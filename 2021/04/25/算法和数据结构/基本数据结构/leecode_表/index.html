@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="汇总了刷题中遇到的 表 相关的题目，例如栈，哈希表，数组字符串相关的题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相关的编程题汇总-表">
+<meta property="og:url" content="http://example.com/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leecode_%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="汇总了刷题中遇到的 表 相关的题目，例如栈，哈希表，数组字符串相关的题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.leetcode-cn.com/194630bf90343475a07278a0840d93ad891206acd50be1b81e75eb357d1e2c07-rotate.gif">
+<meta property="article:published_time" content="2021-04-25T09:09:00.136Z">
+<meta property="article:modified_time" content="2021-04-25T03:20:12.101Z">
+<meta property="article:author" content="常若望">
+<meta property="article:tag" content="刷题">
+<meta property="article:tag" content="表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/194630bf90343475a07278a0840d93ad891206acd50be1b81e75eb357d1e2c07-rotate.gif">
+
+<link rel="canonical" href="http://example.com/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leecode_%E8%A1%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>相关的编程题汇总-表 | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leecode_%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          相关的编程题汇总-表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-25 17:09:00 / 修改时间：11:20:12" itemprop="dateCreated datePublished" datetime="2021-04-25T17:09:00+08:00">2021-04-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">基本数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>汇总了刷题中遇到的 表 相关的题目，例如栈，哈希表，数组字符串相关的题目</p>
+<span id="more"></span>
+
+<h2 id="数组-字符串"><a href="#数组-字符串" class="headerlink" title="数组/字符串"></a>数组/字符串</h2><h4 id="旋转图像"><a href="#旋转图像" class="headerlink" title="旋转图像"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-image/">旋转图像</a></h4><p>要做到不占用额外空间  </p>
+<p><img src="https://pic.leetcode-cn.com/194630bf90343475a07278a0840d93ad891206acd50be1b81e75eb357d1e2c07-rotate.gif" alt="rotate.gif"></p>
+<p>方法一：需要用  暂存一个值 然后 循环交换。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = matrix[i][j];</span><br><span class="line">                matrix[i][j] = matrix[n - j - <span class="number">1</span>][i];</span><br><span class="line">                matrix[n - j - <span class="number">1</span>][i] = matrix[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>];</span><br><span class="line">                matrix[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>] = matrix[j][n - i - <span class="number">1</span>];</span><br><span class="line">                matrix[j][n - i - <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：先水平镜像 后竖直镜像</p>
+<h4 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/calculator-lcci/">计算器</a></h4><p>方法一：递归的方法 很好理解。用递归 实际上也是 遍历了一边确定没有乘除之后 再遍历一圈计算加减</p>
+<p>定义函数计算 cal(string &amp;s, int l, int r) 字符串s在区间[l,r]的结果</p>
+<ol>
+<li>由于是递归所以优先级低的+-先判断进入递归</li>
+<li>因为同等优先级是从左往右 所以递归是从右往左开始扫</li>
+<li>如果没有符号则说明这个区间里是一个数字 使用 stoi 返回数字即可</li>
+</ol>
+<p>方法二：使用堆栈  只遍历一次。遇到乘除直接计算值，遇到加减，将数字放入堆栈（带符号的放入），最后计算堆栈中所有数字的和</p>
+<h4 id="验证IP地址"><a href="#验证IP地址" class="headerlink" title="验证IP地址"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/validate-ip-address/">验证IP地址</a></h4><p>这个题 很恶性  主要就是各种边界条件的判定。有三种方法：</p>
+<ol>
+<li>不使用任何库函数 就纯c++手写循环。使用状态机的思路 构建了状态表 逻辑比较清晰 不会乱</li>
+<li>使用 <code>stringstream</code> 来分割字符串</li>
+<li>使用 正则表达式 这种方法最慢，但是代码最简介。 </li>
+</ol>
+<h4 id="移除无效的括号"><a href="#移除无效的括号" class="headerlink" title="移除无效的括号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-remove-to-make-valid-parentheses/">移除无效的括号</a></h4><h4 id="寻找两个正序数组的中位数"><a href="#寻找两个正序数组的中位数" class="headerlink" title="寻找两个正序数组的中位数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">寻找两个正序数组的中位数</a></h4><p>这个题要求实现 log(m+n)的时间复杂度。首先想到的是使用  归并的方式从头到尾寻找中位数。但是这样复杂度是O(m+n)。不符合要求。看到log(m+n)首要想打就是 二分法。问题是这个怎么用二分法呢。</p>
+<p>首先找中位数 就是找第k个数，那么我就上下 各找前 (k-1)/2个数，然后比较两个数组这个位置数字大小，因为数组是有序的，一旦比较大小比出结果，就可以排除一大部分数字。再在后面的区间中找.</p>
+<h4 id="重复的子字符串"><a href="#重复的子字符串" class="headerlink" title="重复的子字符串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/repeated-substring-pattern/">重复的子字符串</a></h4><p>一开始想到的是 暴力枚举  子字符串的个数，从2，3，4…. 字符串长度如果不能整除可以跳过。然后怎么判断 字符串是否是3个子串重复的呢？例如  a = a1 + a2 + a3 如果要判断a是三个重复的组成就要判断 a1 == a2  a2 == a3 都成立，这样写麻烦，直接把 比较（a2 + a3 + a1 ）== (a1 + a2 + a3) 是否相等即可，代码写着比较简便。</p>
+<p>但是更好的方法是 双倍长度法  构建新的双倍长度的字符串 s == a + a 然后 从 s 的第1个元素开始查找 和 a 匹配的位置，如果a 没有重复字符串组成 那么 找到的位置一定是从 a.size() 开始，即只能找到后面那个 a。</p>
+<h4 id="下一个排列"><a href="#下一个排列" class="headerlink" title="下一个排列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-permutation/">下一个排列</a></h4><p>这个题主要要想清楚下一个大排列的规律。 参考连接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-suan-fa-xiang-jie-si-lu-tui-dao-/">https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-suan-fa-xiang-jie-si-lu-tui-dao-/</a></p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h4 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">相交链表</a></h4><p>双指针，走 m + n + c    n + m + c 相遇 </p>
+<h4 id="LRU-缓存机制"><a href="#LRU-缓存机制" class="headerlink" title="LRU 缓存机制"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU 缓存机制</a></h4><h4 id="LFU-缓存"><a href="#LFU-缓存" class="headerlink" title="LFU 缓存"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lfu-cache/">LFU 缓存</a></h4><p>这个题和上面的区别在于，LRU的题意是，删除最久没使用过的元素，所以通过一个链表即可完成。而这个题要求删除使用最少的元素，所以就需要记录每个元素的使用次数。但是这个最小使用次数有一个规律，使用一个 变量 记录最小使用的次数，每次插入元素</p>
+<ul>
+<li>若该元素A在缓存中存在，且A的使用次数大于最少使用次数，那么该次插入对最小使用次数不影响</li>
+<li>若该元素A在缓存中存在，且A不是唯一一个使用次数最少的元素，那么将它的使用次数加1之后，还是不影响系统的最下使用次数</li>
+<li>若该元素A在缓存中存在，且正好A就是唯一的一个最少使用次数的元素，那么系统的最少使用次数 + 1  并将改元素移动到  使用频率为 min+1 的缓存池中</li>
+<li>若该元素A是个新元素，那么删除缓存中的最少使用频率的元素后，系统使用次数最少频率  就 是  1 </li>
+</ul>
+<p>综上，在这个操作逻辑下 想要维护系统最小使用次数这个变量，其实逻辑不复杂，不需要排序。因此优化上述的数据结构，可以很容易O(1) 实现所有功能</p>
+<p>但是，如果想不到 上述 O(1) 的方法，想到要取出 频率最小的元素，其实就应该 想到  堆 二叉搜索树 等数据结构，但是 用堆，当插入的元素不是堆顶的元素的是偶，从堆中搜索其他元素，O(n) 所以，考虑使用 红黑树，来维护 使用频率的有效性。c++中 set 底层是 红黑树，自定义数据结构后对  &lt;  重载，就可以保证插入到集合中的元素是有序的，每次取出集合起始的元素即可。（但是 要注意，自定义数据结构中，仅仅以 频率作为排序依据实不行的，因为不同元素使用频率可能一样，而集合要求每个元素不同，另外题目也要求 使用频率一样的 删除最近没使用的变量，所以新增一个 time（时间戳） 变量来标记每个元素，当有新的操作增加时，对应被操作的元素time更新时间戳，当使用频率相同时使用time的大小做为排序依据）。这种使用红黑树的方法，每次插入元素复杂度为 O(log N)</p>
+<h4 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/">回文链表</a></h4><p>基本的方法是 遍历链表 把 每个节点缓存到数组里 然后使用双指针判断是不是 回文链表。空间复杂度O(1) 的方法是 先使用快慢指针找到链表的中点，然后将链表后半部分反转，再和前半部分比较，这样没有缓存任何东西，空间复杂度O(1) 时间复杂度O(N)</p>
+<h4 id="排序链表"><a href="#排序链表" class="headerlink" title="排序链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sort-list/">排序链表</a></h4><p>很容易想到归并排序，但是在实现过程中 很容易出现 无线递归的情况。这样考虑  一个节点的时候 中点节点回是哪个，两个节点的时候中点节点会是哪个，基本四个以上的节点就不会出问题了  主要是节点少的时候容易无限递归。</p>
+<h2 id="Hash表"><a href="#Hash表" class="headerlink" title="Hash表"></a>Hash表</h2><h4 id="缺失的第一个正数"><a href="#缺失的第一个正数" class="headerlink" title="缺失的第一个正数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-missing-positive/">缺失的第一个正数</a></h4><p>这个题 有点意思 要时间复杂度 O(N)  常数的空间复杂度。首先一个隐含条件需要看出来，那就是缺失的最小正整数一定是[1, N+1]其中N为数组长度。所以要实现时间复杂度O(N)很容易，直接枚举N个数。用hash表判断每个枚举的数在不在表中即可。</p>
+<p>但是要空间复杂度为O(N)  那就不能额外新建hash表了。但是题目给定的数组可以修改啊，于是乎 怎样在修改数组中数的前提下，害不修改数组的值呢？那就是用正负号标记喽。只对原数组中的数做 正负 处理，如果某个元素存在就将该元素对应的下标上的数 用负标记。（由于数组中可能会存在 0或这负数，而这些数肯定不是  要找的最小正整数，所以将他们预先设置为N+1，不影响负号的标记即刻）。最后再遍历，最先出现正数的位置（即每被标记过） 即为 最小的正数。</p>
+<p>综上 遍历三次 第一次 将负数和0设置为 N+1，第二次遍历标记出现过的数对应的下标的值标为 负数，第三次遍历找第一次为正数的下标</p>
+<h4 id="最长连续序列"><a href="#最长连续序列" class="headerlink" title="最长连续序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">最长连续序列</a></h4><p>这个题不难实现，但是关键是先能想到的使用暴力的方法 求解的逻辑，然后再使用 Hash 去优化，最后再进行剪枝，最终实现 O(n)。</p>
+<h4 id="和为K的子数组"><a href="#和为K的子数组" class="headerlink" title="和为K的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-sum-equals-k/">和为K的子数组</a></h4><p>这个题还可以变化一下  和 大于 K 的最短子数组 就是另一个题目了</p>
+<h4 id="连续数组"><a href="#连续数组" class="headerlink" title="连续数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/contiguous-array/">连续数组</a></h4><p>这类 连续数组  和   &gt;&gt;   前缀后  &gt;&gt;   数组中两数差/两数和   &gt;&gt;   Hash </p>
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h4 id="下一个更大元素-II"><a href="#下一个更大元素-II" class="headerlink" title="下一个更大元素 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-greater-element-ii/">下一个更大元素 II</a></h4><p>这是一个典型的单调栈的题目 。 就是栈中元素,按递增顺序或者递减顺序排列。</p>
+<h4 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">接雨水</a></h4><p>单调递减栈。这个题，关键点 是没想到 怎么计算雨水的容量，一开始想的是 宽度x短边长，但是如果这里面还有其他矮的柱子，还得减去矮柱子的面积，想到了使用栈的方式，但是没想到使用栈的第推计算面积的方式，计算面积可以通过高度差的方式 累计面积。</p>
+<h4 id="柱状图中最大的矩形"><a href="#柱状图中最大的矩形" class="headerlink" title="柱状图中最大的矩形"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形</a></h4><h4 id="和至少为-K-的最短子数组"><a href="#和至少为-K-的最短子数组" class="headerlink" title="和至少为 K 的最短子数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shortest-subarray-with-sum-at-least-k/">和至少为 K 的最短子数组</a></h4><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h4 id="字符串解码"><a href="#字符串解码" class="headerlink" title="字符串解码"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-string/">字符串解码</a></h4><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h4 id="滑动窗口最大值"><a href="#滑动窗口最大值" class="headerlink" title="滑动窗口最大值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum/">滑动窗口最大值</a></h4><p>这个题 和  最大栈/单调栈 类似。只不过那个是用来记录栈数据中的最大值，因此需要一个额外的最大栈。这种题目中 最大值都是和元素的增加顺序有关，因为滑动窗口很像 双端队列的逻辑，所以使用一个双端队列来记录最大值。具体的   窗口前端增加数据时，首先队列前端所有比他小的元素，然后再将改元素从前端入队，同时窗口可能还要收缩一个单位，如果待收缩的元素不是队列尾端的，就不管，若是就从尾端弹出。最后窗口最大的元素就是队列末尾的元素了。o(N)</p>
+<p>但是这个题也可以用优先队列做。首先优先队列中存放K个数，顶端的肯定是最大的，但是不一定在窗口中，因此每次去顶端元素时，要先保证它在窗口中（同时记录每个元素的大小 和 其在数组中的索引位置）即索引位置在窗口以外，就弹出，直到顶端元素在窗口中，那么顶端元素就是窗口的最大值。这个方法复杂度 O(log(N))</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 刷题</a>
+              <a href="/tags/%E8%A1%A8/" rel="tag"><i class="fa fa-tag"></i> 表</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leecode_%E5%9B%BE/" rel="prev" title="相关的编程题汇总-图">
+      <i class="fa fa-chevron-left"></i> 相关的编程题汇总-图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/" rel="next" title="数据结构-图">
+      数据结构-图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">数组&#x2F;字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">旋转图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="nav-number">1.0.2.</span> <span class="nav-text">计算器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81IP%E5%9C%B0%E5%9D%80"><span class="nav-number">1.0.3.</span> <span class="nav-text">验证IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7"><span class="nav-number">1.0.4.</span> <span class="nav-text">移除无效的括号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%AD%A3%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="nav-number">1.0.5.</span> <span class="nav-text">寻找两个正序数组的中位数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.0.6.</span> <span class="nav-text">重复的子字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97"><span class="nav-number">1.0.7.</span> <span class="nav-text">下一个排列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8"><span class="nav-number">2.0.1.</span> <span class="nav-text">相交链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRU-%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="nav-number">2.0.2.</span> <span class="nav-text">LRU 缓存机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LFU-%E7%BC%93%E5%AD%98"><span class="nav-number">2.0.3.</span> <span class="nav-text">LFU 缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8"><span class="nav-number">2.0.4.</span> <span class="nav-text">回文链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8"><span class="nav-number">2.0.5.</span> <span class="nav-text">排序链表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">Hash表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0"><span class="nav-number">3.0.1.</span> <span class="nav-text">缺失的第一个正数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97"><span class="nav-number">3.0.2.</span> <span class="nav-text">最长连续序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">3.0.3.</span> <span class="nav-text">和为K的子数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84"><span class="nav-number">3.0.4.</span> <span class="nav-text">连续数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">4.</span> <span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II"><span class="nav-number">4.0.1.</span> <span class="nav-text">下一个更大元素 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E9%9B%A8%E6%B0%B4"><span class="nav-number">4.0.2.</span> <span class="nav-text">接雨水</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2"><span class="nav-number">4.0.3.</span> <span class="nav-text">柱状图中最大的矩形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%92%8C%E8%87%B3%E5%B0%91%E4%B8%BA-K-%E7%9A%84%E6%9C%80%E7%9F%AD%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">4.0.4.</span> <span class="nav-text">和至少为 K 的最短子数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">5.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81"><span class="nav-number">5.0.1.</span> <span class="nav-text">字符串解码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-number">6.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="nav-number">6.0.1.</span> <span class="nav-text">滑动窗口最大值</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
