@@ -73,47 +73,48 @@
       </tags>
   </entry>
   <entry>
-    <title>pytorch扩展C</title>
-    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/pytorch%E6%89%A9%E5%B1%95c/</url>
-    <content><![CDATA[<h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>python常用语法</title>
+    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/python%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<span id="more"></span> 
+
+<h2 id="python-的用法"><a href="#python-的用法" class="headerlink" title="python *  ** 的用法"></a>python *  ** 的用法</h2><p><img src="figs/1566285511946.png" alt="1566285511946"></p>
+<h3 id="用在函数的输入参数"><a href="#用在函数的输入参数" class="headerlink" title="用在函数的输入参数"></a>用在函数的输入参数</h3><p>​        在定义一个方法时，使用*表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用**arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span> <span class="title">arg</span></span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function">#打印的结果是一个元组</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span>(<span class="params"><span class="built_in">len</span>(<span class="params">arg</span>)</span>)</span></span><br><span class="line"><span class="function">#输出1，2，3，4</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">**arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span>(<span class="params">arg</span>)</span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params">a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span>)</span></span><br><span class="line">#打印结果：&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2, &#x27;c&#x27;:3&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><p>​        与上述过程相反</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>（<span class="title">x</span>，<span class="title">y</span>）:</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">para =  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">add(*para)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">kkwd = &#123;<span class="string">&#x27;x&#x27;</span> :<span class="number">1</span>,<span class="string">&#x27;y&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line">add(**kkwd)</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="同目录下的-setup-py文件"><a href="#同目录下的-setup-py文件" class="headerlink" title="同目录下的 setup.py文件"></a>同目录下的 setup.py文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="值传递，引用传递-，可变对象，不可变对象"><a href="#值传递，引用传递-，可变对象，不可变对象" class="headerlink" title="值传递，引用传递 ，可变对象，不可变对象"></a>值传递，引用传递 ，可变对象，不可变对象</h2><p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
+<p>参考链接：<a href="https://blog.csdn.net/qq_41987033/article/details/81675514">https://blog.csdn.net/qq_41987033/article/details/81675514</a></p>
+<h2 id="使用tensorboard数据可视化"><a href="#使用tensorboard数据可视化" class="headerlink" title="使用tensorboard数据可视化"></a>使用tensorboard数据可视化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>​        对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
+ <figure class="highlight py"><table><tr><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="测试文件"><a href="#测试文件" class="headerlink" title="测试文件"></a>测试文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>​        在程序调用一下api确保生成日志文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">writer &#x3D; SummaryWriter(&#39;runs&#x2F;fashion_mnist_experiment_1&#39;)  </span><br><span class="line">writer.add_image(&#39;four_fashion_mnist_images&#39;, img_grid)</span><br><span class="line">writer.close()   #必须有close 否则内容写不进去</span><br></pre></td></tr></table></figure>
 
-<p>​    遇到提示 .so 库找不到  使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
+<p>​        在系统命令行输入以下命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensorboard --logdir runs  </span><br></pre></td></tr></table></figure>
+
+<p>​        上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件<br>​        输入上述命令后，会产生如下输出，在google浏览器打开<a href="http://desktop-f3bbiio:6006/">http://DESKTOP-F3BBIIO:6006</a> 如果浏览被拒，改为 <a href="http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址">http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</a></p>
+<h2 id="pytorch的用法"><a href="#pytorch的用法" class="headerlink" title="pytorch的用法"></a>pytorch的用法</h2><h3 id="pytorch踩坑"><a href="#pytorch踩坑" class="headerlink" title="pytorch踩坑"></a>pytorch踩坑</h3><ul>
+<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上  此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location=’cpu’  参数  load完毕后再to到需要的gpu上</li>
+<li></li>
+</ul>
+<h3 id="cat-stack-unqueeze用法总结"><a href="#cat-stack-unqueeze用法总结" class="headerlink" title="cat stack unqueeze用法总结"></a>cat stack unqueeze用法总结</h3><p>​    相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
+<ul>
+<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1  按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
+<li>stack: 将输入tensor增加维度堆叠，要求输入的尺寸完全相同。dim范围0~n 也是按照bchw的顺序对应dim。输出的tensor dim=n+1。对于输二维矩阵，dim=0，在c维度堆叠；dim=1，提取每个输入的行向量按行堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道；dim=2，提取每个输入的行向量按列堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道。对于输入三维张量，同理。</li>
+</ul>
 ]]></content>
       <categories>
         <category>其他笔记</category>
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>typoral个人云笔记设置</title>
-    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/typoral%E4%BA%91%E7%AC%94%E8%AE%B0%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="fee663fffeda8dda880e0f8df59a5b72c3209467d8a571cdf574453aafb560dd">995e50c340763ee1a325e8c3b289bb94042f5aabaa770bc0112db74bfe3b3d8bcf0171a02d8c4b6eedae4b4b26a8616157c1bed1204992695e5cb8a5dadbf4a57629ef57cb56fd9f544387cbd331fe5f71916bbe2cd574150bf596190c8292eb66ba7c907acf9cb9fa3ff89fc2ac768987d49cb71348f2f0f1d3b3cc8ee781dba818dbed14fbfddf661e30e360f5ad470dbed249343c7c42471f422ea3f425274d65466460503dee852b2655e7e2b85877934f8a4c228635de7353f3903f20db4c3b5e28b15eb50fe88d6c165bf9aad451ba193df9fb8aab27fd4bb8b6da72f0fb69c6383bb6a7f3268a22dfc70cd0f832624543e8ee2c470d095ce9c0eb90b1da4a4fccc41399cbb20c80be62ef02534b8ac6af8e81bbf8d8df9bf74784c1dc06e6bb6e0df951d96d07b40b8c9c8be3b96807910ab01810be163cd046f23c64b21c8c278a56a61fbab2594a36b575d8279f41e0c747ae5c9e4435c7ff075bc3c9d3e02c0c744f69c81dac68a8a1174d14f0bd611fd121b7695afe946254afe2308c3f0dd4dd8d851d21bd5c19ea4afef6908d25a30e0e499b6457ddab12004eb81454756b291b6a14ca858b29563ae228cd4241072ac4e25cc327c13ef9bc31ed70df3f3a66f5e6eb0415cb11376267f0d718545e19dd32af4576e0132f57e7a6e7e2bbe8d91f768501b4edd75342bd1bbe2423373b8bec9ebbcbbcccef440d38171be285428ef39fa127a75af8de33e11bd86a7f34d8cb462af05c2c121f4a02379c687ce4a596498eae233767d1eb37def86aad70474f3c43532edc16048ef37a33e9621e1df6e0df09eda2d242584d7fb19fb49d65cc3a346522b37a675e57b33b749e0e032a10148e9f7aa7cd06c466c5a1910233d8b8693a3103c439c814df307c17d7ab8ef39aaab82a24d0c7c0fa513d033b2449f0f5365d3c4ba8c1375fbbc52a49bfc86a636ccfbe16bf253731e1bfa53dfeac6965256d230a9c557d728cbd75034ca44df9166f107da149f637cc5db66c0f2bf0e14f7c911dfafd6d7be3f0b5203b3d0f3f365b9c8d3b15ed5025b70c0a2ec7d636f71b7724da114384778ff46758f4ab974ae22fb4b0ac7ed72193159b39790a62a4fa27f3993ca804476aa2208564dc6870fc6436a41202598e968fce4603b2119eb43783ea879e0dc3c50dd71db5c9de780857888407fad5424f94bef5dbcca055f8e19712f338f7a30c50a07d785d4f4421285ecc0a9117859f20e9638d4138d73d67d31a85f97b2484d64aaa6c4b27ee2d31d3de038c74785ed673952e0d50e42af148cebc74c5f089c287aad5bf4238da4e8345f85be8acecd6c37fe4dc1155cec5977c362093051ed210214329e9fb9cb0171a85f1caf2ba168acec1602284ca055592560e26e96bb041d7a3809efb4dfe0a0e8377261e3ea6f3e39c066e47b8330cb76157c21c084fac571357a12f1f7d66620adffc8a3bd1b01a1f5be266ed43befba236b5c57c1c32e397a0586587a9c5f1a5afa59ff3226957dc2978eeac75df3060abfc0aa9e7d22b205663e20160e2b310f449f48042ab7c77a330dd6739856cf94a972a182ca0e92fe708bd566182e4ccf06986ab1d9856df98332603d0f02660c103054719ee90ff1476fecebf0e5298f04e7f20adb5dc9f80a766299c3db297f0452ecbac9e523bd2a56cb2ccab31be7e39139029df12290b13cde2cd2e35a946f36d66caa4df8b2f15209e8c80cb52de04c549742d537c49ab8eaf8a6664042fcacd1985979806f3f1c8f4b13e66d0fc64764d4af5d589a1aff5071d17307ee0ce616d3154c2c04ee4b92b02b3a9a1e562ca665fd05ab9f8d69a902cf6d0ec84bef2a8a6fc5f6df5ce8274751a634467477c2d120fd7cddd99b42de2f1fbfb982e37ee1e59263ce6ade401a0d2e3bcbb90a730352cb1f5c2ef0083cf79223e8c5c75da0b7788158a1b6768f5b268049edf25ff60d4cbd6ff8ab2445ce3a30da97121d4175a977baa04f0e15ca2a612d72f04e2c4719b4143f9698355f0e31615205f751881e188e07b4e19d6014ddd13d94d11dbfb1a04bee571b3737394f627395ebe3ab68c3e0a3715d3f3ac67329a9948da60b9ba3266e0b6545e493668aa7fcb191cad1b3d458ec6e1f8d21121f2d1746b3be0cd85f16d2f2344a569a34de5147be97565b20eac3c442306acebcc530c25e59b10a485e18dedbc2d3a2a5a77af4f473fd1d289eb24f2ccbb5a88f9d402da97ab66557c26ab02d8e98834e76e1eab4af204d0b0934a1b4912df99197e4f7231f691743e8789ed5c52d3be155b12b52ee0751e345cb745b2db60a07bcca2e942a5f5d2e6ea985603226b6dd86caff8a7a42eea246051bc6a1ba303183d9315157a6df2267b3b31d92f575166268e94599e92f42e083a559459f50dffbad3933335a5e234cf08d28aaa36d48fd07213ce1691c98bb57d2fbe4d51a57d2cee9d03f3e9f5100bf258016356e9d5eb2a342f40e692ea35ed862a2abcb37d2a9fac3bb8975c86c6451d7763ae2b4c0343cee68af9ae0e3cbd0e7def04a71c79e8f35a84982f7876984582b84399a49fffecd121d585c2058ed5d8ca0581fff7912dba48d02253ddcbbadbb552ac071353206ef6e8731c91e14d4b5b5cc9642aa17f7e0cde92556fb54922af8aeff4dc3b332bd34597782155295f8119cbe7f738ac27f9bc4175d810d1f8448c21494d53d6453f1faee466d2d6d65f06a7</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>其他笔记</category>
-      </categories>
-      <tags>
-        <tag>软件安装</tag>
-        <tag>加密内容</tag>
       </tags>
   </entry>
   <entry>
@@ -131,7 +132,7 @@
 <p><strong>查看CUDA版本</strong> nvcc -V</p>
 <p><strong>查看文件具体信息</strong> ：ll</p>
 <p><strong>查看tensorflow是否安装成功</strong>： import tensorflow as tf   tf.Session()</p>
-<p><strong>在本地主机查看远程服务器的tensorboard</strong><br>ssh -L 16013:127.0.0.1:6013 <a href="mailto:&#99;&#104;&#x61;&#110;&#103;&#114;&#117;&#111;&#x77;&#x61;&#110;&#x67;&#x40;&#x31;&#49;&#x35;&#46;&#49;&#x35;&#54;&#x2e;&#x32;&#x31;&#51;&#x2e;&#x31;&#x33;&#49;">&#99;&#104;&#x61;&#110;&#103;&#114;&#117;&#111;&#x77;&#x61;&#110;&#x67;&#x40;&#x31;&#49;&#x35;&#46;&#49;&#x35;&#54;&#x2e;&#x32;&#x31;&#51;&#x2e;&#x31;&#x33;&#49;</a>   (115.156.213.131为远程服务器ip)</p>
+<p><strong>在本地主机查看远程服务器的tensorboard</strong><br>ssh -L 16013:127.0.0.1:6013 <a href="mailto:&#x63;&#x68;&#x61;&#x6e;&#x67;&#x72;&#117;&#x6f;&#119;&#97;&#x6e;&#103;&#x40;&#49;&#x31;&#x35;&#46;&#x31;&#x35;&#x36;&#x2e;&#x32;&#x31;&#51;&#46;&#x31;&#51;&#49;">&#x63;&#x68;&#x61;&#x6e;&#x67;&#x72;&#117;&#x6f;&#119;&#97;&#x6e;&#103;&#x40;&#49;&#x31;&#x35;&#46;&#x31;&#x35;&#x36;&#x2e;&#x32;&#x31;&#51;&#46;&#x31;&#51;&#49;</a>   (115.156.213.131为远程服务器ip)</p>
 <p><strong>linux下直接使用python启动tensorboard</strong><br>python -m tensorboard.main –logdir  /mnt2/changruowang/image_enhance/myKinD/log_dir</p>
 <p><strong>将qt-designer的 .ui文件转为py</strong><br>pyuic5 -o mainwindow_.py mainwindow.ui    (.ui为qt设计师的文件)</p>
 <p><strong>markdown转word</strong><br>pandoc -f markdown -t docx ./其他.md -o test.docx</p>
@@ -149,7 +150,7 @@
 <li><p>git push        将代码提交到git hub 远程仓库     <strong>不要在浏览器上随意删除已经提交了的文件，否则本地的记录和云端的记录不一致再次提交会报错，所有对文件的修改最好只在本地修改让后上传云端</strong></p>
 <p><strong>空文件夹不会被add添加 只有里面有文件才会被add   .gitignore文件可以选择push时忽略的文件</strong></p>
 </li>
-<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#99;&#104;&#x61;&#x6e;&#x67;&#x72;&#117;&#111;&#119;&#x61;&#110;&#x67;&#64;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;">&#99;&#104;&#x61;&#x6e;&#x67;&#x72;&#117;&#111;&#119;&#x61;&#110;&#x67;&#64;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
+<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#99;&#x68;&#97;&#x6e;&#103;&#x72;&#117;&#111;&#x77;&#x61;&#110;&#x67;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#99;&#x68;&#97;&#x6e;&#103;&#x72;&#117;&#111;&#x77;&#x61;&#110;&#x67;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
 </li>
 <li><p>使用 git clone https… 形式的连接，提示错误，要将 http /  https 代理关闭 </p>
 <blockquote>
@@ -195,48 +196,47 @@
       </tags>
   </entry>
   <entry>
-    <title>python常用语法</title>
-    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/python%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<span id="more"></span> 
-
-<h2 id="python-的用法"><a href="#python-的用法" class="headerlink" title="python *  ** 的用法"></a>python *  ** 的用法</h2><p><img src="figs/1566285511946.png" alt="1566285511946"></p>
-<h3 id="用在函数的输入参数"><a href="#用在函数的输入参数" class="headerlink" title="用在函数的输入参数"></a>用在函数的输入参数</h3><p>​        在定义一个方法时，使用*表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用**arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span> <span class="title">arg</span></span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function">#打印的结果是一个元组</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span>(<span class="params"><span class="built_in">len</span>(<span class="params">arg</span>)</span>)</span></span><br><span class="line"><span class="function">#输出1，2，3，4</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">**arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span>(<span class="params">arg</span>)</span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params">a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span>)</span></span><br><span class="line">#打印结果：&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2, &#x27;c&#x27;:3&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><p>​        与上述过程相反</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>（<span class="title">x</span>，<span class="title">y</span>）:</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">para =  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">add(*para)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">kkwd = &#123;<span class="string">&#x27;x&#x27;</span> :<span class="number">1</span>,<span class="string">&#x27;y&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line">add(**kkwd)</span><br></pre></td></tr></table></figure>
+    <title>pytorch扩展C</title>
+    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/pytorch%E6%89%A9%E5%B1%95c/</url>
+    <content><![CDATA[<h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="值传递，引用传递-，可变对象，不可变对象"><a href="#值传递，引用传递-，可变对象，不可变对象" class="headerlink" title="值传递，引用传递 ，可变对象，不可变对象"></a>值传递，引用传递 ，可变对象，不可变对象</h2><p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
-<p>参考链接：<a href="https://blog.csdn.net/qq_41987033/article/details/81675514">https://blog.csdn.net/qq_41987033/article/details/81675514</a></p>
-<h2 id="使用tensorboard数据可视化"><a href="#使用tensorboard数据可视化" class="headerlink" title="使用tensorboard数据可视化"></a>使用tensorboard数据可视化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>​        对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
- <figure class="highlight py"><table><tr><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure>
+<h3 id="同目录下的-setup-py文件"><a href="#同目录下的-setup-py文件" class="headerlink" title="同目录下的 setup.py文件"></a>同目录下的 setup.py文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>​        在程序调用一下api确保生成日志文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">writer &#x3D; SummaryWriter(&#39;runs&#x2F;fashion_mnist_experiment_1&#39;)  </span><br><span class="line">writer.add_image(&#39;four_fashion_mnist_images&#39;, img_grid)</span><br><span class="line">writer.close()   #必须有close 否则内容写不进去</span><br></pre></td></tr></table></figure>
+<h3 id="测试文件"><a href="#测试文件" class="headerlink" title="测试文件"></a>测试文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
 
-<p>​        在系统命令行输入以下命令</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensorboard --logdir runs  </span><br></pre></td></tr></table></figure>
-
-<p>​        上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件<br>​        输入上述命令后，会产生如下输出，在google浏览器打开<a href="http://desktop-f3bbiio:6006/">http://DESKTOP-F3BBIIO:6006</a> 如果浏览被拒，改为 <a href="http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址">http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</a></p>
-<h2 id="pytorch的用法"><a href="#pytorch的用法" class="headerlink" title="pytorch的用法"></a>pytorch的用法</h2><h3 id="pytorch踩坑"><a href="#pytorch踩坑" class="headerlink" title="pytorch踩坑"></a>pytorch踩坑</h3><ul>
-<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上  此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location=’cpu’  参数  load完毕后再to到需要的gpu上</li>
-<li></li>
-</ul>
-<h3 id="cat-stack-unqueeze用法总结"><a href="#cat-stack-unqueeze用法总结" class="headerlink" title="cat stack unqueeze用法总结"></a>cat stack unqueeze用法总结</h3><p>​    相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
-<ul>
-<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1  按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
-<li>stack: 将输入tensor增加维度堆叠，要求输入的尺寸完全相同。dim范围0~n 也是按照bchw的顺序对应dim。输出的tensor dim=n+1。对于输二维矩阵，dim=0，在c维度堆叠；dim=1，提取每个输入的行向量按行堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道；dim=2，提取每个输入的行向量按列堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道。对于输入三维张量，同理。</li>
-</ul>
+<p>​    遇到提示 .so 库找不到  使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
 ]]></content>
       <categories>
         <category>其他笔记</category>
       </categories>
       <tags>
         <tag>python</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>typoral个人云笔记设置</title>
+    <url>/2021/04/25/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/typoral%E4%BA%91%E7%AC%94%E8%AE%B0%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="fee663fffeda8dda880e0f8df59a5b72c3209467d8a571cdf574453aafb560dd">995e50c340763ee1a325e8c3b289bb94042f5aabaa770bc0112db74bfe3b3d8bcf0171a02d8c4b6eedae4b4b26a8616157c1bed1204992695e5cb8a5dadbf4a57629ef57cb56fd9f544387cbd331fe5f71916bbe2cd574150bf596190c8292eb66ba7c907acf9cb9fa3ff89fc2ac768987d49cb71348f2f0f1d3b3cc8ee781dba818dbed14fbfddf661e30e360f5ad470dbed249343c7c42471f422ea3f425274d65466460503dee852b2655e7e2b85877934f8a4c228635de7353f3903f20db4c3b5e28b15eb50fe88d6c165bf9aad451ba193df9fb8aab27fd4bb8b6da72f0fb69c6383bb6a7f3268a22dfc70cd0f832624543e8ee2c470d095ce9c0eb90b1da4a4fccc41399cbb20c80be62ef02534b8ac6af8e81bbf8d8df9bf74784c1dc06e6bb6e0df951d96d07b40b8c9c8be3b96807910ab01810be163cd046f23c64b21c8c278a56a61fbab2594a36b575d8279f41e0c747ae5c9e4435c7ff075bc3c9d3e02c0c744f69c81dac68a8a1174d14f0bd611fd121b7695afe946254afe2308c3f0dd4dd8d851d21bd5c19ea4afef6908d25a30e0e499b6457ddab12004eb81454756b291b6a14ca858b29563ae228cd4241072ac4e25cc327c13ef9bc31ed70df3f3a66f5e6eb0415cb11376267f0d718545e19dd32af4576e0132f57e7a6e7e2bbe8d91f768501b4edd75342bd1bbe2423373b8bec9ebbcbbcccef440d38171be285428ef39fa127a75af8de33e11bd86a7f34d8cb462af05c2c121f4a02379c687ce4a596498eae233767d1eb37def86aad70474f3c43532edc16048ef37a33e9621e1df6e0df09eda2d242584d7fb19fb49d65cc3a346522b37a675e57b33b749e0e032a10148e9f7aa7cd06c466c5a1910233d8b8693a3103c439c814df307c17d7ab8ef39aaab82a24d0c7c0fa513d033b2449f0f5365d3c4ba8c1375fbbc52a49bfc86a636ccfbe16bf253731e1bfa53dfeac6965256d230a9c557d728cbd75034ca44df9166f107da149f637cc5db66c0f2bf0e14f7c911dfafd6d7be3f0b5203b3d0f3f365b9c8d3b15ed5025b70c0a2ec7d636f71b7724da114384778ff46758f4ab974ae22fb4b0ac7ed72193159b39790a62a4fa27f3993ca804476aa2208564dc6870fc6436a41202598e968fce4603b2119eb43783ea879e0dc3c50dd71db5c9de780857888407fad5424f94bef5dbcca055f8e19712f338f7a30c50a07d785d4f4421285ecc0a9117859f20e9638d4138d73d67d31a85f97b2484d64aaa6c4b27ee2d31d3de038c74785ed673952e0d50e42af148cebc74c5f089c287aad5bf4238da4e8345f85be8acecd6c37fe4dc1155cec5977c362093051ed210214329e9fb9cb0171a85f1caf2ba168acec1602284ca055592560e26e96bb041d7a3809efb4dfe0a0e8377261e3ea6f3e39c066e47b8330cb76157c21c084fac571357a12f1f7d66620adffc8a3bd1b01a1f5be266ed43befba236b5c57c1c32e397a0586587a9c5f1a5afa59ff3226957dc2978eeac75df3060abfc0aa9e7d22b205663e20160e2b310f449f48042ab7c77a330dd6739856cf94a972a182ca0e92fe708bd566182e4ccf06986ab1d9856df98332603d0f02660c103054719ee90ff1476fecebf0e5298f04e7f20adb5dc9f80a766299c3db297f0452ecbac9e523bd2a56cb2ccab31be7e39139029df12290b13cde2cd2e35a946f36d66caa4df8b2f15209e8c80cb52de04c549742d537c49ab8eaf8a6664042fcacd1985979806f3f1c8f4b13e66d0fc64764d4af5d589a1aff5071d17307ee0ce616d3154c2c04ee4b92b02b3a9a1e562ca665fd05ab9f8d69a902cf6d0ec84bef2a8a6fc5f6df5ce8274751a634467477c2d120fd7cddd99b42de2f1fbfb982e37ee1e59263ce6ade401a0d2e3bcbb90a730352cb1f5c2ef0083cf79223e8c5c75da0b7788158a1b6768f5b268049edf25ff60d4cbd6ff8ab2445ce3a30da97121d4175a977baa04f0e15ca2a612d72f04e2c4719b4143f9698355f0e31615205f751881e188e07b4e19d6014ddd13d94d11dbfb1a04bee571b3737394f627395ebe3ab68c3e0a3715d3f3ac67329a9948da60b9ba3266e0b6545e493668aa7fcb191cad1b3d458ec6e1f8d21121f2d1746b3be0cd85f16d2f2344a569a34de5147be97565b20eac3c442306acebcc530c25e59b10a485e18dedbc2d3a2a5a77af4f473fd1d289eb24f2ccbb5a88f9d402da97ab66557c26ab02d8e98834e76e1eab4af204d0b0934a1b4912df99197e4f7231f691743e8789ed5c52d3be155b12b52ee0751e345cb745b2db60a07bcca2e942a5f5d2e6ea985603226b6dd86caff8a7a42eea246051bc6a1ba303183d9315157a6df2267b3b31d92f575166268e94599e92f42e083a559459f50dffbad3933335a5e234cf08d28aaa36d48fd07213ce1691c98bb57d2fbe4d51a57d2cee9d03f3e9f5100bf258016356e9d5eb2a342f40e692ea35ed862a2abcb37d2a9fac3bb8975c86c6451d7763ae2b4c0343cee68af9ae0e3cbd0e7def04a71c79e8f35a84982f7876984582b84399a49fffecd121d585c2058ed5d8ca0581fff7912dba48d02253ddcbbadbb552ac071353206ef6e8731c91e14d4b5b5cc9642aa17f7e0cde92556fb54922af8aeff4dc3b332bd34597782155295f8119cbe7f738ac27f9bc4175d810d1f8448c21494d53d6453f1faee466d2d6d65f06a7</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>其他笔记</category>
+      </categories>
+      <tags>
+        <tag>软件安装</tag>
+        <tag>加密内容</tag>
       </tags>
   </entry>
   <entry>
@@ -302,6 +302,62 @@
       <categories>
         <category>其他笔记</category>
       </categories>
+  </entry>
+  <entry>
+    <title>STL库常用API汇总</title>
+    <url>/2021/04/25/c++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%BA%93%E5%B8%B8%E7%94%A8API/</url>
+    <content><![CDATA[<p>汇总了c++ STL 库中常用的API用法</p>
+<span id="more"></span>
+
+<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">a.<span class="built_in">resize</span>(N);						  <span class="comment">// 扩容</span></span><br><span class="line"><span class="built_in">reverse</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>());  		    <span class="comment">//倒序</span></span><br><span class="line"><span class="built_in">swap</span>(a[<span class="number">0</span>], a[<span class="number">1</span>]);  					   <span class="comment">//交换位置0 和 1的元素</span></span><br><span class="line">a.<span class="built_in">assign</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>());            <span class="comment">// b 拷贝到 a</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">begin</span>()+<span class="number">1</span>);				    <span class="comment">//删除第一个元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> idx_, <span class="keyword">int</span> w_, <span class="keyword">int</span> p1_, <span class="keyword">int</span> p2_)&#123;</span><br><span class="line">        idx = idx_; w = w_; p1 = p1_; p2 = p2_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Node&amp; data)&#123;     <span class="comment">// 升序排列</span></span><br><span class="line">        <span class="keyword">return</span> w &lt; data.w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> idx;</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    <span class="keyword">int</span> p1;</span><br><span class="line">    <span class="keyword">int</span> p2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">vector&lt;Node&gt; test;</span><br><span class="line"><span class="built_in">sort</span>(test.<span class="built_in">begin</span>(), test.<span class="built_in">end</span>());            <span class="comment">//结构体中重载 &lt; 符号 来对自定义的 vector升序排序，要实现逆序排列 可以重载</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string a = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">string b = a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">1</span>);   <span class="comment">//第一个参数代表起始位置，第二个为长度 提取子串</span></span><br><span class="line">a.<span class="built_in">at</span>(<span class="number">0</span>);                 	<span class="comment">//访问0位置的字符</span></span><br><span class="line">a.<span class="built_in">resize</span>(N); 			   <span class="comment">//和vector一样的扩容方法</span></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">10</span>, <span class="number">4</span>)              <span class="comment">//从位置=10的字符开始 删除4个；不带第二个参数 表示删到结尾</span></span><br><span class="line">a.<span class="built_in">insert</span>(<span class="number">14</span>,<span class="number">6</span>,<span class="string">&#x27;*&#x27;</span>)		   <span class="comment">//向 位置14前面 插入 6 个 &quot;*&quot;</span></span><br><span class="line">a.<span class="built_in">find</span>(<span class="string">&quot;b&quot;</span>,<span class="number">5</span>)               <span class="comment">//从下标5开始查找 字符串“b”出现的位置  用if(pos == string::npos) 用来判断是否找到子串。</span></span><br><span class="line"></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">0</span>,a.<span class="built_in">find_first_not_of</span>(<span class="string">&quot; &quot;</span>));   <span class="comment">//去掉字符串左右两端的空格</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">find_last_not_of</span>(<span class="string">&quot; &quot;</span>) + <span class="number">1</span>);</span><br><span class="line"><span class="comment">/// 用 stringstream 分割 指定字符 分开的 字符串</span></span><br><span class="line"><span class="function">stringstream <span class="title">ss</span><span class="params">(a)</span></span>;</span><br><span class="line">string item;</span><br><span class="line"><span class="keyword">while</span>(ss &gt;&gt; item)	cout &lt;&lt; item &lt;&lt; endl;   <span class="comment">//获取 字符串中的单词 按空格分割</span></span><br><span class="line"><span class="keyword">while</span> (std::<span class="built_in">getline</span>(ss, item, <span class="string">&#x27;_&#x27;</span>))&#123;</span><br><span class="line">    cout &lt;&lt; item &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将 字符串按照 特定字符分割   “11*11+12”</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">split_string</span><span class="params">(string&amp; s)</span></span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; re;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; p2 &lt; s.<span class="built_in">size</span>(); p2++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[p2] == <span class="string">&#x27;+&#x27;</span> || s[p2] == <span class="string">&#x27;-&#x27;</span> || s[p2] == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">                re.<span class="built_in">push_back</span>(s[p2]);</span><br><span class="line">                p1 = p2+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="stringstream用法"><a href="#stringstream用法" class="headerlink" title="stringstream用法"></a>stringstream用法</h3><p>头文件 <code>include&lt;sstream&gt;</code> </p>
+<h3 id="字符串分割函数"><a href="#字符串分割函数" class="headerlink" title="字符串分割函数"></a>字符串分割函数</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">const</span> string s, vector&lt;string&gt;&amp; vs, <span class="keyword">const</span> <span class="keyword">char</span> delim= <span class="string">&#x27; &#x27;</span>)</span></span>&#123;</span><br><span class="line">    <span class="function">istringstream <span class="title">iss</span><span class="params">(s)</span></span>;</span><br><span class="line">    string temp;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">getline</span>(iss,temp,delim))&#123;</span><br><span class="line">        vs.<span class="built_in">emplace_back</span>(<span class="built_in">move</span>(temp));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">back</span>() == delim) vs.<span class="built_in">push_back</span>(&#123;&#125;);<span class="comment">//加这句的原因是getline不会识别最后一个delim,避免误判&quot;172.16.254.1.&quot;,&quot;2001:0db8:85a3:0:0:8A2E:0370:7334:&quot;之类的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;  dict; <span class="comment">// 声明unordered_map对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入数据的三种方式</span></span><br><span class="line">dict.<span class="built_in">insert</span>(pair&lt;string,<span class="keyword">int</span>&gt;(<span class="string">&quot;apple&quot;</span>,<span class="number">2</span>));</span><br><span class="line">dict.<span class="built_in">insert</span>(unordered_map&lt;string, <span class="keyword">int</span>&gt;::<span class="built_in">value_type</span>(<span class="string">&quot;orange&quot;</span>,<span class="number">3</span>));</span><br><span class="line">dict[<span class="string">&quot;banana&quot;</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="comment">// 判断是否有元素</span></span><br><span class="line"><span class="keyword">if</span>(dict.<span class="built_in">empty</span>())</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典无元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典共有&quot;</span>&lt;&lt;dict.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;个元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line"><span class="keyword">for</span>(iter=dict.<span class="built_in">begin</span>();iter!=dict.<span class="built_in">end</span>();iter++)</span><br><span class="line">    cout&lt;&lt;iter-&gt;first&lt;&lt;ends&lt;&lt;iter-&gt;second&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line">dict.<span class="built_in">erase</span>(<span class="string">&#x27;a&#x27;</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*队列*/</span></span><br><span class="line">queue&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*优先队列*/</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::less&lt;<span class="keyword">int</span>&gt; &gt; maxHeap;    <span class="comment">// 大顶堆 堆顶的元素最大</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::greater&lt;<span class="keyword">int</span>&gt; &gt; minHeap; <span class="comment">// 小顶堆 堆顶元素最小</span></span><br><span class="line"><span class="comment">//greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）</span></span><br><span class="line"><span class="keyword">int</span> a = maxHeap.<span class="built_in">top</span>();  <span class="comment">//获取堆顶最大元素</span></span><br><span class="line">maxHeap.<span class="built_in">pop</span>();          <span class="comment">//弹出堆顶元素</span></span><br><span class="line">maxHeap.<span class="built_in">push</span>();         <span class="comment">//向堆中增加元素 堆顶元素永远最大</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*双端队列*/</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; a;     			<span class="comment">// 双端队列 结合了栈和队列的性质，既可以从头部插入 也可以从尾部插入 </span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(a)</span></span>;  			<span class="comment">// 定义并用双端队列a初始化双端队列b</span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&amp;n[<span class="number">1</span>], &amp;n[<span class="number">4</span>])</span></span>;  <span class="comment">// 将n[1]、n[2]、n[3]作为双端队列a的初值</span></span><br><span class="line">deq.<span class="built_in">size</span>();</span><br><span class="line">deq.<span class="built_in">resize</span>();</span><br><span class="line">deq.<span class="built_in">push_front</span>(<span class="keyword">const</span> T&amp; x);  <span class="comment">// 头部添加元素</span></span><br><span class="line">deq.<span class="built_in">push_back</span>(<span class="keyword">const</span> T&amp; x);   <span class="comment">//尾部添加元素</span></span><br><span class="line">deq.<span class="built_in">insert</span>(iterator it, <span class="keyword">const</span> T&amp; x);  <span class="comment">//任意位置插入一个元素</span></span><br><span class="line">deq.<span class="built_in">pop_front</span>(); 			<span class="comment">// 头部删除元素</span></span><br><span class="line">deq.<span class="built_in">pop_back</span>();				<span class="comment">//末尾删除元素</span></span><br><span class="line">deq.<span class="built_in">front</span>();				<span class="comment">//访问第一个元素</span></span><br><span class="line">deq.<span class="built_in">back</span>();					<span class="comment">//访问最后一个元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优先队列-priority-queue"><a href="#优先队列-priority-queue" class="headerlink" title="优先队列 priority_queue"></a>优先队列 priority_queue</h3><p>头文件<code>#include &lt;queue&gt;</code>, 可以自定义其中数据的优先级, 让优先级高的排在队列前面,优先出队。本质是通过大小顶堆这种数据结构实现。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>priority_queue&lt;Type, Container, Functional&gt;</p>
+<p><em>Type</em> 就是数据类型，<em>Container</em> 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），<em>Functional</em> 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大顶堆</p>
+<p>基本操作:</p>
+<ul>
+<li>top 访问队头元素</li>
+<li>empty 队列是否为空</li>
+<li>size 返回队列内元素个数</li>
+<li>push 插入元素到队尾 (并排序)</li>
+<li>emplace 原地构造一个元素并插入队列</li>
+<li>pop 弹出队头元素</li>
+<li>swap 交换内容</li>
+</ul>
+<h4 id="自定义类型用法"><a href="#自定义类型用法" class="headerlink" title="自定义类型用法"></a>自定义类型用法</h4>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>库函数</category>
+      </categories>
+      <tags>
+        <tag>api</tag>
+        <tag>STL</tag>
+      </tags>
   </entry>
   <entry>
     <title>STL容器原理</title>
@@ -390,8 +446,8 @@
         <category>库函数</category>
       </categories>
       <tags>
-        <tag>STL</tag>
         <tag>api</tag>
+        <tag>STL</tag>
       </tags>
   </entry>
   <entry>
@@ -418,62 +474,6 @@
       </categories>
       <tags>
         <tag>STL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STL库常用API汇总</title>
-    <url>/2021/04/25/c++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%BA%93%E5%B8%B8%E7%94%A8API/</url>
-    <content><![CDATA[<p>汇总了c++ STL 库中常用的API用法</p>
-<span id="more"></span>
-
-<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">a.<span class="built_in">resize</span>(N);						  <span class="comment">// 扩容</span></span><br><span class="line"><span class="built_in">reverse</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>());  		    <span class="comment">//倒序</span></span><br><span class="line"><span class="built_in">swap</span>(a[<span class="number">0</span>], a[<span class="number">1</span>]);  					   <span class="comment">//交换位置0 和 1的元素</span></span><br><span class="line">a.<span class="built_in">assign</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>());            <span class="comment">// b 拷贝到 a</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">begin</span>()+<span class="number">1</span>);				    <span class="comment">//删除第一个元素</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> idx_, <span class="keyword">int</span> w_, <span class="keyword">int</span> p1_, <span class="keyword">int</span> p2_)&#123;</span><br><span class="line">        idx = idx_; w = w_; p1 = p1_; p2 = p2_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Node&amp; data)&#123;     <span class="comment">// 升序排列</span></span><br><span class="line">        <span class="keyword">return</span> w &lt; data.w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> idx;</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    <span class="keyword">int</span> p1;</span><br><span class="line">    <span class="keyword">int</span> p2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">vector&lt;Node&gt; test;</span><br><span class="line"><span class="built_in">sort</span>(test.<span class="built_in">begin</span>(), test.<span class="built_in">end</span>());            <span class="comment">//结构体中重载 &lt; 符号 来对自定义的 vector升序排序，要实现逆序排列 可以重载</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string a = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">string b = a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">1</span>);   <span class="comment">//第一个参数代表起始位置，第二个为长度 提取子串</span></span><br><span class="line">a.<span class="built_in">at</span>(<span class="number">0</span>);                 	<span class="comment">//访问0位置的字符</span></span><br><span class="line">a.<span class="built_in">resize</span>(N); 			   <span class="comment">//和vector一样的扩容方法</span></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">10</span>, <span class="number">4</span>)              <span class="comment">//从位置=10的字符开始 删除4个；不带第二个参数 表示删到结尾</span></span><br><span class="line">a.<span class="built_in">insert</span>(<span class="number">14</span>,<span class="number">6</span>,<span class="string">&#x27;*&#x27;</span>)		   <span class="comment">//向 位置14前面 插入 6 个 &quot;*&quot;</span></span><br><span class="line">a.<span class="built_in">find</span>(<span class="string">&quot;b&quot;</span>,<span class="number">5</span>)               <span class="comment">//从下标5开始查找 字符串“b”出现的位置  用if(pos == string::npos) 用来判断是否找到子串。</span></span><br><span class="line"></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">0</span>,a.<span class="built_in">find_first_not_of</span>(<span class="string">&quot; &quot;</span>));   <span class="comment">//去掉字符串左右两端的空格</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">find_last_not_of</span>(<span class="string">&quot; &quot;</span>) + <span class="number">1</span>);</span><br><span class="line"><span class="comment">/// 用 stringstream 分割 指定字符 分开的 字符串</span></span><br><span class="line"><span class="function">stringstream <span class="title">ss</span><span class="params">(a)</span></span>;</span><br><span class="line">string item;</span><br><span class="line"><span class="keyword">while</span>(ss &gt;&gt; item)	cout &lt;&lt; item &lt;&lt; endl;   <span class="comment">//获取 字符串中的单词 按空格分割</span></span><br><span class="line"><span class="keyword">while</span> (std::<span class="built_in">getline</span>(ss, item, <span class="string">&#x27;_&#x27;</span>))&#123;</span><br><span class="line">    cout &lt;&lt; item &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将 字符串按照 特定字符分割   “11*11+12”</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">split_string</span><span class="params">(string&amp; s)</span></span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; re;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; p2 &lt; s.<span class="built_in">size</span>(); p2++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[p2] == <span class="string">&#x27;+&#x27;</span> || s[p2] == <span class="string">&#x27;-&#x27;</span> || s[p2] == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">                re.<span class="built_in">push_back</span>(s[p2]);</span><br><span class="line">                p1 = p2+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="stringstream用法"><a href="#stringstream用法" class="headerlink" title="stringstream用法"></a>stringstream用法</h3><p>头文件 <code>include&lt;sstream&gt;</code> </p>
-<h3 id="字符串分割函数"><a href="#字符串分割函数" class="headerlink" title="字符串分割函数"></a>字符串分割函数</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">const</span> string s, vector&lt;string&gt;&amp; vs, <span class="keyword">const</span> <span class="keyword">char</span> delim= <span class="string">&#x27; &#x27;</span>)</span></span>&#123;</span><br><span class="line">    <span class="function">istringstream <span class="title">iss</span><span class="params">(s)</span></span>;</span><br><span class="line">    string temp;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">getline</span>(iss,temp,delim))&#123;</span><br><span class="line">        vs.<span class="built_in">emplace_back</span>(<span class="built_in">move</span>(temp));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">back</span>() == delim) vs.<span class="built_in">push_back</span>(&#123;&#125;);<span class="comment">//加这句的原因是getline不会识别最后一个delim,避免误判&quot;172.16.254.1.&quot;,&quot;2001:0db8:85a3:0:0:8A2E:0370:7334:&quot;之类的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;  dict; <span class="comment">// 声明unordered_map对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入数据的三种方式</span></span><br><span class="line">dict.<span class="built_in">insert</span>(pair&lt;string,<span class="keyword">int</span>&gt;(<span class="string">&quot;apple&quot;</span>,<span class="number">2</span>));</span><br><span class="line">dict.<span class="built_in">insert</span>(unordered_map&lt;string, <span class="keyword">int</span>&gt;::<span class="built_in">value_type</span>(<span class="string">&quot;orange&quot;</span>,<span class="number">3</span>));</span><br><span class="line">dict[<span class="string">&quot;banana&quot;</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="comment">// 判断是否有元素</span></span><br><span class="line"><span class="keyword">if</span>(dict.<span class="built_in">empty</span>())</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典无元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典共有&quot;</span>&lt;&lt;dict.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;个元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line"><span class="keyword">for</span>(iter=dict.<span class="built_in">begin</span>();iter!=dict.<span class="built_in">end</span>();iter++)</span><br><span class="line">    cout&lt;&lt;iter-&gt;first&lt;&lt;ends&lt;&lt;iter-&gt;second&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line">dict.<span class="built_in">erase</span>(<span class="string">&#x27;a&#x27;</span>); </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*队列*/</span></span><br><span class="line">queue&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*优先队列*/</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::less&lt;<span class="keyword">int</span>&gt; &gt; maxHeap;    <span class="comment">// 大顶堆 堆顶的元素最大</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::greater&lt;<span class="keyword">int</span>&gt; &gt; minHeap; <span class="comment">// 小顶堆 堆顶元素最小</span></span><br><span class="line"><span class="comment">//greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）</span></span><br><span class="line"><span class="keyword">int</span> a = maxHeap.<span class="built_in">top</span>();  <span class="comment">//获取堆顶最大元素</span></span><br><span class="line">maxHeap.<span class="built_in">pop</span>();          <span class="comment">//弹出堆顶元素</span></span><br><span class="line">maxHeap.<span class="built_in">push</span>();         <span class="comment">//向堆中增加元素 堆顶元素永远最大</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*双端队列*/</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; a;     			<span class="comment">// 双端队列 结合了栈和队列的性质，既可以从头部插入 也可以从尾部插入 </span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(a)</span></span>;  			<span class="comment">// 定义并用双端队列a初始化双端队列b</span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&amp;n[<span class="number">1</span>], &amp;n[<span class="number">4</span>])</span></span>;  <span class="comment">// 将n[1]、n[2]、n[3]作为双端队列a的初值</span></span><br><span class="line">deq.<span class="built_in">size</span>();</span><br><span class="line">deq.<span class="built_in">resize</span>();</span><br><span class="line">deq.<span class="built_in">push_front</span>(<span class="keyword">const</span> T&amp; x);  <span class="comment">// 头部添加元素</span></span><br><span class="line">deq.<span class="built_in">push_back</span>(<span class="keyword">const</span> T&amp; x);   <span class="comment">//尾部添加元素</span></span><br><span class="line">deq.<span class="built_in">insert</span>(iterator it, <span class="keyword">const</span> T&amp; x);  <span class="comment">//任意位置插入一个元素</span></span><br><span class="line">deq.<span class="built_in">pop_front</span>(); 			<span class="comment">// 头部删除元素</span></span><br><span class="line">deq.<span class="built_in">pop_back</span>();				<span class="comment">//末尾删除元素</span></span><br><span class="line">deq.<span class="built_in">front</span>();				<span class="comment">//访问第一个元素</span></span><br><span class="line">deq.<span class="built_in">back</span>();					<span class="comment">//访问最后一个元素</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="优先队列-priority-queue"><a href="#优先队列-priority-queue" class="headerlink" title="优先队列 priority_queue"></a>优先队列 priority_queue</h3><p>头文件<code>#include &lt;queue&gt;</code>, 可以自定义其中数据的优先级, 让优先级高的排在队列前面,优先出队。本质是通过大小顶堆这种数据结构实现。</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>priority_queue&lt;Type, Container, Functional&gt;</p>
-<p><em>Type</em> 就是数据类型，<em>Container</em> 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），<em>Functional</em> 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大顶堆</p>
-<p>基本操作:</p>
-<ul>
-<li>top 访问队头元素</li>
-<li>empty 队列是否为空</li>
-<li>size 返回队列内元素个数</li>
-<li>push 插入元素到队尾 (并排序)</li>
-<li>emplace 原地构造一个元素并插入队列</li>
-<li>pop 弹出队头元素</li>
-<li>swap 交换内容</li>
-</ul>
-<h4 id="自定义类型用法"><a href="#自定义类型用法" class="headerlink" title="自定义类型用法"></a>自定义类型用法</h4>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>库函数</category>
-      </categories>
-      <tags>
-        <tag>STL</tag>
-        <tag>api</tag>
       </tags>
   </entry>
   <entry>
@@ -765,29 +765,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++字节对齐</title>
-    <url>/2021/04/25/c++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/</url>
-    <content><![CDATA[<p>C++字节对齐</p>
-<span id="more"></span>
-
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>​        有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
-<ol>
-<li>结构中变量的起始地址 要为该变量类型 大小的整数倍，例如 sizeof(int) = 4 那么结构体中这个变量的存储起始地址 % 4 == 0才行。如果不行，会在前方自动填充0。</li>
-<li>最后即便前面所有都填充完了，最后总的占用的字节数 要是 结构中最大类型数据所占用字节数的倍数，如果不是，最后再填充一次。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">char</span> dda;　　　　　　　　　　　　　　<span class="comment">//偏移量为0，满足对齐方式，dda占用1个字节； </span></span><br><span class="line"><span class="keyword">double</span> dda1;　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。 </span></span><br><span class="line"><span class="keyword">int</span> type；　　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节。 </span></span><br><span class="line">&#125;；　　　　　　　　　　　　　　　　　<span class="comment">//所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。 </span></span><br><span class="line"><span class="comment">////  24 </span></span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语言特性</category>
-      </categories>
-      <tags>
-        <tag>C++语法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++右值和左值</title>
     <url>/2021/04/25/c++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/</url>
     <content><![CDATA[<p>C++右值和左值</p>
@@ -902,6 +879,29 @@
 <p>完美地实现了我们所要的转发效果。但是这个例子中，t 明明是左值，为何可以传入右值引用的函数中？这里的 <code>void relay(T&amp;&amp; t) </code>其实是通用引用，即通过上面的引用折叠规则 由编译器推断得出的。</p>
 <h4 id="完美转发原理"><a href="#完美转发原理" class="headerlink" title="完美转发原理"></a>完美转发原理</h4><p><code>std::forward</code>的源码形式大致是这样：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  精简了标准库的代码，在细节上可能不完全正确，但是足以让我们了解转发函数 forward 的了</span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">T&amp;&amp; <span class="title">forward</span><span class="params">(T &amp;param)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;T&amp;&amp;&gt;(param);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语言特性</category>
+      </categories>
+      <tags>
+        <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++字节对齐</title>
+    <url>/2021/04/25/c++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<p>C++字节对齐</p>
+<span id="more"></span>
+
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>​        有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
+<ol>
+<li>结构中变量的起始地址 要为该变量类型 大小的整数倍，例如 sizeof(int) = 4 那么结构体中这个变量的存储起始地址 % 4 == 0才行。如果不行，会在前方自动填充0。</li>
+<li>最后即便前面所有都填充完了，最后总的占用的字节数 要是 结构中最大类型数据所占用字节数的倍数，如果不是，最后再填充一次。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">char</span> dda;　　　　　　　　　　　　　　<span class="comment">//偏移量为0，满足对齐方式，dda占用1个字节； </span></span><br><span class="line"><span class="keyword">double</span> dda1;　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。 </span></span><br><span class="line"><span class="keyword">int</span> type；　　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节。 </span></span><br><span class="line">&#125;；　　　　　　　　　　　　　　　　　<span class="comment">//所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。 </span></span><br><span class="line"><span class="comment">////  24 </span></span><br></pre></td></tr></table></figure>
+
 
 ]]></content>
       <categories>
@@ -1140,6 +1140,59 @@
       </tags>
   </entry>
   <entry>
+    <title>面经C++基础知识2</title>
+    <url>/2021/04/25/c++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8F-c++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/</url>
+    <content><![CDATA[<p> 面经 C++ 基础知识</p>
+<span id="more"></span>
+
+<h3 id="介绍fork函数"><a href="#介绍fork函数" class="headerlink" title="介绍fork函数"></a>介绍fork函数</h3><p>创建一个和当前进程映像一样的<strong>进程</strong>可以通过fork( )系统调用。成功调用fork 会返回一个大于等于0 的数，对于主进程，返回的是子进程的pid，子进程中返回的是0；可以通过if判断来确定是在子进程还是父进程中，然后执行不同的功能，两个进程执行的先后顺序完全由系统调度决定。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#inclde<span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="fork-wait-exec函数"><a href="#fork-wait-exec函数" class="headerlink" title="fork wait  exec函数"></a>fork wait  exec函数</h3><h3 id="select-函数"><a href="#select-函数" class="headerlink" title="select 函数"></a>select 函数</h3>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++11新特性</title>
+    <url>/2021/04/25/c++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++11%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p>面经C++11新特性</p>
+<span id="more"></span>
+
+<h3 id="请问C-11有哪些新特性？"><a href="#请问C-11有哪些新特性？" class="headerlink" title="请问C++11有哪些新特性？"></a>请问C++11有哪些新特性？</h3><ol>
+<li>新增 auto 关键字，可以根据变量的初始值推断变量类型，但是对于函数的参数和数组的类型不能推断</li>
+<li>新增 nullptr 关键字，可以代表任意类型的指针。C中的 NULL 为宏定义0，在函数重载的时候可能会有歧义，int  or  指针？</li>
+<li>新增 share_ptr, weak_ptr 等智能指针</li>
+<li>新增了右值引用 &amp;&amp; ，实现了语义移动和完美转发的功能，大大减少了临时变量的重复构造析构的次数，提高了性能</li>
+<li>新增了STL 容器 array  tuple</li>
+<li>支持使用初始化列表对类进行初始化 好像只有构造函数支持初始化列表</li>
+<li>atomic 原子操作用于多线程资源互斥操作</li>
+</ol>
+<p>… </p>
+<h3 id="详细介绍一下C-11中的可变参数模板"><a href="#详细介绍一下C-11中的可变参数模板" class="headerlink" title="详细介绍一下C++11中的可变参数模板"></a>详细介绍一下C++11中的可变参数模板</h3><p>c++11的可变参数模板对参数进行了高度泛化，可以表示任意数目、任意类型的参数，其语法为在 class 或者 typename 后面带上省略号。省略号作用如下：</p>
+<ul>
+<li><strong>声明</strong>一个包含0到任意个模板的参数的参数包</li>
+<li>在模板定义的右边，可以将参数包<strong>展成一个个独立的参数</strong></li>
+</ul>
+<p>C++11可以使用递归函数的方式展开参数包，获得可变参数的每个值。<strong>通过递归函数展开参数包，需要提供一个参数包展开的函数和一个递归终止函数</strong>。例如。参数包Args …在展开的过程中递归调用自己，每调用一次参数包中的参数就会少一个，直到所有参数都展开为止。当没有参数时就会调用非模板函数printf终止递归过程。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;end&quot;</span> &lt;&lt; endl; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T a, Args ...rest)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">print</span>(rest...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="详细介绍一下C-11右值引用"><a href="#详细介绍一下C-11右值引用" class="headerlink" title="详细介绍一下C++11右值引用"></a>详细介绍一下C++11右值引用</h3><h3 id="详细介绍一下C-11-lambda新特性"><a href="#详细介绍一下C-11-lambda新特性" class="headerlink" title="详细介绍一下C++11 lambda新特性"></a>详细介绍一下C++11 lambda新特性</h3>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面经C++容器和算法</title>
     <url>/2021/04/25/c++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E5%AE%B9%E5%99%A8%E5%92%8C%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>面经C++容器和算法</p>
@@ -1248,59 +1301,6 @@
 <img src="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom: 50%;" />
 
 ]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++11新特性</title>
-    <url>/2021/04/25/c++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++11%E6%96%B0%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<p>面经C++11新特性</p>
-<span id="more"></span>
-
-<h3 id="请问C-11有哪些新特性？"><a href="#请问C-11有哪些新特性？" class="headerlink" title="请问C++11有哪些新特性？"></a>请问C++11有哪些新特性？</h3><ol>
-<li>新增 auto 关键字，可以根据变量的初始值推断变量类型，但是对于函数的参数和数组的类型不能推断</li>
-<li>新增 nullptr 关键字，可以代表任意类型的指针。C中的 NULL 为宏定义0，在函数重载的时候可能会有歧义，int  or  指针？</li>
-<li>新增 share_ptr, weak_ptr 等智能指针</li>
-<li>新增了右值引用 &amp;&amp; ，实现了语义移动和完美转发的功能，大大减少了临时变量的重复构造析构的次数，提高了性能</li>
-<li>新增了STL 容器 array  tuple</li>
-<li>支持使用初始化列表对类进行初始化 好像只有构造函数支持初始化列表</li>
-<li>atomic 原子操作用于多线程资源互斥操作</li>
-</ol>
-<p>… </p>
-<h3 id="详细介绍一下C-11中的可变参数模板"><a href="#详细介绍一下C-11中的可变参数模板" class="headerlink" title="详细介绍一下C++11中的可变参数模板"></a>详细介绍一下C++11中的可变参数模板</h3><p>c++11的可变参数模板对参数进行了高度泛化，可以表示任意数目、任意类型的参数，其语法为在 class 或者 typename 后面带上省略号。省略号作用如下：</p>
-<ul>
-<li><strong>声明</strong>一个包含0到任意个模板的参数的参数包</li>
-<li>在模板定义的右边，可以将参数包<strong>展成一个个独立的参数</strong></li>
-</ul>
-<p>C++11可以使用递归函数的方式展开参数包，获得可变参数的每个值。<strong>通过递归函数展开参数包，需要提供一个参数包展开的函数和一个递归终止函数</strong>。例如。参数包Args …在展开的过程中递归调用自己，每调用一次参数包中的参数就会少一个，直到所有参数都展开为止。当没有参数时就会调用非模板函数printf终止递归过程。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;end&quot;</span> &lt;&lt; endl; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T a, Args ...rest)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">print</span>(rest...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="详细介绍一下C-11右值引用"><a href="#详细介绍一下C-11右值引用" class="headerlink" title="详细介绍一下C++11右值引用"></a>详细介绍一下C++11右值引用</h3><h3 id="详细介绍一下C-11-lambda新特性"><a href="#详细介绍一下C-11-lambda新特性" class="headerlink" title="详细介绍一下C++11 lambda新特性"></a>详细介绍一下C++11 lambda新特性</h3>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++基础知识2</title>
-    <url>/2021/04/25/c++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8F-c++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/</url>
-    <content><![CDATA[<p> 面经 C++ 基础知识</p>
-<span id="more"></span>
-
-<h3 id="介绍fork函数"><a href="#介绍fork函数" class="headerlink" title="介绍fork函数"></a>介绍fork函数</h3><p>创建一个和当前进程映像一样的<strong>进程</strong>可以通过fork( )系统调用。成功调用fork 会返回一个大于等于0 的数，对于主进程，返回的是子进程的pid，子进程中返回的是0；可以通过if判断来确定是在子进程还是父进程中，然后执行不同的功能，两个进程执行的先后顺序完全由系统调度决定。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#inclde<span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="fork-wait-exec函数"><a href="#fork-wait-exec函数" class="headerlink" title="fork wait  exec函数"></a>fork wait  exec函数</h3><h3 id="select-函数"><a href="#select-函数" class="headerlink" title="select 函数"></a>select 函数</h3>]]></content>
       <categories>
         <category>C++</category>
         <category>面经C++汇总</category>
@@ -1652,91 +1652,6 @@
       </tags>
   </entry>
   <entry>
-    <title>算法思想汇总</title>
-    <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/a.%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/</url>
-    <content><![CDATA[<p>汇总了编程中常用的编程思想的原理，例如DFS，动态规划，回朔等</p>
-<span id="more"></span>
-
-<h1 id="算法思想汇总"><a href="#算法思想汇总" class="headerlink" title="算法思想汇总"></a>算法思想汇总</h1><h2 id="广度-深度优先搜索-BFS-DFS"><a href="#广度-深度优先搜索-BFS-DFS" class="headerlink" title="广度/深度优先搜索 BFS/DFS"></a>广度/深度优先搜索 BFS/DFS</h2><p>​        广度优先搜索 是<a href="http://baike.baidu.com/view/3148644.htm">连通图</a>的一种<a href="http://baike.baidu.com/view/549585.htm">遍历</a>策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域 BFS同样属于盲目搜索。一般用队列数据结构来辅助实现BFS算法。</p>
-<ol>
-<li>首先将根节点放入队列中。</li>
-<li>从队列中取出第一个节点，并检验它是否为目标。如果找到目标，则结束搜寻并回传结果。否则将它所有尚未检验过的直接子节点加入队列中。</li>
-<li>若队列为空，表示整张图都检查过了——亦即图中没有欲搜寻的目标。结束搜寻并回传“找不到目标”。</li>
-<li>重复步骤2。</li>
-</ol>
-<p><img src="https://i.loli.net/2021/03/28/mJ4GI6aciKLot9F.png" alt="1598357141189"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 广度优先搜索</span></span><br><span class="line"><span class="comment"> * @param Vs 起点</span></span><br><span class="line"><span class="comment"> * @param Vd 终点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(Node&amp; Vs, Node&amp; Vd)</span></span>&#123;</span><br><span class="line">	queue&lt;Node&gt; Q;</span><br><span class="line">	Node Vn, Vw;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//初始状态将起点放进队列Q</span></span><br><span class="line">	Q.<span class="built_in">push</span>(Vs);</span><br><span class="line">	<span class="built_in">hash</span>(Vw) = <span class="literal">true</span>;<span class="comment">//设置节点已经访问过了！</span></span><br><span class="line"> </span><br><span class="line">	<span class="keyword">while</span> (!Q.<span class="built_in">empty</span>())&#123;<span class="comment">//队列不为空，继续搜索！</span></span><br><span class="line">		<span class="comment">//取出队列的头Vn</span></span><br><span class="line">		Vn = Q.<span class="built_in">front</span>();</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//从队列中移除</span></span><br><span class="line">		Q.<span class="built_in">pop</span>();</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">while</span>(Vw = Vn通过某规则能够到达的节点)&#123;</span><br><span class="line">			<span class="keyword">if</span> (Vw == Vd)&#123;<span class="comment">//找到终点了！</span></span><br><span class="line">				<span class="comment">//把路径记录，这里没给出解法</span></span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//返回</span></span><br><span class="line">			&#125;</span><br><span class="line"> </span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">isValid</span>(Vw) &amp;&amp; !visit[Vw])&#123;</span><br><span class="line">				<span class="comment">//Vw是一个合法的节点并且为白色节点</span></span><br><span class="line">				Q.<span class="built_in">push</span>(Vw);<span class="comment">//加入队列Q</span></span><br><span class="line">				<span class="built_in">hash</span>(Vw) = <span class="literal">true</span>;<span class="comment">//设置节点颜色</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//无解</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
-<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Backtracking（回溯）属于 DFS</p>
-<ul>
-<li>回溯算法就是按照深度优先的顺序，穷举所有可能性的算法，但是回溯算法比暴力穷举法更高明的地方就是回溯算法可以随时判断当前状态是否符合问题的条件。一旦不符合条件，那么就退回到上一个状态，省去了继续往下探索的时间</li>
-<li>优化剪枝策略，就是判断当前的分支树是否符合问题的条件，如果当前分支树不符合条件，那么就不再遍历这个分支里的所有路径。</li>
-<li>启发式搜索策略指的是，给回溯法搜索子节点的顺序设定一个优先级，从该子节点往下遍历更有可能找到问题的解。</li>
-<li>普通 DFS 主要用在 <strong>可达性问题</strong> ，这种问题只需要执行到特点的位置然后返回即可。</li>
-<li>而 Backtracking 主要用于求解 <strong>排列组合</strong> 问题，例如有 { ‘a’,’b’,’c’ } 三个字符，求解所有由这三个字符排列得到的字符串，这种问题在执行到特定的位置返回之后还会继续执行求解过程。</li>
-</ul>
-<p>​        该页中 平洋大西洋水流问题  中解释中的，将他看作从四周到中间可达问题比较简单，但是自己第一次做的时候其实是用的回溯的思想做的，比较复杂。 因为 Backtracking 不是立即返回，而要继续求解，因此在程序实现时，需要注意对元素的标记问题：</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>​    回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。用回溯算法解决问题的一般步骤：</p>
-<ol>
-<li><p>在访问一个新元素进入新的递归调用时，需要将新元素标记为已经访问，这样才能在继续递归调用时不用重复访问该元素；</p>
-</li>
-<li><p>但是在递归返回时，需要将元素标记为未访问，因为只需要保证在一个递归链中不同时访问一个元素，可以访问已经访问过但是不在当前递归链中的元素。</p>
-</li>
-</ol>
-<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>​        贪心算法，又名贪婪法，是寻找<strong>最优解问题</strong>的常用方法，这种方法模式一般将求解过程分成<strong>若干个步骤</strong>，但每个步骤都应用贪心原则，选取当前状态下<strong>最好/最优的选择</strong>（局部最有利的选择），并以此希望最后堆叠出的结果也是最好/最优的解。</p>
-<ol>
-<li>从某个初始解出发；</li>
-<li>采用迭代的过程，当可以向目标前进一步时，就根据局部最优策略，得到一部分解，缩小问题规模；</li>
-<li>将所有解综合起来。</li>
-</ol>
-<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p>​        双指针 有 <strong>快慢指针</strong> 和  <strong>左右指针</strong> 。双指针法充分使用了数组有序这一特征，从而在某些情况下能够简化一些运算。前者解决主要解决链表中的问题，比如典型的判定链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。</p>
-<p><strong>快慢指针</strong> ： 般都初始化指向链表的头结点 head  ，前进时快指针 fast 在前，慢指针 slow 在后。</p>
-<ul>
-<li>判定链表中是否含有环。从head出发， 快指针每次移动慢指针两倍的距离，二者相遇则有环，快指针先结束无环。</li>
-<li>返回环的长度。相遇后，固定一个指针不懂，移动另一个到再次相遇 记录走过的步长 即为环的长度</li>
-<li>返回环的起点。在刚才相遇的B点，将一个指针回归到起点，另一个还是在B点，然后二者以相同的速度移动，二者再次相遇的 点即为换的起点。具体证明可画图 理解。</li>
-<li>返回链表的中点。类似上面的思路，让快指针一次前进两步，慢指针一次前进一步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。</li>
-<li>寻找链表的倒数第 k 个元素。让快指针先走 k 步，然后快慢指针开始同速前进。当快指针走到链表末尾 null 时，慢指针所在的位置就是倒数第 k 个链表节点。</li>
-</ul>
-<p><strong>左右指针</strong>： 左右指针在数组中实际是指两个索引值，一般初始化为 left = 0, right = nums.length - 1。当数组提到有序时就应该想到双指针。</p>
-<ul>
-<li>二分查找，反转数组，两数之和…</li>
-<li>滑动窗口算法 。滑窗的关键在于判断什么时候座指针收缩窗口，何时更新数据，合理的收缩窗口的方法可以大大简化代码。</li>
-</ul>
-<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>​        二分查找也称为折半查找，每次都能将查找区间减半，这种折半特性的算法**时间复杂度为 O(logN)**。</p>
-<p>​        <strong>m 计算</strong>： m = l + (h - l) / 2<br>​        <strong>未成功查找的返回值</strong>：循环退出时如果仍然没有查找到 key，那么表示查找失败。可以有两种返回值。-1：以一个错误码表示没有查找到 key；l：将 key 插入到 nums 中的正确位置。<br>​        <strong>变种</strong>：二分查找可以有很多变种，实现变种要注意边界值的判断。例如<strong>在一个有重复元素的数组中查找 key 的最左位置</strong>的实现如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, h = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; h) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = l + (h - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[m] &gt;= key) &#123;</span><br><span class="line">            h = m;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            l = m + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h2><p>​        分治策略是：对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解。这种算法设计策略叫做分治法。</p>
-<p>​        适用的情况：</p>
-<ol>
-<li>该问题的规模缩小到一定的程度就可以容易地解决</li>
-<li>该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质。</li>
-<li>利用该问题分解出的子问题的解可以合并为该问题的解；</li>
-<li>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子子问题。</li>
-</ol>
-<p>第一条特征是绝大多数问题都可以满足的，因为问题的计算复杂性一般是随着问题规模的增加而增加；第二条特征是应用分治法的前提它也是大多数问题可以满足的，此特征反映了递归思想的应用；第三条特征是关键，能否利用分治法完全取决于问题是否具有第三条特征，<strong>如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法</strong>。第四条特征涉及到分治法的效率，如果各子问题<strong>是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好</strong>。</p>
-<p>​    分治法在每一层递归上都有三个步骤：</p>
-<ol>
-<li>分解：将原问题分解为若干个规模较小，相互独立，与原问题形式相同的子问题；</li>
-<li>解决：若子问题规模较小而容易被解决则直接解，否则递归地解各个子问题</li>
-<li>合并：将各个子问题的解合并为原问题的解</li>
-</ol>
-<p>常见的例如  二分搜索，汉诺塔问题，归并排序，快速排序等都是使用分治的思想。</p>
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>算法思想</category>
-      </categories>
-      <tags>
-        <tag>算法思想</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>剑指offer</title>
     <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/b.%20%E5%89%91%E6%8C%87Offer/</url>
     <content><![CDATA[<p>记录了剑指offer中的题目，不会写的都在后面加了思路注释，重点复习不会写的就行</p>
@@ -1878,6 +1793,91 @@
       </tags>
   </entry>
   <entry>
+    <title>算法思想汇总</title>
+    <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/a.%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/</url>
+    <content><![CDATA[<p>汇总了编程中常用的编程思想的原理，例如DFS，动态规划，回朔等</p>
+<span id="more"></span>
+
+<h1 id="算法思想汇总"><a href="#算法思想汇总" class="headerlink" title="算法思想汇总"></a>算法思想汇总</h1><h2 id="广度-深度优先搜索-BFS-DFS"><a href="#广度-深度优先搜索-BFS-DFS" class="headerlink" title="广度/深度优先搜索 BFS/DFS"></a>广度/深度优先搜索 BFS/DFS</h2><p>​        广度优先搜索 是<a href="http://baike.baidu.com/view/3148644.htm">连通图</a>的一种<a href="http://baike.baidu.com/view/549585.htm">遍历</a>策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域 BFS同样属于盲目搜索。一般用队列数据结构来辅助实现BFS算法。</p>
+<ol>
+<li>首先将根节点放入队列中。</li>
+<li>从队列中取出第一个节点，并检验它是否为目标。如果找到目标，则结束搜寻并回传结果。否则将它所有尚未检验过的直接子节点加入队列中。</li>
+<li>若队列为空，表示整张图都检查过了——亦即图中没有欲搜寻的目标。结束搜寻并回传“找不到目标”。</li>
+<li>重复步骤2。</li>
+</ol>
+<p><img src="https://i.loli.net/2021/03/28/mJ4GI6aciKLot9F.png" alt="1598357141189"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 广度优先搜索</span></span><br><span class="line"><span class="comment"> * @param Vs 起点</span></span><br><span class="line"><span class="comment"> * @param Vd 终点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(Node&amp; Vs, Node&amp; Vd)</span></span>&#123;</span><br><span class="line">	queue&lt;Node&gt; Q;</span><br><span class="line">	Node Vn, Vw;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//初始状态将起点放进队列Q</span></span><br><span class="line">	Q.<span class="built_in">push</span>(Vs);</span><br><span class="line">	<span class="built_in">hash</span>(Vw) = <span class="literal">true</span>;<span class="comment">//设置节点已经访问过了！</span></span><br><span class="line"> </span><br><span class="line">	<span class="keyword">while</span> (!Q.<span class="built_in">empty</span>())&#123;<span class="comment">//队列不为空，继续搜索！</span></span><br><span class="line">		<span class="comment">//取出队列的头Vn</span></span><br><span class="line">		Vn = Q.<span class="built_in">front</span>();</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//从队列中移除</span></span><br><span class="line">		Q.<span class="built_in">pop</span>();</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">while</span>(Vw = Vn通过某规则能够到达的节点)&#123;</span><br><span class="line">			<span class="keyword">if</span> (Vw == Vd)&#123;<span class="comment">//找到终点了！</span></span><br><span class="line">				<span class="comment">//把路径记录，这里没给出解法</span></span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//返回</span></span><br><span class="line">			&#125;</span><br><span class="line"> </span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">isValid</span>(Vw) &amp;&amp; !visit[Vw])&#123;</span><br><span class="line">				<span class="comment">//Vw是一个合法的节点并且为白色节点</span></span><br><span class="line">				Q.<span class="built_in">push</span>(Vw);<span class="comment">//加入队列Q</span></span><br><span class="line">				<span class="built_in">hash</span>(Vw) = <span class="literal">true</span>;<span class="comment">//设置节点颜色</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//无解</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Backtracking（回溯）属于 DFS</p>
+<ul>
+<li>回溯算法就是按照深度优先的顺序，穷举所有可能性的算法，但是回溯算法比暴力穷举法更高明的地方就是回溯算法可以随时判断当前状态是否符合问题的条件。一旦不符合条件，那么就退回到上一个状态，省去了继续往下探索的时间</li>
+<li>优化剪枝策略，就是判断当前的分支树是否符合问题的条件，如果当前分支树不符合条件，那么就不再遍历这个分支里的所有路径。</li>
+<li>启发式搜索策略指的是，给回溯法搜索子节点的顺序设定一个优先级，从该子节点往下遍历更有可能找到问题的解。</li>
+<li>普通 DFS 主要用在 <strong>可达性问题</strong> ，这种问题只需要执行到特点的位置然后返回即可。</li>
+<li>而 Backtracking 主要用于求解 <strong>排列组合</strong> 问题，例如有 { ‘a’,’b’,’c’ } 三个字符，求解所有由这三个字符排列得到的字符串，这种问题在执行到特定的位置返回之后还会继续执行求解过程。</li>
+</ul>
+<p>​        该页中 平洋大西洋水流问题  中解释中的，将他看作从四周到中间可达问题比较简单，但是自己第一次做的时候其实是用的回溯的思想做的，比较复杂。 因为 Backtracking 不是立即返回，而要继续求解，因此在程序实现时，需要注意对元素的标记问题：</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>​    回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。用回溯算法解决问题的一般步骤：</p>
+<ol>
+<li><p>在访问一个新元素进入新的递归调用时，需要将新元素标记为已经访问，这样才能在继续递归调用时不用重复访问该元素；</p>
+</li>
+<li><p>但是在递归返回时，需要将元素标记为未访问，因为只需要保证在一个递归链中不同时访问一个元素，可以访问已经访问过但是不在当前递归链中的元素。</p>
+</li>
+</ol>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>​        贪心算法，又名贪婪法，是寻找<strong>最优解问题</strong>的常用方法，这种方法模式一般将求解过程分成<strong>若干个步骤</strong>，但每个步骤都应用贪心原则，选取当前状态下<strong>最好/最优的选择</strong>（局部最有利的选择），并以此希望最后堆叠出的结果也是最好/最优的解。</p>
+<ol>
+<li>从某个初始解出发；</li>
+<li>采用迭代的过程，当可以向目标前进一步时，就根据局部最优策略，得到一部分解，缩小问题规模；</li>
+<li>将所有解综合起来。</li>
+</ol>
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p>​        双指针 有 <strong>快慢指针</strong> 和  <strong>左右指针</strong> 。双指针法充分使用了数组有序这一特征，从而在某些情况下能够简化一些运算。前者解决主要解决链表中的问题，比如典型的判定链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。</p>
+<p><strong>快慢指针</strong> ： 般都初始化指向链表的头结点 head  ，前进时快指针 fast 在前，慢指针 slow 在后。</p>
+<ul>
+<li>判定链表中是否含有环。从head出发， 快指针每次移动慢指针两倍的距离，二者相遇则有环，快指针先结束无环。</li>
+<li>返回环的长度。相遇后，固定一个指针不懂，移动另一个到再次相遇 记录走过的步长 即为环的长度</li>
+<li>返回环的起点。在刚才相遇的B点，将一个指针回归到起点，另一个还是在B点，然后二者以相同的速度移动，二者再次相遇的 点即为换的起点。具体证明可画图 理解。</li>
+<li>返回链表的中点。类似上面的思路，让快指针一次前进两步，慢指针一次前进一步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。</li>
+<li>寻找链表的倒数第 k 个元素。让快指针先走 k 步，然后快慢指针开始同速前进。当快指针走到链表末尾 null 时，慢指针所在的位置就是倒数第 k 个链表节点。</li>
+</ul>
+<p><strong>左右指针</strong>： 左右指针在数组中实际是指两个索引值，一般初始化为 left = 0, right = nums.length - 1。当数组提到有序时就应该想到双指针。</p>
+<ul>
+<li>二分查找，反转数组，两数之和…</li>
+<li>滑动窗口算法 。滑窗的关键在于判断什么时候座指针收缩窗口，何时更新数据，合理的收缩窗口的方法可以大大简化代码。</li>
+</ul>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>​        二分查找也称为折半查找，每次都能将查找区间减半，这种折半特性的算法**时间复杂度为 O(logN)**。</p>
+<p>​        <strong>m 计算</strong>： m = l + (h - l) / 2<br>​        <strong>未成功查找的返回值</strong>：循环退出时如果仍然没有查找到 key，那么表示查找失败。可以有两种返回值。-1：以一个错误码表示没有查找到 key；l：将 key 插入到 nums 中的正确位置。<br>​        <strong>变种</strong>：二分查找可以有很多变种，实现变种要注意边界值的判断。例如<strong>在一个有重复元素的数组中查找 key 的最左位置</strong>的实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, h = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; h) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = l + (h - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[m] &gt;= key) &#123;</span><br><span class="line">            h = m;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            l = m + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h2><p>​        分治策略是：对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解。这种算法设计策略叫做分治法。</p>
+<p>​        适用的情况：</p>
+<ol>
+<li>该问题的规模缩小到一定的程度就可以容易地解决</li>
+<li>该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质。</li>
+<li>利用该问题分解出的子问题的解可以合并为该问题的解；</li>
+<li>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子子问题。</li>
+</ol>
+<p>第一条特征是绝大多数问题都可以满足的，因为问题的计算复杂性一般是随着问题规模的增加而增加；第二条特征是应用分治法的前提它也是大多数问题可以满足的，此特征反映了递归思想的应用；第三条特征是关键，能否利用分治法完全取决于问题是否具有第三条特征，<strong>如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法</strong>。第四条特征涉及到分治法的效率，如果各子问题<strong>是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好</strong>。</p>
+<p>​    分治法在每一层递归上都有三个步骤：</p>
+<ol>
+<li>分解：将原问题分解为若干个规模较小，相互独立，与原问题形式相同的子问题；</li>
+<li>解决：若子问题规模较小而容易被解决则直接解，否则递归地解各个子问题</li>
+<li>合并：将各个子问题的解合并为原问题的解</li>
+</ol>
+<p>常见的例如  二分搜索，汉诺塔问题，归并排序，快速排序等都是使用分治的思想。</p>
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>算法思想</category>
+      </categories>
+      <tags>
+        <tag>算法思想</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>相关的编程题汇总-DFS/BFS</title>
     <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_DFS_BFS/</url>
     <content><![CDATA[<p>记录了DFS/BFS相关的题目</p>
@@ -1962,33 +1962,6 @@
       </tags>
   </entry>
   <entry>
-    <title>相关的编程题汇总-贪心算法</title>
-    <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E8%B4%AA%E5%BF%83/</url>
-    <content><![CDATA[<p>记录了解题中需要用贪心思路的题目。</p>
-<span id="more"></span>
-
-
-
-<h4 id="根据身高重建队列"><a href="#根据身高重建队列" class="headerlink" title="根据身高重建队列"></a><a href="https://leetcode-cn.com/problems/queue-reconstruction-by-height/">根据身高重建队列</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203047.png" alt="1598428994335"></p>
-<p>​        这道题的关键是  先对队列按照高到低的顺序排序，当高度相同时，多的在后面。这样从前往后挨个调整得时候，前面元素得移动只可能是往前诺，不会对后面得产生影响。后面得元素插入前面 也不会对已经插入过的影响，因为后面得身高低。</p>
-<h4 id="加油站"><a href="#加油站" class="headerlink" title="加油站"></a><a href="https://leetcode-cn.com/problems/gas-station/">加油站</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203050.png" alt="1598435271191"></p>
-<p>​        这道题使用 两个for循环遍历 也不会超时 时间复杂度是 O(N^2)  但是这样并不好。首先选一个 起点0运行  通过累加 油量 和 损耗量，到第 N 站如果 油量  &gt; 损耗 说明无法到达，<strong>将起点修改为第N+1站作为新的开始</strong> 这里不是从0到1挨个 作为起点测试。因为，如果在第N站  油不够了 而前N站都够，那么油量&gt;=消耗量，那么在这之中选择一个起点 油量=消耗=0 必然到第N站还是不够，所以起点直接选 N+1开始新的测试。</p>
-<h4 id="无重叠区间"><a href="#无重叠区间" class="headerlink" title="无重叠区间"></a><a href="https://leetcode-cn.com/problems/non-overlapping-intervals/">无重叠区间</a></h4><p>​        <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203056.png" alt="image-20200926211802074"></p>
-<p>​        这个题和  <a href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/">用最少数量的箭引爆气球</a> 题目类似。<br>​        首先 对区间的end位置 升序排列，如图所示，从上往下 依次寻找找没有交集且最邻近的 区间，直至结束。那么总数就是可以剩下的最大区间数。为何 这么做就是对的呢？考虑以下 例如从上往下 扫面的过程中， 第0个只和  第1，2 相交，那么 1，2相互也必定重叠。这三个必删掉 两个，删掉哪两个呢？若保留1或者2，那么不能保证 1或者2下面没有区间和它相交，但是保留1，则可以保证就没有其他的再可能与1相交。所以 应该删掉1，2.这也是一种贪心的思想。从上往下扫描，删掉与其相交的 区间。<br>​        但是按照上面思路去写代码 正确性有保证，但是并没有完全利用到里面的规律 会有冗余的 循环。<br>​        再接着 想，从上往下扫面，如果 遇到一个与其相交的 就跳过（代表删除了）再接着往下扫描直到遇到以一个与当前区间不相交的区间，此时将该区间的尾部坐标更新，再接着往下扫面。每次遇到不相交的区间计数加一 统计 总共不相交的区间数量即可。这样取第0个区间的时候 并没有依次遍历完下面所有与第0个区间相交的区间，但是任然可行。因为如果 x(0)(1) &lt; x(3)(0) 即第0，3区间不相交 而 若 x(0)(1) &gt; x(n)(0)  即 第 0 n区间也相交。那么x(3)(1) &gt; x(3)(0) &gt; x(n)(0) 即第3，n区间也必然相交。这样 即便在第0个区间的时候没扫描并删除第n个区间，但是在 切换到第三个区间并往下扫描的时候 也可以将n 删除。</p>
-<h4 id="划分字母区间"><a href="#划分字母区间" class="headerlink" title="划分字母区间"></a><a href="https://leetcode-cn.com/problems/partition-labels/">划分字母区间</a></h4><p>​        这个题的 关键就是 寻找 字母结束的最大位置，当 遍历到 第 i 个 字母时  i == end 则可以作为一个分割点</p>
-<h4 id="最大交换"><a href="#最大交换" class="headerlink" title="最大交换"></a><a href="https://leetcode-cn.com/problems/maximum-swap/">最大交换</a></h4><p>在做题的时候 要首先理解清楚题目的意思，然后尽可能用简单的模型来描述  完成题目要求，而不是在边界情况都还像清楚的时候，就下手用可能的方法解题。例如本题  已读题目就 感觉应该可以用单调栈写。其实本质就是求  高位  左边最大<strong>且 靠后</strong> 的数交换。用单调栈很难一下想到 且靠后 这种边界情况。</p>
-<p>对于查找某个位置 一侧比他大的最大的最远/最近的数，像数字和字符</p>
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>算法思想</category>
-      </categories>
-      <tags>
-        <tag>刷题</tag>
-        <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>相关的编程题汇总-回朔</title>
     <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%9B%9E%E6%9C%94/</url>
     <content><![CDATA[<p>记录了回朔类的题目，常见的 八皇后问题，排列组合等</p>
@@ -2034,6 +2007,33 @@
       <tags>
         <tag>刷题</tag>
         <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>相关的编程题汇总-贪心算法</title>
+    <url>/2021/04/25/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E8%B4%AA%E5%BF%83/</url>
+    <content><![CDATA[<p>记录了解题中需要用贪心思路的题目。</p>
+<span id="more"></span>
+
+
+
+<h4 id="根据身高重建队列"><a href="#根据身高重建队列" class="headerlink" title="根据身高重建队列"></a><a href="https://leetcode-cn.com/problems/queue-reconstruction-by-height/">根据身高重建队列</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203047.png" alt="1598428994335"></p>
+<p>​        这道题的关键是  先对队列按照高到低的顺序排序，当高度相同时，多的在后面。这样从前往后挨个调整得时候，前面元素得移动只可能是往前诺，不会对后面得产生影响。后面得元素插入前面 也不会对已经插入过的影响，因为后面得身高低。</p>
+<h4 id="加油站"><a href="#加油站" class="headerlink" title="加油站"></a><a href="https://leetcode-cn.com/problems/gas-station/">加油站</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203050.png" alt="1598435271191"></p>
+<p>​        这道题使用 两个for循环遍历 也不会超时 时间复杂度是 O(N^2)  但是这样并不好。首先选一个 起点0运行  通过累加 油量 和 损耗量，到第 N 站如果 油量  &gt; 损耗 说明无法到达，<strong>将起点修改为第N+1站作为新的开始</strong> 这里不是从0到1挨个 作为起点测试。因为，如果在第N站  油不够了 而前N站都够，那么油量&gt;=消耗量，那么在这之中选择一个起点 油量=消耗=0 必然到第N站还是不够，所以起点直接选 N+1开始新的测试。</p>
+<h4 id="无重叠区间"><a href="#无重叠区间" class="headerlink" title="无重叠区间"></a><a href="https://leetcode-cn.com/problems/non-overlapping-intervals/">无重叠区间</a></h4><p>​        <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203056.png" alt="image-20200926211802074"></p>
+<p>​        这个题和  <a href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/">用最少数量的箭引爆气球</a> 题目类似。<br>​        首先 对区间的end位置 升序排列，如图所示，从上往下 依次寻找找没有交集且最邻近的 区间，直至结束。那么总数就是可以剩下的最大区间数。为何 这么做就是对的呢？考虑以下 例如从上往下 扫面的过程中， 第0个只和  第1，2 相交，那么 1，2相互也必定重叠。这三个必删掉 两个，删掉哪两个呢？若保留1或者2，那么不能保证 1或者2下面没有区间和它相交，但是保留1，则可以保证就没有其他的再可能与1相交。所以 应该删掉1，2.这也是一种贪心的思想。从上往下扫描，删掉与其相交的 区间。<br>​        但是按照上面思路去写代码 正确性有保证，但是并没有完全利用到里面的规律 会有冗余的 循环。<br>​        再接着 想，从上往下扫面，如果 遇到一个与其相交的 就跳过（代表删除了）再接着往下扫描直到遇到以一个与当前区间不相交的区间，此时将该区间的尾部坐标更新，再接着往下扫面。每次遇到不相交的区间计数加一 统计 总共不相交的区间数量即可。这样取第0个区间的时候 并没有依次遍历完下面所有与第0个区间相交的区间，但是任然可行。因为如果 x(0)(1) &lt; x(3)(0) 即第0，3区间不相交 而 若 x(0)(1) &gt; x(n)(0)  即 第 0 n区间也相交。那么x(3)(1) &gt; x(3)(0) &gt; x(n)(0) 即第3，n区间也必然相交。这样 即便在第0个区间的时候没扫描并删除第n个区间，但是在 切换到第三个区间并往下扫描的时候 也可以将n 删除。</p>
+<h4 id="划分字母区间"><a href="#划分字母区间" class="headerlink" title="划分字母区间"></a><a href="https://leetcode-cn.com/problems/partition-labels/">划分字母区间</a></h4><p>​        这个题的 关键就是 寻找 字母结束的最大位置，当 遍历到 第 i 个 字母时  i == end 则可以作为一个分割点</p>
+<h4 id="最大交换"><a href="#最大交换" class="headerlink" title="最大交换"></a><a href="https://leetcode-cn.com/problems/maximum-swap/">最大交换</a></h4><p>在做题的时候 要首先理解清楚题目的意思，然后尽可能用简单的模型来描述  完成题目要求，而不是在边界情况都还像清楚的时候，就下手用可能的方法解题。例如本题  已读题目就 感觉应该可以用单调栈写。其实本质就是求  高位  左边最大<strong>且 靠后</strong> 的数交换。用单调栈很难一下想到 且靠后 这种边界情况。</p>
+<p>对于查找某个位置 一侧比他大的最大的最远/最近的数，像数字和字符</p>
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>算法思想</category>
+      </categories>
+      <tags>
+        <tag>刷题</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
