@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="记录了动态规划类的题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相关的编程题汇总-动态规划">
+<meta property="og:url" content="http://example.com/2021/04/24/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="记录了动态规划类的题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/UaJ4dIolSTCO7bh.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/d53VscIon614MfU.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/ofr7S8eCcEBs3GR.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/cStoirT5M7sbq9X.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/nlGHCz8ZE39XjAK.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210401152541.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210401152523.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/7ae8b65cf80c5e9980ea33973abb6678f10098646aeac699cac12817b7e250ce-309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F%E5%9B%BE%E8%A7%A3%E5%9B%BE.png">
+<meta property="article:published_time" content="2021-04-24T03:54:28.020Z">
+<meta property="article:modified_time" content="2021-04-25T03:18:53.875Z">
+<meta property="article:author" content="常若望">
+<meta property="article:tag" content="刷题">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/28/UaJ4dIolSTCO7bh.png">
+
+<link rel="canonical" href="http://example.com/2021/04/24/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>相关的编程题汇总-动态规划 | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/24/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          相关的编程题汇总-动态规划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-24 11:54:28" itemprop="dateCreated datePublished" datetime="2021-04-24T11:54:28+08:00">2021-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-25 11:18:53" itemprop="dateModified" datetime="2021-04-25T11:18:53+08:00">2021-04-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录了动态规划类的题目</p>
+<span id="more"></span>
+
+<h1 id="动态规划类题目"><a href="#动态规划类题目" class="headerlink" title="动态规划类题目"></a>动态规划类题目</h1><h2 id="数组类"><a href="#数组类" class="headerlink" title="数组类"></a>数组类</h2><h4 id="等差数列划分"><a href="#等差数列划分" class="headerlink" title="等差数列划分"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/arithmetic-slices/">等差数列划分</a></h4><p>​        关键是  对于一个等差数列  例如 -1, 0, 1, 2, 3 这个数列  第2个开始  等差子数列个数 为 1  依次为  2+1=3   3+2+1=6  可以理解为  当只有三个元素时 子序列就只有 他本身1个，当有四个元素时，子序列总个数分为以下两部分（含有三个元素的子序列个数   +  含有四个元素子序列的个数） 前者就为 上一次的个数 + 1  后者就为上上次的个数。以此类推 如若 有 五个元素的等差数列 那么子序列的个数 就为  3 + 2 + 1 （三个元素的，四个元素的，五个元素的子序列）所以 dp[i] = dp[i-1] +1 ; all_cnt = dp 求和 （非等差序列的位置的dp = 0）</p>
+<h4 id="连续子数组和"><a href="#连续子数组和" class="headerlink" title="连续子数组和"></a>连续子数组和</h4><p><img src="https://i.loli.net/2021/03/28/UaJ4dIolSTCO7bh.png" alt="1597909311300"></p>
+<p>​        基本方法是积分法，记录每个位置的前面所有元素和。基于此将子区间的所有元素求和转化为求差，两元素的差等整除K 就相当于两元素对k的余数相同。判断相同 这里用了哈希表的方法。</p>
+<h4 id="点数删除与获得"><a href="#点数删除与获得" class="headerlink" title="点数删除与获得"></a>点数删除与获得</h4><p><img src="https://i.loli.net/2021/03/28/d53VscIon614MfU.png" alt="1598010356430"></p>
+<p>​        主要思想是 构建上面 那个 all数组，就将状态转移函数简化了很多。all数组的含义是 对数组中的每个整数元素 的 计数，数组的下标代表 元素i 。例如 all[1] 代表 数组中元素1 的个数。如果没有则为0。 这样 dp 的每个状态的切换只在相邻的两个下标发生，dp[i]  与 dp[i-2]没有关系。这样简化了状态转换的情况。</p>
+<h4 id="使序列递增的最小交换次数"><a href="#使序列递增的最小交换次数" class="headerlink" title="使序列递增的最小交换次数"></a>使序列递增的最小交换次数</h4><p><img src="https://i.loli.net/2021/03/28/ofr7S8eCcEBs3GR.png" alt="1598665416838"></p>
+<p>​        这个题的关键在于 每次只能交换相同位置的两个元素。当交换求前n个元素最小交换次数的时候，只需考虑前面两个元素时候交换，并且对应的交换次数。这么一来就会有四种情况，两两取最小。1. 上一次没交换，这一次也不交换，总交换次数不变 2. 上一次交换了，这一次不交换；3. 上一次不交换，这一次交换； 4. 上一次交换，这一次不交换。1,2  3,4分别取较小值，并保存 用以下一次迭代。</p>
+<h4 id="减绳子"><a href="#减绳子" class="headerlink" title="减绳子"></a>减绳子</h4><p><img src="https://i.loli.net/2021/03/28/cStoirT5M7sbq9X.png" alt="1598782259320"></p>
+<p>​        这道题的关键在于 n 太大的时候 会溢出。所以用 dp 递归去计算则不太合适。如果n &lt;= 58。可以用 递归加dp记忆和剪支的方法。但是 这个题 用数学方法比较好回避。根据数学推导，分割的最大值情况为 等分，并且都为3时最好；分三种情况 3,3,3,..3全是3；3,3,3,..2,2  3,3,3…3,2。三种情况。同时 求余越界可以转换为循环求余。 </p>
+<h2 id="玩游戏类题目"><a href="#玩游戏类题目" class="headerlink" title="玩游戏类题目"></a>玩游戏类题目</h2><h4 id="石子游戏"><a href="#石子游戏" class="headerlink" title="石子游戏"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/stone-game/">石子游戏</a></h4><p>数学法：根据题目描述 偶数堆石子，石子总数是奇数个，必定有胜负方。所以可以知道序号奇数堆的总和一定和偶数堆总和不相等。而先手可以保证每次都取奇数堆的石子或者偶数堆，所以先手一定获胜。直接return true</p>
+<p>动态规划法：设置dp[i] [j]  数组，表示只剩 i 到 j 堆石子时，先手先取可以获得的最大石子数量  对角线的元素可以直接填充。然后由对角线向矩阵一个角扩散求解。</p>
+<h4 id="石子游戏II"><a href="#石子游戏II" class="headerlink" title="石子游戏II"></a>石子游戏II</h4><p><img src="https://i.loli.net/2021/03/28/nlGHCz8ZE39XjAK.png" alt="1598277131828"></p>
+<p>​        <strong>关键思想 在于这个是反向推的，</strong>假设剩余的 n 堆石子时，先手 开始 取，能取得的最大的石子数，但是还要考虑 此时 M 的值。想想 如果此时从头往后递推的话，那么M 的取值与前面的取法息息相关，很难讨论全面。而从后往前推，就算是 M 最大 为石子堆数的总数，就便利把所有的 M取值情况都算一下好了。注意：虽然 M 的取值都算了，但是并不是所有都有效的，这个由石子的总堆数决定的，例如表格给 i = 1 时，此时为剩余堆数为5 即 第一堆开始，而第一堆第一M = 1为设定值，此时的 算的M = 2,3,4..在 石子只有五堆的情况下是无效的。<br>​        那么 从最后n堆开始，先手能取的最多石子数 dp[ i ] [m]    1&lt;=m &lt;= L(总堆数)  这是前两个for循环需要遍历的。对于特定的 i M   如果  i &lt;= 2*M 表明先手可以一次拿完剩下的所有的 即为最大 = sum[i : end]  i &gt; 2xM 则 先手可以 取 1&lt;=x &lt;=Mx2 ，有这几种取法。遍历所有x的取法，取最大为 dp[i] [m]。对于特定 1&lt;=x &lt;=Mx2  剩余 i - x 堆时 先手取得的最大的数量 那么 i 堆时的先手取得的总数为 sum_n - dp[i] [i - x]。遍历x 求最大的。</p>
+<h4 id="新21点"><a href="#新21点" class="headerlink" title="新21点"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/new-21-game/">新21点</a></h4><p>这个题目和上面类似也是反向递推。设置 最终问题是 最终得分不超过K 即为获胜的概率。假设 当前起始总分数为 i ，那么求 dp[i] 总分已经有 i 分后 获胜的概率。很显然这次总分数为 由于一次抽取的数字只能是 [1, W]  由于是等概率抽取，那么 dp[i] = 1/W x  (dp[i+1] + dp[i+2] + … + dp[i+W]) 。即递推公式，两次抽取获胜概率的关系。从规则可知，最终抽取总分数 只能是 1 ~ （K-1+W）当得分大于等于K时不能抽了。而整个得分区间又可以分为两段。一段得分区间是 （1<del>K-1），这段区间内的得分之后至少还能再抽一次，于是可以用到上述地推公式。另一段  K</del>K-1+W 此时已不能再抽，小于等于N的获胜概率为1  否则为0 是固定值。</p>
+<p>综上可以从后往前推出  dp[0] 的概率定义并不关心你中间过程是怎么抽的分，只知道当前持有分数再抽下去最终会获胜的概率。而这个起始概率是从末尾已知，往前递推的。</p>
+<h2 id="斐波那希数列类"><a href="#斐波那希数列类" class="headerlink" title="斐波那希数列类"></a>斐波那希数列类</h2><h4 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title=" 爬楼梯"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/"> 爬楼梯</a></h4><h4 id="打家劫舍-II"><a href="#打家劫舍-II" class="headerlink" title="打家劫舍 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-ii/">打家劫舍 II</a></h4><p>​        这道题相对于打家劫舍1 的区别是，这里是环形的房子，有个首尾能否挨着的问题。首先对于 一般的  不是环形的房子。状态转移方程，max(dp[i-2] + num[i],  dp[i-1])   意思是，求 第 i 个及其之前的 最大金额，就两种，一是 他 前一个 dp[i-1]  此时 第i 个不能取，要么就是 dp[i-2]  + num[i]  这是因为 i-2 肯定和 i 不关联，但是如果 dp[i-1] 也和 i 不关联 即没取第i -1个呢，如果dp[i-1] 中没包含 第 i-1 那么可以说明  dp[i-1] 一定 小于等于 dp[i -2] 的 所以上面那个 状态方程成立。但是这个问题是  环形数组，首尾也不能同时取。那问题简单 分情况讨论呗  在数组个数小于等于3个时  一定是取最大的那个，在大于3 个的时，就分两种情况 分别算一次 dp 即 取第一个 不取最后一个  和 不去第一个可以取最后一个这两种情况。返回较大的那个，即遍历两次 dp.</p>
+<h4 id="母牛生产-https-cyc2018-github-io-CS-Notes-notes-Leetcode-题解-动态规划-id-5-母牛生产"><a href="#母牛生产-https-cyc2018-github-io-CS-Notes-notes-Leetcode-题解-动态规划-id-5-母牛生产" class="headerlink" title="[母牛生产](https://cyc2018.github.io/CS-Notes/#/notes/Leetcode 题解 - 动态规划?id=_5-母牛生产)"></a>[母牛生产](<a target="_blank" rel="noopener" href="https://cyc2018.github.io/CS-Notes/#/notes/Leetcode">https://cyc2018.github.io/CS-Notes/#/notes/Leetcode</a> 题解 - 动态规划?id=_5-母牛生产)</h4><p>​        一只小牛在三年成熟之后可以每年开始产一头小牛。那么  第 dp[i-1] 表示第 i-1年的小牛数量 首先它可以顺延至 i 年 因为不会死。其次 这其中还有一批 牛已经是成熟的母牛 可以每头再产一头小牛，那么 i - 1中有多少头成熟的小牛呢，因为小牛变成成熟母牛需要三年，那么 第 i  年往前推3年的 dp[i-3] 第 i-3 年的牛到 第 i 年 隔了三年，也即是 dp[i-1] 年的牛 每头可在 i 年产一头小牛 即 第 i 年牛的数量是  dp[i] = dp[i-1] + dp[i-3]</p>
+<h2 id="矩阵路径"><a href="#矩阵路径" class="headerlink" title="矩阵路径"></a>矩阵路径</h2><h4 id="最小路径和"><a href="#最小路径和" class="headerlink" title="最小路径和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/">最小路径和</a></h4><p>​        这个题的关键是  从左上角到右下角 每次只能向下或者向右移动一步  那么  对于从起点到 格子上的任意位置  (i, j)  只能是从他的正上方 下来 或者 正左边向右移动一个 选较小的 即  min(dp[i-1] [ j ] ,  dp[i] [j - 1]) </p>
+<h4 id="不同路径"><a href="#不同路径" class="headerlink" title="不同路径"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">不同路径</a></h4><p>​        思路同上</p>
+<h4 id="最大正方形"><a href="#最大正方形" class="headerlink" title="最大正方形"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-square/">最大正方形</a></h4><h2 id="分割整数"><a href="#分割整数" class="headerlink" title="分割整数"></a>分割整数</h2><h4 id="整数拆分"><a href="#整数拆分" class="headerlink" title="整数拆分"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/">整数拆分</a></h4><p>​        思路是 对于 拆分整数 n  可以 分解为  拆分  i x  (n-i) 两个数相乘  或者  i x dp[n-i] 拆分成两个以上的数相乘  dp[n-i] 表示 将整数n-i拆分的乘积最大值。因此需要两个循环。</p>
+<h4 id="完全平方数"><a href="#完全平方数" class="headerlink" title="完全平方数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">完全平方数</a></h4><p>​        这个题和上面那个题有一点类似。思想是一样的，但是细节有不同。在 求 dp[n] 时 若可以直接开平方 就为 1 不能直接拆就 拆分为 1x1 和 dp[n - 1x1], 2x2 和 dp[2x2]…中较小的。不拆分的情况的dp要提前遍历将不能拆分的情况的dp设置成无穷大，可以直接开平方的设置为1。</p>
+<h4 id="解码方法"><a href="#解码方法" class="headerlink" title="解码方法"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/">解码方法</a></h4><h2 id="最长递增子序列"><a href="#最长递增子序列" class="headerlink" title="最长递增子序列"></a>最长递增子序列</h2><h4 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></h4><p>​        基本的方法是  动态规划法  高级的是 二分法+动态规划。动态规划 的状态数组为  第 i  个元素结束的  最大上升子序列个数。那么 以第 i + 1 个元素结束的最大上升子序列 可能是从前 i  个结尾的任意一个接过来的 因此要取最大  同时 从第 j 个接至第 i  个元素 如 num[ j]  &lt; num[ i ]  那么 dp[ i ]  + 1  否则  1  因此O(n^2)</p>
+<h4 id="最长数对链"><a href="#最长数对链" class="headerlink" title="最长数对链"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-pair-chain/">最长数对链</a></h4><p>​        这个题 同 最大重叠子区间 扎气球类 的题目   参考  ： <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-pair-chain/solution/chuan-shang-yi-fu-wo-jiu-bu-ren-shi-ni-liao-lai--2/">https://leetcode-cn.com/problems/maximum-length-of-pair-chain/solution/chuan-shang-yi-fu-wo-jiu-bu-ren-shi-ni-liao-lai--2/</a></p>
+<h4 id="摆动序列"><a href="#摆动序列" class="headerlink" title="摆动序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wiggle-subsequence/">摆动序列</a></h4><p>​        这个题 可以按照 题目最长上升子序列的思路  dp设置为 dp[n] [2]  0 表示i位置结尾 上升子序列的个数  1 表示下降的个数  使用相同的n^2的时间复杂度循环即可。但是这个摆动序列相对那个题目可以优化，因为是摆动序列  其实 状态转换 就只和  当前元素与它前一个元素的大小关系有关 再与之前的无关  所以可以做线性优化  o(n)  只循环一次  若当前元素大于上一元素 当前元素的上升个数 等于前一元素的下降个数 + 1 另一个不变…..</p>
+<h4 id="最长湍流子数组"><a href="#最长湍流子数组" class="headerlink" title="最长湍流子数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-turbulent-subarray/">最长湍流子数组</a></h4><p>这个题目和上面那个 摆动序列很相似。将湍流数组的定义抽象化 即为 求最长的 连续的  摆动子序列长度。和上面那个题的区别在于：</p>
+<ul>
+<li>摆动序列可以不连续 但是这个最长湍流 必须连续</li>
+</ul>
+<p>所以状态方程略有差别。但大体思路都是  根据上一次是上升还是下降摆动 来推导这一次的状态。</p>
+<h2 id="最长子序列"><a href="#最长子序列" class="headerlink" title="最长子序列"></a>最长子序列</h2><h4 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列</a></h4><h4 id="最长回文子串"><a href="#最长回文子串" class="headerlink" title="最长回文子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">最长回文子串</a></h4><p>这个题 要注意 二维 dp 遍历的方法，外层循环可以设置为 起点到重点的长度 0<del>n-1  内层循环为起点 0</del>  dp数组的含义还是 起点 到终点确定的二维数组</p>
+<h4 id="最长重复子数组"><a href="#最长重复子数组" class="headerlink" title="最长重复子数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/">最长重复子数组</a></h4><p>动态规划反而复杂度更高 </p>
+<h2 id="背包问题类"><a href="#背包问题类" class="headerlink" title="背包问题类"></a>背包问题类</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/solution/xi-wang-yong-yi-chong-gui-lu-gao-ding-bei-bao-wen-/">背包类问题总结</a></p>
+<h4 id="分割等和子集"><a href="#分割等和子集" class="headerlink" title="分割等和子集"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">分割等和子集</a></h4><p>​        记录两个思路 一个是自己想到的 按照 回朔 + 记忆 的方法   一个是 看解答的标准的动态规划的思想。<br>​        首先 无论怎么做 要判断能不能分割为两个和相等的子集就是 先求和  然后除2  即为在数组中找和为 target的组合。</p>
+<p>​        思路1，对于数组，每个元素有取 和 不取  两种状态。因此  回溯就是  从前往后 对于 第 第 i  个元素  return dfs(i， target-num[i]) |  dfs(i, target)  前者是 第 i 个元素取得情况下  能够满足，后者是 第 i 个元素不取的情况下能否 后面能否  满足和为 target。但是直接这样写会超时，因为会有大量重复的情况。为此加入备忘录  设置 dp[i] [target]   记录子问题的结果 防止重复。这种由于递归的 子问题就是  dfs( i, target)  所以在加入记忆优化 也必然是使用 dp 数组存储对应组合的状态，防止后面重复。</p>
+<p>​        思路2， 动态规划  dp 数组的含义  dp[i] [j]  表示 在数组的前 0~i (包括i) 中，能否找到取和为  j  的情况。最终就是要求                   dp[n-1] [ target] 的状态 。<br>​        考虑一下 要求 对于前  i - 1 个 增加了 第 i 个元素  可以分为 取了第 i 个 和 没 取 第 i 个 元素。dp[ i - 1 ] [ j - num[i]]  || dp[i - 1] [j]  两种取 或 不取。 意思是 如果第 i 个取了 和 为 j  成立  那么 反过来 抛去 第 i 个元素，前 i -1 个元素任取应该能找到 和 为  j-num[i] 的情况，再取一次 num[i] 就可以满足 j ；那么如果这次  i  没取  但是 和 为 j 的情况 很好理解 没取相当与不存在，考虑  i - 1 的情况即可。但是还得考虑 j - num[i]  &lt; 0的情况 ，此时 num[i] 肯定不能取，因为已经大于 j 目标值了，所以此时 == dp[i-1] [j]。 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210401152541.png" alt="image-20201014225610678"></p>
+<h4 id="目标和"><a href="#目标和" class="headerlink" title="目标和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/target-sum/">目标和</a></h4><p>​        这个题 技巧和上面一样。自己做的时候先想到的不是动态规划  是 递归+剪枝  也不会超时。单纯的暴力递归 复杂的 指数级，会超时。</p>
+<p>​        递归的思路。首先每次    选择 target - num[sel]  或者 target - num[sel] 递归。判断到最后一个元素且target==0的时候 计数。剪枝的方法是，增加一个当前剩余元素的最大和limit  起始 limit = sum(nums) ,  递归时  limit - nums[sel] 。 通过判断 当前 target  是否在 区间 [-limit，limit] 之间，不在就返回 不递归。 </p>
+<p>​        动态规划的方法。首先状态数组 含义和上面题 一样 只不过这里记录的是个数。dp[i] [j]  的含义就是 前 i 个元素的和 为 j  的个数。最终就是求 dp[n] [S]<br>那么 第一个元素就已知了 dp[0] [ num[0] ] += 1, dp[0] [-nums[0]] += 1; 那么怎么挨着求到最后呢。首先  j 的 范围 肯定在 正负 sum( nums )之间，因此就建立一个这么宽的状态表 （这样 j 的 值是稀疏的，不会取到这里面的所有值）但是这么建立表格 方便循环。没用到的 计数值为 0 即可。虽然看起来增加了很多无用的 j 的计算过程 但是相对递归的指数级 时间复杂度 还是好很多。状态转移就是   dp[i] [j]  =  dp[i-1] [j - nums[i]]  + dp[i -1] [j + nums[i]]  注意数组索引正负的问题和 后面溢出判断的问题。</p>
+<h4 id="一和零"><a href="#一和零" class="headerlink" title="一和零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/">一和零</a></h4><p>​        这个题 也可以看成背包问题。将 每个字符串价值看成1，每个字符串占用的体积即为 0/1 数量。背包的容量为最多容纳的0/1的个数。状态 dp[i] [mc] [nc]  的含义是  只有前 i 个 字符串时，背包容量 (总的0/1个数) 是 mc nc 时最多可选的字符串的个数。<br>​        dp[i] [mc] [nc]  = max( dp[i-1] [mc - mi] [nc - ni]  + 1,  dp[i-1] [mc] [nc])  含义是 这次选 则第 i  个字符串，则可以取得最大数量，就是上一次最大容量为 mc-mi  nc-ni 时可以取的最大个数 + 1，另一种情况是 这次不取 第 i 个元素，二者取大的。</p>
+<h4 id="零钱兑换"><a href="#零钱兑换" class="headerlink" title="零钱兑换"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">零钱兑换</a></h4><p>​        这道题和  面试题一类中的 矩形面积填充 和青蛙跳台子 的 类型相似。这个题要求到兑换金额为 amount 需要的 最少零钱的组合，那么组合的到最后 amount 只和  dp[amount - coins[i]] 有关，其中取最小即可。</p>
+<h4 id="零钱兑换-II"><a href="#零钱兑换-II" class="headerlink" title="零钱兑换 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">零钱兑换 II</a></h4><p>​        这个题 和 青蛙跳台阶 很像 （dp[m] = dp[m-1] + dp[m-2] 值看最后一步 是跨了几层阶梯），但是又有本质的区别，青蛙跳台阶有先后顺序，总的次数实际是个排列问题，但是这个凑钱的问题是一个组合问题，1，2  和 2，1凑3是一种情况。所有状态方程不一样。</p>
+<p>​        首先，是组合问题，假设硬币集合 [1, 2, 5]  那么就按照一个硬币 一个硬币增加的逻辑 来思考。就是所有取硬币的方式 只和硬币种类有关，只有1 硬币  只有1，2硬币 含有1，2，5硬币这种。然后总的数量 是 需要凑的钱数 amount。也可以从 背包问题 推广到这个题，钱数是背包的容量，取得物品是 硬币，只不过要刚好 把背包装满。因此按照背包问题的通常方法  状态 + 选择，即选择每次选不选当前的硬币，状态是凑成当前金额数 的硬币取法组合。</p>
+<p>​        dp[k] [j]  表示 含有前k个硬币集合，取够金额 j 存在的组合组合数。那么对于 只含 前k-1个硬币组合的情况，组成 金额 j 中的硬币 含有几个 硬币 k , 含有0个硬币k  就是  dp[k-1] [j - coins[k]] 个取法，含有两个 硬币 k  就有 dp[k-1] [j - 2*coins[k]] … 以此类推求和。但是这个状态方程起始还可以简化。具体推导 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/solution/dong-tai-gui-hua-wan-quan-bei-bao-wen-ti-by-liweiw/">https://leetcode-cn.com/problems/coin-change-2/solution/dong-tai-gui-hua-wan-quan-bei-bao-wen-ti-by-liweiw/</a><br>结论 ：  dp[k] [j]  = dp[k-1] [j]  + dp[k] [j - coins[k]] ; 可以这么理解 就是 要凑成 金额 j 可以分为 不使用 第 k 个硬币 dp[k-1] [j]  和 使用第 k 个硬币 dp[k] [j-coins[k]]  这一项其实是保证了 肯定取一个 硬币 k,至于取了 &gt;= 1的几个 k硬币，其实都包含在了 dp[k] [j - coins[k]] 中了。因为 dp[k] [] 这一行 凑齐前面的金额其实都是使用了 &gt;=0 个 第k个硬币的。</p>
+<h4 id="单词拆分"><a href="#单词拆分" class="headerlink" title="单词拆分"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/">单词拆分</a></h4><p>​        dp[i]  表示 s 中 前 i 个字符能否被字典中的单词拆分。判断字符串是不是在字典中 可以使用Hash来加快判断。有多个单词，其中在 I位置 有一个是 true dp[i] 就等于true。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210401152523.png" alt="image-20201018115551358"></p>
+<h4 id="组合总和-Ⅳ"><a href="#组合总和-Ⅳ" class="headerlink" title="组合总和 Ⅳ"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/">组合总和 Ⅳ</a></h4><p>​        和 零钱兑换问题2 对立 这个是排列 问题。</p>
+<h2 id="股票交易类"><a href="#股票交易类" class="headerlink" title="股票交易类"></a>股票交易类</h2><h4 id="最佳买卖股票时机含冷冻期"><a href="#最佳买卖股票时机含冷冻期" class="headerlink" title="最佳买卖股票时机含冷冻期"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳买卖股票时机含冷冻期</a></h4><p><img src="https://pic.leetcode-cn.com/7ae8b65cf80c5e9980ea33973abb6678f10098646aeac699cac12817b7e250ce-309%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F%E5%9B%BE%E8%A7%A3%E5%9B%BE.png" alt="309最佳买卖股票时机含冷冻期图解图.png"></p>
+<p>​        dp[i] [0]   dp[i] [1]   dp[i] [2]   分别代表 当天 持有股票时的累计财产，当太难不持有 且不可买入时的 累计财产，当天不持有但是可买入时的 财产。理清从前一天到今天的状态准换关系即可。 买入/卖出 是动作，而 持有不持有才是状态，由不同的动作，导致每天不同的状态，因此要以 状态设置数组。</p>
+<h4 id="买卖股票的最佳时机含手续费"><a href="#买卖股票的最佳时机含手续费" class="headerlink" title="买卖股票的最佳时机含手续费"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">买卖股票的最佳时机含手续费</a></h4><p>​        类似上。</p>
+<h4 id="买卖股票的最佳时机-III"><a href="#买卖股票的最佳时机-III" class="headerlink" title="买卖股票的最佳时机 III"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></h4><ul>
+<li><input disabled="" type="checkbox"> </li>
+</ul>
+<h4 id="买卖股票的最佳时机-IV"><a href="#买卖股票的最佳时机-IV" class="headerlink" title="买卖股票的最佳时机 IV"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">买卖股票的最佳时机 IV</a></h4><ul>
+<li><input disabled="" type="checkbox"> </li>
+</ul>
+<h2 id="字符串编辑"><a href="#字符串编辑" class="headerlink" title="字符串编辑"></a>字符串编辑</h2><h4 id="两个字符串的删除操作"><a href="#两个字符串的删除操作" class="headerlink" title="两个字符串的删除操作"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/">两个字符串的删除操作</a></h4><p>​        这题就是最长上升子序列的问题</p>
+<h4 id="编辑距离"><a href="#编辑距离" class="headerlink" title="编辑距离"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">编辑距离</a></h4><ul>
+<li><input disabled="" type="checkbox"> </li>
+</ul>
+<h4 id="只有两个键的键盘"><a href="#只有两个键的键盘" class="headerlink" title="只有两个键的键盘"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/2-keys-keyboard/">只有两个键的键盘</a></h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 刷题</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/24/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%88%86%E6%B2%BB/" rel="prev" title="相关的编程题汇总-分治">
+      <i class="fa fa-chevron-left"></i> 相关的编程题汇总-分治
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/24/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%8F%8C%E6%8C%87%E9%92%88/" rel="next" title="相关的编程题汇总-双指针">
+      相关的编程题汇总-双指针 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B1%BB%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">动态规划类题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">数组类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97%E5%88%92%E5%88%86"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">等差数列划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">连续子数组和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%82%B9%E6%95%B0%E5%88%A0%E9%99%A4%E4%B8%8E%E8%8E%B7%E5%BE%97"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">点数删除与获得</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E5%BA%8F%E5%88%97%E9%80%92%E5%A2%9E%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%A4%E6%8D%A2%E6%AC%A1%E6%95%B0"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">使序列递增的最小交换次数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%8F%E7%BB%B3%E5%AD%90"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">减绳子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%A9%E6%B8%B8%E6%88%8F%E7%B1%BB%E9%A2%98%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">玩游戏类题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%B3%E5%AD%90%E6%B8%B8%E6%88%8F"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">石子游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%B3%E5%AD%90%E6%B8%B8%E6%88%8FII"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">石子游戏II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B021%E7%82%B9"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">新21点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%B8%8C%E6%95%B0%E5%88%97%E7%B1%BB"><span class="nav-number">1.3.</span> <span class="nav-text">斐波那希数列类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E6%A5%BC%E6%A2%AF"><span class="nav-number">1.3.0.1.</span> <span class="nav-text"> 爬楼梯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-II"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">打家劫舍 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8D%E7%89%9B%E7%94%9F%E4%BA%A7-https-cyc2018-github-io-CS-Notes-notes-Leetcode-%E9%A2%98%E8%A7%A3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-id-5-%E6%AF%8D%E7%89%9B%E7%94%9F%E4%BA%A7"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">[母牛生产](https:&#x2F;&#x2F;cyc2018.github.io&#x2F;CS-Notes&#x2F;#&#x2F;notes&#x2F;Leetcode 题解 - 动态规划?id&#x3D;_5-母牛生产)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.</span> <span class="nav-text">矩阵路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">最小路径和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">不同路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">最大正方形</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E6%95%B4%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">分割整数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">整数拆分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">完全平方数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">解码方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.6.</span> <span class="nav-text">最长递增子序列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">最长上升子序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E6%95%B0%E5%AF%B9%E9%93%BE"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">最长数对链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%91%86%E5%8A%A8%E5%BA%8F%E5%88%97"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">摆动序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E6%B9%8D%E6%B5%81%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.6.0.4.</span> <span class="nav-text">最长湍流子数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.7.</span> <span class="nav-text">最长子序列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">最长公共子序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2"><span class="nav-number">1.7.0.2.</span> <span class="nav-text">最长回文子串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.7.0.3.</span> <span class="nav-text">最长重复子数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%B1%BB"><span class="nav-number">1.8.</span> <span class="nav-text">背包问题类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">分割等和子集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%92%8C"><span class="nav-number">1.8.0.2.</span> <span class="nav-text">目标和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E5%92%8C%E9%9B%B6"><span class="nav-number">1.8.0.3.</span> <span class="nav-text">一和零</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2"><span class="nav-number">1.8.0.4.</span> <span class="nav-text">零钱兑换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2-II"><span class="nav-number">1.8.0.5.</span> <span class="nav-text">零钱兑换 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86"><span class="nav-number">1.8.0.6.</span> <span class="nav-text">单词拆分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C-%E2%85%A3"><span class="nav-number">1.8.0.7.</span> <span class="nav-text">组合总和 Ⅳ</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E7%B1%BB"><span class="nav-number">1.9.</span> <span class="nav-text">股票交易类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F"><span class="nav-number">1.9.0.1.</span> <span class="nav-text">最佳买卖股票时机含冷冻期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9"><span class="nav-number">1.9.0.2.</span> <span class="nav-text">买卖股票的最佳时机含手续费</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-III"><span class="nav-number">1.9.0.3.</span> <span class="nav-text">买卖股票的最佳时机 III</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-IV"><span class="nav-number">1.9.0.4.</span> <span class="nav-text">买卖股票的最佳时机 IV</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E8%BE%91"><span class="nav-number">1.10.</span> <span class="nav-text">字符串编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">1.10.0.1.</span> <span class="nav-text">两个字符串的删除操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.10.0.2.</span> <span class="nav-text">编辑距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98"><span class="nav-number">1.10.0.3.</span> <span class="nav-text">只有两个键的键盘</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
