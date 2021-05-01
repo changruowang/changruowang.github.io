@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="可乐">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ruowang&#39;s blogs">
-<meta property="og:url" content="http://example.com/tags/STL/index.html">
+  <meta name="description" content="面向对象编程 （OOP）和泛型编程都能处理 在编写程序不知道类型的情况。不同之处在于 ，OOP能处理类型在程序运行之前都未知的情况，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++模板和泛型编程">
+<meta property="og:url" content="http://example.com/2021/04/30/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="可乐">
+<meta property="og:description" content="面向对象编程 （OOP）和泛型编程都能处理 在编写程序不知道类型的情况。不同之处在于 ，OOP能处理类型在程序运行之前都未知的情况，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-30T03:35:41.674Z">
+<meta property="article:modified_time" content="2021-04-30T03:57:11.061Z">
 <meta property="article:author" content="常若望">
+<meta property="article:tag" content="C++语法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/STL/">
+<link rel="canonical" href="http://example.com/2021/04/30/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/">
 
 
 <script id="page-configurations">
@@ -40,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: STL | Ruowang's blogs</title>
+  <title>C++模板和泛型编程 | Ruowang's blogs</title>
   
 
 
@@ -190,91 +193,116 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">STL
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/30/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++模板和泛型编程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-30 11:35:41 / 修改时间：11:57:11" itemprop="dateCreated datePublished" datetime="2021-04-30T11:35:41+08:00">2021-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/" itemprop="url" rel="index"><span itemprop="name">语言特性</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <p>面向对象编程 （<code>OOP</code>）和泛型编程都能处理 <strong>在编写程序不知道类型的情况</strong>。不同之处在于 ，<code>OOP</code>能处理类型在<strong>程序运行之前都未知的情况</strong>，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。 </p>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>C++是一门强类型语言，所以无法做到像动态语言（<code>python javascript</code>）那样子，编写一段通用的逻辑，可以把任意类型的变量传进去处理。泛型编程弥补了这个缺点，通过把通用逻辑设计为模板，摆脱了类型的限制，提供了继承机制以外的另一种抽象机制，极大地提升了代码的可重用性。</p>
+<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>如果希望编写一个函数比较两个值，在实际中由于比较的类型不知道，可以通过函数重载的方式写多个同名的函数，编译器会根据不同的调用参数选择对应的函数执行。但是这样编码很麻烦。我们可以通过定义一个通用的函数模板，来简化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T &amp;v1, <span class="keyword">const</span> T &amp;v2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v1 &lt; v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-24T11:54:21+08:00"
-              content="2021-04-24">
-          04-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/24/C++/%E5%BA%93%E5%87%BD%E6%95%B0/stringstream%E7%94%A8%E6%B3%95/" itemprop="url">
-            <span itemprop="name">streamstream用法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-24T11:54:21+08:00"
-              content="2021-04-24">
-          04-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/24/C++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%BA%93%E5%B8%B8%E7%94%A8API/" itemprop="url">
-            <span itemprop="name">STL库常用API汇总</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-24T11:54:21+08:00"
-              content="2021-04-24">
-          04-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/24/C++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%AE%B9%E5%99%A8%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">STL容器原理</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<ul>
+<li><p><input disabled="" type="checkbox">  模板有关的其他知识</p>
+</li>
+<li><p><input disabled="" type="checkbox">  模板偏特化</p>
+</li>
+<li><p><input disabled="" type="checkbox">  模板全特化</p>
+</li>
+<li><p><input disabled="" type="checkbox">  实参推断</p>
+</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> C++语法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/29/C++/%E5%BA%93%E5%87%BD%E6%95%B0/bind_function/" rel="prev" title="C++_bind_function_package_task">
+      <i class="fa fa-chevron-left"></i> C++_bind_function_package_task
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -331,6 +359,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">函数模板</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -344,7 +373,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
