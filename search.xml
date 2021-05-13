@@ -116,7 +116,7 @@
 <li><p>git push        将代码提交到git hub 远程仓库     <strong>不要在浏览器上随意删除已经提交了的文件，否则本地的记录和云端的记录不一致再次提交会报错，所有对文件的修改最好只在本地修改让后上传云端</strong></p>
 <p><strong>空文件夹不会被add添加 只有里面有文件才会被add   .gitignore文件可以选择push时忽略的文件</strong></p>
 </li>
-<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#99;&#104;&#97;&#110;&#x67;&#x72;&#x75;&#x6f;&#x77;&#x61;&#x6e;&#103;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#104;&#97;&#110;&#x67;&#x72;&#x75;&#x6f;&#x77;&#x61;&#x6e;&#103;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
+<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#x63;&#x68;&#x61;&#110;&#103;&#114;&#x75;&#x6f;&#119;&#x61;&#x6e;&#103;&#x40;&#x71;&#113;&#46;&#x63;&#111;&#x6d;">&#x63;&#x68;&#x61;&#110;&#103;&#114;&#x75;&#x6f;&#119;&#x61;&#x6e;&#103;&#x40;&#x71;&#113;&#46;&#x63;&#111;&#x6d;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
 </li>
 <li><p>使用 git clone https… 形式的连接，提示错误，要将 http /  https 代理关闭 </p>
 <blockquote>
@@ -147,27 +147,6 @@
       <tags>
         <tag>软件安装</tag>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pytorch扩展C</title>
-    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/pytorch%E6%89%A9%E5%B1%95/</url>
-    <content><![CDATA[<h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="同目录下的-setup-py文件"><a href="#同目录下的-setup-py文件" class="headerlink" title="同目录下的 setup.py文件"></a>同目录下的 setup.py文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试文件"><a href="#测试文件" class="headerlink" title="测试文件"></a>测试文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
-
-<p>​    遇到提示 .so 库找不到  使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
-]]></content>
-      <categories>
-        <category>其他笔记</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -268,6 +247,27 @@
   </entry>
   <entry>
     <title>pytorch扩展C</title>
+    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/pytorch%E6%89%A9%E5%B1%95/</url>
+    <content><![CDATA[<h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="同目录下的-setup-py文件"><a href="#同目录下的-setup-py文件" class="headerlink" title="同目录下的 setup.py文件"></a>同目录下的 setup.py文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试文件"><a href="#测试文件" class="headerlink" title="测试文件"></a>测试文件</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>​    遇到提示 .so 库找不到  使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
+]]></content>
+      <categories>
+        <category>其他笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pytorch扩展C</title>
     <url>/2021/05/13/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/pytorch%E6%89%A9%E5%B1%95c/</url>
     <content><![CDATA[<h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -285,6 +285,19 @@
       <tags>
         <tag>python</tag>
         <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人conda配置</title>
+    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7conda%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 添加conda环境变量</span><br><span class="line">  sudo gedit ~&#x2F;.bashrc</span><br><span class="line"></span><br><span class="line">在文件中添加如下配置：</span><br><span class="line"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="line"># !! Contents within this block are managed by &#39;conda init&#39; !!</span><br><span class="line">__conda_setup&#x3D;&quot;$(&#39;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;bin&#x2F;conda&#39; &#39;shell.bash&#39; &#39;hook&#39; 2&gt; &#x2F;dev&#x2F;null)&quot;</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    eval &quot;$__conda_setup&quot;</span><br><span class="line">else</span><br><span class="line">    if [ -f &quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;etc&#x2F;profile.d&#x2F;conda.sh&quot; ]; then</span><br><span class="line">        . &quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;etc&#x2F;profile.d&#x2F;conda.sh&quot;</span><br><span class="line">    else</span><br><span class="line">        export PATH&#x3D;&quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;bin:$PATH&quot;</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line">unset __conda_setup</span><br><span class="line"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span><br><span class="line"># export PYTHONPATH&#x3D;&#x2F;mnt2&#x2F;zhangjinpu&#x2F;CODE&#x2F;CenSiam:$PYTHONPATH</span><br><span class="line"></span><br><span class="line">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br><span class="line"></span><br><span class="line">2. 修改conda环境保存路径  换源</span><br><span class="line">sudo gedit ~&#x2F;.condarc</span><br><span class="line"></span><br><span class="line">添加：</span><br><span class="line">channels:</span><br><span class="line"></span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r</span><br><span class="line">custom_channels:</span><br><span class="line">    conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">envs_dirs:</span><br><span class="line">  - &#x2F;home&#x2F;changruowang&#x2F;.conda&#x2F;envs</span><br><span class="line">pkgs_dirs:</span><br><span class="line">  - &#x2F;home&#x2F;changruowang&#x2F;.conda&#x2F;pkgs</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>其他笔记</category>
+      </categories>
+      <tags>
+        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
@@ -308,19 +321,6 @@
       <tags>
         <tag>软件安装</tag>
         <tag>加密内容</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人conda配置</title>
-    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7conda%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 添加conda环境变量</span><br><span class="line">  sudo gedit ~&#x2F;.bashrc</span><br><span class="line"></span><br><span class="line">在文件中添加如下配置：</span><br><span class="line"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="line"># !! Contents within this block are managed by &#39;conda init&#39; !!</span><br><span class="line">__conda_setup&#x3D;&quot;$(&#39;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;bin&#x2F;conda&#39; &#39;shell.bash&#39; &#39;hook&#39; 2&gt; &#x2F;dev&#x2F;null)&quot;</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    eval &quot;$__conda_setup&quot;</span><br><span class="line">else</span><br><span class="line">    if [ -f &quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;etc&#x2F;profile.d&#x2F;conda.sh&quot; ]; then</span><br><span class="line">        . &quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;etc&#x2F;profile.d&#x2F;conda.sh&quot;</span><br><span class="line">    else</span><br><span class="line">        export PATH&#x3D;&quot;&#x2F;home&#x2F;hust1008&#x2F;anaconda3&#x2F;bin:$PATH&quot;</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line">unset __conda_setup</span><br><span class="line"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span><br><span class="line"># export PYTHONPATH&#x3D;&#x2F;mnt2&#x2F;zhangjinpu&#x2F;CODE&#x2F;CenSiam:$PYTHONPATH</span><br><span class="line"></span><br><span class="line">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br><span class="line"></span><br><span class="line">2. 修改conda环境保存路径  换源</span><br><span class="line">sudo gedit ~&#x2F;.condarc</span><br><span class="line"></span><br><span class="line">添加：</span><br><span class="line">channels:</span><br><span class="line"></span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r</span><br><span class="line">custom_channels:</span><br><span class="line">    conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">    simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">envs_dirs:</span><br><span class="line">  - &#x2F;home&#x2F;changruowang&#x2F;.conda&#x2F;envs</span><br><span class="line">pkgs_dirs:</span><br><span class="line">  - &#x2F;home&#x2F;changruowang&#x2F;.conda&#x2F;pkgs</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>其他笔记</category>
-      </categories>
-      <tags>
-        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
@@ -546,6 +546,29 @@
       </tags>
   </entry>
   <entry>
+    <title>设计模式-创建型-简单工厂</title>
+    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/</url>
+    <content><![CDATA[<p><strong>简单工厂</strong>是一种创建型设计模式，在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
+<span id="more"></span>
+
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><strong>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化</strong>。这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>根据下面代码可以看出，简单工厂的实现要点</p>
+<ul>
+<li>用户并不需要指导具体的子类的名称，只需要根据参数来向工厂获取 产品。而用户只用使用 基类指针来指向 工厂创建的子类对象，即多态机制，来完成子类的特定功能。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Phone</span>() &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XiaoMi</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">XiaoMi</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is xiao mi phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Apple</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is apple phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 简单工厂类，客户使用简单工厂来获取对应的产品</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SimpleFactory</span>()&#123;&#125;;</span><br><span class="line">        <span class="function">Phone* <span class="title">create</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;   <span class="comment">// 注意返回类型为 基类 指针</span></span><br><span class="line">            <span class="built_in"><span class="keyword">switch</span></span> (type)</span><br><span class="line">            &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">XiaoMi</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Apple</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SimpleFactory factory = <span class="built_in">SimpleFactory</span>();</span><br><span class="line">    Phone* ptr = factory.<span class="built_in">create</span>(<span class="number">0</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    ptr = factory.<span class="built_in">create</span>(<span class="number">1</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>设计模式-创建型-单例</title>
     <url>/2021/05/04/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B/</url>
     <content><![CDATA[<p><strong>单例模式</strong>是一种创建型设计模式， 让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</p>
@@ -626,307 +649,6 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式-创建型-简单工厂</title>
-    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/</url>
-    <content><![CDATA[<p><strong>简单工厂</strong>是一种创建型设计模式，在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
-<span id="more"></span>
-
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><strong>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化</strong>。这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>根据下面代码可以看出，简单工厂的实现要点</p>
-<ul>
-<li>用户并不需要指导具体的子类的名称，只需要根据参数来向工厂获取 产品。而用户只用使用 基类指针来指向 工厂创建的子类对象，即多态机制，来完成子类的特定功能。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Phone</span>() &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XiaoMi</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">XiaoMi</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is xiao mi phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Apple</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is apple phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 简单工厂类，客户使用简单工厂来获取对应的产品</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SimpleFactory</span>()&#123;&#125;;</span><br><span class="line">        <span class="function">Phone* <span class="title">create</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;   <span class="comment">// 注意返回类型为 基类 指针</span></span><br><span class="line">            <span class="built_in"><span class="keyword">switch</span></span> (type)</span><br><span class="line">            &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">XiaoMi</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Apple</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SimpleFactory factory = <span class="built_in">SimpleFactory</span>();</span><br><span class="line">    Phone* ptr = factory.<span class="built_in">create</span>(<span class="number">0</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    ptr = factory.<span class="built_in">create</span>(<span class="number">1</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++基础知识2</title>
-    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8F-c++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/</url>
-    <content><![CDATA[<p> 面经 C++ 基础知识</p>
-<span id="more"></span>
-
-<h3 id="介绍fork函数"><a href="#介绍fork函数" class="headerlink" title="介绍fork函数"></a>介绍fork函数</h3><p>创建一个和当前进程映像一样的<strong>进程</strong>可以通过fork( )系统调用。成功调用fork 会返回一个大于等于0 的数，对于主进程，返回的是子进程的pid，子进程中返回的是0；可以通过if判断来确定是在子进程还是父进程中，然后执行不同的功能，两个进程执行的先后顺序完全由系统调度决定。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#inclde<span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="fork-wait-exec函数"><a href="#fork-wait-exec函数" class="headerlink" title="fork wait  exec函数"></a>fork wait  exec函数</h3><h3 id="select-函数"><a href="#select-函数" class="headerlink" title="select 函数"></a>select 函数</h3>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++11新特性</title>
-    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++11%E6%96%B0%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<p>面经C++11新特性</p>
-<span id="more"></span>
-
-<h3 id="请问C-11有哪些新特性？"><a href="#请问C-11有哪些新特性？" class="headerlink" title="请问C++11有哪些新特性？"></a>请问C++11有哪些新特性？</h3><ol>
-<li>新增 auto 关键字，可以根据变量的初始值推断变量类型，但是对于函数的参数和数组的类型不能推断</li>
-<li>新增 nullptr 关键字，可以代表任意类型的指针。C中的 NULL 为宏定义0，在函数重载的时候可能会有歧义，int  or  指针？</li>
-<li>新增 share_ptr, weak_ptr 等智能指针</li>
-<li>新增了右值引用 &amp;&amp; ，实现了语义移动和完美转发的功能，大大减少了临时变量的重复构造析构的次数，提高了性能</li>
-<li>新增了STL 容器 array  tuple</li>
-<li>支持使用初始化列表对类进行初始化 好像只有构造函数支持初始化列表</li>
-<li>atomic 原子操作用于多线程资源互斥操作</li>
-</ol>
-<p>… </p>
-<h3 id="详细介绍一下C-11中的可变参数模板"><a href="#详细介绍一下C-11中的可变参数模板" class="headerlink" title="详细介绍一下C++11中的可变参数模板"></a>详细介绍一下C++11中的可变参数模板</h3><p>c++11的可变参数模板对参数进行了高度泛化，可以表示任意数目、任意类型的参数，其语法为在 class 或者 typename 后面带上省略号。省略号作用如下：</p>
-<ul>
-<li><strong>声明</strong>一个包含0到任意个模板的参数的参数包</li>
-<li>在模板定义的右边，可以将参数包<strong>展成一个个独立的参数</strong></li>
-</ul>
-<p>C++11可以使用递归函数的方式展开参数包，获得可变参数的每个值。<strong>通过递归函数展开参数包，需要提供一个参数包展开的函数和一个递归终止函数</strong>。例如。参数包Args …在展开的过程中递归调用自己，每调用一次参数包中的参数就会少一个，直到所有参数都展开为止。当没有参数时就会调用非模板函数printf终止递归过程。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;end&quot;</span> &lt;&lt; endl; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T a, Args ...rest)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">print</span>(rest...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="详细介绍一下C-11右值引用"><a href="#详细介绍一下C-11右值引用" class="headerlink" title="详细介绍一下C++11右值引用"></a>详细介绍一下C++11右值引用</h3><h3 id="详细介绍一下C-11-lambda新特性"><a href="#详细介绍一下C-11-lambda新特性" class="headerlink" title="详细介绍一下C++11 lambda新特性"></a>详细介绍一下C++11 lambda新特性</h3>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++容器和算法</title>
-    <url>/2021/04/24/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E5%AE%B9%E5%99%A8%E5%92%8C%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>面经C++容器和算法</p>
-<span id="more"></span>
-
-<h2 id="容器和算法"><a href="#容器和算法" class="headerlink" title="容器和算法"></a>容器和算法</h2><h3 id="map和set有什么区别，分别怎么实现"><a href="#map和set有什么区别，分别怎么实现" class="headerlink" title="map和set有什么区别，分别怎么实现"></a>map和set有什么区别，分别怎么实现</h3><p>​        map 和 set 在 c++ 中底层都是红黑树实现。他们的区别在于：</p>
-<ol>
-<li>map的存储形式是key value的形式，在树中对 key关键字进行排序。而set就是以集合种元素本身作为建立红黑树的关键子，set只存储元素。</li>
-<li>对map 迭代时，可以对 value修改，但是不能对key修改，因为红黑树以Key为依据建树，一旦修改红黑树就会自动调整，这时候迭代器的指向顺序就乱了。而同理 set 是直接对 集合中的元素建树，所以set迭代时是不可修改的</li>
-<li>map 支持下标操作，可以通过关键字访问对应的元素，但是在使用下标访问时，如果map中存在该键就将值返回，否则以默认值新建该键值关系，因此在只需要判断该键存在与否的时候 使用 find最好。set 不行。</li>
-</ol>
-<h3 id="STL的allocaotr"><a href="#STL的allocaotr" class="headerlink" title="STL的allocaotr"></a>STL的allocaotr</h3><p>c++的内存管理使用 new/delete 关键字管理。new/delete的具体执行过程：</p>
-<ul>
-<li>new分为两个阶段 :  1. 调用::operator new内存配置  2. 调用构造函数</li>
-<li>delete:分为两个阶段：  1. 调用对象析构函数  2. 调用::operator delete释放内存</li>
-</ul>
-<p>而 STL 中 为了精密分工，将两个阶段（内存配置和对象构造 / 内存释放和对象析构函数）分开操作</p>
-<ol>
-<li>alloc::allocate() 内存配置 </li>
-<li>alloc::deallocate() 内存释放</li>
-</ol>
-<p>同时SGI STL采用了两级内存配置，当分配的内存低于128B 时 使用 内存池技术，通过空闲链表链表管理内存，防止内存碎片化，当分配的内存大于128B时，直接使用malloc realloc free等函数分配一整块内存。</p>
-<h3 id="STL-迭代删除元素"><a href="#STL-迭代删除元素" class="headerlink" title="STL 迭代删除元素"></a>STL 迭代删除元素</h3><p>主要考虑迭代器失效的问题。</p>
-<ul>
-<li>对于序列容器中的vector deque ，删除当前元素，后面的元素都会往前移动一个位置，导致后面的迭代器失效（deque的头尾插除外），而 <code>erase</code> 函数会返回下一个迭代器，因此使用返回值即可。</li>
-<li>对于 list 是由双向环形链表构成，因此也只是当前的迭代器失效，不影响后面的。它的erase方法也会返回下一个有效的iterator。</li>
-<li>对于关联容器，map 和 set 底层都是红黑树，删除当前元素只是当前迭代元素失效，后面的不影响, 备份即可。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//要求删除键值为偶数的键值对</span></span><br><span class="line"> map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::iterator it = m.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line"> <span class="comment">//错误实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it);</span><br><span class="line">   &#125;</span><br><span class="line">   it++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//正确实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it++); <span class="comment">//重点！！！  it++的写法才行不能  m.rease(it); it++;</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span>&#123;</span><br><span class="line">     it++;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="STL有什么基本组成"><a href="#STL有什么基本组成" class="headerlink" title="STL有什么基本组成"></a>STL有什么基本组成</h3><ol>
-<li>容器：STL内部封装好的数据结构，是一种class template，常用的包括vector、list、deque、set、map等</li>
-<li>算法：是一种函数模板，常用的有sort、search、copy等，STL中算法与数据相分离（不像面向对象中将算法与数据封装在class中）。</li>
-<li>迭代器：类似于泛化的指针，用来访问可迭代序列。</li>
-<li>适配器：提供转换操作，有容器适配器、仿函数适配器、迭代器适配器。</li>
-<li>分配器：负责空间配置与管理，用以支持容器。是一种class template。</li>
-<li>仿函数：行为类似函数，就是使一个类的使用看上去像一个函数。它的具体实现就是通过在类中重载了operator()，使这个类具有了类似函数的行为。</li>
-</ol>
-<p>关系：分配器用于给容器分配空间，算法通过迭代器访问容器中的数据从而完成一定的功能，配接器用于适配套接仿函数或容器，或者说通过一定的方法进行封装。例如 queue 和  stack 基本模型都是 deque 通过配接器实现而来。仿函数可以协助算法完成各种操作。</p>
-<h3 id="STL中map与unordered-map"><a href="#STL中map与unordered-map" class="headerlink" title="STL中map与unordered_map"></a>STL中map与unordered_map</h3><ul>
-<li>底层数据结构不一样，map 是使用 红黑数实现，un..使用hash表</li>
-<li>因此查询效率等都不一样</li>
-<li>map 是有序的  un 是无序的 不能迭代访问</li>
-</ul>
-<h3 id="vector和list的区别，应用，越详细越好"><a href="#vector和list的区别，应用，越详细越好" class="headerlink" title="vector和list的区别，应用，越详细越好"></a>vector和list的区别，应用，越详细越好</h3><p>1、区别：</p>
-<ol>
-<li>vector底层实现是数组；list是双向 链表。</li>
-<li>vector支持随机访问，list不支持。</li>
-<li>vector是顺序内存，list不是。</li>
-<li>vector在中间节点进行插入删除会导致内存拷贝，list不会。</li>
-<li>vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请。</li>
-<li>vector随机访问性能好，插入删除性能差；list随机访问性能差，插入删除性能好。</li>
-</ol>
-<p>2、应用</p>
-<ul>
-<li>vector拥有一段连续的内存空间，因此支持随机访问，如果需要高效的随即访问，而不在乎插入和删除的效率，使用vector。</li>
-<li>list拥有一段不连续的内存空间，如果需要高效的插入和删除，而不关心随机访问，则应使用list。</li>
-</ul>
-<h3 id="STL中迭代器的作用，有指针为何还要迭代器"><a href="#STL中迭代器的作用，有指针为何还要迭代器" class="headerlink" title="STL中迭代器的作用，有指针为何还要迭代器"></a>STL中迭代器的作用，有指针为何还要迭代器</h3><p>迭代器给我们提供了一种 不用知道聚合物具体实现的方式，而可以按序访问聚合物中元素的方式，使得算法和数据结构分离。</p>
-<p>他本质是类模板，表现的像指针，重载了 ++ – 和 -&gt;等操作，封装了原生指针，更像智能指针，可以根据不同的数据结构类型来实现不同的++ –等操作。迭代器返回的是对象的引用而不是对象的值。</p>
-<h3 id="STL迭代器是怎么删除元素"><a href="#STL迭代器是怎么删除元素" class="headerlink" title="STL迭代器是怎么删除元素"></a>STL迭代器是怎么删除元素</h3><p>考察的是迭代器失效的问题。</p>
-<h3 id="找到数组中每个元素后面比他大的第一个数"><a href="#找到数组中每个元素后面比他大的第一个数" class="headerlink" title="找到数组中每个元素后面比他大的第一个数"></a>找到数组中每个元素后面比他大的第一个数</h3><p>单调栈   <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">下一个更大元素 II</a></p>
-<h3 id="STL中resize和reserve区别"><a href="#STL中resize和reserve区别" class="headerlink" title="STL中resize和reserve区别"></a>STL中resize和reserve区别</h3><p>resize 和 size 参数相关，reserve函数和 capacity参数相关。</p>
-<ul>
-<li>size指容器当前拥有的元素个数，它代表的空间是初始化了的 可以直接访问</li>
-<li>capacity则指容器在必须分配新存储空间之前可以存储的元素总数，只是空间预分配，未初始化，不可访问</li>
-</ul>
-<p>调用 resize(n) 函数后，容器的 size = n；  如果 n 不超过最大容量capacity，则不需要重新分配内存，capacity不变；反之则重新分配内存 capacity = size；</p>
-<p>调用 reserve(n) 函数后，如果 n  不大于 capacity ，capacity不变，否则重新分配 n 的内存使得capcity等于n，同时将之前 size 的内容拷贝过来。 </p>
-<h3 id="C-STL-的内存优化"><a href="#C-STL-的内存优化" class="headerlink" title="C++ STL 的内存优化"></a>C++ STL 的内存优化</h3><h4 id="二级配置器结构"><a href="#二级配置器结构" class="headerlink" title="二级配置器结构"></a>二级配置器结构</h4><p>STL 内存管理使用二级内存配置器</p>
-<ol>
-<li><p>第一级配置器。当分配的内存数大于128字节时，直接使用 malloc free realloc 等函数执行实际的内存分配，和释放等操作。</p>
-</li>
-<li><p>第二级配置器，当分配的内存少于128字节时，使用内存池管理。又称之次层配置（sub-allocation）。每次配置一大块内存，并维护对应的16个空闲链表（free-list）。下次若有相同大小的内存需求，则直接从free-list中取。如果有小额区块被释放，则由配置器回收到free-list中。</p>
-<p> a. 通过size找到合适的空闲链表，如果链表不为空，则直接返回第一个node</p>
-<p> b. 如果链表为空，则使用 blockAlloc 请求分配 node ，即从图中的 start_free-end_free 中的空闲区域再划分出多个连续的node出来。</p>
-<ul>
-<li>果有足够一个node 的空间，就尽可能的分配多的node （最多20）个，将一个Node返回，其他的添加到空闲链表中</li>
-<li>如果一个多的空闲node都没有，再次向操作系统请求分配内存<ul>
-<li>若分配成功 再次使用 b 步骤，分配 block</li>
-<li>若分配失败，循环各个自由链表寻找空间，如果寻找到了，再次进行 b 过程，否则抛出异常</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>用户调用deallocate释放内存空间，如果要求释放的内存空间大于128bytes，直接调用free。否则按照其大小找到合适的自由链表，并将其插入</p>
-</li>
-</ol>
-<p>上述步骤有三个关键函数：</p>
-<ol>
-<li><p>空间配置函数<code>allocate</code>：</p>
-<p> 检查申请的空间大小，大于128字节就调用一级空间配置器使用malloc分配，否则就调用二级空间配置器，从空闲链表中拿数据块。如果空闲链表为空，则调用 refill 函数重新填充空闲链表。</p>
-</li>
-<li><p>重新填充空闲链表 <code>refill </code></p>
-<p> 在使用 allocate 配置空闲空间时，如果对应的空闲链表中没有可用的块（Node）。那么就会调用该函数充填空闲链表。新的空间取自内存池。默认取出 20 个数据块，如果内存池的空间不够，能取多少取多少。从内存池中取空闲块给空闲链表是由函数  <code>chunk_alloc</code>完成</p>
-</li>
-<li><p>从内存池取空闲块<code>chunk_alloc</code></p>
-<p> 首先根据<strong>end_free - start_free</strong>来判断内存池中的剩余空间是否足以调出nobjs个大小为size的数据块出去。如果内存连一个数据块的空间都无法供应，需要用 malloc 取堆中申请内存。假如山穷水尽，整个系统的堆空间都不够用了，malloc失败，那么chunk_alloc会从空闲链表中找是否有大的数据块，然后将该数据块的空间分给内存池（这个数据块会从链表中去除）。</p>
-</li>
-<li><p>空间释放函数 <code>deallocate</code></p>
-</li>
-<li><p>首先先要检查释放数据块的大小，如果大于128字节就调用第一级配置器，小于128字节则根据数据块的大小来判断回收后的空间会被插入到哪个空闲链表。</p>
-</li>
-</ol>
-<p><img src="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg" alt="preview"></p>
-<img src="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom: 50%;" />
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++类和数据抽象</title>
-    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%B1%BB%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/</url>
-    <content><![CDATA[<p> 经C++类和数据抽象</p>
-<span id="more"></span>
-
-<h3 id="C-中类成员的访问权限"><a href="#C-中类成员的访问权限" class="headerlink" title="C++中类成员的访问权限"></a>C++中类成员的访问权限</h3><p>C++ 通过  pubilc, protected, private 三个关键字来控制成员的访问权限。</p>
-<ul>
-<li>在类的内部，可以随意访问三种属性的变量</li>
-<li>在派生类中，不可以访问父类 私有的 成员</li>
-<li>在类的外部，只能通过对象访问成员，并且只能访问public 属性的成员</li>
-</ul>
-<h3 id="C-中-struct-和class的区别"><a href="#C-中-struct-和class的区别" class="headerlink" title="C++中 struct 和class的区别"></a>C++中 struct 和class的区别</h3><ul>
-<li>c++ 可以用 struct  和 class 定义类，都可以用来继承，但是 struct 默认是公开的属性，而class默认成员是私有的类型。</li>
-<li>class 这个关键字还可以使用 模板，模板类   而 struct 不能</li>
-</ul>
-<h3 id="C-类内可以定义引用数据成员吗"><a href="#C-类内可以定义引用数据成员吗" class="headerlink" title="C++类内可以定义引用数据成员吗"></a>C++类内可以定义引用数据成员吗</h3><p>可以，必须通过成员函数初始化列表初始化。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ref</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">// 构造函数形参为传值，不能保证正确性</span></span><br><span class="line">        <span class="comment">// Ref (int target) :myref(target) &#123;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 函数体对引用赋值，编译错误：引用未初始化</span></span><br><span class="line">        <span class="comment">// Ref (int &amp;target)  &#123;</span></span><br><span class="line">            <span class="comment">// myref = target;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果成员为变量为引用类型，那么构造函数的参数为引用类型  这个好理解 因为你都是引用外界的数据，如果用值传递，进来的只是个临时值，再对临时值做引用，显然有问题。</span></span><br><span class="line">        <span class="comment">// 引用必须在成员初始化列表里面初始化，不能在函数体里面初始化。构造函数的参数列表在构造函数之前执行</span></span><br><span class="line">        <span class="comment">// 在函数体里面修改myref，相当于赋值，显然引用不能赋值</span></span><br><span class="line">        <span class="built_in">Ref</span> (<span class="keyword">int</span> &amp;target) :<span class="built_in">myref</span>(target) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Ref constructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">printRef</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;myref is: &quot;</span> &lt;&lt; myref &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">Ref</span> () &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> &amp;myref;</span><br><span class="line">        <span class="comment">/* data */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="右值引用，跟左值有什么区别"><a href="#右值引用，跟左值有什么区别" class="headerlink" title="右值引用，跟左值有什么区别"></a>右值引用，跟左值有什么区别</h3><p>左值：指可以取地址的，或者有具体名字的变量/对象</p>
-<ul>
-<li>左值可以被赋值，寻址，可变</li>
-</ul>
-<p>右值：c98中包含纯右值，即临时值，和将亡值，通过右值引用绑定的右值，一般右值都是临时的，表达式结束右值便不再存在（右值引用可以延续右值的生命周期）</p>
-<ul>
-<li>右值不可变，不可寻址</li>
-</ul>
-<p>右值引用是c11的新特性，它主要有两个方面的优势：</p>
-<ol>
-<li>右值引用可以减少拷贝构造或者赋值构造中 对临时变量的 重复拷贝。</li>
-<li>能够更简洁明确的定义泛函数</li>
-</ol>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面经C++编译和底层</title>
-    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%BC%96%E8%AF%91%E5%92%8C%E5%BA%95%E5%B1%82/</url>
-    <content><![CDATA[<p> 面经 C++ 编译和底层</p>
-<span id="more"></span>
-
-<h3 id="C-源文件从文本到可执行文件经历的过程"><a href="#C-源文件从文本到可执行文件经历的过程" class="headerlink" title="C++源文件从文本到可执行文件经历的过程"></a>C++源文件从文本到可执行文件经历的过程</h3><p>四个过程。</p>
-<ol>
-<li>预处理阶段：对源代码文件中文件包含关系（头文件）、预编译语句（宏定义）进行分析和替换，生成预编译 .i 文件</li>
-<li>编译阶段：将经过预处理后的预编译文件转换成特定汇编代码，生成汇编文件</li>
-<li>汇编阶段：将编译阶段生成的汇编文件转化成机器码，生成可重定位目标文件</li>
-<li>链接阶段：将多个目标文件及所需要的库连接成最终的可执行目标文件</li>
-</ol>
-<h3 id="include尖括号和双引号的区别"><a href="#include尖括号和双引号的区别" class="headerlink" title="#include尖括号和双引号的区别"></a>#include尖括号和双引号的区别</h3><p>编译器预处理阶段查找头文件的路径不一样。</p>
-<ul>
-<li>尖括号：直接从系统目录里查找 头文件。系统目录主要有：编译时 -I 参数指定的头文件搜索路径，系统变量<code>CPLUS_INCLUDE_PATH</code>/<code>C_INCLUDE_PATH</code>指定的头文件路径 </li>
-<li>双引号：先从当前目录搜索头文件，然后从系统目录中搜索</li>
-</ul>
-<h3 id="include头文件的顺序"><a href="#include头文件的顺序" class="headerlink" title="include头文件的顺序"></a>include头文件的顺序</h3><h3 id="malloc原理，以及系统调用"><a href="#malloc原理，以及系统调用" class="headerlink" title="malloc原理，以及系统调用"></a>malloc原理，以及系统调用</h3><p>Malloc函数用于动态分配内存。为了减少内存碎片和系统调用的开销，malloc其采用内存池的方式，先申请大块内存作为堆区，然后将堆区分为多个内存块，以块作为内存管理的基本单位。当用户申请内存时，直接从堆区分配一块合适的空闲块。Malloc采用隐式链表结构将堆区分成连续的、大小不一的块，包含已分配块和未分配块；同时malloc采用显示链表结构来管理所有的空闲块，即使用一个双向链表将空闲块连接起来，每一个空闲块记录了一个连续的、未分配的地址。</p>
-<p>当进行内存分配时，Malloc会通过显式链表，根据待分配内存大小在直接从合适的链表中寻找空闲块；当进行内存合并时，malloc采用边界标记法，根据每个块的前后块是否已经分配来决定是否进行块合并。</p>
-<p>Malloc在申请内存时，一般会通过brk或者mmap系统调用进行申请。其中当申请内存小于128K时，会使用系统函数brk在堆区中分配；而当申请内存大于128K时，会使用系统函数mmap在映射区分配。</p>
-<h3 id="C-的内存管理"><a href="#C-的内存管理" class="headerlink" title="C++的内存管理"></a>C++的内存管理</h3><p>对于32位CPU可寻址4G线性空间，其中0-3G是用户态空间，3-4G是内核空间，不同进程相同的逻辑地址会映射到不同的物理地址中,其逻辑地址其划分如下: (前三个为静态区 后 三个为动态区)</p>
-<ul>
-<li>代码段：用于存放代码和字符常量</li>
-<li>数据段：用于存放已经初始化的全局变量和局部静态变量</li>
-<li>bss段：用于存放未初始化的全局变量和局部静态变量，或初始化未0的全局局部静态变量</li>
-<li>堆区：用于程序运行过程中，用户自行动态分配的管理的内存区域</li>
-<li>栈区：用于函数调用时，存放函数的局部变量，函数返回地址，返回值等，由操作系统分配和管理。在创建进程时会有一个最大栈大小</li>
-<li>mmap映射区：用于存储动态库等文件映射，同时malloc也可以通过系统调用申请大内存</li>
-</ul>
-<h3 id="如何判断内存泄漏"><a href="#如何判断内存泄漏" class="headerlink" title="如何判断内存泄漏"></a>如何判断内存泄漏</h3><p>内存泄漏通常是由于调用了malloc/new等内存申请的操作，但是缺少了对应的free/delete。为了判断内存是否泄露，我们一方面可以使用linux环境下的内存泄漏检查工具Valgrind,另一方面我们在写代码时可以添加内存申请和释放的统计功能，统计当前申请和释放的内存是否一致，以此来判断内存是否泄露。</p>
-<p>内存泄漏的分类：</p>
-<ol>
-<li>堆内存泄漏 （Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释放，那么此后这块内存将不会被使用，就会产生Heap Leak.</li>
-<li>系统资源泄露（Resource Leak）。主要指程序使用系统分配的资源比如 <strong>Bitmap,handle ,SOCKET</strong>等没有使用相应的函数释放掉，导致系统资源的浪费，严重可导致系统效能降低，系统运行不稳定。</li>
-<li>没有将基类的析构函数定义为虚函数。当基类指针指向子类对象时，如果基类的析构函数不是virtual，那么子类的析构函数将不会被调用，子类的资源没有正确是释放，因此造成内存泄露。</li>
-</ol>
-<h3 id="什么时候会发生段错误"><a href="#什么时候会发生段错误" class="headerlink" title="什么时候会发生段错误"></a>什么时候会发生段错误</h3><p>段错误通常发生在访问非法内存地址的时候，具体来说分为以下几种情况：</p>
-<ul>
-<li>使用野指针</li>
-<li>试图修改字符串常量的内容</li>
-</ul>
-<h3 id="说一下共享内存相关api"><a href="#说一下共享内存相关api" class="headerlink" title="说一下共享内存相关api"></a>说一下共享内存相关api</h3><p>Linux允许不同进程访问同一个逻辑内存，提供了一组API，头文件在<code>sys/shm.h</code>中。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 新建共享内存: </span></span><br><span class="line"><span class="comment">key：共享内存键值，可以理解为共享内存的唯一性标记。</span></span><br><span class="line"><span class="comment">size：共享内存大小</span></span><br><span class="line"><span class="comment">shmflag：创建进程和其他进程的读写权限标识。</span></span><br><span class="line"><span class="comment">返回值：相应的共享内存标识符，失败返回-1*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmget</span><span class="params">(<span class="keyword">key_t</span> key,<span class="keyword">size_t</span> size,<span class="keyword">int</span> shmflg)</span></span>;  <span class="comment">// 新建共享内存</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 连接共享内存到当前进程的地址空间shmat</span></span><br><span class="line"><span class="comment">shm_id：共享内存标识符</span></span><br><span class="line"><span class="comment">shm_addr：指定共享内存连接到当前进程的地址，通常为0，表示由系统来选择。</span></span><br><span class="line"><span class="comment">shmflg：标志位</span></span><br><span class="line"><span class="comment">返回值：指向共享内存第一个字节的指针，失败返回-1*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shm_id,<span class="keyword">const</span> <span class="keyword">void</span> *shm_addr,<span class="keyword">int</span> shmflg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 当前进程分离共享内存shmdt */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmdt</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *shmaddr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 控制共享内存shmctl</span></span><br><span class="line"><span class="comment">和信号量的semctl函数类似，控制共享内存</span></span><br><span class="line"><span class="comment">shm_id：共享内存标识符</span></span><br><span class="line"><span class="comment">command: 有三个值   IPC_STAT:获取共享内存的状态，把共享内存的shmid_ds结构复制到buf中。</span></span><br><span class="line"><span class="comment">                   IPC_SET:设置共享内存的状态，把buf复制到共享内存的shmid_ds结构。</span></span><br><span class="line"><span class="comment">                   IPC_RMID:删除共享内存</span></span><br><span class="line"><span class="comment">				  buf：共享内存管理结构体。*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmctl</span><span class="params">(<span class="keyword">int</span> shm_id,<span class="keyword">int</span> command,struct shmid_ds *buf)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="new-和-malloc-的区别"><a href="#new-和-malloc-的区别" class="headerlink" title="new 和 malloc 的区别"></a>new 和 malloc 的区别</h3><ol>
-<li>new 是 c++ 的一个关键字，而 malloc 是函数。</li>
-<li>new 会根据对象的大小自动分配相同大小的内存，并且会默认调用类的构造函数，而malloc只能自己使用sizeof设定需要分配大小</li>
-<li>new分配的后返回的是指向类的指针，而 malloc返回的是void指针，需要自行进行类型转换</li>
-<li>new分配使用delete释放，malloc与之对应的是free</li>
-<li>new如果内存申请失败会抛出异常，而malloc则返回空指针</li>
-<li>malloc分配的内存不够时，可以调用 relloc 进行扩容，而new没有这个操作</li>
-<li>申请数组时： new[]一次分配所有内存，多次调用构造函数，搭配使用delete[]，delete[]多次调用析构函数，销毁数组中的每个对象。而malloc则只能sizeof(int) * n。</li>
-</ol>
-<h3 id="C-如何处理内存泄漏"><a href="#C-如何处理内存泄漏" class="headerlink" title="C++如何处理内存泄漏"></a>C++如何处理内存泄漏</h3><p>使用varglind，mtrace检测</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1136,40 +858,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++仿函数</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E4%BB%BF%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>C++中的仿函数介绍</p>
-<span id="more"></span>
-
-<h1 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h1><h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><p>当需要将函数作为一个参数传递进另一个函数时，可以使用函数指针。例如下面的例子：</p>
-<blockquote>
-<p>假设我们现在有一个数组，数组中存有任意数量的数字，我们希望能够统计出这个数组中大于 10 的数字的数量，你的代码很可能是这样的：</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RecallFunc</span><span class="params">(<span class="keyword">int</span> *start, <span class="keyword">int</span> *end, <span class="keyword">bool</span> (*pf)(<span class="keyword">int</span>))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> *i=start;i!=end+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	count = <span class="built_in">pf</span>(*i) ? count+<span class="number">1</span> : count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsGreaterThanTen</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num&gt;<span class="number">10</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">10</span>,<span class="number">100</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">19</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="built_in">RecallFunc</span>(a,a+<span class="number">4</span>,IsGreaterThanTen);</span><br><span class="line">    cout&lt;&lt;result&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是，如果此时希望将判定的阈值也作为一个变量传入，变为如下函数就不可行了</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsGreaterThanThreshold</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> threshold)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num&gt;threshold ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>虽然这个函数看起来比前面一个版本更具有一般性，但是它不能满足已经定义好的函数指针参数的要求，因为函数指针参数的类型是<code>bool (*)(int)</code>，与函数<code>bool IsGreaterThanThreshold(int num, int threshold)</code>的类型不相符。如果一定要完成这个任务，按照以往的经验，我们可以考虑如下可能途径：</p>
-<p>（1）阈值作为函数的局部变量。局部变量不能在函数调用中传递，故不可行；<br>（2）函数传参。这种方法我们已经讨论过了，多个参数不适用于已定义好的 RecallFunc() 函数。<br>（3）全局变量。我们可以将阈值设置成一个全局变量。这种方法虽然可行，但是不优雅，且非常容易引入 Bug，比如全局变量容易同名，造成命名空间污染。</p>
-<p>那么有什么好的处理方法呢？仿函数应运而生。</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>编程者要将某种“操作”当做算法的参数，一般有两种方法：</p>
-<p>（1）一个办法就是先将该“操作”设计为一个函数，再将函数指针当做算法的一个参数。上面的实例就是该做法；<br>（2）将该“操作”设计为一个仿函数（就语言层面而言是个 class），再以该仿函数产生一个对象，并以此对象作为算法的一个参数。</p>
-<p>仿函数写法： 写一个简单类，除了维护类的基本成员函数外（<code>struct</code>也可），<strong>只需要重载 operator() 运算符</strong> 。这样既可以免去对一些公共变量的维护，也可以使重复使用的代码独立出来，以便下次复用。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Mycmp</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span> <span class="params">()</span> <span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;a, vector&lt;<span class="keyword">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &gt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IsGreaterThanThresholdFunctor</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">IsGreaterThanThresholdFunctor</span><span class="params">(<span class="keyword">int</span> t)</span>:threshold(t)&#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">int</span> num)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> num &gt; threshold ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> threshold;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RecallFunc</span><span class="params">(<span class="keyword">int</span> *start, <span class="keyword">int</span> *end, IsGreaterThanThresholdFunctor myFunctor)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> *i = start; i != end + <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="built_in">myFunctor</span>(*i) ? count + <span class="number">1</span> : count;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">10</span>,<span class="number">100</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">19</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> result = <span class="built_in">RecallFunc</span>(a, a + <span class="number">4</span>, <span class="built_in">IsGreaterThanThresholdFunctor</span>(<span class="number">10</span>));</span><br><span class="line">	cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语言特性</category>
-      </categories>
-      <tags>
-        <tag>C++语法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++static关键字</title>
     <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/static%E5%85%B3%E9%94%AE%E5%AD%97/</url>
     <content><![CDATA[<p>C++static关键字</p>
@@ -1323,6 +1011,69 @@
       </tags>
   </entry>
   <entry>
+    <title>C++字节对齐</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<p>C++字节对齐</p>
+<span id="more"></span>
+
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>​        有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
+<ol>
+<li>结构中变量的起始地址 要为该变量类型 大小的整数倍，例如 sizeof(int) = 4 那么结构体中这个变量的存储起始地址 % 4 == 0才行。如果不行，会在前方自动填充0。</li>
+<li>最后即便前面所有都填充完了，最后总的占用的字节数 要是 结构中最大类型数据所占用字节数的倍数，如果不是，最后再填充一次。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">char</span> dda;　　　　　　　　　　　　　　<span class="comment">//偏移量为0，满足对齐方式，dda占用1个字节； </span></span><br><span class="line"><span class="keyword">double</span> dda1;　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。 </span></span><br><span class="line"><span class="keyword">int</span> type；　　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节。 </span></span><br><span class="line">&#125;；　　　　　　　　　　　　　　　　　<span class="comment">//所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。 </span></span><br><span class="line"><span class="comment">////  24 </span></span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语言特性</category>
+        <category>语言特性</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+      </categories>
+      <tags>
+        <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++仿函数</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E4%BB%BF%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>C++中的仿函数介绍</p>
+<span id="more"></span>
+
+<h1 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h1><h2 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h2><p>当需要将函数作为一个参数传递进另一个函数时，可以使用函数指针。例如下面的例子：</p>
+<blockquote>
+<p>假设我们现在有一个数组，数组中存有任意数量的数字，我们希望能够统计出这个数组中大于 10 的数字的数量，你的代码很可能是这样的：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RecallFunc</span><span class="params">(<span class="keyword">int</span> *start, <span class="keyword">int</span> *end, <span class="keyword">bool</span> (*pf)(<span class="keyword">int</span>))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> *i=start;i!=end+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	count = <span class="built_in">pf</span>(*i) ? count+<span class="number">1</span> : count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsGreaterThanTen</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num&gt;<span class="number">10</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">10</span>,<span class="number">100</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">19</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="built_in">RecallFunc</span>(a,a+<span class="number">4</span>,IsGreaterThanTen);</span><br><span class="line">    cout&lt;&lt;result&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果此时希望将判定的阈值也作为一个变量传入，变为如下函数就不可行了</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsGreaterThanThreshold</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> threshold)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num&gt;threshold ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然这个函数看起来比前面一个版本更具有一般性，但是它不能满足已经定义好的函数指针参数的要求，因为函数指针参数的类型是<code>bool (*)(int)</code>，与函数<code>bool IsGreaterThanThreshold(int num, int threshold)</code>的类型不相符。如果一定要完成这个任务，按照以往的经验，我们可以考虑如下可能途径：</p>
+<p>（1）阈值作为函数的局部变量。局部变量不能在函数调用中传递，故不可行；<br>（2）函数传参。这种方法我们已经讨论过了，多个参数不适用于已定义好的 RecallFunc() 函数。<br>（3）全局变量。我们可以将阈值设置成一个全局变量。这种方法虽然可行，但是不优雅，且非常容易引入 Bug，比如全局变量容易同名，造成命名空间污染。</p>
+<p>那么有什么好的处理方法呢？仿函数应运而生。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>编程者要将某种“操作”当做算法的参数，一般有两种方法：</p>
+<p>（1）一个办法就是先将该“操作”设计为一个函数，再将函数指针当做算法的一个参数。上面的实例就是该做法；<br>（2）将该“操作”设计为一个仿函数（就语言层面而言是个 class），再以该仿函数产生一个对象，并以此对象作为算法的一个参数。</p>
+<p>仿函数写法： 写一个简单类，除了维护类的基本成员函数外（<code>struct</code>也可），<strong>只需要重载 operator() 运算符</strong> 。这样既可以免去对一些公共变量的维护，也可以使重复使用的代码独立出来，以便下次复用。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Mycmp</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span> <span class="params">()</span> <span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;a, vector&lt;<span class="keyword">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &gt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IsGreaterThanThresholdFunctor</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">IsGreaterThanThresholdFunctor</span><span class="params">(<span class="keyword">int</span> t)</span>:threshold(t)&#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">int</span> num)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> num &gt; threshold ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> threshold;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RecallFunc</span><span class="params">(<span class="keyword">int</span> *start, <span class="keyword">int</span> *end, IsGreaterThanThresholdFunctor myFunctor)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> *i = start; i != end + <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="built_in">myFunctor</span>(*i) ? count + <span class="number">1</span> : count;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">10</span>,<span class="number">100</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">19</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> result = <span class="built_in">RecallFunc</span>(a, a + <span class="number">4</span>, <span class="built_in">IsGreaterThanThresholdFunctor</span>(<span class="number">10</span>));</span><br><span class="line">	cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语言特性</category>
+      </categories>
+      <tags>
+        <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++右值和左值</title>
     <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/</url>
     <content><![CDATA[<p>C++右值和左值</p>
@@ -1448,29 +1199,64 @@
       </tags>
   </entry>
   <entry>
-    <title>C++字节对齐</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/</url>
-    <content><![CDATA[<p>C++字节对齐</p>
+    <title>C++强制类型转换</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>C++强制类型转换</p>
 <span id="more"></span>
 
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>​        有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
+<h1 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h1><p>C 风格的强制类型转换 如下，不管什么类型的转换都可以使用使用下面的方式。</p>
+<blockquote>
+<p>TypeName b = (TypeName)a;</p>
+</blockquote>
+<p>C++也是支持C风格的强制转换,但是C风格的强制转换可能带来一些隐患,让一些问题难以察觉.所以C++提供了一组可以用在不同场合的强制转换的函数 包含：</p>
+<ul>
+<li>const_cast </li>
+<li>static_cast </li>
+<li>dynamic_cast</li>
+<li>reinterpret_cast</li>
+</ul>
+<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><p>主要用于 去掉 指针和引用的 的 const 属性。</p>
 <ol>
-<li>结构中变量的起始地址 要为该变量类型 大小的整数倍，例如 sizeof(int) = 4 那么结构体中这个变量的存储起始地址 % 4 == 0才行。如果不行，会在前方自动填充0。</li>
-<li>最后即便前面所有都填充完了，最后总的占用的字节数 要是 结构中最大类型数据所占用字节数的倍数，如果不是，最后再填充一次。</li>
+<li>常量指针 / 引用 被转化成非常量的指针，并且仍然指向原来的对象；</li>
+<li>const_cast一般用于修改指针。如const char *p形式</li>
 </ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">char</span> dda;　　　　　　　　　　　　　　<span class="comment">//偏移量为0，满足对齐方式，dda占用1个字节； </span></span><br><span class="line"><span class="keyword">double</span> dda1;　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。 </span></span><br><span class="line"><span class="keyword">int</span> type；　　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节。 </span></span><br><span class="line">&#125;；　　　　　　　　　　　　　　　　　<span class="comment">//所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。 </span></span><br><span class="line"><span class="comment">////  24 </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*c_ptr = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> *ptr = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(c_ptr);  <span class="comment">// 通过const_cast&lt;Ty&gt; 去常量 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下的情况 对定义的常变量直接转换的方法  最好不要用  在不同编译器下可能会有不同的结果  </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_val = <span class="number">233</span>;  <span class="comment">//声明为常量类型</span></span><br><span class="line"><span class="keyword">int</span> &amp;use_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt;(c_val); <span class="comment">//使用去const 引用</span></span><br><span class="line"><span class="keyword">int</span> *ptr_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;c_val);<span class="comment">//使用去const 指针</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><ol>
+<li>static_cast 作用和C语言风格强制转换的效果基本一样  <strong>这个和C相同 是指 ，可能会修改二进制的数据</strong><ul>
+<li><strong>用于基本数据类型之间的转换</strong>（int  char bool 等），如把int转换成char，把int转换成enum。这种转换的安全性需要开发者来维护。</li>
+</ul>
+</li>
+<li>用于类层次结构中基类（父类）和派生类（子类）之间指针或引用的转换。注意：<strong>进行上行转换</strong>（把派生类的指针或引用转换成基类表示）<strong>是安全的</strong>；进行下行转换（把基类指针或引用转换成派生类表示）时，由于没有动态类型检查，所以是不安全的</li>
+<li>不能去掉原有的 属性 如  const voliate</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 常规的使用方法 */</span></span><br><span class="line"><span class="keyword">float</span> f_pi=<span class="number">3.141592f</span></span><br><span class="line"><span class="keyword">int</span>   i_pi=<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(f_pi); <span class="comment">/// i_pi 的值为 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* class 的上下行转换 */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上行 Sub -&gt; Base</span></span><br><span class="line"><span class="comment">//编译通过，安全</span></span><br><span class="line">Sub sub;</span><br><span class="line">Base *base_ptr = <span class="keyword">static_cast</span>&lt;Base*&gt;(&amp;sub);  </span><br><span class="line"><span class="comment">//下行 Base -&gt; Sub</span></span><br><span class="line"><span class="comment">//编译通过，不安全</span></span><br><span class="line">Base base;</span><br><span class="line">Sub *sub_ptr = <span class="keyword">static_cast</span>&lt;Sub*&gt;(&amp;base);  </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><p>c++ 多态性，例如在基类中定义一个虚函数，然后 子类 继承这个类并 实现虚函数，不同的子类可以有不同的虚函数实现。当我们将基类的指针指向子类的对象时，就会自动调用 对应子类的 虚函数的实现，这就体现出了多态性。</p>
+<p>这个类型转换是 C 语言替代不了的 因为涉及到 C++ 的多态特性。对于C++ 中的类  的子类 和 基类 之间的指针或引用的转换，因该用dynamic 或者 static 转换。</p>
+<ol>
+<li>当 将基类指针转换为 子类指针时，不能直接强转，也不能用static_cast。这是因为子类除了继承基类的变量和方法之外，还可能有自己新的扩充的定义，即 基类 &lt;  子类，强转就可能出现指针越界。应该使用 dynamic_cast 来完成，因为dynamic 可以在程序运行过程中 对转换的可行性进行检查，如果无法完成，会返回空指针。</li>
+<li>dynamic_cast 的检查依赖于RTTI 实现，需要类中含有虚函数，没有虚函数 编译不通过。</li>
+<li>dynamic_cast 运行检查是有开销的  所以 如果是 子类 像  基类的  上行转换 用 staic_cast 比较快。  </li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span> <span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Sub-&gt;Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Sub * sub = <span class="keyword">new</span> <span class="built_in">Sub</span>();</span><br><span class="line">    sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Base* sub2base = <span class="keyword">dynamic_cast</span>&lt;Base*&gt;(sub);</span><br><span class="line">    <span class="keyword">if</span> (sub2base != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        sub2base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&lt;sub-&gt;base&gt; sub2base val is: &quot;</span> &lt;&lt; sub2base &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;Base-&gt;Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Base *base = <span class="keyword">new</span> <span class="built_in">Base</span>();</span><br><span class="line">    base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Sub  *base2sub = <span class="keyword">dynamic_cast</span>&lt;Sub*&gt;(base);</span><br><span class="line">    <span class="keyword">if</span> (base2sub != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        base2sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt;<span class="string">&quot;&lt;base-&gt;sub&gt; base2sub val is: &quot;</span>&lt;&lt; base2sub &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> sub;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* vs2017 输出为下</span></span><br><span class="line"><span class="comment">Sub-&gt;Base</span></span><br><span class="line"><span class="comment">I&#x27;m Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;sub-&gt;base&gt; sub2base val is: 00B9E080   // 注:这个地址是系统分配的,每次不一定一样</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Base-&gt;Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;base-&gt;sub&gt; base2sub val is: 00000000   // VS2017的C++编译器,对此类错误的转换赋值为nullptr</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><ul>
+<li>强制类型转换符用来<strong>处理无关类</strong>型转换的  (例如指针 和 long long（64位机器指针是八字节） 的转换)</li>
+<li>为操作数的位模式提供较低层次的重新解释！但是他仅仅是重新解释了给出的对象的比特模型，并没有进行二进制的转换！</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdint&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *ptr = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">233</span>);</span><br><span class="line">    <span class="keyword">uint64_t</span> ptr_addr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">uint64_t</span>&gt;(ptr);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ptr 的地址: &quot;</span> &lt;&lt; hex &lt;&lt; ptr &lt;&lt; endl</span><br><span class="line">        &lt;&lt; <span class="string">&quot;ptr_addr 的值(hex): &quot;</span> &lt;&lt; hex &lt;&lt; ptr_addr &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
         <category>C++</category>
         <category>语言特性</category>
-        <category>语言特性</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
       </categories>
       <tags>
         <tag>C++语法</tag>
@@ -1565,90 +1351,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++强制类型转换</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p>C++强制类型转换</p>
-<span id="more"></span>
-
-<h1 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h1><p>C 风格的强制类型转换 如下，不管什么类型的转换都可以使用使用下面的方式。</p>
-<blockquote>
-<p>TypeName b = (TypeName)a;</p>
-</blockquote>
-<p>C++也是支持C风格的强制转换,但是C风格的强制转换可能带来一些隐患,让一些问题难以察觉.所以C++提供了一组可以用在不同场合的强制转换的函数 包含：</p>
-<ul>
-<li>const_cast </li>
-<li>static_cast </li>
-<li>dynamic_cast</li>
-<li>reinterpret_cast</li>
-</ul>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><p>主要用于 去掉 指针和引用的 的 const 属性。</p>
-<ol>
-<li>常量指针 / 引用 被转化成非常量的指针，并且仍然指向原来的对象；</li>
-<li>const_cast一般用于修改指针。如const char *p形式</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*c_ptr = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> *ptr = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(c_ptr);  <span class="comment">// 通过const_cast&lt;Ty&gt; 去常量 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下的情况 对定义的常变量直接转换的方法  最好不要用  在不同编译器下可能会有不同的结果  </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_val = <span class="number">233</span>;  <span class="comment">//声明为常量类型</span></span><br><span class="line"><span class="keyword">int</span> &amp;use_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt;(c_val); <span class="comment">//使用去const 引用</span></span><br><span class="line"><span class="keyword">int</span> *ptr_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;c_val);<span class="comment">//使用去const 指针</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><ol>
-<li>static_cast 作用和C语言风格强制转换的效果基本一样  <strong>这个和C相同 是指 ，可能会修改二进制的数据</strong><ul>
-<li><strong>用于基本数据类型之间的转换</strong>（int  char bool 等），如把int转换成char，把int转换成enum。这种转换的安全性需要开发者来维护。</li>
-</ul>
-</li>
-<li>用于类层次结构中基类（父类）和派生类（子类）之间指针或引用的转换。注意：<strong>进行上行转换</strong>（把派生类的指针或引用转换成基类表示）<strong>是安全的</strong>；进行下行转换（把基类指针或引用转换成派生类表示）时，由于没有动态类型检查，所以是不安全的</li>
-<li>不能去掉原有的 属性 如  const voliate</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 常规的使用方法 */</span></span><br><span class="line"><span class="keyword">float</span> f_pi=<span class="number">3.141592f</span></span><br><span class="line"><span class="keyword">int</span>   i_pi=<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(f_pi); <span class="comment">/// i_pi 的值为 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* class 的上下行转换 */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上行 Sub -&gt; Base</span></span><br><span class="line"><span class="comment">//编译通过，安全</span></span><br><span class="line">Sub sub;</span><br><span class="line">Base *base_ptr = <span class="keyword">static_cast</span>&lt;Base*&gt;(&amp;sub);  </span><br><span class="line"><span class="comment">//下行 Base -&gt; Sub</span></span><br><span class="line"><span class="comment">//编译通过，不安全</span></span><br><span class="line">Base base;</span><br><span class="line">Sub *sub_ptr = <span class="keyword">static_cast</span>&lt;Sub*&gt;(&amp;base);  </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><p>c++ 多态性，例如在基类中定义一个虚函数，然后 子类 继承这个类并 实现虚函数，不同的子类可以有不同的虚函数实现。当我们将基类的指针指向子类的对象时，就会自动调用 对应子类的 虚函数的实现，这就体现出了多态性。</p>
-<p>这个类型转换是 C 语言替代不了的 因为涉及到 C++ 的多态特性。对于C++ 中的类  的子类 和 基类 之间的指针或引用的转换，因该用dynamic 或者 static 转换。</p>
-<ol>
-<li>当 将基类指针转换为 子类指针时，不能直接强转，也不能用static_cast。这是因为子类除了继承基类的变量和方法之外，还可能有自己新的扩充的定义，即 基类 &lt;  子类，强转就可能出现指针越界。应该使用 dynamic_cast 来完成，因为dynamic 可以在程序运行过程中 对转换的可行性进行检查，如果无法完成，会返回空指针。</li>
-<li>dynamic_cast 的检查依赖于RTTI 实现，需要类中含有虚函数，没有虚函数 编译不通过。</li>
-<li>dynamic_cast 运行检查是有开销的  所以 如果是 子类 像  基类的  上行转换 用 staic_cast 比较快。  </li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span> <span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Sub-&gt;Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Sub * sub = <span class="keyword">new</span> <span class="built_in">Sub</span>();</span><br><span class="line">    sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Base* sub2base = <span class="keyword">dynamic_cast</span>&lt;Base*&gt;(sub);</span><br><span class="line">    <span class="keyword">if</span> (sub2base != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        sub2base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&lt;sub-&gt;base&gt; sub2base val is: &quot;</span> &lt;&lt; sub2base &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;Base-&gt;Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Base *base = <span class="keyword">new</span> <span class="built_in">Base</span>();</span><br><span class="line">    base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Sub  *base2sub = <span class="keyword">dynamic_cast</span>&lt;Sub*&gt;(base);</span><br><span class="line">    <span class="keyword">if</span> (base2sub != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        base2sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt;<span class="string">&quot;&lt;base-&gt;sub&gt; base2sub val is: &quot;</span>&lt;&lt; base2sub &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> sub;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* vs2017 输出为下</span></span><br><span class="line"><span class="comment">Sub-&gt;Base</span></span><br><span class="line"><span class="comment">I&#x27;m Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;sub-&gt;base&gt; sub2base val is: 00B9E080   // 注:这个地址是系统分配的,每次不一定一样</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Base-&gt;Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;base-&gt;sub&gt; base2sub val is: 00000000   // VS2017的C++编译器,对此类错误的转换赋值为nullptr</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><ul>
-<li>强制类型转换符用来<strong>处理无关类</strong>型转换的  (例如指针 和 long long（64位机器指针是八字节） 的转换)</li>
-<li>为操作数的位模式提供较低层次的重新解释！但是他仅仅是重新解释了给出的对象的比特模型，并没有进行二进制的转换！</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdint&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *ptr = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">233</span>);</span><br><span class="line">    <span class="keyword">uint64_t</span> ptr_addr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">uint64_t</span>&gt;(ptr);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ptr 的地址: &quot;</span> &lt;&lt; hex &lt;&lt; ptr &lt;&lt; endl</span><br><span class="line">        &lt;&lt; <span class="string">&quot;ptr_addr 的值(hex): &quot;</span> &lt;&lt; hex &lt;&lt; ptr_addr &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语言特性</category>
-      </categories>
-      <tags>
-        <tag>C++语法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++模板</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/</url>
-    <content><![CDATA[<p>C++模板推导规则</p>
-<span id="more"></span>
-
-<h1 id="模板推导规则"><a href="#模板推导规则" class="headerlink" title="模板推导规则"></a>模板推导规则</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(expr); <span class="comment">// deduce T and ParamType from expr</span></span><br></pre></td></tr></table></figure>
-
-<p> 在编译期间，编译器通过expr推导T和ParamType的类型。直觉上，T的类型总是与expr一致，然而实际上，T的类型推到结果，不仅仅依赖于expr的类型，还取决于ParamType的形式。</p>
-<p>ParamType 可以写为 <code>T&amp;  /  T&amp;&amp;  / T*</code> 分为为 引用/万能引用/指针</p>
-<h2 id="指针或引用"><a href="#指针或引用" class="headerlink" title="指针或引用"></a>指针或引用</h2><p>若expr是引用（左值引用或右值引用），则先将引用部分忽略；然后，对expr的类型和ParamType的类型进行模式匹配，来决定T的类型</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> T&amp; param)</span></span>; <span class="comment">// ParamType 为左值引用的形参</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;rx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;crx = x;</span><br><span class="line"><span class="built_in">f</span>(x); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"><span class="built_in">f</span>(rx); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"><span class="built_in">f</span>(crx); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> y = <span class="number">28</span>;</span><br><span class="line"><span class="built_in">f</span>(y); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rr = <span class="number">27</span>;</span><br><span class="line"><span class="built_in">f</span>(rr); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;&amp;crr = <span class="number">28</span>;</span><br><span class="line"><span class="built_in">f</span>(crr); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = &amp;x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *cp = &amp;x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> ccp = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="built_in">f</span>(p); <span class="comment">// T is int*, param&#x27;s type is int* const &amp;</span></span><br><span class="line"><span class="built_in">f</span>(cp); <span class="comment">// T is const int*, param&#x27;s type is const int* const &amp;</span></span><br><span class="line"><span class="built_in">f</span>(ccp); <span class="comment">// T is const char*, param&#x27;s type is const char* const &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(<span class="number">27</span>); <span class="comment">// T is int, param&#x27;s type is const int &amp;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语言特性</category>
-      </categories>
-      <tags>
-        <tag>C++语法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++模板和泛型编程</title>
     <url>/2021/04/30/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p>面向对象编程 （<code>OOP</code>）和泛型编程都能处理 <strong>在编写程序不知道类型的情况</strong>。不同之处在于 ，<code>OOP</code>能处理类型在<strong>程序运行之前都未知的情况</strong>，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。 </p>
@@ -1678,28 +1380,20 @@
       </tags>
   </entry>
   <entry>
-    <title>C++虚函数</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E8%99%9A%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>C++虚函数</p>
+    <title>C++模板</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E6%A8%A1%E6%9D%BF%E6%8E%A8%E5%AF%BC%E8%A7%84%E5%88%99/</url>
+    <content><![CDATA[<p>C++模板推导规则</p>
 <span id="more"></span>
 
+<h1 id="模板推导规则"><a href="#模板推导规则" class="headerlink" title="模板推导规则"></a>模板推导规则</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(expr); <span class="comment">// deduce T and ParamType from expr</span></span><br></pre></td></tr></table></figure>
 
-
-<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>多态 包含 静态多态 和  动态多态，前者是在编译时确定的，通过函数重载实现。后者是通过虚函数实现的，是运行时类指针或引用和它所绑定的对象不同所体现的。</p>
-<p>虚函数 原理： <a href="https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage">https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage</a><br>虚函数 实现原理： <a href="https://blog.twofei.com/496/">https://blog.twofei.com/496/</a><br>虚函数总结： <a href="https://blog.csdn.net/qq_39477053/article/details/80322260">https://blog.csdn.net/qq_39477053/article/details/80322260</a></p>
-<h2 id="虚拟函数"><a href="#虚拟函数" class="headerlink" title="虚拟函数"></a>虚拟函数</h2><p>虚函数的实现是由两个部分组成的，虚函数指针与虚函数表。</p>
-<h3 id="虚函数指针，和表"><a href="#虚函数指针，和表" class="headerlink" title="虚函数指针，和表"></a>虚函数指针，和表</h3><p>虚函数指针是确实存在的数据类型，在一个被实例化的对象中，它总是被存放在该对象的地址首位。某一个基类（没有继承别人），它其中有好几个虚函数，那么这几个虚函数的地址组成了一个表。当示例化这个类后，称为该类的对象，那么对象只是新增了一个虚函数指针，该虚函数指针指向了虚表的首地址。对于继承该类的派生类的对象，它也有一个虚函数指针，如果它的派生类的虚函数重写了，那么它的虚表和基类的虚表不同。因此虚函数指针的指向地址也不同。</p>
-<h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数 就是 后面加 0 的虚函数，它没有对虚函数进行实现，包含纯虚函数的类称为抽象类，它不能被实例化因为它虚函数没实现，一般用于接口的定义。只有它的派生类并实现了虚函数的 才能实例化。</p>
-]]></content>
+<p> 在编译期间，编译器通过expr推导T和ParamType的类型。直觉上，T的类型总是与expr一致，然而实际上，T的类型推到结果，不仅仅依赖于expr的类型，还取决于ParamType的形式。</p>
+<p>ParamType 可以写为 <code>T&amp;  /  T&amp;&amp;  / T*</code> 分为为 引用/万能引用/指针</p>
+<h2 id="指针或引用"><a href="#指针或引用" class="headerlink" title="指针或引用"></a>指针或引用</h2><p>若expr是引用（左值引用或右值引用），则先将引用部分忽略；然后，对expr的类型和ParamType的类型进行模式匹配，来决定T的类型</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> T&amp; param)</span></span>; <span class="comment">// ParamType 为左值引用的形参</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;rx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;crx = x;</span><br><span class="line"><span class="built_in">f</span>(x); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"><span class="built_in">f</span>(rx); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"><span class="built_in">f</span>(crx); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> y = <span class="number">28</span>;</span><br><span class="line"><span class="built_in">f</span>(y); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rr = <span class="number">27</span>;</span><br><span class="line"><span class="built_in">f</span>(rr); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;&amp;crr = <span class="number">28</span>;</span><br><span class="line"><span class="built_in">f</span>(crr); <span class="comment">// T is int, param&#x27;s type is const int&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = &amp;x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *cp = &amp;x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> ccp = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="built_in">f</span>(p); <span class="comment">// T is int*, param&#x27;s type is int* const &amp;</span></span><br><span class="line"><span class="built_in">f</span>(cp); <span class="comment">// T is const int*, param&#x27;s type is const int* const &amp;</span></span><br><span class="line"><span class="built_in">f</span>(ccp); <span class="comment">// T is const char*, param&#x27;s type is const char* const &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">f</span>(<span class="number">27</span>); <span class="comment">// T is int, param&#x27;s type is const int &amp;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>C++</category>
         <category>语言特性</category>
-        <category>语言特性</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
-        <category>��������</category>
       </categories>
       <tags>
         <tag>C++语法</tag>
@@ -1746,6 +1440,312 @@
       </categories>
       <tags>
         <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++虚函数</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E8%99%9A%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>C++虚函数</p>
+<span id="more"></span>
+
+
+
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>多态 包含 静态多态 和  动态多态，前者是在编译时确定的，通过函数重载实现。后者是通过虚函数实现的，是运行时类指针或引用和它所绑定的对象不同所体现的。</p>
+<p>虚函数 原理： <a href="https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage">https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage</a><br>虚函数 实现原理： <a href="https://blog.twofei.com/496/">https://blog.twofei.com/496/</a><br>虚函数总结： <a href="https://blog.csdn.net/qq_39477053/article/details/80322260">https://blog.csdn.net/qq_39477053/article/details/80322260</a></p>
+<h2 id="虚拟函数"><a href="#虚拟函数" class="headerlink" title="虚拟函数"></a>虚拟函数</h2><p>虚函数的实现是由两个部分组成的，虚函数指针与虚函数表。</p>
+<h3 id="虚函数指针，和表"><a href="#虚函数指针，和表" class="headerlink" title="虚函数指针，和表"></a>虚函数指针，和表</h3><p>虚函数指针是确实存在的数据类型，在一个被实例化的对象中，它总是被存放在该对象的地址首位。某一个基类（没有继承别人），它其中有好几个虚函数，那么这几个虚函数的地址组成了一个表。当示例化这个类后，称为该类的对象，那么对象只是新增了一个虚函数指针，该虚函数指针指向了虚表的首地址。对于继承该类的派生类的对象，它也有一个虚函数指针，如果它的派生类的虚函数重写了，那么它的虚表和基类的虚表不同。因此虚函数指针的指向地址也不同。</p>
+<h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数 就是 后面加 0 的虚函数，它没有对虚函数进行实现，包含纯虚函数的类称为抽象类，它不能被实例化因为它虚函数没实现，一般用于接口的定义。只有它的派生类并实现了虚函数的 才能实例化。</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语言特性</category>
+        <category>语言特性</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+        <category>��������</category>
+      </categories>
+      <tags>
+        <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++容器和算法</title>
+    <url>/2021/04/24/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E5%AE%B9%E5%99%A8%E5%92%8C%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>面经C++容器和算法</p>
+<span id="more"></span>
+
+<h2 id="容器和算法"><a href="#容器和算法" class="headerlink" title="容器和算法"></a>容器和算法</h2><h3 id="map和set有什么区别，分别怎么实现"><a href="#map和set有什么区别，分别怎么实现" class="headerlink" title="map和set有什么区别，分别怎么实现"></a>map和set有什么区别，分别怎么实现</h3><p>​        map 和 set 在 c++ 中底层都是红黑树实现。他们的区别在于：</p>
+<ol>
+<li>map的存储形式是key value的形式，在树中对 key关键字进行排序。而set就是以集合种元素本身作为建立红黑树的关键子，set只存储元素。</li>
+<li>对map 迭代时，可以对 value修改，但是不能对key修改，因为红黑树以Key为依据建树，一旦修改红黑树就会自动调整，这时候迭代器的指向顺序就乱了。而同理 set 是直接对 集合中的元素建树，所以set迭代时是不可修改的</li>
+<li>map 支持下标操作，可以通过关键字访问对应的元素，但是在使用下标访问时，如果map中存在该键就将值返回，否则以默认值新建该键值关系，因此在只需要判断该键存在与否的时候 使用 find最好。set 不行。</li>
+</ol>
+<h3 id="STL的allocaotr"><a href="#STL的allocaotr" class="headerlink" title="STL的allocaotr"></a>STL的allocaotr</h3><p>c++的内存管理使用 new/delete 关键字管理。new/delete的具体执行过程：</p>
+<ul>
+<li>new分为两个阶段 :  1. 调用::operator new内存配置  2. 调用构造函数</li>
+<li>delete:分为两个阶段：  1. 调用对象析构函数  2. 调用::operator delete释放内存</li>
+</ul>
+<p>而 STL 中 为了精密分工，将两个阶段（内存配置和对象构造 / 内存释放和对象析构函数）分开操作</p>
+<ol>
+<li>alloc::allocate() 内存配置 </li>
+<li>alloc::deallocate() 内存释放</li>
+</ol>
+<p>同时SGI STL采用了两级内存配置，当分配的内存低于128B 时 使用 内存池技术，通过空闲链表链表管理内存，防止内存碎片化，当分配的内存大于128B时，直接使用malloc realloc free等函数分配一整块内存。</p>
+<h3 id="STL-迭代删除元素"><a href="#STL-迭代删除元素" class="headerlink" title="STL 迭代删除元素"></a>STL 迭代删除元素</h3><p>主要考虑迭代器失效的问题。</p>
+<ul>
+<li>对于序列容器中的vector deque ，删除当前元素，后面的元素都会往前移动一个位置，导致后面的迭代器失效（deque的头尾插除外），而 <code>erase</code> 函数会返回下一个迭代器，因此使用返回值即可。</li>
+<li>对于 list 是由双向环形链表构成，因此也只是当前的迭代器失效，不影响后面的。它的erase方法也会返回下一个有效的iterator。</li>
+<li>对于关联容器，map 和 set 底层都是红黑树，删除当前元素只是当前迭代元素失效，后面的不影响, 备份即可。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//要求删除键值为偶数的键值对</span></span><br><span class="line"> map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::iterator it = m.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line"> <span class="comment">//错误实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it);</span><br><span class="line">   &#125;</span><br><span class="line">   it++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//正确实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it++); <span class="comment">//重点！！！  it++的写法才行不能  m.rease(it); it++;</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span>&#123;</span><br><span class="line">     it++;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="STL有什么基本组成"><a href="#STL有什么基本组成" class="headerlink" title="STL有什么基本组成"></a>STL有什么基本组成</h3><ol>
+<li>容器：STL内部封装好的数据结构，是一种class template，常用的包括vector、list、deque、set、map等</li>
+<li>算法：是一种函数模板，常用的有sort、search、copy等，STL中算法与数据相分离（不像面向对象中将算法与数据封装在class中）。</li>
+<li>迭代器：类似于泛化的指针，用来访问可迭代序列。</li>
+<li>适配器：提供转换操作，有容器适配器、仿函数适配器、迭代器适配器。</li>
+<li>分配器：负责空间配置与管理，用以支持容器。是一种class template。</li>
+<li>仿函数：行为类似函数，就是使一个类的使用看上去像一个函数。它的具体实现就是通过在类中重载了operator()，使这个类具有了类似函数的行为。</li>
+</ol>
+<p>关系：分配器用于给容器分配空间，算法通过迭代器访问容器中的数据从而完成一定的功能，配接器用于适配套接仿函数或容器，或者说通过一定的方法进行封装。例如 queue 和  stack 基本模型都是 deque 通过配接器实现而来。仿函数可以协助算法完成各种操作。</p>
+<h3 id="STL中map与unordered-map"><a href="#STL中map与unordered-map" class="headerlink" title="STL中map与unordered_map"></a>STL中map与unordered_map</h3><ul>
+<li>底层数据结构不一样，map 是使用 红黑数实现，un..使用hash表</li>
+<li>因此查询效率等都不一样</li>
+<li>map 是有序的  un 是无序的 不能迭代访问</li>
+</ul>
+<h3 id="vector和list的区别，应用，越详细越好"><a href="#vector和list的区别，应用，越详细越好" class="headerlink" title="vector和list的区别，应用，越详细越好"></a>vector和list的区别，应用，越详细越好</h3><p>1、区别：</p>
+<ol>
+<li>vector底层实现是数组；list是双向 链表。</li>
+<li>vector支持随机访问，list不支持。</li>
+<li>vector是顺序内存，list不是。</li>
+<li>vector在中间节点进行插入删除会导致内存拷贝，list不会。</li>
+<li>vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请。</li>
+<li>vector随机访问性能好，插入删除性能差；list随机访问性能差，插入删除性能好。</li>
+</ol>
+<p>2、应用</p>
+<ul>
+<li>vector拥有一段连续的内存空间，因此支持随机访问，如果需要高效的随即访问，而不在乎插入和删除的效率，使用vector。</li>
+<li>list拥有一段不连续的内存空间，如果需要高效的插入和删除，而不关心随机访问，则应使用list。</li>
+</ul>
+<h3 id="STL中迭代器的作用，有指针为何还要迭代器"><a href="#STL中迭代器的作用，有指针为何还要迭代器" class="headerlink" title="STL中迭代器的作用，有指针为何还要迭代器"></a>STL中迭代器的作用，有指针为何还要迭代器</h3><p>迭代器给我们提供了一种 不用知道聚合物具体实现的方式，而可以按序访问聚合物中元素的方式，使得算法和数据结构分离。</p>
+<p>他本质是类模板，表现的像指针，重载了 ++ – 和 -&gt;等操作，封装了原生指针，更像智能指针，可以根据不同的数据结构类型来实现不同的++ –等操作。迭代器返回的是对象的引用而不是对象的值。</p>
+<h3 id="STL迭代器是怎么删除元素"><a href="#STL迭代器是怎么删除元素" class="headerlink" title="STL迭代器是怎么删除元素"></a>STL迭代器是怎么删除元素</h3><p>考察的是迭代器失效的问题。</p>
+<h3 id="找到数组中每个元素后面比他大的第一个数"><a href="#找到数组中每个元素后面比他大的第一个数" class="headerlink" title="找到数组中每个元素后面比他大的第一个数"></a>找到数组中每个元素后面比他大的第一个数</h3><p>单调栈   <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">下一个更大元素 II</a></p>
+<h3 id="STL中resize和reserve区别"><a href="#STL中resize和reserve区别" class="headerlink" title="STL中resize和reserve区别"></a>STL中resize和reserve区别</h3><p>resize 和 size 参数相关，reserve函数和 capacity参数相关。</p>
+<ul>
+<li>size指容器当前拥有的元素个数，它代表的空间是初始化了的 可以直接访问</li>
+<li>capacity则指容器在必须分配新存储空间之前可以存储的元素总数，只是空间预分配，未初始化，不可访问</li>
+</ul>
+<p>调用 resize(n) 函数后，容器的 size = n；  如果 n 不超过最大容量capacity，则不需要重新分配内存，capacity不变；反之则重新分配内存 capacity = size；</p>
+<p>调用 reserve(n) 函数后，如果 n  不大于 capacity ，capacity不变，否则重新分配 n 的内存使得capcity等于n，同时将之前 size 的内容拷贝过来。 </p>
+<h3 id="C-STL-的内存优化"><a href="#C-STL-的内存优化" class="headerlink" title="C++ STL 的内存优化"></a>C++ STL 的内存优化</h3><h4 id="二级配置器结构"><a href="#二级配置器结构" class="headerlink" title="二级配置器结构"></a>二级配置器结构</h4><p>STL 内存管理使用二级内存配置器</p>
+<ol>
+<li><p>第一级配置器。当分配的内存数大于128字节时，直接使用 malloc free realloc 等函数执行实际的内存分配，和释放等操作。</p>
+</li>
+<li><p>第二级配置器，当分配的内存少于128字节时，使用内存池管理。又称之次层配置（sub-allocation）。每次配置一大块内存，并维护对应的16个空闲链表（free-list）。下次若有相同大小的内存需求，则直接从free-list中取。如果有小额区块被释放，则由配置器回收到free-list中。</p>
+<p> a. 通过size找到合适的空闲链表，如果链表不为空，则直接返回第一个node</p>
+<p> b. 如果链表为空，则使用 blockAlloc 请求分配 node ，即从图中的 start_free-end_free 中的空闲区域再划分出多个连续的node出来。</p>
+<ul>
+<li>果有足够一个node 的空间，就尽可能的分配多的node （最多20）个，将一个Node返回，其他的添加到空闲链表中</li>
+<li>如果一个多的空闲node都没有，再次向操作系统请求分配内存<ul>
+<li>若分配成功 再次使用 b 步骤，分配 block</li>
+<li>若分配失败，循环各个自由链表寻找空间，如果寻找到了，再次进行 b 过程，否则抛出异常</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>用户调用deallocate释放内存空间，如果要求释放的内存空间大于128bytes，直接调用free。否则按照其大小找到合适的自由链表，并将其插入</p>
+</li>
+</ol>
+<p>上述步骤有三个关键函数：</p>
+<ol>
+<li><p>空间配置函数<code>allocate</code>：</p>
+<p> 检查申请的空间大小，大于128字节就调用一级空间配置器使用malloc分配，否则就调用二级空间配置器，从空闲链表中拿数据块。如果空闲链表为空，则调用 refill 函数重新填充空闲链表。</p>
+</li>
+<li><p>重新填充空闲链表 <code>refill </code></p>
+<p> 在使用 allocate 配置空闲空间时，如果对应的空闲链表中没有可用的块（Node）。那么就会调用该函数充填空闲链表。新的空间取自内存池。默认取出 20 个数据块，如果内存池的空间不够，能取多少取多少。从内存池中取空闲块给空闲链表是由函数  <code>chunk_alloc</code>完成</p>
+</li>
+<li><p>从内存池取空闲块<code>chunk_alloc</code></p>
+<p> 首先根据<strong>end_free - start_free</strong>来判断内存池中的剩余空间是否足以调出nobjs个大小为size的数据块出去。如果内存连一个数据块的空间都无法供应，需要用 malloc 取堆中申请内存。假如山穷水尽，整个系统的堆空间都不够用了，malloc失败，那么chunk_alloc会从空闲链表中找是否有大的数据块，然后将该数据块的空间分给内存池（这个数据块会从链表中去除）。</p>
+</li>
+<li><p>空间释放函数 <code>deallocate</code></p>
+</li>
+<li><p>首先先要检查释放数据块的大小，如果大于128字节就调用第一级配置器，小于128字节则根据数据块的大小来判断回收后的空间会被插入到哪个空闲链表。</p>
+</li>
+</ol>
+<p><img src="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg" alt="preview"></p>
+<img src="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom: 50%;" />
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++类和数据抽象</title>
+    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%B1%BB%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/</url>
+    <content><![CDATA[<p> 经C++类和数据抽象</p>
+<span id="more"></span>
+
+<h3 id="C-中类成员的访问权限"><a href="#C-中类成员的访问权限" class="headerlink" title="C++中类成员的访问权限"></a>C++中类成员的访问权限</h3><p>C++ 通过  pubilc, protected, private 三个关键字来控制成员的访问权限。</p>
+<ul>
+<li>在类的内部，可以随意访问三种属性的变量</li>
+<li>在派生类中，不可以访问父类 私有的 成员</li>
+<li>在类的外部，只能通过对象访问成员，并且只能访问public 属性的成员</li>
+</ul>
+<h3 id="C-中-struct-和class的区别"><a href="#C-中-struct-和class的区别" class="headerlink" title="C++中 struct 和class的区别"></a>C++中 struct 和class的区别</h3><ul>
+<li>c++ 可以用 struct  和 class 定义类，都可以用来继承，但是 struct 默认是公开的属性，而class默认成员是私有的类型。</li>
+<li>class 这个关键字还可以使用 模板，模板类   而 struct 不能</li>
+</ul>
+<h3 id="C-类内可以定义引用数据成员吗"><a href="#C-类内可以定义引用数据成员吗" class="headerlink" title="C++类内可以定义引用数据成员吗"></a>C++类内可以定义引用数据成员吗</h3><p>可以，必须通过成员函数初始化列表初始化。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ref</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">// 构造函数形参为传值，不能保证正确性</span></span><br><span class="line">        <span class="comment">// Ref (int target) :myref(target) &#123;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 函数体对引用赋值，编译错误：引用未初始化</span></span><br><span class="line">        <span class="comment">// Ref (int &amp;target)  &#123;</span></span><br><span class="line">            <span class="comment">// myref = target;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果成员为变量为引用类型，那么构造函数的参数为引用类型  这个好理解 因为你都是引用外界的数据，如果用值传递，进来的只是个临时值，再对临时值做引用，显然有问题。</span></span><br><span class="line">        <span class="comment">// 引用必须在成员初始化列表里面初始化，不能在函数体里面初始化。构造函数的参数列表在构造函数之前执行</span></span><br><span class="line">        <span class="comment">// 在函数体里面修改myref，相当于赋值，显然引用不能赋值</span></span><br><span class="line">        <span class="built_in">Ref</span> (<span class="keyword">int</span> &amp;target) :<span class="built_in">myref</span>(target) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Ref constructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">printRef</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;myref is: &quot;</span> &lt;&lt; myref &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">Ref</span> () &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> &amp;myref;</span><br><span class="line">        <span class="comment">/* data */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="右值引用，跟左值有什么区别"><a href="#右值引用，跟左值有什么区别" class="headerlink" title="右值引用，跟左值有什么区别"></a>右值引用，跟左值有什么区别</h3><p>左值：指可以取地址的，或者有具体名字的变量/对象</p>
+<ul>
+<li>左值可以被赋值，寻址，可变</li>
+</ul>
+<p>右值：c98中包含纯右值，即临时值，和将亡值，通过右值引用绑定的右值，一般右值都是临时的，表达式结束右值便不再存在（右值引用可以延续右值的生命周期）</p>
+<ul>
+<li>右值不可变，不可寻址</li>
+</ul>
+<p>右值引用是c11的新特性，它主要有两个方面的优势：</p>
+<ol>
+<li>右值引用可以减少拷贝构造或者赋值构造中 对临时变量的 重复拷贝。</li>
+<li>能够更简洁明确的定义泛函数</li>
+</ol>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++11新特性</title>
+    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++11%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p>面经C++11新特性</p>
+<span id="more"></span>
+
+<h3 id="请问C-11有哪些新特性？"><a href="#请问C-11有哪些新特性？" class="headerlink" title="请问C++11有哪些新特性？"></a>请问C++11有哪些新特性？</h3><ol>
+<li>新增 auto 关键字，可以根据变量的初始值推断变量类型，但是对于函数的参数和数组的类型不能推断</li>
+<li>新增 nullptr 关键字，可以代表任意类型的指针。C中的 NULL 为宏定义0，在函数重载的时候可能会有歧义，int  or  指针？</li>
+<li>新增 share_ptr, weak_ptr 等智能指针</li>
+<li>新增了右值引用 &amp;&amp; ，实现了语义移动和完美转发的功能，大大减少了临时变量的重复构造析构的次数，提高了性能</li>
+<li>新增了STL 容器 array  tuple</li>
+<li>支持使用初始化列表对类进行初始化 好像只有构造函数支持初始化列表</li>
+<li>atomic 原子操作用于多线程资源互斥操作</li>
+</ol>
+<p>… </p>
+<h3 id="详细介绍一下C-11中的可变参数模板"><a href="#详细介绍一下C-11中的可变参数模板" class="headerlink" title="详细介绍一下C++11中的可变参数模板"></a>详细介绍一下C++11中的可变参数模板</h3><p>c++11的可变参数模板对参数进行了高度泛化，可以表示任意数目、任意类型的参数，其语法为在 class 或者 typename 后面带上省略号。省略号作用如下：</p>
+<ul>
+<li><strong>声明</strong>一个包含0到任意个模板的参数的参数包</li>
+<li>在模板定义的右边，可以将参数包<strong>展成一个个独立的参数</strong></li>
+</ul>
+<p>C++11可以使用递归函数的方式展开参数包，获得可变参数的每个值。<strong>通过递归函数展开参数包，需要提供一个参数包展开的函数和一个递归终止函数</strong>。例如。参数包Args …在展开的过程中递归调用自己，每调用一次参数包中的参数就会少一个，直到所有参数都展开为止。当没有参数时就会调用非模板函数printf终止递归过程。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;end&quot;</span> &lt;&lt; endl; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T a, Args ...rest)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">print</span>(rest...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="详细介绍一下C-11右值引用"><a href="#详细介绍一下C-11右值引用" class="headerlink" title="详细介绍一下C++11右值引用"></a>详细介绍一下C++11右值引用</h3><h3 id="详细介绍一下C-11-lambda新特性"><a href="#详细介绍一下C-11-lambda新特性" class="headerlink" title="详细介绍一下C++11 lambda新特性"></a>详细介绍一下C++11 lambda新特性</h3>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++基础知识2</title>
+    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8F-c++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/</url>
+    <content><![CDATA[<p> 面经 C++ 基础知识</p>
+<span id="more"></span>
+
+<h3 id="介绍fork函数"><a href="#介绍fork函数" class="headerlink" title="介绍fork函数"></a>介绍fork函数</h3><p>创建一个和当前进程映像一样的<strong>进程</strong>可以通过fork( )系统调用。成功调用fork 会返回一个大于等于0 的数，对于主进程，返回的是子进程的pid，子进程中返回的是0；可以通过if判断来确定是在子进程还是父进程中，然后执行不同的功能，两个进程执行的先后顺序完全由系统调度决定。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#inclde<span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="fork-wait-exec函数"><a href="#fork-wait-exec函数" class="headerlink" title="fork wait  exec函数"></a>fork wait  exec函数</h3><h3 id="select-函数"><a href="#select-函数" class="headerlink" title="select 函数"></a>select 函数</h3>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++编译和底层</title>
+    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%BC%96%E8%AF%91%E5%92%8C%E5%BA%95%E5%B1%82/</url>
+    <content><![CDATA[<p> 面经 C++ 编译和底层</p>
+<span id="more"></span>
+
+<h3 id="C-源文件从文本到可执行文件经历的过程"><a href="#C-源文件从文本到可执行文件经历的过程" class="headerlink" title="C++源文件从文本到可执行文件经历的过程"></a>C++源文件从文本到可执行文件经历的过程</h3><p>四个过程。</p>
+<ol>
+<li>预处理阶段：对源代码文件中文件包含关系（头文件）、预编译语句（宏定义）进行分析和替换，生成预编译 .i 文件</li>
+<li>编译阶段：将经过预处理后的预编译文件转换成特定汇编代码，生成汇编文件</li>
+<li>汇编阶段：将编译阶段生成的汇编文件转化成机器码，生成可重定位目标文件</li>
+<li>链接阶段：将多个目标文件及所需要的库连接成最终的可执行目标文件</li>
+</ol>
+<h3 id="include尖括号和双引号的区别"><a href="#include尖括号和双引号的区别" class="headerlink" title="#include尖括号和双引号的区别"></a>#include尖括号和双引号的区别</h3><p>编译器预处理阶段查找头文件的路径不一样。</p>
+<ul>
+<li>尖括号：直接从系统目录里查找 头文件。系统目录主要有：编译时 -I 参数指定的头文件搜索路径，系统变量<code>CPLUS_INCLUDE_PATH</code>/<code>C_INCLUDE_PATH</code>指定的头文件路径 </li>
+<li>双引号：先从当前目录搜索头文件，然后从系统目录中搜索</li>
+</ul>
+<h3 id="include头文件的顺序"><a href="#include头文件的顺序" class="headerlink" title="include头文件的顺序"></a>include头文件的顺序</h3><h3 id="malloc原理，以及系统调用"><a href="#malloc原理，以及系统调用" class="headerlink" title="malloc原理，以及系统调用"></a>malloc原理，以及系统调用</h3><p>Malloc函数用于动态分配内存。为了减少内存碎片和系统调用的开销，malloc其采用内存池的方式，先申请大块内存作为堆区，然后将堆区分为多个内存块，以块作为内存管理的基本单位。当用户申请内存时，直接从堆区分配一块合适的空闲块。Malloc采用隐式链表结构将堆区分成连续的、大小不一的块，包含已分配块和未分配块；同时malloc采用显示链表结构来管理所有的空闲块，即使用一个双向链表将空闲块连接起来，每一个空闲块记录了一个连续的、未分配的地址。</p>
+<p>当进行内存分配时，Malloc会通过显式链表，根据待分配内存大小在直接从合适的链表中寻找空闲块；当进行内存合并时，malloc采用边界标记法，根据每个块的前后块是否已经分配来决定是否进行块合并。</p>
+<p>Malloc在申请内存时，一般会通过brk或者mmap系统调用进行申请。其中当申请内存小于128K时，会使用系统函数brk在堆区中分配；而当申请内存大于128K时，会使用系统函数mmap在映射区分配。</p>
+<h3 id="C-的内存管理"><a href="#C-的内存管理" class="headerlink" title="C++的内存管理"></a>C++的内存管理</h3><p>对于32位CPU可寻址4G线性空间，其中0-3G是用户态空间，3-4G是内核空间，不同进程相同的逻辑地址会映射到不同的物理地址中,其逻辑地址其划分如下: (前三个为静态区 后 三个为动态区)</p>
+<ul>
+<li>代码段：用于存放代码和字符常量</li>
+<li>数据段：用于存放已经初始化的全局变量和局部静态变量</li>
+<li>bss段：用于存放未初始化的全局变量和局部静态变量，或初始化未0的全局局部静态变量</li>
+<li>堆区：用于程序运行过程中，用户自行动态分配的管理的内存区域</li>
+<li>栈区：用于函数调用时，存放函数的局部变量，函数返回地址，返回值等，由操作系统分配和管理。在创建进程时会有一个最大栈大小</li>
+<li>mmap映射区：用于存储动态库等文件映射，同时malloc也可以通过系统调用申请大内存</li>
+</ul>
+<h3 id="如何判断内存泄漏"><a href="#如何判断内存泄漏" class="headerlink" title="如何判断内存泄漏"></a>如何判断内存泄漏</h3><p>内存泄漏通常是由于调用了malloc/new等内存申请的操作，但是缺少了对应的free/delete。为了判断内存是否泄露，我们一方面可以使用linux环境下的内存泄漏检查工具Valgrind,另一方面我们在写代码时可以添加内存申请和释放的统计功能，统计当前申请和释放的内存是否一致，以此来判断内存是否泄露。</p>
+<p>内存泄漏的分类：</p>
+<ol>
+<li>堆内存泄漏 （Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释放，那么此后这块内存将不会被使用，就会产生Heap Leak.</li>
+<li>系统资源泄露（Resource Leak）。主要指程序使用系统分配的资源比如 <strong>Bitmap,handle ,SOCKET</strong>等没有使用相应的函数释放掉，导致系统资源的浪费，严重可导致系统效能降低，系统运行不稳定。</li>
+<li>没有将基类的析构函数定义为虚函数。当基类指针指向子类对象时，如果基类的析构函数不是virtual，那么子类的析构函数将不会被调用，子类的资源没有正确是释放，因此造成内存泄露。</li>
+</ol>
+<h3 id="什么时候会发生段错误"><a href="#什么时候会发生段错误" class="headerlink" title="什么时候会发生段错误"></a>什么时候会发生段错误</h3><p>段错误通常发生在访问非法内存地址的时候，具体来说分为以下几种情况：</p>
+<ul>
+<li>使用野指针</li>
+<li>试图修改字符串常量的内容</li>
+</ul>
+<h3 id="说一下共享内存相关api"><a href="#说一下共享内存相关api" class="headerlink" title="说一下共享内存相关api"></a>说一下共享内存相关api</h3><p>Linux允许不同进程访问同一个逻辑内存，提供了一组API，头文件在<code>sys/shm.h</code>中。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 新建共享内存: </span></span><br><span class="line"><span class="comment">key：共享内存键值，可以理解为共享内存的唯一性标记。</span></span><br><span class="line"><span class="comment">size：共享内存大小</span></span><br><span class="line"><span class="comment">shmflag：创建进程和其他进程的读写权限标识。</span></span><br><span class="line"><span class="comment">返回值：相应的共享内存标识符，失败返回-1*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmget</span><span class="params">(<span class="keyword">key_t</span> key,<span class="keyword">size_t</span> size,<span class="keyword">int</span> shmflg)</span></span>;  <span class="comment">// 新建共享内存</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 连接共享内存到当前进程的地址空间shmat</span></span><br><span class="line"><span class="comment">shm_id：共享内存标识符</span></span><br><span class="line"><span class="comment">shm_addr：指定共享内存连接到当前进程的地址，通常为0，表示由系统来选择。</span></span><br><span class="line"><span class="comment">shmflg：标志位</span></span><br><span class="line"><span class="comment">返回值：指向共享内存第一个字节的指针，失败返回-1*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shm_id,<span class="keyword">const</span> <span class="keyword">void</span> *shm_addr,<span class="keyword">int</span> shmflg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 当前进程分离共享内存shmdt */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmdt</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *shmaddr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 控制共享内存shmctl</span></span><br><span class="line"><span class="comment">和信号量的semctl函数类似，控制共享内存</span></span><br><span class="line"><span class="comment">shm_id：共享内存标识符</span></span><br><span class="line"><span class="comment">command: 有三个值   IPC_STAT:获取共享内存的状态，把共享内存的shmid_ds结构复制到buf中。</span></span><br><span class="line"><span class="comment">                   IPC_SET:设置共享内存的状态，把buf复制到共享内存的shmid_ds结构。</span></span><br><span class="line"><span class="comment">                   IPC_RMID:删除共享内存</span></span><br><span class="line"><span class="comment">				  buf：共享内存管理结构体。*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmctl</span><span class="params">(<span class="keyword">int</span> shm_id,<span class="keyword">int</span> command,struct shmid_ds *buf)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="new-和-malloc-的区别"><a href="#new-和-malloc-的区别" class="headerlink" title="new 和 malloc 的区别"></a>new 和 malloc 的区别</h3><ol>
+<li>new 是 c++ 的一个关键字，而 malloc 是函数。</li>
+<li>new 会根据对象的大小自动分配相同大小的内存，并且会默认调用类的构造函数，而malloc只能自己使用sizeof设定需要分配大小</li>
+<li>new分配的后返回的是指向类的指针，而 malloc返回的是void指针，需要自行进行类型转换</li>
+<li>new分配使用delete释放，malloc与之对应的是free</li>
+<li>new如果内存申请失败会抛出异常，而malloc则返回空指针</li>
+<li>malloc分配的内存不够时，可以调用 relloc 进行扩容，而new没有这个操作</li>
+<li>申请数组时： new[]一次分配所有内存，多次调用构造函数，搭配使用delete[]，delete[]多次调用析构函数，销毁数组中的每个对象。而malloc则只能sizeof(int) * n。</li>
+</ol>
+<h3 id="C-如何处理内存泄漏"><a href="#C-如何处理内存泄漏" class="headerlink" title="C++如何处理内存泄漏"></a>C++如何处理内存泄漏</h3><p>使用varglind，mtrace检测</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -2260,6 +2260,36 @@
       </tags>
   </entry>
   <entry>
+    <title>相关的编程题汇总-回朔</title>
+    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%9B%9E%E6%9C%94/</url>
+    <content><![CDATA[<p>记录了回朔类的题目，常见的 八皇后问题，排列组合等</p>
+<span id="more"></span>
+
+<h4 id="复原IP地址"><a href="#复原IP地址" class="headerlink" title="复原IP地址"></a><a href="https://leetcode-cn.com/problems/restore-ip-addresses/">复原IP地址</a></h4><h4 id="全排列-II"><a href="#全排列-II" class="headerlink" title="全排列 II"></a><a href="https://leetcode-cn.com/problems/permutations-ii/">全排列 II</a></h4><p>​        使用 swap 的方法全排列 去重的关键在于两点 一是和首元素相同的 不再swap  而是swap过的元素不再swap</p>
+<h4 id="组合总和"><a href="#组合总和" class="headerlink" title="组合总和"></a><a href="https://leetcode-cn.com/problems/combination-sum/">组合总和</a></h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; re;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; candidates, vector&lt;<span class="keyword">int</span>&gt;&amp; se, <span class="keyword">int</span> tg, <span class="keyword">int</span> sel)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tg == <span class="number">0</span>)&#123;</span><br><span class="line">            re.<span class="built_in">push_back</span>(se);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sel; i &lt; candidates.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tg &lt; candidates[i])  <span class="keyword">continue</span>;</span><br><span class="line">            se.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">            <span class="built_in">dfs</span>(candidates, se, tg - candidates[i], i);   <span class="comment">////  i  关键  第一次 取 i 了之后  后面取的第二个 第三个...数 都只能从 第i 以及 i 之后开始取  比如 第一次取得第 2个数  那么第二次 就只能在 第二个 以及 第二个之后的数中取，因为 第二次再取第一个数的话 ，就 和 第一次取的第一个的情况重复</span></span><br><span class="line">            se.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="built_in">dfs</span>(candidates, tmp, target, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="组合总和-II"><a href="#组合总和-II" class="headerlink" title="组合总和 II"></a><a href="https://leetcode-cn.com/problems/combination-sum-ii/">组合总和 II</a></h4><p>​        相对上一个题 去重的关键是 要 先 排序 相同的元素在一起 ，才方便去重。</p>
+<h4 id="子集"><a href="#子集" class="headerlink" title="子集"></a><a href="https://leetcode-cn.com/problems/subsets/">子集</a></h4><p>思路：对于每个位置的元素 由选和不选两种情况，选的话，就 push_back到缓存数组中，然后从下一个元素递归。如果不选当前元素，就要pop出来，再对从下一个元素递归。同理下一个元素也有选和不选两种状态。最终结束的标志就是 遍历完整个数组长度。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; re;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> sel, vector&lt;<span class="keyword">int</span>&gt;&amp; nums, vector&lt;<span class="keyword">int</span>&gt;&amp; ans)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sel &gt;= nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            re.<span class="built_in">push_back</span>(ans);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">               </span><br><span class="line">        ans.<span class="built_in">push_back</span>(nums[sel]);</span><br><span class="line">        <span class="built_in">dfs</span>(sel+<span class="number">1</span>, nums, ans);</span><br><span class="line">        ans.<span class="built_in">pop_back</span>();</span><br><span class="line">        <span class="built_in">dfs</span>(sel+<span class="number">1</span>, nums, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">subsets</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, nums, ans);</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="括号生成"><a href="#括号生成" class="headerlink" title="括号生成"></a><a href="https://leetcode-cn.com/problems/generate-parentheses/">括号生成</a></h4><p>和上面的题很类似，就没通过回朔的方法，枚举当前位置是 左括号  or   右括号，分别进行递归。但是要满足有效的条件，就额外增加条件约束，即 只有左括号数量大于右括号的数量的时候才能再添加右括号，当左括号数量大于整体数量一半的时候 不能再添加左括号。</p>
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>算法思想</category>
+        <category>算法思想</category>
+        <category>�㷨˼��</category>
+        <category>�㷨˼��</category>
+        <category>�㷨˼��</category>
+        <category>�㷨˼��</category>
+        <category>�㷨˼��</category>
+      </categories>
+      <tags>
+        <tag>刷题</tag>
+        <tag>回朔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>相关的编程题汇总-双指针</title>
     <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%8F%8C%E6%8C%87%E9%92%88/</url>
     <content><![CDATA[<p>记录了解题中双指针方法典型的题目，例如二分法中的首位指针，图的环判定中的快慢指针，滑窗方法等</p>
@@ -2323,36 +2353,6 @@
       <tags>
         <tag>刷题</tag>
         <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>相关的编程题汇总-回朔</title>
-    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/leecode_%E5%9B%9E%E6%9C%94/</url>
-    <content><![CDATA[<p>记录了回朔类的题目，常见的 八皇后问题，排列组合等</p>
-<span id="more"></span>
-
-<h4 id="复原IP地址"><a href="#复原IP地址" class="headerlink" title="复原IP地址"></a><a href="https://leetcode-cn.com/problems/restore-ip-addresses/">复原IP地址</a></h4><h4 id="全排列-II"><a href="#全排列-II" class="headerlink" title="全排列 II"></a><a href="https://leetcode-cn.com/problems/permutations-ii/">全排列 II</a></h4><p>​        使用 swap 的方法全排列 去重的关键在于两点 一是和首元素相同的 不再swap  而是swap过的元素不再swap</p>
-<h4 id="组合总和"><a href="#组合总和" class="headerlink" title="组合总和"></a><a href="https://leetcode-cn.com/problems/combination-sum/">组合总和</a></h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; re;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; candidates, vector&lt;<span class="keyword">int</span>&gt;&amp; se, <span class="keyword">int</span> tg, <span class="keyword">int</span> sel)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tg == <span class="number">0</span>)&#123;</span><br><span class="line">            re.<span class="built_in">push_back</span>(se);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = sel; i &lt; candidates.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tg &lt; candidates[i])  <span class="keyword">continue</span>;</span><br><span class="line">            se.<span class="built_in">push_back</span>(candidates[i]);</span><br><span class="line">            <span class="built_in">dfs</span>(candidates, se, tg - candidates[i], i);   <span class="comment">////  i  关键  第一次 取 i 了之后  后面取的第二个 第三个...数 都只能从 第i 以及 i 之后开始取  比如 第一次取得第 2个数  那么第二次 就只能在 第二个 以及 第二个之后的数中取，因为 第二次再取第一个数的话 ，就 和 第一次取的第一个的情况重复</span></span><br><span class="line">            se.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="built_in">dfs</span>(candidates, tmp, target, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="组合总和-II"><a href="#组合总和-II" class="headerlink" title="组合总和 II"></a><a href="https://leetcode-cn.com/problems/combination-sum-ii/">组合总和 II</a></h4><p>​        相对上一个题 去重的关键是 要 先 排序 相同的元素在一起 ，才方便去重。</p>
-<h4 id="子集"><a href="#子集" class="headerlink" title="子集"></a><a href="https://leetcode-cn.com/problems/subsets/">子集</a></h4><p>思路：对于每个位置的元素 由选和不选两种情况，选的话，就 push_back到缓存数组中，然后从下一个元素递归。如果不选当前元素，就要pop出来，再对从下一个元素递归。同理下一个元素也有选和不选两种状态。最终结束的标志就是 遍历完整个数组长度。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; re;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> sel, vector&lt;<span class="keyword">int</span>&gt;&amp; nums, vector&lt;<span class="keyword">int</span>&gt;&amp; ans)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sel &gt;= nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            re.<span class="built_in">push_back</span>(ans);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">               </span><br><span class="line">        ans.<span class="built_in">push_back</span>(nums[sel]);</span><br><span class="line">        <span class="built_in">dfs</span>(sel+<span class="number">1</span>, nums, ans);</span><br><span class="line">        ans.<span class="built_in">pop_back</span>();</span><br><span class="line">        <span class="built_in">dfs</span>(sel+<span class="number">1</span>, nums, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">subsets</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, nums, ans);</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="括号生成"><a href="#括号生成" class="headerlink" title="括号生成"></a><a href="https://leetcode-cn.com/problems/generate-parentheses/">括号生成</a></h4><p>和上面的题很类似，就没通过回朔的方法，枚举当前位置是 左括号  or   右括号，分别进行递归。但是要满足有效的条件，就额外增加条件约束，即 只有左括号数量大于右括号的数量的时候才能再添加右括号，当左括号数量大于整体数量一半的时候 不能再添加左括号。</p>
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>算法思想</category>
-        <category>算法思想</category>
-        <category>�㷨˼��</category>
-        <category>�㷨˼��</category>
-        <category>�㷨˼��</category>
-        <category>�㷨˼��</category>
-        <category>�㷨˼��</category>
-      </categories>
-      <tags>
-        <tag>刷题</tag>
-        <tag>回朔</tag>
       </tags>
   </entry>
   <entry>
@@ -2428,6 +2428,16 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2021/05/13/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95_tmp/</url>
+    <content><![CDATA[<hr>
+<p>title: 典型算法-排序算法<br>categories: </p>
+<ul>
+<li>算法和数据结构</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>典型算法-排序算法</title>
     <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>整理、对比了常用的排序算法，插入排序，快速排序….</p>
@@ -2479,16 +2489,6 @@
         <tag>典型算法</tag>
         <tag>排序算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/05/13/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95_tmp/</url>
-    <content><![CDATA[<hr>
-<p>title: 典型算法-排序算法<br>categories: </p>
-<ul>
-<li>算法和数据结构</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>C++_bind_function_package_task</title>
