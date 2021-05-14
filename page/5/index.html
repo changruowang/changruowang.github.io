@@ -196,121 +196,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E9%A1%B9%E7%9B%AE%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%8D%E7%94%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E9%A1%B9%E7%9B%AE%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%8D%E7%94%9F/" class="post-title-link" itemprop="url">项目知识点衍生</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:09:28" itemprop="dateCreated datePublished" datetime="2021-05-11T10:09:28+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 16:17:37" itemprop="dateModified" datetime="2021-05-14T16:17:37+08:00">2021-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h2 id="噪声回归项目"><a href="#噪声回归项目" class="headerlink" title="噪声回归项目"></a>噪声回归项目</h2><p>面试官都对这个项目很感兴趣</p>
-<ol>
-<li><p>mobile-net-v3的结构</p>
-</li>
-<li><p>知道的分类网络</p>
-</li>
-</ol>
-<h2 id="图像提亮任务"><a href="#图像提亮任务" class="headerlink" title="图像提亮任务"></a>图像提亮任务</h2><h3 id="直方图均衡化-和-匹配"><a href="#直方图均衡化-和-匹配" class="headerlink" title="直方图均衡化 和 匹配"></a>直方图均衡化 和 匹配</h3><p><a href="../%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96.md">直方图均衡化</a></p>
-<h3 id="BN-LN"><a href="#BN-LN" class="headerlink" title="BN, LN"></a>BN, LN</h3><p>计算一个batch 样本的均值方差，然后将样本根据均值方差归一化，最后乘上 缩放和平移因子，这两个就是BN层的参数。测试的时候直接使用训练的时候记录的均值方差。</p>
-<p>优点：BN层可以将分布拉到 非饱和区域，减少了梯度弥散；  Batchnorm本身上也是一种正则的方式（主要缓解了梯度消失），可以代替其他正则方式如dropout等。</p>
-<p>缺点：batch太小 计算的均值和方差不稳定</p>
-<ol>
-<li>UNET 的结构，以及是否有改动</li>
-<li>增强的损失函数</li>
-</ol>
-<p>BN的性能很依赖于batch size的大小，而IN的原理则是将某一层的激活值归一化后缩放，如果btch_size是4 那么平均和方差就应该是一个4维的向量。因此LN的性能与bz无关。LN的均值方差在训练个测试的时候都会用到。同理 IN 就是对一个batch中的一个通道的特征图计算均值方差然后归一化，GN是介于IN和LN之间的操作，将通道分组归一化。</p>
-<h3 id="SSIM"><a href="#SSIM" class="headerlink" title="SSIM"></a>SSIM</h3><p>分别以局部窗口中 的 均值 代表亮度 方差 代表对比度，协方差 代表结构相似性，三个方面来衡量两幅图的相似性。</p>
-<ol start="3">
-<li>根据mask的分割，还问了分割算法</li>
-<li>GAN有没有采用特殊的训练技巧</li>
-<li>知道的注意力机制</li>
-<li>了解过transformer嘛</li>
-</ol>
-<h2 id="红外图像增强任务"><a href="#红外图像增强任务" class="headerlink" title="红外图像增强任务"></a>红外图像增强任务</h2><h3 id="知道的图像去噪方法"><a href="#知道的图像去噪方法" class="headerlink" title="知道的图像去噪方法"></a>知道的图像去噪方法</h3><p>空域特征去噪：双边滤波，均值滤波，指导滤波，非局部均值滤波，NLTV，TV</p>
-<p>变换域：BM3D</p>
-<h3 id="知道的图像模糊的方法"><a href="#知道的图像模糊的方法" class="headerlink" title="知道的图像模糊的方法"></a>知道的图像模糊的方法</h3><h3 id="双边滤波的原理"><a href="#双边滤波的原理" class="headerlink" title="双边滤波的原理"></a>双边滤波的原理</h3><h3 id="代码C-实现的时候用了什么"><a href="#代码C-实现的时候用了什么" class="headerlink" title="代码C++实现的时候用了什么"></a>代码C++实现的时候用了什么</h3><h3 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h3><h3 id="泊松方程"><a href="#泊松方程" class="headerlink" title="泊松方程"></a>泊松方程</h3><p>泊松方程的本质就是 通过二阶微分值求解每个点的原始像素值，前提是边界值已知，求解问题就是一个线性方程组。二阶微分的计算可以通过拉普拉斯算子计算，中间为-4，上下左右分别为1的一个卷积核。</p>
-<p>泊松方程的求解是使用的 DCT 离散正弦变换加速的，c++代码使用了 fftw3库，自带多线程的api</p>
-<h2 id="基于YOLO-V3的军用车辆检测任务"><a href="#基于YOLO-V3的军用车辆检测任务" class="headerlink" title="基于YOLO V3的军用车辆检测任务"></a>基于YOLO V3的军用车辆检测任务</h2><h3 id="量化的基本原理"><a href="#量化的基本原理" class="headerlink" title="量化的基本原理"></a>量化的基本原理</h3><p><a href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/%E6%A8%A1%E5%9E%8Bint8%E9%87%8F%E5%8C%96.md">模型int8量化.</a></p>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><ol>
-<li><p>重载和继承</p>
-</li>
-<li><p>知道哪些智能指针</p>
-</li>
-</ol>
-<h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><ol>
-<li>线程和进程区别</li>
-<li>知道进程通信的方法嘛，线程通信呢</li>
-<li>互斥锁和同步锁</li>
-</ol>
-<h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2><p>包含正数和负数的数组，求乘积最大连续子数组</p>
-<h2 id="研究的领域"><a href="#研究的领域" class="headerlink" title="研究的领域"></a>研究的领域</h2><h3 id="对图像增强这项任务的理解"><a href="#对图像增强这项任务的理解" class="headerlink" title="对图像增强这项任务的理解"></a>对图像增强这项任务的理解</h3><h3 id="和其他-low-level-有什么区别"><a href="#和其他-low-level-有什么区别" class="headerlink" title="和其他 low-level 有什么区别"></a>和其他 low-level 有什么区别</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7conda%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1090,6 +975,91 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/01/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/01/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">线程池代码解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-01 12:03:57" itemprop="dateCreated datePublished" datetime="2021-05-01T12:03:57+08:00">2021-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-14 18:01:39" itemprop="dateModified" datetime="2021-05-14T18:01:39+08:00">2021-05-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">个人小项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>网上大佬用 C++11 写的线程池代码，和自己的阅读笔记</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/01/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1163,14 +1133,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
