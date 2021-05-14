@@ -25,19 +25,19 @@
   <meta name="description" content="详细阅读了别人项目中的图像预处理pip line 的工程实现，使用到了多缓冲，多线程等知识点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多缓冲多线程代码阅读笔记">
-<meta property="og:url" content="http://example.com/2021/05/05/C++/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="http://example.com/2021/05/05/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
 <meta property="og:description" content="详细阅读了别人项目中的图像预处理pip line 的工程实现，使用到了多缓冲，多线程等知识点。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-05T12:44:03.000Z">
-<meta property="article:modified_time" content="2021-05-13T09:13:18.800Z">
+<meta property="article:modified_time" content="2021-05-14T10:02:23.833Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="应用">
 <meta property="article:tag" content="多线程">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/05/05/C++/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="http://example.com/2021/05/05/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -202,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/05/C++/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/05/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86%E7%BB%84%E5%90%88%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-13 17:13:18" itemprop="dateModified" datetime="2021-05-13T17:13:18+08:00">2021-05-13</time>
+                <time title="修改时间：2021-05-14 18:02:23" itemprop="dateModified" datetime="2021-05-14T18:02:23+08:00">2021-05-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">个人小项目</span></a>
                 </span>
             </span>
 
@@ -308,8 +312,8 @@
       <i class="fa fa-chevron-left"></i> 设计模式-创建型-工厂方法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/05/08/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/md%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/" rel="next" title="">
-       <i class="fa fa-chevron-right"></i>
+    <a href="/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/python%E8%AF%AD%E6%B3%95/" rel="next" title="python常用语法">
+      python常用语法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -386,20 +390,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
