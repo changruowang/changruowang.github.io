@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="记录了解题中需要用贪心思路的题目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相关的编程题汇总-贪心算法">
+<meta property="og:url" content="http://xxxxx.com/posts/54399/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="记录了解题中需要用贪心思路的题目。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203047.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203050.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203056.png">
+<meta property="article:published_time" content="2021-05-11T02:11:11.000Z">
+<meta property="article:modified_time" content="2021-05-14T12:47:15.132Z">
+<meta property="article:author" content="常若望">
+<meta property="article:tag" content="刷题">
+<meta property="article:tag" content="贪心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203047.png">
+
+<link rel="canonical" href="http://xxxxx.com/posts/54399/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>相关的编程题汇总-贪心算法 | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/54399/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          相关的编程题汇总-贪心算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:11:11" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:11+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录了解题中需要用贪心思路的题目。</p>
+<span id="more"></span>
+
+
+
+<h4 id="根据身高重建队列"><a href="#根据身高重建队列" class="headerlink" title="根据身高重建队列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/queue-reconstruction-by-height/">根据身高重建队列</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203047.png" alt="1598428994335"></p>
+<p>​        这道题的关键是  先对队列按照高到低的顺序排序，当高度相同时，多的在后面。这样从前往后挨个调整得时候，前面元素得移动只可能是往前诺，不会对后面得产生影响。后面得元素插入前面 也不会对已经插入过的影响，因为后面得身高低。</p>
+<h4 id="加油站"><a href="#加油站" class="headerlink" title="加油站"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gas-station/">加油站</a></h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203050.png" alt="1598435271191"></p>
+<p>​        这道题使用 两个for循环遍历 也不会超时 时间复杂度是 O(N^2)  但是这样并不好。首先选一个 起点0运行  通过累加 油量 和 损耗量，到第 N 站如果 油量  &gt; 损耗 说明无法到达，<strong>将起点修改为第N+1站作为新的开始</strong> 这里不是从0到1挨个 作为起点测试。因为，如果在第N站  油不够了 而前N站都够，那么油量&gt;=消耗量，那么在这之中选择一个起点 油量=消耗=0 必然到第N站还是不够，所以起点直接选 N+1开始新的测试。</p>
+<h4 id="无重叠区间"><a href="#无重叠区间" class="headerlink" title="无重叠区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-overlapping-intervals/">无重叠区间</a></h4><p>​        <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203056.png" alt="image-20200926211802074"></p>
+<p>​        这个题和  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/">用最少数量的箭引爆气球</a> 题目类似。<br>​        首先 对区间的end位置 升序排列，如图所示，从上往下 依次寻找找没有交集且最邻近的 区间，直至结束。那么总数就是可以剩下的最大区间数。为何 这么做就是对的呢？考虑以下 例如从上往下 扫面的过程中， 第0个只和  第1，2 相交，那么 1，2相互也必定重叠。这三个必删掉 两个，删掉哪两个呢？若保留1或者2，那么不能保证 1或者2下面没有区间和它相交，但是保留1，则可以保证就没有其他的再可能与1相交。所以 应该删掉1，2.这也是一种贪心的思想。从上往下扫描，删掉与其相交的 区间。<br>​        但是按照上面思路去写代码 正确性有保证，但是并没有完全利用到里面的规律 会有冗余的 循环。<br>​        再接着 想，从上往下扫面，如果 遇到一个与其相交的 就跳过（代表删除了）再接着往下扫描直到遇到以一个与当前区间不相交的区间，此时将该区间的尾部坐标更新，再接着往下扫面。每次遇到不相交的区间计数加一 统计 总共不相交的区间数量即可。这样取第0个区间的时候 并没有依次遍历完下面所有与第0个区间相交的区间，但是任然可行。因为如果 x(0)(1) &lt; x(3)(0) 即第0，3区间不相交 而 若 x(0)(1) &gt; x(n)(0)  即 第 0 n区间也相交。那么x(3)(1) &gt; x(3)(0) &gt; x(n)(0) 即第3，n区间也必然相交。这样 即便在第0个区间的时候没扫描并删除第n个区间，但是在 切换到第三个区间并往下扫描的时候 也可以将n 删除。</p>
+<h4 id="划分字母区间"><a href="#划分字母区间" class="headerlink" title="划分字母区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-labels/">划分字母区间</a></h4><p>​        这个题的 关键就是 寻找 字母结束的最大位置，当 遍历到 第 i 个 字母时  i == end 则可以作为一个分割点</p>
+<h4 id="最大交换"><a href="#最大交换" class="headerlink" title="最大交换"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-swap/">最大交换</a></h4><p>在做题的时候 要首先理解清楚题目的意思，然后尽可能用简单的模型来描述  完成题目要求，而不是在边界情况都还像清楚的时候，就下手用可能的方法解题。例如本题  已读题目就 感觉应该可以用单调栈写。其实本质就是求  高位  左边最大<strong>且 靠后</strong> 的数交换。用单调栈很难一下想到 且靠后 这种边界情况。</p>
+<p>对于查找某个位置 一侧比他大的最大的最远/最近的数，像数字和字符</p>
+<h4 id="有效的括号字符串"><a href="#有效的括号字符串" class="headerlink" title="有效的括号字符串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parenthesis-string/">有效的括号字符串</a></h4><p>这个题也可以使用两个栈做。但是贪心的方法更简单。对于不含有 星号 的问题，只需要累计左右括号的相对数量，如果始终是左括号数大于等于右括号数，并且最终左括号数等于右括号数，那么代表有效。如果有星号，当星号作为左括号时，左括号数可以为 x+1, 当它为右括号时，左括号数可以为  x - 1，所以当前位置的左括号数量累计为一个区间  [l_down, l_up] ，每次遇到 星号，l_down–，r_up++，当 l_down == 0 时，代表前面的左括号数最少为0个，此时再遇到星号，星号就不能再作为右括号了，因此 l_down 限制为0；当 左括号的最大上限 &lt; 0 时，代表即便前面所有的星号都用做左括号，也无法保证左括号数大于等于右括号数。</p>
+<p>最终如果最少的左括号数大于0，表明星号即便全作为右括号，也不够抵消所有的左括号，返回 false</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 刷题</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/18579/" rel="prev" title="相关的编程题汇总-数学思想">
+      <i class="fa fa-chevron-left"></i> 相关的编程题汇总-数学思想
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/24455/" rel="next" title="典型算法-KMP算法">
+      典型算法-KMP算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">根据身高重建队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E6%B2%B9%E7%AB%99"><span class="nav-number">2.</span> <span class="nav-text">加油站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4"><span class="nav-number">3.</span> <span class="nav-text">无重叠区间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4"><span class="nav-number">4.</span> <span class="nav-text">划分字母区间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BA%A4%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">最大交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">6.</span> <span class="nav-text">有效的括号字符串</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
