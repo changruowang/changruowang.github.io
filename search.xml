@@ -116,7 +116,7 @@
 <li><p>git push        将代码提交到git hub 远程仓库     <strong>不要在浏览器上随意删除已经提交了的文件，否则本地的记录和云端的记录不一致再次提交会报错，所有对文件的修改最好只在本地修改让后上传云端</strong></p>
 <p><strong>空文件夹不会被add添加 只有里面有文件才会被add   .gitignore文件可以选择push时忽略的文件</strong></p>
 </li>
-<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#x63;&#x68;&#97;&#110;&#103;&#x72;&#117;&#111;&#119;&#x61;&#110;&#x67;&#x40;&#x71;&#x71;&#46;&#x63;&#111;&#109;">&#x63;&#x68;&#97;&#110;&#103;&#x72;&#117;&#111;&#119;&#x61;&#110;&#x67;&#x40;&#x71;&#x71;&#46;&#x63;&#111;&#109;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
+<li><p>在新的机子上生成 公钥  ssh-keygen -C“ <a href="mailto:&#99;&#104;&#97;&#110;&#x67;&#114;&#117;&#111;&#x77;&#97;&#110;&#103;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;">&#99;&#104;&#97;&#110;&#x67;&#114;&#117;&#111;&#x77;&#97;&#110;&#103;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;</a>” 然后在用户目录下 把生成的id_rsa.pub文件中的东西粘贴添加到 网页版github账户的列表中 这样本地可以访问远程github仓库了</p>
 </li>
 <li><p>使用 git clone https… 形式的连接，提示错误，要将 http /  https 代理关闭 </p>
 <blockquote>
@@ -147,6 +147,51 @@
       <tags>
         <tag>软件安装</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python常用语法</title>
+    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/python%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<span id="more"></span> 
+
+<h2 id="python-的用法"><a href="#python-的用法" class="headerlink" title="python *  ** 的用法"></a>python *  ** 的用法</h2><p><img src="figs/1566285511946.png" alt="1566285511946"></p>
+<h3 id="用在函数的输入参数"><a href="#用在函数的输入参数" class="headerlink" title="用在函数的输入参数"></a>用在函数的输入参数</h3><p>​        在定义一个方法时，使用*表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用**arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span> <span class="title">arg</span></span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function">#打印的结果是一个元组</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span>(<span class="params"><span class="built_in">len</span>(<span class="params">arg</span>)</span>)</span></span><br><span class="line"><span class="function">#输出1，2，3，4</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">**arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span>(<span class="params">arg</span>)</span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params">a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span>)</span></span><br><span class="line">#打印结果：&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2, &#x27;c&#x27;:3&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><p>​        与上述过程相反</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>（<span class="title">x</span>，<span class="title">y</span>）:</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">para =  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">add(*para)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">kkwd = &#123;<span class="string">&#x27;x&#x27;</span> :<span class="number">1</span>,<span class="string">&#x27;y&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line">add(**kkwd)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="值传递，引用传递-，可变对象，不可变对象"><a href="#值传递，引用传递-，可变对象，不可变对象" class="headerlink" title="值传递，引用传递 ，可变对象，不可变对象"></a>值传递，引用传递 ，可变对象，不可变对象</h2><p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
+<p>参考链接：<a href="https://blog.csdn.net/qq_41987033/article/details/81675514">https://blog.csdn.net/qq_41987033/article/details/81675514</a></p>
+<h2 id="使用tensorboard数据可视化"><a href="#使用tensorboard数据可视化" class="headerlink" title="使用tensorboard数据可视化"></a>使用tensorboard数据可视化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>​        对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
+ <figure class="highlight py"><table><tr><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>​        在程序调用一下api确保生成日志文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">writer &#x3D; SummaryWriter(&#39;runs&#x2F;fashion_mnist_experiment_1&#39;)  </span><br><span class="line">writer.add_image(&#39;four_fashion_mnist_images&#39;, img_grid)</span><br><span class="line">writer.close()   #必须有close 否则内容写不进去</span><br></pre></td></tr></table></figure>
+
+<p>​        在系统命令行输入以下命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensorboard --logdir runs  </span><br></pre></td></tr></table></figure>
+
+<p>​        上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件<br>​        输入上述命令后，会产生如下输出，在google浏览器打开<a href="http://desktop-f3bbiio:6006/">http://DESKTOP-F3BBIIO:6006</a> 如果浏览被拒，改为 <a href="http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址">http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</a></p>
+<h2 id="pytorch的用法"><a href="#pytorch的用法" class="headerlink" title="pytorch的用法"></a>pytorch的用法</h2><h3 id="pytorch踩坑"><a href="#pytorch踩坑" class="headerlink" title="pytorch踩坑"></a>pytorch踩坑</h3><ul>
+<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上  此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location=’cpu’  参数  load完毕后再to到需要的gpu上</li>
+<li></li>
+</ul>
+<h3 id="cat-stack-unqueeze用法总结"><a href="#cat-stack-unqueeze用法总结" class="headerlink" title="cat stack unqueeze用法总结"></a>cat stack unqueeze用法总结</h3><p>​    相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
+<ul>
+<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1  按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
+<li>stack: 将输入tensor增加维度堆叠，要求输入的尺寸完全相同。dim范围0~n 也是按照bchw的顺序对应dim。输出的tensor dim=n+1。对于输二维矩阵，dim=0，在c维度堆叠；dim=1，提取每个输入的行向量按行堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道；dim=2，提取每个输入的行向量按列堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道。对于输入三维张量，同理。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -199,51 +244,6 @@
 <p>点击文件新建文件夹？</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>ifstream 要统一用 GBK 编码，中文路径才能打开</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>python常用语法</title>
-    <url>/2021/05/11/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/python%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<span id="more"></span> 
-
-<h2 id="python-的用法"><a href="#python-的用法" class="headerlink" title="python *  ** 的用法"></a>python *  ** 的用法</h2><p><img src="figs/1566285511946.png" alt="1566285511946"></p>
-<h3 id="用在函数的输入参数"><a href="#用在函数的输入参数" class="headerlink" title="用在函数的输入参数"></a>用在函数的输入参数</h3><p>​        在定义一个方法时，使用*表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用**arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span> <span class="title">arg</span></span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function">#打印的结果是一个元组</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span>(<span class="params"><span class="built_in">len</span>(<span class="params">arg</span>)</span>)</span></span><br><span class="line"><span class="function">#输出1，2，3，4</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">**arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span>(<span class="params">arg</span>)</span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params">a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span>)</span></span><br><span class="line">#打印结果：&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2, &#x27;c&#x27;:3&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><p>​        与上述过程相反</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>（<span class="title">x</span>，<span class="title">y</span>）:</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">para =  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">add(*para)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">kkwd = &#123;<span class="string">&#x27;x&#x27;</span> :<span class="number">1</span>,<span class="string">&#x27;y&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line">add(**kkwd)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="值传递，引用传递-，可变对象，不可变对象"><a href="#值传递，引用传递-，可变对象，不可变对象" class="headerlink" title="值传递，引用传递 ，可变对象，不可变对象"></a>值传递，引用传递 ，可变对象，不可变对象</h2><p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
-<p>参考链接：<a href="https://blog.csdn.net/qq_41987033/article/details/81675514">https://blog.csdn.net/qq_41987033/article/details/81675514</a></p>
-<h2 id="使用tensorboard数据可视化"><a href="#使用tensorboard数据可视化" class="headerlink" title="使用tensorboard数据可视化"></a>使用tensorboard数据可视化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>​        对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
- <figure class="highlight py"><table><tr><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>​        在程序调用一下api确保生成日志文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">writer &#x3D; SummaryWriter(&#39;runs&#x2F;fashion_mnist_experiment_1&#39;)  </span><br><span class="line">writer.add_image(&#39;four_fashion_mnist_images&#39;, img_grid)</span><br><span class="line">writer.close()   #必须有close 否则内容写不进去</span><br></pre></td></tr></table></figure>
-
-<p>​        在系统命令行输入以下命令</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensorboard --logdir runs  </span><br></pre></td></tr></table></figure>
-
-<p>​        上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件<br>​        输入上述命令后，会产生如下输出，在google浏览器打开<a href="http://desktop-f3bbiio:6006/">http://DESKTOP-F3BBIIO:6006</a> 如果浏览被拒，改为 <a href="http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址">http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</a></p>
-<h2 id="pytorch的用法"><a href="#pytorch的用法" class="headerlink" title="pytorch的用法"></a>pytorch的用法</h2><h3 id="pytorch踩坑"><a href="#pytorch踩坑" class="headerlink" title="pytorch踩坑"></a>pytorch踩坑</h3><ul>
-<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上  此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location=’cpu’  参数  load完毕后再to到需要的gpu上</li>
-<li></li>
-</ul>
-<h3 id="cat-stack-unqueeze用法总结"><a href="#cat-stack-unqueeze用法总结" class="headerlink" title="cat stack unqueeze用法总结"></a>cat stack unqueeze用法总结</h3><p>​    相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
-<ul>
-<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1  按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
-<li>stack: 将输入tensor增加维度堆叠，要求输入的尺寸完全相同。dim范围0~n 也是按照bchw的顺序对应dim。输出的tensor dim=n+1。对于输二维矩阵，dim=0，在c维度堆叠；dim=1，提取每个输入的行向量按行堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道；dim=2，提取每个输入的行向量按列堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道。对于输入三维张量，同理。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他笔记</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
   </entry>
   <entry>
     <title>pytorch扩展C</title>
@@ -374,6 +374,168 @@
       </categories>
   </entry>
   <entry>
+    <title>设计模式-创建型-单例</title>
+    <url>/2021/05/04/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B/</url>
+    <content><![CDATA[<p><strong>单例模式</strong>是一种创建型设计模式， 让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</p>
+<span id="more"></span>
+
+<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>单例模式（Singleton）是一种创建型设计模式， 让你<strong>能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</strong></p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>使用下三部分来实现：</p>
+<ul>
+<li>私有构造函数：私有构造函数保证了不能通过构造函数来创建对象实例</li>
+<li>一个私有静态变量：私有静态变量用于指向实例化的对象，全局唯一</li>
+<li>一个公有静态函数：只能通过公有静态函数返回<strong>唯一的私有静态变量</strong></li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>主要分为懒汉式 和 饿汉式 两种实现方式。区别就是实例化唯一的对象的位置。而懒汉式又有两种实现，一个线程安全，一个线程不安全</p>
+<ul>
+<li>懒汉式：延迟实现，只有当调用公用静态函数，且静态指针为空的时候才实例化对象，存在线程不安全问题<ul>
+<li>线程安全的修改</li>
+</ul>
+</li>
+<li>饿汉式：当程序运行的时候就 初始化 私有静态指针，因此线程安全</li>
+</ul>
+<p>C++ 代码实现</p>
+<h3 id="饿汉式-懒汉式"><a href="#饿汉式-懒汉式" class="headerlink" title="饿汉式  /  懒汉式"></a>饿汉式  /  懒汉式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="keyword">const</span> std::string value): <span class="built_in">value_</span>(value)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> Singleton* singleton_;</span><br><span class="line">    std::string value_;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>(Singleton &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span>=(<span class="keyword">const</span> Singleton &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="comment">// 全局静态函数 用于实例化唯一的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton *<span class="title">GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton_;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function">string <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> value_;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 如果是饿汉模式，在初始化的时候就 用 new 分配内存，如果懒汉模式，初始静态指针设置为 null 只有调用静态函数的时候才new</span></span><br><span class="line"><span class="comment">// 由于 singleton_ 指针是 私有静态变量，因此只能在函数外部，全局初始化，而不能放在任何一个函数里 去修改（包括mian函数），会编译报错</span></span><br><span class="line">Singleton* Singleton::singleton_= <span class="keyword">new</span> <span class="built_in">Singleton</span>(<span class="string">&quot;Init&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThreadFoo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// Following code emulates slow initialization.</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">1000</span>));</span><br><span class="line">    Singleton* singleton = Singleton::<span class="built_in">GetInstance</span>(<span class="string">&quot;FOO&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; singleton-&gt;<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThreadBar</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// Following code emulates slow initialization.</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">1000</span>));</span><br><span class="line">    Singleton* singleton = Singleton::<span class="built_in">GetInstance</span>(<span class="string">&quot;BAR&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; singleton-&gt;<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当两个线程输出的 结果 不一样时，说明产生了线程不安全的问题</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(ThreadFoo)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(ThreadBar)</span></span>;</span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 同过上述代码可以看出，懒汉式饿汉式的区别：</p>
+<ul>
+<li>饿汉式：在 main 函数的执行之前，就调用了 new 实例化了对象，因此是线程安全的；缺点是由于一开始就申请了空间，会有资源浪费的问题。</li>
+<li>懒汉式：只有在程序 调用 公有静态函数，需要获取对象时，才会判断该对象有没有实例化，没的话再实例化。优点是  延迟实例化带来的节约资源的好处。缺点是 这是线程不安全的。<ul>
+<li>例如当两个线程同时 调用 <code>GetInstance </code>函数，并且都同时通过了 <code>singleton_</code>指针空的判断，就会实例化出两个对象，所以上述代码输出的现象就是，两个线程输出的value值不一样。</li>
+</ul>
+</li>
+</ul>
+<h3 id="懒汉式-线程安全"><a href="#懒汉式-线程安全" class="headerlink" title="懒汉式-线程安全"></a>懒汉式-线程安全</h3><p>为了解决上述 懒汉式 线程不安全的问题就是 对 <code>GetInstance</code> 函数加锁，那么在一个时间点只能有一个线程能够进入该方法，从而避免了实例化多次。但是当一个线程进入该方法之后，其它试图进入该方法的线程都必须等待，即使 <code>Singleton </code>已经被实例化了(即 <code>singleton_ </code>指针不为空)。这会让线程阻塞时间过长，因此该方法有性能问题，不推荐使用。可以使用 <strong>双重校验锁</strong> 的方法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 简单的加锁</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">        singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> singleton_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 双重校验锁</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(singleton_！=<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> singleton_;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        std::lock_guard&lt;std::mutex&gt; <span class="built_in">lock</span>(mutex_);</span><br><span class="line">        <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)</span><br><span class="line">            singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>从上述代码实现可以看出，双重校验锁的原理是，只有当判断 <code>singleton_ </code>为空，即还未实例化的时候，才需要加锁操作，因为这时候肯定是要进行对象实例化操作，即写操作。如果已经实例化了，直接返回地址即可，不用加锁读。但是加锁后又判断了一遍是否指针空，因为还是可能存在两个线程同时进入了第一个 指针判断 空的语句，由于有锁，一个线程实例化对象，并修改指针为非空，完毕后释放锁。此时如果另一个线程不再判断一次为空就会 再次 new 实例化，还是存在线程不安全的问题。</p>
+<p>或者直接这么理解，双重校验就是在  原本的基础上 先判断指针是否为空，空的化直接返回指针，不必校验。而不为空，才加锁判断。</p>
+<p><strong>优点：</strong>双重校验锁，即是延迟实例化的，可以节省资源，还是线程安全的，且不会因为锁的存在使得线程阻塞时间过长。</p>
+<h3 id="volatile-关键字"><a href="#volatile-关键字" class="headerlink" title="volatile 关键字"></a>volatile 关键字</h3><p>singleton_ 采用 volatile 关键字修饰也是很有必要的，<code>singleton_ = new Singleton(value)</code>  这段代码其实是分为三步执行：</p>
+<ol>
+<li>为 <code>Singleton </code>分配内存空间</li>
+<li>初始化 <code>Singleton</code></li>
+<li>将 <code>singleton_  </code>指向分配的内存地址</li>
+</ol>
+<p>但是由于 JVM 具有指令重排的特性，执行顺序有可能变成 1&gt;3&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 调用 getUniqueInstance() 后发现 uniqueInstance 不为空，因此返回 uniqueInstance，但此时 uniqueInstance 还未被初始化。使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行</p>
+<p><a href="../%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/volatile%E5%85%B3%E9%94%AE%E5%AD%97.md">C++ volatile关键字作用</a></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-创建型-简单工厂</title>
+    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/</url>
+    <content><![CDATA[<p><strong>简单工厂</strong>是一种创建型设计模式，在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
+<span id="more"></span>
+
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><strong>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化</strong>。这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>根据下面代码可以看出，简单工厂的实现要点</p>
+<ul>
+<li>用户并不需要指导具体的子类的名称，只需要根据参数来向工厂获取 产品。而用户只用使用 基类指针来指向 工厂创建的子类对象，即多态机制，来完成子类的特定功能。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Phone</span>() &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XiaoMi</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">XiaoMi</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is xiao mi phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Apple</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is apple phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 简单工厂类，客户使用简单工厂来获取对应的产品</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SimpleFactory</span>()&#123;&#125;;</span><br><span class="line">        <span class="function">Phone* <span class="title">create</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;   <span class="comment">// 注意返回类型为 基类 指针</span></span><br><span class="line">            <span class="built_in"><span class="keyword">switch</span></span> (type)</span><br><span class="line">            &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">XiaoMi</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Apple</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SimpleFactory factory = <span class="built_in">SimpleFactory</span>();</span><br><span class="line">    Phone* ptr = factory.<span class="built_in">create</span>(<span class="number">0</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    ptr = factory.<span class="built_in">create</span>(<span class="number">1</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式-创建型-工厂方法</title>
+    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p><strong>工厂方法</strong>是一种创建型设计模式，是基于简单工厂的改进</p>
+<span id="more"></span>
+
+<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>简单工厂中，一个工厂类统一实例化所有的产品，而工厂方法，每个产品用特定的工厂子类实例化。定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。</p>
+<h3 id="和简单工厂对比"><a href="#和简单工厂对比" class="headerlink" title="和简单工厂对比"></a>和简单工厂对比</h3><p>在简单工厂方法中，同一接口的不同产品对象都由一个工厂创建出来。这种做法存在两个问题：</p>
+<ul>
+<li>当产品对象很多时，工厂就会成为一个“过大类”</li>
+<li>当新增产品对象时，需要在工厂中增加一个分支。这就违反了“开闭原则”</li>
+</ul>
+<p>第一条很好理解，一个工厂负责生产所有的产品，不断增加产品的种类，工厂中的 if 语句也就越多。同时，由于增加一个新的产品种类，就要修改工厂的代码，因此违反了开闭原则，开闭原则希望当增加新功能时不用修改原有的代码，只用通过新增代码就完成。</p>
+<p>所以工厂方法，特定的 产品使用特定的 工厂方法生产，当新增一个方法时，只用新增一个生产它的工厂子类即可。因此针对产品不会频繁变化，且产品种类较少的情景下 使用简单工厂反而好些。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>从代码可以看出实现的核心是：</p>
+<ul>
+<li>不同子类重写不同的new 产品的函数，主工厂中首先调用 获取产品的函数获取产品，再执行功能。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 产品抽象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Product</span>() &#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 子类产品1 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProduct1</span> :</span> <span class="keyword">public</span> Product &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#123;Result of the ConcreteProduct1&#125;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 子类产品2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProduct2</span> :</span> <span class="keyword">public</span> Product &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#123;Result of the ConcreteProduct2&#125;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂主类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Creator</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Creator</span>()&#123;&#125;;</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">SomeOperation</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 在工厂主类中 生产 产品，FactoryMethod 是由对应的子类重写了，因此不同的子类会返回不同的产品</span></span><br><span class="line">    <span class="comment">// 然后再 调用产品完成特定的功能</span></span><br><span class="line">    Product* product = <span class="keyword">this</span>-&gt;<span class="built_in">FactoryMethod</span>();</span><br><span class="line">   </span><br><span class="line">    std::string result = <span class="string">&quot;Creator: The same creator&#x27;s code has just worked with &quot;</span> + product-&gt;<span class="built_in">Operation</span>();</span><br><span class="line">    <span class="keyword">delete</span> product;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂1 用于生产产品1</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCreator1</span> :</span> <span class="keyword">public</span> Creator &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProduct1</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 工厂2 用于生产产品2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCreator2</span> :</span> <span class="keyword">public</span> Creator &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProduct2</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClientCode</span><span class="params">(<span class="keyword">const</span> Creator&amp; creator)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Client: I&#x27;m not aware of the creator&#x27;s class, but it still works.\n&quot;</span></span><br><span class="line">            &lt;&lt; creator.<span class="built_in">SomeOperation</span>() &lt;&lt; std::endl;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;App: Launched with the ConcreteCreator1.\n&quot;</span>;</span><br><span class="line">  Creator* creator = <span class="keyword">new</span> <span class="built_in">ConcreteCreator1</span>();</span><br><span class="line">  <span class="built_in">ClientCode</span>(*creator);</span><br><span class="line">  std::cout &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;App: Launched with the ConcreteCreator2.\n&quot;</span>;</span><br><span class="line">  Creator* creator2 = <span class="keyword">new</span> <span class="built_in">ConcreteCreator2</span>();</span><br><span class="line">  <span class="built_in">ClientCode</span>(*creator2);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> creator;</span><br><span class="line">  <span class="keyword">delete</span> creator2;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STL库常用API汇总</title>
+    <url>/2021/05/11/C++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%BA%93%E5%B8%B8%E7%94%A8API/</url>
+    <content><![CDATA[<p>汇总了c++ STL 库中常用的API用法</p>
+<span id="more"></span>
+
+<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">a.<span class="built_in">resize</span>(N);						  <span class="comment">// 扩容</span></span><br><span class="line"><span class="built_in">reverse</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>());  		    <span class="comment">//倒序</span></span><br><span class="line"><span class="built_in">swap</span>(a[<span class="number">0</span>], a[<span class="number">1</span>]);  					   <span class="comment">//交换位置0 和 1的元素</span></span><br><span class="line">a.<span class="built_in">assign</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>());            <span class="comment">// b 拷贝到 a</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">begin</span>()+<span class="number">1</span>);				    <span class="comment">//删除第一个元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> idx_, <span class="keyword">int</span> w_, <span class="keyword">int</span> p1_, <span class="keyword">int</span> p2_)&#123;</span><br><span class="line">        idx = idx_; w = w_; p1 = p1_; p2 = p2_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Node&amp; data)&#123;     <span class="comment">// 升序排列</span></span><br><span class="line">        <span class="keyword">return</span> w &lt; data.w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> idx;</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    <span class="keyword">int</span> p1;</span><br><span class="line">    <span class="keyword">int</span> p2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">vector&lt;Node&gt; test;</span><br><span class="line"><span class="built_in">sort</span>(test.<span class="built_in">begin</span>(), test.<span class="built_in">end</span>());            <span class="comment">//结构体中重载 &lt; 符号 来对自定义的 vector升序排序，要实现逆序排列 可以重载</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string a = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">string b = a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">1</span>);   <span class="comment">//第一个参数代表起始位置，第二个为长度 提取子串</span></span><br><span class="line">a.<span class="built_in">at</span>(<span class="number">0</span>);                 	<span class="comment">//访问0位置的字符</span></span><br><span class="line">a.<span class="built_in">resize</span>(N); 			   <span class="comment">//和vector一样的扩容方法</span></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">10</span>, <span class="number">4</span>)              <span class="comment">//从位置=10的字符开始 删除4个；不带第二个参数 表示删到结尾</span></span><br><span class="line">a.<span class="built_in">insert</span>(<span class="number">14</span>,<span class="number">6</span>,<span class="string">&#x27;*&#x27;</span>)		   <span class="comment">//向 位置14前面 插入 6 个 &quot;*&quot;</span></span><br><span class="line">a.<span class="built_in">find</span>(<span class="string">&quot;b&quot;</span>,<span class="number">5</span>)               <span class="comment">//从下标5开始查找 字符串“b”出现的位置  用if(pos == string::npos) 用来判断是否找到子串。</span></span><br><span class="line"></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">0</span>,a.<span class="built_in">find_first_not_of</span>(<span class="string">&quot; &quot;</span>));   <span class="comment">//去掉字符串左右两端的空格</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">find_last_not_of</span>(<span class="string">&quot; &quot;</span>) + <span class="number">1</span>);</span><br><span class="line"><span class="comment">/// 用 stringstream 分割 指定字符 分开的 字符串</span></span><br><span class="line"><span class="function">stringstream <span class="title">ss</span><span class="params">(a)</span></span>;</span><br><span class="line">string item;</span><br><span class="line"><span class="keyword">while</span>(ss &gt;&gt; item)	cout &lt;&lt; item &lt;&lt; endl;   <span class="comment">//获取 字符串中的单词 按空格分割</span></span><br><span class="line"><span class="keyword">while</span> (std::<span class="built_in">getline</span>(ss, item, <span class="string">&#x27;_&#x27;</span>))&#123;</span><br><span class="line">    cout &lt;&lt; item &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将 字符串按照 特定字符分割   “11*11+12”</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">split_string</span><span class="params">(string&amp; s)</span></span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; re;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; p2 &lt; s.<span class="built_in">size</span>(); p2++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[p2] == <span class="string">&#x27;+&#x27;</span> || s[p2] == <span class="string">&#x27;-&#x27;</span> || s[p2] == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">                re.<span class="built_in">push_back</span>(s[p2]);</span><br><span class="line">                p1 = p2+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="stringstream用法"><a href="#stringstream用法" class="headerlink" title="stringstream用法"></a>stringstream用法</h3><p>头文件 <code>include&lt;sstream&gt;</code> </p>
+<h3 id="字符串分割函数"><a href="#字符串分割函数" class="headerlink" title="字符串分割函数"></a>字符串分割函数</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">const</span> string s, vector&lt;string&gt;&amp; vs, <span class="keyword">const</span> <span class="keyword">char</span> delim= <span class="string">&#x27; &#x27;</span>)</span></span>&#123;</span><br><span class="line">    <span class="function">istringstream <span class="title">iss</span><span class="params">(s)</span></span>;</span><br><span class="line">    string temp;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">getline</span>(iss,temp,delim))&#123;</span><br><span class="line">        vs.<span class="built_in">emplace_back</span>(<span class="built_in">move</span>(temp));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">back</span>() == delim) vs.<span class="built_in">push_back</span>(&#123;&#125;);<span class="comment">//加这句的原因是getline不会识别最后一个delim,避免误判&quot;172.16.254.1.&quot;,&quot;2001:0db8:85a3:0:0:8A2E:0370:7334:&quot;之类的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;  dict; <span class="comment">// 声明unordered_map对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入数据的三种方式</span></span><br><span class="line">dict.<span class="built_in">insert</span>(pair&lt;string,<span class="keyword">int</span>&gt;(<span class="string">&quot;apple&quot;</span>,<span class="number">2</span>));</span><br><span class="line">dict.<span class="built_in">insert</span>(unordered_map&lt;string, <span class="keyword">int</span>&gt;::<span class="built_in">value_type</span>(<span class="string">&quot;orange&quot;</span>,<span class="number">3</span>));</span><br><span class="line">dict[<span class="string">&quot;banana&quot;</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="comment">// 判断是否有元素</span></span><br><span class="line"><span class="keyword">if</span>(dict.<span class="built_in">empty</span>())</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典无元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典共有&quot;</span>&lt;&lt;dict.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;个元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line"><span class="keyword">for</span>(iter=dict.<span class="built_in">begin</span>();iter!=dict.<span class="built_in">end</span>();iter++)</span><br><span class="line">    cout&lt;&lt;iter-&gt;first&lt;&lt;ends&lt;&lt;iter-&gt;second&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line">dict.<span class="built_in">erase</span>(<span class="string">&#x27;a&#x27;</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*队列*/</span></span><br><span class="line">queue&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*优先队列*/</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::less&lt;<span class="keyword">int</span>&gt; &gt; maxHeap;    <span class="comment">// 大顶堆 堆顶的元素最大</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::greater&lt;<span class="keyword">int</span>&gt; &gt; minHeap; <span class="comment">// 小顶堆 堆顶元素最小</span></span><br><span class="line"><span class="comment">//greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）</span></span><br><span class="line"><span class="keyword">int</span> a = maxHeap.<span class="built_in">top</span>();  <span class="comment">//获取堆顶最大元素</span></span><br><span class="line">maxHeap.<span class="built_in">pop</span>();          <span class="comment">//弹出堆顶元素</span></span><br><span class="line">maxHeap.<span class="built_in">push</span>();         <span class="comment">//向堆中增加元素 堆顶元素永远最大</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*双端队列*/</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; a;     			<span class="comment">// 双端队列 结合了栈和队列的性质，既可以从头部插入 也可以从尾部插入 </span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(a)</span></span>;  			<span class="comment">// 定义并用双端队列a初始化双端队列b</span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&amp;n[<span class="number">1</span>], &amp;n[<span class="number">4</span>])</span></span>;  <span class="comment">// 将n[1]、n[2]、n[3]作为双端队列a的初值</span></span><br><span class="line">deq.<span class="built_in">size</span>();</span><br><span class="line">deq.<span class="built_in">resize</span>();</span><br><span class="line">deq.<span class="built_in">push_front</span>(<span class="keyword">const</span> T&amp; x);  <span class="comment">// 头部添加元素</span></span><br><span class="line">deq.<span class="built_in">push_back</span>(<span class="keyword">const</span> T&amp; x);   <span class="comment">//尾部添加元素</span></span><br><span class="line">deq.<span class="built_in">insert</span>(iterator it, <span class="keyword">const</span> T&amp; x);  <span class="comment">//任意位置插入一个元素</span></span><br><span class="line">deq.<span class="built_in">pop_front</span>(); 			<span class="comment">// 头部删除元素</span></span><br><span class="line">deq.<span class="built_in">pop_back</span>();				<span class="comment">//末尾删除元素</span></span><br><span class="line">deq.<span class="built_in">front</span>();				<span class="comment">//访问第一个元素</span></span><br><span class="line">deq.<span class="built_in">back</span>();					<span class="comment">//访问最后一个元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优先队列-priority-queue"><a href="#优先队列-priority-queue" class="headerlink" title="优先队列 priority_queue"></a>优先队列 priority_queue</h3><p>头文件<code>#include &lt;queue&gt;</code>, 可以自定义其中数据的优先级, 让优先级高的排在队列前面,优先出队。本质是通过大小顶堆这种数据结构实现。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>priority_queue&lt;Type, Container, Functional&gt;</p>
+<p><em>Type</em> 就是数据类型，<em>Container</em> 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），<em>Functional</em> 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大顶堆</p>
+<p>基本操作:</p>
+<ul>
+<li>top 访问队头元素</li>
+<li>empty 队列是否为空</li>
+<li>size 返回队列内元素个数</li>
+<li>push 插入元素到队尾 (并排序)</li>
+<li>emplace 原地构造一个元素并插入队列</li>
+<li>pop 弹出队头元素</li>
+<li>swap 交换内容</li>
+</ul>
+<h4 id="自定义类型用法"><a href="#自定义类型用法" class="headerlink" title="自定义类型用法"></a>自定义类型用法</h4>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>库函数</category>
+      </categories>
+      <tags>
+        <tag>api</tag>
+        <tag>STL库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>STL容器原理</title>
     <url>/2021/04/24/C++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%AE%B9%E5%99%A8%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>总结了STL容器的原理</p>
@@ -459,64 +621,8 @@
         <category>库函数</category>
       </categories>
       <tags>
-        <tag>STL库</tag>
         <tag>api</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STL库常用API汇总</title>
-    <url>/2021/05/11/C++/%E5%BA%93%E5%87%BD%E6%95%B0/STL%E5%BA%93%E5%B8%B8%E7%94%A8API/</url>
-    <content><![CDATA[<p>汇总了c++ STL 库中常用的API用法</p>
-<span id="more"></span>
-
-<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">a.<span class="built_in">resize</span>(N);						  <span class="comment">// 扩容</span></span><br><span class="line"><span class="built_in">reverse</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>());  		    <span class="comment">//倒序</span></span><br><span class="line"><span class="built_in">swap</span>(a[<span class="number">0</span>], a[<span class="number">1</span>]);  					   <span class="comment">//交换位置0 和 1的元素</span></span><br><span class="line">a.<span class="built_in">assign</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>());            <span class="comment">// b 拷贝到 a</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">begin</span>()+<span class="number">1</span>);				    <span class="comment">//删除第一个元素</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> idx_, <span class="keyword">int</span> w_, <span class="keyword">int</span> p1_, <span class="keyword">int</span> p2_)&#123;</span><br><span class="line">        idx = idx_; w = w_; p1 = p1_; p2 = p2_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Node&amp; data)&#123;     <span class="comment">// 升序排列</span></span><br><span class="line">        <span class="keyword">return</span> w &lt; data.w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> idx;</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    <span class="keyword">int</span> p1;</span><br><span class="line">    <span class="keyword">int</span> p2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">vector&lt;Node&gt; test;</span><br><span class="line"><span class="built_in">sort</span>(test.<span class="built_in">begin</span>(), test.<span class="built_in">end</span>());            <span class="comment">//结构体中重载 &lt; 符号 来对自定义的 vector升序排序，要实现逆序排列 可以重载</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string a = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">string b = a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">1</span>);   <span class="comment">//第一个参数代表起始位置，第二个为长度 提取子串</span></span><br><span class="line">a.<span class="built_in">at</span>(<span class="number">0</span>);                 	<span class="comment">//访问0位置的字符</span></span><br><span class="line">a.<span class="built_in">resize</span>(N); 			   <span class="comment">//和vector一样的扩容方法</span></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">10</span>, <span class="number">4</span>)              <span class="comment">//从位置=10的字符开始 删除4个；不带第二个参数 表示删到结尾</span></span><br><span class="line">a.<span class="built_in">insert</span>(<span class="number">14</span>,<span class="number">6</span>,<span class="string">&#x27;*&#x27;</span>)		   <span class="comment">//向 位置14前面 插入 6 个 &quot;*&quot;</span></span><br><span class="line">a.<span class="built_in">find</span>(<span class="string">&quot;b&quot;</span>,<span class="number">5</span>)               <span class="comment">//从下标5开始查找 字符串“b”出现的位置  用if(pos == string::npos) 用来判断是否找到子串。</span></span><br><span class="line"></span><br><span class="line">a.<span class="built_in">erase</span>(<span class="number">0</span>,a.<span class="built_in">find_first_not_of</span>(<span class="string">&quot; &quot;</span>));   <span class="comment">//去掉字符串左右两端的空格</span></span><br><span class="line">a.<span class="built_in">erase</span>(a.<span class="built_in">find_last_not_of</span>(<span class="string">&quot; &quot;</span>) + <span class="number">1</span>);</span><br><span class="line"><span class="comment">/// 用 stringstream 分割 指定字符 分开的 字符串</span></span><br><span class="line"><span class="function">stringstream <span class="title">ss</span><span class="params">(a)</span></span>;</span><br><span class="line">string item;</span><br><span class="line"><span class="keyword">while</span>(ss &gt;&gt; item)	cout &lt;&lt; item &lt;&lt; endl;   <span class="comment">//获取 字符串中的单词 按空格分割</span></span><br><span class="line"><span class="keyword">while</span> (std::<span class="built_in">getline</span>(ss, item, <span class="string">&#x27;_&#x27;</span>))&#123;</span><br><span class="line">    cout &lt;&lt; item &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将 字符串按照 特定字符分割   “11*11+12”</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">split_string</span><span class="params">(string&amp; s)</span></span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; re;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; p2 &lt; s.<span class="built_in">size</span>(); p2++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[p2] == <span class="string">&#x27;+&#x27;</span> || s[p2] == <span class="string">&#x27;-&#x27;</span> || s[p2] == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">                re.<span class="built_in">push_back</span>(s[p2]);</span><br><span class="line">                p1 = p2+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        re.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(s.<span class="built_in">substr</span>(p1, p2-p1)));</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="stringstream用法"><a href="#stringstream用法" class="headerlink" title="stringstream用法"></a>stringstream用法</h3><p>头文件 <code>include&lt;sstream&gt;</code> </p>
-<h3 id="字符串分割函数"><a href="#字符串分割函数" class="headerlink" title="字符串分割函数"></a>字符串分割函数</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">const</span> string s, vector&lt;string&gt;&amp; vs, <span class="keyword">const</span> <span class="keyword">char</span> delim= <span class="string">&#x27; &#x27;</span>)</span></span>&#123;</span><br><span class="line">    <span class="function">istringstream <span class="title">iss</span><span class="params">(s)</span></span>;</span><br><span class="line">    string temp;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">getline</span>(iss,temp,delim))&#123;</span><br><span class="line">        vs.<span class="built_in">emplace_back</span>(<span class="built_in">move</span>(temp));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">back</span>() == delim) vs.<span class="built_in">push_back</span>(&#123;&#125;);<span class="comment">//加这句的原因是getline不会识别最后一个delim,避免误判&quot;172.16.254.1.&quot;,&quot;2001:0db8:85a3:0:0:8A2E:0370:7334:&quot;之类的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;  dict; <span class="comment">// 声明unordered_map对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入数据的三种方式</span></span><br><span class="line">dict.<span class="built_in">insert</span>(pair&lt;string,<span class="keyword">int</span>&gt;(<span class="string">&quot;apple&quot;</span>,<span class="number">2</span>));</span><br><span class="line">dict.<span class="built_in">insert</span>(unordered_map&lt;string, <span class="keyword">int</span>&gt;::<span class="built_in">value_type</span>(<span class="string">&quot;orange&quot;</span>,<span class="number">3</span>));</span><br><span class="line">dict[<span class="string">&quot;banana&quot;</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="comment">// 判断是否有元素</span></span><br><span class="line"><span class="keyword">if</span>(dict.<span class="built_in">empty</span>())</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典无元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;该字典共有&quot;</span>&lt;&lt;dict.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;个元素&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line">unordered_map&lt;string, <span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line"><span class="keyword">for</span>(iter=dict.<span class="built_in">begin</span>();iter!=dict.<span class="built_in">end</span>();iter++)</span><br><span class="line">    cout&lt;&lt;iter-&gt;first&lt;&lt;ends&lt;&lt;iter-&gt;second&lt;&lt;endl;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line">dict.<span class="built_in">erase</span>(<span class="string">&#x27;a&#x27;</span>); </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*队列*/</span></span><br><span class="line">queue&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*优先队列*/</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::less&lt;<span class="keyword">int</span>&gt; &gt; maxHeap;    <span class="comment">// 大顶堆 堆顶的元素最大</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, std::greater&lt;<span class="keyword">int</span>&gt; &gt; minHeap; <span class="comment">// 小顶堆 堆顶元素最小</span></span><br><span class="line"><span class="comment">//greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）</span></span><br><span class="line"><span class="keyword">int</span> a = maxHeap.<span class="built_in">top</span>();  <span class="comment">//获取堆顶最大元素</span></span><br><span class="line">maxHeap.<span class="built_in">pop</span>();          <span class="comment">//弹出堆顶元素</span></span><br><span class="line">maxHeap.<span class="built_in">push</span>();         <span class="comment">//向堆中增加元素 堆顶元素永远最大</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*双端队列*/</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; a;     			<span class="comment">// 双端队列 结合了栈和队列的性质，既可以从头部插入 也可以从尾部插入 </span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(a)</span></span>;  			<span class="comment">// 定义并用双端队列a初始化双端队列b</span></span><br><span class="line"><span class="function">deque&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&amp;n[<span class="number">1</span>], &amp;n[<span class="number">4</span>])</span></span>;  <span class="comment">// 将n[1]、n[2]、n[3]作为双端队列a的初值</span></span><br><span class="line">deq.<span class="built_in">size</span>();</span><br><span class="line">deq.<span class="built_in">resize</span>();</span><br><span class="line">deq.<span class="built_in">push_front</span>(<span class="keyword">const</span> T&amp; x);  <span class="comment">// 头部添加元素</span></span><br><span class="line">deq.<span class="built_in">push_back</span>(<span class="keyword">const</span> T&amp; x);   <span class="comment">//尾部添加元素</span></span><br><span class="line">deq.<span class="built_in">insert</span>(iterator it, <span class="keyword">const</span> T&amp; x);  <span class="comment">//任意位置插入一个元素</span></span><br><span class="line">deq.<span class="built_in">pop_front</span>(); 			<span class="comment">// 头部删除元素</span></span><br><span class="line">deq.<span class="built_in">pop_back</span>();				<span class="comment">//末尾删除元素</span></span><br><span class="line">deq.<span class="built_in">front</span>();				<span class="comment">//访问第一个元素</span></span><br><span class="line">deq.<span class="built_in">back</span>();					<span class="comment">//访问最后一个元素</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="优先队列-priority-queue"><a href="#优先队列-priority-queue" class="headerlink" title="优先队列 priority_queue"></a>优先队列 priority_queue</h3><p>头文件<code>#include &lt;queue&gt;</code>, 可以自定义其中数据的优先级, 让优先级高的排在队列前面,优先出队。本质是通过大小顶堆这种数据结构实现。</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>priority_queue&lt;Type, Container, Functional&gt;</p>
-<p><em>Type</em> 就是数据类型，<em>Container</em> 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），<em>Functional</em> 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大顶堆</p>
-<p>基本操作:</p>
-<ul>
-<li>top 访问队头元素</li>
-<li>empty 队列是否为空</li>
-<li>size 返回队列内元素个数</li>
-<li>push 插入元素到队尾 (并排序)</li>
-<li>emplace 原地构造一个元素并插入队列</li>
-<li>pop 弹出队头元素</li>
-<li>swap 交换内容</li>
-</ul>
-<h4 id="自定义类型用法"><a href="#自定义类型用法" class="headerlink" title="自定义类型用法"></a>自定义类型用法</h4>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>库函数</category>
-      </categories>
-      <tags>
         <tag>STL库</tag>
-        <tag>api</tag>
       </tags>
   </entry>
   <entry>
@@ -543,112 +649,6 @@
       </categories>
       <tags>
         <tag>STL库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式-创建型-单例</title>
-    <url>/2021/05/04/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B/</url>
-    <content><![CDATA[<p><strong>单例模式</strong>是一种创建型设计模式， 让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</p>
-<span id="more"></span>
-
-<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>单例模式（Singleton）是一种创建型设计模式， 让你<strong>能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</strong></p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>使用下三部分来实现：</p>
-<ul>
-<li>私有构造函数：私有构造函数保证了不能通过构造函数来创建对象实例</li>
-<li>一个私有静态变量：私有静态变量用于指向实例化的对象，全局唯一</li>
-<li>一个公有静态函数：只能通过公有静态函数返回<strong>唯一的私有静态变量</strong></li>
-</ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>主要分为懒汉式 和 饿汉式 两种实现方式。区别就是实例化唯一的对象的位置。而懒汉式又有两种实现，一个线程安全，一个线程不安全</p>
-<ul>
-<li>懒汉式：延迟实现，只有当调用公用静态函数，且静态指针为空的时候才实例化对象，存在线程不安全问题<ul>
-<li>线程安全的修改</li>
-</ul>
-</li>
-<li>饿汉式：当程序运行的时候就 初始化 私有静态指针，因此线程安全</li>
-</ul>
-<p>C++ 代码实现</p>
-<h3 id="饿汉式-懒汉式"><a href="#饿汉式-懒汉式" class="headerlink" title="饿汉式  /  懒汉式"></a>饿汉式  /  懒汉式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="keyword">const</span> std::string value): <span class="built_in">value_</span>(value)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> Singleton* singleton_;</span><br><span class="line">    std::string value_;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>(Singleton &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span>=(<span class="keyword">const</span> Singleton &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="comment">// 全局静态函数 用于实例化唯一的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton *<span class="title">GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton_;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function">string <span class="title">value</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> value_;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 如果是饿汉模式，在初始化的时候就 用 new 分配内存，如果懒汉模式，初始静态指针设置为 null 只有调用静态函数的时候才new</span></span><br><span class="line"><span class="comment">// 由于 singleton_ 指针是 私有静态变量，因此只能在函数外部，全局初始化，而不能放在任何一个函数里 去修改（包括mian函数），会编译报错</span></span><br><span class="line">Singleton* Singleton::singleton_= <span class="keyword">new</span> <span class="built_in">Singleton</span>(<span class="string">&quot;Init&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThreadFoo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// Following code emulates slow initialization.</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">1000</span>));</span><br><span class="line">    Singleton* singleton = Singleton::<span class="built_in">GetInstance</span>(<span class="string">&quot;FOO&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; singleton-&gt;<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThreadBar</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// Following code emulates slow initialization.</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">1000</span>));</span><br><span class="line">    Singleton* singleton = Singleton::<span class="built_in">GetInstance</span>(<span class="string">&quot;BAR&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; singleton-&gt;<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当两个线程输出的 结果 不一样时，说明产生了线程不安全的问题</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(ThreadFoo)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(ThreadBar)</span></span>;</span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 同过上述代码可以看出，懒汉式饿汉式的区别：</p>
-<ul>
-<li>饿汉式：在 main 函数的执行之前，就调用了 new 实例化了对象，因此是线程安全的；缺点是由于一开始就申请了空间，会有资源浪费的问题。</li>
-<li>懒汉式：只有在程序 调用 公有静态函数，需要获取对象时，才会判断该对象有没有实例化，没的话再实例化。优点是  延迟实例化带来的节约资源的好处。缺点是 这是线程不安全的。<ul>
-<li>例如当两个线程同时 调用 <code>GetInstance </code>函数，并且都同时通过了 <code>singleton_</code>指针空的判断，就会实例化出两个对象，所以上述代码输出的现象就是，两个线程输出的value值不一样。</li>
-</ul>
-</li>
-</ul>
-<h3 id="懒汉式-线程安全"><a href="#懒汉式-线程安全" class="headerlink" title="懒汉式-线程安全"></a>懒汉式-线程安全</h3><p>为了解决上述 懒汉式 线程不安全的问题就是 对 <code>GetInstance</code> 函数加锁，那么在一个时间点只能有一个线程能够进入该方法，从而避免了实例化多次。但是当一个线程进入该方法之后，其它试图进入该方法的线程都必须等待，即使 <code>Singleton </code>已经被实例化了(即 <code>singleton_ </code>指针不为空)。这会让线程阻塞时间过长，因此该方法有性能问题，不推荐使用。可以使用 <strong>双重校验锁</strong> 的方法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 简单的加锁</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)&#123;</span><br><span class="line">        singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> singleton_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 双重校验锁</span></span><br><span class="line"><span class="function">Singleton* <span class="title">Singleton::GetInstance</span><span class="params">(<span class="keyword">const</span> std::string&amp; value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(singleton_！=<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> singleton_;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        std::lock_guard&lt;std::mutex&gt; <span class="built_in">lock</span>(mutex_);</span><br><span class="line">        <span class="keyword">if</span>(singleton_==<span class="literal">nullptr</span>)</span><br><span class="line">            singleton_ = <span class="keyword">new</span> <span class="built_in">Singleton</span>(value);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>从上述代码实现可以看出，双重校验锁的原理是，只有当判断 <code>singleton_ </code>为空，即还未实例化的时候，才需要加锁操作，因为这时候肯定是要进行对象实例化操作，即写操作。如果已经实例化了，直接返回地址即可，不用加锁读。但是加锁后又判断了一遍是否指针空，因为还是可能存在两个线程同时进入了第一个 指针判断 空的语句，由于有锁，一个线程实例化对象，并修改指针为非空，完毕后释放锁。此时如果另一个线程不再判断一次为空就会 再次 new 实例化，还是存在线程不安全的问题。</p>
-<p>或者直接这么理解，双重校验就是在  原本的基础上 先判断指针是否为空，空的化直接返回指针，不必校验。而不为空，才加锁判断。</p>
-<p><strong>优点：</strong>双重校验锁，即是延迟实例化的，可以节省资源，还是线程安全的，且不会因为锁的存在使得线程阻塞时间过长。</p>
-<h3 id="volatile-关键字"><a href="#volatile-关键字" class="headerlink" title="volatile 关键字"></a>volatile 关键字</h3><p>singleton_ 采用 volatile 关键字修饰也是很有必要的，<code>singleton_ = new Singleton(value)</code>  这段代码其实是分为三步执行：</p>
-<ol>
-<li>为 <code>Singleton </code>分配内存空间</li>
-<li>初始化 <code>Singleton</code></li>
-<li>将 <code>singleton_  </code>指向分配的内存地址</li>
-</ol>
-<p>但是由于 JVM 具有指令重排的特性，执行顺序有可能变成 1&gt;3&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 调用 getUniqueInstance() 后发现 uniqueInstance 不为空，因此返回 uniqueInstance，但此时 uniqueInstance 还未被初始化。使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行</p>
-<p><a href="../%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/volatile%E5%85%B3%E9%94%AE%E5%AD%97.md">C++ volatile关键字作用</a></p>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式-创建型-工厂方法</title>
-    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p><strong>工厂方法</strong>是一种创建型设计模式，是基于简单工厂的改进</p>
-<span id="more"></span>
-
-<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>简单工厂中，一个工厂类统一实例化所有的产品，而工厂方法，每个产品用特定的工厂子类实例化。定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。</p>
-<h3 id="和简单工厂对比"><a href="#和简单工厂对比" class="headerlink" title="和简单工厂对比"></a>和简单工厂对比</h3><p>在简单工厂方法中，同一接口的不同产品对象都由一个工厂创建出来。这种做法存在两个问题：</p>
-<ul>
-<li>当产品对象很多时，工厂就会成为一个“过大类”</li>
-<li>当新增产品对象时，需要在工厂中增加一个分支。这就违反了“开闭原则”</li>
-</ul>
-<p>第一条很好理解，一个工厂负责生产所有的产品，不断增加产品的种类，工厂中的 if 语句也就越多。同时，由于增加一个新的产品种类，就要修改工厂的代码，因此违反了开闭原则，开闭原则希望当增加新功能时不用修改原有的代码，只用通过新增代码就完成。</p>
-<p>所以工厂方法，特定的 产品使用特定的 工厂方法生产，当新增一个方法时，只用新增一个生产它的工厂子类即可。因此针对产品不会频繁变化，且产品种类较少的情景下 使用简单工厂反而好些。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>从代码可以看出实现的核心是：</p>
-<ul>
-<li>不同子类重写不同的new 产品的函数，主工厂中首先调用 获取产品的函数获取产品，再执行功能。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 产品抽象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Product</span>() &#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 子类产品1 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProduct1</span> :</span> <span class="keyword">public</span> Product &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#123;Result of the ConcreteProduct1&#125;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 子类产品2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProduct2</span> :</span> <span class="keyword">public</span> Product &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">std::string <span class="title">Operation</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#123;Result of the ConcreteProduct2&#125;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂主类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Creator</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Creator</span>()&#123;&#125;;</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">SomeOperation</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 在工厂主类中 生产 产品，FactoryMethod 是由对应的子类重写了，因此不同的子类会返回不同的产品</span></span><br><span class="line">    <span class="comment">// 然后再 调用产品完成特定的功能</span></span><br><span class="line">    Product* product = <span class="keyword">this</span>-&gt;<span class="built_in">FactoryMethod</span>();</span><br><span class="line">   </span><br><span class="line">    std::string result = <span class="string">&quot;Creator: The same creator&#x27;s code has just worked with &quot;</span> + product-&gt;<span class="built_in">Operation</span>();</span><br><span class="line">    <span class="keyword">delete</span> product;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂1 用于生产产品1</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCreator1</span> :</span> <span class="keyword">public</span> Creator &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProduct1</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 工厂2 用于生产产品2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCreator2</span> :</span> <span class="keyword">public</span> Creator &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function">Product* <span class="title">FactoryMethod</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProduct2</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClientCode</span><span class="params">(<span class="keyword">const</span> Creator&amp; creator)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Client: I&#x27;m not aware of the creator&#x27;s class, but it still works.\n&quot;</span></span><br><span class="line">            &lt;&lt; creator.<span class="built_in">SomeOperation</span>() &lt;&lt; std::endl;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;App: Launched with the ConcreteCreator1.\n&quot;</span>;</span><br><span class="line">  Creator* creator = <span class="keyword">new</span> <span class="built_in">ConcreteCreator1</span>();</span><br><span class="line">  <span class="built_in">ClientCode</span>(*creator);</span><br><span class="line">  std::cout &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;App: Launched with the ConcreteCreator2.\n&quot;</span>;</span><br><span class="line">  Creator* creator2 = <span class="keyword">new</span> <span class="built_in">ConcreteCreator2</span>();</span><br><span class="line">  <span class="built_in">ClientCode</span>(*creator2);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> creator;</span><br><span class="line">  <span class="keyword">delete</span> creator2;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式-创建型-简单工厂</title>
-    <url>/2021/05/05/C++/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82/</url>
-    <content><![CDATA[<p><strong>简单工厂</strong>是一种创建型设计模式，在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
-<span id="more"></span>
-
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><strong>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化</strong>。这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>根据下面代码可以看出，简单工厂的实现要点</p>
-<ul>
-<li>用户并不需要指导具体的子类的名称，只需要根据参数来向工厂获取 产品。而用户只用使用 基类指针来指向 工厂创建的子类对象，即多态机制，来完成子类的特定功能。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Phone</span>() &#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XiaoMi</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">XiaoMi</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is xiao mi phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span>:</span> <span class="keyword">public</span> Phone&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Apple</span>()&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;This is apple phone&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 简单工厂类，客户使用简单工厂来获取对应的产品</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">SimpleFactory</span>()&#123;&#125;;</span><br><span class="line">        <span class="function">Phone* <span class="title">create</span><span class="params">(<span class="keyword">int</span> type)</span></span>&#123;   <span class="comment">// 注意返回类型为 基类 指针</span></span><br><span class="line">            <span class="built_in"><span class="keyword">switch</span></span> (type)</span><br><span class="line">            &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">XiaoMi</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Apple</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SimpleFactory factory = <span class="built_in">SimpleFactory</span>();</span><br><span class="line">    Phone* ptr = factory.<span class="built_in">create</span>(<span class="number">0</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    ptr = factory.<span class="built_in">create</span>(<span class="number">1</span>);</span><br><span class="line">    ptr-&gt;<span class="built_in">run</span>();</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
@@ -1074,70 +1074,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++强制类型转换</title>
-    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p>C++强制类型转换</p>
-<span id="more"></span>
-
-<h1 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h1><p>C 风格的强制类型转换 如下，不管什么类型的转换都可以使用使用下面的方式。</p>
-<blockquote>
-<p>TypeName b = (TypeName)a;</p>
-</blockquote>
-<p>C++也是支持C风格的强制转换,但是C风格的强制转换可能带来一些隐患,让一些问题难以察觉.所以C++提供了一组可以用在不同场合的强制转换的函数 包含：</p>
-<ul>
-<li>const_cast </li>
-<li>static_cast </li>
-<li>dynamic_cast</li>
-<li>reinterpret_cast</li>
-</ul>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><p>主要用于 去掉 指针和引用的 的 const 属性。</p>
-<ol>
-<li>常量指针 / 引用 被转化成非常量的指针，并且仍然指向原来的对象；</li>
-<li>const_cast一般用于修改指针。如const char *p形式</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*c_ptr = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> *ptr = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(c_ptr);  <span class="comment">// 通过const_cast&lt;Ty&gt; 去常量 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下的情况 对定义的常变量直接转换的方法  最好不要用  在不同编译器下可能会有不同的结果  </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_val = <span class="number">233</span>;  <span class="comment">//声明为常量类型</span></span><br><span class="line"><span class="keyword">int</span> &amp;use_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt;(c_val); <span class="comment">//使用去const 引用</span></span><br><span class="line"><span class="keyword">int</span> *ptr_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;c_val);<span class="comment">//使用去const 指针</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><ol>
-<li>static_cast 作用和C语言风格强制转换的效果基本一样  <strong>这个和C相同 是指 ，可能会修改二进制的数据</strong><ul>
-<li><strong>用于基本数据类型之间的转换</strong>（int  char bool 等），如把int转换成char，把int转换成enum。这种转换的安全性需要开发者来维护。</li>
-</ul>
-</li>
-<li>用于类层次结构中基类（父类）和派生类（子类）之间指针或引用的转换。注意：<strong>进行上行转换</strong>（把派生类的指针或引用转换成基类表示）<strong>是安全的</strong>；进行下行转换（把基类指针或引用转换成派生类表示）时，由于没有动态类型检查，所以是不安全的</li>
-<li>不能去掉原有的 属性 如  const voliate</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 常规的使用方法 */</span></span><br><span class="line"><span class="keyword">float</span> f_pi=<span class="number">3.141592f</span></span><br><span class="line"><span class="keyword">int</span>   i_pi=<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(f_pi); <span class="comment">/// i_pi 的值为 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* class 的上下行转换 */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上行 Sub -&gt; Base</span></span><br><span class="line"><span class="comment">//编译通过，安全</span></span><br><span class="line">Sub sub;</span><br><span class="line">Base *base_ptr = <span class="keyword">static_cast</span>&lt;Base*&gt;(&amp;sub);  </span><br><span class="line"><span class="comment">//下行 Base -&gt; Sub</span></span><br><span class="line"><span class="comment">//编译通过，不安全</span></span><br><span class="line">Base base;</span><br><span class="line">Sub *sub_ptr = <span class="keyword">static_cast</span>&lt;Sub*&gt;(&amp;base);  </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><p>c++ 多态性，例如在基类中定义一个虚函数，然后 子类 继承这个类并 实现虚函数，不同的子类可以有不同的虚函数实现。当我们将基类的指针指向子类的对象时，就会自动调用 对应子类的 虚函数的实现，这就体现出了多态性。</p>
-<p>这个类型转换是 C 语言替代不了的 因为涉及到 C++ 的多态特性。对于C++ 中的类  的子类 和 基类 之间的指针或引用的转换，因该用dynamic 或者 static 转换。</p>
-<ol>
-<li>当 将基类指针转换为 子类指针时，不能直接强转，也不能用static_cast。这是因为子类除了继承基类的变量和方法之外，还可能有自己新的扩充的定义，即 基类 &lt;  子类，强转就可能出现指针越界。应该使用 dynamic_cast 来完成，因为dynamic 可以在程序运行过程中 对转换的可行性进行检查，如果无法完成，会返回空指针。</li>
-<li>dynamic_cast 的检查依赖于RTTI 实现，需要类中含有虚函数，没有虚函数 编译不通过。</li>
-<li>dynamic_cast 运行检查是有开销的  所以 如果是 子类 像  基类的  上行转换 用 staic_cast 比较快。  </li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span> <span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Sub-&gt;Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Sub * sub = <span class="keyword">new</span> <span class="built_in">Sub</span>();</span><br><span class="line">    sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Base* sub2base = <span class="keyword">dynamic_cast</span>&lt;Base*&gt;(sub);</span><br><span class="line">    <span class="keyword">if</span> (sub2base != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        sub2base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&lt;sub-&gt;base&gt; sub2base val is: &quot;</span> &lt;&lt; sub2base &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;Base-&gt;Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Base *base = <span class="keyword">new</span> <span class="built_in">Base</span>();</span><br><span class="line">    base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Sub  *base2sub = <span class="keyword">dynamic_cast</span>&lt;Sub*&gt;(base);</span><br><span class="line">    <span class="keyword">if</span> (base2sub != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        base2sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt;<span class="string">&quot;&lt;base-&gt;sub&gt; base2sub val is: &quot;</span>&lt;&lt; base2sub &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> sub;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* vs2017 输出为下</span></span><br><span class="line"><span class="comment">Sub-&gt;Base</span></span><br><span class="line"><span class="comment">I&#x27;m Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;sub-&gt;base&gt; sub2base val is: 00B9E080   // 注:这个地址是系统分配的,每次不一定一样</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Base-&gt;Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;base-&gt;sub&gt; base2sub val is: 00000000   // VS2017的C++编译器,对此类错误的转换赋值为nullptr</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><ul>
-<li>强制类型转换符用来<strong>处理无关类</strong>型转换的  (例如指针 和 long long（64位机器指针是八字节） 的转换)</li>
-<li>为操作数的位模式提供较低层次的重新解释！但是他仅仅是重新解释了给出的对象的比特模型，并没有进行二进制的转换！</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdint&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *ptr = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">233</span>);</span><br><span class="line">    <span class="keyword">uint64_t</span> ptr_addr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">uint64_t</span>&gt;(ptr);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ptr 的地址: &quot;</span> &lt;&lt; hex &lt;&lt; ptr &lt;&lt; endl</span><br><span class="line">        &lt;&lt; <span class="string">&quot;ptr_addr 的值(hex): &quot;</span> &lt;&lt; hex &lt;&lt; ptr_addr &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语言特性</category>
-      </categories>
-      <tags>
-        <tag>C++语法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++右值和左值</title>
     <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC/</url>
     <content><![CDATA[<p>C++右值和左值</p>
@@ -1252,6 +1188,70 @@
 <p>完美地实现了我们所要的转发效果。但是这个例子中，t 明明是左值，为何可以传入右值引用的函数中？这里的 <code>void relay(T&amp;&amp; t) </code>其实是通用引用，即通过上面的引用折叠规则 由编译器推断得出的。</p>
 <h4 id="完美转发原理"><a href="#完美转发原理" class="headerlink" title="完美转发原理"></a>完美转发原理</h4><p><code>std::forward</code>的源码形式大致是这样：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  精简了标准库的代码，在细节上可能不完全正确，但是足以让我们了解转发函数 forward 的了</span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">T&amp;&amp; <span class="title">forward</span><span class="params">(T &amp;param)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;T&amp;&amp;&gt;(param);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语言特性</category>
+      </categories>
+      <tags>
+        <tag>C++语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++强制类型转换</title>
+    <url>/2021/05/11/C++/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>C++强制类型转换</p>
+<span id="more"></span>
+
+<h1 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h1><p>C 风格的强制类型转换 如下，不管什么类型的转换都可以使用使用下面的方式。</p>
+<blockquote>
+<p>TypeName b = (TypeName)a;</p>
+</blockquote>
+<p>C++也是支持C风格的强制转换,但是C风格的强制转换可能带来一些隐患,让一些问题难以察觉.所以C++提供了一组可以用在不同场合的强制转换的函数 包含：</p>
+<ul>
+<li>const_cast </li>
+<li>static_cast </li>
+<li>dynamic_cast</li>
+<li>reinterpret_cast</li>
+</ul>
+<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><p>主要用于 去掉 指针和引用的 的 const 属性。</p>
+<ol>
+<li>常量指针 / 引用 被转化成非常量的指针，并且仍然指向原来的对象；</li>
+<li>const_cast一般用于修改指针。如const char *p形式</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*c_ptr = <span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="keyword">char</span> *ptr = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(c_ptr);  <span class="comment">// 通过const_cast&lt;Ty&gt; 去常量 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下的情况 对定义的常变量直接转换的方法  最好不要用  在不同编译器下可能会有不同的结果  </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_val = <span class="number">233</span>;  <span class="comment">//声明为常量类型</span></span><br><span class="line"><span class="keyword">int</span> &amp;use_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt;(c_val); <span class="comment">//使用去const 引用</span></span><br><span class="line"><span class="keyword">int</span> *ptr_val = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;c_val);<span class="comment">//使用去const 指针</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><ol>
+<li>static_cast 作用和C语言风格强制转换的效果基本一样  <strong>这个和C相同 是指 ，可能会修改二进制的数据</strong><ul>
+<li><strong>用于基本数据类型之间的转换</strong>（int  char bool 等），如把int转换成char，把int转换成enum。这种转换的安全性需要开发者来维护。</li>
+</ul>
+</li>
+<li>用于类层次结构中基类（父类）和派生类（子类）之间指针或引用的转换。注意：<strong>进行上行转换</strong>（把派生类的指针或引用转换成基类表示）<strong>是安全的</strong>；进行下行转换（把基类指针或引用转换成派生类表示）时，由于没有动态类型检查，所以是不安全的</li>
+<li>不能去掉原有的 属性 如  const voliate</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 常规的使用方法 */</span></span><br><span class="line"><span class="keyword">float</span> f_pi=<span class="number">3.141592f</span></span><br><span class="line"><span class="keyword">int</span>   i_pi=<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(f_pi); <span class="comment">/// i_pi 的值为 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* class 的上下行转换 */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上行 Sub -&gt; Base</span></span><br><span class="line"><span class="comment">//编译通过，安全</span></span><br><span class="line">Sub sub;</span><br><span class="line">Base *base_ptr = <span class="keyword">static_cast</span>&lt;Base*&gt;(&amp;sub);  </span><br><span class="line"><span class="comment">//下行 Base -&gt; Sub</span></span><br><span class="line"><span class="comment">//编译通过，不安全</span></span><br><span class="line">Base base;</span><br><span class="line">Sub *sub_ptr = <span class="keyword">static_cast</span>&lt;Sub*&gt;(&amp;base);  </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><p>c++ 多态性，例如在基类中定义一个虚函数，然后 子类 继承这个类并 实现虚函数，不同的子类可以有不同的虚函数实现。当我们将基类的指针指向子类的对象时，就会自动调用 对应子类的 虚函数的实现，这就体现出了多态性。</p>
+<p>这个类型转换是 C 语言替代不了的 因为涉及到 C++ 的多态特性。对于C++ 中的类  的子类 和 基类 之间的指针或引用的转换，因该用dynamic 或者 static 转换。</p>
+<ol>
+<li>当 将基类指针转换为 子类指针时，不能直接强转，也不能用static_cast。这是因为子类除了继承基类的变量和方法之外，还可能有自己新的扩充的定义，即 基类 &lt;  子类，强转就可能出现指针越界。应该使用 dynamic_cast 来完成，因为dynamic 可以在程序运行过程中 对转换的可行性进行检查，如果无法完成，会返回空指针。</li>
+<li>dynamic_cast 的检查依赖于RTTI 实现，需要类中含有虚函数，没有虚函数 编译不通过。</li>
+<li>dynamic_cast 运行检查是有开销的  所以 如果是 子类 像  基类的  上行转换 用 staic_cast 比较快。  </li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>:</span> <span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    ~<span class="built_in">Sub</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;I&#x27;m Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">i_am_virtual_foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Sub-&gt;Base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Sub * sub = <span class="keyword">new</span> <span class="built_in">Sub</span>();</span><br><span class="line">    sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Base* sub2base = <span class="keyword">dynamic_cast</span>&lt;Base*&gt;(sub);</span><br><span class="line">    <span class="keyword">if</span> (sub2base != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        sub2base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&lt;sub-&gt;base&gt; sub2base val is: &quot;</span> &lt;&lt; sub2base &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;Base-&gt;Sub&quot;</span> &lt;&lt; endl;</span><br><span class="line">    Base *base = <span class="keyword">new</span> <span class="built_in">Base</span>();</span><br><span class="line">    base-&gt;<span class="built_in">print</span>();</span><br><span class="line">    Sub  *base2sub = <span class="keyword">dynamic_cast</span>&lt;Sub*&gt;(base);</span><br><span class="line">    <span class="keyword">if</span> (base2sub != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        base2sub-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt;<span class="string">&quot;&lt;base-&gt;sub&gt; base2sub val is: &quot;</span>&lt;&lt; base2sub &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> sub;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* vs2017 输出为下</span></span><br><span class="line"><span class="comment">Sub-&gt;Base</span></span><br><span class="line"><span class="comment">I&#x27;m Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;sub-&gt;base&gt; sub2base val is: 00B9E080   // 注:这个地址是系统分配的,每次不一定一样</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Base-&gt;Sub</span></span><br><span class="line"><span class="comment">I&#x27;m Base</span></span><br><span class="line"><span class="comment">&lt;base-&gt;sub&gt; base2sub val is: 00000000   // VS2017的C++编译器,对此类错误的转换赋值为nullptr</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><ul>
+<li>强制类型转换符用来<strong>处理无关类</strong>型转换的  (例如指针 和 long long（64位机器指针是八字节） 的转换)</li>
+<li>为操作数的位模式提供较低层次的重新解释！但是他仅仅是重新解释了给出的对象的比特模型，并没有进行二进制的转换！</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdint&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *ptr = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">233</span>);</span><br><span class="line">    <span class="keyword">uint64_t</span> ptr_addr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">uint64_t</span>&gt;(ptr);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ptr 的地址: &quot;</span> &lt;&lt; hex &lt;&lt; ptr &lt;&lt; endl</span><br><span class="line">        &lt;&lt; <span class="string">&quot;ptr_addr 的值(hex): &quot;</span> &lt;&lt; hex &lt;&lt; ptr_addr &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ptr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1524,48 +1524,6 @@
       </tags>
   </entry>
   <entry>
-    <title>面经C++类和数据抽象</title>
-    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%B1%BB%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/</url>
-    <content><![CDATA[<p> 经C++类和数据抽象</p>
-<span id="more"></span>
-
-<h3 id="C-中类成员的访问权限"><a href="#C-中类成员的访问权限" class="headerlink" title="C++中类成员的访问权限"></a>C++中类成员的访问权限</h3><p>C++ 通过  pubilc, protected, private 三个关键字来控制成员的访问权限。</p>
-<ul>
-<li>在类的内部，可以随意访问三种属性的变量</li>
-<li>在派生类中，不可以访问父类 私有的 成员</li>
-<li>在类的外部，只能通过对象访问成员，并且只能访问public 属性的成员</li>
-</ul>
-<h3 id="C-中-struct-和class的区别"><a href="#C-中-struct-和class的区别" class="headerlink" title="C++中 struct 和class的区别"></a>C++中 struct 和class的区别</h3><ul>
-<li>c++ 可以用 struct  和 class 定义类，都可以用来继承，但是 struct 默认是公开的属性，而class默认成员是私有的类型。</li>
-<li>class 这个关键字还可以使用 模板，模板类   而 struct 不能</li>
-</ul>
-<h3 id="C-类内可以定义引用数据成员吗"><a href="#C-类内可以定义引用数据成员吗" class="headerlink" title="C++类内可以定义引用数据成员吗"></a>C++类内可以定义引用数据成员吗</h3><p>可以，必须通过成员函数初始化列表初始化。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ref</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">// 构造函数形参为传值，不能保证正确性</span></span><br><span class="line">        <span class="comment">// Ref (int target) :myref(target) &#123;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 函数体对引用赋值，编译错误：引用未初始化</span></span><br><span class="line">        <span class="comment">// Ref (int &amp;target)  &#123;</span></span><br><span class="line">            <span class="comment">// myref = target;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果成员为变量为引用类型，那么构造函数的参数为引用类型  这个好理解 因为你都是引用外界的数据，如果用值传递，进来的只是个临时值，再对临时值做引用，显然有问题。</span></span><br><span class="line">        <span class="comment">// 引用必须在成员初始化列表里面初始化，不能在函数体里面初始化。构造函数的参数列表在构造函数之前执行</span></span><br><span class="line">        <span class="comment">// 在函数体里面修改myref，相当于赋值，显然引用不能赋值</span></span><br><span class="line">        <span class="built_in">Ref</span> (<span class="keyword">int</span> &amp;target) :<span class="built_in">myref</span>(target) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Ref constructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">printRef</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;myref is: &quot;</span> &lt;&lt; myref &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">Ref</span> () &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> &amp;myref;</span><br><span class="line">        <span class="comment">/* data */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="右值引用，跟左值有什么区别"><a href="#右值引用，跟左值有什么区别" class="headerlink" title="右值引用，跟左值有什么区别"></a>右值引用，跟左值有什么区别</h3><p>左值：指可以取地址的，或者有具体名字的变量/对象</p>
-<ul>
-<li>左值可以被赋值，寻址，可变</li>
-</ul>
-<p>右值：c98中包含纯右值，即临时值，和将亡值，通过右值引用绑定的右值，一般右值都是临时的，表达式结束右值便不再存在（右值引用可以延续右值的生命周期）</p>
-<ul>
-<li>右值不可变，不可寻址</li>
-</ul>
-<p>右值引用是c11的新特性，它主要有两个方面的优势：</p>
-<ol>
-<li>右值引用可以减少拷贝构造或者赋值构造中 对临时变量的 重复拷贝。</li>
-<li>能够更简洁明确的定义泛函数</li>
-</ol>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>面经C++汇总</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面经C++容器和算法</title>
     <url>/2021/04/24/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E5%AE%B9%E5%99%A8%E5%92%8C%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>面经C++容器和算法</p>
@@ -1673,6 +1631,48 @@
 <p><img src="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg" alt="preview"></p>
 <img src="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom: 50%;" />
 
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>面经C++汇总</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经C++类和数据抽象</title>
+    <url>/2021/05/11/C++/%E9%9D%A2%E7%BB%8FC++%E6%B1%87%E6%80%BB/%E9%9D%A2%E7%BB%8Fc++%E7%B1%BB%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/</url>
+    <content><![CDATA[<p> 经C++类和数据抽象</p>
+<span id="more"></span>
+
+<h3 id="C-中类成员的访问权限"><a href="#C-中类成员的访问权限" class="headerlink" title="C++中类成员的访问权限"></a>C++中类成员的访问权限</h3><p>C++ 通过  pubilc, protected, private 三个关键字来控制成员的访问权限。</p>
+<ul>
+<li>在类的内部，可以随意访问三种属性的变量</li>
+<li>在派生类中，不可以访问父类 私有的 成员</li>
+<li>在类的外部，只能通过对象访问成员，并且只能访问public 属性的成员</li>
+</ul>
+<h3 id="C-中-struct-和class的区别"><a href="#C-中-struct-和class的区别" class="headerlink" title="C++中 struct 和class的区别"></a>C++中 struct 和class的区别</h3><ul>
+<li>c++ 可以用 struct  和 class 定义类，都可以用来继承，但是 struct 默认是公开的属性，而class默认成员是私有的类型。</li>
+<li>class 这个关键字还可以使用 模板，模板类   而 struct 不能</li>
+</ul>
+<h3 id="C-类内可以定义引用数据成员吗"><a href="#C-类内可以定义引用数据成员吗" class="headerlink" title="C++类内可以定义引用数据成员吗"></a>C++类内可以定义引用数据成员吗</h3><p>可以，必须通过成员函数初始化列表初始化。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ref</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">// 构造函数形参为传值，不能保证正确性</span></span><br><span class="line">        <span class="comment">// Ref (int target) :myref(target) &#123;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 函数体对引用赋值，编译错误：引用未初始化</span></span><br><span class="line">        <span class="comment">// Ref (int &amp;target)  &#123;</span></span><br><span class="line">            <span class="comment">// myref = target;</span></span><br><span class="line">            <span class="comment">// cout &lt;&lt; &quot;Ref constructor&quot; &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果成员为变量为引用类型，那么构造函数的参数为引用类型  这个好理解 因为你都是引用外界的数据，如果用值传递，进来的只是个临时值，再对临时值做引用，显然有问题。</span></span><br><span class="line">        <span class="comment">// 引用必须在成员初始化列表里面初始化，不能在函数体里面初始化。构造函数的参数列表在构造函数之前执行</span></span><br><span class="line">        <span class="comment">// 在函数体里面修改myref，相当于赋值，显然引用不能赋值</span></span><br><span class="line">        <span class="built_in">Ref</span> (<span class="keyword">int</span> &amp;target) :<span class="built_in">myref</span>(target) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Ref constructor&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">printRef</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;myref is: &quot;</span> &lt;&lt; myref &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">virtual</span> ~<span class="built_in">Ref</span> () &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> &amp;myref;</span><br><span class="line">        <span class="comment">/* data */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="右值引用，跟左值有什么区别"><a href="#右值引用，跟左值有什么区别" class="headerlink" title="右值引用，跟左值有什么区别"></a>右值引用，跟左值有什么区别</h3><p>左值：指可以取地址的，或者有具体名字的变量/对象</p>
+<ul>
+<li>左值可以被赋值，寻址，可变</li>
+</ul>
+<p>右值：c98中包含纯右值，即临时值，和将亡值，通过右值引用绑定的右值，一般右值都是临时的，表达式结束右值便不再存在（右值引用可以延续右值的生命周期）</p>
+<ul>
+<li>右值不可变，不可寻址</li>
+</ul>
+<p>右值引用是c11的新特性，它主要有两个方面的优势：</p>
+<ol>
+<li>右值引用可以减少拷贝构造或者赋值构造中 对临时变量的 重复拷贝。</li>
+<li>能够更简洁明确的定义泛函数</li>
+</ol>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -1863,46 +1863,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据结构-图</title>
-    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/</url>
-    <content><![CDATA[<p>数据结构之图，记录了图有关的定义和常规操作</p>
-<span id="more"></span>
-
-<h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h2 id="几个重要的概念"><a href="#几个重要的概念" class="headerlink" title="几个重要的概念"></a>几个重要的概念</h2><ul>
-<li>有向图 / 无向图 / 混合图：每个边都是有向边，个边都是无向边，…</li>
-<li>度：顶点相邻边的数目，常用 <code>deg(V)</code>, <code>d(v)</code> 表示。有向图中 以该顶点为终点的边的数目 <strong>入度</strong>；   以该顶点为起点的边的数目 <strong>出度</strong> ； 顶点的度 = 入度 + 出度。</li>
-<li>连通的 / 连通图 /  连通分量 / 极大连通子图：从顶点 u 有路径到达 v ，则 <code>u,v</code> 是连通的；任意两点连通；H是G的连通子图，且不存在连通图F，使得 <code>H ⊊ F ⊆ G</code>，则H是G的连通分量。<ul>
-<li>连通图只有一个连通分量，即图自身</li>
-<li>非连通图有多个连通分量。</li>
-</ul>
-</li>
-</ul>
-<h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p><strong>直接存边</strong>：使用一个数组来存边，数组中的每个元素都包含一条边的起点、终点和边权（带边权的图），或者使用多个数组分别存起点、终点和边权。</p>
-<p><img src="https://i.loli.net/2021/03/28/BNKUo93ncTrgdWY.png" alt="1598969422109"></p>
-<p><strong>邻接矩阵 Adjacency Matrix</strong>二维数组 <code>adj[][]</code>，<code>adj[u][v]</code> 为 1 表示存在 u 到 v 的边，为 0 表示不存在。如果是带边权的图，可以在 <code>adj[u][v]</code> 中存储 u 到 v 的边的边权。</p>
-<p><strong>邻接表 Adjacency Table</strong>：使用一个支持动态增加元素的数据结构构成的数组，例如c++中的 vector<int></p>
-<ul>
-<li><p>领接表：中 <code>adj[u]</code> 存储的是点 u 所有出边的信息（终点、边权等）</p>
-</li>
-<li><p>逆邻接表：中 <code>adj[u]</code> 存储的是点 u 所有入边的信息（起点、边权等）</p>
-<p>​    </p>
-</li>
-</ul>
-<h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><ul>
-<li>深度优先搜索 (Depth-First Search, DFS)</li>
-<li>广度优先搜索 (Breadth-First Search, BFS)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>基本数据结构</category>
-      </categories>
-      <tags>
-        <tag>图</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>相关的编程题汇总-表</title>
     <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leecode_%E8%A1%A8/</url>
     <content><![CDATA[<p>汇总了刷题中遇到的 表 相关的题目，例如栈，哈希表，数组字符串相关的题目</p>
@@ -1972,6 +1932,46 @@
       </tags>
   </entry>
   <entry>
+    <title>数据结构-图</title>
+    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/</url>
+    <content><![CDATA[<p>数据结构之图，记录了图有关的定义和常规操作</p>
+<span id="more"></span>
+
+<h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h2 id="几个重要的概念"><a href="#几个重要的概念" class="headerlink" title="几个重要的概念"></a>几个重要的概念</h2><ul>
+<li>有向图 / 无向图 / 混合图：每个边都是有向边，个边都是无向边，…</li>
+<li>度：顶点相邻边的数目，常用 <code>deg(V)</code>, <code>d(v)</code> 表示。有向图中 以该顶点为终点的边的数目 <strong>入度</strong>；   以该顶点为起点的边的数目 <strong>出度</strong> ； 顶点的度 = 入度 + 出度。</li>
+<li>连通的 / 连通图 /  连通分量 / 极大连通子图：从顶点 u 有路径到达 v ，则 <code>u,v</code> 是连通的；任意两点连通；H是G的连通子图，且不存在连通图F，使得 <code>H ⊊ F ⊆ G</code>，则H是G的连通分量。<ul>
+<li>连通图只有一个连通分量，即图自身</li>
+<li>非连通图有多个连通分量。</li>
+</ul>
+</li>
+</ul>
+<h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p><strong>直接存边</strong>：使用一个数组来存边，数组中的每个元素都包含一条边的起点、终点和边权（带边权的图），或者使用多个数组分别存起点、终点和边权。</p>
+<p><img src="https://i.loli.net/2021/03/28/BNKUo93ncTrgdWY.png" alt="1598969422109"></p>
+<p><strong>邻接矩阵 Adjacency Matrix</strong>二维数组 <code>adj[][]</code>，<code>adj[u][v]</code> 为 1 表示存在 u 到 v 的边，为 0 表示不存在。如果是带边权的图，可以在 <code>adj[u][v]</code> 中存储 u 到 v 的边的边权。</p>
+<p><strong>邻接表 Adjacency Table</strong>：使用一个支持动态增加元素的数据结构构成的数组，例如c++中的 vector<int></p>
+<ul>
+<li><p>领接表：中 <code>adj[u]</code> 存储的是点 u 所有出边的信息（终点、边权等）</p>
+</li>
+<li><p>逆邻接表：中 <code>adj[u]</code> 存储的是点 u 所有入边的信息（起点、边权等）</p>
+<p>​    </p>
+</li>
+</ul>
+<h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><ul>
+<li>深度优先搜索 (Depth-First Search, DFS)</li>
+<li>广度优先搜索 (Breadth-First Search, BFS)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>基本数据结构</category>
+      </categories>
+      <tags>
+        <tag>图</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构-表</title>
     <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E8%A1%A8/</url>
     <content><![CDATA[<p>数据结构之表，例如数组，哈希表，链表</p>
@@ -1983,119 +1983,9 @@
         <category>基本数据结构</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
         <tag>表</tag>
+        <tag>数据结构</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>典型算法-KMP算法</title>
-    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>详细记录了 KMP 算法的原理，KPM算法是一种字符串匹配算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。</p>
-<span id="more"></span>
-
-<h1 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h1><p>KMP算法是一种<strong>字符串匹配</strong>算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。如下图所示，字符串匹配就是从主串中搜索是否存在模式串。字符串匹配是一个非常频繁的任务。例如，今有一份名单，你急切地想知道自己在不在名单上；又如，假设你拿到了一份文献，你希望快速地找到某个关键字（keyword）所在的章节……凡此种种，不胜枚举。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328211045.png" alt="image-20210328211045841"></p>
-<h2 id="暴力-Brute-Force"><a href="#暴力-Brute-Force" class="headerlink" title="暴力 Brute-Force"></a>暴力 Brute-Force</h2><p>首先想到的就是 暴力搜索，从最开始对齐比较 如果不相同，将模式串往后移动一位再去和主串对应位置的子串比较….直到找到。但是显然这样比较的复杂度为O(n*(m-n+1))  n 为主串的长度，m为子串的长度。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328212909.png" alt="image-20210328212909725"></p>
-<p>暴力的方法很慢，那么有没有优化的方法了。暴力方法中每次 没匹配上 都是往后移动一格，然后接着比较，这样比较的趟数很多，完全没有用到上一次比较失败的教训。<strong>尽可能利用残余的信息，是KMP算法的思想所在</strong>。上面的例子中在匹配 algor 全对上了，但是最后一个a没有匹配上，按照暴力的逻辑 可能就往后滑动一个 再接着配。但是我们可以明显看出  algor 这几个字母如果错位，就不可能再配上，所以完全可以从 i 去比较，可以直接跳过主串中algor这几个字母。再例如下面的例子：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328213445.png" alt="image-20210328213445574"></p>
-<p>还是在 最后一个 d 处对不上，但是已经比较了 abcab 这一段，这一段模式串和主串是对的上的，根据这个已知信息 按照直觉逻辑，这次可以跳到ab试试，因为可以保证 模式串中已经比较过的 ab 和 主串中的部分对的上，而且 比较过的这一段中 存在首ab 和 尾ab相同。一句话总结  <strong>我们在已经比较并确定对齐的模式串的主串abcab后，我们移动的准则是 从abcab中 找到 模式串的首ab 和主串的尾ab对齐的位置，再往后就是主串之前没比过的位置就接着比</strong> 。这是KMP算法的核心了。</p>
-<h2 id="KMP原理"><a href="#KMP原理" class="headerlink" title="KMP原理"></a>KMP原理</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328215038.png" alt="image-20210328215038322"></p>
-<p>如上图所示，绿色部分是成功匹配，失配于红色部分。深绿色手绘线条标出了相等的前缀和后缀，<strong>其长度为next[右端]</strong>. 由于手绘线条部分的字符是一样的，所以直接把前面那条移到后面那条的位置。因此说，<strong>next数组为我们如何移动标尺提供了依据</strong>。</p>
-<h2 id="PMT表"><a href="#PMT表" class="headerlink" title="PMT表"></a>PMT表</h2><p>上述 ab … ab 这样首位相同的结构，叫做前缀和后缀。（也叫 next 数组 即 PMT表）</p>
-<p> 如果字符串A和B，存在A=BS，其中S是任意的非空字符串，那就称B为A的前缀。例如，”Harry”的前缀包括{”H”, ”Ha”, ”Har”, ”Harr”}，我们把所有前缀组成的集合，称为字符串的前缀集合。同样可以定义后缀A=SB， 其中S是任意的非空字符串，那就称B为A的后缀，例如，”Potter”的后缀包括{”otter”, ”tter”, ”ter”, ”er”, ”r”}，然后把所有后缀组成的集合，称为字符串的后缀集合。要注意的是，字符串本身并不是自己的后缀。</p>
-<p>如果一个字符串长度为N 那么PMT表的长度就为N 定义为：<strong>PMT中的值是字符串的前缀集合与后缀集合的交集中最长元素的长度</strong>。例如 对于字符串”ababa”，它的前缀集合为{”a”, ”ab”, ”aba”, ”abab”}，它的后缀集合为{”baba”, ”aba”, ”ba”, ”a”}， 两个集合的交集为{”a”, ”aba”}，其中最长的元素为”aba”，长度为3。</p>
-<h2 id="构建next数组"><a href="#构建next数组" class="headerlink" title="构建next数组"></a>构建next数组</h2><p>next数组是 针对模式串的。next数组的定义：</p>
-<ul>
-<li>定义 “k-前缀” 为一个字符串的前 k 个字符； “k-后缀” 为一个字符串的后 k 个字符。k 必须小于字符串长度。</li>
-<li>next[x] 定义为： P[0]~P[x] 这一段字符串，使得<strong>k-前缀恰等于k-后缀</strong>的最大的k.</li>
-</ul>
-<p>用动态规划的思路思考，如果已知 next[0] next[1]  next[2] … next[x]  要求 next[x+1]呢？首先，已经知道了 next[x-1]（以下记为now）。</p>
-<ol>
-<li>如果 P[x] 与 P[now] 一样 (图中的是不相等的情况) 最长相等前后缀的长度就可以扩展一位，很明显 next[x] = now + 1。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328220456.png" alt="image-20210328220458845"></p>
-<ol start="2">
-<li>P[x] 与 P[now] 不一样 。如上图  不能直接+1，因此，我们应该<strong>缩短这个now</strong>。 但是还是可以知道字串A == 字串B（这是由next[x]确定已知的），后面要新增一个 c 所以这个 c 肯定要用上，那么我们希望从 字串 B 的尾巴（后缀集合）中找一段  假设为 C ， 和字串A 的前缀中找一段 假设为 E 满足   C + ‘c’ == E，把 E 拆开为 E1 + 字符n ，又字串A == 字串B，这不就等于在子串 A 中 找相等的最大前缀C和后缀E （回到了next的定义 即为next[now - 1] ），然后再判断‘c’ 是否等于字符n。综上：<ul>
-<li>now = next[ now - 1]</li>
-<li>再判断 p[x] == p[now] 是否成立，成立就是 next[now - 1] + 1 否则循环</li>
-</ul>
-</li>
-</ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://pic1.zhimg.com/v2-010a582b0c92a92044c43a2a2ea88928_r.jpg?source=1940ef5c" alt="preview"></p>
-<p><img src="https://pic2.zhimg.com/80/v2-a6bd81af7cf9bbda32b2cfb0e4858276_1440w.jpg?source=1940ef5c" alt="img"></p>
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>经典算法</category>
-      </categories>
-      <tags>
-        <tag>典型算法</tag>
-        <tag>KMP算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>典型算法-排序算法</title>
-    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>整理、对比了常用的排序算法，插入排序，快速排序….</p>
-<span id="more"></span>
-
-<h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><h2 id="各种排序算法概述"><a href="#各种排序算法概述" class="headerlink" title="各种排序算法概述"></a>各种排序算法概述</h2><p><img src="https://i.loli.net/2021/03/28/2TKAQ1MtRfIrZSh.png" alt="image-20201116223456289"></p>
-<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
-<ul>
-<li>插入排序：平均时间复杂度O(n^2)  两层循环，外循环从第二个数开始，起始认为第一个元素是有序的，每个外循环就是将当前指向的元素插入到前面已排好序的序列中。因此还需要一个内循环来完成当前外循环指向的待插入元素与前面已排好序的每个元素逐一比较寻找插入点。每次寻找插入点的过程是这样实现空间O(1)的： 待插入元素和它卡面相邻的比较，比他还大就不用比了，他就在这儿不动，如果比他小，和他交换位置，再接着往前比，直到遇到比它小的元素为止。因此整个插入过程是不断和相邻位置交换的。</li>
-<li>选择排序：就是每次循环遍历序列，记录当前序列中最小的元素，将其放到序列首；再从剩余序列中寻找最小的放第二个…. 因此两个循环 。在数组实现中，空间O(n) ，不稳定  例如  5  3  5  2  第一趟选择出最小的2  和 首元素 5 交换，破坏了两个5原本的顺序，所以是不稳定排序。如果用链表就是稳定排序。</li>
-<li>冒泡排序：从第一个元开始比较和他右边响铃的元素的大小，前大后小就交换，否则不动，接着第二个和第三个比，交换….直到最后一个。这样第一趟中，一定会把序列中最大的元素交换到最后。第二次冒泡就只用比较到倒数第二个元素就结束。即序列后面是拍好序的。循环执行，直到所有有序。由于每次都是相邻比较交换，所以是稳定排序。两层循环 O(n^2)</li>
-<li>希尔排序：第一个时间复杂度突破O(n^2)的算法。思想是，先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序。每趟排序，根据对应的增量ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序（按照增量大小，间隔增量的元素划分为一个组）。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。这么设计算法的原因是，考虑到原始的插入排序中，当最小的元素在最后时，往前插入，要从尾比到头，循环一轮，很浪费时间。这样分组，起始组间间隔较大，可以大步长的将较小的元素调换到靠前的位置。因此 不是相邻交换元素了，是不稳定排序，时间复杂度 O(n^1.3)</li>
-<li>堆排序：利用了小顶堆这个数据结构。堆是完全二叉树，因此用数组存储，首先将数组所有元素堆化（构造大顶堆），这样数组第一个元素是序列中最大的。然后将数组首元素和最后一个元素交换（即将最大的元素放到了数组最后面），因为交换了顺序，此时不满足堆的性质了，因此接着将前n-1个元素堆化，再将首元素和倒数第二个交换….循环直到堆里只剩一个元素。时间复杂度O(nlogn)，涉及到首位交换元素，不稳定排序，空间复杂度O(1)</li>
-<li>快速排序：快速排序的思想是，每次从序列中选择一个基准数据，然后将比他小的数放他左边，大的放右边。这样再递归的对它左边子序列和右边子序列执行上述过程的快排。分组的过程是这样的，使用双指针，默认每次选取序列第一个元素为基准元素，初始数据遍历指针和数据存储指针都指向基准后的元素，遍历其后每个元素，如果小于基准数据，就和数据存储指针指向的数据交换，在将数据存储指针自增，每时刻，数据滑动指针总在存储指针之后的。由于这个分组过程也不是相邻元素互换了，所以是不稳定排序。空间复杂度是因为递归需要额外数据保留空间 O(nlogn)</li>
-<li>归并排序：和快排一样也是用了分治的思想。递归函数作用是将数组指定区间变为有序。因此函数中，先对左半部分递归归并，使得左半部分序列有序，再对右半部分递归，使得右半部分有序，最后归并，将两部分有序的序列合并，使用双指针的方法，合并时需要一个辅助数组，因此空间复杂度O(N)，涉及到二分法所以时间复杂度O(NlogN) 同时 归并递归到最底层就是相邻两个元素的比较，所以是稳定排序。</li>
-<li>计数排序：计数排序只能对正整数排序。首先要确定数组中最大最小元素，来确定分配多大的内存。然后遍历一次数组，每个数据放到其对应下标的备用数组中。遍历完后，再遍历备用数组的每个位置，将对应位置的元素一次输出，即可。所有都是O(n+k)</li>
-<li>桶排序：首先根据一定的函数映射关系，例如均匀映射，将数组中 的元素分配到N个桶中，再对桶中元素执行插入排序，最后将桶所有元素拼接。这个和计数排序类似，只不过计数排序的分桶映射方式是 数据 和 数组下标直接对应，因此计数排序只能应用于数据分布范围小的整数，而桶排序不限于此。</li>
-<li>基数排序：基数排序的思想是，对整数的每个位 逐位排序。先找出最大元素的位数，循环，先根据个位数的值对所有元素排序，拍完之后对于只有一位的元素，就完成排序；接着根据元素十位的值对剩下元素进行计数排序，对于只有两位数的元素也排序完成…..O(N*k) K为位数。每一位的排序是一个计数排序 为 N。</li>
-</ul>
-<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>​        <strong>快速排序</strong>的核心思想是在待排序数组中选取一个 基准数据（原则上要尽量保证 基准数据正好是中位数，这里以常用的第一个元素作为基准数据，基准数据选的不好 算法的复杂度会达到O(n^2)，但是平均复杂度趋近O(N)）。首先以数组第一个元素为基准a，将大于a的元素都放在a的右边，小于的放在左边。再递归的在左右区间使用这种策略直至排序完成。具体的伪代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">partition</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> lf, <span class="keyword">int</span> rt)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(lf &gt;= rt || rt &lt; <span class="number">0</span>)    <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> base = nums[lf];</span><br><span class="line">        <span class="keyword">int</span> pl = lf+<span class="number">1</span>, pr = lf+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(pr &lt;= rt)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[pr] &lt; base)&#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[pr], nums[pl++]);</span><br><span class="line">            &#125;</span><br><span class="line">            pr++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">swap</span>(nums[lf], nums[pl<span class="number">-1</span>]);  <span class="comment">// 这一步很关键 要将比较的基准数字最后切换到中间，然后再递归它的左边和右边部分</span></span><br><span class="line">        <span class="built_in">partition</span>(nums, lf, pl<span class="number">-2</span>);</span><br><span class="line">        <span class="built_in">partition</span>(nums, pl, rt);  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">partition</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆排序的要点</p>
-<ul>
-<li>连续数组存储，对于每个节点 i  它的 左 / 右 节点的下标 2 x i + 1 / 2 x i + 2 </li>
-<li>建立堆的时候，每次从最底下非叶子节点开始 向上判断 节点是否大于子节点的值，若不是 和较大的节点交换值，然后再递归的调整叶子节点。因此可以看作是两个循环</li>
-<li>构建好大堆之后，每次将堆顶的元素和最后一个元素交换，然后将堆顶元素下沉淀，然后将数组长度减一接着交换…    </li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">/// 从 节点 i 开始调整，调整完毕后 （调整的数组长度为 i） 可以保证 i 节点及其以下的部分是 满足要求的堆</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">adjMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> len, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>((i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span> &lt; len)&#123;</span><br><span class="line">            <span class="keyword">int</span> lf = (i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> rt = lf + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> max_idx = i;  <span class="comment">// 当前节点，左右子节点，取值较大的点的序号</span></span><br><span class="line">            <span class="keyword">if</span>(lf &lt; len &amp;&amp; nums[lf] &gt; nums[max_idx])  max_idx = lf;</span><br><span class="line">            <span class="keyword">if</span>(rt &lt; len &amp;&amp; nums[rt] &gt; nums[max_idx])  max_idx = rt;</span><br><span class="line">		  </span><br><span class="line">            <span class="built_in">swap</span>(nums[max_idx], nums[i]);</span><br><span class="line">			</span><br><span class="line">            <span class="keyword">if</span>(max_idx == i)  <span class="comment">//如果未在该节点处未发生调整，可以直接推出</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">else</span>             <span class="comment">//如果未在该节点处发生调整，还要往下递归的调整</span></span><br><span class="line">                i = max_idx;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/// 构建堆，第一次构建大堆时，要从最底层的节点开始向上 不断调用 adjMaxHeap 调整 </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="built_in">adjMaxHeap</span>(nums, len, i);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; nums[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/// 对于已经构建好的大堆，每次将堆顶的最大元素 调换到素组后端，然后将堆顶元素重新下沉，因为只修改了堆顶元素，所以直接从堆顶开始不断向下调整即可。</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sortMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="built_in">buildMaxHeap</span>(nums);</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = len<span class="number">-1</span>; l &gt; <span class="number">0</span>; l--)&#123;</span><br><span class="line">            <span class="built_in">swap</span>(nums[l], nums[<span class="number">0</span>]);</span><br><span class="line">            <span class="built_in">adjMaxHeap</span>(nums, l, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">       <span class="built_in">sortMaxHeap</span>(nums);</span><br><span class="line">       <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><p>桶排序的原理是，设置 m 个桶，桶是有序的，首先将 n 个待排序数分别放到对应的桶里，然后再分别对桶里的元素进行排序。假设桶内的元素使用 快排，复杂度是 O(nlogn)，那么桶排序的复杂度为 O(N + M X (N / M) X log(N/M)) = O(N + Nlog(N / M))，当桶的数量接近于数组的长度时，复杂度接近O(N)，因此对于数据分布均匀的数组，采用桶排序效果较好。桶排序的缺点是空间复杂度高，且实际数据并不是接近均匀的情况，因此效果一般。</p>
-<h3 id="典型的例题"><a href="#典型的例题" class="headerlink" title="典型的例题"></a>典型的例题</h3><h4 id="最大间距"><a href="#最大间距" class="headerlink" title="最大间距"></a><a href="https://leetcode-cn.com/problems/maximum-gap/">最大间距</a></h4><p>自己一开始做的时候，想到了用桶排序，但是把题目要求的空间复杂度看成常数的空间复杂度，感觉桶排序不满足。那如果是要求线性空间复杂度为啥不找出最大最小值，然后用Hash标记一下某个元素是否存在，然后枚举呢。当时也是没一下子想到桶排序的抽屉原理。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumGap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> minVal = *<span class="built_in">min_element</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> maxVal = *<span class="built_in">max_element</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> d = <span class="built_in">max</span>(<span class="number">1</span>, (maxVal - minVal) / (n - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">int</span> bucketSize = (maxVal - minVal) / d + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        vector&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; <span class="built_in">bucket</span>(bucketSize, &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;);  <span class="comment">// 存储 (桶内最小值，桶内最大值) 对，(-1, -1) 表示该桶是空的</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> idx = (nums[i] - minVal) / d;</span><br><span class="line">            <span class="keyword">if</span> (bucket[idx].first == <span class="number">-1</span>) &#123;</span><br><span class="line">                bucket[idx].first = bucket[idx].second = nums[i];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                bucket[idx].first = <span class="built_in">min</span>(bucket[idx].first, nums[i]);</span><br><span class="line">                bucket[idx].second = <span class="built_in">max</span>(bucket[idx].second, nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> prev = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bucketSize; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bucket[i].first == <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (prev != <span class="number">-1</span>) &#123;</span><br><span class="line">                ret = <span class="built_in">max</span>(ret, bucket[i].first - bucket[prev].second);</span><br><span class="line">            &#125;</span><br><span class="line">            prev = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>算法和数据结构</category>
-        <category>经典算法</category>
-      </categories>
-      <tags>
-        <tag>典型算法</tag>
-        <tag>排序算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/05/13/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95_tmp/</url>
-    <content><![CDATA[<hr>
-<p>title: 典型算法-排序算法<br>categories: </p>
-<ul>
-<li>算法和数据结构</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>算法思想汇总</title>
@@ -2491,6 +2381,116 @@
       </tags>
   </entry>
   <entry>
+    <title>典型算法-KMP算法</title>
+    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>详细记录了 KMP 算法的原理，KPM算法是一种字符串匹配算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。</p>
+<span id="more"></span>
+
+<h1 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h1><p>KMP算法是一种<strong>字符串匹配</strong>算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。如下图所示，字符串匹配就是从主串中搜索是否存在模式串。字符串匹配是一个非常频繁的任务。例如，今有一份名单，你急切地想知道自己在不在名单上；又如，假设你拿到了一份文献，你希望快速地找到某个关键字（keyword）所在的章节……凡此种种，不胜枚举。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328211045.png" alt="image-20210328211045841"></p>
+<h2 id="暴力-Brute-Force"><a href="#暴力-Brute-Force" class="headerlink" title="暴力 Brute-Force"></a>暴力 Brute-Force</h2><p>首先想到的就是 暴力搜索，从最开始对齐比较 如果不相同，将模式串往后移动一位再去和主串对应位置的子串比较….直到找到。但是显然这样比较的复杂度为O(n*(m-n+1))  n 为主串的长度，m为子串的长度。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328212909.png" alt="image-20210328212909725"></p>
+<p>暴力的方法很慢，那么有没有优化的方法了。暴力方法中每次 没匹配上 都是往后移动一格，然后接着比较，这样比较的趟数很多，完全没有用到上一次比较失败的教训。<strong>尽可能利用残余的信息，是KMP算法的思想所在</strong>。上面的例子中在匹配 algor 全对上了，但是最后一个a没有匹配上，按照暴力的逻辑 可能就往后滑动一个 再接着配。但是我们可以明显看出  algor 这几个字母如果错位，就不可能再配上，所以完全可以从 i 去比较，可以直接跳过主串中algor这几个字母。再例如下面的例子：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328213445.png" alt="image-20210328213445574"></p>
+<p>还是在 最后一个 d 处对不上，但是已经比较了 abcab 这一段，这一段模式串和主串是对的上的，根据这个已知信息 按照直觉逻辑，这次可以跳到ab试试，因为可以保证 模式串中已经比较过的 ab 和 主串中的部分对的上，而且 比较过的这一段中 存在首ab 和 尾ab相同。一句话总结  <strong>我们在已经比较并确定对齐的模式串的主串abcab后，我们移动的准则是 从abcab中 找到 模式串的首ab 和主串的尾ab对齐的位置，再往后就是主串之前没比过的位置就接着比</strong> 。这是KMP算法的核心了。</p>
+<h2 id="KMP原理"><a href="#KMP原理" class="headerlink" title="KMP原理"></a>KMP原理</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328215038.png" alt="image-20210328215038322"></p>
+<p>如上图所示，绿色部分是成功匹配，失配于红色部分。深绿色手绘线条标出了相等的前缀和后缀，<strong>其长度为next[右端]</strong>. 由于手绘线条部分的字符是一样的，所以直接把前面那条移到后面那条的位置。因此说，<strong>next数组为我们如何移动标尺提供了依据</strong>。</p>
+<h2 id="PMT表"><a href="#PMT表" class="headerlink" title="PMT表"></a>PMT表</h2><p>上述 ab … ab 这样首位相同的结构，叫做前缀和后缀。（也叫 next 数组 即 PMT表）</p>
+<p> 如果字符串A和B，存在A=BS，其中S是任意的非空字符串，那就称B为A的前缀。例如，”Harry”的前缀包括{”H”, ”Ha”, ”Har”, ”Harr”}，我们把所有前缀组成的集合，称为字符串的前缀集合。同样可以定义后缀A=SB， 其中S是任意的非空字符串，那就称B为A的后缀，例如，”Potter”的后缀包括{”otter”, ”tter”, ”ter”, ”er”, ”r”}，然后把所有后缀组成的集合，称为字符串的后缀集合。要注意的是，字符串本身并不是自己的后缀。</p>
+<p>如果一个字符串长度为N 那么PMT表的长度就为N 定义为：<strong>PMT中的值是字符串的前缀集合与后缀集合的交集中最长元素的长度</strong>。例如 对于字符串”ababa”，它的前缀集合为{”a”, ”ab”, ”aba”, ”abab”}，它的后缀集合为{”baba”, ”aba”, ”ba”, ”a”}， 两个集合的交集为{”a”, ”aba”}，其中最长的元素为”aba”，长度为3。</p>
+<h2 id="构建next数组"><a href="#构建next数组" class="headerlink" title="构建next数组"></a>构建next数组</h2><p>next数组是 针对模式串的。next数组的定义：</p>
+<ul>
+<li>定义 “k-前缀” 为一个字符串的前 k 个字符； “k-后缀” 为一个字符串的后 k 个字符。k 必须小于字符串长度。</li>
+<li>next[x] 定义为： P[0]~P[x] 这一段字符串，使得<strong>k-前缀恰等于k-后缀</strong>的最大的k.</li>
+</ul>
+<p>用动态规划的思路思考，如果已知 next[0] next[1]  next[2] … next[x]  要求 next[x+1]呢？首先，已经知道了 next[x-1]（以下记为now）。</p>
+<ol>
+<li>如果 P[x] 与 P[now] 一样 (图中的是不相等的情况) 最长相等前后缀的长度就可以扩展一位，很明显 next[x] = now + 1。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328220456.png" alt="image-20210328220458845"></p>
+<ol start="2">
+<li>P[x] 与 P[now] 不一样 。如上图  不能直接+1，因此，我们应该<strong>缩短这个now</strong>。 但是还是可以知道字串A == 字串B（这是由next[x]确定已知的），后面要新增一个 c 所以这个 c 肯定要用上，那么我们希望从 字串 B 的尾巴（后缀集合）中找一段  假设为 C ， 和字串A 的前缀中找一段 假设为 E 满足   C + ‘c’ == E，把 E 拆开为 E1 + 字符n ，又字串A == 字串B，这不就等于在子串 A 中 找相等的最大前缀C和后缀E （回到了next的定义 即为next[now - 1] ），然后再判断‘c’ 是否等于字符n。综上：<ul>
+<li>now = next[ now - 1]</li>
+<li>再判断 p[x] == p[now] 是否成立，成立就是 next[now - 1] + 1 否则循环</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://pic1.zhimg.com/v2-010a582b0c92a92044c43a2a2ea88928_r.jpg?source=1940ef5c" alt="preview"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-a6bd81af7cf9bbda32b2cfb0e4858276_1440w.jpg?source=1940ef5c" alt="img"></p>
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>经典算法</category>
+      </categories>
+      <tags>
+        <tag>典型算法</tag>
+        <tag>KMP算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>典型算法-排序算法</title>
+    <url>/2021/05/11/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>整理、对比了常用的排序算法，插入排序，快速排序….</p>
+<span id="more"></span>
+
+<h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><h2 id="各种排序算法概述"><a href="#各种排序算法概述" class="headerlink" title="各种排序算法概述"></a>各种排序算法概述</h2><p><img src="https://i.loli.net/2021/03/28/2TKAQ1MtRfIrZSh.png" alt="image-20201116223456289"></p>
+<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
+<ul>
+<li>插入排序：平均时间复杂度O(n^2)  两层循环，外循环从第二个数开始，起始认为第一个元素是有序的，每个外循环就是将当前指向的元素插入到前面已排好序的序列中。因此还需要一个内循环来完成当前外循环指向的待插入元素与前面已排好序的每个元素逐一比较寻找插入点。每次寻找插入点的过程是这样实现空间O(1)的： 待插入元素和它卡面相邻的比较，比他还大就不用比了，他就在这儿不动，如果比他小，和他交换位置，再接着往前比，直到遇到比它小的元素为止。因此整个插入过程是不断和相邻位置交换的。</li>
+<li>选择排序：就是每次循环遍历序列，记录当前序列中最小的元素，将其放到序列首；再从剩余序列中寻找最小的放第二个…. 因此两个循环 。在数组实现中，空间O(n) ，不稳定  例如  5  3  5  2  第一趟选择出最小的2  和 首元素 5 交换，破坏了两个5原本的顺序，所以是不稳定排序。如果用链表就是稳定排序。</li>
+<li>冒泡排序：从第一个元开始比较和他右边响铃的元素的大小，前大后小就交换，否则不动，接着第二个和第三个比，交换….直到最后一个。这样第一趟中，一定会把序列中最大的元素交换到最后。第二次冒泡就只用比较到倒数第二个元素就结束。即序列后面是拍好序的。循环执行，直到所有有序。由于每次都是相邻比较交换，所以是稳定排序。两层循环 O(n^2)</li>
+<li>希尔排序：第一个时间复杂度突破O(n^2)的算法。思想是，先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序。每趟排序，根据对应的增量ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序（按照增量大小，间隔增量的元素划分为一个组）。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。这么设计算法的原因是，考虑到原始的插入排序中，当最小的元素在最后时，往前插入，要从尾比到头，循环一轮，很浪费时间。这样分组，起始组间间隔较大，可以大步长的将较小的元素调换到靠前的位置。因此 不是相邻交换元素了，是不稳定排序，时间复杂度 O(n^1.3)</li>
+<li>堆排序：利用了小顶堆这个数据结构。堆是完全二叉树，因此用数组存储，首先将数组所有元素堆化（构造大顶堆），这样数组第一个元素是序列中最大的。然后将数组首元素和最后一个元素交换（即将最大的元素放到了数组最后面），因为交换了顺序，此时不满足堆的性质了，因此接着将前n-1个元素堆化，再将首元素和倒数第二个交换….循环直到堆里只剩一个元素。时间复杂度O(nlogn)，涉及到首位交换元素，不稳定排序，空间复杂度O(1)</li>
+<li>快速排序：快速排序的思想是，每次从序列中选择一个基准数据，然后将比他小的数放他左边，大的放右边。这样再递归的对它左边子序列和右边子序列执行上述过程的快排。分组的过程是这样的，使用双指针，默认每次选取序列第一个元素为基准元素，初始数据遍历指针和数据存储指针都指向基准后的元素，遍历其后每个元素，如果小于基准数据，就和数据存储指针指向的数据交换，在将数据存储指针自增，每时刻，数据滑动指针总在存储指针之后的。由于这个分组过程也不是相邻元素互换了，所以是不稳定排序。空间复杂度是因为递归需要额外数据保留空间 O(nlogn)</li>
+<li>归并排序：和快排一样也是用了分治的思想。递归函数作用是将数组指定区间变为有序。因此函数中，先对左半部分递归归并，使得左半部分序列有序，再对右半部分递归，使得右半部分有序，最后归并，将两部分有序的序列合并，使用双指针的方法，合并时需要一个辅助数组，因此空间复杂度O(N)，涉及到二分法所以时间复杂度O(NlogN) 同时 归并递归到最底层就是相邻两个元素的比较，所以是稳定排序。</li>
+<li>计数排序：计数排序只能对正整数排序。首先要确定数组中最大最小元素，来确定分配多大的内存。然后遍历一次数组，每个数据放到其对应下标的备用数组中。遍历完后，再遍历备用数组的每个位置，将对应位置的元素一次输出，即可。所有都是O(n+k)</li>
+<li>桶排序：首先根据一定的函数映射关系，例如均匀映射，将数组中 的元素分配到N个桶中，再对桶中元素执行插入排序，最后将桶所有元素拼接。这个和计数排序类似，只不过计数排序的分桶映射方式是 数据 和 数组下标直接对应，因此计数排序只能应用于数据分布范围小的整数，而桶排序不限于此。</li>
+<li>基数排序：基数排序的思想是，对整数的每个位 逐位排序。先找出最大元素的位数，循环，先根据个位数的值对所有元素排序，拍完之后对于只有一位的元素，就完成排序；接着根据元素十位的值对剩下元素进行计数排序，对于只有两位数的元素也排序完成…..O(N*k) K为位数。每一位的排序是一个计数排序 为 N。</li>
+</ul>
+<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>​        <strong>快速排序</strong>的核心思想是在待排序数组中选取一个 基准数据（原则上要尽量保证 基准数据正好是中位数，这里以常用的第一个元素作为基准数据，基准数据选的不好 算法的复杂度会达到O(n^2)，但是平均复杂度趋近O(N)）。首先以数组第一个元素为基准a，将大于a的元素都放在a的右边，小于的放在左边。再递归的在左右区间使用这种策略直至排序完成。具体的伪代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">partition</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> lf, <span class="keyword">int</span> rt)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(lf &gt;= rt || rt &lt; <span class="number">0</span>)    <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> base = nums[lf];</span><br><span class="line">        <span class="keyword">int</span> pl = lf+<span class="number">1</span>, pr = lf+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(pr &lt;= rt)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[pr] &lt; base)&#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[pr], nums[pl++]);</span><br><span class="line">            &#125;</span><br><span class="line">            pr++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">swap</span>(nums[lf], nums[pl<span class="number">-1</span>]);  <span class="comment">// 这一步很关键 要将比较的基准数字最后切换到中间，然后再递归它的左边和右边部分</span></span><br><span class="line">        <span class="built_in">partition</span>(nums, lf, pl<span class="number">-2</span>);</span><br><span class="line">        <span class="built_in">partition</span>(nums, pl, rt);  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">partition</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆排序的要点</p>
+<ul>
+<li>连续数组存储，对于每个节点 i  它的 左 / 右 节点的下标 2 x i + 1 / 2 x i + 2 </li>
+<li>建立堆的时候，每次从最底下非叶子节点开始 向上判断 节点是否大于子节点的值，若不是 和较大的节点交换值，然后再递归的调整叶子节点。因此可以看作是两个循环</li>
+<li>构建好大堆之后，每次将堆顶的元素和最后一个元素交换，然后将堆顶元素下沉淀，然后将数组长度减一接着交换…    </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">/// 从 节点 i 开始调整，调整完毕后 （调整的数组长度为 i） 可以保证 i 节点及其以下的部分是 满足要求的堆</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">adjMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> len, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>((i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span> &lt; len)&#123;</span><br><span class="line">            <span class="keyword">int</span> lf = (i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> rt = lf + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> max_idx = i;  <span class="comment">// 当前节点，左右子节点，取值较大的点的序号</span></span><br><span class="line">            <span class="keyword">if</span>(lf &lt; len &amp;&amp; nums[lf] &gt; nums[max_idx])  max_idx = lf;</span><br><span class="line">            <span class="keyword">if</span>(rt &lt; len &amp;&amp; nums[rt] &gt; nums[max_idx])  max_idx = rt;</span><br><span class="line">		  </span><br><span class="line">            <span class="built_in">swap</span>(nums[max_idx], nums[i]);</span><br><span class="line">			</span><br><span class="line">            <span class="keyword">if</span>(max_idx == i)  <span class="comment">//如果未在该节点处未发生调整，可以直接推出</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">else</span>             <span class="comment">//如果未在该节点处发生调整，还要往下递归的调整</span></span><br><span class="line">                i = max_idx;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/// 构建堆，第一次构建大堆时，要从最底层的节点开始向上 不断调用 adjMaxHeap 调整 </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="built_in">adjMaxHeap</span>(nums, len, i);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; nums[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/// 对于已经构建好的大堆，每次将堆顶的最大元素 调换到素组后端，然后将堆顶元素重新下沉，因为只修改了堆顶元素，所以直接从堆顶开始不断向下调整即可。</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sortMaxHeap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="built_in">buildMaxHeap</span>(nums);</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = len<span class="number">-1</span>; l &gt; <span class="number">0</span>; l--)&#123;</span><br><span class="line">            <span class="built_in">swap</span>(nums[l], nums[<span class="number">0</span>]);</span><br><span class="line">            <span class="built_in">adjMaxHeap</span>(nums, l, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">       <span class="built_in">sortMaxHeap</span>(nums);</span><br><span class="line">       <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><p>桶排序的原理是，设置 m 个桶，桶是有序的，首先将 n 个待排序数分别放到对应的桶里，然后再分别对桶里的元素进行排序。假设桶内的元素使用 快排，复杂度是 O(nlogn)，那么桶排序的复杂度为 O(N + M X (N / M) X log(N/M)) = O(N + Nlog(N / M))，当桶的数量接近于数组的长度时，复杂度接近O(N)，因此对于数据分布均匀的数组，采用桶排序效果较好。桶排序的缺点是空间复杂度高，且实际数据并不是接近均匀的情况，因此效果一般。</p>
+<h3 id="典型的例题"><a href="#典型的例题" class="headerlink" title="典型的例题"></a>典型的例题</h3><h4 id="最大间距"><a href="#最大间距" class="headerlink" title="最大间距"></a><a href="https://leetcode-cn.com/problems/maximum-gap/">最大间距</a></h4><p>自己一开始做的时候，想到了用桶排序，但是把题目要求的空间复杂度看成常数的空间复杂度，感觉桶排序不满足。那如果是要求线性空间复杂度为啥不找出最大最小值，然后用Hash标记一下某个元素是否存在，然后枚举呢。当时也是没一下子想到桶排序的抽屉原理。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumGap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> minVal = *<span class="built_in">min_element</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> maxVal = *<span class="built_in">max_element</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> d = <span class="built_in">max</span>(<span class="number">1</span>, (maxVal - minVal) / (n - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">int</span> bucketSize = (maxVal - minVal) / d + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        vector&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; <span class="built_in">bucket</span>(bucketSize, &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;);  <span class="comment">// 存储 (桶内最小值，桶内最大值) 对，(-1, -1) 表示该桶是空的</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> idx = (nums[i] - minVal) / d;</span><br><span class="line">            <span class="keyword">if</span> (bucket[idx].first == <span class="number">-1</span>) &#123;</span><br><span class="line">                bucket[idx].first = bucket[idx].second = nums[i];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                bucket[idx].first = <span class="built_in">min</span>(bucket[idx].first, nums[i]);</span><br><span class="line">                bucket[idx].second = <span class="built_in">max</span>(bucket[idx].second, nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> prev = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bucketSize; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bucket[i].first == <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (prev != <span class="number">-1</span>) &#123;</span><br><span class="line">                ret = <span class="built_in">max</span>(ret, bucket[i].first - bucket[prev].second);</span><br><span class="line">            &#125;</span><br><span class="line">            prev = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>算法和数据结构</category>
+        <category>经典算法</category>
+      </categories>
+      <tags>
+        <tag>典型算法</tag>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/05/13/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95_tmp/</url>
+    <content><![CDATA[<hr>
+<p>title: 典型算法-排序算法<br>categories: </p>
+<ul>
+<li>算法和数据结构</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>C++_bind_function_package_task</title>
     <url>/2021/04/29/C++/%E5%BA%93%E5%87%BD%E6%95%B0/bind_function/</url>
     <content><![CDATA[<p>该笔记作为理解通用线程池代码的基础。包含了异步编程的方法，函数绑定的方法等…</p>
@@ -2605,8 +2605,8 @@
         <category>库函数</category>
       </categories>
       <tags>
-        <tag>STL库</tag>
         <tag>api</tag>
+        <tag>STL库</tag>
       </tags>
   </entry>
   <entry>
