@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="总结了设计模式相关的知识点，内容几乎来自 CS-NOTE ，以及 https:&#x2F;&#x2F;refactoringguru.cn&#x2F;design-patterns&#x2F;">
+  <meta name="description" content="总结了设计模式相关的知识点，内容几乎来自 CS-NOTE ，以及 设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式概述">
 <meta property="og:url" content="http://xxxxx.com/posts/31788/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="总结了设计模式相关的知识点，内容几乎来自 CS-NOTE ，以及 https:&#x2F;&#x2F;refactoringguru.cn&#x2F;design-patterns&#x2F;">
+<meta property="og:description" content="总结了设计模式相关的知识点，内容几乎来自 CS-NOTE ，以及 设计模式">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-04T12:19:05.773Z">
-<meta property="article:modified_time" content="2021-05-22T03:42:02.083Z">
+<meta property="article:published_time" content="2021-05-04T12:19:05.000Z">
+<meta property="article:modified_time" content="2021-05-27T12:00:40.740Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 11:42:02" itemprop="dateModified" datetime="2021-05-22T11:42:02+08:00">2021-05-22</time>
+                <time title="修改时间：2021-05-27 20:00:40" itemprop="dateModified" datetime="2021-05-27T20:00:40+08:00">2021-05-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,21 +260,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>总结了设计模式相关的知识点，内容几乎来自 CS-NOTE ，以及 <a target="_blank" rel="noopener" href="https://refactoringguru.cn/design-patterns/">https://refactoringguru.cn/design-patterns/</a></p>
+        <p>总结了设计模式相关的知识点，内容几乎来自 <a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/">CS-NOTE</a> ，以及 <a target="_blank" rel="noopener" href="https://refactoringguru.cn/design-patterns/">设计模式</a> </p>
 <span id="more"></span>
 
+<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><p><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.md">设计原则</a></p>
 <h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h2><p>设计模式（Design pattern）是指在软件设计中 <strong>被反复使用的一种代码设计经验</strong>，设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。</p>
-<h2 id="为什么要使用设计模式"><a href="#为什么要使用设计模式" class="headerlink" title="为什么要使用设计模式"></a>为什么要使用设计模式</h2><p>使用设计模式的目的是为了可重用代码，提高代码的可扩展性和可维护性。软件开发要实现可维护、可扩展，就必须尽量复用代码，并且降低代码的耦合度。设计模式主要是基于 <code>OOP </code>编程提炼的，它基于以下几个原则：</p>
-<h3 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h3><p>设计模式把一些常用的设计思想提炼出一个个模式，然后给每个模式命名，这样在使用的时候更方便交流。GoF 把23个常用模式分为创建型模式、结构型模式和行为型模式三类。</p>
+<h2 id="为什么要使用设计模式"><a href="#为什么要使用设计模式" class="headerlink" title="为什么要使用设计模式"></a>为什么要使用设计模式</h2><p>使用设计模式的目的是为了可重用代码，提高代码的可扩展性和可维护性。软件开发要实现可维护、可扩展，就必须尽量复用代码，并且降低代码的耦合度。设计模式主要是基于 <code>OOP </code>编程提炼的，并遵守上述设计原则。</p>
+<h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><p>设计模式把一些常用的设计思想提炼出一个个模式，然后给每个模式命名，这样在使用的时候更方便交流。GoF 把23个常用模式分为创建型模式、结构型模式和行为型模式三类。</p>
 <blockquote>
 <p>设计模式这个术语是上个世纪90年代由Erich Gamma、Richard Helm、Raplh Johnson和Jonhn Vlissides四个人总结提炼出来的，并且写了一本<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Design_Patterns">Design Patterns</a>的书。这四人也被称为四人帮（GoF）。</p>
 </blockquote>
-<h4 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h4><ul>
+<h3 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h3><ul>
 <li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B.md">单例</a></li>
 <li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82.md">简单工厂</a></li>
 <li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95.md">工厂方法</a></li>
+<li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82.md">抽象工厂</a></li>
+<li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%94%9F%E6%88%90%E5%99%A8.md">生成器</a></li>
+<li><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F.md">原型模式</a></li>
 </ul>
-<h4 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h4><h4 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h4>
+<h3 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B.md">行为型</a></h3><ul>
+<li>责任链</li>
+<li>命令</li>
+<li>解释器</li>
+<li>迭代器</li>
+<li>中介者</li>
+<li>备忘录</li>
+<li>观察者</li>
+<li>状态</li>
+<li>策略</li>
+<li>模板方法</li>
+<li>访问者</li>
+</ul>
+<h3 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B.md">结构型</a></h3><ul>
+<li>适配器</li>
+<li>桥接</li>
+<li>组合</li>
+<li>装饰</li>
+<li>外观</li>
+<li>享元</li>
+<li>代理</li>
+</ul>
+<h3 id="面经-设计模式"><a href="#面经-设计模式" class="headerlink" title="面经-设计模式"></a><a href="./%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%9D%A2%E7%BB%8F-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md">面经-设计模式</a></h3>
     </div>
 
     
@@ -361,7 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什么是设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">类别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">行为型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">结构型</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">什么是设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">为什么要使用设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">类别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">行为型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text">结构型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E7%BB%8F-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">面经-设计模式</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -375,7 +401,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -388,7 +414,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

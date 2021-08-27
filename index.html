@@ -196,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/38994/">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -210,7 +210,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/38994/" class="post-title-link" itemprop="url">面向对象</a>
+            <a href="/posts/3/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -219,28 +219,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-05-21 17:04:52" itemprop="dateCreated datePublished" datetime="2021-05-21T17:04:52+08:00">2021-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 11:38:57" itemprop="dateModified" datetime="2021-05-22T11:38:57+08:00">2021-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
+              <time title="创建时间：2021-08-14 21:20:37 / 修改时间：21:21:30" itemprop="dateCreated datePublished" datetime="2021-08-14T21:20:37+08:00">2021-08-14</time>
             </span>
 
           
@@ -254,52 +235,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
+          <h2 id="Word"><a href="#Word" class="headerlink" title="Word"></a>Word</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38300903">公式快速编号</a> </p>
 
-<h1 id="面向对象思想"><a href="#面向对象思想" class="headerlink" title="面向对象思想"></a>面向对象思想</h1><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体。数据被保护在抽象数据类型内部，尽可能隐藏内部的细节，只保留一些对外交互的接口使其与外部发生联系。</p>
-<p>优点：</p>
-<ul>
-<li>减少耦合：可以独立开发、测试、优化、修改、调试。因此也可以减轻维护的负担。</li>
-<li>有效的调节性能：可以通过剖析来确定哪些模块影响了系统的性能</li>
-<li>提高软件的可重用性</li>
-<li>降低了构建大型系统的风险：即使整个系统不可用，但是这些独立的模块却有可能是可用的</li>
-</ul>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承实现了 <strong>IS-A</strong> 关系（IS-A是一种继承关系，has-A是一种包含关系，例如一个类中包含另一个类）</p>
-<p>继承应该遵循里氏替换原则，子类对象必须能够替换掉所有父类对象</p>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>多态分为编译时多态和运行时多态：</p>
-<ul>
-<li>编译时多态主要指方法的重载</li>
-<li>运行时多态指程序中定义的对象引用所指向的具体类型在运行期间才确定</li>
-</ul>
-<p>运行时多态有三个条件：</p>
-<ul>
-<li><p>继承</p>
-</li>
-<li><p>覆盖（重写）</p>
-</li>
-<li><p>向上转型</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2></li>
-</ul>
-<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><h3 id="单一责任原则"><a href="#单一责任原则" class="headerlink" title="单一责任原则"></a>单一责任原则</h3><p>让一个类只负责一件事，当这个类需要做过多事情的时候，就需要分解这个类。如果一个类承担的职责过多，就等于把这些职责耦合在了一起，一个职责的变化可能会削弱这个类完成其它职责的能力。</p>
-<h3 id="开放封闭原则"><a href="#开放封闭原则" class="headerlink" title="开放封闭原则"></a>开放封闭原则</h3><p>该原则要求在添加新功能时不需要修改代码。符合开闭原则最典型的设计模式是装饰者模式，它可以动态地将责任附加到对象上，而不用去修改类的代码。</p>
-<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><p>子类对象必须能够替换掉所有父类对象。继承是一种 IS-A 关系，子类需要能够当成父类来使用，并且需要比父类更特殊。如果不满足这个原则，那么各个子类的行为上就会有很大差异，增加继承体系的复杂度。</p>
-<h3 id="接口分离原则"><a href="#接口分离原则" class="headerlink" title="接口分离原则"></a>接口分离原则</h3><p>不应该强迫客户依赖于它们不用的方法。因此使用多个专门的接口比使用单一的总接口要好。</p>
-<h3 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h3><p>高层模块不应该依赖于低层模块，二者都应该依赖于抽象；抽象不应该依赖于细节，细节应该依赖于抽象。</p>
-<p>相对于细节的多变性，抽象的东西要稳定的多。以抽象为基础搭建起来的架构比以细节为基础搭建起来的架构要稳定的多。<strong>在java中，抽象指的是接口或者抽象类，细节就是具体的实现类</strong>，<strong>使用接口或者抽象类的目的是制定好规范和契约</strong>，而不去涉及任何具体的操作，把展现细节的任务交给他们的实现类去完成。</p>
-<p> 依赖倒置原则的核心思想是<strong>面向接口编程</strong></p>
-<p>依赖于抽象意味着：</p>
-<ul>
-<li>任何变量都不应该持有一个指向具体类的指针或者引用；</li>
-<li>任何类都不应该从具体类派生；</li>
-<li>任何方法都不应该覆写它的任何基类中的已经实现的方法</li>
-</ul>
-<h2 id="其他设计原则"><a href="#其他设计原则" class="headerlink" title="其他设计原则"></a>其他设计原则</h2><p>除了上述的经典原则，在实际开发中还有下面这些常见的设计原则。</p>
-<h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><p>迪米特法则又叫作最少知识原则（Least Knowledge Principle，简写 LKP），就是说一个对象应当对其他对象有尽可能少的了解，不和陌生人说话</p>
-<h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3><p>尽量使用对象组合，而不是通过继承来达到复用的目的。</p>
-<h3 id="共同封闭原则"><a href="#共同封闭原则" class="headerlink" title="共同封闭原则"></a>共同封闭原则</h3><p>一起修改的类，应该组合在一起（同一个包里）。如果必须修改应用程序里的代码，我们希望所有的修改都发生在一个包里（修改关闭），而不是遍布在很多包里</p>
-<h3 id="稳定抽象原则"><a href="#稳定抽象原则" class="headerlink" title="稳定抽象原则"></a>稳定抽象原则</h3><p>最稳定的包应该是最抽象的包，不稳定的包应该是具体的包，即包的抽象程度跟它的稳定性成正比</p>
-<h3 id="稳定依赖原则"><a href="#稳定依赖原则" class="headerlink" title="稳定依赖原则"></a>稳定依赖原则</h3><p>包之间的依赖关系都应该是稳定方向依赖的，包要依赖的包要比自己更具有稳定性。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       
     </div>
 
@@ -318,7 +255,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/56771/">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -332,7 +269,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/56771/" class="post-title-link" itemprop="url">题目汇总总结</a>
+            <a href="/posts/1/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -343,16 +280,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-05-20 09:47:15 / 修改时间：15:20:11" itemprop="dateCreated datePublished" datetime="2021-05-20T09:47:15+08:00">2021-05-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
+              <time title="创建时间：2021-08-08 10:37:39 / 修改时间：16:36:12" itemprop="dateCreated datePublished" datetime="2021-08-08T10:37:39+08:00">2021-08-08</time>
             </span>
 
           
@@ -366,15 +294,368 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>对写过的题进行分类整理</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/56771/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="const-和-constexpr"><a href="#const-和-constexpr" class="headerlink" title="const 和 constexpr"></a>const 和 constexpr</h1><h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90720012">参考链接</a></p>
+<h3 id="const-修饰变量"><a href="#const-修饰变量" class="headerlink" title="const 修饰变量"></a>const 修饰变量</h3><p>无论const修饰全局还是函数的局部变量，那么该变量都不能被程序员显式的修改，否则编译器会报错。但是变量本质都是地址，因此可以对他取地址给指针，然后通过指针再去修改该值。这样操作编译器不会报错。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span>* p = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;N);</span><br><span class="line">*p = <span class="number">102</span>;   <span class="comment">// 这样就将N的值修改了</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>全局 const 变量：存储在只读存储区，使用上面的方法可以修改  会导致运行错误</li>
+<li>函数局部的 const 变量：存在栈里，使用上面的方法修改它的值，且不会产生运行错误</li>
+</ul>
+<p>c++ 对 const 会对默认类型的变量（非自定义的结构体成员变量，常规的int  float 等会优化）在编译时期会优化，上面的例子中 会将所有地方的 N 像宏定义一样直接替换为 1000；例如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; N &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p;</span><br><span class="line"><span class="comment">// N: 输出1000  *P输出102  </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>因此 推荐将变量定义为 const 类型 这样编译器会直接替换为值，后面就减少一次内存访问请求</strong> 相对宏定义的优势就是 有类型检查</p>
+<h3 id="const-类对象"><a href="#const-类对象" class="headerlink" title="const 类对象"></a>const 类对象</h3><p>定义 const 类对象 或者 结构体变量一样，代表他们的成员都不能被修改。并且，const 类对象只能调用它的 const 成员函数，而不能调用普通的非const成员函数。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-f86a180355890874db6c2d3873bdda5a_720w.jpg" alt="img"></p>
+<h3 id="const指针"><a href="#const指针" class="headerlink" title="const指针"></a>const指针</h3><ul>
+<li>一种指 指向的地址的内容不可以修改 但是它可以转而指向别的地址  (结合最开始的例子可以看出 <strong>编译器是通过 “指针的类型” 来判断是否只读的，因此如果普通指针指向const的变量地址，它的值仍然可以修改</strong>)   <code> const int *p</code></li>
+<li>指向的地址可以修改，但是它不能再指向别人     <code> int * const p = &amp;a</code>   ( 就看const 后面跟的是啥 啥就不能变)</li>
+</ul>
+<h3 id="const-成员函数"><a href="#const-成员函数" class="headerlink" title="const 成员函数"></a>const 成员函数</h3><p>代表该成员函数 不能修改类中的成员变量，同时也正是这个特性，const 类的对象只能调用 ocnst 修饰的成员函数</p>
+<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/256416683">参考链接</a></p>
+<p>constexpr是C++11中新增的关键字，其语义是“常量表达式”，也就是在编译期可求值的表达式。最基础的常量表达式就是字面值或全局变量/函数的地址或sizeof等关键字返回的结果，而其它常量表达式都是由基础表达式通过各种确定的运算得到的。constexpr值可用于enum、switch、数组长度等场合。</p>
+<h3 id="编译时常量-常量表达式"><a href="#编译时常量-常量表达式" class="headerlink" title="编译时常量/常量表达式"></a>编译时常量/常量表达式</h3><ul>
+<li>必须是可以在编译阶段被识别的。比如模版的参数／数组的大小</li>
+<li>例如  const int a = 5;  此时 5 就是一个常量表达式   sizeof() 就是个常量表达式 在编译时期就能确定 可以能用来初始化数组大小 case语句的分支等</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fixed_size_list</span></span></span><br><span class="line"><span class="class">&#123;</span> <span class="comment">/*...*/</span> &#125;;</span><br><span class="line"></span><br><span class="line">fixed_size_list&lt;X&gt; mylist;     <span class="comment">// &lt;-- X必须是字面值类型</span></span><br><span class="line"><span class="keyword">int</span> numbers[X];   <span class="comment">// &lt;-- X必须是字面值类型</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>constexpr 在修饰函数的时候</p>
+<ul>
+<li>如果函数的入口参数 是使用的字符常量，在编译时期可以确定 那么这个函数就是常量表达式  返回值可以直接用来初始化数组大小</li>
+<li>如果入口参数的值编译时期无法直接确定 那么他就是个普通函数</li>
+</ul>
+<p>constexpr的好处：</p>
+<ol>
+<li>是一种很强的约束，更好地保证程序的正确语义不被破坏。</li>
+<li>编译器可以在编译期对constexpr的代码进行非常大的优化，<strong>比如将用到的constexpr表达式都直接替换成最终结果等。</strong></li>
+<li>相比宏来说，没有额外的开销，但更安全可靠</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/5/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-11 11:40:30 / 修改时间：11:49:22" itemprop="dateCreated datePublished" datetime="2021-07-11T11:40:30+08:00">2021-07-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="子字符串查找-——Rabin-Karp算法"><a href="#子字符串查找-——Rabin-Karp算法" class="headerlink" title="子字符串查找 ——Rabin-Karp算法"></a>子字符串查找 ——Rabin-Karp算法</h1><p>求字符串的连续子串，如果传统的散列法复杂度很高。而Rabin-Karp算法的思路是  将字符串每个 字符  a<del>z 看作  0</del>25 组成的 26 进制的数。并且在计算 每个位置长度 为 n 的连续子串的散列值时 可以使用  除留余法  方式  将散列的复杂度降低为 O(1)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210711114504.png" alt="image-20210711114457000"></p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="最长重复子串"><a href="#最长重复子串" class="headerlink" title="最长重复子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-duplicate-substring/">最长重复子串</a></h4><p>这个题也可以用 动态规划做，dp 设置为 字符串1 前 i 个 和  字符串2 前  j  个的子串的最长后缀长度。通过 两层遍历即可完成。</p>
+<p>但是使用  二分查找 + hash 法 复杂度会更低（前提是 hash 使用Rabin-Karp算法散列，保证散列的复杂度为O(1)）  </p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/24895aca0459">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-09 20:05:22" itemprop="dateCreated datePublished" datetime="2021-07-09T20:05:22+08:00">2021-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-10 17:06:10" itemprop="dateModified" datetime="2021-07-10T17:06:10+08:00">2021-07-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="二分匹配"><a href="#二分匹配" class="headerlink" title="二分匹配"></a>二分匹配</h1><h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96229700">参考链接</a></p>
+<p>主要就是 能划分为 二分图，集合0中的元素之间不会有匹配关系，它只会和集合1中的元素有匹配关系，可能一对一一对多。同理集合2中的元素也是</p>
+<p>常用的套路是 按照 奇偶 位置划分二分集合。</p>
+<h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><p>首先 依次从左边集合中选出一个元素  和  右边集合中的元素匹配。如果右边集合中某个元素已经被占用了，那么根据它指向的左边集合中的元素号，递归的去调整它，以给当前元素腾位置。如果能腾出来，那么成功。否则返回false  算法实现的关键在于 一个记录  右边 到左边  的数组序号的映射关系，和   右边序号的访问情况。</p>
+<p>算法时间复杂度，O(ExV)  V为左边集合顶点的数目，E为图中的边数。每次去左边的一个顶点去和右边集合的顶点匹配，最坏情况就是把图中所有的边都遍历一遍才能找到可以匹配的结果。</p>
+<p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/b9eae162e02f4f928eac37d7699b352e?tpId=37&&tqId=21251&rp=1&ru=/ta/huawei&qru=/ta/huawei/question-ranking">例题</a></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> M, N;            <span class="comment">//M, N分别表示左、右侧集合的元素数量</span></span><br><span class="line"><span class="keyword">int</span> Map[MAXM][MAXN]; <span class="comment">//邻接矩阵存图</span></span><br><span class="line"><span class="keyword">int</span> p[MAXN];         <span class="comment">//记录当前右侧元素所对应的左侧元素</span></span><br><span class="line"><span class="keyword">bool</span> vis[MAXN];      <span class="comment">//记录右侧元素是否已被访问过</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">        <span class="keyword">if</span> (Map[i][j] &amp;&amp; !vis[j]) <span class="comment">//有边且未访问</span></span><br><span class="line">        &#123;</span><br><span class="line">            vis[j] = <span class="literal">true</span>;                 <span class="comment">//记录状态为访问过</span></span><br><span class="line">            <span class="keyword">if</span> (p[j] == <span class="number">0</span> || <span class="built_in">match</span>(p[j])) <span class="comment">//如果暂无匹配，或者原来匹配的左侧元素可以找到新的匹配</span></span><br><span class="line">            &#123;</span><br><span class="line">                p[j] = i;    <span class="comment">//当前左侧元素成为当前右侧元素的新匹配</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回匹配成功</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//循环结束，仍未找到匹配，返回匹配失败</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hungarian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis)); <span class="comment">//重置vis数组</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">match</span>(i))</span><br><span class="line">            cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="KM算法"><a href="#KM算法" class="headerlink" title="KM算法"></a>KM算法</h2><p>KM 算法是解决带权值的 二分匹配问题</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sixdaycoder/article/details/47720471">参考链接</a></p>
+<h3 id="算法实现原理"><a href="#算法实现原理" class="headerlink" title="算法实现原理"></a>算法实现原理</h3><p>基本原理也是依靠匈牙利算法，但是每个边都带了权重，因此思想是 取当前的最大子图 然后按照匈牙利算法去寻找完美匹配，如果无法实现完备匹配  就需要扩充最大子图。</p>
+<p>通俗的算法原理：集合A中的1个元素都可以和B中的多个元素匹配，但是由于只能择其一，所以就选和B中匹配得分最大的边 联通，同理所有A中的点都这样筛选边，这样如果 A中的所有元素都和B中的有匹配（即实现完备匹配），那么此时图的匹配权重一定是最大。此时这就可以转化为匈牙利算法去搜索有无完备匹配。</p>
+<p>如果没有实现完备匹配，那一定是有 n 个点 n-1 个边之间出现冲突。所以直观的应该放宽选取可匹配边的权重标准 让新的权重较小的边也加入图中，再尝试是否可以完备匹配，如果此时可以完备匹配 那么起始最终匹配的权重和相对初始的最大子图的完备匹配后的权重和（但是无法实现） 是 略微缩小的。KM算法就是通过一定的策略完成  扩充子图 -&gt; 完备匹配 这个循环的，并保证 子图的权重 一定是  从初始最大 -&gt;  小递减的 中间没有跳跃，所以最后匹配的权重和最大 </p>
+<ul>
+<li>寻找相等子图的完备匹配</li>
+</ul>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ol>
+<li>初始化可行顶标的值 (设定lx,ly的初始值)</li>
+<li>用匈牙利算法寻找相等子图的完备匹配</li>
+<li>若未找到增广路则修改可行顶标的值</li>
+<li>重复(2)(3)直到找到相等子图的完备匹配为止</li>
+</ol>
+<p>实现子图扩充最优 要 按照两个原则来实现：</p>
+<ul>
+<li>可行顶标</li>
+<li>可行边，顶点的定标和 等于 边的权重 为一个可行边  可以加入相等子图中</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/4/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-20 11:16:33 / 修改时间：16:24:10" itemprop="dateCreated datePublished" datetime="2021-06-20T11:16:33+08:00">2021-06-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10-这个小数是无限循环，还是不循环，还是不一定"><a href="#有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10-这个小数是无限循环，还是不循环，还是不一定" class="headerlink" title="有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10 这个小数是无限循环，还是不循环，还是不一定"></a>有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10 这个小数是无限循环，还是不循环，还是不一定</h3><p>由于当前位数只由前两位决定，因此如果 第一次出现了 ab 然后后面又出现了ab 那么必然就循环了。而要对10取模，因此a  b 的范围都0~9 两个连续字取值就10 x 10种情况，所以一定会循环。</p>
+<h3 id="1-n中所有的数里面1出现的次数"><a href="#1-n中所有的数里面1出现的次数" class="headerlink" title="1-  n中所有的数里面1出现的次数"></a>1-  n中所有的数里面1出现的次数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">剑指 Offer 43. 1～n 整数中 1 出现的次数</a></p>
+<h3 id="100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢"><a href="#100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢" class="headerlink" title="100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢"></a>100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢</h3><p>将两个人取的总数看作一轮，每一轮先手最多拿走8个，因此后手总是可以保证这一轮两个人一共拿走9个。所以这样如果有99个石子，99/9=11个回合后，后手正好拿完所有的式子，因此先手拿一个一定可以赢</p>
+<h3 id="斗地主中，地主拿到王炸的概率是多少"><a href="#斗地主中，地主拿到王炸的概率是多少" class="headerlink" title="斗地主中，地主拿到王炸的概率是多少"></a>斗地主中，地主拿到王炸的概率是多少</h3><p>这个就是很简单的排列组合问题。54张牌，可以考虑这种分配模型，将54张牌放一排，前17张农民1的，后17张农名2的，最后20张地主的，然后就是算大小王都在后20张的概率，可以看作把大小王放到  54 个位置中的两个，大小王不同，有序，所以A54/2  同理 A20/2</p>
+<h3 id="如何精确测量（计算）不规则物体的表面积？"><a href="#如何精确测量（计算）不规则物体的表面积？" class="headerlink" title="如何精确测量（计算）不规则物体的表面积？"></a>如何精确测量（计算）不规则物体的表面积？</h3><p>热缩膜覆盖后撕开铺在格子纸上数格子</p>
+<h3 id="海盗分金"><a href="#海盗分金" class="headerlink" title="海盗分金"></a>海盗分金</h3><p>经济学上有个“海盗分金”模型,是说5个海盗抢得100枚金币,他们按抽签的顺序依次提方案：首先由1号提出分配方案,然后5人表决,超过半数同意方案才被通过,否则他将被扔入大海喂鲨鱼,依此类推. 假定“每人海盗都是绝顶聪明且很理智”,那么“第一个海盗提出怎样的分配方案才能够使自己的收益最大化?”</p>
+<p>1，2，3，4，5  从后往前推，如果1-3号都死了，只有4，5号，那么5号一定不会给4号投票让4号也死这样自己就能占有所有硬币。因此4号直到5号的想法就会杜绝这种情况发生，因此它要无条件支持3号，避免只剩4，5两人的情况。3号也直到4号会无条件支持他，因此它只用 100  0  0 即可。2号也知道3号这么想的，所以3号必定不会支持2二号，因此它必须讨好2号让他俩同意它的方法，所以就 98  0  1  1 这样根据2号给出的方案4号5号都能拿到1块，比把2号淘汰后3的方案好，所以这样4和5号就会接受2号的方案。同理1号又知道2号这么想的，所以应该放弃2号，并且给3号4号和5号更多的利益，首先3号如果不投1号，到2号手里就只能得到0个硬币，所以1号只需给3号1个硬币即可让3号支持它，而4和5号如果让1号死了他们最多从中获得1个硬币，因此给他们两个硬币比之前多就可以。由于1号只需3 4 5 中取两个拿到票即可，因此4号和五号挑一个给两个硬币拉拢即可。</p>
+<p>综上  一号的方案  97  0  1  2  0  或  97  0  1  0  2    </p>
+<h3 id="机器人挖矿问题"><a href="#机器人挖矿问题" class="headerlink" title="机器人挖矿问题"></a>机器人挖矿问题</h3><p>一个机器人每天可以挖到8个硬币； 50个硬币可以换得一个机器人； 问：给您5个机器人，50个硬币，10天后，最多拥有多少硬币？</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/midi666/article/details/105230879">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/2/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-19 10:11:13" itemprop="dateCreated datePublished" datetime="2021-06-19T10:11:13+08:00">2021-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-19 11:48:07" itemprop="dateModified" datetime="2021-08-19T11:48:07+08:00">2021-08-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="struct和union的区别"><a href="#struct和union的区别" class="headerlink" title="struct和union的区别"></a>struct和union的区别</h3><h3 id="memcpy实现"><a href="#memcpy实现" class="headerlink" title="memcpy实现"></a>memcpy实现</h3><p>要 考虑函数的鲁棒性</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mymemcpy</span><span class="params">(<span class="keyword">void</span>* src, <span class="keyword">void</span>* dst, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 多字节复制  要判断两个地址是不是有重叠，如果有重叠要反向赋值</span></span><br><span class="line">    <span class="keyword">if</span>(!dst || !src)    <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> m = len / <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>);</span><br><span class="line">    <span class="keyword">int</span> n = len % <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//倒序</span></span><br><span class="line">    <span class="keyword">if</span>(src + len &gt; dst &amp;&amp; dst &gt; src)&#123;</span><br><span class="line">        <span class="keyword">char</span>* p1 = (<span class="keyword">char</span>*)(src + len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">char</span>* p2 = (<span class="keyword">char</span>*)(dst + len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">            *p2-- = *p1--;</span><br><span class="line">        &#125;</span><br><span class="line">        p1++; p2++;   <span class="comment">// 注意内存覆盖</span></span><br><span class="line">        <span class="keyword">int</span>* p3 = (<span class="keyword">int</span>*)p1;</span><br><span class="line">        <span class="keyword">int</span>* p4 = (<span class="keyword">int</span>*)p2;</span><br><span class="line">        p3--; p4--;</span><br><span class="line">        <span class="keyword">while</span>(m--)&#123;</span><br><span class="line">            *((<span class="keyword">char</span>*)p4++) = *((<span class="keyword">char</span>*)p3++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 正向拷贝</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="手写一下智能指针"><a href="#手写一下智能指针" class="headerlink" title="手写一下智能指针"></a>手写一下智能指针</h3><h3 id="weak-ptr-内部实现-可以实现观察者模式"><a href="#weak-ptr-内部实现-可以实现观察者模式" class="headerlink" title="weak_ptr 内部实现,  可以实现观察者模式"></a>weak_ptr 内部实现,  可以实现观察者模式</h3><p> 这是因为 weak_ptr 只会增加弱引用计数，它不会影响指向的对象的生命周期，多以可以在被观察者中使用weak_ptr去指向观察者，观察者对象的释放与否都不会影响被观察者的运行结果，当被观察者需要向观察者传递消息时只需要将弱指针提升为智能指针再去访问。</p>
+<p>解决内存泄漏….</p>
+<h3 id="智能指针是线程安全的嘛"><a href="#智能指针是线程安全的嘛" class="headerlink" title="智能指针是线程安全的嘛"></a>智能指针是线程安全的嘛</h3><p>引用计数是原子的，线程安全的，对共享内存的操作不是，多线程写会出现问题</p>
+<h3 id="Hash-怎么做成线程安全"><a href="#Hash-怎么做成线程安全" class="headerlink" title="Hash 怎么做成线程安全"></a>Hash 怎么做成线程安全</h3><p>Hash表本质是一个数组，可以直接全表上锁，但是这样锁冲突的概率很大。可以分段上锁，因为本质上  就是一个线程修改数组中的某一个元素，同时另一个线程可以修改数组的其他元素。只有当要hash扩容的时候才需要全表上锁</p>
+<h3 id="菱形继承"><a href="#菱形继承" class="headerlink" title="菱形继承"></a>菱形继承</h3><p>主要总结了三块儿知识点  </p>
+<ol>
+<li>普通的菱形继承的内存分布，比如 D: public B1, public B2,  内存模型可以看作 [B1:B 组成的一块儿内存]  + [B2:B组成的一块儿内存] + [D 自己定义的一块儿内存]，就是三段儿。但是这样会有二义性，比如B1里面的变量b 和 B2里面的变量b，访问就要家类型限定，来指定你要访问的是 B1 还是 B2 里面的。</li>
+<li>虚继承的菱形继承问题：首先 虚继承就是说 子类如果定义了父类中存在的变量，那么就不再覆写，将父类的变量放在内存最后，同时在首地址需要存放一个 vbptr ，vbptr第一项指示相对起始虚表指针的偏移，第二项来指示基类变量的偏移，这样通过 vbptr可以直接跳转到基类变量上。那么菱形继承的内存布局就是  [B1:覆写B的变量和B1独有的变量] + [B2:B2覆写B的变量和B2独有的] + [D自己定义的变量] + [基类B的一份变量]；也就是说 可以指定 B1/B2/B 来选择要访问谁的变量</li>
+<li>带虚函数的菱形继承（不考虑虚继承）：这种情况下 首先很重要的- 一个 D对象只能用 B1 或者 B2类型的指针去指向，而不能用 B的指针指向D会报错。会有两个虚函数表  B1的虚函数表  +  B2 的虚函数表； D自己单独写的新的虚函数被放在了第一个虚表中的最后。B1虚表中有完备的 B1+B类的所有虚函数，如果D重写了就替换，同理 B2 虚表中有完备的B2+B的所有虚函数 ，这样无论是取B1指针指向D对象 还是  B2指针指向D对象，都能调用B1中所有的虚函数 或者 B2中的所有虚函数</li>
+<li>带虚函数的菱形继承（考虑虚继承）….</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/AgoniAngel/article/details/105893798">参考链接</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/AgoniAngel/article/details/105449238">参考链接</a></p>
+<h3 id="设计模式：解释一下proactor。"><a href="#设计模式：解释一下proactor。" class="headerlink" title="设计模式：解释一下proactor。"></a>设计模式：解释一下proactor。</h3><h3 id="const-的作用，作用于函数-的特点"><a href="#const-的作用，作用于函数-的特点" class="headerlink" title="const 的作用，作用于函数 的特点"></a>const 的作用，作用于函数 的特点</h3><ul>
+<li>const 作用于局部变量它存放在栈中  可以通过地址间接修改变量值 作用于全局变量 存在只读数据存储区，如果修改它的值会产生运行错误</li>
+<li>const 作用于成员函数  那么  代表它不会修改所有非 static 的成员变量（实际就是 const this 指针实现）；因此const 对象也就只能调用 const 修饰的成员函数</li>
+</ul>
+<h3 id="野指针，空指针的区别；内存泄漏问题；如何解决"><a href="#野指针，空指针的区别；内存泄漏问题；如何解决" class="headerlink" title="野指针，空指针的区别；内存泄漏问题；如何解决"></a>野指针，空指针的区别；内存泄漏问题；如何解决</h3><h3 id="在不知道头节点的情况下删除某个节点"><a href="#在不知道头节点的情况下删除某个节点" class="headerlink" title="在不知道头节点的情况下删除某个节点"></a>在不知道头节点的情况下删除某个节点</h3><h3 id="C-能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。"><a href="#C-能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。" class="headerlink" title="C++能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。"></a>C++能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。</h3><p>可以 会修改   代码复用</p>
+<h3 id="面向过程和面向对象各自的优缺点"><a href="#面向过程和面向对象各自的优缺点" class="headerlink" title="面向过程和面向对象各自的优缺点"></a>面向过程和面向对象各自的优缺点</h3><h3 id="内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响"><a href="#内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响" class="headerlink" title="内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响"></a>内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响</h3><h3 id="可执行文件的文件格式（ELF文件格式）"><a href="#可执行文件的文件格式（ELF文件格式）" class="headerlink" title="可执行文件的文件格式（ELF文件格式）"></a>可执行文件的文件格式（ELF文件格式）</h3><h3 id="C-的构造析构顺序"><a href="#C-的构造析构顺序" class="headerlink" title="C++的构造析构顺序"></a>C++的构造析构顺序</h3><h3 id="怎么用一个指向子类的基类指针调用基类的虚函数"><a href="#怎么用一个指向子类的基类指针调用基类的虚函数" class="headerlink" title="怎么用一个指向子类的基类指针调用基类的虚函数"></a>怎么用一个指向子类的基类指针调用基类的虚函数</h3><p>（强制转换或者指明作用域d-&gt;Base::fun()）</p>
+<h3 id="写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程"><a href="#写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程" class="headerlink" title="写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程"></a>写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程</h3><h3 id="快排的时间复杂度，什么时候最坏，什么时候最好"><a href="#快排的时间复杂度，什么时候最坏，什么时候最好" class="headerlink" title="快排的时间复杂度，什么时候最坏，什么时候最好"></a>快排的时间复杂度，什么时候最坏，什么时候最好</h3><h3 id="什么情况下会出现段错误，为什么段错误程序会直接终止"><a href="#什么情况下会出现段错误，为什么段错误程序会直接终止" class="headerlink" title="什么情况下会出现段错误，为什么段错误程序会直接终止"></a>什么情况下会出现段错误，为什么段错误程序会直接终止</h3><h3 id="大文件排序问题"><a href="#大文件排序问题" class="headerlink" title="大文件排序问题"></a>大文件排序问题</h3><p>题目：有一个大文件，里面记录了若干数字，把这些数字进行排序。文件大小远大于内存大小</p>
+<p>基本思想都是要归并 将大文件分成多个小文件 分别排序，然后合并的。最后合并的时候每个小文件只读入一部分，同时留一个输出缓冲区用于存储已经排好的数据。等输出缓冲区满了之后就把他存到外存然后清空输出缓冲区。</p>
+<p>topK的问题类似，一部分一部分的读入 用堆选择topK大的数据</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linguanh/p/8532641.html">参考</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101337.png" alt="image-20210619101337401"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101332.png" alt="image-20210619101325346"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101347.png" alt="image-20210619101347480"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619102250.png" alt="image-20210619102250262"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619103938.png" alt="image-20210619103938330"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105006.png" alt="image-20210619105006188"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105210.png" alt="image-20210619105210585"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105741.png" alt="image-20210619105741668"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105924.png" alt="image-20210619105924199"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619111012.png" alt="image-20210619111011948"></p>
+
       
     </div>
 
@@ -416,9 +697,104 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-17 11:54:00 / 修改时间：11:57:53" itemprop="dateCreated datePublished" datetime="2021-05-17T11:54:00+08:00">2021-05-17</time>
+              <time title="创建时间：2021-06-10 17:44:33" itemprop="dateCreated datePublished" datetime="2021-06-10T17:44:33+08:00">2021-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-07 15:32:03" itemprop="dateModified" datetime="2021-08-07T15:32:03+08:00">2021-08-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="字节视频算法实习"><a href="#字节视频算法实习" class="headerlink" title="字节视频算法实习"></a>字节视频算法实习</h3><h4 id="知道的分类网络"><a href="#知道的分类网络" class="headerlink" title="知道的分类网络"></a>知道的分类网络</h4><h4 id="mobile-net-v3的结构"><a href="#mobile-net-v3的结构" class="headerlink" title="mobile-net-v3的结构"></a>mobile-net-v3的结构</h4><h4 id="GAN有没有采用特殊的训练技巧"><a href="#GAN有没有采用特殊的训练技巧" class="headerlink" title="GAN有没有采用特殊的训练技巧"></a>GAN有没有采用特殊的训练技巧</h4><h4 id="知道的注意力机制"><a href="#知道的注意力机制" class="headerlink" title="知道的注意力机制"></a>知道的注意力机制</h4><h4 id="了解过transformer嘛"><a href="#了解过transformer嘛" class="headerlink" title="了解过transformer嘛"></a>了解过transformer嘛</h4><h4 id="根据mask的分割，还问了分割算法"><a href="#根据mask的分割，还问了分割算法" class="headerlink" title="根据mask的分割，还问了分割算法"></a>根据mask的分割，还问了分割算法</h4><h4 id="知道的图像去噪方法"><a href="#知道的图像去噪方法" class="headerlink" title="知道的图像去噪方法"></a>知道的图像去噪方法</h4><h4 id="知道的图像模糊的方法"><a href="#知道的图像模糊的方法" class="headerlink" title="知道的图像模糊的方法"></a>知道的图像模糊的方法</h4><h4 id="双边滤波的原理"><a href="#双边滤波的原理" class="headerlink" title="双边滤波的原理"></a>双边滤波的原理</h4><h4 id="代码C-实现的时候用了什么"><a href="#代码C-实现的时候用了什么" class="headerlink" title="代码C++实现的时候用了什么"></a>代码C++实现的时候用了什么</h4><h4 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h4><h4 id="对图像增强这项任务的理解"><a href="#对图像增强这项任务的理解" class="headerlink" title="对图像增强这项任务的理解"></a>对图像增强这项任务的理解</h4><h4 id="和其他-low-level-网络结构有啥区别-在训练数据重组的情况下-有什么区别"><a href="#和其他-low-level-网络结构有啥区别-在训练数据重组的情况下-有什么区别" class="headerlink" title="和其他 low-level 网络结构有啥区别 在训练数据重组的情况下 有什么区别"></a>和其他 low-level 网络结构有啥区别 在训练数据重组的情况下 有什么区别</h4><h4 id="包含正数和负数的数组，求乘积最大连续子数组"><a href="#包含正数和负数的数组，求乘积最大连续子数组" class="headerlink" title="包含正数和负数的数组，求乘积最大连续子数组"></a>包含正数和负数的数组，求乘积最大连续子数组</h4><h4 id="丢鸡蛋问题"><a href="#丢鸡蛋问题" class="headerlink" title="丢鸡蛋问题"></a>丢鸡蛋问题</h4><h3 id="腾讯后端实习"><a href="#腾讯后端实习" class="headerlink" title="腾讯后端实习"></a>腾讯后端实习</h3><h4 id="重载和继承"><a href="#重载和继承" class="headerlink" title="重载和继承"></a>重载和继承</h4><h4 id="知道哪些智能指针"><a href="#知道哪些智能指针" class="headerlink" title="知道哪些智能指针"></a>知道哪些智能指针</h4><h4 id="线程和进程区别"><a href="#线程和进程区别" class="headerlink" title="线程和进程区别"></a>线程和进程区别</h4><h4 id="知道进程通信的方法嘛，线程通信呢"><a href="#知道进程通信的方法嘛，线程通信呢" class="headerlink" title="知道进程通信的方法嘛，线程通信呢"></a>知道进程通信的方法嘛，线程通信呢</h4><h4 id="了解linux哪些锁"><a href="#了解linux哪些锁" class="headerlink" title="了解linux哪些锁"></a>了解linux哪些锁</h4><h3 id="TP-图像优化岗"><a href="#TP-图像优化岗" class="headerlink" title="TP 图像优化岗"></a>TP 图像优化岗</h3><h4 id="怎么解决过拟合"><a href="#怎么解决过拟合" class="headerlink" title="怎么解决过拟合"></a>怎么解决过拟合</h4><h4 id="预编译的作用"><a href="#预编译的作用" class="headerlink" title="预编译的作用"></a>预编译的作用</h4><h4 id="图像处理流程了解嘛"><a href="#图像处理流程了解嘛" class="headerlink" title="图像处理流程了解嘛"></a>图像处理流程了解嘛</h4><p>回答 ISP</p>
+<h4 id="用了什么设计模式"><a href="#用了什么设计模式" class="headerlink" title="用了什么设计模式"></a>用了什么设计模式</h4><h4 id="红外细节增强项目候遇到过什么问题"><a href="#红外细节增强项目候遇到过什么问题" class="headerlink" title="红外细节增强项目候遇到过什么问题"></a>红外细节增强项目候遇到过什么问题</h4><p>我完成这个任务的流程是，先在Matlab上验证算法的效果，然后确是可行后再转为C++实现，因此遇到的比较难搞的问题还是Matlab算法调试阶段时候效果出不来。比如前面细节层拉伸后光晕问题，产生分析和解决，还有比如细节层调整，之前都是设置固定参数，但是很难用一套参数处理好，才想到用图像熵做个参数自动搜索。最后落地实现，都是一些代码编写的问题印象不深了。</p>
+<h4 id="拉普拉斯金字塔存储的是什么"><a href="#拉普拉斯金字塔存储的是什么" class="headerlink" title="拉普拉斯金字塔存储的是什么"></a>拉普拉斯金字塔存储的是什么</h4><h4 id="对于目标检测识别深度学习能都替代传统方法"><a href="#对于目标检测识别深度学习能都替代传统方法" class="headerlink" title="对于目标检测识别深度学习能都替代传统方法"></a>对于目标检测识别深度学习能都替代传统方法</h4><p>不太了解检测识别 直接围绕回答的增强</p>
+<h4 id="项目里的提亮效果如何评价"><a href="#项目里的提亮效果如何评价" class="headerlink" title="项目里的提亮效果如何评价"></a>项目里的提亮效果如何评价</h4><p>因为前景不对齐，所以主要还是在测试集上定性观察。其次在测试集上手工将运动区域过滤掉然后定量对比背景的相似度，对于运动的前景由于不对齐可以采用类似NIQE  LOE这种无参考图像质量评价的标准，但是最后一个评估方法当时并没有尝试，因为虽然一些常规得指标是普适于大规模的自然数据集  但是应用于这个任务中这个指标的评价效果是否可靠也不一定。</p>
+<h4 id="怎么组织团队合作的"><a href="#怎么组织团队合作的" class="headerlink" title="怎么组织团队合作的"></a>怎么组织团队合作的</h4><p>不同人的代码风格不一样怎么办？</p>
+<h4 id="深度学习方法，怎么确定一个模块的效果？"><a href="#深度学习方法，怎么确定一个模块的效果？" class="headerlink" title="深度学习方法，怎么确定一个模块的效果？"></a>深度学习方法，怎么确定一个模块的效果？</h4><p>当时说了个啥奇奇怪怪的词没听懂</p>
+<h4 id="概率题-红蓝车撞人，目击正确的概率"><a href="#概率题-红蓝车撞人，目击正确的概率" class="headerlink" title="概率题 红蓝车撞人，目击正确的概率"></a>概率题 红蓝车撞人，目击正确的概率</h4><h4 id="验证毒药的问题"><a href="#验证毒药的问题" class="headerlink" title="验证毒药的问题"></a>验证毒药的问题</h4><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>要重新组织一下语言 项目详细介绍的时候脱稿 不然回答的逻辑很混乱，方法介绍要简化一点。</p>
+<h4 id="觉得自己做的比较好的项目"><a href="#觉得自己做的比较好的项目" class="headerlink" title="觉得自己做的比较好的项目"></a>觉得自己做的比较好的项目</h4><h4 id="怎么做研究"><a href="#怎么做研究" class="headerlink" title="怎么做研究"></a>怎么做研究</h4><h4 id="怎么较好的完成项目"><a href="#怎么较好的完成项目" class="headerlink" title="怎么较好的完成项目"></a>怎么较好的完成项目</h4><h4 id="研究问题的思路"><a href="#研究问题的思路" class="headerlink" title="研究问题的思路"></a>研究问题的思路</h4><h4 id="红外图像和RGB图像的特性"><a href="#红外图像和RGB图像的特性" class="headerlink" title="红外图像和RGB图像的特性"></a>红外图像和RGB图像的特性</h4><p>红外成像原理 红外成像设备是通过探测周围环境的热辐射特性，将它以图像的形式显示出来。特点：</p>
+<ol>
+<li>灰度集中  对比度差 </li>
+<li>噪声多样性，一方面是动态噪声  如 热噪声 散粒噪声，光子噪声 形成机理复杂；另一方面是各探测元对相同辐射的反应具有不一致性，在红外图像上会产生固定的模式噪声，这种噪声是稳定的。现阶段高动态范围的红外设备也越来越多，这类红外设备有更高的灵敏度可以探测更小的热量差异，每个像元有2^14  2^16个灰度级，而现阶段普通设备….需要压缩动态范围 </li>
+</ol>
+<h3 id="YUV-图像格式和用处"><a href="#YUV-图像格式和用处" class="headerlink" title="YUV 图像格式和用处"></a>YUV 图像格式和用处</h3><h4 id="图像HDR"><a href="#图像HDR" class="headerlink" title="图像HDR"></a>图像HDR</h4><h4 id="为什么选NLTV算法"><a href="#为什么选NLTV算法" class="headerlink" title="为什么选NLTV算法"></a>为什么选NLTV算法</h4><h4 id="https深入"><a href="#https深入" class="headerlink" title="https深入"></a>https深入</h4><h4 id="怎么和他人合作"><a href="#怎么和他人合作" class="headerlink" title="怎么和他人合作"></a>怎么和他人合作</h4><h4 id="印象最深刻的事儿"><a href="#印象最深刻的事儿" class="headerlink" title="印象最深刻的事儿"></a>印象最深刻的事儿</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/33486/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/33486/" class="post-title-link" itemprop="url">面经-设计模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-27 19:29:07" itemprop="dateCreated datePublished" datetime="2021-05-27T19:29:07+08:00">2021-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-16 21:14:06" itemprop="dateModified" datetime="2021-08-16T21:14:06+08:00">2021-08-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
             </span>
 
           
@@ -432,8 +808,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="位运算类题目"><a href="#位运算类题目" class="headerlink" title="位运算类题目"></a>位运算类题目</h2><p>位运算的题目，常规的思路就是异或为0的规律做。</p>
-<h4 id="剑指-Offer-56-II-数组中数字出现的次数-II"><a href="#剑指-Offer-56-II-数组中数字出现的次数-II" class="headerlink" title="剑指 Offer 56 - II. 数组中数字出现的次数 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/">剑指 Offer 56 - II. 数组中数字出现的次数 II</a></h4><p>这个题很巧妙。一个数组中一个数字出现了 N 次，只有一个出现了1次，找出这个出现一次的数，可以知道，出现N次那么对应的位的和一定为N的倍数。对于所有元素的某一位，可能是 0  2N  3N  4N… 或着 1  2N+1  3N+1 …</p>
+          <span id="more"></span>
+
+<h3 id="请问你了解哪些设计模式？"><a href="#请问你了解哪些设计模式？" class="headerlink" title="请问你了解哪些设计模式？"></a>请问你了解哪些设计模式？</h3><p>常见的设计模式如下：</p>
+<p>单例模式：确保单例类全局只有一个实例，并提供该实例的全局访问点。单例模式的实现核心是将 类 的构造函数设置为私有，并预留一个获取全局唯一对象的静态函数，用于外界获得该实例。根据实例化的时间可以分为懒汉模式和饿汉模式，区别就在于是使用的时候实例化还是在系统启动的时候就初始化。</p>
+<p>工厂模式：是一个创建对象的接口，但是由子类决定实例化哪个类。工厂方法把实例化操作延迟到子类。</p>
+<p>生成器模式：是一个创建型设计模式，如果一个类包含大量的部件，可以通过一个额外的生成器来分步骤创建复杂的对象，然后将创建的对象返回。</p>
+<p>模板模式：定义算法框架，并将一些步骤延迟到子类实现，例如 常见的目标检测，包含了图像读取，预处理，检测，可视化，这几个子过程。如果更改其中的预处理的方法，那么只用在子类中重写预处理函数即可，其他过程都可以复用。weak_ptr</p>
+<p>观察者模式：原理类似于所有观察者都实现一个 updata 接口，然后将所有的观察者注册进被观察者中，当被观察者状态变化时循环通过 update 接口通知所有观察者。</p>
+<p>装饰模式：是静态继承的一种替代，通过装饰模式可以动态的给原有的对象增加新的功能。装饰类和被装饰类之间不存在耦合不相互影响。这种模式对被装饰类进行包装，在装饰类中持有被装饰类的对象，实现在保持原有功能前提下实现新的功能。除了最底层的原始对象不需要依赖以外，其他装饰对象都要携带一个指针指向它装饰的对象，装饰的过程像一个链表层层叠加。</p>
+<h3 id="请你说一说OOP的设计模式的五项原则"><a href="#请你说一说OOP的设计模式的五项原则" class="headerlink" title="请你说一说OOP的设计模式的五项原则"></a>请你说一说OOP的设计模式的五项原则</h3><p><strong>单一职责原则</strong>：每个类只负责单一的责任，如果一个任务很复杂，应该将他分散的多个类种实现，减少类的耦合，提高类的复用性。<br><strong>依赖倒置原则</strong>：核心是面向接口编程的思想。高层模块不能依赖于底层模块，他们应该共同依赖于抽象（接口），因为抽象更稳定。在高层模块和底层模块之间抽象出一个稳定的接口层，降低他们之间的耦合。<br><strong>里氏替换原则</strong>：这个原则是说 子类对象要能够完全替换父类，即可以使用父类的地方也要能使用子类替换。并在客户端中使用父类指针或引用类型来引用子类，以实现动态绑定。<br><strong>接口隔离原则</strong>：不应该强迫客户依赖于它们不用的方法。因此使用多个专门的接口比使用单一的总接口要好。<br><strong>开放-封闭原则</strong>：在新增功能时，不需要修改原有的代码<br><strong>最少知识原则</strong>：</p>
+<h3 id="请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？"><a href="#请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？" class="headerlink" title="请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？"></a>请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？</h3><p>构造函数设置为私有属性，只有通过该类提供的静态方法来得到该类的唯一实例。在静态方法中判断 指向实例的静态成员指针为空，就实例化类，否则直接返回。（必须是静态成员指针，因为静态成员函数无法访问非静态成员变量）</p>
+<p>单例模式有懒汉模式，可能会线程不安全，如果多个线程同时通过了指针空判断，就会创建出多个实例，通过双重锁来实现线程安全。（判空，上锁，再判空，为啥要用双重锁？如果已经实例化了，通过第一个判空操作能避免读的时候加锁等待，提高性能。第二个锁就是为了防止创建对象的时候多线程竞争）<br>另一个是饿汉模式，在程序运行时就完成了对象初始化，因此不存在不安全问题。</p>
+<h3 id="请你说说工厂模式的优点？"><a href="#请你说说工厂模式的优点？" class="headerlink" title="请你说说工厂模式的优点？"></a>请你说说工厂模式的优点？</h3><p>为了解耦，将对象的使用过程和创建过程分离。如果对象创建过程包含了复杂的创建逻辑，可以统一放在工厂类中实现，实现代码复用。充分利用了面向对象的多态性质，工厂对象返回的是指向具体子类的基类指针，如果后续修改了子类的业务逻辑，也只用修改工厂中的初始化逻辑，方便维护。</p>
+<h3 id="请你说一下观察者模式"><a href="#请你说一下观察者模式" class="headerlink" title="请你说一下观察者模式"></a>请你说一下观察者模式</h3><p>观察者模式中分为观察者和被观察者，当被观察者发生装填改变时，观察者会受到通知。主要为了解决对象状态改变给其他对象通知的问题，其实现类似于观察者在被观察者那注册了一个回调函数。</p>
+<h3 id="说一说装饰模式"><a href="#说一说装饰模式" class="headerlink" title="说一说装饰模式"></a>说一说装饰模式</h3><p>是静态继承的一种替代，通过装饰模式可以动态的给原有的对象增加新的功能。装饰类和被装饰类之间不存在耦合不相互影响。这种模式对被装饰类进行包装，在装饰类中持有被装饰类的对象，实现在保持原有功能前提下实现新的功能。除了最底层的原始对象不需要依赖以外，其他装饰对象都要携带一个指针指向它装饰的对象，装饰的过程像一个链表层层叠加。</p>
+<p>使用场景：1、扩展一个类的功能。 2、动态增加功能，动态撤销。</p>
+<h3 id="手撕单例模式"><a href="#手撕单例模式" class="headerlink" title="手撕单例模式"></a>手撕单例模式</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span>&#123;</span></span><br><span class="line">	<span class="keyword">private</span>: </span><br><span class="line">    	<span class="keyword">static</span> Single* ptr;</span><br><span class="line">    	std::mutex mtx_;</span><br><span class="line">    	<span class="built_in">Single</span>()&#123;&#125;;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="function"><span class="keyword">static</span> <span class="title">getSingeTon</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(ptr == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                mtx_.<span class="built_in">lock</span>();</span><br><span class="line">                <span class="keyword">if</span>(ptr == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                	ptr = <span class="keyword">new</span> <span class="built_in">Single</span>();</span><br><span class="line">                &#125;</span><br><span class="line">                mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ptr;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Single* Single::ptr = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
       
     </div>
@@ -453,7 +849,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/33362/">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/57512/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -467,7 +863,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/33362/" class="post-title-link" itemprop="url">笔记管理软件</a>
+            <a href="/posts/57512/" class="post-title-link" itemprop="url">结构型</a>
         </h2>
 
         <div class="post-meta">
@@ -476,21 +872,27 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-14 17:18:32 / 修改时间：22:04:49" itemprop="dateCreated datePublished" datetime="2021-05-14T17:18:32+08:00">2021-05-14</time>
+              <time title="创建时间：2021-05-25 21:04:43" itemprop="dateCreated datePublished" datetime="2021-05-25T21:04:43+08:00">2021-05-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-26 22:20:12" itemprop="dateModified" datetime="2021-05-26T22:20:12+08:00">2021-05-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E5%B0%8F%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">个人小项目</span></a>
+                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
                 </span>
             </span>
 
@@ -505,10 +907,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>平常在本地使用 typoral 写markdown 笔记，通过git管理本地的笔记文件，定时上传github，使用hexo环境编译笔记并同步到github主页，但是由于 typoral 只是一个文档编辑器，每次要插入笔记引用和笔记yaml头等操作时很麻烦。</p>
+          <p>结构型模式</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/33362/#more" rel="contents">
+              <a class="btn" href="/posts/57512/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -532,7 +934,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/10121/">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/10008/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -546,7 +948,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/10121/" class="post-title-link" itemprop="url">典型算法-排序算法</a>
+            <a href="/posts/10008/" class="post-title-link" itemprop="url">责任模式</a>
         </h2>
 
         <div class="post-meta">
@@ -556,14 +958,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-11 10:11:13" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:13+08:00">2021-05-11</time>
+              <time title="创建时间：2021-05-22 20:55:32" itemprop="dateCreated datePublished" datetime="2021-05-22T20:55:32+08:00">2021-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-15 17:24:26" itemprop="dateModified" datetime="2021-05-15T17:24:26+08:00">2021-05-15</time>
+                <time title="修改时间：2021-07-13 17:05:07" itemprop="dateModified" datetime="2021-07-13T17:05:07+08:00">2021-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -571,11 +973,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">经典算法</span></a>
+                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
                 </span>
             </span>
 
@@ -590,435 +992,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>整理、对比了常用的排序算法，插入排序，快速排序….</p>
+          <p>行为模型模式</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/10121/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/24455/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/24455/" class="post-title-link" itemprop="url">典型算法-KMP算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:12" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:12+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">经典算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>详细记录了 KMP 算法的原理，KPM算法是一种字符串匹配算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/24455/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/54399/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/54399/" class="post-title-link" itemprop="url">相关的编程题汇总-贪心算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:11" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:11+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录了解题中需要用贪心思路的题目。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/54399/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/18579/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/18579/" class="post-title-link" itemprop="url">相关的编程题汇总-数学思想</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:10" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:10+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-17 11:57:31" itemprop="dateModified" datetime="2021-05-17T11:57:31+08:00">2021-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录了解题中需要用数学思想的题目，这类题目规律最多样。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/18579/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/56789/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/56789/" class="post-title-link" itemprop="url">相关的编程题汇总-回朔</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:09" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:09+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录了回朔类的题目，常见的 八皇后问题，排列组合等</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/56789/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/58115/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/58115/" class="post-title-link" itemprop="url">相关的编程题汇总-双指针</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:08" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:08+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录了解题中双指针方法典型的题目，例如二分法中的首位指针，图的环判定中的快慢指针，滑窗方法等</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/58115/#more" rel="contents">
+              <a class="btn" href="/posts/10008/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1041,7 +1018,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1111,7 +1088,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1124,7 +1101,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

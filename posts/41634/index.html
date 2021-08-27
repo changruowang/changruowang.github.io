@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/03/28/BNKUo93ncTrgdWY.png">
 <meta property="article:published_time" content="2021-05-11T02:10:58.000Z">
-<meta property="article:modified_time" content="2021-05-14T12:47:15.094Z">
+<meta property="article:modified_time" content="2021-06-25T09:59:12.541Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="图">
 <meta property="article:tag" content="数据结构">
@@ -233,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
+                <time title="修改时间：2021-06-25 17:59:12" itemprop="dateModified" datetime="2021-06-25T17:59:12+08:00">2021-06-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,6 +294,73 @@
 <li>深度优先搜索 (Depth-First Search, DFS)</li>
 <li>广度优先搜索 (Breadth-First Search, BFS)</li>
 </ul>
+<h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><p>根据依赖关系输入 排序结果，要将被依赖的步骤放在前面执行，没有依赖关系的步骤先后顺序无所谓。对于有环的图，构成了循环依赖的关系，因此这个环上的所有元素无法输出。所以 <strong>拓扑排序可以用来判断图是否有环</strong></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h4><p>首先入度为0的节点，它一定不依赖任何节点，所以它可以最先输出。因此首先遍历所有节点并统计每个节点的 入度；一开始将所有入度为0的节点之间放入队列。按照广度优先遍历的套路，不断从队列中取节点，取出的节点代表它执行完毕，可以被输出，同时将它指向的节点的入度减1，如果减到了0那么就代表它所有的依赖都执行了，因此可以放入队列中等待执行（输出）。</p>
+<h4 id="深度优先"><a href="#深度优先" class="headerlink" title="深度优先"></a>深度优先</h4><p>遍历所有节点，若节点未被访问则从该节点开始深度遍历。并将该节点状态设置为正在遍历中 1；当他的所有邻接子节点遍历完成后，再次回溯到这个节点时，将状态设置为 2 并将该节点入栈。 代表访问完成。而当该节点状态为 正在遍历中 并再次访问到它时 代表有环 直接退出，无拓扑排序。最后输出时将 栈 反序输出即可。这么做可以成立的原因是，因为  节点入栈实在回溯的时候完成的  因此对于有出度的节点 它入栈的顺序一定晚于 由该节点输出的子节点，符合拓扑排序的要求。 </p>
+<h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><h3 id="深度-广度优先遍历"><a href="#深度-广度优先遍历" class="headerlink" title="深度/广度优先遍历"></a>深度/广度优先遍历</h3><p>这种方法耗时较长。初始 到其他节点的延时为无穷大。首先从初始节点出发，开始广度/深度优先遍历。判断是否将新的节点加入队列的方法是 <strong>当前延时小，则将该节点加入访问队列（递归节点）</strong>。这样可以防止有环的情况下 出现死循环。对于广度优先遍历的方法，注意不能用 入度数 是否递减到 0 来判断 是否停止 将其加入遍历，例如 4-&gt;1-&gt;2-&gt;3   4-&gt;2-&gt;3 若第一个路劲 为最短 ，但是 若用入度数递减为0判断是否加入遍历的条件，路径一会先到达3这样导致 2-&gt;3提前失效，就无法找到最短的路径一。</p>
+<h3 id="迪杰斯特拉算法-Dijkstra"><a href="#迪杰斯特拉算法-Dijkstra" class="headerlink" title="迪杰斯特拉算法 Dijkstra"></a>迪杰斯特拉算法 Dijkstra</h3><p>特点： （参考链接: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35644234/article/details/60870719%EF%BC%89">https://blog.csdn.net/qq_35644234/article/details/60870719）</a></p>
+<ul>
+<li>求<strong>单源最短路径</strong>，即求从一个点出发 到其他所有点的最短距离</li>
+<li>只适用于非负权图</li>
+<li>时间复杂度优秀</li>
+<li>使用了贪心思想</li>
+</ul>
+<p>步骤：</p>
+<ol>
+<li>初始化两个集合，一个已确定最短路径的节点为集合P， 未确定最短路的节点为集合Q。保存源节点 K 到每个节点的距离，若源节点和它无直接连接，初始化时距离为无穷大。将源节点K放入 P。</li>
+<li>从Q中找一个 到 K 距离最短的节点 u, 因为距离权值都是正，而这个又最短，其他的无论怎么从 K 走到 u 都不如这个 K直接到 u 的近。因此将它放入P，代表已经确定。 （贪心思想）</li>
+<li>上一步已经确定一个新的 最短路径的节点，这一步就要 确定 以 u 为出的 边所指向的 节点 v，是否能通过 u 缩短 K到v的距离。这一步叫松弛。此时 v 节点还是在Q中。</li>
+<li>循环 2 开始 找新的 最短距离 节点 然后再用新的最短边 来松弛 节点。直到 Q 空。</li>
+</ol>
+<p><strong>核心思想</strong>：基于贪心的原则。每次取出从起点到某节点最短的距离，然后再以该节点为中心 区松弛更新起点到所有节点的距离。是一个 贪心+广度优先搜索的策略</p>
+<p><strong>时间复杂度</strong>： O(E + NlogN)  使用优先队列优化后， 朝队列中插入复杂度为 O(N) N为节点数目。然后遍历所有节点最多 N log N ,  但是其实还访问了一遍所有的边，所以加 E 为边的数量  访问边–&gt;取点-&gt;插入优先队列</p>
+<h3 id="Bellman-Ford-算法"><a href="#Bellman-Ford-算法" class="headerlink" title="Bellman-Ford 算法"></a>Bellman-Ford 算法</h3><p>Dijkstra算法要求边权为正数，但是这个方法不要求，并且可以用来判断负环路，就是如果图中成环且总和为负，那么在没有中转数限制下转的圈越多就越小到负无穷</p>
+<p>该方法 基本思想是  遍历每个边  e(i, j)  如果 dist(st, j) = min( dist(st, i) + w(i, j) ,   dist(st, i)) 。根据连接情况初始化 dist , 第一次遍历所有边，完成之后，此时的最短距离其实其中的最短距离是 中转节点不超过 1 个 时的最短距离 （也可能没中转，取决于上述 min 表达式有没有松弛成功）。那么一共有 N个节点，所以最多需要要遍历所有边 N-1 次 即可求得确定的单源到所有节点的最短距离（不是负环图时）。</p>
+<p>当然，图是稀疏连接的，那么不可能经过每个点都中转一次才能得到最短距离。因此在每次遍历完所有边之后如果此时的最短路径没有更新边可以退出了。</p>
+<p>同理，借助这个原理，如果他是负环图，那么即便遍历N-1次后，最短距离依然可以更低。</p>
+<p><strong>核心思想</strong>： 遍历所有的边，用边松弛当前最短距离。遍历的论数代表当前可能中转的最多节点数</p>
+<p><strong>复杂度</strong>：O(NxE) N 为节点数，E为边的数目。</p>
+<p><strong>如何记录最短距离对应的路径</strong>： 通过path数组来记录路径，path[i]=j表明节点 i 取得最小路径时，其最后一段走的是节点 j 到节点 i  。知道终点后，反向查找即可。例如求起点是 0 到 终点 5 的最短路径。path[ 5 ] = k 就是起点到5取最短路劲时 最后一段是 k -&gt;5 即  0 -&gt; k -&gt; 5 …..</p>
+<h3 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h3><p>用于求任意两个节点之间的最短距离。</p>
+<p>将上述两种算法套个循环即可完成所有点之间的最短距离</p>
+<p>但是这里记录一下 dp 的思路  复杂度其实和 B-F算法加个循环一样</p>
+<p>设 dp[k] [i] [j]  代表最多只能经过前 k 个节点中转时的最短路径 （就是可以经过 1,2,…k节点中的一个或者多个中转） dp[k] [i] [j] = min( dp[k-1] [i] [k] + dp[k-1] [k] [j] + w(i, j) , dp[k-1] [i] [j])  从这个 转移方程可以看出，第一项就是 正好 以 节点 k 中转时的最短路径  ，后一项就是 k 节点能中转但是我不在这儿转的最短距离。因此如果 min 选择了前者，那么就代表在 k 节点中转，没选择，k节点就没中转。</p>
+<p>所以最外层  依旧要遍历所有节点  复杂度和上面方法套个循环一样</p>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><p>并查集的重要思想在于，<strong>用集合中的一个元素代表集合</strong>。我曾看过一个有趣的比喻，把集合比喻成<strong>帮派</strong>，而代表元素则是<strong>帮主</strong>。接下来我们利用这个比喻，看看并查集是如何运作的。</p>
+<p>对于一个给定的图  它有很多节点，但是部分节点是联通的，部分是不连通的。如何判断该图中有多少个联通区域呢。</p>
+<ol>
+<li>初始每个节点自成一派，自己是自己的祖先 ，初始联通个数为节点数目</li>
+<li>给定图中的一个边，首先判断该边的两个端点是否在一个集合中<ul>
+<li>如果不在一个集合中 说明 该边的存在会将 这两个端点合并成一个集合，因此联通个数-1，并将两个集合合并，合并的思路很简单，将他们附属在同一个祖先下即可</li>
+<li>如果在一个集合中  返回false 说明这个边的存在不影响当前联通的个数</li>
+</ul>
+</li>
+<li>这样遍历所有的边  最后就可以计算出联通图的个数</li>
+</ol>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>并查集  简单来说有两个功能</p>
+<ol>
+<li>查询两个集合是否相交  </li>
+<li>合并两个不相交的集合  需要合并所有节点</li>
+</ol>
+<p>他的查询和合并时间复杂度是相互约束的。如果所有相连的节点都挂在同一个祖先下，即树的深度只有1，那么查询的复杂度为1，但是合并的复杂度就为O(N)，（因为要将一个集合的所有节点的祖先重新设置）。也可以在合并时适当控制树的深度来平衡查询和合并的复杂度。</p>
+<blockquote>
+<p><strong>题目背景</strong><br>若某个家族人员过于庞大，要判断两个是否是亲戚，确实还很不容易，现在给出某个亲戚关系图，求任意给出的两个人是否具有亲戚关系。<br><strong>题目描述</strong><br>规定：x和y是亲戚，y和z是亲戚，那么x和z也是亲戚。如果x,y是亲戚，那么x的亲戚都是y的亲戚，y的亲戚也都是x的亲戚。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnionFind1</span> <span class="title">implements</span> <span class="title">UF</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] array;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnionFind1</span><span class="params">(<span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">        array = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            array[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> array.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> array[p];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">isConnected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">find</span>(p) == <span class="built_in">find</span>(q);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unionElements</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pID = <span class="built_in">find</span>(p);</span><br><span class="line">        <span class="keyword">int</span> qID = <span class="built_in">find</span>(q);</span><br><span class="line">        <span class="comment">//如果本身就是相连的</span></span><br><span class="line">        <span class="keyword">if</span> (qID == pID) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] == pID) &#123;</span><br><span class="line">                array[i] = qID;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><p>最小生成树就是 一个图中，使它可以完全联通的最小边的权重和。这是并查集的一个典型应用</p>
+<p><strong>思路</strong></p>
+<ol>
+<li>将所有的边权从小到大排序</li>
+<li>从小到达取边  首先判断边的两个端点是否属于同一个集合<ul>
+<li>如果是就不能使用该边，因为它的加入不会使联通数量减少，说明加入之后会使当已经加入的连接成环</li>
+<li>如果不是，那么要合并这两个点对应的集合。同时这个边也是最小生成树中的一个边</li>
+</ul>
+</li>
+<li>遍历</li>
+</ol>
 
     </div>
 
@@ -382,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">几个重要的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.3.</span> <span class="nav-text">图的遍历</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">几个重要的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.3.</span> <span class="nav-text">图的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-number">1.4.</span> <span class="nav-text">拓扑排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">广度优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">深度优先</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">1.5.</span> <span class="nav-text">最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-number">1.5.1.</span> <span class="nav-text">深度&#x2F;广度优先遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95-Dijkstra"><span class="nav-number">1.5.2.</span> <span class="nav-text">迪杰斯特拉算法 Dijkstra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Ford-%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.3.</span> <span class="nav-text">Bellman-Ford 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floyd%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.4.</span> <span class="nav-text">Floyd算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-number">1.6.</span> <span class="nav-text">并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.6.1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.6.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">1.6.3.</span> <span class="nav-text">最小生成树</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -396,7 +463,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -409,7 +476,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
