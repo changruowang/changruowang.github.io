@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="主要贡献 建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构 ​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整 数据驱动的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Retinex Net">
+<meta property="og:url" content="http://xxxxx.com/posts/15395/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="主要贡献 建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构 ​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整 数据驱动的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png">
+<meta property="article:published_time" content="2021-05-11T02:10:30.000Z">
+<meta property="article:modified_time" content="2021-08-27T08:19:59.533Z">
+<meta property="article:author" content="常若望">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png">
+
+<link rel="canonical" href="http://xxxxx.com/posts/15395/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Deep Retinex Net | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/15395/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Deep Retinex Net
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:30" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:30+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:19:59" itemprop="dateModified" datetime="2021-08-27T16:19:59+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
+<li>建立了一个 采集与真实场景的 含有成对的低光照/正常光照的大尺度数据集（包含了合成和非合成的图像）</li>
+<li>提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。</li>
+<li>提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构</li>
+</ul>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png" alt="1572790251537"></p>
+<p>​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整</p>
+<h3 id="数据驱动的图像分解-Decom-Net"><a href="#数据驱动的图像分解-Decom-Net" class="headerlink" title="数据驱动的图像分解 Decom-Net"></a>数据驱动的图像分解 Decom-Net</h3><p>​        这一部分将输入图像 S 分解为光照估计 I 和反射分量 R。一种分解反射和光照的方法是使用人工约束条件。然而根据retinex模型的那个式子很难实现，作者使用数据驱动的方式构建一个 Decom-Net来完成。这个网络的特点是损失函数的设计。由上图看出DecomNet的训练不需要低光照图的R和L来直接构建损失，而是通过以下几个约束条件来间接构建损失函数。</p>
+<ul>
+<li><p>低光照图的反射率图和正常光照的反射率图应该尽可能一样：<br>$$<br>\mathcal{L}<em>{i r}=\left|R</em>{l o w}-R_{n o r m a l}\right|_{1}<br>$$</p>
+</li>
+<li><p>应该可以根据R, I 还原重建出 I 对应的 S图 。假设Sn Sl分别为输入正常光照和低光照图像，  Il  In为分解产生的高低光照图  Rn Rl 为分解产生的对应的反射率。约束1可知Rn应该尽可能接近Rl。 约束2的意思则是： 使用Rn Il 可以还原出Sl  使用Rn In可以还原出Sn  使用Rl Il可以还原出Sl  使用Rl In可以还原出Sn 。  R*I 即根据Retinex理论重建的过程，而-则来度量还原的程度。</p>
+</li>
+</ul>
+<p>$$<br>\mathcal{L}<em>{\text {recon}}=\sum</em>{i=l o w, n o r m a l} \sum_{j=l o w, n o r m a l} \lambda_{i j}\left|R_{i} \circ I_{j}-S_{j}\right|_{1}<br>$$</p>
+<ul>
+<li>结构平滑损失。即分解产生的光照图应该尽可能的平滑，因为认为一张图上的光照在各个区域是一致的。全变分(TV)损失，最小化整张图的梯度，通常在图像重建中作为先验平滑图像。但是直接应用TV损失来约束平滑光照图会在 图像本身梯度较大的区域失效 （下图黑边）。这是由于不管区域是纹理细节还是强边界，光照梯度都是均匀减少的。因此原本的TV损失对图像的结构是盲目的，如果在图像边缘进行强烈的模糊虽然产生的光照图会平滑但是反射率图会产生黑边。如下图。因此根据对应位置的反射率对光照梯度加上权重。上式 $\nabla I_{i}$ 表示微光图/正常光照图的梯度，一般的TV损失是直接对全图$\nabla I$ 求和作为损失来优化平滑图像。这里相当于根据反射率图像的梯度给梯度加上了一个权值exp()。在反射率图本身梯度大的地方权值小，小的地方权值大。作者认为在物理结构存在梯度的地方光照应该不连续   ？？</li>
+</ul>
+<p>$$<br>\mathcal{L}<em>{i s}=\sum</em>{i=l o w, n o r m a l}\left|\nabla I_{i} \circ \exp \left(-\lambda_{g} \nabla R_{i}\right)\right|<br>$$</p>
+<ul>
+<li>将上述三部分损失相加即为Decom-Net 采用的损失<br>$$<br>\mathcal{L}=\mathcal{L}<em>{\text {recon}}+\lambda</em>{i r} \mathcal{L}<em>{i r}+\lambda</em>{i s} \mathcal{L}_{i s}<br>$$<br>作者还提到 关于LIME网络也在计算光照图像时考虑到图像原本的结构，但是本质和自己的不同….</li>
+</ul>
+<blockquote>
+<p>For LIME, the total variation constraint is weighted by an initial illumination map, which is the maximum intensity of each pixel in R, G and B channels. Our structure-aware smoothness loss instead is weighted by reflectance. The static initial estimation used in LIME may not depict the image structure as well as reflectance does, since reflectance is assumed as the physical property of an image.  </p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png" alt="1572858053126"></p>
+<h3 id="多尺度光照调节-adjustment"><a href="#多尺度光照调节-adjustment" class="headerlink" title="多尺度光照调节  adjustment"></a>多尺度光照调节  adjustment</h3><p>​        这个adujust网络的结构类似于<strong>U-net</strong> 的编码解码结构。降采样块包含步长为2的卷积层，上采样块使用resize-convolution层，即先将特征图插值的方法上采样然后使用步长为1的卷积和激活。这一部分的损失即为调整过后的光照图和去噪过后的反射率图重建产生的图像和正常光照图像之间的l1损失。<br>​        可以看到，在这一部分还对反射率图进行了去噪处理，使用的时DMB3</p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>​        作者提出了一套数据集，包含两部分：成对的合成数据和真实的低光照图。由于真实场景的图像采集正常光照和低光照时会产生错位，作者采用了三步法来矫正。<br>​        合成图像，作者分析了已有的真实低光照图像和真实的正常图像光照的YCbCr中Y的分量，统计Y分量的直方图，根据他们的规律来合成低光照图像。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png" alt="1572858105879"></p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>​        本论文作者并没有贴出指标的定量分析，只是贴了几幅图。图像分解的方法是否有效有待考虑….<br>​        定性分析：</p>
+<ol>
+<li><p>首先作者为了证明图像分解网络设计的有效性，贴出了和LIME分别对微光图和正常图像分解产生的R , I图，发现LIME在同一个图的低光和正常光图分解的R结果并不一致， 而R反应的应该是物体本身的折射率，在低/正常图下应该一样。</p>
+</li>
+<li><p> 同样的，在R图中 由于去掉了光照分量，应该不存在阴影，而LIME的R中存在明显的阴影，但是RetinexNet除了有噪 声外是没有阴影的 说明光照分量取出的比较彻底。</p>
+</li>
+<li><p>文章所提的方法不会对局部区域过曝，主要是全局光照调节效果好</p>
+</li>
+<li><p>得益于加权TV损失，相对于基于DeHz去雾方法 结果中没有黑边</p>
+</li>
+<li><p>又对比了同样含有去噪方法的JED 网络，LIME(网络后去噪) 结果，发现Retinex的边缘细节得到较好的保留。 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png" alt="1572859097749"></p>
+</li>
+</ol>
+<p>感觉这种方法处理的结果</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/313/" rel="prev" title="CURL">
+      <i class="fa fa-chevron-left"></i> CURL
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/46341/" rel="next" title="DRBN">
+      DRBN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E8%A7%A3-Decom-Net"><span class="nav-number">2.1.</span> <span class="nav-text">数据驱动的图像分解 Decom-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E5%85%89%E7%85%A7%E8%B0%83%E8%8A%82-adjustment"><span class="nav-number">2.2.</span> <span class="nav-text">多尺度光照调节  adjustment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

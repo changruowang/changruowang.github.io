@@ -589,6 +589,583 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/623/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/623/" class="post-title-link" itemprop="url">HDR-survey</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-05 20:20:32" itemprop="dateCreated datePublished" datetime="2021-07-05T20:20:32+08:00">2021-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:19:48" itemprop="dateModified" datetime="2021-08-27T16:19:48+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZHANG2012LIANG/article/details/85031065">图像融合</a></p>
+<h1 id="HDR-综述"><a href="#HDR-综述" class="headerlink" title="HDR  综述"></a>HDR  综述</h1><h2 id="HDR-概念"><a href="#HDR-概念" class="headerlink" title="HDR 概念"></a>HDR 概念</h2><ol>
+<li>HDR 动态范围：是指图像的最大亮度和最小亮度的比值。对于一个8位的图像，能够存储的动态的范围只有 10^2量级，但是自然场景以及人眼的感知范围远远大于这个。而显示器可以显示的动态范围也只有 10^2 量级，因此直接显示 HDR 图像也会使细节丢失。</li>
+<li>HDR成像：包含两个 过程，一个是成像，相机采集生成位深度为10，12或者16位的高动态图像；另一个过程是 显示，使用特殊的显示器显示高动态范围的图像。</li>
+</ol>
+<p>我理解的低光图像增强和HDR的区别：</p>
+<p>主要就是两种场景：</p>
+<ol>
+<li>一种是纯黑的图提亮；</li>
+<li>一种是光照不均匀的图</li>
+</ol>
+<p>低光照增强实际就是 8位的 图像 -&gt; 提亮后的8位图像，整个过程图像位深度不变，只是通过算法改变了图像的效果，可以认为是伪HDR图像，因为记录的图像的动态范围并没有增加</p>
+<p>HDR技术，则是 8位LDR图像 -&gt; 10/14/16位HDR图像，图像的位深度变大了，图像记录信息的动态范围确确实实增加了。但是显示器能显示的动态范围有限，因此还是要经过 色调映射技术才能在一般的显示器上显示。</p>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210706200639404.png" alt="image-20210706200639404" style="zoom:50%;" />
+
+<h2 id="方法分类"><a href="#方法分类" class="headerlink" title="方法分类"></a>方法分类</h2><h3 id="Tone-Map色调映射"><a href="#Tone-Map色调映射" class="headerlink" title="Tone Map色调映射"></a>Tone Map色调映射</h3><p>照相机和摄像机可以捕捉到HDR的影像，渲染过程中可以产生HDR的画面。这些内容如果需要显示到LDR的设备上，就需要一个称为tone mapping的过程，把HDR变成LDR   HDR-&gt;LDR显示  </p>
+<p>Tone Map色调映射算法都可以看作  S  曲线映射  只是不同方法曲线形状不太一样</p>
+<h3 id="单帧HDR"><a href="#单帧HDR" class="headerlink" title="单帧HDR"></a>单帧HDR</h3><p>单帧HDR 是输入为LDR图像，然后提升局部和全部细节输出，感觉输出也是LDR域的伪HDR图像</p>
+<ol>
+<li>条件编码结构：传统的CNN在图像所有位置都采用相同的滤波器权重处理，但是对于图像中 不同区域的处理是不同的，例如图像超分中 通过预先语义分割的一个map作为条件图来使网络对不同纹理的区域有不同的处理。在HDR中也一样，因此常常会通过一个条件子网络来 做位置相关编码核图像相关编码。但是感觉这种和注意力没啥区别  都是点乘 一个  条件图 + 一个偏置</li>
+<li>分频处理的结构：将图像分为不同的频带分别处理  低中高 分别处理融合  例如 DRBN 文中  就是全局三个频带处理，并且再每个阶段会有频带间的信息交流  就是会上采样融合作为下一阶段的输入   同时  全局和局部特征提取结构也是很常见的结构</li>
+<li>生成多帧再融合的思路就是将 单张图像 通过 乘系数 或者 通过相机响应模型等方法 扩展为多张亮度等级的图  再采用多帧融合的思路进行 融合 </li>
+</ol>
+<h3 id="多帧HDR"><a href="#多帧HDR" class="headerlink" title="多帧HDR"></a>多帧HDR</h3><p>多帧HDR 常常是要考虑 动态场景下的 HDR  如果是对齐的 可以之间采用一个蒙板函数融合生成 HDR 图像  然后 ToneMap压缩动态范围再显示。同时多帧HDR可能有下面两种思路</p>
+<ul>
+<li>使用不同的曝光采集多帧图像 融合  由于不同时间采集的一定会有前景不对齐的问题</li>
+<li>采集多张相同的低曝光的图像  HDR+ 中  避免不可逆的过饱和，同时也可以采用多帧降噪方法抑制阴影区域的噪声，但是也存在不对齐的问题</li>
+</ul>
+<p>网络结构</p>
+<ol>
+<li>传统思路：传统思路就是  预处理 对齐  融合的 方法；早期的方法都是这样做的 </li>
+<li>多分支的网络：认为不需要认为做 对齐  CNN有自动对齐的功能，因此直接采用多分枝特征提取 +  融合  +  解码 的结构</li>
+<li>在网络中引入 特征对齐网络，相对第二种的朴素思路自然效果更好。具体的可以是 使用可变形卷积构建的多尺度特征对齐模板，也可以是基于自适应卷积滤波器的结构，就是一个分支输出线性变换参数 ，通道数为 cxc 然后对对应位置的特征图的 c x c 领域的特征做线性变换输出。融合的话可以使用注意力机制的特征融合模块</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21983679">参考链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/376246037">https://zhuanlan.zhihu.com/p/376246037</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361596881">https://zhuanlan.zhihu.com/p/361596881</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45250844/article/details/103207184">https://blog.csdn.net/weixin_45250844/article/details/103207184</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw">https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w">https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/46151/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/46151/" class="post-title-link" itemprop="url">图像处理-逆滤波和维纳滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-30 22:21:45" itemprop="dateCreated datePublished" datetime="2021-06-30T22:21:45+08:00">2021-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:20:38" itemprop="dateModified" datetime="2021-08-27T16:20:38+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">传统图像处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h1 id="维纳滤波"><a href="#维纳滤波" class="headerlink" title="维纳滤波"></a>维纳滤波</h1><h2 id="逆滤波"><a href="#逆滤波" class="headerlink" title="逆滤波"></a>逆滤波</h2><p>用于不含噪声的图像去模糊</p>
+<h2 id="维纳滤波-1"><a href="#维纳滤波-1" class="headerlink" title="维纳滤波"></a>维纳滤波</h2><p>用于含有噪声的图像去模糊  以及去噪</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">参考链接</a></p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">维纳滤波详解</a></p>
+<p>在图像拍摄过程中由于各种原因会造成图像退化，图像退化模型如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222253.png" alt="image-20210630222253821"></p>
+<p>其中，⋆ 为卷积符号，f ( x , y ) 为输入图像，g ( x , y ) 为退化图像，h ( x , y ) 为退化函数，η ( x , y ) 为加性噪声，将上式进行傅里叶变换有（根据傅里叶变换的特性，<strong>空间域中的卷积相当于频率域中的乘积</strong>）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222401.png" alt="image-20210630222401374"></p>
+<p><strong>(1) 如果不考虑退化函数</strong>，图像退化模型就简化为图像噪声模型</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222436.png" alt="image-20210630222435984"></p>
+<p>图像增强问题成为单纯的图像去噪问题，可以通过空间域滤波等众多方法解决。</p>
+<p><strong>(2) 如果不考虑加性噪声</strong>，图像退化模型就简化为</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222453.png" alt="image-20210630222453569"></p>
+<p>这种问题可以通过逆滤波解决，即通过傅里叶变化以及阵列除法即可获得恢复后的图像频谱：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222524.png" alt="image-20210630222524519"></p>
+<p>但是对于退化模型 H 如何获取呢？数字图像处理中有  观察估计法，试验估计法和建模估计。例如建模估中可以通过运动数学模型将退化函数构造为：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222732.png" alt="image-20210630222732217"></p>
+<p><strong>(3) 如果退化函数和加性噪声都考虑</strong>，空域滤波器无法解决图像退化问题，逆滤波效果因为噪声的存在会变得非常差，这个时候就需要用到<strong>维纳滤波</strong>，（维纳滤波的推导写在结论中）维纳滤波公式如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222742.png" alt="image-20210630222742064"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/44176/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/44176/" class="post-title-link" itemprop="url">BM3D</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-22 21:21:24" itemprop="dateCreated datePublished" datetime="2021-06-22T21:21:24+08:00">2021-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:20:10" itemprop="dateModified" datetime="2021-08-27T16:20:10+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%8E%BB%E5%99%AA/" itemprop="url" rel="index"><span itemprop="name">图像视频去噪</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33552519/article/details/108632146">https://blog.csdn.net/qq_33552519/article/details/108632146</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.codenong.com/cs105736895/">https://www.codenong.com/cs105736895/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/62084/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/62084/" class="post-title-link" itemprop="url">图像视频去噪综述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-22 20:36:56" itemprop="dateCreated datePublished" datetime="2021-06-22T20:36:56+08:00">2021-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:20:08" itemprop="dateModified" datetime="2021-08-27T16:20:08+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%8E%BB%E5%99%AA/" itemprop="url" rel="index"><span itemprop="name">图像视频去噪</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021721649">https://segmentfault.com/a/1190000021721649</a></p>
+<p><a target="_blank" rel="noopener" href="https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/">https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/51754/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/51754/" class="post-title-link" itemprop="url">HDR+</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-21 20:48:56" itemprop="dateCreated datePublished" datetime="2021-06-21T20:48:56+08:00">2021-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-27 16:19:50" itemprop="dateModified" datetime="2021-08-27T16:19:50+08:00">2021-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h1 id="HDR"><a href="#HDR" class="headerlink" title="HDR+"></a>HDR+</h1><p>Burst photography for high dynamic range and low-light imaging on mobile cameras</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zbwgycm/article/details/82458240">参考链接</a></p>
+<h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><ol>
+<li>不使用多曝光。而是使用一个固定的较低的曝光时间和增益采集多帧图像。将这个曝光设置的足够低以比避免过曝溢出</li>
+<li>直接对bayer格式的数据处理，而不是RGB。一方面采集多帧如果都用RGB格式那每张都要经过ISP，另一方面ISP会对RAW图像做个非线性化，使得去噪变得困难</li>
+<li>使用了基于 FFT 的快速对齐算法</li>
+</ol>
+<p>主要思想是，首先使用多帧低照度的 raw 格式的图像做去噪融合成一张（这是一个常用多帧去噪手段），然后使用一个自适应的曝光算法将该图像扩展到长短曝光后融合，最后将处理后的 RAW 数据 经过ISP流程得到结果。</p>
+<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ol>
+<li>故意曝光不足避免过曝而不可逆</li>
+<li>采集多帧用于抑制暗区域噪声</li>
+<li>使用自动曝光算法 设置长短曝光参数，短曝光参数用于调整相机硬件参数来采集固定曝光的图像，长曝光参数用于对短曝光图像做tone map合成长曝光图</li>
+<li>使用 像素级的 曝光融合方法 融合长短曝光图像 </li>
+<li>色调映射（tone map）压缩动态范围</li>
+</ol>
+<h3 id="自动曝光"><a href="#自动曝光" class="headerlink" title="自动曝光"></a>自动曝光</h3><p>这一步其实是在多帧去噪融合之后使用的，按照原文顺序先介绍了。</p>
+<p>现在的 ISP 中都集成了 自动对焦 自动曝光 自动白平衡算法（3A），理论上我们可以直接使用ISP中自带的自动曝光算法根据场景自动设置相机曝光参数，然后再沿用这个参数采集多帧固定曝光的图像用于后续的融合去噪。但是，对于高动态范围的场景，拍摄的图像可能包含无法通过后期 HDR 色调映射恢复的高光或曝光不足的区域。（个人感觉主要是过曝不可逆，所以要避免）</p>
+<p>因此其实最终是对 两张gamma矫正后的图像做融合，其中一个是多帧去噪后的欠曝光图，另一张是对欠曝光后的图使用数字曝光补偿后的图。因此自动曝光算法可以 表述 为两个曝光水平：</p>
+<ul>
+<li><strong>合成长曝光</strong>：由短曝光图合成的长曝光图，在色调映射中用于恢复阴影区域 </li>
+<li><strong>短曝光</strong>：用于捕捉场景中亮的区域</li>
+</ul>
+<p><em>动态范围</em>： 图像能捕捉的场景中的光亮度的范围。自然场景中的动态场景通常特别高，人眼能看到的范围也很大。而通常相机能表示的范围只有256中。即便相机能采集到大动态范围的图像，但是一般的显示器能显示的亮度等级也有限，一方面为了弥补相机自生的动态感知范围不足的问题常常采用多曝光融合的方式来合成高动态的图像（场景亮暗细节都能保留），另一方面还要通过tone map色调映射技术将HDR图像压缩为，转换成可以在显示器上显示出更符合人眼视觉的LDR图像。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90093872">动态范围</a></p>
+<p>虽然说要尽量先使用低曝光的图像去采集多帧图像，从而避免饱和。但是曝光太低意味着噪声太强，需要融合更多帧来抑制噪声，这需要付出计算代价。同时如果过分的压缩动态范围（我理解为这是 Tone map 这一步的压缩动态范围，将合成的高动态图使用色调映射手段压缩为显示器可以显示的范围）会出现卡通效应（就是阴影部分被过度提亮了）<strong>文章中设置的压缩比为8（即最亮：最暗大约8比1）</strong></p>
+<h4 id="基于实例的自动曝光"><a href="#基于实例的自动曝光" class="headerlink" title="基于实例的自动曝光"></a>基于实例的自动曝光</h4><p>构建了一个包含5000个场景的数据集，并手动给每张图片标注 短曝光参数  和  长曝光参数，前者用于采集图像的曝光参数，后者用于后面 tone map 的参数。给定一帧raw的输入图像，提取他的特征描述符并在数据库中寻找与他对应的候选样例，然后将所有候选样例手动标注的两个参数分别做一个简单的加权融合。</p>
+<ul>
+<li>用于计算特征描述符的图像保证是白平衡的</li>
+<li>是在大幅下采样的版本上计算特征描述符，用于量化场景亮度分布</li>
+<li>四组64纬的特征，其中两组在两个不同的尺度空间上提取的，其中两组提取自图像 max(R,G,B) 和  avg(R,G,B)；前者用于代表频率空间的曝光，后两组用于关注颜色削波 <font color=red>（color clipping ？？？？？不懂）</font></li>
+<li>带注意力的特征提取手段，通常情况下计算特征时都是给与图像中心更多的权重，当选择中人脸时也可以给与选定区域较大的权重。</li>
+<li>选取候选实例中亮度在当前场景亮度8倍的实例，以防止昼夜颠倒的不真实情况</li>
+</ul>
+<h4 id="曝光参数分解"><a href="#曝光参数分解" class="headerlink" title="曝光参数分解"></a>曝光参数分解</h4><p>通过前面可以计算出 长短曝光参数。那么这一步就是要将从实例中查询计算的短曝光参数  分解为   真实的相机参数（相机曝光时间和曝光增益）然后修改相机参数再去采集图像。这一步使用一个固定的策略来 平衡噪声 和 运动模糊（如果曝光时间长就会有运动模糊）之间的关系</p>
+<ul>
+<li>对于亮的场景，曝光增益设置到最低，而曝光时间提高到8ms</li>
+<li>当场景变得暗时，曝光时间固定8ms不变，曝光增益x4</li>
+<li>最后曝光时间和曝光增益一起成比例的提高，曝光时间上限100ms 曝光增益上限96x  为了尽可能提高采集图像的信噪比，尽可能提高曝光增益</li>
+</ul>
+<p><font color=red>（这个过程不是很理解 为何要这么做 以及前面的短曝光参数在这一步做何用？）</font> </p>
+<h4 id="图像数量-burst-size"><a href="#图像数量-burst-size" class="headerlink" title="图像数量(burst size)"></a>图像数量(burst size)</h4><p>在较亮的场景 使用1~2张图即可，因为噪声不多，虽然多一点图也可以抑制运动模糊啥的。在低光照环境下 或者  高动态场景下，通常要将低亮度的区域亮度拉升，会有噪声，因此需要较多帧去噪，提高信噪比。</p>
+<p>通常作者 会限制 图像数量才 2~8 张</p>
+<h4 id="图像流采集"><a href="#图像流采集" class="headerlink" title="图像流采集"></a>图像流采集</h4><p>自动曝光算法运行在ISP之前。每四帧图像做一次 自动曝光的参数 计算，计算一次大概10ms，没必要每次都计算因为场景不会急速变化，但是也不能太久计算一次参数，免得场景切换时显示有延迟。</p>
+<p>另一个问题就是，高动态场景中如果包含大量过曝的像素，对估计 低曝光参数 有影响，因此作者通过 忽略  部分过曝像素来计算 匹配参数能较好地匹配样例中相似的低光照场景  <font color=red>（？）</font></p>
+<h3 id="帧对齐"><a href="#帧对齐" class="headerlink" title="帧对齐"></a>帧对齐</h3><p>常用的对齐方法是光流对齐，这种方法可以对齐非刚体形变，但是计算复杂度很高。出于速度、内存和性能（毕竟是移动端）的折衷考虑，作者提出了一个简单的对齐的方法，虽然这种方法无法应对非刚性形变并且误差比较大，但是后续的多帧融合算法对这个误差比较鲁棒，所以即便是使用这个简单快速的对齐方法，整体效果也可以接受。</p>
+<h4 id="选参考帧"><a href="#选参考帧" class="headerlink" title="选参考帧"></a>选参考帧</h4><p>参考帧选择尽可能清晰的帧。根据基于原始输入绿色通道中梯度的简单度量，选择参考帧作为突发子集中最清晰的帧。同时为了最大限度地减少快门延迟，按下快门后连拍并从前 3 帧中选择参考帧。</p>
+<h4 id="处理raw图像"><a href="#处理raw图像" class="headerlink" title="处理raw图像"></a>处理raw图像</h4><p>raw数据格式实际是一整张  RGGB 排列的图像，包含了四个颜色平面。作者直接使用 2X2 的平均池化  得到 下采样的灰度图，对该灰度图像做配准。（我觉得这里不必拘泥于是不是 严格的灰度，因为最后对齐的损失函数使用像素差异来做的，即便不是标准的 RGB-&gt;gray也不太影响对齐性能）</p>
+<h4 id="分层配准"><a href="#分层配准" class="headerlink" title="分层配准"></a>分层配准</h4><p>作者采用了一个由粗到细的配准策略。具体的是构建一个高斯金字塔的结构，先从顶层配（粗）， 将上层的配准结果作为下一层的固定偏移。每层配准的表达式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="image-20210628093708522"></p>
+<p>其中 u0 v0 为上一层配准的偏移结果，p 可能是 L1/L2距离，n 是计算相似度窗口的大小。u v 即为要求的 偏移；因此求u v 即为优化D的最小值。关于窗口的大小 和 采用的损失类型会在后面讨论。另外这里没有采用归一化互相关系数类似NCC中的东西对光照对比度做归一化是因为作者认为采集的几帧图像都是在相同曝光才采集的亮度一致。</p>
+<p><font color=red> 边界情况怎么处理？</font></p>
+<p>根据不同的尺度层，采用了不同的超参数。在粗尺度下，使用L2损失和大搜索半径来做对齐（这里的较大搜索半径如何理解？理解为偏移吧），以提高初始对齐的准确率；在底层，使用L1损失和较小的搜索半径。按照文中的说明：</p>
+<ul>
+<li>最底层，使用+-1的搜索半径，L1损失，图像块为16X16</li>
+<li>接着，对上层做二倍下采样，+-4搜索半径，L2损失</li>
+<li>接着，对上层做四倍下采样，+-4搜索半径，L2损失</li>
+<li>…</li>
+</ul>
+<p>个人理解，最底层的L1损失精度最高，但是计算比较耗时。高层的L2损失可以做加速，优化的计算方法中这个搜索半径其实就是一个限幅的作用，并不会实际对每组偏移都计算然后选一个最优，而是最小化二次式的最优估计的方式，因此这里添加的搜索半径其实就是个限度，并不会实际影响计算速度，而这里的限度估计也是怕高层估计误差太大跑偏太远使得当前层无法对上一层的偏差纠正。由于在高层有了粗略偏移估计，所以在最低层使用+-1的搜索半径就行。</p>
+<p>如果不采用尺度金子塔的策略，最底层就要 做一个搜索半径变化范围很大的对齐，例如可能一次就要估计出 +20 的偏移，如果使用L2加速对齐策略，这里一次L2最优估计很容易陷入局部最优，采用L1做精细搜索显然计算量很大。</p>
+<h4 id="快速L2对齐"><a href="#快速L2对齐" class="headerlink" title="快速L2对齐"></a>快速L2对齐</h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="image-20210628111641192"></p>
+<p>其实就是前面那个 L2 损失 可以分解为为局部和、局部平方和 以及 卷积计算两部分。前者可以通过积分图加速，后者可以在频域加速。然后假设为 D2为 待估计参数偏移 （u,v）的一个二元二次表达式，如下，我们可以通过计算几个固定偏移 (u v) 下对应的 D2值来估计固定参数A ,b  c</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="image-20210628111927519"></p>
+<p>最后全局最优值 (u , v) 即为:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="image-20210628112051053"></p>
+<p>所以这是一种近似最优的L2加速方法，不需要搜索每个可能的偏移值，只需要计算几个离散的点做一个二次多项式拟合。</p>
+<h3 id="多帧去噪"><a href="#多帧去噪" class="headerlink" title="多帧去噪"></a>多帧去噪</h3><h4 id="时域去噪"><a href="#时域去噪" class="headerlink" title="时域去噪"></a>时域去噪</h4><p>这也是该文章的核心部分，通过连拍实现对同一场景做多次观察来实现降噪。但是从上面的对齐策略可以看出，前面的对齐只考虑了刚性变化，对于非刚性运动遮挡等问题，上述的对齐方法无法估计。因此这就要求<strong>这一节的多帧融合方法可以对上述的对齐误差鲁棒。</strong></p>
+<p>采用了  成对的时域合并方法。</p>
+<p>首先对每帧图像 变换到频域 T0 为参考帧的频谱图</p>
+<ol>
+<li>首先一个方法，如下式，简单的将每个帧的频谱图加权平均，但是这样效果最差，<strong>因为正交变换是线性的，这样加权等同于直接在空域中对多帧取平均</strong>，因此如果有旋转不对齐的情况鬼影就很严重。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="image-20210704160856275"></p>
+<ol start="2">
+<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考  <a href="../%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E4%BC%A0%E7%BB%9F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB.md">图像处理-传统去噪算法汇总.</a>  将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p>
+</li>
+<li><p>最后作者的方法是 对  1 的一个改进。如下式，其实就是  (1 - A) T  + A T0  A是个系数 。相当于在参考帧 和 其他帧 的频谱之间做了个线性插值，而不是直接取平均。这个插值系数由  两帧之间的频谱差异 D 计算。但是不是简单的差异，而是拿噪声的强度做了个参考，如果差异相对噪声频谱的强度很大，表明不对齐，那么就给较小的插值系数；反之给较大的权重。<strong>系数  类似 像素级别的维纳收缩的系数</strong>，<strong>只不过维纳收缩中  使用信号噪声的比 来确定收缩系数，这里使用 频谱功率差异和噪声的比来确定每对儿的插值系数。</strong></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="image-20210704162829608"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="image-20210704162934904"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="image-20210704162947537"></p>
+<p>最后，作者说他们的方法  可以在 图像去噪质量 和  鬼影问题 做个较好的权衡</p>
+<h4 id="空间去噪"><a href="#空间去噪" class="headerlink" title="空间去噪"></a>空间去噪</h4><p>通过上一节对时域中的多帧频谱图像平均达到了 减小噪声方差的目的，如果是N张平均可以理解为噪声缩小了 sigma^2 / N，得到一张滤波后的二维频谱图。按照<strong>维纳滤波收缩的形式（即使用信噪比估计收缩系数）</strong>，再在空域对频谱幅值做收缩。但是这一次根据人眼视觉特性，<strong>人眼对高频区的人造痕迹不是很敏感</strong>，所以根据这个特性 作者对不同频带的噪声强度乘了个系数，给高频区域更高的噪声强度，从而降低对高频区域的滤波程度（即尽可能保留高频区域的纹理）。其中 f(w) 是个分段线性的函数。<strong>通过此举，来尽量提高图像的视觉效果 而  不是 SNR</strong></p>
+<p>也正是这种 不同频段设置不同噪声水平的维纳滤波方法，使得最后在高对比度的区域噪声抑制效果不好</p>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704170800.png" alt="image-20210704170800576" style="zoom:50%;" />
+
+<h3 id="融合Bayer数据"><a href="#融合Bayer数据" class="headerlink" title="融合Bayer数据"></a>融合Bayer数据</h3><p>对 bayer 图像的每个颜色平面分别对齐融合。</p>
+<p>然后就帧融合是  一个块一个块进行的，这些块之间设置一定的重叠，为了防止出现块边缘的不连续效应，使得融合更加平滑，对块进行窗函数操作。在DFT域使用升余弦函数。</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li>这种滤波方法不能有效地抑制高对比度区域（如强边缘区域）的噪声。这是由于高对比度区域在空间DFT域的分布是非稀疏的，削弱了空间降噪的有效性。</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704192601.png" alt="image-20210704192601394" style="zoom:50%;" />
+
+<ol start="2">
+<li>由于算法不会拒绝一个不能完全配准的  块 ，所以有时候会出现轻微的鬼影。</li>
+</ol>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210704192645530.png" alt="image-20210704192645530" style="zoom:50%;" />
+
+<ol start="3">
+<li>有时会出现振铃效应，作者说该现象基本可以忽略不计；（若频域滤波函数具有陡峭变化，则傅里叶逆变换得到的空域滤波函数会在外围出现震荡）</li>
+</ol>
+<h3 id="合成HDR"><a href="#合成HDR" class="headerlink" title="合成HDR"></a>合成HDR</h3><p>经过配准和融合之后，拍摄的多帧Bayer raw图像合成单张raw图像，且具有更高的bit深度和SNR。实际中，输入10bit的raw数据会合成12bit的数据。得到输出raw图像后，还需要一系列的ISP后处理流程才能得到可视化RGB图像。这些步骤主要包括：</p>
+<ol>
+<li>暗电流扣除</li>
+<li>镜头阴影校正</li>
+<li>白平衡</li>
+<li>去马赛克</li>
+<li>彩色去噪</li>
+<li>颜色校正</li>
+<li>动态范围压缩</li>
+<li>去雾</li>
+<li>全局色调调整</li>
+<li>色差校正</li>
+<li>锐化</li>
+<li>特定色调颜色调整</li>
+<li>dithering</li>
+</ol>
+<p>其中，动态范围压缩步骤中，利用获取的短曝光图像以及合成的长曝光图像来  融合。融合方法采用了 Exposure Fusion 文章中的方法融合。但是这里作者只用了亮度这一个评判因素，计算两张图的亮度权重，加权融合（这样节省计算量）合后做gamma校正并将原来的颜色赋值上去。</p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>在极端动态范围场景，可能存在过曝光区域。在有快速运动的低光场景，为了避免运动模糊使用较短的曝光时间，可能会残留比较剧烈的噪声。在高对比度场景中，由于使用了曝光融合，可能会存在轻微的中频halos。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/21718/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -674,482 +1251,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/64084/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/64084/" class="post-title-link" itemprop="url">附加</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 10:11:13" itemprop="dateCreated datePublished" datetime="2021-06-19T10:11:13+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:47:07" itemprop="dateModified" datetime="2021-08-27T16:47:07+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E9%9D%A2%E7%BB%8FC-%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">面经C++汇总</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h3 id="struct和union的区别"><a href="#struct和union的区别" class="headerlink" title="struct和union的区别"></a>struct和union的区别</h3><h3 id="memcpy实现"><a href="#memcpy实现" class="headerlink" title="memcpy实现"></a>memcpy实现</h3><p>要 考虑函数的鲁棒性</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mymemcpy</span><span class="params">(<span class="keyword">void</span>* src, <span class="keyword">void</span>* dst, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 多字节复制  要判断两个地址是不是有重叠，如果有重叠要反向赋值</span></span><br><span class="line">    <span class="keyword">if</span>(!dst || !src)    <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> m = len / <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>);</span><br><span class="line">    <span class="keyword">int</span> n = len % <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//倒序</span></span><br><span class="line">    <span class="keyword">if</span>(src + len &gt; dst &amp;&amp; dst &gt; src)&#123;</span><br><span class="line">        <span class="keyword">char</span>* p1 = (<span class="keyword">char</span>*)(src + len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">char</span>* p2 = (<span class="keyword">char</span>*)(dst + len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">            *p2-- = *p1--;</span><br><span class="line">        &#125;</span><br><span class="line">        p1++; p2++;   <span class="comment">// 注意内存覆盖</span></span><br><span class="line">        <span class="keyword">int</span>* p3 = (<span class="keyword">int</span>*)p1;</span><br><span class="line">        <span class="keyword">int</span>* p4 = (<span class="keyword">int</span>*)p2;</span><br><span class="line">        p3--; p4--;</span><br><span class="line">        <span class="keyword">while</span>(m--)&#123;</span><br><span class="line">            *((<span class="keyword">char</span>*)p4++) = *((<span class="keyword">char</span>*)p3++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 正向拷贝</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="手写一下智能指针"><a href="#手写一下智能指针" class="headerlink" title="手写一下智能指针"></a>手写一下智能指针</h3><h3 id="weak-ptr-内部实现-可以实现观察者模式"><a href="#weak-ptr-内部实现-可以实现观察者模式" class="headerlink" title="weak_ptr 内部实现,  可以实现观察者模式"></a>weak_ptr 内部实现,  可以实现观察者模式</h3><p> 这是因为 weak_ptr 只会增加弱引用计数，它不会影响指向的对象的生命周期，多以可以在被观察者中使用weak_ptr去指向观察者，观察者对象的释放与否都不会影响被观察者的运行结果，当被观察者需要向观察者传递消息时只需要将弱指针提升为智能指针再去访问。</p>
-<p>解决内存泄漏….</p>
-<h3 id="智能指针是线程安全的嘛"><a href="#智能指针是线程安全的嘛" class="headerlink" title="智能指针是线程安全的嘛"></a>智能指针是线程安全的嘛</h3><p>引用计数是原子的，线程安全的，对共享内存的操作不是，多线程写会出现问题</p>
-<h3 id="Hash-怎么做成线程安全"><a href="#Hash-怎么做成线程安全" class="headerlink" title="Hash 怎么做成线程安全"></a>Hash 怎么做成线程安全</h3><p>Hash表本质是一个数组，可以直接全表上锁，但是这样锁冲突的概率很大。可以分段上锁，因为本质上  就是一个线程修改数组中的某一个元素，同时另一个线程可以修改数组的其他元素。只有当要hash扩容的时候才需要全表上锁</p>
-<h3 id="菱形继承"><a href="#菱形继承" class="headerlink" title="菱形继承"></a>菱形继承</h3><p>主要总结了三块儿知识点  </p>
-<ol>
-<li>普通的菱形继承的内存分布，比如 D: public B1, public B2,  内存模型可以看作 [B1:B 组成的一块儿内存]  + [B2:B组成的一块儿内存] + [D 自己定义的一块儿内存]，就是三段儿。但是这样会有二义性，比如B1里面的变量b 和 B2里面的变量b，访问就要家类型限定，来指定你要访问的是 B1 还是 B2 里面的。</li>
-<li>虚继承的菱形继承问题：首先 虚继承就是说 子类如果定义了父类中存在的变量，那么就不再覆写，将父类的变量放在内存最后，同时在首地址需要存放一个 vbptr ，vbptr第一项指示相对起始虚表指针的偏移，第二项来指示基类变量的偏移，这样通过 vbptr可以直接跳转到基类变量上。那么菱形继承的内存布局就是  [B1:覆写B的变量和B1独有的变量] + [B2:B2覆写B的变量和B2独有的] + [D自己定义的变量] + [基类B的一份变量]；也就是说 可以指定 B1/B2/B 来选择要访问谁的变量</li>
-<li>带虚函数的菱形继承（不考虑虚继承）：这种情况下 首先很重要的- 一个 D对象只能用 B1 或者 B2类型的指针去指向，而不能用 B的指针指向D会报错。会有两个虚函数表  B1的虚函数表  +  B2 的虚函数表； D自己单独写的新的虚函数被放在了第一个虚表中的最后。B1虚表中有完备的 B1+B类的所有虚函数，如果D重写了就替换，同理 B2 虚表中有完备的B2+B的所有虚函数 ，这样无论是取B1指针指向D对象 还是  B2指针指向D对象，都能调用B1中所有的虚函数 或者 B2中的所有虚函数</li>
-<li>带虚函数的菱形继承（考虑虚继承）….</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/AgoniAngel/article/details/105893798">参考链接</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/AgoniAngel/article/details/105449238">参考链接</a></p>
-<h3 id="设计模式：解释一下proactor。"><a href="#设计模式：解释一下proactor。" class="headerlink" title="设计模式：解释一下proactor。"></a>设计模式：解释一下proactor。</h3><h3 id="const-的作用，作用于函数-的特点"><a href="#const-的作用，作用于函数-的特点" class="headerlink" title="const 的作用，作用于函数 的特点"></a>const 的作用，作用于函数 的特点</h3><ul>
-<li>const 作用于局部变量它存放在栈中  可以通过地址间接修改变量值 作用于全局变量 存在只读数据存储区，如果修改它的值会产生运行错误</li>
-<li>const 作用于成员函数  那么  代表它不会修改所有非 static 的成员变量（实际就是 const this 指针实现）；因此const 对象也就只能调用 const 修饰的成员函数</li>
-</ul>
-<h3 id="野指针，空指针的区别；内存泄漏问题；如何解决"><a href="#野指针，空指针的区别；内存泄漏问题；如何解决" class="headerlink" title="野指针，空指针的区别；内存泄漏问题；如何解决"></a>野指针，空指针的区别；内存泄漏问题；如何解决</h3><h3 id="在不知道头节点的情况下删除某个节点"><a href="#在不知道头节点的情况下删除某个节点" class="headerlink" title="在不知道头节点的情况下删除某个节点"></a>在不知道头节点的情况下删除某个节点</h3><h3 id="C-能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。"><a href="#C-能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。" class="headerlink" title="C++能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。"></a>C++能否在有参构造函数中调用无参构造函数，无参构造函数中如果有修改类成员会不会对当前正在构造的类产生影响，这种调用方式有什么优势或者缺点。</h3><p>可以 会修改   代码复用</p>
-<h3 id="面向过程和面向对象各自的优缺点"><a href="#面向过程和面向对象各自的优缺点" class="headerlink" title="面向过程和面向对象各自的优缺点"></a>面向过程和面向对象各自的优缺点</h3><h3 id="内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响"><a href="#内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响" class="headerlink" title="内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响"></a>内存屏障，volatile作用，是否具有原子性，使用volatile会对编译器有什么影响</h3><h3 id="可执行文件的文件格式（ELF文件格式）"><a href="#可执行文件的文件格式（ELF文件格式）" class="headerlink" title="可执行文件的文件格式（ELF文件格式）"></a>可执行文件的文件格式（ELF文件格式）</h3><h3 id="C-的构造析构顺序"><a href="#C-的构造析构顺序" class="headerlink" title="C++的构造析构顺序"></a>C++的构造析构顺序</h3><h3 id="怎么用一个指向子类的基类指针调用基类的虚函数"><a href="#怎么用一个指向子类的基类指针调用基类的虚函数" class="headerlink" title="怎么用一个指向子类的基类指针调用基类的虚函数"></a>怎么用一个指向子类的基类指针调用基类的虚函数</h3><p>（强制转换或者指明作用域d-&gt;Base::fun()）</p>
-<h3 id="写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程"><a href="#写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程" class="headerlink" title="写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程"></a>写一个字符串类的移动构造，拷贝构造，赋值构造并模拟这几个过程</h3><h3 id="快排的时间复杂度，什么时候最坏，什么时候最好"><a href="#快排的时间复杂度，什么时候最坏，什么时候最好" class="headerlink" title="快排的时间复杂度，什么时候最坏，什么时候最好"></a>快排的时间复杂度，什么时候最坏，什么时候最好</h3><h3 id="什么情况下会出现段错误，为什么段错误程序会直接终止"><a href="#什么情况下会出现段错误，为什么段错误程序会直接终止" class="headerlink" title="什么情况下会出现段错误，为什么段错误程序会直接终止"></a>什么情况下会出现段错误，为什么段错误程序会直接终止</h3><h3 id="大文件排序问题"><a href="#大文件排序问题" class="headerlink" title="大文件排序问题"></a>大文件排序问题</h3><p>题目：有一个大文件，里面记录了若干数字，把这些数字进行排序。文件大小远大于内存大小</p>
-<p>基本思想都是要归并 将大文件分成多个小文件 分别排序，然后合并的。最后合并的时候每个小文件只读入一部分，同时留一个输出缓冲区用于存储已经排好的数据。等输出缓冲区满了之后就把他存到外存然后清空输出缓冲区。</p>
-<p>topK的问题类似，一部分一部分的读入 用堆选择topK大的数据</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linguanh/p/8532641.html">参考</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101337.png" alt="image-20210619101337401"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101332.png" alt="image-20210619101325346"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619101347.png" alt="image-20210619101347480"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619102250.png" alt="image-20210619102250262"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619103938.png" alt="image-20210619103938330"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105006.png" alt="image-20210619105006188"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105210.png" alt="image-20210619105210585"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105741.png" alt="image-20210619105741668"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619105924.png" alt="image-20210619105924199"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210619111012.png" alt="image-20210619111011948"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/51622/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/51622/" class="post-title-link" itemprop="url">面试记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-10 17:44:33" itemprop="dateCreated datePublished" datetime="2021-06-10T17:44:33+08:00">2021-06-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:47:07" itemprop="dateModified" datetime="2021-08-27T16:47:07+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h3 id="字节视频算法实习"><a href="#字节视频算法实习" class="headerlink" title="字节视频算法实习"></a>字节视频算法实习</h3><h4 id="知道的分类网络"><a href="#知道的分类网络" class="headerlink" title="知道的分类网络"></a>知道的分类网络</h4><h4 id="mobile-net-v3的结构"><a href="#mobile-net-v3的结构" class="headerlink" title="mobile-net-v3的结构"></a>mobile-net-v3的结构</h4><h4 id="GAN有没有采用特殊的训练技巧"><a href="#GAN有没有采用特殊的训练技巧" class="headerlink" title="GAN有没有采用特殊的训练技巧"></a>GAN有没有采用特殊的训练技巧</h4><h4 id="知道的注意力机制"><a href="#知道的注意力机制" class="headerlink" title="知道的注意力机制"></a>知道的注意力机制</h4><h4 id="了解过transformer嘛"><a href="#了解过transformer嘛" class="headerlink" title="了解过transformer嘛"></a>了解过transformer嘛</h4><h4 id="根据mask的分割，还问了分割算法"><a href="#根据mask的分割，还问了分割算法" class="headerlink" title="根据mask的分割，还问了分割算法"></a>根据mask的分割，还问了分割算法</h4><h4 id="知道的图像去噪方法"><a href="#知道的图像去噪方法" class="headerlink" title="知道的图像去噪方法"></a>知道的图像去噪方法</h4><h4 id="知道的图像模糊的方法"><a href="#知道的图像模糊的方法" class="headerlink" title="知道的图像模糊的方法"></a>知道的图像模糊的方法</h4><h4 id="双边滤波的原理"><a href="#双边滤波的原理" class="headerlink" title="双边滤波的原理"></a>双边滤波的原理</h4><h4 id="代码C-实现的时候用了什么"><a href="#代码C-实现的时候用了什么" class="headerlink" title="代码C++实现的时候用了什么"></a>代码C++实现的时候用了什么</h4><h4 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h4><h4 id="对图像增强这项任务的理解"><a href="#对图像增强这项任务的理解" class="headerlink" title="对图像增强这项任务的理解"></a>对图像增强这项任务的理解</h4><h4 id="和其他-low-level-网络结构有啥区别-在训练数据重组的情况下-有什么区别"><a href="#和其他-low-level-网络结构有啥区别-在训练数据重组的情况下-有什么区别" class="headerlink" title="和其他 low-level 网络结构有啥区别 在训练数据重组的情况下 有什么区别"></a>和其他 low-level 网络结构有啥区别 在训练数据重组的情况下 有什么区别</h4><h4 id="包含正数和负数的数组，求乘积最大连续子数组"><a href="#包含正数和负数的数组，求乘积最大连续子数组" class="headerlink" title="包含正数和负数的数组，求乘积最大连续子数组"></a>包含正数和负数的数组，求乘积最大连续子数组</h4><h4 id="丢鸡蛋问题"><a href="#丢鸡蛋问题" class="headerlink" title="丢鸡蛋问题"></a>丢鸡蛋问题</h4><h3 id="腾讯后端实习"><a href="#腾讯后端实习" class="headerlink" title="腾讯后端实习"></a>腾讯后端实习</h3><h4 id="重载和继承"><a href="#重载和继承" class="headerlink" title="重载和继承"></a>重载和继承</h4><h4 id="知道哪些智能指针"><a href="#知道哪些智能指针" class="headerlink" title="知道哪些智能指针"></a>知道哪些智能指针</h4><h4 id="线程和进程区别"><a href="#线程和进程区别" class="headerlink" title="线程和进程区别"></a>线程和进程区别</h4><h4 id="知道进程通信的方法嘛，线程通信呢"><a href="#知道进程通信的方法嘛，线程通信呢" class="headerlink" title="知道进程通信的方法嘛，线程通信呢"></a>知道进程通信的方法嘛，线程通信呢</h4><h4 id="了解linux哪些锁"><a href="#了解linux哪些锁" class="headerlink" title="了解linux哪些锁"></a>了解linux哪些锁</h4><h3 id="TP-图像优化岗"><a href="#TP-图像优化岗" class="headerlink" title="TP 图像优化岗"></a>TP 图像优化岗</h3><h4 id="怎么解决过拟合"><a href="#怎么解决过拟合" class="headerlink" title="怎么解决过拟合"></a>怎么解决过拟合</h4><h4 id="预编译的作用"><a href="#预编译的作用" class="headerlink" title="预编译的作用"></a>预编译的作用</h4><h4 id="图像处理流程了解嘛"><a href="#图像处理流程了解嘛" class="headerlink" title="图像处理流程了解嘛"></a>图像处理流程了解嘛</h4><p>回答 ISP</p>
-<h4 id="用了什么设计模式"><a href="#用了什么设计模式" class="headerlink" title="用了什么设计模式"></a>用了什么设计模式</h4><h4 id="红外细节增强项目候遇到过什么问题"><a href="#红外细节增强项目候遇到过什么问题" class="headerlink" title="红外细节增强项目候遇到过什么问题"></a>红外细节增强项目候遇到过什么问题</h4><p>我完成这个任务的流程是，先在Matlab上验证算法的效果，然后确是可行后再转为C++实现，因此遇到的比较难搞的问题还是Matlab算法调试阶段时候效果出不来。比如前面细节层拉伸后光晕问题，产生分析和解决，还有比如细节层调整，之前都是设置固定参数，但是很难用一套参数处理好，才想到用图像熵做个参数自动搜索。最后落地实现，都是一些代码编写的问题印象不深了。</p>
-<h4 id="拉普拉斯金字塔存储的是什么"><a href="#拉普拉斯金字塔存储的是什么" class="headerlink" title="拉普拉斯金字塔存储的是什么"></a>拉普拉斯金字塔存储的是什么</h4><h4 id="对于目标检测识别深度学习能都替代传统方法"><a href="#对于目标检测识别深度学习能都替代传统方法" class="headerlink" title="对于目标检测识别深度学习能都替代传统方法"></a>对于目标检测识别深度学习能都替代传统方法</h4><p>不太了解检测识别 直接围绕回答的增强</p>
-<h4 id="项目里的提亮效果如何评价"><a href="#项目里的提亮效果如何评价" class="headerlink" title="项目里的提亮效果如何评价"></a>项目里的提亮效果如何评价</h4><p>因为前景不对齐，所以主要还是在测试集上定性观察。其次在测试集上手工将运动区域过滤掉然后定量对比背景的相似度，对于运动的前景由于不对齐可以采用类似NIQE  LOE这种无参考图像质量评价的标准，但是最后一个评估方法当时并没有尝试，因为虽然一些常规得指标是普适于大规模的自然数据集  但是应用于这个任务中这个指标的评价效果是否可靠也不一定。</p>
-<h4 id="怎么组织团队合作的"><a href="#怎么组织团队合作的" class="headerlink" title="怎么组织团队合作的"></a>怎么组织团队合作的</h4><p>不同人的代码风格不一样怎么办？</p>
-<h4 id="深度学习方法，怎么确定一个模块的效果？"><a href="#深度学习方法，怎么确定一个模块的效果？" class="headerlink" title="深度学习方法，怎么确定一个模块的效果？"></a>深度学习方法，怎么确定一个模块的效果？</h4><p>当时说了个啥奇奇怪怪的词没听懂</p>
-<h4 id="概率题-红蓝车撞人，目击正确的概率"><a href="#概率题-红蓝车撞人，目击正确的概率" class="headerlink" title="概率题 红蓝车撞人，目击正确的概率"></a>概率题 红蓝车撞人，目击正确的概率</h4><h4 id="验证毒药的问题"><a href="#验证毒药的问题" class="headerlink" title="验证毒药的问题"></a>验证毒药的问题</h4><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>要重新组织一下语言 项目详细介绍的时候脱稿 不然回答的逻辑很混乱，方法介绍要简化一点。</p>
-<h4 id="觉得自己做的比较好的项目"><a href="#觉得自己做的比较好的项目" class="headerlink" title="觉得自己做的比较好的项目"></a>觉得自己做的比较好的项目</h4><h4 id="怎么做研究"><a href="#怎么做研究" class="headerlink" title="怎么做研究"></a>怎么做研究</h4><h4 id="怎么较好的完成项目"><a href="#怎么较好的完成项目" class="headerlink" title="怎么较好的完成项目"></a>怎么较好的完成项目</h4><h4 id="研究问题的思路"><a href="#研究问题的思路" class="headerlink" title="研究问题的思路"></a>研究问题的思路</h4><h4 id="红外图像和RGB图像的特性"><a href="#红外图像和RGB图像的特性" class="headerlink" title="红外图像和RGB图像的特性"></a>红外图像和RGB图像的特性</h4><p>红外成像原理 红外成像设备是通过探测周围环境的热辐射特性，将它以图像的形式显示出来。特点：</p>
-<ol>
-<li>灰度集中  对比度差 </li>
-<li>噪声多样性，一方面是动态噪声  如 热噪声 散粒噪声，光子噪声 形成机理复杂；另一方面是各探测元对相同辐射的反应具有不一致性，在红外图像上会产生固定的模式噪声，这种噪声是稳定的。现阶段高动态范围的红外设备也越来越多，这类红外设备有更高的灵敏度可以探测更小的热量差异，每个像元有2^14  2^16个灰度级，而现阶段普通设备….需要压缩动态范围 </li>
-</ol>
-<h3 id="YUV-图像格式和用处"><a href="#YUV-图像格式和用处" class="headerlink" title="YUV 图像格式和用处"></a>YUV 图像格式和用处</h3><h4 id="图像HDR"><a href="#图像HDR" class="headerlink" title="图像HDR"></a>图像HDR</h4><h4 id="为什么选NLTV算法"><a href="#为什么选NLTV算法" class="headerlink" title="为什么选NLTV算法"></a>为什么选NLTV算法</h4><h4 id="https深入"><a href="#https深入" class="headerlink" title="https深入"></a>https深入</h4><h4 id="怎么和他人合作"><a href="#怎么和他人合作" class="headerlink" title="怎么和他人合作"></a>怎么和他人合作</h4><h4 id="印象最深刻的事儿"><a href="#印象最深刻的事儿" class="headerlink" title="印象最深刻的事儿"></a>印象最深刻的事儿</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/33486/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/33486/" class="post-title-link" itemprop="url">面经-设计模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-27 19:29:07" itemprop="dateCreated datePublished" datetime="2021-05-27T19:29:07+08:00">2021-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:05:38" itemprop="dateModified" datetime="2021-08-27T16:05:38+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h3 id="请问你了解哪些设计模式？"><a href="#请问你了解哪些设计模式？" class="headerlink" title="请问你了解哪些设计模式？"></a>请问你了解哪些设计模式？</h3><p>常见的设计模式如下：</p>
-<p>单例模式：确保单例类全局只有一个实例，并提供该实例的全局访问点。单例模式的实现核心是将 类 的构造函数设置为私有，并预留一个获取全局唯一对象的静态函数，用于外界获得该实例。根据实例化的时间可以分为懒汉模式和饿汉模式，区别就在于是使用的时候实例化还是在系统启动的时候就初始化。</p>
-<p>工厂模式：是一个创建对象的接口，但是由子类决定实例化哪个类。工厂方法把实例化操作延迟到子类。</p>
-<p>生成器模式：是一个创建型设计模式，如果一个类包含大量的部件，可以通过一个额外的生成器来分步骤创建复杂的对象，然后将创建的对象返回。</p>
-<p>模板模式：定义算法框架，并将一些步骤延迟到子类实现，例如 常见的目标检测，包含了图像读取，预处理，检测，可视化，这几个子过程。如果更改其中的预处理的方法，那么只用在子类中重写预处理函数即可，其他过程都可以复用。weak_ptr</p>
-<p>观察者模式：原理类似于所有观察者都实现一个 updata 接口，然后将所有的观察者注册进被观察者中，当被观察者状态变化时循环通过 update 接口通知所有观察者。</p>
-<p>装饰模式：是静态继承的一种替代，通过装饰模式可以动态的给原有的对象增加新的功能。装饰类和被装饰类之间不存在耦合不相互影响。这种模式对被装饰类进行包装，在装饰类中持有被装饰类的对象，实现在保持原有功能前提下实现新的功能。除了最底层的原始对象不需要依赖以外，其他装饰对象都要携带一个指针指向它装饰的对象，装饰的过程像一个链表层层叠加。</p>
-<h3 id="请你说一说OOP的设计模式的五项原则"><a href="#请你说一说OOP的设计模式的五项原则" class="headerlink" title="请你说一说OOP的设计模式的五项原则"></a>请你说一说OOP的设计模式的五项原则</h3><p><strong>单一职责原则</strong>：每个类只负责单一的责任，如果一个任务很复杂，应该将他分散的多个类种实现，减少类的耦合，提高类的复用性。<br><strong>依赖倒置原则</strong>：核心是面向接口编程的思想。高层模块不能依赖于底层模块，他们应该共同依赖于抽象（接口），因为抽象更稳定。在高层模块和底层模块之间抽象出一个稳定的接口层，降低他们之间的耦合。<br><strong>里氏替换原则</strong>：这个原则是说 子类对象要能够完全替换父类，即可以使用父类的地方也要能使用子类替换。并在客户端中使用父类指针或引用类型来引用子类，以实现动态绑定。<br><strong>接口隔离原则</strong>：不应该强迫客户依赖于它们不用的方法。因此使用多个专门的接口比使用单一的总接口要好。<br><strong>开放-封闭原则</strong>：在新增功能时，不需要修改原有的代码<br><strong>最少知识原则</strong>：</p>
-<h3 id="请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？"><a href="#请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？" class="headerlink" title="请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？"></a>请问如何保证单例模式只有唯一实例？你知道的都有哪些方法？</h3><p>构造函数设置为私有属性，只有通过该类提供的静态方法来得到该类的唯一实例。在静态方法中判断 指向实例的静态成员指针为空，就实例化类，否则直接返回。（必须是静态成员指针，因为静态成员函数无法访问非静态成员变量）</p>
-<p>单例模式有懒汉模式，可能会线程不安全，如果多个线程同时通过了指针空判断，就会创建出多个实例，通过双重锁来实现线程安全。（判空，上锁，再判空，为啥要用双重锁？如果已经实例化了，通过第一个判空操作能避免读的时候加锁等待，提高性能。第二个锁就是为了防止创建对象的时候多线程竞争）<br>另一个是饿汉模式，在程序运行时就完成了对象初始化，因此不存在不安全问题。</p>
-<h3 id="请你说说工厂模式的优点？"><a href="#请你说说工厂模式的优点？" class="headerlink" title="请你说说工厂模式的优点？"></a>请你说说工厂模式的优点？</h3><p>为了解耦，将对象的使用过程和创建过程分离。如果对象创建过程包含了复杂的创建逻辑，可以统一放在工厂类中实现，实现代码复用。充分利用了面向对象的多态性质，工厂对象返回的是指向具体子类的基类指针，如果后续修改了子类的业务逻辑，也只用修改工厂中的初始化逻辑，方便维护。</p>
-<h3 id="请你说一下观察者模式"><a href="#请你说一下观察者模式" class="headerlink" title="请你说一下观察者模式"></a>请你说一下观察者模式</h3><p>观察者模式中分为观察者和被观察者，当被观察者发生装填改变时，观察者会受到通知。主要为了解决对象状态改变给其他对象通知的问题，其实现类似于观察者在被观察者那注册了一个回调函数。</p>
-<h3 id="说一说装饰模式"><a href="#说一说装饰模式" class="headerlink" title="说一说装饰模式"></a>说一说装饰模式</h3><p>是静态继承的一种替代，通过装饰模式可以动态的给原有的对象增加新的功能。装饰类和被装饰类之间不存在耦合不相互影响。这种模式对被装饰类进行包装，在装饰类中持有被装饰类的对象，实现在保持原有功能前提下实现新的功能。除了最底层的原始对象不需要依赖以外，其他装饰对象都要携带一个指针指向它装饰的对象，装饰的过程像一个链表层层叠加。</p>
-<p>使用场景：1、扩展一个类的功能。 2、动态增加功能，动态撤销。</p>
-<h3 id="手撕单例模式"><a href="#手撕单例模式" class="headerlink" title="手撕单例模式"></a>手撕单例模式</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span>&#123;</span></span><br><span class="line">	<span class="keyword">private</span>: </span><br><span class="line">    	<span class="keyword">static</span> Single* ptr;</span><br><span class="line">    	std::mutex mtx_;</span><br><span class="line">    	<span class="built_in">Single</span>()&#123;&#125;;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="function"><span class="keyword">static</span> <span class="title">getSingeTon</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(ptr == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                mtx_.<span class="built_in">lock</span>();</span><br><span class="line">                <span class="keyword">if</span>(ptr == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">                	ptr = <span class="keyword">new</span> <span class="built_in">Single</span>();</span><br><span class="line">                &#125;</span><br><span class="line">                mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ptr;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Single* Single::ptr = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/57512/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/57512/" class="post-title-link" itemprop="url">结构型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-25 21:04:43" itemprop="dateCreated datePublished" datetime="2021-05-25T21:04:43+08:00">2021-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:05:38" itemprop="dateModified" datetime="2021-08-27T16:05:38+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>结构型模式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/57512/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/10008/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/10008/" class="post-title-link" itemprop="url">责任模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-22 20:55:32" itemprop="dateCreated datePublished" datetime="2021-05-22T20:55:32+08:00">2021-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:05:38" itemprop="dateModified" datetime="2021-08-27T16:05:38+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>行为模型模式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/10008/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1219,14 +1324,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
