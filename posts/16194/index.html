@@ -22,19 +22,23 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人云笔记设置">
+  <meta name="description" content="typoral搭建个人云笔记  安装 PicGo，图床设置位 GitHub图床。这里要在github中新建一个 public 的respo。然后在github中新建一个token，并将token复制过来（这个token只有新建的时候显示一次，没了再新建就行了 或者把它保存下来）。最重要的是 分支名要写对，之前看别人博客里都写的 master 结果一直上传失败，这个得看自己这个仓库里到底是不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="typoral个人云笔记设置">
 <meta property="og:url" content="http://xxxxx.com/posts/16194/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="个人云笔记设置">
+<meta property="og:description" content="typoral搭建个人云笔记  安装 PicGo，图床设置位 GitHub图床。这里要在github中新建一个 public 的respo。然后在github中新建一个token，并将token复制过来（这个token只有新建的时候显示一次，没了再新建就行了 或者把它保存下来）。最重要的是 分支名要写对，之前看别人博客里都写的 master 结果一直上传失败，这个得看自己这个仓库里到底是不">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203728.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203602.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210404173142.png">
 <meta property="article:published_time" content="2021-05-11T02:09:26.000Z">
-<meta property="article:modified_time" content="2021-05-14T14:05:19.776Z">
+<meta property="article:modified_time" content="2021-08-28T08:15:22.997Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="软件安装">
 <meta property="article:tag" content="加密内容">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203728.png">
 
 <link rel="canonical" href="http://xxxxx.com/posts/16194/">
 
@@ -235,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 22:05:19" itemprop="dateModified" datetime="2021-05-14T22:05:19+08:00">2021-05-14</time>
+                <time title="修改时间：2021-08-28 16:15:22" itemprop="dateModified" datetime="2021-08-28T16:15:22+08:00">2021-08-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,18 +273,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="7159743a9bfb0ea115d11e4c298f9525d43e26f2627096e4e74ddf527e0fda38">995e50c340763ee1a325e8c3b289bb94042f5aabaa770bc0112db74bfe3b3d8bcf0171a02d8c4b6eedae4b4b26a86161ac4e8b5b6d09a7617f0c472693d46bdcc2527fe7eedbc86db8ebd905e1ed774f42f2fe105959bf45ba0c9240629075501b64ce076c6913085d490df52dac01e6349026d33c254cbb8dcf763258d3e5608edf71eb2802b7112dba4c2e0fc7b5bd082fadec8c4d8b3ee0dca2cacb9d676e06b7b10a77ec2d78311ebab03718bd8c54ed280a3789b529f6653a5b3fc421257842d221da076678fec9b1d98bf02d4c34e08d04dd1ee3c0ee22bbe876e6b8ee22668be5e64b554e52ad097eeabf4b2154e12fefb5dcb264aaa1d3e94112d50725978ca34db1677b8a5507009a2fdfee1faa8a2fbea07ced5f20987826c74bcf10f98cbb80283a0b47c55749121b8ba10583e40d72d8dd2737f4af81cb6e5d456e66643a2a1fcbf35031216cfddf2535a817c824023979bd4e614a3b673fbabe848a54c9703bf934b9072f20742eec12c61a1a50e13da5456f19da04e01aba32cc4e7af79ad9d769049668fd14159b7c6696c8014aa6a16cf66498fc03bd89240f143bbee6fa5fc88a241a7c9f9e8cda28a4b6a9d77295a71ff1e833ec04b2e2f084201819fbeeddd23c5b8512a80ca514287090db47768a5e65768cc309e165bf6e0e8f446cfbce05e081a08391c79e1829de2c19d9b5a053407bf1a5b392efe62c032453b2622c8ecbf22b7870840b2b08a8da7df1672a891694e541b4ec223379b3b123cf51430fb89c14740af16d3a747068ca61239e39647b4eeec54ea6bf480a00d044a7ef391f3144b295a50c05f67b370a4e4975c0506ae2eca110cabcc6989ce5f41155284b778aa614617438534970a96655f34d77cd0bf957bd2062d4d96e7fa52bbeb98ea0793681acde1335ebfc04b3801b0e4b00fb4d9b4394ceaa38b821bfc591d77fc3ff36db5caef82e950b3dcacaeea379184f8183dbea45f4992ff32fbe0e193a2641d3db1181b53dfaf72b52eb559cae9bd464fe7b0d04fdd8221860418d6e92f32e422002a1b2c379aa91465b8dd8854ea421ccc19a702b142ea23e5040317f984bae1682f05edb8fddae195eaa90683b62b6617df36991f5eccb6ab99639aa1681fce04e0cd031cbb29b39c36124597f7f720b002b2f508d25b9952f03a60b578ece8cacd9302a8f1ed8b17b91315e93181a9af35d0f46c4599aa8f19807e5028d15787a9702ba95912b1f62535396981b2221aec9aad32ec561bcaa4556bd1555face77a721e27d4dd147d4bb428f6607ee0392971f26fa06420251bfe98d57cbbb4bd6dddb4f4a78d7c11dd98b3897968101b3aff3b9c2074e93f1c296b900e01793a64c0355b4ebe31322497f4c9c2b89326671f6395ff0b4716592fe6f2011685d59a59d378d66365d0c940e75f7e1b3467edbca17c4b4c3c82d7d151adaed17b6796b92e5f32a8a43ecc830d9ff9d852fd9dc211d0c86b36d542d8815b942ff9270da7ad238064d9944b5be6f3c7b4463d7f631ad936f5057f8e39d6da6c79f4d5b65237e7491a42e53d70e9941944aba2c946bdd7064248d7ed273869bc9d6e53c14919eb3659dbdc51cae8b12d8f1bc3051a7281b1348ab5a6d6ccd57213c6eab5934f20938fdad6ca311212c5b344c8a2de40f20645daff967362969f28123c7380e2a3f9d7e0d4e55b26657a0760cea000d6d84415d6436913b9811e053cfd334dd7503a348202f026228e4d66c601ed92db4e1b8f0b45ab6a4ceb93462597fab6542729e3505964a38cf547d080390315033190fe359ab58033177f2ea8402518feffbea1a1d4b712219029df58497ea6ad637037bc4711c20e5f4a320eba493745436a114827857e6a9e60e46e4d73deb4f496050a9d3c8de9aad6caecded1fba6c99b9dbb20261a781f6665343847878412bccc255c88eae471981a59a2a4a16edbcfcccb6375225e0792e63dc947cb09ad5c33a5e4a90fd45275f9f8230612573c07dd76804aca996d13bd0a9df3b941ff53db7b7147e63ba6850ec20920f2ac31fdce8c2f23e2e1454ed8da29bdce9f231ba1b6ea791ad9c3f2a72dbcf619cb0ca9a67ab9fb43f6c1255347c3261e6311eb01ed97caa26eac9bb45ed038fe15df0d799248caad8b1b715ce320cb09c871a3c9ad45b4cc0ca7167ae18113262b2e9ca1289e3ce2142ade6591ad19bb91b5e4f8c5aef8dbc2dfc533d28af6aeddb7f1fa19188085264f3bc26374aaadd0cffcad4213aa33253c3468ef39ab1a59e884ccc1409493e21d338cac273a1a77c2b1e735183d9cec73950a33e9090893db63bad18b012cd1285e0cb3fa4bfd137a304d1a61c86d63ec27107ca13a6c937514d6017ce5dc7b289fe1a3c2d39f7b66b6888045eefe7f604d5b2a2a1498911dda4c943b02d456d2dbc235c14726afae67a77b441222b11c27d33d4d10da8f431d4fae066c5bdd9ccea115feb367fa55afbfab04b371a6ef5ef22bd57e813e917bd813643f8fdb16068489e6bdb1561689484ceb403462c2333dd72a7cd9dc3bfacd9b3e26af25bd3afc0b4f6b3febfdc64499d11c95256dca7f99ec2822e9027f3b0efaee92ce5c3ecbeadeceef7bf4222c31c73374831766eba5e7c99b111728512503e01793c6ff71313a62935cdfa142500c72b49bb2db5e3ca00d2a9c97d3e544cbb8a91c39d8d5773c57bb07ae2c399dfde4f16dce09cb06150f34c03304fec835c01af815c602688ff27398b342f34ecae2637a45c6103f5e41a329e5a8d11966ae2a46f67fca46556be99fe97c6f4890a08a192d1cb7bac152d</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <span id="more"></span>
+<h1 id="typoral搭建个人云笔记">typoral搭建个人云笔记</h1>
+<ol type="1">
+<li>安装 PicGo，图床设置位 GitHub图床。这里要在github中新建一个 <strong>public</strong> 的respo。然后在github中新建一个token，并将token复制过来（这个token只有新建的时候显示一次，没了再新建就行了 或者把它保存下来）。最重要的是 分支名要写对，之前看别人博客里都写的 master 结果一直上传失败，这个得看自己这个仓库里到底是不是master。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203728.png" alt="image-20210328203727951" style="zoom: 67%;" /></p>
+<ol start="2" type="1">
+<li>然后在typoral中设置 图片插入方式，这样插入图片后默认上传到PicGo的云端服务器上了</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203602.png" alt="image-20210328203602607" style="zoom:67%;" /></p>
+<ol start="3" type="1">
+<li><p>将 PicGo中的上传前重命名 和 时间戳打开，否则可能会因为文件名相同导致上传失败</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210404173142.png" alt="image-20210404173142710" style="zoom: 67%;" /></p></li>
+<li><p>笔记同步，直接用 github 将本地的 笔记 push 到 云端即可。或者直接（用脚本 pull.sync.cmd上传）</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot; &quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将 typoral 启动目录设置为笔记的根目录，以文件树的形式展示</p></li>
+</ol>
+
     </div>
 
     
@@ -368,6 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#typoral%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">typoral搭建个人云笔记</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -381,14 +392,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">138</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
