@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="主要贡献 建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构 ​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整 数据驱动的">
+  <meta name="description" content="主要贡献  建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构  1572790251537  ​ 可以看出，整个模型由序列的两部分组成，图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Retinex Net">
 <meta property="og:url" content="http://xxxxx.com/posts/15395/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="主要贡献 建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构 ​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整 数据驱动的">
+<meta property="og:description" content="主要贡献  建立了一个 采集与真实场景的 含有成对的低光照&#x2F;正常光照的大尺度数据集（包含了合成和非合成的图像） 提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。 提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构  网络结构  1572790251537  ​ 可以看出，整个模型由序列的两部分组成，图">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png">
@@ -269,49 +269,63 @@
 
       
         <span id="more"></span>
-
-<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
+<h2 id="主要贡献">主要贡献</h2>
+<ul>
 <li>建立了一个 采集与真实场景的 含有成对的低光照/正常光照的大尺度数据集（包含了合成和非合成的图像）</li>
 <li>提出了一个基于retinex理论的图像分解的深度神经网络模型。这个模型是端到端训练的。</li>
 <li>提出了用于学习图像分解模型的结构加权总变分损失。能够较好的平滑光照图同时保留原本的结构</li>
 </ul>
-<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png" alt="1572790251537"></p>
-<p>​    可以看出，整个模型由序列的两部分组成，图像分解，和  去噪以及亮度多尺度调整</p>
-<h3 id="数据驱动的图像分解-Decom-Net"><a href="#数据驱动的图像分解-Decom-Net" class="headerlink" title="数据驱动的图像分解 Decom-Net"></a>数据驱动的图像分解 Decom-Net</h3><p>​        这一部分将输入图像 S 分解为光照估计 I 和反射分量 R。一种分解反射和光照的方法是使用人工约束条件。然而根据retinex模型的那个式子很难实现，作者使用数据驱动的方式构建一个 Decom-Net来完成。这个网络的特点是损失函数的设计。由上图看出DecomNet的训练不需要低光照图的R和L来直接构建损失，而是通过以下几个约束条件来间接构建损失函数。</p>
+<h2 id="网络结构">网络结构</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png" alt="" /><figcaption>1572790251537</figcaption>
+</figure>
+<p>​ 可以看出，整个模型由序列的两部分组成，图像分解，和 去噪以及亮度多尺度调整</p>
+<h3 id="数据驱动的图像分解-decom-net">数据驱动的图像分解 Decom-Net</h3>
+<p>​ 这一部分将输入图像 S 分解为光照估计 I 和反射分量 R。一种分解反射和光照的方法是使用人工约束条件。然而根据retinex模型的那个式子很难实现，作者使用数据驱动的方式构建一个 Decom-Net来完成。这个网络的特点是损失函数的设计。由上图看出DecomNet的训练不需要低光照图的R和L来直接构建损失，而是通过以下几个约束条件来间接构建损失函数。</p>
 <ul>
-<li><p>低光照图的反射率图和正常光照的反射率图应该尽可能一样：<br>$$<br>\mathcal{L}<em>{i r}=\left|R</em>{l o w}-R_{n o r m a l}\right|_{1}<br>$$</p>
-</li>
-<li><p>应该可以根据R, I 还原重建出 I 对应的 S图 。假设Sn Sl分别为输入正常光照和低光照图像，  Il  In为分解产生的高低光照图  Rn Rl 为分解产生的对应的反射率。约束1可知Rn应该尽可能接近Rl。 约束2的意思则是： 使用Rn Il 可以还原出Sl  使用Rn In可以还原出Sn  使用Rl Il可以还原出Sl  使用Rl In可以还原出Sn 。  R*I 即根据Retinex理论重建的过程，而-则来度量还原的程度。</p>
-</li>
+<li><p>低光照图的反射率图和正常光照的反射率图应该尽可能一样： <span class="math display">\[
+\mathcal{L}_{i r}=\left\|R_{l o w}-R_{n o r m a l}\right\|_{1}
+\]</span></p></li>
+<li><p>应该可以根据R, I 还原重建出 I 对应的 S图 。假设Sn Sl分别为输入正常光照和低光照图像， Il In为分解产生的高低光照图 Rn Rl 为分解产生的对应的反射率。约束1可知Rn应该尽可能接近Rl。 约束2的意思则是： 使用Rn Il 可以还原出Sl 使用Rn In可以还原出Sn 使用Rl Il可以还原出Sl 使用Rl In可以还原出Sn 。 R*I 即根据Retinex理论重建的过程，而-则来度量还原的程度。</p></li>
 </ul>
-<p>$$<br>\mathcal{L}<em>{\text {recon}}=\sum</em>{i=l o w, n o r m a l} \sum_{j=l o w, n o r m a l} \lambda_{i j}\left|R_{i} \circ I_{j}-S_{j}\right|_{1}<br>$$</p>
+<p><span class="math display">\[
+\mathcal{L}_{\text {recon}}=\sum_{i=l o w, n o r m a l} \sum_{j=l o w, n o r m a l} \lambda_{i j}\left\|R_{i} \circ I_{j}-S_{j}\right\|_{1}
+\]</span></p>
 <ul>
-<li>结构平滑损失。即分解产生的光照图应该尽可能的平滑，因为认为一张图上的光照在各个区域是一致的。全变分(TV)损失，最小化整张图的梯度，通常在图像重建中作为先验平滑图像。但是直接应用TV损失来约束平滑光照图会在 图像本身梯度较大的区域失效 （下图黑边）。这是由于不管区域是纹理细节还是强边界，光照梯度都是均匀减少的。因此原本的TV损失对图像的结构是盲目的，如果在图像边缘进行强烈的模糊虽然产生的光照图会平滑但是反射率图会产生黑边。如下图。因此根据对应位置的反射率对光照梯度加上权重。上式 $\nabla I_{i}$ 表示微光图/正常光照图的梯度，一般的TV损失是直接对全图$\nabla I$ 求和作为损失来优化平滑图像。这里相当于根据反射率图像的梯度给梯度加上了一个权值exp()。在反射率图本身梯度大的地方权值小，小的地方权值大。作者认为在物理结构存在梯度的地方光照应该不连续   ？？</li>
+<li>结构平滑损失。即分解产生的光照图应该尽可能的平滑，因为认为一张图上的光照在各个区域是一致的。全变分(TV)损失，最小化整张图的梯度，通常在图像重建中作为先验平滑图像。但是直接应用TV损失来约束平滑光照图会在 图像本身梯度较大的区域失效 （下图黑边）。这是由于不管区域是纹理细节还是强边界，光照梯度都是均匀减少的。因此原本的TV损失对图像的结构是盲目的，如果在图像边缘进行强烈的模糊虽然产生的光照图会平滑但是反射率图会产生黑边。如下图。因此根据对应位置的反射率对光照梯度加上权重。上式 <span class="math inline">\(\nabla I_{i}\)</span> 表示微光图/正常光照图的梯度，一般的TV损失是直接对全图<span class="math inline">\(\nabla I\)</span> 求和作为损失来优化平滑图像。这里相当于根据反射率图像的梯度给梯度加上了一个权值exp()。在反射率图本身梯度大的地方权值小，小的地方权值大。作者认为在物理结构存在梯度的地方光照应该不连续 ？？</li>
 </ul>
-<p>$$<br>\mathcal{L}<em>{i s}=\sum</em>{i=l o w, n o r m a l}\left|\nabla I_{i} \circ \exp \left(-\lambda_{g} \nabla R_{i}\right)\right|<br>$$</p>
+<p><span class="math display">\[
+\mathcal{L}_{i s}=\sum_{i=l o w, n o r m a l}\left\|\nabla I_{i} \circ \exp \left(-\lambda_{g} \nabla R_{i}\right)\right\|
+\]</span></p>
 <ul>
-<li>将上述三部分损失相加即为Decom-Net 采用的损失<br>$$<br>\mathcal{L}=\mathcal{L}<em>{\text {recon}}+\lambda</em>{i r} \mathcal{L}<em>{i r}+\lambda</em>{i s} \mathcal{L}_{i s}<br>$$<br>作者还提到 关于LIME网络也在计算光照图像时考虑到图像原本的结构，但是本质和自己的不同….</li>
+<li>将上述三部分损失相加即为Decom-Net 采用的损失 <span class="math display">\[
+\mathcal{L}=\mathcal{L}_{\text {recon}}+\lambda_{i r} \mathcal{L}_{i r}+\lambda_{i s} \mathcal{L}_{i s}
+\]</span> 作者还提到 关于LIME网络也在计算光照图像时考虑到图像原本的结构，但是本质和自己的不同....</li>
 </ul>
 <blockquote>
-<p>For LIME, the total variation constraint is weighted by an initial illumination map, which is the maximum intensity of each pixel in R, G and B channels. Our structure-aware smoothness loss instead is weighted by reflectance. The static initial estimation used in LIME may not depict the image structure as well as reflectance does, since reflectance is assumed as the physical property of an image.  </p>
+<p>For LIME, the total variation constraint is weighted by an initial illumination map, which is the maximum intensity of each pixel in R, G and B channels. Our structure-aware smoothness loss instead is weighted by reflectance. The static initial estimation used in LIME may not depict the image structure as well as reflectance does, since reflectance is assumed as the physical property of an image.</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png" alt="1572858053126"></p>
-<h3 id="多尺度光照调节-adjustment"><a href="#多尺度光照调节-adjustment" class="headerlink" title="多尺度光照调节  adjustment"></a>多尺度光照调节  adjustment</h3><p>​        这个adujust网络的结构类似于<strong>U-net</strong> 的编码解码结构。降采样块包含步长为2的卷积层，上采样块使用resize-convolution层，即先将特征图插值的方法上采样然后使用步长为1的卷积和激活。这一部分的损失即为调整过后的光照图和去噪过后的反射率图重建产生的图像和正常光照图像之间的l1损失。<br>​        可以看到，在这一部分还对反射率图进行了去噪处理，使用的时DMB3</p>
-<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>​        作者提出了一套数据集，包含两部分：成对的合成数据和真实的低光照图。由于真实场景的图像采集正常光照和低光照时会产生错位，作者采用了三步法来矫正。<br>​        合成图像，作者分析了已有的真实低光照图像和真实的正常图像光照的YCbCr中Y的分量，统计Y分量的直方图，根据他们的规律来合成低光照图像。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png" alt="1572858105879"></p>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>​        本论文作者并没有贴出指标的定量分析，只是贴了几幅图。图像分解的方法是否有效有待考虑….<br>​        定性分析：</p>
-<ol>
-<li><p>首先作者为了证明图像分解网络设计的有效性，贴出了和LIME分别对微光图和正常图像分解产生的R , I图，发现LIME在同一个图的低光和正常光图分解的R结果并不一致， 而R反应的应该是物体本身的折射率，在低/正常图下应该一样。</p>
-</li>
-<li><p> 同样的，在R图中 由于去掉了光照分量，应该不存在阴影，而LIME的R中存在明显的阴影，但是RetinexNet除了有噪 声外是没有阴影的 说明光照分量取出的比较彻底。</p>
-</li>
-<li><p>文章所提的方法不会对局部区域过曝，主要是全局光照调节效果好</p>
-</li>
-<li><p>得益于加权TV损失，相对于基于DeHz去雾方法 结果中没有黑边</p>
-</li>
-<li><p>又对比了同样含有去噪方法的JED 网络，LIME(网络后去噪) 结果，发现Retinex的边缘细节得到较好的保留。 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png" alt="1572859097749"></p>
-</li>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png" alt="" /><figcaption>1572858053126</figcaption>
+</figure>
+<h3 id="多尺度光照调节-adjustment">多尺度光照调节 adjustment</h3>
+<p>​ 这个adujust网络的结构类似于<strong>U-net</strong> 的编码解码结构。降采样块包含步长为2的卷积层，上采样块使用resize-convolution层，即先将特征图插值的方法上采样然后使用步长为1的卷积和激活。这一部分的损失即为调整过后的光照图和去噪过后的反射率图重建产生的图像和正常光照图像之间的l1损失。 ​ 可以看到，在这一部分还对反射率图进行了去噪处理，使用的时DMB3</p>
+<h2 id="数据集">数据集</h2>
+<p>​ 作者提出了一套数据集，包含两部分：成对的合成数据和真实的低光照图。由于真实场景的图像采集正常光照和低光照时会产生错位，作者采用了三步法来矫正。 ​ 合成图像，作者分析了已有的真实低光照图像和真实的正常图像光照的YCbCr中Y的分量，统计Y分量的直方图，根据他们的规律来合成低光照图像。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png" alt="" /><figcaption>1572858105879</figcaption>
+</figure>
+<h2 id="结果">结果</h2>
+<p>​ 本论文作者并没有贴出指标的定量分析，只是贴了几幅图。图像分解的方法是否有效有待考虑.... ​ 定性分析：</p>
+<ol type="1">
+<li><p>首先作者为了证明图像分解网络设计的有效性，贴出了和LIME分别对微光图和正常图像分解产生的R , I图，发现LIME在同一个图的低光和正常光图分解的R结果并不一致， 而R反应的应该是物体本身的折射率，在低/正常图下应该一样。</p></li>
+<li><p>同样的，在R图中 由于去掉了光照分量，应该不存在阴影，而LIME的R中存在明显的阴影，但是RetinexNet除了有噪 声外是没有阴影的 说明光照分量取出的比较彻底。</p></li>
+<li><p>文章所提的方法不会对局部区域过曝，主要是全局光照调节效果好</p></li>
+<li><p>得益于加权TV损失，相对于基于DeHz去雾方法 结果中没有黑边</p></li>
+<li><p>又对比了同样含有去噪方法的JED 网络，LIME(网络后去噪) 结果，发现Retinex的边缘细节得到较好的保留。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png" alt="" /><figcaption>1572859097749</figcaption>
+</figure></li>
 </ol>
 <p>感觉这种方法处理的结果</p>
 
@@ -398,7 +412,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E8%A7%A3-Decom-Net"><span class="nav-number">2.1.</span> <span class="nav-text">数据驱动的图像分解 Decom-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E5%85%89%E7%85%A7%E8%B0%83%E8%8A%82-adjustment"><span class="nav-number">2.2.</span> <span class="nav-text">多尺度光照调节  adjustment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E8%A7%A3-decom-net"><span class="nav-number">2.1.</span> <span class="nav-text">数据驱动的图像分解 Decom-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E5%85%89%E7%85%A7%E8%B0%83%E8%8A%82-adjustment"><span class="nav-number">2.2.</span> <span class="nav-text">多尺度光照调节 adjustment</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -266,15 +266,13 @@
       
         <p>C++字节对齐</p>
 <span id="more"></span>
-
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
-<ol>
+<h3 id="字节对齐">字节对齐</h3>
+<p>有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数 据。显然在读取效率上下降很多。为了保证读取效率，c/c++变量地址要保证字节对齐。</p>
+<ol type="1">
 <li>结构中变量的起始地址 要为该变量类型 大小的整数倍，例如 sizeof(int) = 4 那么结构体中这个变量的存储起始地址 % 4 == 0才行。如果不行，会在前方自动填充0。</li>
 <li>最后即便前面所有都填充完了，最后总的占用的字节数 要是 结构中最大类型数据所占用字节数的倍数，如果不是，最后再填充一次。</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">char</span> dda;　　　　　　　　　　　　　　<span class="comment">//偏移量为0，满足对齐方式，dda占用1个字节； </span></span><br><span class="line"><span class="keyword">double</span> dda1;　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为1，不是sizeof(double)=8的倍数，需要补足7个字节才能使偏移量变为8（满足对齐方式），因此VC自动填充7个字节，dda1存放在偏移量为8的地址上，它占用8个字节。 </span></span><br><span class="line"><span class="keyword">int</span> type；　　　　　　　　　　　　　<span class="comment">//下一个可用的地址的偏移量为16，是sizeof(int)=4的倍数，满足int的对齐方式，所以不需要VC自动填充，type存放在偏移量为16的地址上，它占用4个字节。 </span></span><br><span class="line">&#125;；　　　　　　　　　　　　　　　　　<span class="comment">//所有成员变量都分配了空间，空间总的大小为1+7+8+4=20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数sizeof(double)=8）的倍数，所以需要填充4个字节，以满足结构的大小为sizeof(double)=8的倍数。 </span></span><br><span class="line"><span class="comment">////  24 </span></span><br></pre></td></tr></table></figure>
-
-
 
     </div>
 

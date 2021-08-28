@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="同态滤波参考链接 基本原理同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。 所谓非线性组合信号，举例来说，比如 z(t) &#x3D; x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) &#x3D; log(x(t)) + log">
+  <meta name="description" content="同态滤波 参考链接 基本原理 同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。 所谓非线性组合信号，举例来说，比如 z(t) &#x3D; x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) &#x3D; log(x(t))">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像处理-同态滤波">
 <meta property="og:url" content="http://xxxxx.com/posts/65493/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="同态滤波参考链接 基本原理同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。 所谓非线性组合信号，举例来说，比如 z(t) &#x3D; x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) &#x3D; log(x(t)) + log">
+<meta property="og:description" content="同态滤波 参考链接 基本原理 同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。 所谓非线性组合信号，举例来说，比如 z(t) &#x3D; x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) &#x3D; log(x(t))">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png">
@@ -270,20 +270,32 @@
 
       
         <span id="more"></span>
-
-<h1 id="同态滤波"><a href="#同态滤波" class="headerlink" title="同态滤波"></a>同态滤波</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/161667344">参考链接</a></p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。</p>
-<p>所谓非线性组合信号，举例来说，比如 z(t) = x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) = log(x(t)) + log(y(t))，这样一来，就变成了线性组合的信号，log(x(t)) 和 log(y(t)) 时域相加，所以频域也是相加的关系，如果它们的频谱位置不同，就可以傅里叶变换后较好的分开，以便进行后续的分别的操作，比如应用高、低通滤波或者其他手工设计的滤波器等，然后再将结果傅里叶反变换，得到处理过的 \hat{ log(z(t)) }，在取幂，就可以得到最终的处理结果。</p>
-<h2 id="图像中的同态滤波"><a href="#图像中的同态滤波" class="headerlink" title="图像中的同态滤波"></a>图像中的同态滤波</h2><p>在图像处理中，常常遇到动态范围很大但是暗区的细节又不清楚的现象，我们希望增强暗区细节的同时不损失亮区细节，一般来说，我们可以将图像f(x,y)建模成 <strong>照射强度（illumination）</strong> i(x,y) 和 <strong>反射强度（reflection）</strong> r(x,y)的乘积，所以有：</p>
-<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="image-20210606115221662"></p>
+<h1 id="同态滤波">同态滤波</h1>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/161667344">参考链接</a></p>
+<h2 id="基本原理">基本原理</h2>
+<p>同态变换一般是指将非线性组合信号通过某种变换，使其变成线性组合信号，从而可以更方便的运用线性操作对信号进行处理。</p>
+<p>所谓非线性组合信号，举例来说，比如 z(t) = x(t) y(t)，两个信号相乘得到组合信号，由于时域相乘等价于频率域卷积，所以无法在频率域将其分开。但是我们应用一个log算子，对两边取对数，则有： log(z(t)) = log(x(t)) + log(y(t))，这样一来，就变成了线性组合的信号，log(x(t)) 和 log(y(t)) 时域相加，所以频域也是相加的关系，如果它们的频谱位置不同，就可以傅里叶变换后较好的分开，以便进行后续的分别的操作，比如应用高、低通滤波或者其他手工设计的滤波器等，然后再将结果傅里叶反变换，得到处理过的 ，在取幂，就可以得到最终的处理结果。</p>
+<h2 id="图像中的同态滤波">图像中的同态滤波</h2>
+<p>在图像处理中，常常遇到动态范围很大但是暗区的细节又不清楚的现象，我们希望增强暗区细节的同时不损失亮区细节，一般来说，我们可以将图像f(x,y)建模成 <strong>照射强度（illumination）</strong> i(x,y) 和 <strong>反射强度（reflection）</strong> r(x,y)的乘积，所以有：</p>
+<figure>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="" /><figcaption>image-20210606115221662</figcaption>
+</figure>
 <p>一般来说，自然图片的光照一般是均匀渐变的，所以i应该是低频分量，而不同物体对光的反射是具有突变的，所以r是高频分量。现在我们对两边取对数，并做Fourier变换，得到线性组合的频率域。</p>
-<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="image-20210606115234960"></p>
+<figure>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="" /><figcaption>image-20210606115234960</figcaption>
+</figure>
 <p>我们希望对低频能量进行压制（抑制掉 光照分量），这样就降低了动态范围，而要对高频进行提高，这样就增强了图像的对比度，示意图如下：</p>
-<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="image-20210606115250493"></p>
+<figure>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="" /><figcaption>image-20210606115250493</figcaption>
+</figure>
 <p>所以采用的滤波器为：</p>
-<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="image-20210606115300446"></p>
+<figure>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="" /><figcaption>image-20210606115300446</figcaption>
+</figure>
 <p>操作完成后在按照之前介绍的步骤，反变换，求幂，即可得到处理后的图像，整个过程的流程图如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="image-20210606115350488"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="" /><figcaption>image-20210606115350488</figcaption>
+</figure>
 
     </div>
 
