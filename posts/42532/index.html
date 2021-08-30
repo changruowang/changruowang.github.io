@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="3A算法 3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。 自动对焦AF 计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距">
+  <meta name="description" content="3A算法3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。 自动对焦AF计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距下成像是最清">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像处理-3A算法和ISP">
 <meta property="og:url" content="http://xxxxx.com/posts/42532/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="3A算法 3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。 自动对焦AF 计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距">
+<meta property="og:description" content="3A算法3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。 自动对焦AF计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距下成像是最清">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608223056.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215513.png">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210608215036384.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215107.png">
 <meta property="article:published_time" content="2021-06-08T11:33:46.000Z">
-<meta property="article:modified_time" content="2021-08-27T09:00:31.584Z">
+<meta property="article:modified_time" content="2021-08-30T12:19:05.653Z">
 <meta property="article:author" content="常若望">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608223056.png">
@@ -238,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 17:00:31" itemprop="dateModified" datetime="2021-08-27T17:00:31+08:00">2021-08-27</time>
+                <time title="修改时间：2021-08-30 20:19:05" itemprop="dateModified" datetime="2021-08-30T20:19:05+08:00">2021-08-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,74 +273,60 @@
 
       
         <span id="more"></span>
-<h1 id="a算法">3A算法</h1>
-<p>3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。</p>
-<h2 id="自动对焦af">自动对焦AF</h2>
-<p>计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距下成像是最清晰的，那么爬山法的原理和梯度下降有点类似。搜索当前点领域空间的点，选其中反馈最大的位置作为下一步迭代的点。即不断往上“怕山”，直到遇到局部最优值，即领域的值都比它差。</p>
+<h1 id="3A算法"><a href="#3A算法" class="headerlink" title="3A算法"></a>3A算法</h1><p>3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。</p>
+<h2 id="自动对焦AF"><a href="#自动对焦AF" class="headerlink" title="自动对焦AF"></a>自动对焦AF</h2><p>计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距下成像是最清晰的，那么爬山法的原理和梯度下降有点类似。搜索当前点领域空间的点，选其中反馈最大的位置作为下一步迭代的点。即不断往上“怕山”，直到遇到局部最优值，即领域的值都比它差。</p>
 <p>那么自动对焦算法中有两个关键步骤</p>
 <ul>
 <li>图像清晰度评价指标：图像熵，灰度方差，拉普拉斯梯度和，变分损失等</li>
 <li>搜索算法： 上述的爬山法的 优点是 避免了全局搜索，效率高。 但是会陷入局部最优，一个替代的方法是 模拟退火法。他的思路是当找到局部最优值后，以一定的概率接受往周围稍差的值前进，即以一定概率接受走下坡路，但是这个概率是越来越低的，直至收敛。因此这样就可能跳出局部最优值，而搜索到更好的结果。</li>
 </ul>
-<h2 id="自动曝光ae">自动曝光AE</h2>
-<p>一般的自动曝光算法通过获取图像的亮度调节相应的曝光参数，得到合适的曝光量。曝光参数包括光圈大小, 快门速度和摄像头传感器的亮度增益。</p>
-<p>获取图像亮度,可采用的方法有：</p>
-<ol type="1">
+<h2 id="自动曝光AE"><a href="#自动曝光AE" class="headerlink" title="自动曝光AE"></a>自动曝光AE</h2><p> 一般的自动曝光算法通过获取图像的亮度调节相应的曝光参数，得到合适的曝光量。曝光参数包括光圈大小, 快门速度和摄像头传感器的亮度增益。</p>
+<p> 获取图像亮度,可采用的方法有：</p>
+<ol>
 <li>平均亮度</li>
 <li>分区域加权平均，可以将关注区域集中在屏幕某个具体位置 或者具体对象</li>
 <li>直方图信息等</li>
 <li>设置不同的亮度文献，对背光、正光和强光进行区分</li>
 </ol>
 <p>调整参数的主要方法：</p>
-<ol type="1">
+<ol>
 <li>查表法：系统内部可能预先存储了一张曝光参数的调整步长与图像亮度之间的关系查找表，根据当前的亮度去获取调整值，使得图像亮度接近期望值。</li>
 <li>迭代法：</li>
 <li>数值计算法</li>
 </ol>
-<h2 id="自动白平衡awb">自动白平衡AWB</h2>
-<p>白平衡，这是和光源的色温息息相关的概念。例如 早期的灯泡，都是光色的暖光源，在暖光源下成像的整体颜色就偏黄，白炽灯是冷色光源，成像效果就偏蓝。为了使得成像效果不受光源色温影响，尽可能还原出场景的本身颜色，就有了自动白平衡算法。</p>
+<h2 id="自动白平衡AWB"><a href="#自动白平衡AWB" class="headerlink" title="自动白平衡AWB"></a>自动白平衡AWB</h2><p>白平衡，这是和光源的色温息息相关的概念。例如 早期的灯泡，都是光色的暖光源，在暖光源下成像的整体颜色就偏黄，白炽灯是冷色光源，成像效果就偏蓝。为了使得成像效果不受光源色温影响，尽可能还原出场景的本身颜色，就有了自动白平衡算法。</p>
 <p>常用的白平衡算法有以下两种：</p>
-<ol type="1">
-<li>选白点算法：所谓白点就是图像中原本应该是白色的点。白点算法就是首先找到图像中 可能的 “白色的点”，然后将白色点矫正会去RGB={255，255，255}，以此为标准，就能知道变换矩阵将其他颜色的像素点都还原回去。这里的 可能的白点 是选的图像中 RGB 值和最大的点，这个最大的也是一个阈值。</li>
+<ol>
+<li>选白点算法：所谓白点就是图像中原本应该是白色的点。白点算法就是首先找到图像中  可能的  “白色的点”，然后将白色点矫正会去RGB={255，255，255}，以此为标准，就能知道变换矩阵将其他颜色的像素点都还原回去。这里的  可能的白点 是选的图像中 RGB 值和最大的点，这个最大的也是一个阈值。</li>
 <li>灰度世界假设：类似上面的白点算法。灰度世界原理是，对于一个丰富的场景的图，它全图 R G B 三通道的均值应该接近，基于此就可以算出各个通道的变换倍数。</li>
 <li>色温估计：这个算法原理是，预先在不同的光源下，记录一个合适的校准值保存。在测试的时候，先根据图像估算色温，然后去查表找到当前色温的校准值。至于如何估计色温，可以将图像分块，然后针对每个块做一个白点的计算，得到色温估算。</li>
 </ol>
-<h1 id="isp">ISP</h1>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z_HUALIN/article/details/78017314">安卓相机处理流程</a></p>
+<h1 id="ISP"><a href="#ISP" class="headerlink" title="ISP"></a>ISP</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z_HUALIN/article/details/78017314">安卓相机处理流程</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/115321553">参考链接</a></p>
-<p>ISP 图像信号处理器，用于处理图像传感器的原始数据。它首先是一个处理器，然后由运行在其上的软件来控制整个ISP流程。软件结构按照层级可以划分为如下三层，分别为 顶层的 ISP控制逻辑， 3A算法库，传感器控制库 和 基础ISP算法。如下图所示。</p>
-<p>​ <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608223056.png" alt="image-20210608223056771" style="zoom:50%;" /></p>
+<p>ISP  图像信号处理器，用于处理图像传感器的原始数据。它首先是一个处理器，然后由运行在其上的软件来控制整个ISP流程。软件结构按照层级可以划分为如下三层，分别为 顶层的 ISP控制逻辑， 3A算法库，传感器控制库 和  基础ISP算法。如下图所示。</p>
+<p>​                                                                            <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608223056.png" alt="image-20210608223056771" style="zoom:50%;" /> </p>
 <ul>
 <li>SENSOR 3A：我理解为控制相机硬件的库，例如控制相机的快门，光圈大小等，因此它服务于 3A库，3A算法需要根据当前图像的统计信息反馈来调整这些硬件参数。</li>
-<li>SENSOR ISP：其他的一些算法库，例如 黑电平矫正，黑点矫正等算法</li>
+<li>SENSOR ISP：其他的一些算法库，例如  黑电平矫正，黑点矫正等算法</li>
 <li>3A LIB：就是上面介绍的3A算法</li>
 <li>ISP CTRL：整个 ISP 的控制逻辑，从传感器读取数据，然后通过回调函数调用底层的ISP算法，完成整个ISP的流程，然后输出图像，同时还负责处理外部用户通过IIC / SPI 等输入的控制指令。</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215513.png" alt="image-20210608215513588" style="zoom: 67%;" /></p>
-<p>常规的步骤可以 以 3A 算法作为依据划分为算个阶段。因为其实 白平衡 亮度 和 焦距 他们存在依赖关系。因此需要有序调整。从上图可以大致看出，先自动调整白平衡，然后自动调整曝光，最后自动对焦</p>
-<h3 id="黑电平矫正">黑电平矫正</h3>
-<p>由于传感器存在漏电流，当全黑时成的像由于漏电流的存在而不是全黑的，减去偏移值即可</p>
-<h3 id="镜头阴影矫正">镜头阴影矫正</h3>
-<p>或者叫非均匀矫正，镜头中央进光比较均匀，四周少，表现就是纯色场景 四周有暗角。这也是相机的固有缺陷，可以实现矫正</p>
-<h3 id="坏点矫正">坏点矫正</h3>
-<p>相机传感器难免有一些成像单元损坏，会导致最后的图像有一些坏点。找坏点，做中值滤波即可</p>
-<h3 id="颜色插值">颜色插值</h3>
-<p>相机的成像元件是按照 拜尔排列，和屏幕的显示彩色图像一样，他是红绿蓝三个颜色滤镜分别采集RGB信号，因此输出的图像也就是 RawRGB格式，那么就需要对R G B 三通道都进行颜色插值，</p>
-<p>​ <img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210608215036384.png" alt="image-20210608215036384" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215107.png" alt="image-20210608215107199" style="zoom: 33%;" /></p>
-<h3 id="去噪">去噪</h3>
-<p>对图像传统的去噪方法 ….</p>
-<h3 id="颜色矫正">颜色矫正</h3>
-<ul>
+<p>常规的步骤可以  以  3A 算法作为依据划分为算个阶段。因为其实   白平衡  亮度  和  焦距 他们存在依赖关系。因此需要有序调整。从上图可以大致看出，先自动调整白平衡，然后自动调整曝光，最后自动对焦</p>
+<h3 id="黑电平矫正"><a href="#黑电平矫正" class="headerlink" title="黑电平矫正"></a>黑电平矫正</h3><p>由于传感器存在漏电流，当全黑时成的像由于漏电流的存在而不是全黑的，减去偏移值即可</p>
+<h3 id="镜头阴影矫正"><a href="#镜头阴影矫正" class="headerlink" title="镜头阴影矫正"></a>镜头阴影矫正</h3><p>或者叫非均匀矫正，镜头中央进光比较均匀，四周少，表现就是纯色场景 四周有暗角。这也是相机的固有缺陷，可以实现矫正</p>
+<h3 id="坏点矫正"><a href="#坏点矫正" class="headerlink" title="坏点矫正"></a>坏点矫正</h3><p>相机传感器难免有一些成像单元损坏，会导致最后的图像有一些坏点。找坏点，做中值滤波即可</p>
+<h3 id="颜色插值"><a href="#颜色插值" class="headerlink" title="颜色插值"></a>颜色插值</h3><p>相机的成像元件是按照 拜尔排列，和屏幕的显示彩色图像一样，他是红绿蓝三个颜色滤镜分别采集RGB信号，因此输出的图像也就是 RawRGB格式，那么就需要对R G B 三通道都进行颜色插值，</p>
+<p>​                                            <img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210608215036384.png" alt="image-20210608215036384" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215107.png" alt="image-20210608215107199" style="zoom: 33%;" /></p>
+<h3 id="去噪"><a href="#去噪" class="headerlink" title="去噪"></a>去噪</h3><p>对图像传统的去噪方法 ….</p>
+<h3 id="颜色矫正"><a href="#颜色矫正" class="headerlink" title="颜色矫正"></a>颜色矫正</h3><ul>
 <li>RGB： 是一种均匀性较差的颜色空间，人眼对于三个颜色分量的敏感程度是不一样的，<strong>如果颜色的相似性直接用欧氏距离来度量，其结果与人眼视觉会有较大的偏差</strong>。在RGB颜色系统中，<strong>三个颜色分量之间是高度相关的，即只要亮度改变，三个分量都会相应的改变</strong>，如果一个颜色的某一个分量发生了一定程度的改变，那么这颜色很可能也要发生改变。</li>
 <li>HSI：用色调（Hue）、饱和度（Saturation或Chroma）和亮度（Intensity或Brightness）来描述颜色。 I 分量与颜色信息无关，H和S分量与人感受彩色的方式相似，彩色图像中的每一个均匀性彩色区域都对应一个相一致的色度和饱和度，色度和饱和度能够被用来进行独立于亮度的彩色区域分割。</li>
 <li>YUV：Y就是常说的灰度</li>
 </ul>
-<h3 id="gamma矫正">gamma矫正</h3>
-<p>人眼对亮度的敏感度不是线性变化的，在低照度下 人眼对亮度变化敏感，在高亮度下人眼对亮度变化没那么敏感，因此使用gamma矫正对输入图像的灰度做一个非线性操作，拉伸低亮度的值，压缩高亮度的像素值</p>
-<h3 id="色彩空间转换">色彩空间转换</h3>
-<p>了解一下常用的色彩空间和运用</p>
-<h3 id="彩色去噪">彩色去噪</h3>
-
+<h3 id="gamma矫正"><a href="#gamma矫正" class="headerlink" title="gamma矫正"></a>gamma矫正</h3><p>人眼对亮度的敏感度不是线性变化的，在低照度下 人眼对亮度变化敏感，在高亮度下人眼对亮度变化没那么敏感，因此使用gamma矫正对输入图像的灰度做一个非线性操作，拉伸低亮度的值，压缩高亮度的像素值</p>
+<h3 id="色彩空间转换"><a href="#色彩空间转换" class="headerlink" title="色彩空间转换"></a>色彩空间转换</h3><p>了解一下常用的色彩空间和运用</p>
+<h3 id="彩色去噪"><a href="#彩色去噪" class="headerlink" title="彩色去噪"></a>彩色去噪</h3>
     </div>
 
     
@@ -424,7 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#a%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">3A算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%AF%B9%E7%84%A6af"><span class="nav-number">1.1.</span> <span class="nav-text">自动对焦AF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%9D%E5%85%89ae"><span class="nav-number">1.2.</span> <span class="nav-text">自动曝光AE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%99%BD%E5%B9%B3%E8%A1%A1awb"><span class="nav-number">1.3.</span> <span class="nav-text">自动白平衡AWB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isp"><span class="nav-number">2.</span> <span class="nav-text">ISP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%94%B5%E5%B9%B3%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.1.</span> <span class="nav-text">黑电平矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%A4%B4%E9%98%B4%E5%BD%B1%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.2.</span> <span class="nav-text">镜头阴影矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%8F%E7%82%B9%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.3.</span> <span class="nav-text">坏点矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E6%8F%92%E5%80%BC"><span class="nav-number">2.0.4.</span> <span class="nav-text">颜色插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E5%99%AA"><span class="nav-number">2.0.5.</span> <span class="nav-text">去噪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.6.</span> <span class="nav-text">颜色矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gamma%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.7.</span> <span class="nav-text">gamma矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.0.8.</span> <span class="nav-text">色彩空间转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%A9%E8%89%B2%E5%8E%BB%E5%99%AA"><span class="nav-number">2.0.9.</span> <span class="nav-text">彩色去噪</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3A%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">3A算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%AF%B9%E7%84%A6AF"><span class="nav-number">1.1.</span> <span class="nav-text">自动对焦AF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%9D%E5%85%89AE"><span class="nav-number">1.2.</span> <span class="nav-text">自动曝光AE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%99%BD%E5%B9%B3%E8%A1%A1AWB"><span class="nav-number">1.3.</span> <span class="nav-text">自动白平衡AWB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ISP"><span class="nav-number">2.</span> <span class="nav-text">ISP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%94%B5%E5%B9%B3%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.1.</span> <span class="nav-text">黑电平矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%A4%B4%E9%98%B4%E5%BD%B1%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.2.</span> <span class="nav-text">镜头阴影矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%8F%E7%82%B9%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.3.</span> <span class="nav-text">坏点矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E6%8F%92%E5%80%BC"><span class="nav-number">2.0.4.</span> <span class="nav-text">颜色插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E5%99%AA"><span class="nav-number">2.0.5.</span> <span class="nav-text">去噪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.6.</span> <span class="nav-text">颜色矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gamma%E7%9F%AB%E6%AD%A3"><span class="nav-number">2.0.7.</span> <span class="nav-text">gamma矫正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.0.8.</span> <span class="nav-text">色彩空间转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%A9%E8%89%B2%E5%8E%BB%E5%99%AA"><span class="nav-number">2.0.9.</span> <span class="nav-text">彩色去噪</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -438,14 +424,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

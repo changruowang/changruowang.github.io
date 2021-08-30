@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/03/28/4Fv9EmPOSTH1Bu7.png">
 <meta property="article:published_time" content="2021-05-11T02:11:05.000Z">
-<meta property="article:modified_time" content="2021-05-14T12:47:15.116Z">
+<meta property="article:modified_time" content="2021-08-30T12:23:12.793Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="刷题">
 <meta property="article:tag" content="DFS&#x2F;BFS">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 20:47:15" itemprop="dateModified" datetime="2021-05-14T20:47:15+08:00">2021-05-14</time>
+                <time title="修改时间：2021-08-30 20:23:12" itemprop="dateModified" datetime="2021-08-30T20:23:12+08:00">2021-08-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,17 +273,11 @@
       
         <p>记录了DFS/BFS相关的题目</p>
 <span id="more"></span>
-<h4 id="被围绕的区域">被围绕的区域</h4>
-<figure>
-<img src="https://i.loli.net/2021/03/28/4Fv9EmPOSTH1Bu7.png" alt="" /><figcaption>1598364256416</figcaption>
-</figure>
-<p>​ 这个题直接找被围绕的区域可能会超时，因为如果测试的矩阵很大，那么中间的元素很多。而直接从四周寻找和边界联通的点，那么可以减少计算量。可以使用广度优先搜索方法 从边界开始的 ‘O’开始 寻找与其联通的其他‘O’并将其一并标记为‘A’</p>
-<h4 id="单词接龙"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/">单词接龙</a></h4>
-<p>​ 这个题思路不难，很容易想到要用广度优先遍历，寻找起点和终点的最短路径。但是，需要提前建图，再对图用广度优先遍历的方法去寻找起点到终点的最短路径。图以 邻接表的形式保存。但是这种方法有优化的空间。字符串传递 引用的形式传入，否则时间不够</p>
-<h4 id="朋友圈"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/friend-circles/">朋友圈</a></h4>
-<p>​ 这个题 和上面不一样，<strong>朋友圈的模型 给定的就是一个图的邻接矩阵</strong>，然后要求这个图中的连通图的个数。这个题一种方法是并查集做 一种是 深度/广度优先遍历，每次遍历与当前节点连接的节点并标记。</p>
-<h4 id="太平洋大西洋水流问题"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pacific-atlantic-water-flow/">太平洋大西洋水流问题</a></h4>
-<p>​ 这个题 有两个关键点。<strong>一是 想到 从边缘向内部深度优先遍历，标记和边缘相连的点。二是 想到分步完成</strong>，记录两个表，分别表示和左上边缘（太平洋） 和 右下边缘（大西洋）相连的点。最后两个表都标记为1 的位置即为 既可以流向大西洋也可以流向太平洋的位置。 ​ 自己在做的时候 不仅没想到 应该从边缘 向内遍历的 方法，也没想到 先判断大西洋连接再判断太平洋连接的操作。直接把两种状态放在一起遍历，考虑得情况很多，很难理清，因为对于一个点向四个方向 分别由遍历得到的四种结果 连接大西洋/太平洋/都不连接/两个都连接。四种结果综合才能确定 当前点的状态，最后想到一个用两位数表示的方法 二进制 11 01 10 00 四个遍历方向 按位 或 == 11则表示该点同时连接 两个洋。虽然此法行得通，但是 每次遍历的状态 只有 11 的情况可以用来剪枝。这种想法其实 和 回溯比较类似。</p>
+<h4 id="被围绕的区域"><a href="#被围绕的区域" class="headerlink" title="被围绕的区域"></a>被围绕的区域</h4><p><img src="https://i.loli.net/2021/03/28/4Fv9EmPOSTH1Bu7.png" alt="1598364256416"></p>
+<p>​        这个题直接找被围绕的区域可能会超时，因为如果测试的矩阵很大，那么中间的元素很多。而直接从四周寻找和边界联通的点，那么可以减少计算量。可以使用广度优先搜索方法 从边界开始的 ‘O’开始 寻找与其联通的其他‘O’并将其一并标记为‘A’  </p>
+<h4 id="单词接龙"><a href="#单词接龙" class="headerlink" title="单词接龙"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/">单词接龙</a></h4><p>​        这个题思路不难，很容易想到要用广度优先遍历，寻找起点和终点的最短路径。但是，需要提前建图，再对图用广度优先遍历的方法去寻找起点到终点的最短路径。图以  邻接表的形式保存。但是这种方法有优化的空间。字符串传递 引用的形式传入，否则时间不够</p>
+<h4 id="朋友圈"><a href="#朋友圈" class="headerlink" title=" 朋友圈"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/friend-circles/"> 朋友圈</a></h4><p>​        这个题 和上面不一样，<strong>朋友圈的模型 给定的就是一个图的邻接矩阵</strong>，然后要求这个图中的连通图的个数。这个题一种方法是并查集做 一种是 深度/广度优先遍历，每次遍历与当前节点连接的节点并标记。</p>
+<h4 id="太平洋大西洋水流问题"><a href="#太平洋大西洋水流问题" class="headerlink" title="太平洋大西洋水流问题"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pacific-atlantic-water-flow/">太平洋大西洋水流问题</a></h4><p>​        这个题 有两个关键点。<strong>一是 想到 从边缘向内部深度优先遍历，标记和边缘相连的点。二是 想到分步完成</strong>，记录两个表，分别表示和左上边缘（太平洋） 和 右下边缘（大西洋）相连的点。最后两个表都标记为1 的位置即为 既可以流向大西洋也可以流向太平洋的位置。<br>​        自己在做的时候 不仅没想到 应该从边缘 向内遍历的 方法，也没想到 先判断大西洋连接再判断太平洋连接的操作。直接把两种状态放在一起遍历，考虑得情况很多，很难理清，因为对于一个点向四个方向  分别由遍历得到的四种结果  连接大西洋/太平洋/都不连接/两个都连接。四种结果综合才能确定 当前点的状态，最后想到一个用两位数表示的方法 二进制 11 01 10 00 四个遍历方向 按位 或 == 11则表示该点同时连接 两个洋。虽然此法行得通，但是 每次遍历的状态 只有 11 的情况可以用来剪枝。这种想法其实 和 回溯比较类似。</p>
 
     </div>
 
@@ -372,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">被围绕的区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99"><span class="nav-number">2.</span> <span class="nav-text">单词接龙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8B%E5%8F%8B%E5%9C%88"><span class="nav-number">3.</span> <span class="nav-text">朋友圈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">太平洋大西洋水流问题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">被围绕的区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99"><span class="nav-number">2.</span> <span class="nav-text">单词接龙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8B%E5%8F%8B%E5%9C%88"><span class="nav-number">3.</span> <span class="nav-text"> 朋友圈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">太平洋大西洋水流问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -386,14 +380,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

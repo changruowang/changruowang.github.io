@@ -22,18 +22,18 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4,">
+  <meta name="description" content="图像增强研究现状 基于直方图的方法：Adaptive histogram equalization and its variations  基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28]   基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4, 9,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LightenNet">
 <meta property="og:url" content="http://xxxxx.com/posts/34239/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4,">
+<meta property="og:description" content="图像增强研究现状 基于直方图的方法：Adaptive histogram equalization and its variations  基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28]   基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4, 9,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png">
 <meta property="article:published_time" content="2021-05-11T02:10:38.000Z">
-<meta property="article:modified_time" content="2021-08-27T09:00:31.687Z">
+<meta property="article:modified_time" content="2021-08-30T12:13:53.830Z">
 <meta property="article:author" content="常若望">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 17:00:31" itemprop="dateModified" datetime="2021-08-27T17:00:31+08:00">2021-08-27</time>
+                <time title="修改时间：2021-08-30 20:13:53" itemprop="dateModified" datetime="2021-08-30T20:13:53+08:00">2021-08-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,84 +272,77 @@
 
       
         <span id="more"></span>
-<h2 id="图像增强研究现状">图像增强研究现状</h2>
-<ol type="1">
-<li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p></li>
-<li><p>基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28]</p></li>
+<h2 id="图像增强研究现状"><a href="#图像增强研究现状" class="headerlink" title="图像增强研究现状"></a>图像增强研究现状</h2><ol>
+<li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p>
+</li>
+<li><p>基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] </p>
+</li>
 <li><p>基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4, 9, 28]</p>
 <blockquote>
-<p>Such a method first inverts an input low-light image, and then employs an image dehazing algorithm on the inverted image, finally achieves the enhanced image by inverting the dehazed image.</p>
-</blockquote></li>
-<li><p>基于稀疏表示的微光图像增强框架：增强的结果在很大程度上依赖于所学习的字典的准确性 [5]</p>
+<p>Such a method first inverts an input low-light image, and then employs an image dehazing algorithm on the inverted image, finally achieves the enhanced image by inverting the dehazed image.  </p>
+</blockquote>
+</li>
+<li><p>基于稀疏表示的微光图像增强框架：增强的结果在很大程度上依赖于所学习的字典的准确性 [5]  </p>
 <blockquote>
-<p>Fotiadou et al. used two dictionaries (i.e., night dictionary and day dictionary) to transform the Sparse Representation of low-light image patches to the corresponding enhanced image patches.</p>
-</blockquote></li>
-<li><p>基于融合的方法： 通过两个设计的权重来 融合亮度增强和对比度增强结果。此外采用多尺度融合的方法来减少放大的伪影。然而，与其他基于融合的图像增强方法一样，这种方法由于忽略了弱光照图像退化的物理特性，容易产生过增强、过饱和和不真实的结果 。 [7]</p></li>
-<li><p>LLNet：提出了一种基于深度学习的图像自适应增强和去噪方法，直接采用了现有的深度神经网络结构（堆叠稀疏去噪自动编码器）建立低光图像与增强、去噪图像之间的关系。实验结果表明，基于深度学习的方法适用于微光图像增强。[20]</p></li>
+<p>Fotiadou et al. used two dictionaries (i.e., night dictionary and day dictionary) to transform the Sparse Representation of low-light image patches to the corresponding enhanced image patches.  </p>
+</blockquote>
+</li>
+<li><p>基于融合的方法： 通过两个设计的权重来 融合亮度增强和对比度增强结果。此外采用多尺度融合的方法来减少放大的伪影。然而，与其他基于融合的图像增强方法一样，这种方法由于忽略了弱光照图像退化的物理特性，容易产生过增强、过饱和和不真实的结果 。 [7]</p>
+</li>
+<li><p>LLNet：提出了一种基于深度学习的图像自适应增强和去噪方法，直接采用了现有的深度神经网络结构（堆叠稀疏去噪自动编码器）建立低光图像与增强、去噪图像之间的关系。实验结果表明，基于深度学习的方法适用于微光图像增强。[20]</p>
+</li>
 <li><p>LIME: 简单的微光图像增强方法。[11]</p>
 <blockquote>
-<p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method</p>
-</blockquote></li>
+<p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method </p>
+</blockquote>
+</li>
 </ol>
-<h2 id="lightennet">LightenNet</h2>
-<h3 id="retinex-model">Retinex model :</h3>
-<p>​ Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示： ​ I(x) = R(x) · L(x) ​ I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度 反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
-<h3 id="贡献">贡献</h3>
-<ul>
+<h2 id="LightenNet"><a href="#LightenNet" class="headerlink" title="LightenNet"></a>LightenNet</h2><h3 id="Retinex-model"><a href="#Retinex-model" class="headerlink" title="Retinex  model  :"></a>Retinex  model  :</h3><p>​    Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示：<br>​                                                                            I(x) = R(x) · L(x)<br>​        I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度  反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
+<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ul>
 <li>提出了一个用于低光照图像增强的简单的CNN网络。与以往的使用CNN的直接估计输出方法不同，LightenNet学习低光照图像和其响应光照强度图之间的映射。</li>
 <li>基于Retinex模型，提出了一种合成低光照图像的方法。</li>
 <li>提出的方法在合成低光照图和实际低光照图上都取得了最好的效果</li>
 </ul>
-<h3 id="lightennet-1">LightenNet</h3>
-<p>​ 通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x) 即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。</p>
+<h3 id="LightenNet-1"><a href="#LightenNet-1" class="headerlink" title="LightenNet"></a>LightenNet</h3><p>​    通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x)    即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。  </p>
 <blockquote>
-<p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x)</p>
+<p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x) </p>
 </blockquote>
-<p>​ 论文作者说，LightenNet包含四个卷积层，每层都有不同的作用。比如前两层主要作用于高亮度的区域，第三层作用于低亮度的区域，最后一层用于重建。</p>
-<ol type="1">
+<p>​    论文作者说，LightenNet包含四个卷积层，每层都有不同的作用。比如前两层主要作用于高亮度的区域，第三层作用于低亮度的区域，最后一层用于重建。</p>
+<ol>
 <li>Patch extraction and representation</li>
 <li>Feature enhancement ：将噪声和特征分开映射</li>
 <li>Non-linear mapping:</li>
 <li>Reconstruction</li>
 </ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png" alt="" /><figcaption>1572008006804</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png" alt="" /><figcaption>1572008198140</figcaption>
-</figure>
-<p>损失函数为MSE损失 illu是图像的光照图像？？怎么获得？</p>
-<p>​ 在通过CNN获得光照映射图之后，还要进行以下3步，才能获得最终的增强图片。</p>
-<ol type="1">
-<li><p>Gamma矫正（Gamma correction ） L(x)` = L(x)^γ (r=1.7)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png" alt="1572008006804"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png" alt="1572008198140"></p>
+<p>损失函数为MSE损失  illu是图像的光照图像？？怎么获得？</p>
+<p>​        在通过CNN获得光照映射图之后，还要进行以下3步，才能获得最终的增强图片。</p>
+<ol>
+<li><p>Gamma矫正（Gamma correction ）   L(x)` = L(x)^γ (r=1.7)</p>
 <blockquote>
-<p>Following previous method [11], we adjust the estimated illumination map by Gamma correction in order to thoroughly unveil dark regions in the results, which can be expressed as</p>
-</blockquote></li>
-<li><p>作者在优化CNN模型的时候认为局部的nXn输入图像具有相同的光照强度，因此gamma矫正之后需要通过指导滤波来细化光照图。在导图滤波中，将输入图像的红色通道作为导图，滤波窗口大小为16×16.</p></li>
-<li><p>基于Retinex 模型，将低光照输入图/光照强度预测图 得到最终的增强后的输出 拥有了精确的光照强度映射图，就能产生自然的接近真实的增强输出，暗的区域得到增强，亮的区域保持不变。</p></li>
+<p>Following previous method [11], we adjust the estimated illumination map by Gamma correction in order to thoroughly unveil dark regions in the results, which can be expressed as </p>
+</blockquote>
+</li>
+<li><p>作者在优化CNN模型的时候认为局部的nXn输入图像具有相同的光照强度，因此gamma矫正之后需要通过指导滤波来细化光照图。在导图滤波中，将输入图像的红色通道作为导图，滤波窗口大小为16×16.</p>
+</li>
+<li>基于Retinex 模型，将低光照输入图/光照强度预测图  得到最终的增强后的输出  拥有了精确的光照强度映射图，就能产生自然的接近真实的增强输出，暗的区域得到增强，亮的区域保持不变。</li>
 </ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png" alt="" /><figcaption>1572010031130</figcaption>
-</figure>
-<h3 id="具体的实现">具体的实现</h3>
-<h4 id="训练参数">训练参数</h4>
-<ul>
-<li>使用高斯分布初始化权重，偏置设0</li>
-<li>初始学习率0.05 每100000个迭代减少0.5</li>
-<li>momentum =0.9 batch_size=128</li>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png" alt="1572010031130"></p>
+<h3 id="具体的实现"><a href="#具体的实现" class="headerlink" title="具体的实现"></a>具体的实现</h3><h4 id="训练参数"><a href="#训练参数" class="headerlink" title="训练参数"></a>训练参数</h4><ul>
+<li>使用高斯分布初始化权重，偏置设0 </li>
+<li>初始学习率0.05  每100000个迭代减少0.5</li>
+<li>momentum =0.9  batch_size=128</li>
 </ul>
-<h4 id="样本的合成">样本的合成</h4>
-<p>​ 首先，基于图像局部亮度大小恒定的假设制造数据。作者从互联网上收集了600张带有各种内容的清晰的照明图像（光照充足且没有噪声和模糊的图），用于样本对的合成（弱光照图像以及其光照映射）。基于Retinex ，给定实际的清晰图像R(X)，和一个随机光照值L， 一个弱光照图I(x) = R(x)*L 通过这种方式，获得训练图片集patch patch的overlapping pixels = 10 16X16的训练图片 2000..张 （假设输入的16X16图像具有相同的光照映射）</p>
-<h3 id="实验结果">实验结果</h3>
-<ul>
+<h4 id="样本的合成"><a href="#样本的合成" class="headerlink" title="样本的合成"></a>样本的合成</h4><p>​        首先，基于图像局部亮度大小恒定的假设制造数据。作者从互联网上收集了600张带有各种内容的清晰的照明图像（光照充足且没有噪声和模糊的图），用于样本对的合成（弱光照图像以及其光照映射）。基于Retinex  ，给定实际的清晰图像R(X)，和一个随机光照值L， 一个弱光照图I(x) = R(x)*L  通过这种方式，获得训练图片集patch  patch的overlapping pixels = 10  16X16的训练图片 2000..张 （假设输入的16X16图像具有相同的光照映射）</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><ul>
 <li>最后的1X1的Constarint重建对这个模型很重要</li>
 <li>最后尝试增加卷积层数没有作用 作者认为的原因是 1.梯度扩散效应 2.简单的原始架构重复导致网络架构不合理 作者将来会考虑使用更复杂的CNN网络来做</li>
-<li><strong>Failure cases </strong> 训练的时候使用的都是没有噪声的图像，因此对于带有噪声的微光图像 效果不好</li>
+<li><strong>Failure cases </strong> 训练的时候使用的都是没有噪声的图像，因此对于带有噪声的微光图像 效果不好 </li>
 </ul>
-<h3 id="研究方向">研究方向</h3>
-<ol type="1">
+<h3 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h3><ol>
 <li>使用复杂的网络</li>
-<li>考虑带噪声的低光照图</li>
+<li>考虑带噪声的低光照图 </li>
 </ol>
 
     </div>
@@ -435,7 +428,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">图像增强研究现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lightennet"><span class="nav-number">2.</span> <span class="nav-text">LightenNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retinex-model"><span class="nav-number">2.1.</span> <span class="nav-text">Retinex model :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.2.</span> <span class="nav-text">贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lightennet-1"><span class="nav-number">2.3.</span> <span class="nav-text">LightenNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">具体的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.1.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%90%88%E6%88%90"><span class="nav-number">2.4.2.</span> <span class="nav-text">样本的合成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.5.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="nav-number">2.6.</span> <span class="nav-text">研究方向</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">图像增强研究现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LightenNet"><span class="nav-number">2.</span> <span class="nav-text">LightenNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Retinex-model"><span class="nav-number">2.1.</span> <span class="nav-text">Retinex  model  :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.2.</span> <span class="nav-text">贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LightenNet-1"><span class="nav-number">2.3.</span> <span class="nav-text">LightenNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">具体的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.1.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%90%88%E6%88%90"><span class="nav-number">2.4.2.</span> <span class="nav-text">样本的合成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.5.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="nav-number">2.6.</span> <span class="nav-text">研究方向</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -449,14 +442,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

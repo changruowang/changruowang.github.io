@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210524213503.png">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210525205621893.png">
 <meta property="article:published_time" content="2021-05-22T12:55:32.000Z">
-<meta property="article:modified_time" content="2021-08-27T08:05:38.760Z">
+<meta property="article:modified_time" content="2021-08-30T12:08:52.573Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 16:05:38" itemprop="dateModified" datetime="2021-08-27T16:05:38+08:00">2021-08-27</time>
+                <time title="修改时间：2021-08-30 20:08:52" itemprop="dateModified" datetime="2021-08-30T20:08:52+08:00">2021-08-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,14 +278,9 @@
       
         <p>行为模型模式</p>
 <span id="more"></span>
-<h2 id="责任链">责任链</h2>
-<h3 id="概述">概述</h3>
-<p>责任链就是 将所有对象按照链条的形式串联，请求按照顺序从这个链条的起始对象开始往后传递，如果遇到一个对象可以处理该消息，那么处理返回，否则就将消息传递给它指向的下一个对象。</p>
-<h3 id="结构">结构</h3>
-<p>实现上，每个类别存放一个指向下一个对象的指针（类似单向链表）。子类要重写基类的处理函数Handle，子类中判断该消息是否可以处理，如果能就处理然后返回；如果不能，就传递给指向的下一个对象执行，这个操作逻辑可以直接调用基类的Handle执行，在基类中完成向下一个对象传递消息并执行的逻辑。</p>
-<h2 id="命令">命令</h2>
-<h3 id="概述-1">概述</h3>
-<p>？？？</p>
+<h2 id="责任链"><a href="#责任链" class="headerlink" title="责任链"></a>责任链</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>责任链就是 将所有对象按照链条的形式串联，请求按照顺序从这个链条的起始对象开始往后传递，如果遇到一个对象可以处理该消息，那么处理返回，否则就将消息传递给它指向的下一个对象。</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>实现上，每个类别存放一个指向下一个对象的指针（类似单向链表）。子类要重写基类的处理函数Handle，子类中判断该消息是否可以处理，如果能就处理然后返回；如果不能，就传递给指向的下一个对象执行，这个操作逻辑可以直接调用基类的Handle执行，在基类中完成向下一个对象传递消息并执行的逻辑。</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>？？？</p>
 <p>将命令封装成对象中，具有以下作用：</p>
 <ul>
 <li>使用命令来参数化其它对象</li>
@@ -293,82 +288,56 @@
 <li>将命令的操作记录到日志中</li>
 <li>支持可撤销的操作</li>
 </ul>
-<h3 id="结构-1">结构</h3>
-<ul>
+<h3 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h3><ul>
 <li>Command：命令</li>
 <li>Receiver：命令接收者，也就是命令真正的执行者</li>
 <li>Invoker：通过它来调用命令</li>
 <li>Client：可以设置命令与命令的接收者</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210522221426.png" alt="image-20210522221413603" style="zoom:67%;" /></p>
-<h2 id="迭代器">迭代器</h2>
-<h3 id="概述-2">概述</h3>
-<p>提供一种顺序访问聚合对象元素的方法，并且不暴露聚合对象的内部表示。这样不同类型的容器就可以使用统一的迭代器进行容器内部元素的按序访问。这个在<code>stl</code>库里很常用</p>
-<h3 id="结构-2">结构</h3>
-<ul>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>提供一种顺序访问聚合对象元素的方法，并且不暴露聚合对象的内部表示。这样不同类型的容器就可以使用统一的迭代器进行容器内部元素的按序访问。这个在<code>stl</code>库里很常用</p>
+<h3 id="结构-2"><a href="#结构-2" class="headerlink" title="结构"></a>结构</h3><ul>
 <li>Aggregate 是聚合类，其中<code>createIterator()</code> 方法可以产生一个 Iterator；</li>
 <li><code>Iterator</code>主要定义了 <code>hasNext()</code>和 <code>next()</code>方法；</li>
 <li>Client 组合了 Aggregate，为了迭代遍历 Aggregate，也需要组合 Iterator</li>
 </ul>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210523165653286.png" alt="image-20210523165653286" style="zoom: 67%;" /></p>
-<h2 id="中介者">中介者</h2>
-<h3 id="概述-3">概述</h3>
-<p>该模式中，建议将对象之间的复杂的沟通和控制方式转换为简单的星形方式。所有组件都通过中介对象向其他组件发送命令。</p>
+<h2 id="中介者"><a href="#中介者" class="headerlink" title="中介者"></a>中介者</h2><h3 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h3><p>该模式中，建议将对象之间的复杂的沟通和控制方式转换为简单的星形方式。所有组件都通过中介对象向其他组件发送命令。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210524195212.png" alt="image-20210524195212430" style="zoom: 33%;" /></p>
-<h3 id="结构-3">结构</h3>
-<p>有点像 qt 中的信号和槽的机制。实现上，首先每个组件 都需要继承包含中介对象指针，每个组件都要有设置中介对象的接口。然后中介对象中有一个 notify() 函数，某个组件想要通知另一个组件干什么事儿，就调用自己类里的 中介对象的 notify() 函数向中介发送消息。然后在 notify函数中根据消息类型来处理事件。初始的时候，将所有组件注册进中介对象，以方便中介对象 notify() 函数中能够操作任意连接的对象。</p>
+<h3 id="结构-3"><a href="#结构-3" class="headerlink" title="结构"></a>结构</h3><p>有点像 qt 中的信号和槽的机制。实现上，首先每个组件 都需要继承包含中介对象指针，每个组件都要有设置中介对象的接口。然后中介对象中有一个 notify() 函数，某个组件想要通知另一个组件干什么事儿，就调用自己类里的 中介对象的 notify() 函数向中介发送消息。然后在 notify函数中根据消息类型来处理事件。初始的时候，将所有组件注册进中介对象，以方便中介对象 notify() 函数中能够操作任意连接的对象。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210524200417.png" alt="image-20210524200417504" style="zoom: 67%;" /></p>
-<h2 id="备忘录">备忘录</h2>
-<h3 id="概述-4">概述</h3>
-<p>允许在不暴露对象实现细节的情况下保存和恢复对象之前的状态。说白了对历史存快照，并 实现撤回。</p>
-<h3 id="结构-4">结构</h3>
-<ul>
+<h2 id="备忘录"><a href="#备忘录" class="headerlink" title="备忘录"></a>备忘录</h2><h3 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h3><p>允许在不暴露对象实现细节的情况下保存和恢复对象之前的状态。说白了对历史存快照，并 实现撤回。</p>
+<h3 id="结构-4"><a href="#结构-4" class="headerlink" title="结构"></a>结构</h3><ul>
 <li>原始对象：需要对原始对象中表示状态的 公有/私有成员变量做 备份</li>
 <li>Memento： 备忘录对象，将原始对象中的状态变量封装在这个类中，作为和外界（Caretaker）沟通的状态包。</li>
 <li>Caretaker：负责人，将历史状态包保存为数组，用于撤回功能，它无法访问 Memento 中封装的状态对象</li>
 </ul>
-<p>为何会有单独的这个模式？如果要是实现撤回，必然要对对象的状态做保存，但是对象中的成员变量可能有的是私有的变量，外界（按下保存状态按钮后）无法访问，也就无法获取状态。这个模式就是建议，新增一个备忘录对象作为 原始对象 和 Caretaker负责人沟通的桥梁，原始对象通过 <code>save</code> 接口将自身状态相关变量封装在 备忘录对象中 输出，给负责人存下。负责人将历史的 备忘录对象 给原始对象的 <code>restore</code> 接口用于恢复对象。（getState函数可以设置为友元函数，这样只有红框里的是一起的可以调用）</p>
+<p>为何会有单独的这个模式？如果要是实现撤回，必然要对对象的状态做保存，但是对象中的成员变量可能有的是私有的变量，外界（按下保存状态按钮后）无法访问，也就无法获取状态。这个模式就是建议，新增一个备忘录对象作为  原始对象 和  Caretaker负责人沟通的桥梁，原始对象通过 <code>save</code> 接口将自身状态相关变量封装在  备忘录对象中 输出，给负责人存下。负责人将历史的 备忘录对象 给原始对象的 <code>restore</code> 接口用于恢复对象。（getState函数可以设置为友元函数，这样只有红框里的是一起的可以调用）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210524204959.png" alt="image-20210524204959467" style="zoom: 67%;" /></p>
-<h2 id="观察者">观察者</h2>
-<h3 id="概述-5">概述</h3>
-<p>定义对象之间的一对多依赖，当一个对象状态改变时，它的所有依赖都会收到通知并且自动更新状态。</p>
-<h3 id="结构-5">结构</h3>
-<ul>
+<h2 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h2><h3 id="概述-5"><a href="#概述-5" class="headerlink" title="概述"></a>概述</h3><p>定义对象之间的一对多依赖，当一个对象状态改变时，它的所有依赖都会收到通知并且自动更新状态。</p>
+<h3 id="结构-5"><a href="#结构-5" class="headerlink" title="结构"></a>结构</h3><ul>
 <li>发布者对象：发布者状态更新后，通知与它相连的所有观察者状态发生了变化</li>
 <li>观察者对象：有多个观察者对象，对发布者 “侦听”</li>
 </ul>
-<p>实现起来很简单，每个类型的观察者都要重写 <code>upadate</code>函数，就是在 发布者对象中设置一个链表（或者集合），保存所有的观察者对象的指针，更新的时候就挨个调用观察者对象中的 <code>upadate</code>函数 类似回调函数吧。</p>
-<h2 id="状态模式">状态模式</h2>
-<h3 id="概述-6">概述</h3>
-<p>一般的有限状态机的写法 有许多 判别语句，这个模式可以避免写判断语句。这个模式 将每个状态设置为一个单独的状态对象，通过切换不同的状态独享来切换他们的行为。</p>
+<p>实现起来很简单，每个类型的观察者都要重写 <code>upadate</code>函数，就是在 发布者对象中设置一个链表（或者集合），保存所有的观察者对象的指针，更新的时候就挨个调用观察者对象中的  <code>upadate</code>函数 类似回调函数吧。</p>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><h3 id="概述-6"><a href="#概述-6" class="headerlink" title="概述"></a>概述</h3><p>一般的有限状态机的写法 有许多 判别语句，这个模式可以避免写判断语句。这个模式 将每个状态设置为一个单独的状态对象，通过切换不同的状态独享来切换他们的行为。</p>
 <p>状态模式让你能在一个对象的内部状态变化时改变其行为， 使其看上去就像改变了自身所属的类一样</p>
-<h3 id="结构-6">结构</h3>
-<p>状态 抽象为一个接口，然后每个状态都对接口（即触发状态转移的条件，图中的 request ）重新实现 ， 不同状态对象，就会调用它重新实现的触发函数，并在其中将状态修改，当前状态使用一个上下文对象保存即可，<strong>状态切换实质就是将 基类状态指针指向不同的 实例对象，不同的实例对象又对状态转移条件接口有不同的实现，这就完成了 根据不同状态，不同的状态转移条件 做状态切换的逻辑</strong></p>
+<h3 id="结构-6"><a href="#结构-6" class="headerlink" title="结构"></a>结构</h3><p>状态 抽象为一个接口，然后每个状态都对接口（即触发状态转移的条件，图中的 request ）重新实现 ， 不同状态对象，就会调用它重新实现的触发函数，并在其中将状态修改，当前状态使用一个上下文对象保存即可，<strong>状态切换实质就是将 基类状态指针指向不同的 实例对象，不同的实例对象又对状态转移条件接口有不同的实现，这就完成了 根据不同状态，不同的状态转移条件 做状态切换的逻辑</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210524213503.png" alt="image-20210524213503558" style="zoom:33%;" /></p>
 <p>本质上的原理是通过多态性质来完成不同状态下的不同方法。考虑下面简单的状态转移，A状态 在 request 条件下 切换成 B 状态，B状态又在request 条件下切换为A状态。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  一般的 SWITCH CASE  语句写有限状态机</span></span><br><span class="line">string state = <span class="string">&quot;A&quot;</span>;</span><br><span class="line"><span class="keyword">switch</span> state&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;A&quot;</span>: </span><br><span class="line">        <span class="keyword">if</span>(request)	state = <span class="string">&quot;B&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;B&quot;</span>:</span><br><span class="line">        <span class="keyword">if</span>(request)	state = <span class="string">&quot;A&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 状态模式中的写法</span></span><br><span class="line"><span class="comment">// 将每个状态 中的状态转移条件抽象为一个结构，然后每个状态都对接口重新实现，就表明了 在当前状态下 request条件发生时应该进行的操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Context</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">state</span>&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    Context* context;              <span class="comment">// 保存状态上下文  使用该对象切换状态</span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>= <span class="number">0</span>;    <span class="comment">// 状态转移的条件 抽线为函数来触发</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span> <span class="keyword">public</span> state&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;当前状态A 触发了条件，转化为状态B&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;context-&gt;<span class="built_in">set_state</span>(<span class="keyword">new</span> B);   <span class="comment">// 当状态为 A 状态时，并且出发了 条件，就切换为B状态，即将上下文中的状态改为B状态 后面再触发该条件，调用的就是 B 状态重写的触发条件函数。</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">public</span> state&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">override</span></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;当前状态B 触发了条件，转化为状态A&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;context-&gt;<span class="built_in">set_state</span>(<span class="keyword">new</span> A);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Context</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	state* now_state;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">set_state</span><span class="params">(state* new_st)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(now_state != <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">delete</span> now_state;</span><br><span class="line">        now_state = new_st;</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</span><br><span class="line">        now_state-&gt;<span class="built_in">request</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Context *ct = <span class="built_in">Context</span>();</span><br><span class="line">    ct-&gt;<span class="built_in">set_state</span>(<span class="keyword">new</span> A);  <span class="comment">//设置初始状态</span></span><br><span class="line">    </span><br><span class="line">    ct-&gt;<span class="built_in">request</span>(); <span class="comment">// 状态切换</span></span><br><span class="line">    ct-&gt;<span class="built_in">request</span>(); <span class="comment">// 状态切换</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="策略模式">策略模式</h2>
-<h3 id="概述-7">概述</h3>
-<p>定义一系列算法，封装每个算法，并使它们可以互换。</p>
-<h3 id="结构-7">结构</h3>
-<ul>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><h3 id="概述-7"><a href="#概述-7" class="headerlink" title="概述"></a>概述</h3><p>定义一系列算法，封装每个算法，并使它们可以互换。</p>
+<h3 id="结构-7"><a href="#结构-7" class="headerlink" title="结构"></a>结构</h3><ul>
 <li>Strategy 接口定义了一个算法族，它们都实现了 behavior() 方法。</li>
 <li>Context 是使用到该算法族的类，其中的 doSomething() 方法会调用 behavior()，setStrategy(Strategy) 方法可以动态地改变 strategy 对象，也就是说能动态地改变 Context 所使用的算法。</li>
 </ul>
-<h3 id="与状态模式的比较">与状态模式的比较</h3>
-<p>状态模式主要是在运行过程中 根据 触发条件来自动的 更改状态，从而改变 Context对象的行为。而策略模式主要是用来封装以组可以相互替代的算法簇并且可以根据需要动态地去替换 Context 使用地算法。<strong>他们实现上类似，都是通过Contex对象中地算法簇指针指向不同地对象，来实现它调用的算法的动态改变，但是切换的时机不一样。</strong></p>
-<h2 id="模板方法">模板方法</h2>
-<h3 id="概述-8">概述</h3>
-<p>定义算法框架，并将一些步骤的实现延迟到子类。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。 例如：对于一个目标跟踪任务，处理流程是 读图像-&gt; 图像预处理 -&gt; 钩子函数-&gt; 跟踪 -&gt; 输出；此时如果我要换中间的 图像预处理的算法，那么我在子类实现的时候重写 图像预处理函数即可。这样可以使得算法结构不变，且可以方便地复用子过程。</p>
-<h3 id="结构-8">结构</h3>
-<p>就是将算法流程抽象为几个分开步骤，写成虚函数</p>
-<h2 id="访问者模式">访问者模式</h2>
-<h3 id="概述-9">概述</h3>
-<p>为一个对象结构（比如组合结构）增加新的功能。一个对象中包含了很多类型的子对象，例如 公司结构中每个员工是一个节点。访问者模式提供了访问对象结构中每个节点的方法。</p>
-<h3 id="结构-9">结构</h3>
-<p>将访问者 用一个单独的类 Visitor 实现，为每个 对象结构中的每个节点提供 的访问实现一个 visit (ElementA* elm) 接口。在每个节点结构中实现一个 accept (Visitor* ) 函数，并在函数中 调用 Visitor 的 visit 函数，以自身作为参数传入给 Visitor 访问。这样就实现了 Visitor 访问节点的功能。</p>
+<h3 id="与状态模式的比较"><a href="#与状态模式的比较" class="headerlink" title="与状态模式的比较"></a>与状态模式的比较</h3><p>状态模式主要是在运行过程中 根据 触发条件来自动的 更改状态，从而改变 Context对象的行为。而策略模式主要是用来封装以组可以相互替代的算法簇并且可以根据需要动态地去替换 Context 使用地算法。<strong>他们实现上类似，都是通过Contex对象中地算法簇指针指向不同地对象，来实现它调用的算法的动态改变，但是切换的时机不一样。</strong></p>
+<h2 id="模板方法"><a href="#模板方法" class="headerlink" title="模板方法"></a>模板方法</h2><h3 id="概述-8"><a href="#概述-8" class="headerlink" title="概述"></a>概述</h3><p>定义算法框架，并将一些步骤的实现延迟到子类。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。<br>例如：对于一个目标跟踪任务，处理流程是 读图像-&gt; 图像预处理  -&gt; 钩子函数-&gt; 跟踪  -&gt; 输出；此时如果我要换中间的 图像预处理的算法，那么我在子类实现的时候重写 图像预处理函数即可。这样可以使得算法结构不变，且可以方便地复用子过程。</p>
+<h3 id="结构-8"><a href="#结构-8" class="headerlink" title="结构"></a>结构</h3><p>就是将算法流程抽象为几个分开步骤，写成虚函数</p>
+<h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><h3 id="概述-9"><a href="#概述-9" class="headerlink" title="概述"></a>概述</h3><p>为一个对象结构（比如组合结构）增加新的功能。一个对象中包含了很多类型的子对象，例如 公司结构中每个员工是一个节点。访问者模式提供了访问对象结构中每个节点的方法。</p>
+<h3 id="结构-9"><a href="#结构-9" class="headerlink" title="结构"></a>结构</h3><p>将访问者 用一个单独的类 Visitor 实现，为每个 对象结构中的每个节点提供 的访问实现一个  visit (ElementA<em> elm) 接口。在每个节点结构中实现一个<br> accept (Visitor</em> ) 函数，并在函数中 调用 Visitor 的 visit 函数，以自身作为参数传入给 Visitor 访问。这样就实现了 Visitor  访问节点的功能。</p>
 <p>为何要这样？<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1f1049d0a0f4">参考链接</a></p>
-<p>首先这里使用了 函数重载的功能，如果节点对象的类型有很多种，例如 3个节点对象A 3个节点对象B。那么在对每个节点对象进行遍历的时候势必要写一个判断语句，if( it is ElementA ) … else if( it is ElementB) … 当种类多的时候就很麻烦。而我们在 Visitor中的 visit 函数重载了不同类型节点的访问函数，就避免了写判断语句。</p>
+<p>首先这里使用了 函数重载的功能，如果节点对象的类型有很多种，例如  3个节点对象A  3个节点对象B。那么在对每个节点对象进行遍历的时候势必要写一个判断语句，if( it is  ElementA ) … else if( it is ElementB) … 当种类多的时候就很麻烦。而我们在 Visitor中的 visit 函数重载了不同类型节点的访问函数，就避免了写判断语句。</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210525205621893.png" alt="image-20210525205621893" style="zoom:50%;" /></p>
 
     </div>
@@ -471,14 +440,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

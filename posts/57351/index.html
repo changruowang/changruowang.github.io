@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="来自 www.cyc2018.xyz 的内容">
+  <meta name="description" content="来自 www.cyc2018.xyz  的内容">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络-概述">
 <meta property="og:url" content="http://xxxxx.com/posts/57351/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="来自 www.cyc2018.xyz 的内容">
+<meta property="og:description" content="来自 www.cyc2018.xyz  的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/network-of-networks.gif">
 <meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/3be42601-9d33-4d29-8358-a9d16453af93.png">
 <meta property="og:image" content="https://images2017.cnblogs.com/blog/999804/201709/999804-20170929150555778-1593038196.png">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-cc40c9010862820c3ffd457021d885d0_r.jpg">
 <meta property="article:published_time" content="2021-05-11T02:11:30.000Z">
-<meta property="article:modified_time" content="2021-08-27T09:00:31.782Z">
+<meta property="article:modified_time" content="2021-08-30T12:25:35.131Z">
 <meta property="article:author" content="常若望">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/network-of-networks.gif">
@@ -238,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-27 17:00:31" itemprop="dateModified" datetime="2021-08-27T17:00:31+08:00">2021-08-27</time>
+                <time title="修改时间：2021-08-30 20:25:35" itemprop="dateModified" datetime="2021-08-30T20:25:35+08:00">2021-08-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,80 +272,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>来自 <a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/">www.cyc2018.xyz</a> 的内容</p>
+        <p>来自 <a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/">www.cyc2018.xyz</a>  的内容</p>
 <span id="more"></span>
-<h2 id="概述">概述</h2>
-<h3 id="网络的网络">网络的网络</h3>
-<p>计算网络是由若干结点和连接这些结点的链路组成。网络中的结点可以是计算机，集线器，交换机或路由器等</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="网络的网络"><a href="#网络的网络" class="headerlink" title="网络的网络"></a>网络的网络</h3><p>计算网络是由若干结点和连接这些结点的链路组成。网络中的结点可以是计算机，集线器，交换机或路由器等</p>
 <p>网络把主机连接起来，而互联网（internet）是把多种不同的网络连接起来，因此互连网是网络的网络。而互联网（Internet）是全球范围的互连网。</p>
-<figure>
-<img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/network-of-networks.gif" alt="" /><figcaption>img</figcaption>
-</figure>
-<h3 id="isp">ISP</h3>
-<p>ISP(internet service provider)译为互联网服务提供商，类似中国电信，中国移动，中国联通就是国内有名的ISP。ISP可以从互联网管理机构申请到很多IP地址，然后一些机构和个人从某个ISP获取IP地址的使用权，并可通过该ISP连接到互联网。三层ISP结构分为 主干ISP，地区ISP，本地ISP</p>
+<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/network-of-networks.gif" alt="img"></p>
+<h3 id="ISP"><a href="#ISP" class="headerlink" title="ISP"></a>ISP</h3><p>ISP(internet service provider)译为互联网服务提供商，类似中国电信，中国移动，中国联通就是国内有名的ISP。ISP可以从互联网管理机构申请到很多IP地址，然后一些机构和个人从某个ISP获取IP地址的使用权，并可通过该ISP连接到互联网。三层ISP结构分为 主干ISP，地区ISP，本地ISP</p>
 <p>从原理上讲。只要每一个本地ISP都安装了路由器连接到某个地区ISP，而每一个地区ISP也有路由器连接到主干ISP，那么在这些相互连接的ISP的共同作用下，就可以完成互联网中的所有的分组转发任务。</p>
-<figure>
-<img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/3be42601-9d33-4d29-8358-a9d16453af93.png" alt="" /><figcaption>img</figcaption>
-</figure>
-<p><strong>互联网交换点(IXP)：为了更快地转发分组，IXP允许两个网络直接连接并交换分组，而不需要通过第三个网络来转发分组。</strong>例如上图中，主机A和主机B通过2个地区ISP连接起来了，就不必经过最上层的的主干ISP来转发分组。<strong>典型的IXP由一个或多个网络交换机组成</strong>。</p>
-<h3 id="主机之间的通信方式">主机之间的通信方式</h3>
-<h4 id="客户-服务器cs">客户-服务器（C/S）</h4>
-<p>客户是服务的请求方，服务器是服务的提供方。客户端之间不能直接交流。</p>
-<h4 id="对等p2p">对等（P2P）</h4>
-<p>不区分客户和服务器。</p>
-<h3 id="电路交换与分组交换">电路交换与分组交换</h3>
-<h4 id="电路交换">电路交换</h4>
-<p>电路交换用于电话通信系统，两个用户要通信之前需要建立一条专用的物理链路，并且在整个通信过程中始终占用该链路。由于通信的过程中不可能一直在使用传输线路，因此电路交换对线路的利用率很低，往往不到 10%</p>
-<h4 id="分组交换">分组交换</h4>
-<p>每个分组都有首部和尾部，包含了源地址和目的地址等控制信息，在同一个传输线路上同时传输多个分组互相不会影响，因此在同一条传输线路上允许同时传输多个分组，也就是说分组交换不需要占用传输线路。在一个邮局通信系统中，邮局收到一份邮件之后，先存储下来，然后把相同目的地的邮件一起转发到下一个目的地，这个过程就是存储转发过程，分组交换也使用了存储转发过程</p>
-<h3 id="时延">时延</h3>
-<p>总时延 = 排队时延 + 处理时延 + 传输时延 + 传播时延</p>
-<h4 id="排队时延">排队时延</h4>
-<p>分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。</p>
-<h4 id="处理时延">处理时延</h4>
-<p>主机或路由器收到分组时进行处理所需要的时间，例如分析首部、从分组中提取数据、进行差错检验或查找适当的路由等。</p>
-<h4 id="传输时延">传输时延</h4>
-<p>主机或路由器传输数据帧所需要的时间。一帧数据有长度 delay = l / v(bit/s) 其中 l 表示数据帧的长度，v 表示传输速率</p>
-<h4 id="传播时延">传播时延</h4>
-<p>电磁波在信道中传播所需要花费的时间，电磁波传播的速度接近光速</p>
-<hr />
-<h3 id="计算机网络体系结构">计算机网络体系结构</h3>
-<figure>
-<img src="https://images2017.cnblogs.com/blog/999804/201709/999804-20170929150555778-1593038196.png" alt="" /><figcaption>img</figcaption>
-</figure>
-<h4 id="五层协议">五层协议</h4>
-<ul>
+<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/3be42601-9d33-4d29-8358-a9d16453af93.png" alt="img"></p>
+<p> <strong>互联网交换点(IXP)：为了更快地转发分组，IXP允许两个网络直接连接并交换分组，而不需要通过第三个网络来转发分组。</strong>例如上图中，主机A和主机B通过2个地区ISP连接起来了，就不必经过最上层的的主干ISP来转发分组。<strong>典型的IXP由一个或多个网络交换机组成</strong>。</p>
+<h3 id="主机之间的通信方式"><a href="#主机之间的通信方式" class="headerlink" title="主机之间的通信方式"></a>主机之间的通信方式</h3><h4 id="客户-服务器（C-S）"><a href="#客户-服务器（C-S）" class="headerlink" title="客户-服务器（C/S）"></a>客户-服务器（C/S）</h4><p>客户是服务的请求方，服务器是服务的提供方。客户端之间不能直接交流。</p>
+<h4 id="对等（P2P）"><a href="#对等（P2P）" class="headerlink" title="对等（P2P）"></a>对等（P2P）</h4><p>不区分客户和服务器。</p>
+<h3 id="电路交换与分组交换"><a href="#电路交换与分组交换" class="headerlink" title="电路交换与分组交换"></a>电路交换与分组交换</h3><h4 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h4><p>电路交换用于电话通信系统，两个用户要通信之前需要建立一条专用的物理链路，并且在整个通信过程中始终占用该链路。由于通信的过程中不可能一直在使用传输线路，因此电路交换对线路的利用率很低，往往不到 10%</p>
+<h4 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h4><p>每个分组都有首部和尾部，包含了源地址和目的地址等控制信息，在同一个传输线路上同时传输多个分组互相不会影响，因此在同一条传输线路上允许同时传输多个分组，也就是说分组交换不需要占用传输线路。在一个邮局通信系统中，邮局收到一份邮件之后，先存储下来，然后把相同目的地的邮件一起转发到下一个目的地，这个过程就是存储转发过程，分组交换也使用了存储转发过程</p>
+<h3 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h3><p>总时延 = 排队时延 + 处理时延 + 传输时延 + 传播时延</p>
+<h4 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h4><p>分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。</p>
+<h4 id="处理时延"><a href="#处理时延" class="headerlink" title="处理时延"></a>处理时延</h4><p>主机或路由器收到分组时进行处理所需要的时间，例如分析首部、从分组中提取数据、进行差错检验或查找适当的路由等。</p>
+<h4 id="传输时延"><a href="#传输时延" class="headerlink" title="传输时延"></a>传输时延</h4><p>主机或路由器传输数据帧所需要的时间。一帧数据有长度   delay = l / v(bit/s) 其中 l 表示数据帧的长度，v 表示传输速率</p>
+<h4 id="传播时延"><a href="#传播时延" class="headerlink" title="传播时延"></a>传播时延</h4><p>电磁波在信道中传播所需要花费的时间，电磁波传播的速度接近光速</p>
+<hr>
+<h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><p><img src="https://images2017.cnblogs.com/blog/999804/201709/999804-20170929150555778-1593038196.png" alt="img"></p>
+<h4 id="五层协议"><a href="#五层协议" class="headerlink" title="五层协议"></a>五层协议</h4><ul>
 <li><strong>应用层</strong> ：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等协议。数据单位为报文。</li>
 <li><strong>传输层</strong> ：为进程提供通用数据传输服务。由于应用层协议很多，定义通用的传输层协议就可以支持不断增多的应用层协议。运输层包括两种协议：传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。TCP 主要提供完整性服务，UDP 主要提供及时性服务。</li>
 <li><strong>网络层</strong> ：为主机提供数据传输服务。而传输层协议是为主机中的进程提供数据传输服务。网络层把传输层传递下来的报文段或者用户数据报封装成分组。</li>
 <li><strong>数据链路层</strong> ：网络层针对的还是主机之间的数据传输服务，而主机之间可以有很多链路，链路层协议就是为同一链路的主机提供数据传输服务。数据链路层把网络层传下来的分组封装成帧。</li>
 <li><strong>物理层</strong> ：考虑的是怎样在传输媒体上传输数据比特流，而不是指具体的传输媒体。物理层的作用是尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感觉不到这些差异。</li>
 </ul>
-<h4 id="osi">OSI</h4>
-<p>其中表示层和会话层用途如下：</p>
+<h4 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h4><p>其中表示层和会话层用途如下：</p>
 <ul>
 <li><strong>表示层</strong> ：数据压缩、加密以及数据描述，这使得应用程序不必关心在各台主机中数据内部格式不同的问题。</li>
 <li><strong>会话层</strong> ：建立及管理会话。</li>
 </ul>
 <p>五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理</p>
-<h4 id="tcpip-协议">TCP/IP 协议</h4>
-<p>它只有四层，数据链路层和物理层合并为网路接口层。并且 TCP/IP协议中，应用程序可以直接使用网络层或者网络接口层的，不严格遵守OSI分层的概念。</p>
-<h3 id="数据在各层的传递">数据在各层的传递</h3>
-<figure>
-<img src="https://pic1.zhimg.com/v2-cc40c9010862820c3ffd457021d885d0_r.jpg" alt="" /><figcaption>preview</figcaption>
-</figure>
+<h4 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP/IP 协议"></a>TCP/IP 协议</h4><p>它只有四层，数据链路层和物理层合并为网路接口层。并且 TCP/IP协议中，应用程序可以直接使用网络层或者网络接口层的，不严格遵守OSI分层的概念。</p>
+<h3 id="数据在各层的传递"><a href="#数据在各层的传递" class="headerlink" title="数据在各层的传递"></a>数据在各层的传递</h3><p><img src="https://pic1.zhimg.com/v2-cc40c9010862820c3ffd457021d885d0_r.jpg" alt="preview"></p>
 <p>在向下的过程中，需要添加下层协议所需要的首部或者尾部，而在向上的过程中不断拆开首部和尾部。</p>
 <p>路由器只有下面三层协议，因为路由器位于网络核心中，不需要为进程或者应用程序提供服务，因此也就不需要传输层和应用层。</p>
-<h2 id="物理层">物理层</h2>
-<h3 id="通信方式">通信方式</h3>
-<p>根据信息在传输线上的传送方向，分为以下三种通信方式：</p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h3 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h3><p>根据信息在传输线上的传送方向，分为以下三种通信方式：</p>
 <ul>
 <li>单工通信：单向传输</li>
 <li>半双工通信：双向交替传输</li>
 <li>全双工通信：双向同时传输</li>
 </ul>
-<h3 id="带通调制">带通调制</h3>
-<p>带通调制 就是用 根据 要传输的信号，去调制载波。将规则周期变化的载波（例如正弦波）调制为我们期待的信号。为什么要调制呢？因为按照通信中的理论，<strong>无线通信的条线长度和波长是有对应的关系的，而我们要传输的信号通常不固定或者频率很低，所以为了灵活应对不同的传输信号，使用固定的合适的频率去做载波做无线传输。</strong></p>
+<h3 id="带通调制"><a href="#带通调制" class="headerlink" title="带通调制"></a>带通调制</h3><p>带通调制 就是用 根据 要传输的信号，去调制载波。将规则周期变化的载波（例如正弦波）调制为我们期待的信号。为什么要调制呢？因为按照通信中的理论，<strong>无线通信的条线长度和波长是有对应的关系的，而我们要传输的信号通常不固定或者频率很低，所以为了灵活应对不同的传输信号，使用固定的合适的频率去做载波做无线传输。</strong></p>
 <p>模拟信号是连续的信号，数字信号是离散的信号。带通调制把数字信号转换为模拟信号。</p>
 
     </div>
@@ -431,7 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="nav-number">1.1.</span> <span class="nav-text">网络的网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isp"><span class="nav-number">1.2.</span> <span class="nav-text">ISP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">主机之间的通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8cs"><span class="nav-number">1.3.1.</span> <span class="nav-text">客户-服务器（C&#x2F;S）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%AD%89p2p"><span class="nav-number">1.3.2.</span> <span class="nav-text">对等（P2P）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E4%B8%8E%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">电路交换与分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.1.</span> <span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.2.</span> <span class="nav-text">分组交换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">时延</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.1.</span> <span class="nav-text">排队时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.2.</span> <span class="nav-text">处理时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.3.</span> <span class="nav-text">传输时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">传播时延</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.</span> <span class="nav-text">计算机网络体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.6.1.</span> <span class="nav-text">五层协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#osi"><span class="nav-number">1.6.2.</span> <span class="nav-text">OSI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpip-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.6.3.</span> <span class="nav-text">TCP&#x2F;IP 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%90%84%E5%B1%82%E7%9A%84%E4%BC%A0%E9%80%92"><span class="nav-number">1.7.</span> <span class="nav-text">数据在各层的传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E9%80%9A%E8%B0%83%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">带通调制</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="nav-number">1.1.</span> <span class="nav-text">网络的网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ISP"><span class="nav-number">1.2.</span> <span class="nav-text">ISP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">主机之间的通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88C-S%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">客户-服务器（C&#x2F;S）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%AD%89%EF%BC%88P2P%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">对等（P2P）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E4%B8%8E%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">电路交换与分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.1.</span> <span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.4.2.</span> <span class="nav-text">分组交换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">时延</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.1.</span> <span class="nav-text">排队时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.2.</span> <span class="nav-text">处理时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.3.</span> <span class="nav-text">传输时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">传播时延</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.</span> <span class="nav-text">计算机网络体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.6.1.</span> <span class="nav-text">五层协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OSI"><span class="nav-number">1.6.2.</span> <span class="nav-text">OSI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-IP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.6.3.</span> <span class="nav-text">TCP&#x2F;IP 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%90%84%E5%B1%82%E7%9A%84%E4%BC%A0%E9%80%92"><span class="nav-number">1.7.</span> <span class="nav-text">数据在各层的传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E9%80%9A%E8%B0%83%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">带通调制</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -445,14 +415,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
