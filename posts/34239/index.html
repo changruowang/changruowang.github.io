@@ -22,18 +22,18 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4,">
+  <meta name="description" content="LightenNet 图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LightenNet">
 <meta property="og:url" content="http://xxxxx.com/posts/34239/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4,">
+<meta property="og:description" content="LightenNet 图像增强研究现状  基于直方图的方法：Adaptive histogram equalization and its variations 基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] 基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png">
 <meta property="article:published_time" content="2021-05-11T02:10:38.000Z">
-<meta property="article:modified_time" content="2021-08-31T03:14:32.198Z">
+<meta property="article:modified_time" content="2021-08-31T03:21:53.238Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="低光照图像增强">
 <meta name="twitter:card" content="summary">
@@ -238,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:14:32" itemprop="dateModified" datetime="2021-08-31T11:14:32+08:00">2021-08-31</time>
+                <time title="修改时间：2021-08-31 11:21:53" itemprop="dateModified" datetime="2021-08-31T11:21:53+08:00">2021-08-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,6 +273,7 @@
 
       
         <span id="more"></span>
+<h1 id="lightennet">LightenNet</h1>
 <h2 id="图像增强研究现状">图像增强研究现状</h2>
 <ol type="1">
 <li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p></li>
@@ -292,7 +293,7 @@
 <p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method</p>
 </blockquote></li>
 </ol>
-<h2 id="lightennet">LightenNet</h2>
+<h2 id="lightennet-1">LightenNet</h2>
 <h3 id="retinex-model">Retinex model :</h3>
 <p>​ Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示： ​ I(x) = R(x) · L(x) ​ I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度 反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
 <h3 id="贡献">贡献</h3>
@@ -301,7 +302,7 @@
 <li>基于Retinex模型，提出了一种合成低光照图像的方法。</li>
 <li>提出的方法在合成低光照图和实际低光照图上都取得了最好的效果</li>
 </ul>
-<h3 id="lightennet-1">LightenNet</h3>
+<h3 id="lightennet-2">LightenNet</h3>
 <p>​ 通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x) 即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。</p>
 <blockquote>
 <p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x)</p>
@@ -439,7 +440,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">图像增强研究现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lightennet"><span class="nav-number">2.</span> <span class="nav-text">LightenNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retinex-model"><span class="nav-number">2.1.</span> <span class="nav-text">Retinex model :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.2.</span> <span class="nav-text">贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lightennet-1"><span class="nav-number">2.3.</span> <span class="nav-text">LightenNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.4.</span> <span class="nav-text">具体的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.1.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%90%88%E6%88%90"><span class="nav-number">2.4.2.</span> <span class="nav-text">样本的合成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.5.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="nav-number">2.6.</span> <span class="nav-text">研究方向</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lightennet"><span class="nav-number">1.</span> <span class="nav-text">LightenNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.1.</span> <span class="nav-text">图像增强研究现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lightennet-1"><span class="nav-number">1.2.</span> <span class="nav-text">LightenNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retinex-model"><span class="nav-number">1.2.1.</span> <span class="nav-text">Retinex model :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lightennet-2"><span class="nav-number">1.2.3.</span> <span class="nav-text">LightenNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.4.</span> <span class="nav-text">具体的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%90%88%E6%88%90"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">样本的合成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.5.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="nav-number">1.2.6.</span> <span class="nav-text">研究方向</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

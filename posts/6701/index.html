@@ -22,18 +22,18 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="传统算法：Retinex 系列多尺度视网膜增强算法 Retinex原理 ​ I(x) &#x3D; R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[L(x,y)] &#x3D; ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积) 把这个技术运用到图像处理上，就是针对我们现在已">
+  <meta name="description" content="MSR-NET Retinex 系列算法 Retinex原理 ​ I(x) &#x3D; R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[L(x,y)] &#x3D; ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积) 把这个技术运用到图像处理上，就是针对我们现在已经获得的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MSR">
 <meta property="og:url" content="http://xxxxx.com/posts/6701/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="传统算法：Retinex 系列多尺度视网膜增强算法 Retinex原理 ​ I(x) &#x3D; R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[L(x,y)] &#x3D; ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积) 把这个技术运用到图像处理上，就是针对我们现在已">
+<meta property="og:description" content="MSR-NET Retinex 系列算法 Retinex原理 ​ I(x) &#x3D; R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[L(x,y)] &#x3D; ​ Log[R(x,y)] &#x3D; Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积) 把这个技术运用到图像处理上，就是针对我们现在已经获得的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212112.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212122.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212118.png">
 <meta property="article:published_time" content="2021-05-11T02:10:40.000Z">
-<meta property="article:modified_time" content="2021-08-31T03:14:39.081Z">
+<meta property="article:modified_time" content="2021-08-31T03:22:46.961Z">
 <meta property="article:author" content="常若望">
 <meta property="article:tag" content="低光照图像增强">
 <meta name="twitter:card" content="summary">
@@ -238,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:14:39" itemprop="dateModified" datetime="2021-08-31T11:14:39+08:00">2021-08-31</time>
+                <time title="修改时间：2021-08-31 11:22:46" itemprop="dateModified" datetime="2021-08-31T11:22:46+08:00">2021-08-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,7 +273,8 @@
 
       
         <span id="more"></span>
-<h2 id="传统算法retinex-系列多尺度视网膜增强算法">传统算法：Retinex 系列多尺度视网膜增强算法</h2>
+<h1 id="msr-net">MSR-NET</h1>
+<h2 id="retinex-系列算法">Retinex 系列算法</h2>
 <h3 id="retinex原理">Retinex原理</h3>
 <p>​ I(x) = R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] = Log[I(x,y)] - Log[L(x,y)] = ​ Log[R(x,y)] = Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积)<br />
 把这个技术运用到图像处理上，就是针对我们现在已经获得的一副图像数据I(x,y），计算出对应的R(x,y)，则R(x,y)认为是增强后的图像，现在的关键是如何得到L(X,Y)。Retinex理论的提出者指出这个L(x,y）可以通过对图像数据I(x,y）进行F(x,y)高斯模糊而得到，从实际运用的角度来说，也可以用均值模糊来代替高斯模糊。</p>
@@ -305,7 +306,7 @@
 </ol>
 <h4 id="more...">more...</h4>
 <p>参考链接： https://www.cnblogs.com/Imageshop/archive/2013/04/17/3026881.html https://cloud.tencent.com/developer/article/1011768</p>
-<h2 id="msr-net">MSR-net</h2>
+<h2 id="msr-net-1">MSR-net</h2>
 <p>### 主要贡献：</p>
 <ol type="1">
 <li>作者认为 传统的MSR多尺度视网膜增强算法的过程可以用神经网络去模拟，并且神经网络的参数可以根据数据自学习。相对传统的采用固定的高斯模糊核要灵活 <strong>多尺度Retinex实际上相当于一个具有残差结构的前馈卷积神经网络</strong></li>
@@ -435,7 +436,7 @@ L=\frac{1}{N} \sum_{i=1}^{N}\left\|f\left(X_{i}\right)-Y_{i}\right\|_{F}^{2}+\la
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95retinex-%E7%B3%BB%E5%88%97%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%A7%86%E7%BD%91%E8%86%9C%E5%A2%9E%E5%BC%BA%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">传统算法：Retinex 系列多尺度视网膜增强算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retinex%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">Retinex原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#msr-multi-scale-retinex"><span class="nav-number">1.1.1.</span> <span class="nav-text">MSR (Multi-Scale Retinex)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E8%89%B2%E5%BD%A9%E6%81%A2%E5%A4%8D%E7%9A%84%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%A7%86%E7%BD%91%E8%86%9C%E5%A2%9E%E5%BC%BA%E7%AE%97%E6%B3%95msrcrmulti-scale-retinex-with-color-restoration"><span class="nav-number">1.1.2.</span> <span class="nav-text">带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more..."><span class="nav-number">1.1.3.</span> <span class="nav-text">more...</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msr-net"><span class="nav-number">2.</span> <span class="nav-text">MSR-net</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="nav-number">2.2.</span> <span class="nav-text">结构图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2f1"><span class="nav-number">2.2.1.</span> <span class="nav-text">多尺度对数变换f1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#difference-of-convolution-f2"><span class="nav-number">2.2.2.</span> <span class="nav-text">Difference-of-convolution f2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E9%87%8D%E5%BB%BA%E5%87%BD%E6%95%B0-f3"><span class="nav-number">2.2.3.</span> <span class="nav-text">颜色重建函数 f3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.4.</span> <span class="nav-text">损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.3.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">2.3.3.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#msr-net"><span class="nav-number">1.</span> <span class="nav-text">MSR-NET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#retinex-%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">Retinex 系列算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retinex%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">Retinex原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#msr-multi-scale-retinex"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">MSR (Multi-Scale Retinex)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E8%89%B2%E5%BD%A9%E6%81%A2%E5%A4%8D%E7%9A%84%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%A7%86%E7%BD%91%E8%86%9C%E5%A2%9E%E5%BC%BA%E7%AE%97%E6%B3%95msrcrmulti-scale-retinex-with-color-restoration"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more..."><span class="nav-number">1.1.1.3.</span> <span class="nav-text">more...</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msr-net-1"><span class="nav-number">1.2.</span> <span class="nav-text">MSR-net</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">结构图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2f1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">多尺度对数变换f1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#difference-of-convolution-f2"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Difference-of-convolution f2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E9%87%8D%E5%BB%BA%E5%87%BD%E6%95%B0-f3"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">颜色重建函数 f3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">训练参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
