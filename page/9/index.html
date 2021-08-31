@@ -259,42 +259,57 @@
 
       
           <span id="more"></span>
-<h1 id="UMLE-Unsupervised-Multi-discriminator-Network-for-Low-Light-Enhancement"><a href="#UMLE-Unsupervised-Multi-discriminator-Network-for-Low-Light-Enhancement" class="headerlink" title="UMLE: Unsupervised Multi-discriminator Network for Low Light Enhancement*"></a>UMLE: Unsupervised Multi-discriminator Network for Low Light Enhancement*</h1><h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><p>这三类 鉴别器的设计，有效性有待考究，但是从原理上讲的通，它通过  高通/低通滤波器  提取颜色 和 文理部分，分别输入鉴别器。所以可以借鉴用外加手段实验输入图像信息分离的 思路 分开处理。优点类似 今年CVPR2020上的那个频率分解的思路，它是用两个不同卷积率的差去分离频率信息。</p>
+<h1 id="umle-unsupervised-multi-discriminator-network-for-low-light-enhancement">UMLE: Unsupervised Multi-discriminator Network for Low Light Enhancement*</h1>
+<h2 id="亮点">亮点</h2>
+<p>这三类 鉴别器的设计，有效性有待考究，但是从原理上讲的通，它通过 高通/低通滤波器 提取颜色 和 文理部分，分别输入鉴别器。所以可以借鉴用外加手段实验输入图像信息分离的 思路 分开处理。优点类似 今年CVPR2020上的那个频率分解的思路，它是用两个不同卷积率的差去分离频率信息。</p>
 <p>另一个采用了鉴别器生成器权重共享的策略，至少证明这个 东西不会影响效果，是轻量化的一个小trick。然后使用不同的CPAM对编码器的编码特征提取。</p>
-<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ol>
+<h2 id="主要贡献">主要贡献</h2>
+<ol type="1">
 <li>提出了一个实时的 基于 不成对图像训练的 低光照图像增强网络</li>
-<li>使用了 多个 鉴别器，分别从 光照、纹理、和多尺度三个方面 来组合对抗损失  （创新点）</li>
+<li>使用了 多个 鉴别器，分别从 光照、纹理、和多尺度三个方面 来组合对抗损失 （创新点）</li>
 <li>设计了 注意力模块，由通道注意力 和 像素注意力串接而成的 CPAM （最大池化+平均池化组成的像素注意力）</li>
 <li>生成器 和 鉴别器 的 编码部分共享权重，说是可以提高训练的稳定性，并减少模型的大小</li>
 </ol>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211942.png" alt="image-20201230103849874"></p>
-<p>​    主要结构 不必 多说 很清晰。主要要注意以下几个点：</p>
+<h2 id="主要内容">主要内容</h2>
+<h3 id="结构">结构</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211942.png" alt="" /><figcaption>image-20201230103849874</figcaption>
+</figure>
+<p>​ 主要结构 不必 多说 很清晰。主要要注意以下几个点：</p>
 <ul>
-<li>共享编码区的权重  提高了训练的稳定性，减少了模型大小</li>
-<li>采用了 三个 鉴别器<ul>
+<li>共享编码区的权重 提高了训练的稳定性，减少了模型大小</li>
+<li>采用了 三个 鉴别器
+<ul>
 <li>多尺度鉴别器就是 在三个不同尺度各一个鉴别器来鉴别真假。因为仅仅一个全局鉴别器很难同时关注所有的区域，大尺度可以更好的关注大区域，小尺度可以更好关注细节区域</li>
-<li>颜色鉴别器：注意 图上 未画出。实际在图像输入颜色鉴别器之前首先使用了 一个低通滤波器，以过滤纹理边缘信息，使得鉴别器只关注  颜色</li>
+<li>颜色鉴别器：注意 图上 未画出。实际在图像输入颜色鉴别器之前首先使用了 一个低通滤波器，以过滤纹理边缘信息，使得鉴别器只关注 颜色</li>
 <li>纹理鉴别器：同上，输入鉴别器前，通过高斯高通滤波器提取出了 纹理细节，避免颜色影响。接着再编码-&gt;CPAM-&gt;分类输出结果。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211948.png" alt="image-20201230104605270"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211954.png" alt="image-20201230104650389"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211948.png" alt="" /><figcaption>image-20201230104605270</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211954.png" alt="" /><figcaption>image-20201230104650389</figcaption>
+</figure>
 <p>上式是论文贴的 低通滤波器。</p>
-<h3 id="损失"><a href="#损失" class="headerlink" title="损失"></a>损失</h3><ol>
+<h3 id="损失">损失</h3>
+<ol type="1">
 <li>对抗损失</li>
-<li><strong>循环一致损失</strong>   EnlightenGAN 中提出 由于不成对缺乏 很好的约束 ，所以它采用了 自监督损失（输入输出VGG），但是这里也用了VGG损失，也用了 循环一致损失，为啥？不过可以看出文章作者并未多提 循环一致这个事儿，说明不是创新点。</li>
+<li><strong>循环一致损失</strong> EnlightenGAN 中提出 由于不成对缺乏 很好的约束 ，所以它采用了 自监督损失（输入输出VGG），但是这里也用了VGG损失，也用了 循环一致损失，为啥？不过可以看出文章作者并未多提 循环一致这个事儿，说明不是创新点。</li>
 <li>颜色损失：论文中 单独列出，我以为包含在 对抗损失之中？</li>
 <li>保留损失：就是输入输出 VGG损失</li>
-<li>重建损失：就是输入输出的L1距离  不知道为啥要这个损失 感觉 还不如VGG</li>
+<li>重建损失：就是输入输出的L1距离 不知道为啥要这个损失 感觉 还不如VGG</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211958.png" alt="image-20201230105254104"></p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>论文 从以下几个方面做实验：</p>
-<ol>
-<li>和其他方法的定量对比  在 ETH数据集上对比 。</li>
-<li>和其他方法做  USER STUDY实验</li>
-<li>消融实验 ， 验证  三种对抗其 和 CPAM 模块的作用、</li>
-<li>在 应用 上，和SLAM  检测 这两个具体任务结合 分别验证对他们带来的性能提升。</li>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211958.png" alt="" /><figcaption>image-20201230105254104</figcaption>
+</figure>
+<h2 id="实验结果">实验结果</h2>
+<p>论文 从以下几个方面做实验：</p>
+<ol type="1">
+<li>和其他方法的定量对比 在 ETH数据集上对比 。</li>
+<li>和其他方法做 USER STUDY实验</li>
+<li>消融实验 ， 验证 三种对抗其 和 CPAM 模块的作用、</li>
+<li>在 应用 上，和SLAM 检测 这两个具体任务结合 分别验证对他们带来的性能提升。</li>
 </ol>
 
       
@@ -374,27 +389,48 @@
 
       
           <span id="more"></span>
-<h1 id="SID-NISM-A-Self-supervised-Low-light-Image-Enhancement-Framework"><a href="#SID-NISM-A-Self-supervised-Low-light-Image-Enhancement-Framework" class="headerlink" title="SID-NISM: A Self-supervised Low-light Image Enhancement Framework"></a>SID-NISM: A Self-supervised Low-light Image Enhancement Framework</h1><h2 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h2><ol>
-<li>类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于  它 将低光照图的  直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。</li>
+<h1 id="sid-nism-a-self-supervised-low-light-image-enhancement-framework">SID-NISM: A Self-supervised Low-light Image Enhancement Framework</h1>
+<h2 id="主要思路">主要思路</h2>
+<ol type="1">
+<li>类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于 它 将低光照图的 直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。</li>
 <li>考虑了噪声，I = R X L + N</li>
-<li>第二阶段的 光照调整方法 不是gamma 矫正，是作者自己提出的新的函数  这个可以借鉴</li>
+<li>第二阶段的 光照调整方法 不是gamma 矫正，是作者自己提出的新的函数 这个可以借鉴</li>
 </ol>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="image-20201231103107211"></p>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="image-20201231103305198"></p>
+<h2 id="主要内容">主要内容</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="" /><figcaption>image-20201231103107211</figcaption>
+</figure>
+<h3 id="损失函数">损失函数</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="" /><figcaption>image-20201231103305198</figcaption>
+</figure>
 <p>均衡后的图像的 分解产生的 R 要和 低光照图直接分解产生的R 一致</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="image-20201231103339686"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="" /><figcaption>image-20201231103339686</figcaption>
+</figure>
 <p>光照平滑和一致损失，第一项表明 光照分段平滑，以反射率图的梯度加权。第二项以高低光照图自身梯度加权，是为了让在两张图中都是边缘的地方损失小，非共同边缘的地方损失大，即两张光照图的边缘一致。这和RetinexNet中的损失一致</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="image-20201231103645591"></p>
-<p>第一项，意思为增强后的图像的 梯度要比原图像放大beta倍，当然 计算原输入图像 S 的梯度的时，滤掉了梯度较小的地方。第二项是，输入图像的 HSV中的H通道和 分解R的  H通道要一致，防止颜色乱变。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="image-20201231103920053"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="" /><figcaption>image-20201231103645591</figcaption>
+</figure>
+<p>第一项，意思为增强后的图像的 梯度要比原图像放大beta倍，当然 计算原输入图像 S 的梯度的时，滤掉了梯度较小的地方。第二项是，输入图像的 HSV中的H通道和 分解R的 H通道要一致，防止颜色乱变。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="" /><figcaption>image-20201231103920053</figcaption>
+</figure>
 <p>最后一项是噪声 一致的 ，输入图像乘 噪声估计图N ，约束噪声的大小。（不知道为啥）</p>
-<h3 id="光照调整"><a href="#光照调整" class="headerlink" title="光照调整"></a>光照调整</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="image-20201231104256103"></p>
-<p>​        这个阶段是整篇文章比较有意思的地方。它分析了直接用GAMMA矫正来调整光照图带来的问题，然后针对它进行了改进，提出了一个新的光照调整函数。</p>
-<p>​        具体的，图像R的对比度由于暗区域的过度增亮而被破坏。最终增强图像的照明水平仍然不足，因为明亮区域几乎没有变化。一句话总结就是，gamma矫正过分的提高了暗区域的光照，导致R*L 乘回去之后，R衰减的太少，使得整体效果显得过增强。对于亮区域gamma 矫正又几乎不调整，导致亮区域的低光光照被拉低。按它的思路应该是  暗区域亮度拉升变缓，以抑制R的过曝，亮区域亮度要再提高免得亮区域亮度乘上系数后又被压缩回去了。（是这样嘛？？？）</p>
-<p>​        按照上述逻辑 作者提出的曲线波形是NIMS的形状，表达式为：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="image-20201231105830496"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="image-20201231105852294"></p>
-<p>首先对光照图的像素亮度进行聚类，（两类）。分为亮像素和暗像素，去亮像素区的最小亮度值作为T，计算yita。参数 yita 的意义在于，在NISM下将亮像素的最小照明值映射到0.8 </p>
+<h3 id="光照调整">光照调整</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="" /><figcaption>image-20201231104256103</figcaption>
+</figure>
+<p>​ 这个阶段是整篇文章比较有意思的地方。它分析了直接用GAMMA矫正来调整光照图带来的问题，然后针对它进行了改进，提出了一个新的光照调整函数。</p>
+<p>​ 具体的，图像R的对比度由于暗区域的过度增亮而被破坏。最终增强图像的照明水平仍然不足，因为明亮区域几乎没有变化。一句话总结就是，gamma矫正过分的提高了暗区域的光照，导致R*L 乘回去之后，R衰减的太少，使得整体效果显得过增强。对于亮区域gamma 矫正又几乎不调整，导致亮区域的低光光照被拉低。按它的思路应该是 暗区域亮度拉升变缓，以抑制R的过曝，亮区域亮度要再提高免得亮区域亮度乘上系数后又被压缩回去了。（是这样嘛？？？）</p>
+<p>​ 按照上述逻辑 作者提出的曲线波形是NIMS的形状，表达式为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="" /><figcaption>image-20201231105830496</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="" /><figcaption>image-20201231105852294</figcaption>
+</figure>
+<p>首先对光照图的像素亮度进行聚类，（两类）。分为亮像素和暗像素，去亮像素区的最小亮度值作为T，计算yita。参数 yita 的意义在于，在NISM下将亮像素的最小照明值映射到0.8</p>
 
       
     </div>
@@ -474,16 +510,19 @@
       
           <span id="more"></span>
 <p>Self-supervised Image Enhancement Network: Training with Low Light Images Only</p>
-<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
+<h2 id="主要贡献">主要贡献</h2>
+<ul>
 <li>基于最大熵和 Retinex 模型，构建了一个无监督的低光照图像增强网络，不需要paired图像训练。甚至是可以只用一张图像训练网络。</li>
 <li>提出的网络速度很快</li>
 </ul>
-<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><p>​    文章的思想是。设计一个网络，分解产生 反射率图 和 光照图。而为了实现自监督的目的，即仅仅使用低光照图像来训练，就需要设计一系列的损失函数来约束网络学习的方向。这里主要就用到了熵最大化的约束条件。熵最大化就是当图像的直方图分布服从均匀分布时，它的熵最大，因此 反射率图的学习 很大程度上是依赖这个熵最大化约束，否则在没有参考的正常图像的情况下没法学到合理的 反射率。</p>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><ol>
-<li><p>重建损失，和常规的一样</p>
-</li>
+<h2 id="主要方法">主要方法</h2>
+<p>​ 文章的思想是。设计一个网络，分解产生 反射率图 和 光照图。而为了实现自监督的目的，即仅仅使用低光照图像来训练，就需要设计一系列的损失函数来约束网络学习的方向。这里主要就用到了熵最大化的约束条件。熵最大化就是当图像的直方图分布服从均匀分布时，它的熵最大，因此 反射率图的学习 很大程度上是依赖这个熵最大化约束，否则在没有参考的正常图像的情况下没法学到合理的 反射率。</p>
+<h3 id="损失函数">损失函数</h3>
+<ol type="1">
+<li><p>重建损失，和常规的一样</p></li>
 <li><p>反射率图 R 的约束：</p>
-<script type="math/tex; mode=display">l_{R}=\left\|\max _{c \in R, G, B} R^{c}-F\left(\max _{c \in R, G, B} S^{c}\right)\right\|_{1}+\lambda\|\triangle R\|_{1}</script><p>其中 $F(.)$ 代表直方图均衡化后的结果。第一项的含义为，取输入低光照图像的最大亮度通道（并非固定的R,G,B中的一个），对它做直方图均衡化，并将这个作为网络输出的反射率图的最大通达的参考结果。第二项对反射率图的梯度约束的作用是抑制噪声。</p>
+<p><span class="math display">\[l_{R}=\left\|\max _{c \in R, G, B} R^{c}-F\left(\max _{c \in R, G, B} S^{c}\right)\right\|_{1}+\lambda\|\triangle R\|_{1}\]</span></p>
+<p>其中 <span class="math inline">\(F(.)\)</span> 代表直方图均衡化后的结果。第一项的含义为，取输入低光照图像的最大亮度通道（并非固定的R,G,B中的一个），对它做直方图均衡化，并将这个作为网络输出的反射率图的最大通达的参考结果。第二项对反射率图的梯度约束的作用是抑制噪声。</p>
 <p>使用最大像素通道的目的：</p>
 <ul>
 <li>对于弱光图像，最大通道对其视觉效果的影响最大</li>
@@ -493,30 +532,36 @@
 <p>使用直方图均衡化的原因</p>
 <ul>
 <li>直方图均衡化可以大大提高图像的信息熵。</li>
-</ul>
-</li>
-<li><p>光照图的约束，采用的即为Retinex-Net 这篇文章中的损失</p>
-</li>
+</ul></li>
+<li><p>光照图的约束，采用的即为Retinex-Net 这篇文章中的损失</p></li>
 </ol>
-<script type="math/tex; mode=display">
-\mathcal{L}_{i s}=\sum\left\|\nabla I_{i} \circ \exp \left(-\lambda_{g} \nabla R_{i}\right)\right\|</script><ol>
+<p><span class="math display">\[
+\mathcal{L}_{i s}=\sum\left\|\nabla I_{i} \circ \exp \left(-\lambda_{g} \nabla R_{i}\right)\right\|
+\]</span></p>
+<ol start="4" type="1">
 <li>综合上述，即为本文的损失函数</li>
 </ol>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>​    大部分基于模型的方法，其实就是类似上述设计一个根据各种先验设计损失函数，然后将损失函数转换到频域使用FFT加快计算，不断迭代得到增强结果。上式设计的损失函数其实也可以类似优化，但是作者是使用一个小网络来完成的，之所以选用后者的方法，有如下原因：</p>
-<ol>
-<li><p>使用传统的FFT优化，在每一张图像增强的过程中都需要 迭代优化，而且损失函数越复杂，计算量就越大，不同图像迭代次数也不一样时间开销也不一样。</p>
-</li>
-<li><p>同时，传统的解决方案不能利用大数据，以前的数据处理对新的数据处理毫无帮助。</p>
-</li>
-<li><p>与有监督的CNN方法比，这种方法不需要精心设计的训练数据就能达到较好的效果，且精心设计的参考图像不一定能包含实际需要的所有场景，泛化能力不好。相对基于模型的传统方法，本文的算法在计算速度上有有优势。</p>
-</li>
+<h3 id="优点">优点</h3>
+<p>​ 大部分基于模型的方法，其实就是类似上述设计一个根据各种先验设计损失函数，然后将损失函数转换到频域使用FFT加快计算，不断迭代得到增强结果。上式设计的损失函数其实也可以类似优化，但是作者是使用一个小网络来完成的，之所以选用后者的方法，有如下原因：</p>
+<ol type="1">
+<li><p>使用传统的FFT优化，在每一张图像增强的过程中都需要 迭代优化，而且损失函数越复杂，计算量就越大，不同图像迭代次数也不一样时间开销也不一样。</p></li>
+<li><p>同时，传统的解决方案不能利用大数据，以前的数据处理对新的数据处理毫无帮助。</p></li>
+<li><p>与有监督的CNN方法比，这种方法不需要精心设计的训练数据就能达到较好的效果，且精心设计的参考图像不一定能包含实际需要的所有场景，泛化能力不好。相对基于模型的传统方法，本文的算法在计算速度上有有优势。</p></li>
 </ol>
-<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p><img src="../figs/1590054658337.png" alt="1590054658337"></p>
-<p>​    关于结构，卷积层和sigmod层的叠加也可以产生可以接受的结果。然而，如果添加一些concat层，增强结果将变得更加清晰。作者还采用了上采样和下采样的结构，这样的结构可以起到抑制噪声的作用，但是有些场合中会带来模糊的效果。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="实验细节"><a href="#实验细节" class="headerlink" title="实验细节"></a>实验细节</h3><p>​    使用LOL dataset中的485张 低光照图像训练，15张做测试。batch_size = 16，path_size=48x48</p>
-<h3 id="训练时间的影响"><a href="#训练时间的影响" class="headerlink" title="训练时间的影响"></a>训练时间的影响</h3><p>​    作者训练了1000epoch，没20epoch在测试集上计算一次 各种指标，包括GE CE GMI SSIM NIQE…. 最终的结论是，取在 200epoch输出的模型参数。因为随着 epoch的增加，虽然一些表征清晰度的指标会效果变好，但是像SSIM这种有参考图像的指标会越来越差，这是因为噪声的影响。所以为了在噪音和清晰度之间保持一个平衡，选择在200epoch停止。</p>
-<h3 id="重复稳定性"><a href="#重复稳定性" class="headerlink" title="重复稳定性"></a>重复稳定性</h3><p>​    这部分实验目的就是 反复训练几次，对比每次训练的结果是不是可以反复复现。结论是 一些指标不是特别稳定，这可能是由于 L1 损失函数的解不唯一的原因？但是 整体出来的视觉效果差不多，所以说 该文方法可重复复现，具有稳定性。</p>
-<h3 id="与其他方法对比"><a href="#与其他方法对比" class="headerlink" title="与其他方法对比"></a>与其他方法对比</h3>
+<h3 id="网络结构">网络结构</h3>
+<figure>
+<img src="../figs/1590054658337.png" alt="" /><figcaption>1590054658337</figcaption>
+</figure>
+<p>​ 关于结构，卷积层和sigmod层的叠加也可以产生可以接受的结果。然而，如果添加一些concat层，增强结果将变得更加清晰。作者还采用了上采样和下采样的结构，这样的结构可以起到抑制噪声的作用，但是有些场合中会带来模糊的效果。</p>
+<h2 id="实验">实验</h2>
+<h3 id="实验细节">实验细节</h3>
+<p>​ 使用LOL dataset中的485张 低光照图像训练，15张做测试。batch_size = 16，path_size=48x48</p>
+<h3 id="训练时间的影响">训练时间的影响</h3>
+<p>​ 作者训练了1000epoch，没20epoch在测试集上计算一次 各种指标，包括GE CE GMI SSIM NIQE.... 最终的结论是，取在 200epoch输出的模型参数。因为随着 epoch的增加，虽然一些表征清晰度的指标会效果变好，但是像SSIM这种有参考图像的指标会越来越差，这是因为噪声的影响。所以为了在噪音和清晰度之间保持一个平衡，选择在200epoch停止。</p>
+<h3 id="重复稳定性">重复稳定性</h3>
+<p>​ 这部分实验目的就是 反复训练几次，对比每次训练的结果是不是可以反复复现。结论是 一些指标不是特别稳定，这可能是由于 L1 损失函数的解不唯一的原因？但是 整体出来的视觉效果差不多，所以说 该文方法可重复复现，具有稳定性。</p>
+<h3 id="与其他方法对比">与其他方法对比</h3>
+
       
     </div>
 
@@ -594,7 +639,9 @@
 
       
           <span id="more"></span>
-<h2 id="Progressive-Retinex-Mutually-Reinforced-Illumination-Noise-Perception-Network-for-Low-Light-Image-Enhancement"><a href="#Progressive-Retinex-Mutually-Reinforced-Illumination-Noise-Perception-Network-for-Low-Light-Image-Enhancement" class="headerlink" title="Progressive Retinex: Mutually Reinforced Illumination-Noise Perception Network for Low Light Image Enhancement"></a>Progressive Retinex: Mutually Reinforced Illumination-Noise Perception Network for Low Light Image Enhancement</h2><h2 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h2><ul>
+<h2 id="progressive-retinex-mutually-reinforced-illumination-noise-perception-network-for-low-light-image-enhancement">Progressive Retinex: Mutually Reinforced Illumination-Noise Perception Network for Low Light Image Enhancement</h2>
+<h2 id="贡献">贡献</h2>
+<ul>
 <li>提出了一种基于Retinex模型的 渐进式训练结构，低光图像的照度和噪声以一种相互增强的方式被感知，即光照估计和去噪交替进行训练。一方面用训练的光照图知道去噪网络训练，接着反过来去噪模型知道光照估计，如此交替</li>
 <li>提出了两个基于 全point-wise CNN的 光照估计和噪声估计网络</li>
 <li>在真实和合成数据集上均效果良好</li>
@@ -677,55 +724,81 @@
 
       
           <span id="more"></span>
-<h2 id="传统算法：Retinex-系列多尺度视网膜增强算法"><a href="#传统算法：Retinex-系列多尺度视网膜增强算法" class="headerlink" title="传统算法：Retinex 系列多尺度视网膜增强算法"></a>传统算法：Retinex 系列多尺度视网膜增强算法</h2><h3 id="Retinex原理"><a href="#Retinex原理" class="headerlink" title="Retinex原理"></a>Retinex原理</h3><p>​                                                                I(x) = R(x) · L(x)<br>​        对上式子取对数，得到<br>​                                                     Log[R(x,y)] = Log[I(x,y)] - Log[L(x,y)] =<br>​                                                    Log[R(x,y)] = Log[I(x,y)] - Log[I(x,y)<em>F(x,y)]    ( </em>表示卷积)<br>把这个技术运用到图像处理上，就是针对我们现在已经获得的一副图像数据I(x,y），计算出对应的R(x,y)，则R(x,y)认为是增强后的图像，现在的关键是如何得到L(X,Y)。Retinex理论的提出者指出这个L(x,y）可以通过对图像数据I(x,y）进行F(x,y)高斯模糊而得到，从实际运用的角度来说，也可以用均值模糊来代替高斯模糊。</p>
-<ol>
+<h2 id="传统算法retinex-系列多尺度视网膜增强算法">传统算法：Retinex 系列多尺度视网膜增强算法</h2>
+<h3 id="retinex原理">Retinex原理</h3>
+<p>​ I(x) = R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] = Log[I(x,y)] - Log[L(x,y)] = ​ Log[R(x,y)] = Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积)<br />
+把这个技术运用到图像处理上，就是针对我们现在已经获得的一副图像数据I(x,y），计算出对应的R(x,y)，则R(x,y)认为是增强后的图像，现在的关键是如何得到L(X,Y)。Retinex理论的提出者指出这个L(x,y）可以通过对图像数据I(x,y）进行F(x,y)高斯模糊而得到，从实际运用的角度来说，也可以用均值模糊来代替高斯模糊。</p>
+<ol type="1">
 <li>输入： 原始图像数据I(x,y),尺度（也就是所谓的模糊的半径）</li>
-<li>处理：<ul>
+<li>处理：
+<ul>
 <li>计算原始图像按指定尺度进行模糊后的图像 L(x,y);</li>
 <li>按照上式的计算方法计算出 Log[R(x,y)]的值</li>
 <li>将 Log[R(x,y)]量化为0到255范围的像素值，作为最终的输出</li>
-</ul>
-</li>
+</ul></li>
 </ol>
 <p>上述在讲Log[] 量化时，会产生色彩失真。这也是这算法的通病。上述实现的算法通常叫SSR (Single Scale Retinex,单尺度视网膜增强）</p>
-<h4 id="MSR-Multi-Scale-Retinex"><a href="#MSR-Multi-Scale-Retinex" class="headerlink" title="MSR (Multi-Scale Retinex)"></a>MSR (Multi-Scale Retinex)</h4><p>​    最为经典的就是3尺度的，大、中、小，既能实现图像动态范围的压缩，又能保持色感的一致性较好。同单尺度相比，该算法有在计算Log[R(x,y)]的值时步骤有所不同。</p>
+<h4 id="msr-multi-scale-retinex">MSR (Multi-Scale Retinex)</h4>
+<p>​ 最为经典的就是3尺度的，大、中、小，既能实现图像动态范围的压缩，又能保持色感的一致性较好。同单尺度相比，该算法有在计算Log[R(x,y)]的值时步骤有所不同。</p>
 <ul>
 <li>需要对原始图像进行每个尺度的高斯模糊，得到模糊后的图像Li(x,y),其中小标i表示尺度数</li>
-<li>对每个尺度下进行累加计算  Log[R(x,y)] =  Log[R(x,y)] + Weight(i)* ( Log[Ii(x,y)]-Log[Li(x,y)]);  其中Weight(i)表示每个尺度对应的权重，要求各尺度权重之和必须为1，经典的取值为等权重</li>
+<li>对每个尺度下进行累加计算 Log[R(x,y)] = Log[R(x,y)] + Weight(i)* ( Log[Ii(x,y)]-Log[Li(x,y)]); 其中Weight(i)表示每个尺度对应的权重，要求各尺度权重之和必须为1，经典的取值为等权重</li>
 </ul>
-<h4 id="带色彩恢复的多尺度视网膜增强算法-MSRCR-Multi-Scale-Retinex-with-Color-Restoration"><a href="#带色彩恢复的多尺度视网膜增强算法-MSRCR-Multi-Scale-Retinex-with-Color-Restoration" class="headerlink" title="带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)"></a>带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)</h4><p>​        其改进在于对Log量化过程的改进：</p>
-<ol>
-<li><p>分别计算出 Log[R(x,y)]中R/G/B各通道数据的均值Mean和均方差Var（注意是均方差）</p>
-</li>
-<li><p>利用类似下述公式计算各通道的Min和Max值   Min = Mean - Dynamic <em> Var;    Max = Mean + Dynamic </em> Var;</p>
-</li>
+<h4 id="带色彩恢复的多尺度视网膜增强算法msrcrmulti-scale-retinex-with-color-restoration">带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)</h4>
+<p>​ 其改进在于对Log量化过程的改进：</p>
+<ol type="1">
+<li><p>分别计算出 Log[R(x,y)]中R/G/B各通道数据的均值Mean和均方差Var（注意是均方差）</p></li>
+<li><p>利用类似下述公式计算各通道的Min和Max值 Min = Mean - Dynamic * Var; Max = Mean + Dynamic * Var;</p></li>
 <li><p>对Log[R(x,y)]的每一个值Value，进行线性映射：</p>
-<p>​                                           R(x,y) = ( Value - Min ) / (Max - Min) * (255-0)</p>
+<p>​ R(x,y) = ( Value - Min ) / (Max - Min) * (255-0)</p>
 <p>同时要注意增加一个溢出判断,即：</p>
-<p>​                               if (R(x,y) &gt; 255)  R(x,y) =255; else if (R(x,y) &lt; 0) R(x,y)=0</p>
-</li>
+<p>​ if (R(x,y) &gt; 255) R(x,y) =255; else if (R(x,y) &lt; 0) R(x,y)=0</p></li>
 </ol>
-<h4 id="more…"><a href="#more…" class="headerlink" title="more…"></a>more…</h4><p>参考链接： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/Imageshop/archive/2013/04/17/3026881.html">https://www.cnblogs.com/Imageshop/archive/2013/04/17/3026881.html</a><br>                   <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1011768">https://cloud.tencent.com/developer/article/1011768</a></p>
-<h2 id="MSR-net"><a href="#MSR-net" class="headerlink" title="MSR-net"></a>MSR-net</h2><h3 id="主要贡献："><a href="#主要贡献：" class="headerlink" title="主要贡献："></a>主要贡献：</h3><ol>
-<li>作者认为 传统的MSR多尺度视网膜增强算法的过程可以用神经网络去模拟，并且神经网络的参数可以根据数据自学习。相对传统的采用固定的高斯模糊核要灵活  <strong>多尺度Retinex实际上相当于一个具有残差结构的前馈卷积神经网络</strong></li>
+<h4 id="more...">more...</h4>
+<p>参考链接： https://www.cnblogs.com/Imageshop/archive/2013/04/17/3026881.html https://cloud.tencent.com/developer/article/1011768</p>
+<h2 id="msr-net">MSR-net</h2>
+<p>### 主要贡献：</p>
+<ol type="1">
+<li>作者认为 传统的MSR多尺度视网膜增强算法的过程可以用神经网络去模拟，并且神经网络的参数可以根据数据自学习。相对传统的采用固定的高斯模糊核要灵活 <strong>多尺度Retinex实际上相当于一个具有残差结构的前馈卷积神经网络</strong></li>
 <li>提出MSR-net 基于Retinex模型和神经网络的方法端到端得学习亮暗图之间得映射</li>
 </ol>
-<h3 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h3><p>常用得图像增强的方法有</p>
-<ol>
-<li>直方图均衡化HE  </li>
+<h3 id="相关知识">相关知识</h3>
+<p>常用得图像增强的方法有</p>
+<ol type="1">
+<li>直方图均衡化HE<br />
+</li>
 <li>Gamma Correction 通过压缩亮区像素的范围，扩大暗区域的亮度范围</li>
-<li>上述的方法都只关注了单个像素而没有关注其周围的像素信息。文献[5] contextual and variational contrast enhancement …</li>
+<li>上述的方法都只关注了单个像素而没有关注其周围的像素信息。文献[5] contextual and variational contrast enhancement ...</li>
 </ol>
-<h3 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212112.png" alt="1572616376706"></p>
-<h4 id="多尺度对数变换f1"><a href="#多尺度对数变换f1" class="headerlink" title="多尺度对数变换f1"></a>多尺度对数变换f1</h4><script type="math/tex; mode=display">
-M_{j}=\log _{v_{j}+1}\left(1+v_{j} \cdot X\right), j=1,2, \ldots, n</script><p>​        输入的一幅3通道的图像，经过对数变换为 n*3 通道的tensor。 log函数具有压缩高灰度值的数据，拉伸低灰度值的数据。X代表输入图像，vj代表对应的尺度n代表尺度数。<br>​        接着，使用一个卷积+Relu  。上述的操作主要是通过多次对数变换的加权和来得到更好的图像，加速了网络的收敛。</p>
-<h4 id="Difference-of-convolution-f2"><a href="#Difference-of-convolution-f2" class="headerlink" title="Difference-of-convolution  f2"></a>Difference-of-convolution  f2</h4><p>​        这里的卷积代表着对不同尺度的图像进行平滑处理。将不同卷积层的输出contact 一起最后来个1X1卷积，相当于MSR中对不同尺度的SSR输出的加权平均。1X1之后引入了一个 <strong>“-”</strong> 操作，与SSR中的 Log[I(x,y)] - Log[L(x,y)] 减 的目的相同，根据模拟产生的L(x,y)  还原出Log[R(x,y)]   深度为K </p>
-<h4 id="颜色重建函数-f3"><a href="#颜色重建函数-f3" class="headerlink" title="颜色重建函数 f3"></a>颜色重建函数 f3</h4><p>​        由于上一步 减 的到的是 Log(R(x,y))   因此最后一个1X1卷积就是用来色彩还原的。<br>​        上述三步的输出结果可视化如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212122.png" alt="1572618295529"></p>
-<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><script type="math/tex; mode=display">
-L=\frac{1}{N} \sum_{i=1}^{N}\left\|f\left(X_{i}\right)-Y_{i}\right\|_{F}^{2}+\lambda \sum_{i=-1}^{K+2}\left\|W_{i}\right\|_{F}^{2}</script><h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><p>​        依然是同时使用合成图像验证，使用公开的真实的数据集。同时还对比了各种超参数对结果的影响。<strong>作者建立了一个新的真实数据集 包含HQ LQ图片</strong>      同时还使用了已有的正式低光照数据集 <strong>MEF NPE VV</strong></p>
-<h4 id="训练参数"><a href="#训练参数" class="headerlink" title="训练参数"></a>训练参数</h4><p>​        中间的神经网络的深度为K ， adam 权重衰减为10-6  batch_size为64  初始学习率为10-4  学习率除10每100K到200K  iteration。作者实验发现带有第一个对数多尺度变换的要比单尺度变换的效果好  4个变换尺度，分别为1，10，100，300</p>
-<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212118.png" alt="1572779177674"></p>
+<h3 id="结构图">结构图</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212112.png" alt="" /><figcaption>1572616376706</figcaption>
+</figure>
+<h4 id="多尺度对数变换f1">多尺度对数变换f1</h4>
+<p><span class="math display">\[
+M_{j}=\log _{v_{j}+1}\left(1+v_{j} \cdot X\right), j=1,2, \ldots, n
+\]</span></p>
+<p>​ 输入的一幅3通道的图像，经过对数变换为 n*3 通道的tensor。 log函数具有压缩高灰度值的数据，拉伸低灰度值的数据。X代表输入图像，vj代表对应的尺度n代表尺度数。 ​ 接着，使用一个卷积+Relu 。上述的操作主要是通过多次对数变换的加权和来得到更好的图像，加速了网络的收敛。</p>
+<h4 id="difference-of-convolution-f2">Difference-of-convolution f2</h4>
+<p>​ 这里的卷积代表着对不同尺度的图像进行平滑处理。将不同卷积层的输出contact 一起最后来个1X1卷积，相当于MSR中对不同尺度的SSR输出的加权平均。1X1之后引入了一个 <strong>“-”</strong> 操作，与SSR中的 Log[I(x,y)] - Log[L(x,y)] 减 的目的相同，根据模拟产生的L(x,y) 还原出Log[R(x,y)] 深度为K</p>
+<h4 id="颜色重建函数-f3">颜色重建函数 f3</h4>
+<p>​ 由于上一步 减 的到的是 Log(R(x,y)) 因此最后一个1X1卷积就是用来色彩还原的。 ​ 上述三步的输出结果可视化如下：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212122.png" alt="" /><figcaption>1572618295529</figcaption>
+</figure>
+<h4 id="损失函数">损失函数</h4>
+<p><span class="math display">\[
+L=\frac{1}{N} \sum_{i=1}^{N}\left\|f\left(X_{i}\right)-Y_{i}\right\|_{F}^{2}+\lambda \sum_{i=-1}^{K+2}\left\|W_{i}\right\|_{F}^{2}
+\]</span></p>
+<h3 id="实验">实验</h3>
+<h4 id="数据集">数据集</h4>
+<p>​ 依然是同时使用合成图像验证，使用公开的真实的数据集。同时还对比了各种超参数对结果的影响。<strong>作者建立了一个新的真实数据集 包含HQ LQ图片</strong> 同时还使用了已有的正式低光照数据集 <strong>MEF NPE VV</strong></p>
+<h4 id="训练参数">训练参数</h4>
+<p>​ 中间的神经网络的深度为K ， adam 权重衰减为10-6 batch_size为64 初始学习率为10-4 学习率除10每100K到200K iteration。作者实验发现带有第一个对数多尺度变换的要比单尺度变换的效果好 4个变换尺度，分别为1，10，100，300</p>
+<h4 id="结果">结果</h4>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212118.png" alt="" /><figcaption>1572779177674</figcaption>
+</figure>
 
       
     </div>
@@ -804,34 +877,52 @@ L=\frac{1}{N} \sum_{i=1}^{N}\left\|f\left(X_{i}\right)-Y_{i}\right\|_{F}^{2}+\la
 
       
           <span id="more"></span>
-<h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><p>​        由于图像内容的复杂性，作者认为简单的网络难以实现高质量的图像增强。因此设计了MBLLEN 的多分枝结构。将图像增强任务分解成和不同特征相关的子问题，不同特征层分别增强，最后通过多分枝结果融合得到搞质量的输出。</p>
-<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>​        由三部分组成，FEM, EM, FM;特征提取模块，增强模块，融合模块。</p>
-<ol>
+<h2 id="主要思想">主要思想</h2>
+<p>​ 由于图像内容的复杂性，作者认为简单的网络难以实现高质量的图像增强。因此设计了MBLLEN 的多分枝结构。将图像增强任务分解成和不同特征相关的子问题，不同特征层分别增强，最后通过多分枝结果融合得到搞质量的输出。</p>
+<h2 id="网络结构">网络结构</h2>
+<h3 id="结构">结构</h3>
+<p>​ 由三部分组成，FEM, EM, FM;特征提取模块，增强模块，融合模块。</p>
+<ol type="1">
 <li>FEM：将三通道微光图像输入FEM模块，FEM模块实际是由10个步长1，3X3卷积Relu层组成的网络。每一层卷积后的feature map一方面作为EM模块的输入，一方面接着传给下一层卷积接着提特征</li>
 <li>EM：增强模块，数量等于上一层输出的feature map的个数。每个EM模块都是conv deconv结构，输出的尺寸和原微光图像尺寸相同。所有EM模块输出的featuremap contact 作为FM的输出</li>
 <li>FM：多分支融合，将上一层contact的结果用1X1卷积聚合。得到最终的输出</li>
-<li>应用在视频….</li>
+<li>应用在视频....</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212135.png" alt="1572958613424"></p>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>​        传统的MSE或者MAE损失在增强的任务中不能很好的表现，作者使用了更复杂的损失函数，包含结构损失，Context(语义)损失， 区域损失</p>
-<ol>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212135.png" alt="" /><figcaption>1572958613424</figcaption>
+</figure>
+<h3 id="损失函数">损失函数</h3>
+<p>​ 传统的MSE或者MAE损失在增强的任务中不能很好的表现，作者使用了更复杂的损失函数，包含结构损失，Context(语义)损失， 区域损失</p>
+<ol type="1">
 <li>结构损失（structure loss ）：这个损失是为了提高输出图像的视觉 效果。通常低光照图像暗区因为硬件捕获的问题带有模糊和伪影，他们视觉效果不好但是不能被MAE损失表现出来。作者提出的结构损失中包含两部分：简化的SSIM MS-SSIM。</li>
 </ol>
-<script type="math/tex; mode=display">
-L_{S S M}=-\frac{1}{N} \sum_{p \in i m g} \frac{2 \mu_{x} \mu_{y}+C_{1}}{\mu_{x}^{2}+\mu_{y}^{2}+C_{1}} \cdot \frac{2 \sigma_{x y}+C_{2}}{\sigma_{x}^{2}+\sigma_{y}^{2}+C_{2}}</script><script type="math/tex; mode=display">
-L_{S t r}=L_{S S I M}+L_{M S-S S I M}</script><ol>
+<p><span class="math display">\[
+L_{S S M}=-\frac{1}{N} \sum_{p \in i m g} \frac{2 \mu_{x} \mu_{y}+C_{1}}{\mu_{x}^{2}+\mu_{y}^{2}+C_{1}} \cdot \frac{2 \sigma_{x y}+C_{2}}{\sigma_{x}^{2}+\sigma_{y}^{2}+C_{2}}
+\]</span></p>
+<p><span class="math display">\[
+L_{S t r}=L_{S S I M}+L_{M S-S S I M}
+\]</span></p>
+<ol start="2" type="1">
 <li>context loss： 作者认为MSE和SSIM智能表示低层信息，认为使用更高级的语义信息是有必要的。采用了SRGAN中相似的做法来设计损失。具体是使用VGG-19 net提取两张图片的特征图。然后比较特征图的差别，如下式，i,j表示VGG-19中第j层特征第i个block的输出特征图。</li>
 </ol>
-<script type="math/tex; mode=display">
-L_{V G G / i, j}=\frac{1}{W_{i, j} H_{i, j} C_{i, j}} \sum_{x=1}^{W_{i, j}} \sum_{z=1}^{C_{i, j}}\left\|\phi_{i, j}(E)_{x, y, z}-\phi_{i, j}(G)_{x, y, z}\right\|</script><ol>
-<li><strong>region loss</strong>  区域损失：上面两个损失函数都是基于全图的。然而在图像增强任务中，需要对低光照区域提供更多的注意力。因此作者提出这个损失函数来平衡低光照区域和其他区域的损失。作者筛选暗区域的策略是 发现选取一副图中前40%暗的像素作为暗区域最能代表实际的暗区域。<strong>这里可以寻找更恰当的选取暗区域的方法</strong>  式子中，EL GL中的L代表输入图像的暗区域，H代表亮区域  E,G代表输出图像和groundtruth    WL=4  WH=1<script type="math/tex; mode=display">
-L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^{m_{L}}\left(\left\|E_{L}(i, j)-G_{L}(i, j)\right\|\right)+w_{H} \cdot \frac{1}{m_{H} n_{H}} \sum_{i=1}^{n_{H}} \sum_{j=1}^{m_{H}}\left(\left\|E_{H}(i, j)-G_{H}(i, j)\right\|\right)</script></li>
+<p><span class="math display">\[
+L_{V G G / i, j}=\frac{1}{W_{i, j} H_{i, j} C_{i, j}} \sum_{x=1}^{W_{i, j}} \sum_{z=1}^{C_{i, j}}\left\|\phi_{i, j}(E)_{x, y, z}-\phi_{i, j}(G)_{x, y, z}\right\|
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>region loss</strong> 区域损失：上面两个损失函数都是基于全图的。然而在图像增强任务中，需要对低光照区域提供更多的注意力。因此作者提出这个损失函数来平衡低光照区域和其他区域的损失。作者筛选暗区域的策略是 发现选取一副图中前40%暗的像素作为暗区域最能代表实际的暗区域。<strong>这里可以寻找更恰当的选取暗区域的方法</strong> 式子中，EL GL中的L代表输入图像的暗区域，H代表亮区域 E,G代表输出图像和groundtruth WL=4 WH=1 <span class="math display">\[
+L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^{m_{L}}\left(\left\|E_{L}(i, j)-G_{L}(i, j)\right\|\right)+w_{H} \cdot \frac{1}{m_{H} n_{H}} \sum_{i=1}^{n_{H}} \sum_{j=1}^{m_{H}}\left(\left\|E_{H}(i, j)-G_{H}(i, j)\right\|\right)
+\]</span></li>
 </ol>
-<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>​        选取PASCAL VOC上的一部分图像使用损及gamma矫正转化为合成的低光照图像，同时加入了泊松噪声。56张验证，144张测试。minibatch 24  256X256X3的图像。VGG损失作者选取的是j=4 i=3处的feature map 。ADAM优化器，学习率0.002 b1=0.9 b2=0.99 e=10-8  学习率每个epoch learnrate * 0.95。</p>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212143.png" alt="1572960634271"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<h3 id="实现细节">实现细节</h3>
+<p>​ 选取PASCAL VOC上的一部分图像使用损及gamma矫正转化为合成的低光照图像，同时加入了泊松噪声。56张验证，144张测试。minibatch 24 256X256X3的图像。VGG损失作者选取的是j=4 i=3处的feature map 。ADAM优化器，学习率0.002 b1=0.9 b2=0.99 e=10-8 学习率每个epoch learnrate * 0.95。</p>
+<h2 id="结果">结果</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212143.png" alt="" /><figcaption>1572960634271</figcaption>
+</figure>
+<h2 id="结论">结论</h2>
+<ul>
 <li>感觉这篇文章 出发点 很独特，不同于以往的基于retinex模型的方法，提取光照图等等。通过多层特征提取，然后分别增强，最后多分枝融合。思想很独特。</li>
-<li>区域损失 值得借鉴和改进     VGG损失？？？ </li>
+<li>区域损失 值得借鉴和改进 VGG损失？？？</li>
 </ul>
 
       
@@ -911,77 +1002,84 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 
       
           <span id="more"></span>
-<h2 id="图像增强研究现状"><a href="#图像增强研究现状" class="headerlink" title="图像增强研究现状"></a>图像增强研究现状</h2><ol>
-<li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p>
-</li>
-<li><p>基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28] </p>
-</li>
+<h2 id="图像增强研究现状">图像增强研究现状</h2>
+<ol type="1">
+<li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p></li>
+<li><p>基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28]</p></li>
 <li><p>基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4, 9, 28]</p>
 <blockquote>
-<p>Such a method first inverts an input low-light image, and then employs an image dehazing algorithm on the inverted image, finally achieves the enhanced image by inverting the dehazed image.  </p>
-</blockquote>
-</li>
-<li><p>基于稀疏表示的微光图像增强框架：增强的结果在很大程度上依赖于所学习的字典的准确性 [5]  </p>
+<p>Such a method first inverts an input low-light image, and then employs an image dehazing algorithm on the inverted image, finally achieves the enhanced image by inverting the dehazed image.</p>
+</blockquote></li>
+<li><p>基于稀疏表示的微光图像增强框架：增强的结果在很大程度上依赖于所学习的字典的准确性 [5]</p>
 <blockquote>
-<p>Fotiadou et al. used two dictionaries (i.e., night dictionary and day dictionary) to transform the Sparse Representation of low-light image patches to the corresponding enhanced image patches.  </p>
-</blockquote>
-</li>
-<li><p>基于融合的方法： 通过两个设计的权重来 融合亮度增强和对比度增强结果。此外采用多尺度融合的方法来减少放大的伪影。然而，与其他基于融合的图像增强方法一样，这种方法由于忽略了弱光照图像退化的物理特性，容易产生过增强、过饱和和不真实的结果 。 [7]</p>
-</li>
-<li><p>LLNet：提出了一种基于深度学习的图像自适应增强和去噪方法，直接采用了现有的深度神经网络结构（堆叠稀疏去噪自动编码器）建立低光图像与增强、去噪图像之间的关系。实验结果表明，基于深度学习的方法适用于微光图像增强。[20]</p>
-</li>
+<p>Fotiadou et al. used two dictionaries (i.e., night dictionary and day dictionary) to transform the Sparse Representation of low-light image patches to the corresponding enhanced image patches.</p>
+</blockquote></li>
+<li><p>基于融合的方法： 通过两个设计的权重来 融合亮度增强和对比度增强结果。此外采用多尺度融合的方法来减少放大的伪影。然而，与其他基于融合的图像增强方法一样，这种方法由于忽略了弱光照图像退化的物理特性，容易产生过增强、过饱和和不真实的结果 。 [7]</p></li>
+<li><p>LLNet：提出了一种基于深度学习的图像自适应增强和去噪方法，直接采用了现有的深度神经网络结构（堆叠稀疏去噪自动编码器）建立低光图像与增强、去噪图像之间的关系。实验结果表明，基于深度学习的方法适用于微光图像增强。[20]</p></li>
 <li><p>LIME: 简单的微光图像增强方法。[11]</p>
 <blockquote>
-<p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method </p>
-</blockquote>
-</li>
+<p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method</p>
+</blockquote></li>
 </ol>
-<h2 id="LightenNet"><a href="#LightenNet" class="headerlink" title="LightenNet"></a>LightenNet</h2><h3 id="Retinex-model"><a href="#Retinex-model" class="headerlink" title="Retinex  model  :"></a>Retinex  model  :</h3><p>​    Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示：<br>​                                                                            I(x) = R(x) · L(x)<br>​        I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度  反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
-<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ul>
+<h2 id="lightennet">LightenNet</h2>
+<h3 id="retinex-model">Retinex model :</h3>
+<p>​ Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示： ​ I(x) = R(x) · L(x) ​ I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度 反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
+<h3 id="贡献">贡献</h3>
+<ul>
 <li>提出了一个用于低光照图像增强的简单的CNN网络。与以往的使用CNN的直接估计输出方法不同，LightenNet学习低光照图像和其响应光照强度图之间的映射。</li>
 <li>基于Retinex模型，提出了一种合成低光照图像的方法。</li>
 <li>提出的方法在合成低光照图和实际低光照图上都取得了最好的效果</li>
 </ul>
-<h3 id="LightenNet-1"><a href="#LightenNet-1" class="headerlink" title="LightenNet"></a>LightenNet</h3><p>​    通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x)    即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。  </p>
+<h3 id="lightennet-1">LightenNet</h3>
+<p>​ 通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x) 即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。</p>
 <blockquote>
-<p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x) </p>
+<p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x)</p>
 </blockquote>
-<p>​    论文作者说，LightenNet包含四个卷积层，每层都有不同的作用。比如前两层主要作用于高亮度的区域，第三层作用于低亮度的区域，最后一层用于重建。</p>
-<ol>
+<p>​ 论文作者说，LightenNet包含四个卷积层，每层都有不同的作用。比如前两层主要作用于高亮度的区域，第三层作用于低亮度的区域，最后一层用于重建。</p>
+<ol type="1">
 <li>Patch extraction and representation</li>
 <li>Feature enhancement ：将噪声和特征分开映射</li>
 <li>Non-linear mapping:</li>
 <li>Reconstruction</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png" alt="1572008006804"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png" alt="1572008198140"></p>
-<p>损失函数为MSE损失  illu是图像的光照图像？？怎么获得？</p>
-<p>​        在通过CNN获得光照映射图之后，还要进行以下3步，才能获得最终的增强图片。</p>
-<ol>
-<li><p>Gamma矫正（Gamma correction ）   L(x)` = L(x)^γ (r=1.7)</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png" alt="" /><figcaption>1572008006804</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png" alt="" /><figcaption>1572008198140</figcaption>
+</figure>
+<p>损失函数为MSE损失 illu是图像的光照图像？？怎么获得？</p>
+<p>​ 在通过CNN获得光照映射图之后，还要进行以下3步，才能获得最终的增强图片。</p>
+<ol type="1">
+<li><p>Gamma矫正（Gamma correction ） L(x)` = L(x)^γ (r=1.7)</p>
 <blockquote>
-<p>Following previous method [11], we adjust the estimated illumination map by Gamma correction in order to thoroughly unveil dark regions in the results, which can be expressed as </p>
-</blockquote>
-</li>
-<li><p>作者在优化CNN模型的时候认为局部的nXn输入图像具有相同的光照强度，因此gamma矫正之后需要通过指导滤波来细化光照图。在导图滤波中，将输入图像的红色通道作为导图，滤波窗口大小为16×16.</p>
-</li>
-<li>基于Retinex 模型，将低光照输入图/光照强度预测图  得到最终的增强后的输出  拥有了精确的光照强度映射图，就能产生自然的接近真实的增强输出，暗的区域得到增强，亮的区域保持不变。</li>
+<p>Following previous method [11], we adjust the estimated illumination map by Gamma correction in order to thoroughly unveil dark regions in the results, which can be expressed as</p>
+</blockquote></li>
+<li><p>作者在优化CNN模型的时候认为局部的nXn输入图像具有相同的光照强度，因此gamma矫正之后需要通过指导滤波来细化光照图。在导图滤波中，将输入图像的红色通道作为导图，滤波窗口大小为16×16.</p></li>
+<li><p>基于Retinex 模型，将低光照输入图/光照强度预测图 得到最终的增强后的输出 拥有了精确的光照强度映射图，就能产生自然的接近真实的增强输出，暗的区域得到增强，亮的区域保持不变。</p></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png" alt="1572010031130"></p>
-<h3 id="具体的实现"><a href="#具体的实现" class="headerlink" title="具体的实现"></a>具体的实现</h3><h4 id="训练参数"><a href="#训练参数" class="headerlink" title="训练参数"></a>训练参数</h4><ul>
-<li>使用高斯分布初始化权重，偏置设0 </li>
-<li>初始学习率0.05  每100000个迭代减少0.5</li>
-<li>momentum =0.9  batch_size=128</li>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png" alt="" /><figcaption>1572010031130</figcaption>
+</figure>
+<h3 id="具体的实现">具体的实现</h3>
+<h4 id="训练参数">训练参数</h4>
+<ul>
+<li>使用高斯分布初始化权重，偏置设0</li>
+<li>初始学习率0.05 每100000个迭代减少0.5</li>
+<li>momentum =0.9 batch_size=128</li>
 </ul>
-<h4 id="样本的合成"><a href="#样本的合成" class="headerlink" title="样本的合成"></a>样本的合成</h4><p>​        首先，基于图像局部亮度大小恒定的假设制造数据。作者从互联网上收集了600张带有各种内容的清晰的照明图像（光照充足且没有噪声和模糊的图），用于样本对的合成（弱光照图像以及其光照映射）。基于Retinex  ，给定实际的清晰图像R(X)，和一个随机光照值L， 一个弱光照图I(x) = R(x)*L  通过这种方式，获得训练图片集patch  patch的overlapping pixels = 10  16X16的训练图片 2000..张 （假设输入的16X16图像具有相同的光照映射）</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><ul>
+<h4 id="样本的合成">样本的合成</h4>
+<p>​ 首先，基于图像局部亮度大小恒定的假设制造数据。作者从互联网上收集了600张带有各种内容的清晰的照明图像（光照充足且没有噪声和模糊的图），用于样本对的合成（弱光照图像以及其光照映射）。基于Retinex ，给定实际的清晰图像R(X)，和一个随机光照值L， 一个弱光照图I(x) = R(x)*L 通过这种方式，获得训练图片集patch patch的overlapping pixels = 10 16X16的训练图片 2000..张 （假设输入的16X16图像具有相同的光照映射）</p>
+<h3 id="实验结果">实验结果</h3>
+<ul>
 <li>最后的1X1的Constarint重建对这个模型很重要</li>
 <li>最后尝试增加卷积层数没有作用 作者认为的原因是 1.梯度扩散效应 2.简单的原始架构重复导致网络架构不合理 作者将来会考虑使用更复杂的CNN网络来做</li>
-<li><strong>Failure cases </strong> 训练的时候使用的都是没有噪声的图像，因此对于带有噪声的微光图像 效果不好 </li>
+<li><strong>Failure cases </strong> 训练的时候使用的都是没有噪声的图像，因此对于带有噪声的微光图像 效果不好</li>
 </ul>
-<h3 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h3><ol>
+<h3 id="研究方向">研究方向</h3>
+<ol type="1">
 <li>使用复杂的网络</li>
-<li>考虑带噪声的低光照图 </li>
+<li>考虑带噪声的低光照图</li>
 </ol>
 
       
@@ -1061,13 +1159,20 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 
       
           <span id="more"></span>
-<h1 id="LEUGAN-Low-Light-Image-Enhancement-by-Unsupervised-Generative-Attentional-Networks"><a href="#LEUGAN-Low-Light-Image-Enhancement-by-Unsupervised-Generative-Attentional-Networks" class="headerlink" title="LEUGAN:Low-Light Image Enhancement by Unsupervised Generative Attentional Networks"></a>LEUGAN:Low-Light Image Enhancement by Unsupervised Generative Attentional Networks</h1><h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><ol>
+<h1 id="leuganlow-light-image-enhancement-by-unsupervised-generative-attentional-networks">LEUGAN:Low-Light Image Enhancement by Unsupervised Generative Attentional Networks</h1>
+<h2 id="亮点">亮点</h2>
+<ol type="1">
 <li>生成器和判别器都是两分支结构，边缘辅助模块用于辅助边缘增强，一个注意力模块用于恢复颜色</li>
 <li>设计了一个新的损失函数</li>
 </ol>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212229.png" alt="image-20201230154540024"></p>
+<h2 id="结构">结构</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212229.png" alt="" /><figcaption>image-20201230154540024</figcaption>
+</figure>
 <p>提出的 structure loss 和 SSIM 很像，应该是作用于输入图像和输出图像之间的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212236.png" alt="image-20201230154646501"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212236.png" alt="" /><figcaption>image-20201230154646501</figcaption>
+</figure>
 <p><strong>这个损失没看懂</strong></p>
 
       
@@ -1147,100 +1252,145 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 
       
           <span id="more"></span>
-<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ol>
-<li><p>总结了微光图像增强中存在的挑战：</p>
+<h2 id="主要贡献">主要贡献</h2>
+<ol type="1">
+<li>总结了微光图像增强中存在的挑战：
 <ul>
 <li>如何有效的从单张图像中估计光照，并且可以灵活的调节光照等级</li>
 <li>如何去除之前隐藏在黑暗中的噪声和颜色失真等退化现象</li>
 <li>在没有充足的训练样本和完美的ground-truth的情况下训练低光照增强网络模型</li>
-</ul>
-</li>
-<li><p>和RetinexNet模型类似：</p>
+</ul></li>
+<li>和RetinexNet模型类似：
 <ul>
 <li>基于Retinex理论 使用网络将图片分解为两个部分：光照和反射率</li>
 <li>网络的训练是基于一对低光照正常光照图像，而不是使用反射率和光照groundtruth</li>
 <li>提供了一个光照映射图可以调节的 灵活的调节网络 以供不同的需求</li>
 <li>提出了一个可以有效消除由于光照增强放大的暗区域噪声的模块</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><p>​    Plain Methods： 基于直方图均衡化的方法，gamma矫正的方法。这类方法缺点是很少考虑光照因素<br>​    Traditional Illumination-based Methods : 传统基于光照的方法。例如SSR MSR NPE等，通过调整图像光照来增强，这类方法通常没有考虑色彩失真和噪声。<br>​    基于深度学习的方法：</p>
-<h2 id="论文理论"><a href="#论文理论" class="headerlink" title="论文理论"></a>论文理论</h2><h3 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h3><p>​        没有完美的光照图和反射率图，因此需要根据各种约束条件来优化分解网络。作者认为，微光图像中的噪声在暗区域较亮区域的影响更大，因为暗区域的微小噪声和颜色失真会一起被放大，所以作者认为用光照图来指导反射率图去噪重建效果会比直接用DBM3无差别的对反射率图去噪好。最后，作者认为正常微光图像的退化程度相对于正常光照图片要严重，这些退化的因素会随着反射率图最终传递到最后的结果，因此作者认为可以使用正常图像分解产生的反射率图作为低光照图分解的反射率图重建（去噪，颜色矫正等）的指导。作者申明这种使用良好的反射率图做指导和直接使用原图做指导完全不同。</p>
-<h4 id="光照图指导的反射率重建："><a href="#光照图指导的反射率重建：" class="headerlink" title="光照图指导的反射率重建："></a>光照图指导的反射率重建：</h4><script type="math/tex; mode=display">
-\mathbf{I}=\mathbf{R} \circ \mathbf{L}+\mathbf{E}=\tilde{\mathbf{R}} \circ \mathbf{L}=(\mathbf{R}+\tilde{\mathbf{E}}) \circ \mathbf{L}=\mathbf{R} \circ \mathbf{L}+\tilde{\mathbf{E}} \circ \mathbf{L}</script><p>I为输入低光照图，R为本身的反射率图，L为原本的低光照图。如果将图像分解，会将噪声分解到$\tilde{\mathbf{R}}$  此时包含(R + E)因此最后调整光照强度再还原时，E与L一起被放大，因此需要用L来指导去噪。那么为什么不直接从输入微光图像I中去除E呢？一方面光照不平衡的问题存在，另一方面内部的细节和噪声不均匀地混合在一起，再就是由于L 的存在是个变量，没有合适的方法去掉，就是同一个场景光照不同噪声强度也不同，难以在参杂一个光照变量的情况下很好的去除噪声，而反射率图就更纯粹，比较适合用来去噪。</p>
-<h2 id="Kind-Network"><a href="#Kind-Network" class="headerlink" title="Kind Network"></a>Kind Network</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212250.png" alt="1572948093087"></p>
-<h3 id="分解网络"><a href="#分解网络" class="headerlink" title="分解网络"></a>分解网络</h3><p>​        训练时网络有输入成对的图像   Il  Ih </p>
-<ol>
+<h2 id="研究现状">研究现状</h2>
+<p>​ Plain Methods： 基于直方图均衡化的方法，gamma矫正的方法。这类方法缺点是很少考虑光照因素 ​ Traditional Illumination-based Methods : 传统基于光照的方法。例如SSR MSR NPE等，通过调整图像光照来增强，这类方法通常没有考虑色彩失真和噪声。 ​ 基于深度学习的方法：</p>
+<h2 id="论文理论">论文理论</h2>
+<h3 id="主要思想">主要思想</h3>
+<p>​ 没有完美的光照图和反射率图，因此需要根据各种约束条件来优化分解网络。作者认为，微光图像中的噪声在暗区域较亮区域的影响更大，因为暗区域的微小噪声和颜色失真会一起被放大，所以作者认为用光照图来指导反射率图去噪重建效果会比直接用DBM3无差别的对反射率图去噪好。最后，作者认为正常微光图像的退化程度相对于正常光照图片要严重，这些退化的因素会随着反射率图最终传递到最后的结果，因此作者认为可以使用正常图像分解产生的反射率图作为低光照图分解的反射率图重建（去噪，颜色矫正等）的指导。作者申明这种使用良好的反射率图做指导和直接使用原图做指导完全不同。</p>
+<h4 id="光照图指导的反射率重建">光照图指导的反射率重建：</h4>
+<p><span class="math display">\[
+\mathbf{I}=\mathbf{R} \circ \mathbf{L}+\mathbf{E}=\tilde{\mathbf{R}} \circ \mathbf{L}=(\mathbf{R}+\tilde{\mathbf{E}}) \circ \mathbf{L}=\mathbf{R} \circ \mathbf{L}+\tilde{\mathbf{E}} \circ \mathbf{L}
+\]</span></p>
+<p>I为输入低光照图，R为本身的反射率图，L为原本的低光照图。如果将图像分解，会将噪声分解到<span class="math inline">\(\tilde{\mathbf{R}}\)</span> 此时包含(R + E)因此最后调整光照强度再还原时，E与L一起被放大，因此需要用L来指导去噪。那么为什么不直接从输入微光图像I中去除E呢？一方面光照不平衡的问题存在，另一方面内部的细节和噪声不均匀地混合在一起，再就是由于L 的存在是个变量，没有合适的方法去掉，就是同一个场景光照不同噪声强度也不同，难以在参杂一个光照变量的情况下很好的去除噪声，而反射率图就更纯粹，比较适合用来去噪。</p>
+<h2 id="kind-network">Kind Network</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212250.png" alt="" /><figcaption>1572948093087</figcaption>
+</figure>
+<h3 id="分解网络">分解网络</h3>
+<p>​ 训练时网络有输入成对的图像 Il Ih</p>
+<ol type="1">
 <li>保证输入的低光照和正常光照图像分解产生的反射率图相同：</li>
 </ol>
-<script type="math/tex; mode=display">
-\mathcal{L}_{r s}^{L D}:=\left\|\mathbf{R}_{l}-\mathbf{R}_{h}\right\|_{2}^{2}</script><ol>
-<li>光照图平滑约束，其中$\nabla$表示梯度。max( $\epsilon$)避免分母除0  这里是通过输入图像的梯度加权光照梯度的，而Retinex中是通过反射率图加权。可以看出，输入图像边缘处梯度大，光照图对应的梯度损失小，允许此处的光照分布不那么平滑。</li>
+<p><span class="math display">\[
+\mathcal{L}_{r s}^{L D}:=\left\|\mathbf{R}_{l}-\mathbf{R}_{h}\right\|_{2}^{2}
+\]</span></p>
+<ol start="2" type="1">
+<li>光照图平滑约束，其中<span class="math inline">\(\nabla\)</span>表示梯度。max( <span class="math inline">\(\epsilon\)</span>)避免分母除0 这里是通过输入图像的梯度加权光照梯度的，而Retinex中是通过反射率图加权。可以看出，输入图像边缘处梯度大，光照图对应的梯度损失小，允许此处的光照分布不那么平滑。</li>
 </ol>
-<script type="math/tex; mode=display">
-\mathcal{L}_{i s}^{L D}:=\left\|\frac{\nabla \mathbf{L}_{l}}{\max \left(\left|\nabla \mathbf{I}_{l}\right|, \epsilon\right)}\right\| 1+\left\|\frac{\nabla \mathbf{L}_{h}}{\max \left(\left|\nabla \mathbf{I}_{h}\right|, \epsilon\right)}\right\|</script><ol>
+<p><span class="math display">\[
+\mathcal{L}_{i s}^{L D}:=\left\|\frac{\nabla \mathbf{L}_{l}}{\max \left(\left|\nabla \mathbf{I}_{l}\right|, \epsilon\right)}\right\| 1+\left\|\frac{\nabla \mathbf{L}_{h}}{\max \left(\left|\nabla \mathbf{I}_{h}\right|, \epsilon\right)}\right\|
+\]</span></p>
+<ol start="3" type="1">
 <li>底/高输入图像的低/高光照图的结构一致性。作者给出了u<em>exp(-c</em>u)的变化曲线，先增后减。大概意思是，如果两个光照图的梯度都很大或者都很小，输出loss很小，如果一大一小则loss很大，也符合这个函数的变化规律。 ？？</li>
 </ol>
-<script type="math/tex; mode=display">
-\mathcal{L}_{m c}^{L D}:=\|\mathbf{M} \circ \exp (-c \cdot \mathbf{M})\|_{1} \text { with } \mathbf{M}:=\left|\nabla \mathbf{L}_{l}\right|+| \nabla \mathbf{L}_{h}</script><ol>
+<p><span class="math display">\[
+\mathcal{L}_{m c}^{L D}:=\|\mathbf{M} \circ \exp (-c \cdot \mathbf{M})\|_{1} \text { with } \mathbf{M}:=\left|\nabla \mathbf{L}_{l}\right|+| \nabla \mathbf{L}_{h}
+\]</span></p>
+<ol start="4" type="1">
 <li>将分解产生的结果要能尽可能还原回原输入图</li>
-<li>$ \mathbf{I}_{h} $</li>
+<li>$ _{h} $</li>
 </ol>
-<script type="math/tex; mode=display">
-\mathcal{L}_{r e c}^{\hat{L} D}:=\left\|\mathbf{I}_{l}-\mathbf{R}_{l} \circ \mathbf{L}_{l}\right\|_{1}+\left\|\mathbf{I}_{h}-\mathbf{R}_{h} \circ \mathbf{L}_{h}\right\|_{1}</script><ol>
-<li>最后将上述损失按权重相加即可  0.01，0.08，0.1，1</li>
+<p><span class="math display">\[
+\mathcal{L}_{r e c}^{\hat{L} D}:=\left\|\mathbf{I}_{l}-\mathbf{R}_{l} \circ \mathbf{L}_{l}\right\|_{1}+\left\|\mathbf{I}_{h}-\mathbf{R}_{h} \circ \mathbf{L}_{h}\right\|_{1}
+\]</span></p>
+<ol start="5" type="1">
+<li>最后将上述损失按权重相加即可 0.01，0.08，0.1，1</li>
 </ol>
-<h3 id="反射率重建网络"><a href="#反射率重建网络" class="headerlink" title="反射率重建网络"></a>反射率重建网络</h3><p>​        该部分在Deep RetinexNet中使用的DBM3去噪，然后和光照调整网络整合出输出结果。而在改论文中使用了Unet类似的编解码网络重建。输入为 低光照图分解产生的 R 和 I 。I 用来指导R的重建，高质量图产生的R作为groundtruth来计算损失。同样的 把纹理细节也计入了损失。</p>
-<script type="math/tex; mode=display">
-\mathcal{L}^{R R}:=\left\|\hat{\mathbf{R}}-\mathbf{R}_{h}\right\|_{2}^{2}-\operatorname{SSIM}\left(\hat{\mathbf{R}}, \mathbf{R}_{h}\right)+\left\|\nabla \hat{\mathbf{R}}-\nabla \mathbf{R}_{h}\right\|_{2}^{2}</script><h3 id="亮度调整网络"><a href="#亮度调整网络" class="headerlink" title="亮度调整网络"></a>亮度调整网络</h3><p>​        计算两个光照图之间的关系的方法为：ta = mean(L1/L2)  在网络训练是可以以低光照图作为输入待调整，高光照亮度图作为groundtruth 同时计算二者的调节系数a 并扩充为一个featuremap一起输出网络。最后的损失为：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}^{I A}:=\left\|\hat{\mathbf{L}}-\mathbf{L}_{t}\right\|_{2}^{2}+\left\||\nabla \hat{\mathbf{L}}|-\left|\nabla \mathbf{L}_{t}\right|\right\|_{2}^{2}</script><h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>​        主要在LOL数据集上对比和各种算法。包含500对正常/低光照图像。分解网络batchsize=10, path-size=48X48。分辨率重建网络和光照跳着网络batch size为4，384X384大小。SGD优化</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212307.png" alt="1572948721689"></p>
-<h2 id="后续版本-KindD"><a href="#后续版本-KindD" class="headerlink" title="后续版本  KindD ++"></a>后续版本  KindD ++</h2><p><img src="https://github.com/zhangyhuaee/KinD_plus/blob/master/figures/restoration_net2.jpg?raw=true" alt="restoration_net2.jpg"></p>
-<p> 主要是改进了 重建网络 光照图深入重建网络的各个层 ，且重建网络中使用多尺度的卷积contact</p>
+<h3 id="反射率重建网络">反射率重建网络</h3>
+<p>​ 该部分在Deep RetinexNet中使用的DBM3去噪，然后和光照调整网络整合出输出结果。而在改论文中使用了Unet类似的编解码网络重建。输入为 低光照图分解产生的 R 和 I 。I 用来指导R的重建，高质量图产生的R作为groundtruth来计算损失。同样的 把纹理细节也计入了损失。 <span class="math display">\[
+\mathcal{L}^{R R}:=\left\|\hat{\mathbf{R}}-\mathbf{R}_{h}\right\|_{2}^{2}-\operatorname{SSIM}\left(\hat{\mathbf{R}}, \mathbf{R}_{h}\right)+\left\|\nabla \hat{\mathbf{R}}-\nabla \mathbf{R}_{h}\right\|_{2}^{2}
+\]</span></p>
+<h3 id="亮度调整网络">亮度调整网络</h3>
+<p>​ 计算两个光照图之间的关系的方法为：ta = mean(L1/L2) 在网络训练是可以以低光照图作为输入待调整，高光照亮度图作为groundtruth 同时计算二者的调节系数a 并扩充为一个featuremap一起输出网络。最后的损失为： <span class="math display">\[
+\mathcal{L}^{I A}:=\left\|\hat{\mathbf{L}}-\mathbf{L}_{t}\right\|_{2}^{2}+\left\||\nabla \hat{\mathbf{L}}|-\left|\nabla \mathbf{L}_{t}\right|\right\|_{2}^{2}
+\]</span></p>
+<h2 id="实验结果">实验结果</h2>
+<p>​ 主要在LOL数据集上对比和各种算法。包含500对正常/低光照图像。分解网络batchsize=10, path-size=48X48。分辨率重建网络和光照跳着网络batch size为4，384X384大小。SGD优化</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212307.png" alt="" /><figcaption>1572948721689</figcaption>
+</figure>
+<h2 id="后续版本-kindd">后续版本 KindD ++</h2>
+<figure>
+<img src="https://github.com/zhangyhuaee/KinD_plus/blob/master/figures/restoration_net2.jpg?raw=true" alt="" /><figcaption>restoration_net2.jpg</figcaption>
+</figure>
+<p>主要是改进了 重建网络 光照图深入重建网络的各个层 ，且重建网络中使用多尺度的卷积contact</p>
 <p>本文的创新点在于：</p>
 <ul>
 <li>将光照图作为反射率图去噪重建的指导</li>
 <li>光照图的光照强度可调整功能</li>
 <li>分解网络中 对光照强度的梯度平滑中的权重 感觉较RetinexNet网络的好</li>
-<li>将正常光照的反射率图作为低光照图反射率图去噪调整的groundtruth </li>
+<li>将正常光照的反射率图作为低光照图反射率图去噪调整的groundtruth</li>
 </ul>
 <p>感觉的缺点：</p>
 <ul>
 <li>分解网络结构</li>
 </ul>
-<hr>
-<h2 id="文章复现遇到的问题"><a href="#文章复现遇到的问题" class="headerlink" title="文章复现遇到的问题"></a>文章复现遇到的问题</h2><ol>
-<li>在使用LOLDateset数据集时， 一定要注意正常光照图和低光照图成对儿 LOLDatesat数据中 高低光照图的名字是一样的，但是两个文件夹中  低光照的图片不一定能在高光照文件夹中找到对应名字的图 这种图应该舍去   一开始读取数据的方法是排序后取相同位置的图片做一对儿 这样不行 因为有漏序号的 后面就都错位了</li>
-<li>分解网络  论文给的详细网络结构没有BN层  <strong><em>不能加BN层！！！！</em></strong>！   一开始以为BN层只有好处没坏处  结果加了死活不能收敛    </li>
-<li>在批量训练时 有时候在每个epoch最后一批 Loss可能会跳  可能因为  总的训练样本数量 / batch_size 不能整出  dateloader 中 drop_last = True 舍弃最后一批  </li>
-<li>原版本的用2X2卷积计算的梯度，这种偶数的卷积核在边界会补0  但是计算完后没有把补0的边界填充0 会有白边，这不影响，在加上规范化后，由于百边的影响会使整体的梯度幅值偏小。所以复现时不用卷积算梯度后补0  整体梯度比用卷积算的大0.02左右  梯度整体偏大会使光照图区域灰色的一片….</li>
+<hr />
+<h2 id="文章复现遇到的问题">文章复现遇到的问题</h2>
+<ol type="1">
+<li>在使用LOLDateset数据集时， 一定要注意正常光照图和低光照图成对儿 LOLDatesat数据中 高低光照图的名字是一样的，但是两个文件夹中 低光照的图片不一定能在高光照文件夹中找到对应名字的图 这种图应该舍去 一开始读取数据的方法是排序后取相同位置的图片做一对儿 这样不行 因为有漏序号的 后面就都错位了</li>
+<li>分解网络 论文给的详细网络结构没有BN层 <strong><em>不能加BN层！！！！</em></strong>！ 一开始以为BN层只有好处没坏处 结果加了死活不能收敛<br />
+</li>
+<li>在批量训练时 有时候在每个epoch最后一批 Loss可能会跳 可能因为 总的训练样本数量 / batch_size 不能整出 dateloader 中 drop_last = True 舍弃最后一批<br />
+</li>
+<li>原版本的用2X2卷积计算的梯度，这种偶数的卷积核在边界会补0 但是计算完后没有把补0的边界填充0 会有白边，这不影响，在加上规范化后，由于百边的影响会使整体的梯度幅值偏小。所以复现时不用卷积算梯度后补0 整体梯度比用卷积算的大0.02左右 梯度整体偏大会使光照图区域灰色的一片....</li>
 </ol>
-<h3 id="关于分解网络损失权重的讨论"><a href="#关于分解网络损失权重的讨论" class="headerlink" title="关于分解网络损失权重的讨论"></a>关于分解网络损失权重的讨论</h3><h4 id="按照原始的损失权重的定义-结果"><a href="#按照原始的损失权重的定义-结果" class="headerlink" title="按照原始的损失权重的定义 结果"></a>按照原始的损失权重的定义 结果</h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212321.png" alt="1573788470551"></p>
-<p>可以看出  网络映射成了恒等映射， 分离出来的光照分量恒为1    这种情况，重建损失很低，但是R的相似度也很低，但是由于其权重只有0.01 所以被削弱了。感觉不符合分解的目的。 </p>
-<h4 id="rec-rs-is-mc-1-1-0-08-0-1"><a href="#rec-rs-is-mc-1-1-0-08-0-1" class="headerlink" title="rec, rs, is, mc = 1,1,0.08,0.1"></a>rec, rs, is, mc = 1,1,0.08,0.1</h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212328.png" alt="1573789025322"></p>
-<p>​    可以看出增R反射率损失的权重</p>
-<hr>
-<h3 id="官方代码"><a href="#官方代码" class="headerlink" title="官方代码"></a>官方代码</h3><p>​    与论文描述不一致的地方</p>
-<ul>
-<li>[ ] 激活函数使用的是 lrelu 斜率为0.2</li>
-<li>[ ] 对梯度进行了去均值归一化  先归一化再数据扩增 还是先扩增再归一化 有区别？   程序错误没有裁剪 patch  ！！！！！！</li>
-<li>[ ] 分解网络equal_r 损失为L1损失而 文章中为平方MSE损失</li>
-<li>[ ] 分解网络中 mc损失 x y 分别计算reduce平均求和 权重0.15    加权TV损失权重为0.2</li>
+<h3 id="关于分解网络损失权重的讨论">关于分解网络损失权重的讨论</h3>
+<h4 id="按照原始的损失权重的定义-结果">按照原始的损失权重的定义 结果</h4>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212321.png" alt="" /><figcaption>1573788470551</figcaption>
+</figure>
+<p>可以看出 网络映射成了恒等映射， 分离出来的光照分量恒为1 这种情况，重建损失很低，但是R的相似度也很低，但是由于其权重只有0.01 所以被削弱了。感觉不符合分解的目的。</p>
+<h4 id="rec-rs-is-mc-110.080.1">rec, rs, is, mc = 1,1,0.08,0.1</h4>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212328.png" alt="" /><figcaption>1573789025322</figcaption>
+</figure>
+<p>​ 可以看出增R反射率损失的权重</p>
+<hr />
+<h3 id="官方代码">官方代码</h3>
+<p>​ 与论文描述不一致的地方</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+激活函数使用的是 lrelu 斜率为0.2</li>
+<li><input type="checkbox" disabled="" />
+对梯度进行了去均值归一化 先归一化再数据扩增 还是先扩增再归一化 有区别？ 程序错误没有裁剪 patch ！！！！！！</li>
+<li><input type="checkbox" disabled="" />
+分解网络equal_r 损失为L1损失而 文章中为平方MSE损失</li>
+<li><input type="checkbox" disabled="" />
+分解网络中 mc损失 x y 分别计算reduce平均求和 权重0.15 加权TV损失权重为0.2</li>
 </ul>
-<hr>
+<hr />
 <p>别人的笔记</p>
-<h1 id="Kindling-the-Darkness-A-Practical-Low-light-Image-Enhancer"><a href="#Kindling-the-Darkness-A-Practical-Low-light-Image-Enhancer" class="headerlink" title="Kindling the Darkness: A Practical Low-light Image Enhancer"></a>Kindling the Darkness: A Practical Low-light Image Enhancer</h1><p>paper：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.04161">Kindling the Darkness: A Practical Low-light Image Enhancer</a></p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>类似Retinex理论，将图片分解为2部分。<ul>
+<h1 id="kindling-the-darkness-a-practical-low-light-image-enhancer">Kindling the Darkness: A Practical Low-light Image Enhancer</h1>
+<p>paper：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.04161">Kindling the Darkness: A Practical Low-light Image Enhancer</a></p>
+<h2 id="abstract">Abstract</h2>
+<ul>
+<li>类似Retinex理论，将图片分解为2部分。
+<ul>
 <li>一部分用于光照调整（illumination）</li>
 <li>另一部分用于degradation removal（reflectance）</li>
-</ul>
-</li>
+</ul></li>
 <li>原始空间被解耦为2个子空间，以便学习</li>
 <li>网络是用成对的不同曝光条件的图像去训练，而不是用reflectance and illumination的GT</li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>一些操作在一些环境上可以用于调整图像的质量，但也存在缺点。比如，高ISO虽然增加了图像传感器对光的敏感度，但是噪声也放大了，因此造成了低信噪比SNR。长曝光受限于拍摄静态场景，否则图像会变得模糊。使用闪光灯虽然可以照亮环境，但会带来意想不到的高光和不平衡的光线，视觉效果不太好。</p>
+<h2 id="introduction">Introduction</h2>
+<p>一些操作在一些环境上可以用于调整图像的质量，但也存在缺点。比如，高ISO虽然增加了图像传感器对光的敏感度，但是噪声也放大了，因此造成了低信噪比SNR。长曝光受限于拍摄静态场景，否则图像会变得模糊。使用闪光灯虽然可以照亮环境，但会带来意想不到的高光和不平衡的光线，视觉效果不太好。</p>
 <p><strong>3种不好处理的光条件：</strong></p>
 <ul>
 <li>极度低光，一些噪声和颜色失真隐藏在黑暗中。</li>
@@ -1252,146 +1402,149 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 <p><strong>1.如何有效的从单张图像中估计出光照图成分，并且可以灵活调整光照level?</strong></p>
 <p><strong>2.在提升图像亮度后，如何移除诸如噪声和颜色失真之类的退化？</strong></p>
 <p><strong>3.在没有ground-truth的情况下，样本数目有限的情况下，如何训练模型？</strong></p>
-<h3 id="1-1-Previous-Arts"><a href="#1-1-Previous-Arts" class="headerlink" title="1.1 Previous Arts"></a>1.1 Previous Arts</h3><h4 id="（1）Plain-Methods："><a href="#（1）Plain-Methods：" class="headerlink" title="（1）Plain Methods："></a><strong>（1）Plain Methods：</strong></h4><p>处理在全局低光照的图像的比较直观的方法是放大图像，但会在细节上有噪声和颜色失真。</p>
+<h3 id="previous-arts">1.1 Previous Arts</h3>
+<h4 id="plain-methods"><strong>（1）Plain Methods：</strong></h4>
+<p>处理在全局低光照的图像的比较直观的方法是放大图像，但会在细节上有噪声和颜色失真。</p>
 <p>在颜色较亮的区域，放大操作经常会导致颜色过饱和以及过度曝光。</p>
 <p>直方图均衡化（histogram equalization，HE），试图把值映射在[0,1]，平衡输出的直方图来解决这个问题。</p>
 <p>伽马矫正（gamma correction，GC），以非线性的方式在每个像素执行。虽然GC可以对暗像素进行提亮，但没考虑每个像素之间的相邻关系。</p>
 <p>这些普通方法的缺点是，不考虑真实光照因素，导致增强的效果不好，与真实场景不同。</p>
-<h4 id="（2）Traditional-Illumination-based-Methods"><a href="#（2）Traditional-Illumination-based-Methods" class="headerlink" title="（2）Traditional Illumination-based Methods:"></a>（2）Traditional Illumination-based Methods:</h4><p>与plain method不同的是，传统的基于光照的方法注意到光照的重要性。</p>
+<h4 id="traditional-illumination-based-methods">（2）Traditional Illumination-based Methods:</h4>
+<p>与plain method不同的是，传统的基于光照的方法注意到光照的重要性。</p>
 <p><strong>Retinex理论：</strong>有颜色的图片可以被分解为2部分，反射率和光照。</p>
 <p>比较早提出理论有：</p>
 <ul>
-<li>single-scale Retinex，SSR<ul>
+<li>single-scale Retinex，SSR
+<ul>
 <li>D. J. Jobson, Z. Rahman, and G. A. Woodell, “Properties and performance of a center/surround retinex,” IEEE Transactions on Image Processing, vol. 6, no. 3, pp. 451–62, 1997.</li>
-</ul>
-</li>
-<li>multi-scale Retinex，MSR<ul>
+</ul></li>
+<li>multi-scale Retinex，MSR
+<ul>
 <li>D. J. Jobson, Z. Rahman, and G. A. Woodell, “A multiscale retinex for bridging the gap between color images and the human ob- servation of scenes,” IEEE Transactions on Image Processing, vol. 6, no. 7, pp. 965–976, 2002.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>这些方法生成的结果通常不真实，且在有的地方过度增强。</p>
 <p>之后又有一些方法进行改进：</p>
 <ul>
-<li><ol>
+<li><ol type="1">
 <li>NPE：在增强对比度的同时保护自然光照。</li>
 </ol>
 <ul>
 <li>D. J. Jobson, Z. Rahman, and G. A. Woodell, “A multiscale retinex for bridging the gap between color images and the human ob- servation of scenes,” IEEE Transactions on Image Processing, vol. 6, no. 7, pp. 965–976, <strong>2002.</strong></li>
-</ul>
-</li>
+</ul></li>
 <li><p>2.通过融合最初光照估计的多重推导来进行调整光照。</p>
 <ul>
 <li>X. Fu, D. Zeng, H. Yue, Y. Liao, X. Ding, and J. Paisley, “A fusion- based enhancing method for weakly illuminated images,” Signal Processing, vol. 129, pp. 82–96, <strong>2016</strong></li>
 <li>缺点：有时会牺牲真实区域的丰富纹理。</li>
-</ul>
-</li>
+</ul></li>
 <li><p>3.从初始光照图估计结构光照图。</p>
 <ul>
 <li>X. Guo, Y. Li, and H. Ling, “Lime: Low-light image enhancement via illumination map estimation,” IEEE Trans Image Process, vol. 26, no. 2, pp. 982–993, <strong>2017</strong></li>
 <li>缺点：假设图像是无噪声和无颜色失真的，没有考虑到退化问题</li>
-</ul>
-</li>
+</ul></li>
 <li><p>4.提出权重变分模型同时估计反射率和光照估计（SRIE），通过调整光照生成图像</p>
 <ul>
 <li>X. Fu, D. Zeng, Y. Huang, X. Zhang, and X. Ding, “A weighted variational model for simultaneous reflectance and illumination estimation,” in IEEE Conference on Computer Vision and Pattern Recognition, pp. 2782–2790, <strong>2016</strong></li>
-</ul>
-</li>
-<li><p>5.在3的基础上提出了引入了an extra term to host noise</p>
-</li>
+</ul></li>
+<li><p>5.在3的基础上提出了引入了an extra term to host noise</p></li>
 </ul>
 <p>缺点：4、5虽然可以处理图像的弱噪声，但不擅长处理颜色的失真和强噪声。</p>
-<h4 id="（3）Deep-Learning-based-Methods"><a href="#（3）Deep-Learning-based-Methods" class="headerlink" title="（3）Deep Learning-based Methods"></a>（3）Deep Learning-based Methods</h4><ul>
-<li>LLNet（low-light net）,建立深度模型作为同时处理对比度增强和去噪的模块。<ul>
+<h4 id="deep-learning-based-methods">（3）Deep Learning-based Methods</h4>
+<ul>
+<li>LLNet（low-light net）,建立深度模型作为同时处理对比度增强和去噪的模块。
+<ul>
 <li>K. G. Lore, A. Akintayo, and S. Sarkar, “Llnet: A deep autoen- coder approach to natural low-light image enhancement,” Pattern Recognition, vol. 61, pp. 650–662, <strong>2017</strong>.</li>
-</ul>
-</li>
-<li>MSR-net，作者认为多尺度Retinex等价于前向传播的不同高斯卷积核的卷积网络，受此启发，构造了end-to-end的网络结构，直接学习从dark到bright。<ul>
+</ul></li>
+<li>MSR-net，作者认为多尺度Retinex等价于前向传播的不同高斯卷积核的卷积网络，受此启发，构造了end-to-end的网络结构，直接学习从dark到bright。
+<ul>
 <li>L. Shen, Z. Yue, F. Feng, Q. Chen, S. Liu, and J. Ma, “Msr-net:low- light image enhancement using deep convolutional network,” p. arXiv, 11 <strong>2017</strong>.</li>
-</ul>
-</li>
-<li>Retinex-Net，集成了图片分解和光照映射，此外，还利用了现成的（off-the-shelf）去噪工具（BM3D）to clean the reflectance component<ul>
+</ul></li>
+<li>Retinex-Net，集成了图片分解和光照映射，此外，还利用了现成的（off-the-shelf）去噪工具（BM3D）to clean the reflectance component
+<ul>
 <li>C. Wei, W. Wang, W. Yang, and J. Liu, “Deep retinex decom- position for low-light enhancement,” in British Machine Vision Conference, <strong>2018</strong>.</li>
 <li>(ps：不懂to clean the reflectance component)</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>这些方法的<strong>缺点</strong>：</p>
 <p>1.这些方法都假设每个图像都存在GT的光，没有考虑到不同光的噪声在不同的区域的影响不同。即，提取了光照因子后，reflectance的dark区域的噪声level明显高于bright区域。在这种情况下，训练均匀分布图像（反射率）的去噪器不再适合。</p>
 <p>2.此外，这些方法都没处理好颜色失真的退化问题。</p>
 <ul>
-<li>提出处理低光照的end-to-end的pipeline，用fully convolutional network同时处理噪声和颜色失真<ul>
+<li>提出处理低光照的end-to-end的pipeline，用fully convolutional network同时处理噪声和颜色失真
+<ul>
 <li>C. Chen, Q. Chen, J. Xu, and V. Koltun, “Learning to see in the dark,” in IEEE Conference on Computer Vision and Pattern Recogni- tion, pp. 3291–3300, 2018.</li>
-<li>缺点：<ul>
+<li>缺点：
+<ul>
 <li>只适用于raw数据，应用场景受限</li>
 <li>如果将网络改造成输入JPEG格式，性能会变差</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <p>现有的方法都是通过伽马矫正调整光照，在精心构造的训练数据中指定一个level或者融合。伽马矫正可能无法反应不同曝光level之间的关系。第二种方法受限于指定的level是否包含在训练数据中。而最后一个方法，甚至没有提供可操作的选项。（这里不是太懂）</p>
 <p>因此，需要设计一个映射函数，将one light(exposure)转换为another以便用户调整。</p>
-<h4 id="（4）Image-Denoising-Methods："><a href="#（4）Image-Denoising-Methods：" class="headerlink" title="（4）Image Denoising Methods："></a>（4）Image Denoising Methods：</h4><p>经典的方法是用特定的先验来处理图像，比如：non-local self-similarity、piecewise smoothness（分段平滑）、信号稀疏表示。最受欢迎的可能是：BM3D和WNNM。</p>
+<h4 id="image-denoising-methods">（4）Image Denoising Methods：</h4>
+<p>经典的方法是用特定的先验来处理图像，比如：non-local self-similarity、piecewise smoothness（分段平滑）、信号稀疏表示。最受欢迎的可能是：BM3D和WNNM。</p>
 <ul>
-<li>BM3D：<ul>
+<li>BM3D：
+<ul>
 <li>K. Dabov, A. Foi, V. Katkovnik, and K. Egiazarian, “Image denoising by sparse 3-d transform-domain collaborative filtering,” IEEE Transactions on Image Processing, vol. 16, no. 8, pp. 2080–2095, 2007.</li>
-</ul>
-</li>
-<li>WNNM：<ul>
+</ul></li>
+<li>WNNM：
+<ul>
 <li>S. Gu, L. Zhang, W. Zuo, and X. Feng, “Weighted nuclear norm minimization with application to image denoising,” in IEEE Con- ference on Computer Vision and Pattern Recognition, pp. 2862–2869, 2014.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>缺点：</p>
 <p>由于优化具有高复杂性以及参数的搜索空间很大，这些传统方法在真实条件下效果不是很好。</p>
 <p>基于深度学习的去噪器表现出优越性。比如：</p>
 <ul>
-<li>SSDA，使用堆叠的稀疏自动编码器<ul>
+<li>SSDA，使用堆叠的稀疏自动编码器
+<ul>
 <li>F. Agostinelli, M. R. Anderson, and H. Lee, “Adaptive multi- column deep neural networks with application to robust image denoising,” in NeurIPS, 2013</li>
 <li>J. Xie, L. Xu, and E. Chen, “Image denoising and inpainting with deep neural networks,” in NeurIPS, 2012.</li>
-</ul>
-</li>
-<li>TNRD，by trainable nonlinear reaction diffusion(反应扩散？不是很懂)<ul>
+</ul></li>
+<li>TNRD，by trainable nonlinear reaction diffusion(反应扩散？不是很懂)
+<ul>
 <li>Y. Chen and T. Pock, “Trainable nonlinear reaction diffusion: A flexible framework for fast and effective image restoration,” IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 39, no. 6, pp. 1256–1272, 2017.</li>
-</ul>
-</li>
-<li>DnCNN，使用残差学习和batch normalization，可以节约计算成本，因为在测试阶段只有后馈卷积操作。<ul>
+</ul></li>
+<li>DnCNN，使用残差学习和batch normalization，可以节约计算成本，因为在测试阶段只有后馈卷积操作。
+<ul>
 <li>K. Zhang, W. Zuo, Y. Chen, D. Meng, and L. Zhang, “Beyond a gaussian denoiser: Residual learning of deep cnn for image denoising,” IEEE Transactions on Image Processing, vol. 26, no. 7, pp. 3142–3155, 2016.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>缺点：</p>
 <p>这些模型在blind image denoising上仍然有困难。one may train multiple models for varied levels or one model with a large number of parameters，这是很不灵活的</p>
 <p>通过在任务汇总反复思考，这个问题得到了一定的缓解：</p>
 <ul>
-<li>paper：<ul>
+<li>paper：
+<ul>
 <li>X. Zhang, Y. Lu, J. Liu, and B. Dong, “Dynamically unfolding recurrent restorer: A moving endpoint control method for image restoration,” in ICLR, <strong>2018</strong>.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>缺点：</p>
-<p> 上面提到的方法都没有考虑到不同的区域有着不同的level的噪声。</p>
-<p> 同样的问题也出现在颜色失真上。</p>
-<h3 id="1-2-Contributions"><a href="#1-2-Contributions" class="headerlink" title="1.2 Contributions"></a>1.2 Contributions</h3><ol>
+<p>上面提到的方法都没有考虑到不同的区域有着不同的level的噪声。</p>
+<p>同样的问题也出现在颜色失真上。</p>
+<h3 id="contributions">1.2 Contributions</h3>
+<ol type="1">
 <li>受到Retinex理论启发，提出的网络将图像分解为2个部分：反射率和光照，将原始空间解耦为2个更小的空间</li>
 <li>网络的训练数据是在不同光照/曝光条件下获取的成对图像，而不是用任何的GT的反射和光照信息</li>
 <li>提供了一个映射函数方便用户根据不同需求调整光线level</li>
 <li>提出的网络也包括了一个可以有效消除放大黑暗区域带来视觉缺陷的模块</li>
 </ol>
-<h2 id="2、Methodology"><a href="#2、Methodology" class="headerlink" title="2、Methodology"></a>2、Methodology</h2><p>一个理想的低光度图像增强器应该可以有效去除藏在黑暗中的退化，以及灵活地调整光照/曝光条件。</p>
+<h2 id="methodology">2、Methodology</h2>
+<p>一个理想的低光度图像增强器应该可以有效去除藏在黑暗中的退化，以及灵活地调整光照/曝光条件。</p>
 <p>网络结构：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img" /></a></p>
 <ul>
 <li>整个网络有2个分支，分别是：反射率和光照</li>
-<li>从功能的角度可分为3个部分：<ul>
+<li>从功能的角度可分为3个部分：
+<ul>
 <li>层分解（layer decomposition）</li>
 <li>反射率恢复（reflectance restoration）</li>
 <li>光照调整（illumination adjustment）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="2-1-Consideration-amp-Motivation"><a href="#2-1-Consideration-amp-Motivation" class="headerlink" title="2.1 Consideration &amp; Motivation"></a>2.1 Consideration &amp; Motivation</h4><p><strong>（1）Layer Decomposition</strong></p>
+<h4 id="consideration-motivation">2.1 Consideration &amp; Motivation</h4>
+<p><strong>（1）Layer Decomposition</strong></p>
 <p>Retinex 理论：一个图像I可以看做是2个部分，reflectance R和illumination L，即，I = R ◦ L，R和L的对应元素的点乘。</p>
 <p><strong>（2）Data usage and Priors</strong></p>
 <p>层分解在自然界是欠定的，因此额外的先验/正则化很重要。假设图像的无退化的，一个场景的不同镜头应该有相同的反射率。光照图虽然有很大不同，但应该有简单且一致的结构。（不懂这里）</p>
@@ -1410,36 +1563,37 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 <p>最好的光照强度对不同的人和应用是很不同的，因此，需要提供任意调整光照的接口。</p>
 <p>过去常用的3个方法，fusion，缺少光线调整；light level appointment，要求训练集包含目标level；伽马矫正，不能反映不同光线（曝光）level之间的联系。</p>
 <p>作者提出从真实数据中学习灵活的映射函数，用户可以随意调整level</p>
-<h4 id="2-2-KinD-Network"><a href="#2-2-KinD-Network" class="headerlink" title="2.2 KinD Network"></a>2.2 KinD Network</h4><p>网络结构：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img"></a></p>
+<h4 id="kind-network-1">2.2 KinD Network</h4>
+<p>网络结构：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img" /></a></p>
 <p><strong>（一）Layer Decomposition Net</strong></p>
 <ul>
 <li>输入：用不同光照/曝光的图像作为成对图像[I_l，I_h]</li>
 <li>之前有个假设，在相同的场景，反射率应该相同，首先的目标是让反射率对[R_l，R_h]应该尽量相同（图中上面的中间输出）。（理想情况下无退化情况）。</li>
 <li>光照图[L_l，L_h]应该分段平滑，且相同（图中下面的中间输出）。</li>
-<li>定义各种loss<ul>
-<li>reflectance similarity，L_rs，反射率相似度<ul>
+<li>定义各种loss
+<ul>
+<li>reflectance similarity，L_rs，反射率相似度
+<ul>
 <li>即，输出的两张反射率map的相似度</li>
-</ul>
-</li>
-<li>illumination smoothness，L_is，光照平滑度<ul>
+</ul></li>
+<li>illumination smoothness，L_is，光照平滑度
+<ul>
 <li>即，输出的两张光照map的平滑度</li>
 <li>衡量光照相对输入来说的结构相关性（这里不懂）</li>
 <li>这个平滑项对边缘的像素惩罚小，对平滑区域惩罚大。</li>
-</ul>
-</li>
-<li>mutual consistency，L_mc，相互一致性<ul>
+</ul></li>
+<li>mutual consistency，L_mc，相互一致性
+<ul>
 <li>保证强相关的边缘被保留下来</li>
 <li>即，两张光照map之间</li>
-</ul>
-</li>
-<li>reconstruction error，L_rec<ul>
+</ul></li>
+<li>reconstruction error，L_rec
+<ul>
 <li>衡量重建图像的误差</li>
 <li>即，分辨率图和光照图各自的生成和各自的输入之间的误差</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <p><strong>（二）Reflectance Restoration Net</strong></p>
 <p>低光照图像比亮光度图像更多退化。</p>
@@ -1452,7 +1606,8 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
 <p>3个conv （2个conv+ReLu）+ 1个sigmoid</p>
 <p>α被扩展为一个map，作为输入的一部分。</p>
 <p>Loss：L_LA</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img"></a></p>
+<h2 id="总结">总结</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/KinD.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/KinD.png" alt="img" /></a></p>
 <ul>
 <li>输入是成对的不同曝光的图像</li>
 <li>将亮光图像的反射率作为GT，明亮图像的反射图作为GT去引导低照图像的反射图进行增强</li>
@@ -1537,84 +1692,88 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
       
           <span id="more"></span>
 <p>Deep Bilateral Learning for Real-Time Image Enhancement (HDR-Net)</p>
-<p>Deep Bilateral Retinex for Low-Light Image Enhancement </p>
-<h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><p>借鉴了 双边网格（在快速双边滤波算法中被提出用于加速双边滤波）的思想 和 局部颜色仿射不变性的 特点，将图像缩放至低分辨率 输入网络，学习局部和全局特征，融合之后转换到双边网格中，得到双边网格下的局部仿射变换参数。并行的，对输入图像做仿射变换得到引导图，并将其用来引导前面的双边网格做空间和颜色深度上的插值，恢复到和原来图像一样大小的变换参数。最后根据这个参数对输入图像做仿射变换，得到输出图像。</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<p>Deep Bilateral Retinex for Low-Light Image Enhancement</p>
+<h2 id="主要思想">主要思想</h2>
+<p>借鉴了 双边网格（在快速双边滤波算法中被提出用于加速双边滤波）的思想 和 局部颜色仿射不变性的 特点，将图像缩放至低分辨率 输入网络，学习局部和全局特征，融合之后转换到双边网格中，得到双边网格下的局部仿射变换参数。并行的，对输入图像做仿射变换得到引导图，并将其用来引导前面的双边网格做空间和颜色深度上的插值，恢复到和原来图像一样大小的变换参数。最后根据这个参数对输入图像做仿射变换，得到输出图像。</p>
+<h3 id="特点">特点</h3>
+<ol type="1">
 <li>大部分计算过程是在低分辨率的网格下进行的 - CNN中的局部和全局特征提取都是在低分辨率下执行。</li>
 <li>学习的是输入输出的变换矩阵，而不是直接学习输出</li>
 <li>虽然主要网络实在低分辨率下进行的 但是损失函数是在原来的分辨率上建立的，从而使得低分辨下的操作去优化原分辨下的图像。</li>
 </ol>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><p>这篇文章主要是在先前的基础上进一步改进的，包括联合双边上采样（JBU)，这里是通过将双边滤波器作用在高分辨的引导图去产生局部平滑但是也保留边缘的上采样；双边引导上采样（BGU Bilateral Guided Upsampling ）则是引入了在双边网格里进行局部仿射变换，再通过引导图进行上采样。这篇论文实际上就是将BGU里的仿射变换操作通过网络进行学习。</p>
-<h3 id="BGU-主要思想"><a href="#BGU-主要思想" class="headerlink" title="BGU 主要思想"></a>BGU 主要思想</h3><p>文章提出了一种加速图像处理的方法。由于很多复杂的滤镜处理速度比较慢，一个很常用的解决思路是对原图 downsample 之后做处理，然后用 upsample 得到处理结果。而在 BGU 这个例子里，利用 bilateral grid 来做 downsample - upsample 的工作，使得效果更为出色。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212354.png" alt="1595208512974"></p>
+<h2 id="主要内容">主要内容</h2>
+<p>这篇文章主要是在先前的基础上进一步改进的，包括联合双边上采样（JBU)，这里是通过将双边滤波器作用在高分辨的引导图去产生局部平滑但是也保留边缘的上采样；双边引导上采样（BGU Bilateral Guided Upsampling ）则是引入了在双边网格里进行局部仿射变换，再通过引导图进行上采样。这篇论文实际上就是将BGU里的仿射变换操作通过网络进行学习。</p>
+<h3 id="bgu-主要思想">BGU 主要思想</h3>
+<p>文章提出了一种加速图像处理的方法。由于很多复杂的滤镜处理速度比较慢，一个很常用的解决思路是对原图 downsample 之后做处理，然后用 upsample 得到处理结果。而在 BGU 这个例子里，利用 bilateral grid 来做 downsample - upsample 的工作，使得效果更为出色。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212354.png" alt="" /><figcaption>1595208512974</figcaption>
+</figure>
 <ul>
 <li>任何滤镜效果，在双边网格的局部小区域内（<strong>空域xy小范围内，以及像素域小范围内</strong>）都可以看做是一个线性变换。</li>
 <li>利用 bilateral grid 可以从一个低分辨率的图上 slice 得到高分辨率的结果</li>
 <li>upsample 针对的是变换系数，而不是直接针对像素。这样对细节方面损失降低到最小。</li>
 </ul>
 <p>具体实现步骤如下：</p>
-<ol>
+<ol type="1">
 <li>对原图 downsample 得到一个小图</li>
 <li>在小图上应用滤镜</li>
 <li>在小图上划分网格（bilateral graid），拟合每一个网格中的线性变换</li>
 <li>线性变换的系数在网格间做平滑（这个平滑不仅在 x y 空间域的平滑，还在像素域z轴平滑，所以才要用双边网格，3D双边网格的作用就是以灰度值做第三维，将灰度差异在x轴上体现）</li>
 <li>利用这个网格，根据原始大图在这个网格上做 slicing，得到高分辨率的线性变换系数，进一步得到高分辨率的结果</li>
 </ol>
-<h3 id="网络的主要结构："><a href="#网络的主要结构：" class="headerlink" title="网络的主要结构："></a>网络的主要结构：</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212421.png" alt="1595165752929"></p>
-<p>​    <strong>Low-level特征</strong> 首先将输入图像下采样至固定的256x256。然后一组共用的特征提取层，一共四层，每层为步长为2的3x3卷积和激活层。如果这个层数太少缺乏表达力，如下图对比，层数太多后面得到的仿射变换系数太稀疏（决定了双边网格的z轴的bin的数量)。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212416.png" alt="1595165304189"></p>
-<p>​    <strong>局部特征提</strong>取有两层卷积，这两个卷积都不改变feature map的尺寸，如果没有局部特征提取层，最后的预测的变换系数会失去空间信息。</p>
-<p>​    <strong>全局特征提取</strong> 的支路包含了两个步长为2的卷积层和3个全连接层，最后输出一个包含全局信息的64维的特征向量。网络的输入图在提取特征时已经Resize成256x256了，所以可以直接用全连接。局特征具有的全局信息可以作为局部特征提取的先验，如果没有全局特征去描述图像信息的高维表示，网络可能会做出错误的局部特征表示，从而出现如上图的artifact。</p>
+<h3 id="网络的主要结构">网络的主要结构：</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212421.png" alt="" /><figcaption>1595165752929</figcaption>
+</figure>
+<p>​ <strong>Low-level特征</strong> 首先将输入图像下采样至固定的256x256。然后一组共用的特征提取层，一共四层，每层为步长为2的3x3卷积和激活层。如果这个层数太少缺乏表达力，如下图对比，层数太多后面得到的仿射变换系数太稀疏（决定了双边网格的z轴的bin的数量)。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212416.png" alt="" /><figcaption>1595165304189</figcaption>
+</figure>
+<p>​ <strong>局部特征提</strong>取有两层卷积，这两个卷积都不改变feature map的尺寸，如果没有局部特征提取层，最后的预测的变换系数会失去空间信息。</p>
+<p>​ <strong>全局特征提取</strong> 的支路包含了两个步长为2的卷积层和3个全连接层，最后输出一个包含全局信息的64维的特征向量。网络的输入图在提取特征时已经Resize成256x256了，所以可以直接用全连接。局特征具有的全局信息可以作为局部特征提取的先验，如果没有全局特征去描述图像信息的高维表示，网络可能会做出错误的局部特征表示，从而出现如上图的artifact。</p>
 <p><strong>两个特征融合</strong> 论文的公式没看懂，但是看代码就是将来给你个特征直接相加 接一个relu再使用卷积层将维度转换为最终的96。具体的这部分卷积的尺寸如表.</p>
-<h3 id="双边网格"><a href="#双边网格" class="headerlink" title="双边网格"></a>双边网格</h3><p>​        前面CNN最终输出的尺寸 为16X16X96 96 = 3X4X8; 输出图像为3通道，对应这里的3，4是每个输出通道的每个像素需要四个系数，三个对应输入图像的三通道值和一个偏移。也就是输出图像的每个像素位置需要一个3x4的变换矩阵。那么8就代表像素域的 bin 的数量。而空间域的bin的数量由输入图像和16的比值决定的。</p>
-<p><strong>guide map</strong> 的 分辨率和原图一样，通道数为1 ，由原图通过几个卷积生成。 </p>
-<p><strong>使用可训练的slicing layer进行上采样 </strong>  这一步是要将上一步的信息转换到输入的高分辨率空间，这步操作基于双边网格里的slicing操作，通过一个单通道的引导图将A进行上采样。利用引导图g对A进行上采样，是利用A的系数进行三次线性插值，位置由g决定：</p>
-<script type="math/tex; mode=display">
-\bar{A}_{c}[x, y]=\sum_{i, j, k} \tau\left(s_{x} x-i\right) \tau\left(s_{y} y-j\right) \tau(d \cdot g[x, y]-k) A_{c}[i, j, k]</script><p>这里 $$<br>\tau(.)=\max (1-|\cdot|, 0)</p>
-<script type="math/tex; mode=display">表示线性插值，$s_{x}$ $s_{y}$表示网格的宽度和原图分辨率的长宽比。x 和 y 的位置由这两个长宽比决定其在网格中的对应位置，而我们知道网格z轴的 bin数量是8，应该是将z的8维度插值为 256bins  然后将bin合并成1 那么这里输出图像是 $\bar{A}_{c}$ 的 z 轴在网格对应的深度由guide map决定 即$\bar{A}_{c}[i,j,g[x,y]]$，这个guide map是网络可训练的，那么最后每个$\bar{A}_{c}$ 像素的颜色深度也就由参与guide map决定，例如guide map上相邻灰度差异很大的像素，那么他们在原始网格也中映射的也是z轴上相距很远的两个bin，而BGU中说网格间是局部平滑，也即i索引的这两个变换矩阵差异会很大。但是这里是基于CNN的 并像BGU中那样直接对网格间的参数做平滑约束，这里就靠数据自己学习吧，最终学出来的也应该会有这个效果。 我感觉 它直接拿原图的灰度版本作为guide map 来指导插值也可以，但是这样相当于固定死了，原图差异多大的灰度，映射到网格中就是固定位置的bins虽然说也合理，但是 使用几层CNN来生成guide 就可学习更灵活了。这中以全分辨率的guide指导上采样 比直接使用 可学习的转置卷积上采样的对比。**与基于转置卷积不同，这种方法在guide map的指导下可以很好的保留图像的边缘。**
-
-![1595211122459](https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212434.png)
-
-### 获得最终的输出
-
-​        这一部分和上一部分中的guide map的计算是在全分辨率下进行的。这一步就是将上一步得到的全分辨率的变换矩阵（w x h x 12）用来对原图做变换。公式如下：</script><p>\mathrm{O}_{c}[x, y]=\bar{A}_{n_{\phi}+\left(n_{\phi}+1\right) c}+\sum_{c^{\prime}=0}^{n_{\phi}-1} \bar{A}_{c^{\prime}+\left(n_{\phi}+1\right) c}[x, y] \phi_{c^{\prime}}[x, y]</p>
-<script type="math/tex; mode=display">
-
-其中 $n_{\phi}$ = 3 表示输入图像的通道数，$\phi_{c} = I$表示输入图像，输出的 $\bar{A}$ 为wxhx12的变换参数 w h 代表图像原图分辨率，12 = 3x4 按照按照  [R R R b1 G G G b2 B B B b3] 的顺序排列 R R R b1意味用于计算输出图像R通道值需要用的四个参数 且 公式中的下标按照feature 的通道序号索引的。  例如输出图像的r通道的某位置的值由 r(out)(x) = [a1, a2, a3] * [r, g, b]‘(input) + instance
-
-### 损失函数
-
-训练参考图像为人工PS的参考图像，和网络生成的图像做损失即可。由此可见损失的计算是在全分辨率下完成的。
-
-## 实验
-
-缺点，这个方法对于其他任务 例如图像去雾 ，深度估计，色彩化等任务上效果较差，这是因为其有较强的假设即输出是由输入的局部仿射变换得到的。
-可以通过对输入图做特征进一步的提取特征来增强其表达效果。例如一个网格里使用36个仿射变换系数作用在一个层级为3的高斯金字塔处理的输入图要比原始的bilateral效果更好，尽管速度会变慢
-
-….
-
-
-
-## 主要类容
-
-这篇文章将 HDR中使用到的双边滤波的思想 和 Retinex 结合，来做图像增强。首先和HDR一样，将原始降采样，在低分辨率下进行 变换参数的估计。前半部分和HDR 完全一样，包括 CNN的设计 (全局和局部特征提取，guide map的设计)。只是输出的变换参数 维度为 wxhx(9 + 9x2 + 3x4) 这里 9 + 9x2 为噪声估计用到的变换参数，9是W 9x2是偏移量，相当于可变性卷积的意思；3x4是用于光照图估计的变化参数，和HDR中的方式一样。通过两个变换分别估计出了噪声图和光照图，使用式  $\widetilde{\boldsymbol{R}}=(\boldsymbol{I}-\boldsymbol{N}) \oslash \boldsymbol{E}$ 估计最终增强之后的图像。
-
-### 网络的主要结构
-
-![1595218108228](https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212440.png)
-
-### 噪声图的估计
-
-根据 变换参数对输入图像变换得到噪声估计图像，变换参数为 9 + 9 x 2  感觉相当于1X1可变性卷积。对于某个像素位置 输入为三通道 输出也为三通道，相当于需要 3x3个1x1卷积核，而 9x2 为x y两个方向上的偏移，即可变性卷积的原理。  
-
-- [ ] 最后的噪声变换 是否为 1x1的可变形卷积？
-
-### 损失函数
-
-作者使用 LOL 数据集训练 LOL 包含了 1500 low/noemal 图像对，其中500对是真实数据 其他的为合成数据。这里我饿认为LOL提供的不算参考图吧  只是 一对儿不同曝光度的图像。但是作者直接将high作为参考图像来构建损失函数。</script><p>\mathcal{L}:=\mathcal{L}_{r}(\boldsymbol{R}, \tilde{\boldsymbol{R}})+\lambda_{n} \mathcal{L}_{n}(\boldsymbol{N})+\lambda_{e} \mathcal{L}_{e}(\boldsymbol{E}, \boldsymbol{I})</p>
-<p>$$<br>第一项即估计的R和参考的R的相似度，具体不仅包含了衡量两个R的相似度的L1损失还有两个梯度相似度的L1损失。第二项损失用来尽量保存图像中的边缘。第三项即常规光照平滑损失。</p>
-<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>​        在训练的时候将输入图像归一化至[0,1] crop到 256x256 batch size 设置为16可变形卷积设置的K=3 Window size=15 边长缩放比例为16 32</p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>​     </p>
+<h3 id="双边网格">双边网格</h3>
+<p>​ 前面CNN最终输出的尺寸 为16X16X96 96 = 3X4X8; 输出图像为3通道，对应这里的3，4是每个输出通道的每个像素需要四个系数，三个对应输入图像的三通道值和一个偏移。也就是输出图像的每个像素位置需要一个3x4的变换矩阵。那么8就代表像素域的 bin 的数量。而空间域的bin的数量由输入图像和16的比值决定的。</p>
+<p><strong>guide map</strong> 的 分辨率和原图一样，通道数为1 ，由原图通过几个卷积生成。</p>
+<p><strong>使用可训练的slicing layer进行上采样 </strong> 这一步是要将上一步的信息转换到输入的高分辨率空间，这步操作基于双边网格里的slicing操作，通过一个单通道的引导图将A进行上采样。利用引导图g对A进行上采样，是利用A的系数进行三次线性插值，位置由g决定： <span class="math display">\[
+\bar{A}_{c}[x, y]=\sum_{i, j, k} \tau\left(s_{x} x-i\right) \tau\left(s_{y} y-j\right) \tau(d \cdot g[x, y]-k) A_{c}[i, j, k]
+\]</span> 这里 <span class="math display">\[
+\tau(.)=\max (1-|\cdot|, 0)
+\]</span>表示线性插值，<span class="math inline">\(s_{x}\)</span> <span class="math inline">\(s_{y}\)</span>表示网格的宽度和原图分辨率的长宽比。x 和 y 的位置由这两个长宽比决定其在网格中的对应位置，而我们知道网格z轴的 bin数量是8，应该是将z的8维度插值为 256bins 然后将bin合并成1 那么这里输出图像是 <span class="math inline">\(\bar{A}_{c}\)</span> 的 z 轴在网格对应的深度由guide map决定 即<span class="math inline">\(\bar{A}_{c}[i,j,g[x,y]]\)</span>，这个guide map是网络可训练的，那么最后每个<span class="math inline">\(\bar{A}_{c}\)</span> 像素的颜色深度也就由参与guide map决定，例如guide map上相邻灰度差异很大的像素，那么他们在原始网格也中映射的也是z轴上相距很远的两个bin，而BGU中说网格间是局部平滑，也即i索引的这两个变换矩阵差异会很大。但是这里是基于CNN的 并像BGU中那样直接对网格间的参数做平滑约束，这里就靠数据自己学习吧，最终学出来的也应该会有这个效果。 我感觉 它直接拿原图的灰度版本作为guide map 来指导插值也可以，但是这样相当于固定死了，原图差异多大的灰度，映射到网格中就是固定位置的bins虽然说也合理，但是 使用几层CNN来生成guide 就可学习更灵活了。这中以全分辨率的guide指导上采样 比直接使用 可学习的转置卷积上采样的对比。<strong>与基于转置卷积不同，这种方法在guide map的指导下可以很好的保留图像的边缘。</strong></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212434.png" alt="" /><figcaption>1595211122459</figcaption>
+</figure>
+<h3 id="获得最终的输出">获得最终的输出</h3>
+<p>​ 这一部分和上一部分中的guide map的计算是在全分辨率下进行的。这一步就是将上一步得到的全分辨率的变换矩阵（w x h x 12）用来对原图做变换。公式如下：</p>
+<p><span class="math display">\[
+\mathrm{O}_{c}[x, y]=\bar{A}_{n_{\phi}+\left(n_{\phi}+1\right) c}+\sum_{c^{\prime}=0}^{n_{\phi}-1} \bar{A}_{c^{\prime}+\left(n_{\phi}+1\right) c}[x, y] \phi_{c^{\prime}}[x, y]
+\]</span></p>
+<p>其中 <span class="math inline">\(n_{\phi}\)</span> = 3 表示输入图像的通道数，<span class="math inline">\(\phi_{c} = I\)</span>表示输入图像，输出的 <span class="math inline">\(\bar{A}\)</span> 为wxhx12的变换参数 w h 代表图像原图分辨率，12 = 3x4 按照按照 [R R R b1 G G G b2 B B B b3] 的顺序排列 R R R b1意味用于计算输出图像R通道值需要用的四个参数 且 公式中的下标按照feature 的通道序号索引的。 例如输出图像的r通道的某位置的值由 r(out)(x) = [a1, a2, a3] * [r, g, b]‘(input) + instance</p>
+<h3 id="损失函数">损失函数</h3>
+<p>训练参考图像为人工PS的参考图像，和网络生成的图像做损失即可。由此可见损失的计算是在全分辨率下完成的。</p>
+<h2 id="实验">实验</h2>
+<p>缺点，这个方法对于其他任务 例如图像去雾 ，深度估计，色彩化等任务上效果较差，这是因为其有较强的假设即输出是由输入的局部仿射变换得到的。 可以通过对输入图做特征进一步的提取特征来增强其表达效果。例如一个网格里使用36个仿射变换系数作用在一个层级为3的高斯金字塔处理的输入图要比原始的bilateral效果更好，尽管速度会变慢</p>
+<p>….</p>
+<h2 id="主要类容">主要类容</h2>
+<p>这篇文章将 HDR中使用到的双边滤波的思想 和 Retinex 结合，来做图像增强。首先和HDR一样，将原始降采样，在低分辨率下进行 变换参数的估计。前半部分和HDR 完全一样，包括 CNN的设计 (全局和局部特征提取，guide map的设计)。只是输出的变换参数 维度为 wxhx(9 + 9x2 + 3x4) 这里 9 + 9x2 为噪声估计用到的变换参数，9是W 9x2是偏移量，相当于可变性卷积的意思；3x4是用于光照图估计的变化参数，和HDR中的方式一样。通过两个变换分别估计出了噪声图和光照图，使用式 <span class="math inline">\(\widetilde{\boldsymbol{R}}=(\boldsymbol{I}-\boldsymbol{N}) \oslash \boldsymbol{E}\)</span> 估计最终增强之后的图像。</p>
+<h3 id="网络的主要结构-1">网络的主要结构</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212440.png" alt="" /><figcaption>1595218108228</figcaption>
+</figure>
+<h3 id="噪声图的估计">噪声图的估计</h3>
+<p>根据 变换参数对输入图像变换得到噪声估计图像，变换参数为 9 + 9 x 2 感觉相当于1X1可变性卷积。对于某个像素位置 输入为三通道 输出也为三通道，相当于需要 3x3个1x1卷积核，而 9x2 为x y两个方向上的偏移，即可变性卷积的原理。</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+最后的噪声变换 是否为 1x1的可变形卷积？</li>
+</ul>
+<h3 id="损失函数-1">损失函数</h3>
+<p>作者使用 LOL 数据集训练 LOL 包含了 1500 low/noemal 图像对，其中500对是真实数据 其他的为合成数据。这里我饿认为LOL提供的不算参考图吧 只是 一对儿不同曝光度的图像。但是作者直接将high作为参考图像来构建损失函数。 <span class="math display">\[
+\mathcal{L}:=\mathcal{L}_{r}(\boldsymbol{R}, \tilde{\boldsymbol{R}})+\lambda_{n} \mathcal{L}_{n}(\boldsymbol{N})+\lambda_{e} \mathcal{L}_{e}(\boldsymbol{E}, \boldsymbol{I})
+\]</span> 第一项即估计的R和参考的R的相似度，具体不仅包含了衡量两个R的相似度的L1损失还有两个梯度相似度的L1损失。第二项损失用来尽量保存图像中的边缘。第三项即常规光照平滑损失。</p>
+<h3 id="实现细节">实现细节</h3>
+<p>​ 在训练的时候将输入图像归一化至[0,1] crop到 256x256 batch size 设置为16可变形卷积设置的K=3 Window size=15 边长缩放比例为16 32</p>
+<h3 id="结果">结果</h3>
+<p>​</p>
 
       
     </div>
