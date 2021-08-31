@@ -316,7 +316,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:37:27" itemprop="dateModified" datetime="2021-08-31T11:37:27+08:00">2021-08-31</time>
+                <time title="修改时间：2021-08-31 11:42:14" itemprop="dateModified" datetime="2021-08-31T11:42:14+08:00">2021-08-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -343,15 +343,201 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          总结了研究生期间的项目经历
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/17412/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+<h1 id="研究生期间项目总结">研究生期间项目总结</h1>
+<h2 id="学习路线">学习路线</h2>
+<ol type="1">
+<li>刷题 计算机网络基础 面经<br />
+</li>
+<li>图像增强相关的知识整理</li>
+</ol>
+<h2 id="自我介绍">自我介绍</h2>
+<p>面试官好，我本科毕业于武汉理工大学，推免至华科读人工智能与自动化学院读研，我的主要研究方向是基于深度学习的低光照图像增强算法，在实验室主要做算法工程化这块。</p>
+<p>寒假在虹软实习了两个月，实习期间的主要工作是针对一个特定场景下的图像提亮任务。一个是不对齐的低光照图像提亮任务，训练和测试数据都有一对包含运动前景的图像，以其中的一张为参考，提高另一张低亮度图像的效果。在实习期间尝试了多种不同方法来完成，效果得到指导老师的认可。</p>
+<p>目前有一篇基于深度学习的低光照图像增强文章被国际会议录用。在论文中，我提出了一个基于不成对图像训练的两阶段低光照图像增强网络。在多个真实无参考图像数据集上测试的 NIQE 指标优于ZeroDEC, EnlightenGAN等主流无监督算法。</p>
+<p>在实验室期间，做过三个与图像有关的项目</p>
+<p>一个是十三五项目，我们实验室需要研发一个红外制导抗干扰系统，我负责部分图像预处理算法的研究和实现，并作为预处理部分的负责人集成了所有预处理算法形成一个预处理模块，通过该模块用户可以选择需要的图像预处理组合。</p>
+<p>另个是预研项目，在该项目中提出的基于局部保边滤波的高动态红外图像自适应增强算法在真实红外图像上测试的CPP和MPC指标均优于主流算法。并在Linux下用C++实现了该算法插件，算法插件和研究报告已交付中科院电子所。</p>
+<p>最后一个项目是在国产麒麟系统下开发弹载可见光模板制备软件。软件采用界面+算法的架构。针对国产化下速度较慢的问题，在算法层面和交互层面同时优化，达到较好的使用体验。软件现已交付武汉航天科工研究院使用。</p>
+<p>本科的时候参加了两个教育部主办的比赛，一个是大学生电子设计大赛，获得湖北省一等奖；另一个是全国大学生智能车竞赛，经过一年的准备，拿到该比赛的两个组别的全国一等奖。</p>
+<p>我个人性格比较沉稳不浮躁，敢于探索，自律性比较强。在研究生期间有图像增强的研究经历，对这个领域比较熟悉且感兴趣，所以希望未来工作也能从事这方面的任务。</p>
+<p>对于图像增强这个方向，一方面我觉得这个在手机夜景增强或者自动驾驶等方面确实有应用前景，另一方面这块做的人不太多，可以有更多的发挥空间。因此，希望在这一块有更进一步的研究。</p>
+<h2 id="虹软实习-图像提亮">虹软实习-图像提亮</h2>
+<h3 id="总结">总结</h3>
+<ol type="1">
+<li>任务背景和目的</li>
+<li>采用的方法 （mask + ohem 一起说）</li>
+<li>为什么使用上述方法 ，上述方法的局限</li>
+<li>融合的方法和效果</li>
+</ol>
+<p>这是实习期间指导老师交给我的一个偏研究型的任务，是项目中的一部分，这个任务和常规的低光照增强任务不太一样，常规的增强任务测试的时候输入为一张低光照图像，输出增强后的结果。这个任务在测试 和 训练的时候都有一对图像，两张图象的前景不对齐。期望以其中一张为参考，调整另一张低亮度图像的效果。由于涉及到动态场景，因此在做之前 我对 视频或者动态场景图像重建任务进行了粗略了解 ，目前这类任务的基本的思路都是在网络结构中引入 可变形卷积之类的 特征对齐结构，用于对连续多帧图像特征最齐，然后融合输出，损失为监督损失。</p>
+<p>我认为和视频或者动态场景重建任务不同处在于，首先他们有完全对齐的参考图约束，二是他们输入图像并没有包含大量参考图像的信息 所以过拟合出 ghost 的风险不大。因此 我没有直接尝试这类方法。</p>
+<p>显而易见如果不加处理的将两张图片输入网络，然后采用相似度损失度量增强图像和参考图像，网络肯定会过拟合到输入的参考图信息带来Ghost问题。而如果不输入参考图 或是 输入参考图模糊等方法虽然可以避免过度学习到参考图的信息，但是也没有充分利用参考图的背景信息。在数据量和网络规模的限制下，这些方案肯定不是最优的。</p>
+<p>因此，我的想法是希望网络隐式的学习运动信息，从而降低对背景区域的重建难度。首先使用直方图匹配方法对低光照图预提亮，使用光流和差分法对运动像素进行分割，根据分割结果，将 图像 分为 运动的前景区域和背景区域。因为低光和参考图的前景不对齐，在训练的时候，前景区域只能使用预提亮的图像作为约束，背景区域使用参考图约束。通过这种mask损失可以使网络学习到隐式的运动信息。</p>
+<p>这种方法在第一批数据集上效果很好，但是之后导师又给了我第二批数据集，第二批数据集的特点是 对齐的图像较多，且有很多运动面积大的前景。直接使用上面的mask损失会使部分测试图像出现ghost。这时候结合难样本挖掘的方法进行权重微调。根据前景的余弦相似度损失筛选前百分之30大的训练样本进行反向传播，难样本池是动态更新的，因为每次crop的训练样本不一定一样。最终很好的解决了ghost问题。这个效果也是被指导老师认可了的。</p>
+<p>最后导师给我了一个亮度更低的数据集，增强后噪声也更严重，按照上面mask的思路做，会出现明显的Ghost问题。我个人认为可能原因是这样的：mask损失虽然可以使网络学习分割运动像素，但是无法学习语义信息，所以当噪声太大的时候，网络就很难区分背景噪声像素和前景运动像素的差异，最终导致mask损失失效。于是想到干脆不隐式学习运动像素了，直接在网络增加显示的mask估计模块。具体的首先采用两个特征编码网络对两张图像分别提特征，然后使用一个CBAM类似的注意力模块来估计 mask，用估计的 mask 过滤参考图中不需要的前景特征，然后融合二者特征得到增强的图像。分多个阶段训练，一阶段训练编码模块，使得两个路径编码出的特征接近。二阶段训练注意力模块，使用之前的mask损失方法，并辅以手工标注运动区域作为约束。最后融合模块的训练最重要，但是由于没有完全对齐的参考图，因此只能使用CGAN 的方法训练，以尽可能保证增强结果 自然 。最终结果没有鬼影，因为不对齐的特征被mask掉了，并且可以很好的还原背景细节。较之前的方法的缺点是，区域颜色过度效果不够自然，这也是可以预料到的问题，因为最后一个阶段的融合阶段就类似 图像补全任务，在没有参考图像的情况下，很难确保被补全区域和周围区域的一致性。</p>
+<h3 id="难点">难点</h3>
+<p>这是一个不常见的应用场景，可以参考的文献不多，因此后期的思路都是不断摸索出来的。</p>
+<p>难点在于给定了一个参考图像，如果应用的不好，无法充分挖掘参考图像中的有用背景信息，但是如果不加处理的使用参考图像，很容易有鬼影问题，因此用常规的相似度损失函数很难在 提亮效果和鬼影问题中做出权衡。</p>
+<p>另一个难点是 mask 方法实际也有缺陷 ….. 由此进一步尝试了其他方法</p>
+<p>在做的时候一方面第一次使用云服务器，平时在实验室使用的 dataloader 的加载方法是在 getitem 方法中使用PIL读图，如果每个 item 运行时间较长并且开启了多线程数据加载，就会导致卡死。这是因为直接一张一张图加载速度很慢，然后使用PIL处理速度也慢就导致整个item延时较长。后续将数据集制作成一个 hd5f 格式的文件一次性读入内存，训练速度直接起飞</p>
+<h3 id="衍生">衍生</h3>
+<p>关于这个任务的意义，其实这个任务中的参考图像类似于一张条件图像，在视频通话固定镜头的这类场景中，可以保留第一帧效果较好的图片，后续可以传送的质量较差的图像完全可以通过这个条件图片还原还原。例如背景模糊</p>
+<h3 id="编码解码思路">编码解码思路</h3>
+<p>mask方法在前两个数据集上效果很好，但是第三个数据集中低光照图像更暗，噪声更严重，mask方法很难解决鬼影问题（没有做深度调参），因为感觉 如果原始噪声太强，网络就很难区噪声像素和运动像素，并且mask损失不能使网络学习到运动前景的语义信息，因为其实产生鬼影的区域虽然肉眼看起来明显，但是和背景的MSE差异并不大，所以感觉它不是很强的约束。</p>
+<p>所以根据对这个任务的理解，提出了一个多阶段训练的方法。但是由于后期大概这个方法只调了一两周，没有解决色差问题。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210408153920.png" alt="" /><figcaption>image-20210408153913650</figcaption>
+</figure>
+<h3 id="动态场景重建任务">动态场景重建任务</h3>
+<p>最常见的就是多帧图像 HDR算法。早期的算法首先将所有图象像素亮度大概对齐到一定水平，然后使用光流算法完成图象对齐，最后再融合输出, 也有使用CNN实现光流的但是本质都是在图象层面完成了空间对齐。后来的文章，大都将HDR看作图象到图象的转换，认为CNN有容忍偏差的能力，不需要显式的对齐图片，因此全用一个网络完成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411223937.png" alt="image-20210411223937517" style="zoom:50%;" /></p>
+<h3 id="视频重建的文章">视频重建的文章</h3>
+<p>EDVR 是一个视频重建网络。主要结构为 输入特征提取 –&gt; 特征对齐模块 –&gt; 特征融合模块 –&gt; 重建输出。由于不同帧的目标有移动，所以需要将相邻帧的特征 和 参考帧 对齐。 特征对齐模块的设计使用了可变形卷积 和 特征金子塔的结构。另外特征融合模块的一个重要的设计是 作者考虑到不同帧间即便对齐了，但是由于信息量的差异，应该有不同的权重，因此加入了注意力。端到端损失 可变形卷积不好训练。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203254.png" alt="image-20210203152951344" style="zoom:50%;" /></p>
+<p>STFAN 一篇视频去模糊的文章 。和上面的逻辑类似，也是分成了 几个模块，特征提取模块、STFAN模块、重建模块。MSE损失和感知损失。</p>
+<ol type="1">
+<li><p>但是这个STFAN模块采用了不同与可变形卷积的特征对齐方式不同，采用的是作者自己提出的 FAC 层完成，FAC的本质是首先使用三元组特征来生成一个对齐滤波器，然后用滤波器对待对齐特征进行变换得到输出后的特征。变换的方式是 将滤波器某个空间位置的特征取出 并reshape 为 k x k x c 然后 和 特征 点乘 求和得到一个输出 1 x 1 x c 的输出。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203249.png" alt="image-20210203160054986" style="zoom:50%;" /></p></li>
+<li><p>另一个不同是 结构上的， EVDR 是 从头到尾的 直线结构，只是在输入的时候输入多帧信息，而这个文章的 预测方式是 连续的，它每次会用相邻帧预测对齐滤波器，但是是作用于上一次去模糊后的特征。也就是它当前帧的预测还使用到了前一帧去模糊后的特征，同时该帧去模糊后的特征也会保留用于下一帧的处理。所以是个连贯的处理过程。</p></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411223257.png" alt="image-20210411223257602" style="zoom:67%;" /></p>
+<h2 id="虹软实习-噪声回归">虹软实习-噪声回归</h2>
+<h3 id="总结-1">总结</h3>
+<p>这是我刚到公司导师交给我的任务，希望我用网络来预测图像的噪声。</p>
+<p>这个任务的应用背景是这样的，输入图像很大，5000像素以上，需要回归的属性为 噪声的颗粒大小strength 和 噪声像素值的强弱。测试的时候将大图划分为3x3 9个子区域，每个区域随机采样一个合适的patch，然后预测，最终对他们预测结果取平均。</p>
+<p>由于一张图需要同时预测两个属性，而训练样本中每个属性的类别存在不平衡的问题，为了简单，少类别的样本，就从大图上多抠几个训练样本出来，将两个属性分开制作，得到两个数据集，每个数据集只保证一个属性的所有类别样本分布平衡。训练的时候两个数据集交替使用。在抠训练样本时，可能会扣到明显过曝的块，而这种肯定是不能代表整张图的噪声水平，所以采用阈值滤掉。</p>
+<p>前期我尝试过多种网络结构，最终选取了mobile-net-v3，因为在这个任务上resnet18/50这种大网络也并没有体现出太大优势，最终训练损失收敛的都比较好。也尝试过自己搭建更加轻量的网络，但是效果不好，主要体现在稳定性上，对每张图中的9个块的预测结果计算方差，比较大，说明预测结果不太稳定。我认为影响效果的主要原因是 采用现成的主干网络有预训练权重，所以回归效果较好。</p>
+<h3 id="mobile-net-v3结构">Mobile-net-v3结构</h3>
+<p>分为三个部分，起始一个3x3卷积提取特征，中间是MobileBlock组成，large 和 small 版本就是中间的MobileBlock的数量和特征通道数不同。中间的 block 的主要结构是 输入 首先使用1x1卷积提高通道数，然后使用深度可分离卷积提取特征，再接一个通道注意力模块，最后再使用1x1卷积特征聚合后残差输出。激活函数使用的是 h-swish h-sigmoid 计算速度较快且精度较高。</p>
+<blockquote>
+<p>swish = x * sigmoid(b * x) h-swish 本质就是将 sigmoid 用 relu6 代替 (左平移加限幅) 速度更快并且效果差不太多</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411215609.png" alt="image-20210411215602613" style="zoom:50%;" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hswish</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        out = x * F.relu6(x + <span class="number">3</span>, inplace=<span class="literal">True</span>) / <span class="number">6</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hsigmoid</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        out = F.relu6(x + <span class="number">3</span>, inplace=<span class="literal">True</span>) / <span class="number">6</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
+<p><a href="/posts/13251/">虹软实习</a></p>
+<h2 id="论文">论文</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210408155912.png" alt="image-20210408155912757" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210408160002.png" alt="image-20210408160002002" style="zoom: 50%;" /></p>
+<h3 id="总结-2">总结</h3>
+<p>论文是今年年初投在国际会议IJCNN上的一篇文章，今天刚收到录用通知。</p>
+<p>我在这项工作中提出了一个两阶段的图像增强方法。第一阶段通过无监督的方式训练一个光照估计网络，将图像进行初步增强，但是基于Retinex的增强方法的缺点是增强效果不自然，因为这个假设太简单了。所以在第二阶段使用GAN的方法来对第一阶段的结果进行微调，虽然使用GAN来做重建不是新鲜的手段，但是由于没有成对图像的监督，以往方法都是通过cycle-gan的结构来加强约束，这种结构冗余且复杂，效果也得不到很好的保证。也有文章例如EnlightenGAN尝试引入局部判别器和感知损失来加强约束，但是依然不能很有效的解决不一致增强的问题。我尝试将基于Retinex的重建损失和对抗损失结合来训练第二阶段的生成器，因为有了重建损失的强约束，所以不一致增强问题得到了较好的解决。同时为了得到更好的效果，生成器采用了 两分支的 结构，一个重建分支，模块采用残差结构，一个注意力分支用于指导重建分支重建，采用concat结构。最终在 多个 真实无参考图像的数据集 例如 DCIM VV NPE 等上 测试的NIQE指标优于 主流算法。</p>
+<h3 id="方法分类">方法分类</h3>
+<p><a href="/posts/27906/">综述笔记</a></p>
+<h2 id="信息智能快速处理技术研究">信息智能快速处理技术研究</h2>
+<h3 id="总结-3">总结</h3>
+<p>这是一个是十三五预研项目。主要是高动态红外图像研究细节增强算法和插件研制，服务于后续的检测识别。</p>
+<p>通过局部保边滤波将输入图像分为一个平滑层和多个细节层。对平滑层使用 熵指导的 全局对比度调整。就是首先给定一些列离散的gamma矫正值，然后使用这个参数分别矫正之后计算 图像熵 熵越大代表图像信息量越大。选取熵最大的gamma矫正结果为 全局调整结果。</p>
+<blockquote>
+<p>在对平滑层矫正前 要先归一化到 [0, 1] 然后再 gamma矫正 gamma取 0.1：0.1：3</p>
+</blockquote>
+<p>然后基于人眼视觉特性原理对细节层进行拉伸，根据韦伯定律人眼对亮度不敏感，但是对相对亮度的差异比较敏感，所以在使用指数函数对细节层整体拉伸后，需要点乘平滑层图像。这个点乘的意义在于 亮度大的地方，细节层也拉升较大的幅度。但是直接将细节层直接放大后 会有光晕。我们采取的解决办法是 以原始图像的梯度最为参考，将细节层梯度大小异常的位置调整为图像原始梯度，这个调整是在梯度域进行的，所以调整完毕之后可以使用泊松方程还原为细节层。</p>
+<blockquote>
+<p>为什么细节层会有光晕，因为保边滤波后的平滑层边缘可能会存在平滑过渡的情况，这时候如果平滑层和原图边缘不完全对齐，做差后就会有光晕</p>
+</blockquote>
+<blockquote>
+<p>指数函数设置的 alpha = 0.9 （不同的细节层 使用不同的指数拉升） 另一个代码实现上的细节是 筛出了占比很小很小的像素 当作噪声筛掉了 去除 holo 的原理是，首先可以计算出细节层的 GX GY 然后将原始图像的梯度为参考 去除细节层中异常的梯度。最后使用泊松方程将 调整后的GX GY还原为 细节层</p>
+</blockquote>
+<p>经过上述两步后，拉升和调整后的细节层与平滑层以一定的权重结合就可以得到初步的结果，多个细节层也可以设置不同的加权参数。最后借鉴HDR的思路，将图像分别乘上不同的系数，得到多个亮度等级的图像， 然后融合，进一步提高图像细节。采用了拉普拉斯融合的方法。</p>
+<blockquote>
+<p>这个系数不是随便设置的，比例因子的计算方法是 当前图像的平均亮度 / 期望的平均亮度 ； 70 110 150 三个期望亮度等级</p>
+</blockquote>
+<p>我们提出的方法 在真实遥感红外图像上 的 CPP MCP指标均优于主流的方法。</p>
+<blockquote>
+<p>CPP 为衡量像素对比度的指标，计算的是像素和它领域的上下左右像素值的差异，MPC是平均像素对比度，计算的是某位置和它领域像素的差异平均值。都是越大表明细节效果越好 其他主流算法有 线性拉伸 梯度域高动态红外图像增强 基于指导滤波的高动态红外图像增强 双平台直方图均衡化增强</p>
+</blockquote>
+<p>最后将该算法在 Linux 下使用C++实现，形成一个算法插件交付中科院电子所使用。由于算法处理的红外图像常常分辨率很高，大概2000到5000分辨率都有可能。因此实现时采用了多线程的方法，采用多线程加速后，处理2000大小的输入图像耗时1s左右。</p>
+<h3 id="算法实现">算法实现</h3>
+<p>对于不涉及图像全局信息统计的步骤，都使用了多线程分块处理的加速策略。对于熵指导的全局对比度调整步骤中，由于熵计算的全局信息，因此没法分块处理，但是我们使用了二分搜索的策略来加速搜索速度，因为根据经验 图像熵大致是随着gamma参数的增加而先增后减。最后多曝光融合步骤采用了三个线程并行完成金字塔建立任务。</p>
+<p>对于保边 滤波，由于每个输出像素值只与他的局部窗口大小有关，因此当输入图像大于1000的时候，将图像分为四块，采用四个线程分别处理，图像块的交界处保留一个窗口大小的公共区域。对于熵指导的全局对比度提升流程，考察的是图像全局的信息量，因此不能沿用图像分块加速的策略，但是考虑到图像的信息量随着矫正参数从小到大呈现先增大后减小的趋势，因此使用二分搜索的策略来降低搜索次数。对于图像的细节层调整部分，因为细节层的局部梯度异常只和它对应位置的原图的梯度有关，不涉全局信息的参考，因此也能采用分块加速的策略。最后多曝光融合过程，采用三个线程分别构建三张高中低曝光图的金子塔，再融合。</p>
+<h3 id="局部自适应保变滤波">局部自适应保变滤波</h3>
+<p>就是期望把局部区域类梯度较大的像素点 当作边缘保留 局部细节平滑。因此 优化的函数 <strong>一个数据项</strong> <strong>一个梯度项，对边缘加权</strong>（包括去TV去噪 这类方法都类似）</p>
+<p>指导滤波的思想，输出 是 输入的线性的表示 一块区域内 两个参数分别为 w b，该区域的输像素 B = w x I + b 表示，然后将它带入能量函数最小化能量函数。 当带入 wxI + b后，梯度就变成w了，能量函数就是个凸二次函数，极值点即为最小值，就对w,b分别求偏导很容易计算出 w b 的解，如下。可以看出最终的计算结果和 指导滤波的很相似。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425163015.png" alt="" /><figcaption>image-20201223180151424</figcaption>
+</figure>
+<p>使用局部自适应保边滤波器 对输入图像滤波 获得 平滑层 和 细节层。 或者迭代得对基层进行滤波 可以生成原始图像的多尺度分解（相当于用不同半径的窗口进行LEPF 滤波）。之所以叫自适应滤波 是因为 需要设定不同的参数来控制平滑度，但是这个含有输入图的梯度加权，有自适应的效果。</p>
+<h3 id="指导滤波">指导滤波</h3>
+<p>He等人最先提出指导滤波。思想就是 输出 图像 为<strong>指导图像的线性表示</strong>（窗口）。期望输出图像 和 输入图像 p 接近，能量函数为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425163017.png" alt="" /><figcaption>image-20201223180401089</figcaption>
+</figure>
+<p>因为输出表示为 指导图像的线性函数，所以指导图像 和 指导图像的边缘一致 ，所以就有保留边缘的效果。当指导图像为输入图像本身时，就变为了双边滤波。 同样的上述函数也是通过求导 极值点即为多求。但是 这不行 需要加入一个惩罚项 防止过拟合 。于是就变成下面这个形式，其实和局部自适应保变滤波形式就很像了 <strong>只不过这个惩罚项是个固定的参数，而那个包含了图像局部梯度的加权</strong>。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425163020.png" alt="" /><figcaption>image-20201223193816113</figcaption>
+</figure>
+<h3 id="拉普拉斯融合">拉普拉斯融合</h3>
+<p><a href="/posts/63908/">图像处理-拉普拉斯融合</a></p>
+<h3 id="难点-1">难点</h3>
+<p>我完成这个任务的流程是，先在Matlab上验证算法的效果，然后确是可行后再转为C++实现，因此遇到的比较难搞的问题还是Matlab算法调试阶段时候效果出不来。比如前面细节层拉伸后光晕问题，产生分析和解决，还有比如细节层调整，之前都是设置固定参数，但是很难用一套参数处理好，才想到用图像熵做个参数自动搜索。最后落地实现，都是一些代码编写的问题印象不深了。</p>
+<h2 id="红外制导抗干扰算法">红外制导抗干扰算法</h2>
+<h3 id="总结-4">总结</h3>
+<ol type="1">
+<li>个人的职责</li>
+<li>需要实现的效果 （动态选择预处理算法组合）</li>
+<li>一般的处理方法 和 分析</li>
+<li>C++结构上如何实现</li>
+</ol>
+<p>这是实验室的十三五国防基金项目，主要任务是研究红外制导抗干扰算法。我负责增强去噪算法的研究和实现，以及所有预处理算法的集成工作。预处理模块集成了基于保边滤波的高动态红外图像增强算法，基于双噪声相似性非局部变分去噪，基于区域加权双稀疏约束的红外遥感图像去条带算法，还有一些红外图像去模糊算法等。主体上图像预处理按照 去噪-&gt;非均匀矫正-&gt;去条带-&gt;增强-&gt;去模糊的流程完成，同一类算法又包含多种可选的细分算法。</p>
+<p>直观上，如果用户选择多个算法，我只需要把指向每一类算法对象的指针push入vector中即可，采用循环的方式对选择的算法采用顺序执行，最后得到串联执行的结果。但是这样整个预处理操作只能放到一个线程中，为了更高效我们采用多线程中的流水线思想。但是不同的预处理算法耗时不等，快的几毫秒，慢的几十毫秒，如果每个算法占用一个线程，那么运行较快的线程将会在休眠和运行态切换，因此，为了充分挖掘多核性能，我们设置了算法组的机制，将一个算法序列根据耗时划分为多个组，保证每个组的算法耗时总和接近，不同组运行在不同的线程上。首先结合设计模式中的工厂模式以及C++的多态，不同的预处理算法继承自同一个基础算法类，并重写 run 函数，run函数的输入为图像，输出为处理后的图像。然后通过一个工厂类来获取指定的算法对象。</p>
+<p>接着定义一个线程类，将同一组的算法对象进行封装，线程类中维护一个输入图像队列指针，和一个输出图像队列指针，在run函数中不断从输入图像队列中取出数据处理，然后串行执行算法，将结果放入输出缓冲队列。（由于需要频繁的数据插入删除操作，我们自己用双向链表实现了线程安全的队列类）</p>
+<p>最后在一个单例的生成器中，完成所有线程类对象的构建，并将他们按照链表的形式串联起来。用户可以通过全局唯一的生成器对象来更改需要使用的预处理算法组合。当后续需要新增算法时，只需实现算法子类，并在算法工厂类中添加对应的选择语句即可。</p>
+<p>采用多线程优化后速度怎样：选择不同的算法多线程带来的加速效果不同，平均来讲 运行速度大概有一半以上的提升。</p>
+<p>有一个实时视频检测的有实时性要求，测试的时候我们在预处理操作只上了 一个红外图像增强和去噪的流程，采用的就是前面的多缓冲架构，然后结合后面的检测识别 可以达到要求</p>
+<p>因为我们主要是研究各个算法的效果，然后将算法做出一个演示的东西出来展示，当然对抗干扰性能会有专门的测试数据去跑，在最终 诱饵干扰 背景杂波干扰 激光干扰等场景下 抗干扰成功率达90% 在典型背景杂波如云团、地物、海面中，信杂比≥2时 的检测率达到98%</p>
+<h3 id="双噪声相似性非局部图像去噪算法">双噪声相似性非局部图像去噪算法</h3>
+<p><a href="/posts/59491/">双噪声相似性的非局部图像去噪方法</a></p>
+<h3 id="算法类的实现">算法类的实现</h3>
+<p>这一块用到了c++的多态机制，后续通过一个指向特定算法对象的基类指针来完成对不同算法的调用。使用的是简单工厂的设计模式，方便后续新增算法。当然也可以使用工厂模式，一个工厂负责一个对象的实例化，由于后续还是基于代码选择实例化算法，因此直接使用 switch case 语句较好。</p>
+<h3 id="线程类的实现">线程类的实现</h3>
+<p>将多个图像预处理算法封装在一个线程类中，按照串行的方式执行这些算法，每个线程类中维护一个 输入图像队列和一个输出图像队列，输入图像队列由上一个线程输入数据，由当前线程取出数据并处理，多个线程对象通过队列指针连接构成流水线。 由于队列的最大容量可固定，因此采用环形队列和互斥锁重新实现了一个线程安全的类，每次往队列中插入和删除数据的时间复杂度都为O(1)。</p>
+<h3 id="单例模式和生成器">单例模式和生成器</h3>
+<p>对线程类的构建使用的是生成器的模型，但是考虑到全局只需要一个预处理模块，结合单例模式的特点将生成器的 构造函数设置为私有权限，用户只能通过静态成员函数实例化一个生成器对象，生成器对象，根据用户添加的算法列表，对算法分组，并实例化多个线程对象，这些对象由生成器统一对他们的运行状态进行控制。因此 通过生成器对象 完全 隔绝了 用户 和 多线程算法层相关的代码。</p>
+<h3 id="难点-2">难点</h3>
+<p>工程量大，图像预处理部分的算法种类就很多，需要多人合作完成。简单的代码结构一方面执行效率不高，后期维护也很困难，所以采用了灵活的设计模式以及高效的线程方法。</p>
+<h3 id="halide教程">Halide教程</h3>
+<h2 id="任务规划系统设计">任务规划系统设计</h2>
+<h3 id="总结-5">总结</h3>
+<p>这是和武汉航天科工合作的项目。主要任务是在国产麒麟系统下开发一个模板制备软件，制备的模板用于弹上可见光目标算法。弹上的可见光目标跟踪算法也是我们实验室做的，基本的检测原理都是NCC算法。软件采用QT界面+算法的架构，使用人员首先通过软件的地标勾勒模块勾勒出基准图中的目标显著性区域，然后再通过目标框选功能框选出地标，最后交由算法验证地标的可靠性。最后将制备的模板打包为二进制文件输出。</p>
+<p>由于国产化硬件性能较弱，地标可靠性验证算法在国产平台上完成一个地标验证大概需要20秒。面对这个问题，首先优化算法，使用积分图、频域点乘、这种空间换时间的方法加速NCC匹配，使得单个地标检验时间缩短到5S左右。接着采用线程池的方法实现0等待的多地地标制作流程。用户完成一个地标的框选后将地标编号和位置加入任务队列，并从线程池中唤醒一个线程完成该地标的匹配性能计算和可靠性检验，地标检验如果失败，将地标框标红，表明该地标不合适，需要重新调整位置，如果成功，地标框标绿，并将制备结果放入就绪队列；与此同时，用户可以继续框选新的地标而不必等待上一个框选地标制作结束。</p>
+<h3 id="软件操作流程">软件操作流程</h3>
+<ol type="1">
+<li>打开一张基准图，然后使用勾勒工具在基准图上勾勒出显著性区域。勾勒的多边形内部以多边形的灰度均值填充，背景区域以背景灰度均值填充，勾勒完成后得到一副多值模板</li>
+<li>框选地标，选出显著区域的和背景交界处的矩形位置作为匹配的地标，在这种位置匹配效果最好</li>
+<li>根据框选位置，计算该地标的匹配性能参数。方法是，将多制图和模板透视变换后匹配，计算相关峰的锐度、八邻域比、最次峰高度比</li>
+<li>地标使用高度区间计算，以基准图的高度为基础，分别向上和向下进行高度变换，并使用前一步的方法验证在变换后的高度上地标的性能是否符合要求。搜索出地标可靠的最大区间，如果最大区间太小则丢弃。</li>
+<li>按照上述方法找出多个可靠的地标，然后根据地标的性能参数对地标进行排序，作为弹上的多地标定位算法的使用依据。</li>
+<li>将地标参数和多值模板等信息写成二进制文件存储。</li>
+<li>最后还有个攻击可行性检测流程。另一个软件单独实现。通过透视变换制作仿真序列，然后使用前面制备的模板来做检测跟踪，分析在仿真序列上检测跟踪的效果。</li>
+</ol>
+<h3 id="软件架构">软件架构</h3>
+<p>整个工程有两个主要的类，一个是负责界面绘图的 mainwindow 类，另一个是 zhibei 的类，都继承自 <code>QObject</code> 对象；zhibei 类中的函数主要负责和后端算法交互，调用动态库中图像相关的算法完成地标可靠性验证和匹配性能计算等任务。mainwindow类主要负责界面相关的函数，接收来自界面操作的信号。同时，通过qt的信号槽机制，mainwindow可以调用zhibei类中的函数，zhibei类也可以将制作结果传递给mainwindw显示。</p>
+<h3 id="线程池">线程池</h3>
+<p>线程池采用了单独的类管理，使用 <code>vector&lt;thread&gt;</code>类型的数组存放线程，每个线程的任务是从任务队列中取出一个任务执行。当任务队列为空的时候阻塞，等待信号到来。任务队是 function 类别的，每个任务使用 function 类将可执行函数。考虑到不同的任务可能有不同的输入参数，因此当增加一个任务时，使用先使用 bind 函数将可执行对象和对应的参数绑定，然后在 void 型的 lambad 函数中调用，这样，无论什么类型的可执行对象都转化为了 void(void) 的函数签名，然后将这个匿名函数用 function 对象包装后放入任务队列。并释放一个条件信号。这里任务的添加是在用户完成一个地标的框选过后添加的，地标框的位置是参数，地标检验和性能计算的函数是可执行对象。最后当函数完成计算后，将可用的地标放入一个就绪队列，这个队列同样使用互斥锁保护。</p>
+<p>最后当用户点击模板打包按钮后，首先等待所有的线程执行完毕，如果就绪队列中可用的地标数量达到要求，即执行打包过程，输出二进制文件。</p>
+<h3 id="为什么使用线程池">为什么使用线程池</h3>
+<p>其实也可以直接在每次完成地标框选后 新增一个线程 进行处理。一方面反复创建销毁线程有开销，另一方面系统核心数有并不是线程越多越好，使用线程池设置线程上限，避免创建出过多的线程都处于阻塞状态的问题。结合信号量可以很容易实现等待机制。</p>
+<h3 id="难点-3">难点</h3>
+<p>一个是在国产化系统下的优化。它使用的是一个国产龙芯四核处理器。在自己的虚拟机上测试的那个地标制作速度较快没有明显区别，但是在国产系统中速度很慢。通过测试后发现是NCC匹配的速度很慢，然后就对这一部分调优。以往的版本是DSP上的所以内存使用很保守，就是用了 积分图 和 卷积加速的策略使得单个匹配速度得到提升。再就是使用线程池优化操作逻辑，免除等待。</p>
+<h2 id="比赛">比赛</h2>
+<ul>
+<li>简述一下比赛的 规则</li>
+<li>任务的分工 以及 自己的职责</li>
+</ul>
+<h3 id="难点-4">难点</h3>
+<p><strong>信标组</strong>：</p>
+<p>车模转向策略：</p>
+<p>一个是车模的结构，我们需要识别场上亮起信标灯的位置，首先考虑的是摄像头去识别，但是当车冲向信标灯熄灭后 下一个亮起的灯的位置随机不确定，因此这时候单一的摄像头会有个视觉盲区，车的转向策略就是个难题，如果随机旋转寻找下一个亮起的灯，那么显然不合适，因为如果下一个亮起的灯和车模旋转的方向相反，那么耗时大大增加。所以可以想到的方案是两个摄像头，但是摄像头质量重，如果安装位置再高一点，势必会造成车模惯性变大，控制难度变大。因此我们摒弃了这个方案。采用的是红外传感器辅助的手段，通过36（使用这么多是因为红外传感器的效果并不稳定 多个提供一个冗余判别）个红外传感器焊接为圆盘状，放置于车模上，每次灭灯后根据红外传感器的指令去预判灭灯后的舵角，可以很好的实现预判；这个方案另一个优点是 作为场地有阳光的补充</p>
+<p>车模的速度控制：首先车模直冲灯运动时 摄像头解析的灯的位置输出和车的实际轨迹并非直线，其实是个弧线，因此采用了路径拟合的手段，使车模以指向信标灯运动；再就是 车模发现信标灯到向车模冲过去 需要一个加速减速灭灯的过程，如果速度太快会影响转向性能，所以我们对直线速度控制上采用了 模糊PID的方法根据距离 设定当前PID速度，而非以匀速或者匀加减速</p>
+<p>车模电路稳定性：速度快时 电路常常会 自动重启 还好队友也很给你 后来通过改进电路解决了</p>
+<h3 id="创意组">创意组</h3>
+<p>机械上：拾取棋子的过程会比较耗时 我们在机械上采用了 舵机+电磁铁的方案 相比机械臂 或者直线电机 我们拾取速度很快。同时采用麦克纳姆轮 实现全向运动，配合视觉定位算法 可以实现场上任意两点之间的直线运动。</p>
+<p>视觉上：这个视觉我们其实当时也是0基础来的 当时不知道 有TX2 之类的高性能的移动计算平台。我们采用的树莓派，虽然性能比较受限，但是通过算法上优化 还是做到了很好。我们巧妙的利用了 数字的位置关系，图像上只对视野内的数字进行分割，得到当前图像位置，然后由于如果出发点已知，那么很容易根据分割数字的位置解算到车模在场地中的全局位置，免去了数字识别的流程大大降低流程复杂度。同时树莓派支持双核，因此采用了 两个线程缓冲，一个图像采集线程一个定位线程。最终整个识别定位流程可以满足控制需求</p>
+<p>结算：八皇后的普遍解法。采用贪心的策略每次选取当前最近的棋子去还原。</p>
+<h3 id="四旋翼">四旋翼</h3>
+<p>2017年电赛，当时四旋翼组是独立与控制组的。我们通过校赛获取参赛资格后，就确定做四旋翼组。前期有一两个月准备的时间吧。我们自己设计了飞控，调试飞控参数什么的，然后把前一年的四旋翼的比赛要求做完了。大概就是 需要设计飞行器，可以完成巡线的功能，难点在于 飞行控制（飞行控制我记得当时有很多开源飞控 例如匿名飞控），黑线识别，拐角识别，定高等。通过自己做的飞控把前一年的比赛要求都实现了</p>
+<p>最后正式比赛 四旋翼跟随 小车，小车由人遥控按照一定的规则运动，飞行器要完成跟随功能，当时题目要求可以用开源飞控，但是还必须得使用瑞萨单片机，因此我们得方案是 自行设计了一块基于瑞萨单片机的 运动控制板，然后飞控使用学校统一购置的飞控，我们在自己的平台上完成视觉定位功能，并根据控制算法 将 飞行器的控制指令 以串口的形式发给 飞控。最后没有进国赛 是因为我们最终降落判定的不好，在完成所有规定的动作后 飞行器要自动降落，我们降落判定有问题，导致最后延迟了很久 才降落。</p>
+<p>难点：跟随的稳定性，硬件难度，临时增加的瑞萨单片机，需要快速调整方案</p>
+
       
     </div>
 
@@ -507,24 +693,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span> 
-<h1 id="typoral搭建个人云笔记"><a href="#typoral搭建个人云笔记" class="headerlink" title="typoral搭建个人云笔记"></a>typoral搭建个人云笔记</h1><ol>
+          <span id="more"></span>
+<h1 id="typoral搭建个人云笔记">typoral搭建个人云笔记</h1>
+<ol type="1">
 <li>安装 PicGo，图床设置位 GitHub图床。这里要在github中新建一个 <strong>public</strong> 的respo。然后在github中新建一个token，并将token复制过来（这个token只有新建的时候显示一次，没了再新建就行了 或者把它保存下来）。最重要的是 分支名要写对，之前看别人博客里都写的 master 结果一直上传失败，这个得看自己这个仓库里到底是不是master。</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203728.png" alt="image-20210328203727951" style="zoom: 67%;" /></p>
-<ol>
+<ol start="2" type="1">
 <li>然后在typoral中设置 图片插入方式，这样插入图片后默认上传到PicGo的云端服务器上了</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203602.png" alt="image-20210328203602607" style="zoom:67%;" /></p>
-<ol>
-<li><p>将 PicGo中的上传前重命名 和  时间戳打开，否则可能会因为文件名相同导致上传失败</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210404173142.png" alt="image-20210404173142710" style="zoom: 67%;" /></p>
-</li>
+<ol start="3" type="1">
+<li><p>将 PicGo中的上传前重命名 和 时间戳打开，否则可能会因为文件名相同导致上传失败</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210404173142.png" alt="image-20210404173142710" style="zoom: 67%;" /></p></li>
 <li><p>笔记同步，直接用 github 将本地的 笔记 push 到 云端即可。或者直接（用脚本 pull.sync.cmd上传）</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot; &quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将 typoral 启动目录设置为笔记的根目录，以文件树的形式展示</p>
-</li>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot; &quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将 typoral 启动目录设置为笔记的根目录，以文件树的形式展示</p></li>
 </ol>
 
       
@@ -603,10 +787,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="c-测试文件："><a href="#c-测试文件：" class="headerlink" title="c++测试文件："></a>c++测试文件：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="同目录下的-setup-py文件"><a href="#同目录下的-setup-py文件" class="headerlink" title="同目录下的 setup.py文件"></a>同目录下的 setup.py文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3 id="测试文件"><a href="#测试文件" class="headerlink" title="测试文件"></a>测试文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
-<p>​    遇到提示 .so 库找不到  使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
+          <h3 id="c测试文件">c++测试文件：</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;torch/script.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">extend_gray</span><span class="params">(torch::Tensor image, torch::Tensor warp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// BEGIN image_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">image_mat</span><span class="params">(<span class="comment">/*rows=*/</span>image.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*cols=*/</span>image.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="comment">/*data=*/</span>image.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END image_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN warp_mat</span></span><br><span class="line">    <span class="function">cv::Mat <span class="title">warp_mat</span><span class="params">(<span class="comment">/*rows=*/</span>warp.size(<span class="number">0</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*cols=*/</span>warp.size(<span class="number">1</span>),</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*type=*/</span>CV_32FC1,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="comment">/*data=*/</span>warp.data_ptr&lt;<span class="keyword">float</span>&gt;())</span></span>;</span><br><span class="line">    <span class="comment">// END warp_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_mat</span></span><br><span class="line">    cv::Mat output_mat;</span><br><span class="line">    cv::<span class="built_in">warpPerspective</span>(image_mat, output_mat, warp_mat, <span class="comment">/*dsize=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="comment">// END output_mat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// BEGIN output_tensor</span></span><br><span class="line">    torch::Tensor output = torch::<span class="built_in">from_blob</span>(output_mat.ptr&lt;<span class="keyword">float</span>&gt;(), <span class="comment">/*sizes=*/</span>&#123;<span class="number">8</span>, <span class="number">8</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> output.<span class="built_in">clone</span>();</span><br><span class="line">    <span class="comment">// END output_tensor</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pybind11 绑定</span></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) &#123;</span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;extend_gray&quot;</span>, &amp;extend_gray, <span class="string">&quot;extend gray&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="同目录下的-setup.py文件">同目录下的 setup.py文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> torch.utils.cpp_extension <span class="keyword">import</span> BuildExtension, CppExtension</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头文件目录</span></span><br><span class="line">include_dirs = os.path.dirname(os.path.abspath(__file__))  <span class="comment">## 头文件路径</span></span><br><span class="line"><span class="comment"># 源代码目录</span></span><br><span class="line">source_cpu = glob.glob(os.path.join(include_dirs, <span class="string">&#x27;*.cpp&#x27;</span>))  <span class="comment">## cpp文件列表 [&#x27;&#x27;, &#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;extend_gray&#x27;</span>,  <span class="comment"># 模块名称，需要在python中调用  </span></span><br><span class="line">    version=<span class="string">&quot;0.1&quot;</span>,</span><br><span class="line">    ext_modules=[</span><br><span class="line">        CppExtension(<span class="string">&#x27;extend_gray&#x27;</span>, </span><br><span class="line">        sources=source_cpu,   </span><br><span class="line">        library_dirs=[<span class="string">&#x27;/usr/local/lib&#x27;</span>], <span class="comment"># &#x27;/usr/local/lib&#x27;为opencv的动态库路径 -L/usr/...</span></span><br><span class="line">        include_dirs=[include_dirs, <span class="string">&#x27;/usr/local/include/opencv&#x27;</span>, <span class="string">&#x27;/usr/local/include&#x27;</span>], <span class="comment">## 头文件路径后两个为 opencv的</span></span><br><span class="line">        libraries=[<span class="string">&quot;opencv_core&quot;</span>, <span class="string">&quot;opencv_imgproc&quot;</span>, <span class="string">&quot;opencv_imgcodecs&quot;</span>, <span class="string">&quot;opencv_highgui&quot;</span>]),</span><br><span class="line">        <span class="comment">## 相当于g++ 编译的 -lopencv_core 一定要写全, 否则不写全编译不会报错但是运行会出错，必要时可以直接g++编译测试看用到哪些动态库</span></span><br><span class="line">    ],</span><br><span class="line">    cmdclass=&#123;</span><br><span class="line">        <span class="string">&#x27;build_ext&#x27;</span>: BuildExtension.with_options(no_python_abi_suffix=<span class="literal">True</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="测试文件">测试文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> extend_gray</span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extend_gray.extend_gray(torch.randn(<span class="number">32</span>, <span class="number">32</span>), torch.rand(<span class="number">3</span>, <span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+<p>​ 遇到提示 .so 库找不到 使用 find 命令在环境中搜，然后 添加到 LD_LIBRARY_PATH 变量中 写入 .bashrc 文件后面</p>
 
       
     </div>
@@ -684,29 +871,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span> 
-<h1 id="pytorch-amp-python"><a href="#pytorch-amp-python" class="headerlink" title="pytorch&amp;python"></a>pytorch&amp;python</h1><h2 id="python-的用法"><a href="#python-的用法" class="headerlink" title="python   * 的用法"></a>python <em>  *</em> 的用法</h2><p><img src="figs/1566285511946.png" alt="1566285511946"></p>
-<h3 id="用在函数的输入参数"><a href="#用在函数的输入参数" class="headerlink" title="用在函数的输入参数"></a>用在函数的输入参数</h3><p>​        在定义一个方法时，使用<em>表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用*</em>arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
+          <span id="more"></span>
+<h1 id="pytorchpython">pytorch&amp;python</h1>
+<h2 id="python-的用法">python * ** 的用法</h2>
+<figure>
+<img src="figs/1566285511946.png" alt="" /><figcaption>1566285511946</figcaption>
+</figure>
+<h3 id="用在函数的输入参数">用在函数的输入参数</h3>
+<p>​ 在定义一个方法时，使用*表示输入参数列表不确定。会将输入的参数放入一个元组中，函数内可通过访问元组的方法访问里面的数据。使用**arg也可以表示不确定参数列表，但是会将输入参数打包为字典结构。因此函数内部可以通过访问字典结构的方法访问输入参数</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span> <span class="title">arg</span></span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function">#打印的结果是一个元组</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">myprint</span>(<span class="params">*arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span>(<span class="params"><span class="built_in">len</span>(<span class="params">arg</span>)</span>)</span></span><br><span class="line"><span class="function">#输出1，2，3，4</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myprint</span>(<span class="params">**arg</span>)</span></span><br><span class="line"><span class="function">	<span class="title">print</span>(<span class="params">arg</span>)</span></span><br><span class="line"><span class="function"><span class="title">myprint</span>(<span class="params">a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span></span>)</span></span><br><span class="line">#打印结果：&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2, &#x27;c&#x27;:3&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><p>​        与上述过程相反</p>
+<h3 id="解包">解包</h3>
+<p>​ 与上述过程相反</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>（<span class="title">x</span>，<span class="title">y</span>）:</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">para =  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">add(*para)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    <span class="built_in">print</span> x+y</span><br><span class="line">kkwd = &#123;<span class="string">&#x27;x&#x27;</span> :<span class="number">1</span>,<span class="string">&#x27;y&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line">add(**kkwd)</span><br></pre></td></tr></table></figure>
-<h2 id="值传递，引用传递-，可变对象，不可变对象"><a href="#值传递，引用传递-，可变对象，不可变对象" class="headerlink" title="值传递，引用传递 ，可变对象，不可变对象"></a>值传递，引用传递 ，可变对象，不可变对象</h2><p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41987033/article/details/81675514">https://blog.csdn.net/qq_41987033/article/details/81675514</a></p>
-<h2 id="使用tensorboard数据可视化"><a href="#使用tensorboard数据可视化" class="headerlink" title="使用tensorboard数据可视化"></a>使用tensorboard数据可视化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>​        对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
- <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure>
-<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>​        在程序调用一下api确保生成日志文件</p>
+<h2 id="值传递引用传递-可变对象不可变对象">值传递，引用传递 ，可变对象，不可变对象</h2>
+<p>一般来说，将数字、字符串、元组是不可变对象，传入函数，相当于对内存进行了拷贝，在函数内修改其值不会改变函数外的值。但是对于列表、字典等可以增删的数据结构，传入函数后，相当于传递进去的是c语言中的指向地址的指针。所以在函数内对其进行有关地址的操作都可以修改函数外的变量的值。</p>
+<p>参考链接：https://blog.csdn.net/qq_41987033/article/details/81675514</p>
+<h2 id="使用tensorboard数据可视化">使用tensorboard数据可视化</h2>
+<h3 id="安装">安装</h3>
+<p>​ 对于pytorch1.0 torch.utils.tensorboard中有这个文件，但是直接在程序中导入会报错，不考虑这个，自行安装tensorboardX。 需要安装tensorboardX为python代码执行，实现pytorch到tensorflow的转化生成一个日志文件，还需要安装tensorflow，才能调用tensorboard命令解析日志文件并上传到浏览器</p>
+<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboardX</span><br><span class="line">pip install tensorflow <span class="comment">#安装的gpu版本</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="简单使用">简单使用</h3>
+<p>​ 在程序调用一下api确保生成日志文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writer &#x3D; SummaryWriter(&#39;runs&#x2F;fashion_mnist_experiment_1&#39;)  </span><br><span class="line">writer.add_image(&#39;four_fashion_mnist_images&#39;, img_grid)</span><br><span class="line">writer.close()   #必须有close 否则内容写不进去</span><br></pre></td></tr></table></figure>
-<p>​        在系统命令行输入以下命令</p>
+<p>​ 在系统命令行输入以下命令</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir runs  </span><br></pre></td></tr></table></figure>
-<p>​        上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件<br>​        输入上述命令后，会产生如下输出，在google浏览器打开<a target="_blank" rel="noopener" href="http://DESKTOP-F3BBIIO:6006">http://DESKTOP-F3BBIIO:6006</a> 如果浏览被拒，改为 <a href="http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址">http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</a></p>
-<h2 id="pytorch的用法"><a href="#pytorch的用法" class="headerlink" title="pytorch的用法"></a>pytorch的用法</h2><h3 id="pytorch踩坑"><a href="#pytorch踩坑" class="headerlink" title="pytorch踩坑"></a>pytorch踩坑</h3><ul>
-<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上  此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location=’cpu’  参数  load完毕后再to到需要的gpu上</li>
+<p>​ 上述的runs为刚才在py中生成日志文件的路径，得确保该路径下存放得有生成得日志文件 ​ 输入上述命令后，会产生如下输出，在google浏览器打开http://DESKTOP-F3BBIIO:6006 如果浏览被拒，改为 http://localhost:6006。如果是本机电脑链接远程服务器，则将服务器名字改为服务器的ip地址</p>
+<h2 id="pytorch的用法">pytorch的用法</h2>
+<h3 id="pytorch踩坑">pytorch踩坑</h3>
+<ul>
+<li>load模型时，他会自动将其加载在这个模型训练时所在的gpu上 此时若这个gpu刚好满了就不能加载。所以最好每次加自增加 map_location='cpu' 参数 load完毕后再to到需要的gpu上</li>
 <li></li>
 </ul>
-<h3 id="cat-stack-unqueeze用法总结"><a href="#cat-stack-unqueeze用法总结" class="headerlink" title="cat stack unqueeze用法总结"></a>cat stack unqueeze用法总结</h3><p>​    相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
+<h3 id="cat-stack-unqueeze用法总结">cat stack unqueeze用法总结</h3>
+<p>​ 相同： cat, stack 输入都为 1. tensor列表，2.另一个参数是维度 （n为输入tensor的维度数）</p>
 <ul>
-<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1  按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
+<li>cat : 将输入的tensor按照指定维度连接， 不要求输入的尺寸完全相同。dim的范围为 0~n-1 按照b, c, h, w的顺序对应dim从小到大。例如输入为二维矩阵，dim=0/1 =0表示在 h 维度拼接，即输出矩阵的行数为输入之和。</li>
 <li>stack: 将输入tensor增加维度堆叠，要求输入的尺寸完全相同。dim范围0~n 也是按照bchw的顺序对应dim。输出的tensor dim=n+1。对于输二维矩阵，dim=0，在c维度堆叠；dim=1，提取每个输入的行向量按行堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道；dim=2，提取每个输入的行向量按列堆叠构成输出的一个通道，输入矩阵有多少行就有多少通道。对于输入三维张量，同理。</li>
 </ul>
 
@@ -787,11 +987,16 @@
 
       
           <span id="more"></span>
-<h1 id="双噪声相似度的变分去噪"><a href="#双噪声相似度的变分去噪" class="headerlink" title="双噪声相似度的变分去噪"></a>双噪声相似度的变分去噪</h1><h2 id="变分去噪-TV"><a href="#变分去噪-TV" class="headerlink" title="变分去噪(TV)"></a>变分去噪(TV)</h2><p>假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。</p>
-<h2 id="非局部均值滤波-（NLM）"><a href="#非局部均值滤波-（NLM）" class="headerlink" title="非局部均值滤波 （NLM）"></a>非局部均值滤波 （NLM）</h2><p>相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息，在去噪的同时能够最大程度的保持图像的细节特征。</p>
-<h2 id="非局部变分去噪（NLTV）"><a href="#非局部变分去噪（NLTV）" class="headerlink" title="非局部变分去噪（NLTV）"></a>非局部变分去噪（NLTV）</h2><p>借鉴了 非局部 均值滤波中的思想，原始的 变分损失就是度量的当前像素和领域像素的差值，即梯度，作为约束，期望平滑。在非局部变分损失中，将梯度重新定义为其领域一个像素与当前像素之间的差值，权重为以二者像素中心的patch之间的相似度。然后使用 split Bregman算法来求解非局部TV模型</p>
-<h2 id="双噪声相似性的非局部变分去噪"><a href="#双噪声相似性的非局部变分去噪" class="headerlink" title="双噪声相似性的非局部变分去噪"></a>双噪声相似性的非局部变分去噪</h2><p>在NLTV去噪算法中，度量像素之间的相似性是根据初始噪声图像计算的，没有考虑到算法迭代过程中像素之间的相似性，由于在迭代过程中，像素之间的相似性可能会改变，若一直利用初始噪声的相似权重可能会不准确。因此在计算像素之间的相似性时同时利用初始噪声图像的相似性和迭代过程中像素之间的相似性来计算，以增强度量像素相似性的准确性。</p>
-<p>总的来说，就是每次迭代求解过程中 都更新一下权重矩阵，原始的非局部变分损失中的 权重 计算的是原始噪声图像的各个patch之间的相似性，双噪声相似性算法中  在权重中额外添加了一个   当前迭代结果的像素间的相似性作为参考。</p>
+<h1 id="双噪声相似度的变分去噪">双噪声相似度的变分去噪</h1>
+<h2 id="变分去噪tv">变分去噪(TV)</h2>
+<p>假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。</p>
+<h2 id="非局部均值滤波-nlm">非局部均值滤波 （NLM）</h2>
+<p>相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息，在去噪的同时能够最大程度的保持图像的细节特征。</p>
+<h2 id="非局部变分去噪nltv">非局部变分去噪（NLTV）</h2>
+<p>借鉴了 非局部 均值滤波中的思想，原始的 变分损失就是度量的当前像素和领域像素的差值，即梯度，作为约束，期望平滑。在非局部变分损失中，将梯度重新定义为其领域一个像素与当前像素之间的差值，权重为以二者像素中心的patch之间的相似度。然后使用 split Bregman算法来求解非局部TV模型</p>
+<h2 id="双噪声相似性的非局部变分去噪">双噪声相似性的非局部变分去噪</h2>
+<p>在NLTV去噪算法中，度量像素之间的相似性是根据初始噪声图像计算的，没有考虑到算法迭代过程中像素之间的相似性，由于在迭代过程中，像素之间的相似性可能会改变，若一直利用初始噪声的相似权重可能会不准确。因此在计算像素之间的相似性时同时利用初始噪声图像的相似性和迭代过程中像素之间的相似性来计算，以增强度量像素相似性的准确性。</p>
+<p>总的来说，就是每次迭代求解过程中 都更新一下权重矩阵，原始的非局部变分损失中的 权重 计算的是原始噪声图像的各个patch之间的相似性，双噪声相似性算法中 在权重中额外添加了一个 当前迭代结果的像素间的相似性作为参考。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210607111125.png" alt="image-20210607111125324" style="zoom:67%;" /></p>
 
       

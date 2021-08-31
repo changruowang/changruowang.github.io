@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="死锁必要条件通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态  互斥（mutualexclusion），一个资源每次只能被一个进程使用 不可抢占（nopreemption），进程已获得的资源，在未使用完之前，不能强行剥夺 占有并等待（hold andwait），一个进程因请求资源而阻塞时，对已获得的资源保持不放 环形等待（circularwait），若干进程之间形成一种首尾相接的循">
+  <meta name="description" content="死锁 必要条件 通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态  互斥（mutualexclusion），一个资源每次只能被一个进程使用 不可抢占（nopreemption），进程已获得的资源，在未使用完之前，不能强行剥夺 占有并等待（hold andwait），一个进程因请求资源而阻塞时，对已获得的资源保持不放 环形等待（circularwait），若干进程之间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机操作系统-死锁">
 <meta property="og:url" content="http://xxxxx.com/posts/49205/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="死锁必要条件通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态  互斥（mutualexclusion），一个资源每次只能被一个进程使用 不可抢占（nopreemption），进程已获得的资源，在未使用完之前，不能强行剥夺 占有并等待（hold andwait），一个进程因请求资源而阻塞时，对已获得的资源保持不放 环形等待（circularwait），若干进程之间形成一种首尾相接的循">
+<meta property="og:description" content="死锁 必要条件 通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态  互斥（mutualexclusion），一个资源每次只能被一个进程使用 不可抢占（nopreemption），进程已获得的资源，在未使用完之前，不能强行剥夺 占有并等待（hold andwait），一个进程因请求资源而阻塞时，对已获得的资源保持不放 环形等待（circularwait），若干进程之间">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/04/05/I9NwHWanvUqPs7V.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/05/gnWPJ9mkNRSMTFu.png">
@@ -272,28 +272,41 @@
 
       
         <span id="more"></span>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h2><p>通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态</p>
+<h1 id="死锁">死锁</h1>
+<h2 id="必要条件">必要条件</h2>
+<p>通俗地讲，就是两个或多个进程被无限期地阻塞、相互等待的一种状态</p>
 <ul>
 <li>互斥（mutualexclusion），一个资源每次只能被一个进程使用</li>
 <li>不可抢占（nopreemption），进程已获得的资源，在未使用完之前，不能强行剥夺</li>
 <li>占有并等待（hold andwait），一个进程因请求资源而阻塞时，对已获得的资源保持不放</li>
 <li>环形等待（circularwait），若干进程之间形成一种首尾相接的循环等待资源关系。</li>
 </ul>
-<h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><p>主要有以下四种方法： </p>
+<h2 id="处理方法">处理方法</h2>
+<p>主要有以下四种方法：</p>
 <ul>
 <li>鸵鸟策略</li>
 <li>死锁检测与死锁恢复</li>
 <li>死锁预防</li>
 <li>死锁避免</li>
 </ul>
-<h2 id="鸵鸟策略"><a href="#鸵鸟策略" class="headerlink" title="鸵鸟策略"></a>鸵鸟策略</h2><p>鸵鸟在遇见问题时，把头埋在沙子里，假装根本没发生问题。因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。（<strong>就是不管</strong>）</p>
+<h2 id="鸵鸟策略">鸵鸟策略</h2>
+<p>鸵鸟在遇见问题时，把头埋在沙子里，假装根本没发生问题。因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。（<strong>就是不管</strong>）</p>
 <p>大多数操作系统，包括 Unix，Linux 和 Windows，处理死锁问题的办法仅仅是忽略它。</p>
-<h2 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h2><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复</p>
-<h3 id="每种类型一个资源的死锁检测"><a href="#每种类型一个资源的死锁检测" class="headerlink" title="每种类型一个资源的死锁检测"></a>每种类型一个资源的死锁检测</h3><p><img src="https://i.loli.net/2021/04/05/I9NwHWanvUqPs7V.png" alt="image-20201214195516515"></p>
-<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。<strong>有环时 即发生死锁</strong>  因此 每种类型一个资源的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
-<h3 id="每种类型多个资源的死锁检测"><a href="#每种类型多个资源的死锁检测" class="headerlink" title="每种类型多个资源的死锁检测"></a>每种类型多个资源的死锁检测</h3><p><img src="https://i.loli.net/2021/04/05/gnWPJ9mkNRSMTFu.png" alt="image-20201214195622770"></p>
+<h2 id="死锁检测与死锁恢复">死锁检测与死锁恢复</h2>
+<p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复</p>
+<h3 id="每种类型一个资源的死锁检测">每种类型一个资源的死锁检测</h3>
+<figure>
+<img src="https://i.loli.net/2021/04/05/I9NwHWanvUqPs7V.png" alt="" /><figcaption>image-20201214195516515</figcaption>
+</figure>
+<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。<strong>有环时 即发生死锁</strong> 因此 每种类型一个资源的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
+<h3 id="每种类型多个资源的死锁检测">每种类型多个资源的死锁检测</h3>
+<figure>
+<img src="https://i.loli.net/2021/04/05/gnWPJ9mkNRSMTFu.png" alt="" /><figcaption>image-20201214195622770</figcaption>
+</figure>
 <p>这时候后 就不能用上述的环路检测法检测了，一个类型多个资源的情况如下，左图发生了死锁，而右图未死锁。这种情况的死锁检测算法如下：</p>
-<p><img src="https://i.loli.net/2021/04/05/GvwpKYR1V4gUxoF.png" alt="image-20201214195823456"></p>
+<figure>
+<img src="https://i.loli.net/2021/04/05/GvwpKYR1V4gUxoF.png" alt="" /><figcaption>image-20201214195823456</figcaption>
+</figure>
 <p>上图中，有三个进程四个资源，每个数据代表的含义如下：</p>
 <ul>
 <li>E 向量：资源总量</li>
@@ -303,34 +316,38 @@
 </ul>
 <p>进程 P1 和 P2 所请求的资源都得不到满足，只有进程 P3 可以，让 P3 执行，之后释放 P3 拥有的资源，此时 A = (2 2 2 0)。P2 可以执行，执行后释放 P2 拥有的资源，A = (4 2 2 1) 。P1 也可以执行。所有进程都可以顺利执行，没有死锁。</p>
 <p>算法总结如下：每个进程最开始时都不被标记，执行过程有可能被标记。当算法结束时，任何没有被标记的进程都是死锁进程。</p>
-<ol>
+<ol type="1">
 <li>寻找一个没有标记的进程 Pi，它所请求的资源小于等于 A。</li>
 <li>如果找到了这样一个进程，那么将 C 矩阵的第 i 行向量加到 A 中，标记该进程，并转回 1。</li>
 <li>如果没有这样一个进程，算法终止。</li>
 </ol>
-<h3 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h3><ul>
+<h3 id="死锁恢复">死锁恢复</h3>
+<ul>
 <li>利用抢占恢复 ： 剥夺陷于死锁的进程所占用的资源，但并不撤销此进程，直至死锁解除。</li>
 <li>利用回滚恢复 ： 根据系统保存的检查点让所有的进程回退，直到足以解除死锁，这种措施要求系统建立保存检查点、回退及重启机制。</li>
 <li>通过杀死进程恢复：撤销陷入死锁的所有进程，解除死锁，继续运行</li>
 </ul>
-<h2 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h2><p>在程序运行之前预防发生死锁 </p>
-<ol>
+<h2 id="死锁预防">死锁预防</h2>
+<p>在程序运行之前预防发生死锁</p>
+<ol type="1">
 <li>破坏互斥条件</li>
 <li>破坏占有和等待条件 ： 一种实现方式是规定所有进程在开始执行前请求所需要的全部资源</li>
 <li>破坏不可抢占条件</li>
 <li>破坏环路等待：给资源统一编号，进程只能按编号顺序来请求资源</li>
 </ol>
-<h2 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h2><p>在程序运行时避免发生死锁。</p>
+<h2 id="死锁避免">死锁避免</h2>
+<p>在程序运行时避免发生死锁。</p>
 <p>定义：如果没有死锁发生，并且即使所有进程突然请求对资源的最大需求，也仍然存在某种调度次序能够使得每一个进程运行完毕，则称该状态是安全的。</p>
-<h2 id="锁的实现"><a href="#锁的实现" class="headerlink" title="锁的实现"></a>锁的实现</h2><p>Linux中有很多种锁。互斥锁，读写锁，自旋锁，RCU锁等。从底层实现来看  锁就是一个标志位，哪个线程先得到该标志位并对他置位，则代表它先获得了该锁，其他的线程无法对他操作，直到该线程自己将标志位恢复为止。</p>
-<ol>
+<h2 id="锁的实现">锁的实现</h2>
+<p>Linux中有很多种锁。互斥锁，读写锁，自旋锁，RCU锁等。从底层实现来看 锁就是一个标志位，哪个线程先得到该标志位并对他置位，则代表它先获得了该锁，其他的线程无法对他操作，直到该线程自己将标志位恢复为止。</p>
+<ol type="1">
 <li>原子的CAS操作 （Compare and Set）</li>
 </ol>
-<p>标志位本身也是一个共享的变量，对他进行读写也需要保护，那么这是个无解的问题嘛？不是的，其实对这个标志位的操作由硬件支持指令级的原子的 CAS 。原子的意思是  某一系列指令在执行过程中不会被任务调度和中断给打断，在单核系统中，简单的关中断即可实现系列指令的原子执行，但是多核系统中还要借助缓存一致性，来确保不同核上的线程对同一个内存区域的变量读取的是一致的。通过上面手段就在硬件层面上实现了变量的 原子性的CAS</p>
+<p>标志位本身也是一个共享的变量，对他进行读写也需要保护，那么这是个无解的问题嘛？不是的，其实对这个标志位的操作由硬件支持指令级的原子的 CAS 。原子的意思是 某一系列指令在执行过程中不会被任务调度和中断给打断，在单核系统中，简单的关中断即可实现系列指令的原子执行，但是多核系统中还要借助缓存一致性，来确保不同核上的线程对同一个内存区域的变量读取的是一致的。通过上面手段就在硬件层面上实现了变量的 原子性的CAS</p>
 <blockquote>
 <p>CAS 原理就是，首先从内存中读取要修改的变量，将他和期望值比较，如果和期望值不同，那么就说明它被修改了就什么都不做返回false，如果相同，则对变量修改并返回true。</p>
 </blockquote>
-<ol>
+<ol start="2" type="1">
 <li>根据锁是否获得，来决定执行什么策略</li>
 </ol>
 <p>基于上面原子的CAS操作，就可以保证锁被某个线程唯一的获得不会出现多个线程同时拿到锁的情况。然后至于 互斥锁，自旋锁，读写锁什么的都是根据锁是否获得，来决定执行什么不同的策略</p>

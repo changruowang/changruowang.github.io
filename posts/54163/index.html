@@ -268,20 +268,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>面向对象编程 （<code>OOP</code>）和泛型编程都能处理 <strong>在编写程序不知道类型的情况</strong>。不同之处在于 ，<code>OOP</code>能处理类型在<strong>程序运行之前都未知的情况</strong>，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。 </p>
+        <p>面向对象编程 （<code>OOP</code>）和泛型编程都能处理 <strong>在编写程序不知道类型的情况</strong>。不同之处在于 ，<code>OOP</code>能处理类型在<strong>程序运行之前都未知的情况</strong>，而泛型编程中，在编译时就能获知类型了。而模板是C++泛型编程的基础。</p>
 <span id="more"></span>
 <p>C++是一门强类型语言，所以无法做到像动态语言（<code>python javascript</code>）那样子，编写一段通用的逻辑，可以把任意类型的变量传进去处理。泛型编程弥补了这个缺点，通过把通用逻辑设计为模板，摆脱了类型的限制，提供了继承机制以外的另一种抽象机制，极大地提升了代码的可重用性。</p>
-<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>如果希望编写一个函数比较两个值，在实际中由于比较的类型不知道，可以通过函数重载的方式写多个同名的函数，编译器会根据不同的调用参数选择对应的函数执行。但是这样编码很麻烦。我们可以通过定义一个通用的函数模板，来简化。</p>
+<h2 id="函数模板">函数模板</h2>
+<p>如果希望编写一个函数比较两个值，在实际中由于比较的类型不知道，可以通过函数重载的方式写多个同名的函数，编译器会根据不同的调用参数选择对应的函数执行。但是这样编码很麻烦。我们可以通过定义一个通用的函数模板，来简化。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T &amp;v1, <span class="keyword">const</span> T &amp;v2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v1 &lt; v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>[ ] 模板有关的其他知识</p>
-</li>
-<li><p>[ ] 模板偏特化</p>
-</li>
-<li><p>[ ] 模板全特化</p>
-</li>
-<li><p>[ ] 实参推断</p>
-</li>
+<ul class="task-list">
+<li><p><input type="checkbox" disabled="" />
+模板有关的其他知识</p></li>
+<li><p><input type="checkbox" disabled="" />
+模板偏特化</p></li>
+<li><p><input type="checkbox" disabled="" />
+模板全特化</p></li>
+<li><p><input type="checkbox" disabled="" />
+实参推断</p></li>
 </ul>
 
     </div>

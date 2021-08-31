@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="SID-NISM: A Self-supervised Low-light Image Enhancement Framework主要思路 类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于  它 将低光照图的  直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。 考虑了噪声，I &#x3D; R X L + N 第二阶段的 光照调整方法 不是gamma 矫正，是作者自">
+  <meta name="description" content="SID-NISM: A Self-supervised Low-light Image Enhancement Framework 主要思路  类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于 它 将低光照图的 直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。 考虑了噪声，I &#x3D; R X L + N 第二阶段的 光照调整方法 不是gamma 矫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SID-NISM">
 <meta property="og:url" content="http://xxxxx.com/posts/37892/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="SID-NISM: A Self-supervised Low-light Image Enhancement Framework主要思路 类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于  它 将低光照图的  直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。 考虑了噪声，I &#x3D; R X L + N 第二阶段的 光照调整方法 不是gamma 矫正，是作者自">
+<meta property="og:description" content="SID-NISM: A Self-supervised Low-light Image Enhancement Framework 主要思路  类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于 它 将低光照图的 直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。 考虑了噪声，I &#x3D; R X L + N 第二阶段的 光照调整方法 不是gamma 矫">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png">
@@ -278,27 +278,48 @@
 
       
         <span id="more"></span>
-<h1 id="SID-NISM-A-Self-supervised-Low-light-Image-Enhancement-Framework"><a href="#SID-NISM-A-Self-supervised-Low-light-Image-Enhancement-Framework" class="headerlink" title="SID-NISM: A Self-supervised Low-light Image Enhancement Framework"></a>SID-NISM: A Self-supervised Low-light Image Enhancement Framework</h1><h2 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h2><ol>
-<li>类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于  它 将低光照图的  直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。</li>
+<h1 id="sid-nism-a-self-supervised-low-light-image-enhancement-framework">SID-NISM: A Self-supervised Low-light Image Enhancement Framework</h1>
+<h2 id="主要思路">主要思路</h2>
+<ol type="1">
+<li>类似RetinexNet 的方法构建分解网络，但是在是无监督的 多以区别在于 它 将低光照图的 直方图均衡化版本作为高亮度版本一起分解，构建场景一致性损失。</li>
 <li>考虑了噪声，I = R X L + N</li>
-<li>第二阶段的 光照调整方法 不是gamma 矫正，是作者自己提出的新的函数  这个可以借鉴</li>
+<li>第二阶段的 光照调整方法 不是gamma 矫正，是作者自己提出的新的函数 这个可以借鉴</li>
 </ol>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="image-20201231103107211"></p>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="image-20201231103305198"></p>
+<h2 id="主要内容">主要内容</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="" /><figcaption>image-20201231103107211</figcaption>
+</figure>
+<h3 id="损失函数">损失函数</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="" /><figcaption>image-20201231103305198</figcaption>
+</figure>
 <p>均衡后的图像的 分解产生的 R 要和 低光照图直接分解产生的R 一致</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="image-20201231103339686"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="" /><figcaption>image-20201231103339686</figcaption>
+</figure>
 <p>光照平滑和一致损失，第一项表明 光照分段平滑，以反射率图的梯度加权。第二项以高低光照图自身梯度加权，是为了让在两张图中都是边缘的地方损失小，非共同边缘的地方损失大，即两张光照图的边缘一致。这和RetinexNet中的损失一致</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="image-20201231103645591"></p>
-<p>第一项，意思为增强后的图像的 梯度要比原图像放大beta倍，当然 计算原输入图像 S 的梯度的时，滤掉了梯度较小的地方。第二项是，输入图像的 HSV中的H通道和 分解R的  H通道要一致，防止颜色乱变。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="image-20201231103920053"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="" /><figcaption>image-20201231103645591</figcaption>
+</figure>
+<p>第一项，意思为增强后的图像的 梯度要比原图像放大beta倍，当然 计算原输入图像 S 的梯度的时，滤掉了梯度较小的地方。第二项是，输入图像的 HSV中的H通道和 分解R的 H通道要一致，防止颜色乱变。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="" /><figcaption>image-20201231103920053</figcaption>
+</figure>
 <p>最后一项是噪声 一致的 ，输入图像乘 噪声估计图N ，约束噪声的大小。（不知道为啥）</p>
-<h3 id="光照调整"><a href="#光照调整" class="headerlink" title="光照调整"></a>光照调整</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="image-20201231104256103"></p>
-<p>​        这个阶段是整篇文章比较有意思的地方。它分析了直接用GAMMA矫正来调整光照图带来的问题，然后针对它进行了改进，提出了一个新的光照调整函数。</p>
-<p>​        具体的，图像R的对比度由于暗区域的过度增亮而被破坏。最终增强图像的照明水平仍然不足，因为明亮区域几乎没有变化。一句话总结就是，gamma矫正过分的提高了暗区域的光照，导致R*L 乘回去之后，R衰减的太少，使得整体效果显得过增强。对于亮区域gamma 矫正又几乎不调整，导致亮区域的低光光照被拉低。按它的思路应该是  暗区域亮度拉升变缓，以抑制R的过曝，亮区域亮度要再提高免得亮区域亮度乘上系数后又被压缩回去了。（是这样嘛？？？）</p>
-<p>​        按照上述逻辑 作者提出的曲线波形是NIMS的形状，表达式为：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="image-20201231105830496"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="image-20201231105852294"></p>
-<p>首先对光照图的像素亮度进行聚类，（两类）。分为亮像素和暗像素，去亮像素区的最小亮度值作为T，计算yita。参数 yita 的意义在于，在NISM下将亮像素的最小照明值映射到0.8 </p>
+<h3 id="光照调整">光照调整</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="" /><figcaption>image-20201231104256103</figcaption>
+</figure>
+<p>​ 这个阶段是整篇文章比较有意思的地方。它分析了直接用GAMMA矫正来调整光照图带来的问题，然后针对它进行了改进，提出了一个新的光照调整函数。</p>
+<p>​ 具体的，图像R的对比度由于暗区域的过度增亮而被破坏。最终增强图像的照明水平仍然不足，因为明亮区域几乎没有变化。一句话总结就是，gamma矫正过分的提高了暗区域的光照，导致R*L 乘回去之后，R衰减的太少，使得整体效果显得过增强。对于亮区域gamma 矫正又几乎不调整，导致亮区域的低光光照被拉低。按它的思路应该是 暗区域亮度拉升变缓，以抑制R的过曝，亮区域亮度要再提高免得亮区域亮度乘上系数后又被压缩回去了。（是这样嘛？？？）</p>
+<p>​ 按照上述逻辑 作者提出的曲线波形是NIMS的形状，表达式为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="" /><figcaption>image-20201231105830496</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="" /><figcaption>image-20201231105852294</figcaption>
+</figure>
+<p>首先对光照图的像素亮度进行聚类，（两类）。分为亮像素和暗像素，去亮像素区的最小亮度值作为T，计算yita。参数 yita 的意义在于，在NISM下将亮像素的最小照明值映射到0.8</p>
 
     </div>
 
@@ -386,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SID-NISM-A-Self-supervised-Low-light-Image-Enhancement-Framework"><span class="nav-number">1.</span> <span class="nav-text">SID-NISM: A Self-supervised Low-light Image Enhancement Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">主要思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E8%B0%83%E6%95%B4"><span class="nav-number">1.2.2.</span> <span class="nav-text">光照调整</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sid-nism-a-self-supervised-low-light-image-enhancement-framework"><span class="nav-number">1.</span> <span class="nav-text">SID-NISM: A Self-supervised Low-light Image Enhancement Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">主要思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E8%B0%83%E6%95%B4"><span class="nav-number">1.2.2.</span> <span class="nav-text">光照调整</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

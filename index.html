@@ -259,7 +259,8 @@
 
       
           <span id="more"></span>
-<h2 id="Word"><a href="#Word" class="headerlink" title="Word"></a>Word</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38300903">公式快速编号</a> </p>
+<h2 id="word">Word</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38300903">公式快速编号</a></p>
 
       
     </div>
@@ -338,37 +339,48 @@
 
       
           <span id="more"></span>
-<h1 id="const-和-constexpr"><a href="#const-和-constexpr" class="headerlink" title="const 和 constexpr"></a>const 和 constexpr</h1><h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90720012">参考链接</a></p>
-<h3 id="const-修饰变量"><a href="#const-修饰变量" class="headerlink" title="const 修饰变量"></a>const 修饰变量</h3><p>无论const修饰全局还是函数的局部变量，那么该变量都不能被程序员显式的修改，否则编译器会报错。但是变量本质都是地址，因此可以对他取地址给指针，然后通过指针再去修改该值。这样操作编译器不会报错。例如：</p>
+<h1 id="const-和-constexpr">const 和 constexpr</h1>
+<h2 id="const">const</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90720012">参考链接</a></p>
+<h3 id="const-修饰变量">const 修饰变量</h3>
+<p>无论const修饰全局还是函数的局部变量，那么该变量都不能被程序员显式的修改，否则编译器会报错。但是变量本质都是地址，因此可以对他取地址给指针，然后通过指针再去修改该值。这样操作编译器不会报错。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span>* p = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;N);</span><br><span class="line">*p = <span class="number">102</span>;   <span class="comment">// 这样就将N的值修改了</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>全局 const 变量：存储在只读存储区，使用上面的方法可以修改  会导致运行错误</li>
+<li>全局 const 变量：存储在只读存储区，使用上面的方法可以修改 会导致运行错误</li>
 <li>函数局部的 const 变量：存在栈里，使用上面的方法修改它的值，且不会产生运行错误</li>
 </ul>
-<p>c++ 对 const 会对默认类型的变量（非自定义的结构体成员变量，常规的int  float 等会优化）在编译时期会优化，上面的例子中 会将所有地方的 N 像宏定义一样直接替换为 1000；例如</p>
+<p>c++ 对 const 会对默认类型的变量（非自定义的结构体成员变量，常规的int float 等会优化）在编译时期会优化，上面的例子中 会将所有地方的 N 像宏定义一样直接替换为 1000；例如</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; N &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p;</span><br><span class="line"><span class="comment">// N: 输出1000  *P输出102  </span></span><br></pre></td></tr></table></figure>
 <p><strong>因此 推荐将变量定义为 const 类型 这样编译器会直接替换为值，后面就减少一次内存访问请求</strong> 相对宏定义的优势就是 有类型检查</p>
-<h3 id="const-类对象"><a href="#const-类对象" class="headerlink" title="const 类对象"></a>const 类对象</h3><p>定义 const 类对象 或者 结构体变量一样，代表他们的成员都不能被修改。并且，const 类对象只能调用它的 const 成员函数，而不能调用普通的非const成员函数。</p>
-<p><img src="https://pic3.zhimg.com/80/v2-f86a180355890874db6c2d3873bdda5a_720w.jpg" alt="img"></p>
-<h3 id="const指针"><a href="#const指针" class="headerlink" title="const指针"></a>const指针</h3><ul>
-<li>一种指 指向的地址的内容不可以修改 但是它可以转而指向别的地址  (结合最开始的例子可以看出 <strong>编译器是通过 “指针的类型” 来判断是否只读的，因此如果普通指针指向const的变量地址，它的值仍然可以修改</strong>)   <code>const int *p</code></li>
-<li>指向的地址可以修改，但是它不能再指向别人     <code>int * const p = &amp;a</code>   ( 就看const 后面跟的是啥 啥就不能变)</li>
+<h3 id="const-类对象">const 类对象</h3>
+<p>定义 const 类对象 或者 结构体变量一样，代表他们的成员都不能被修改。并且，const 类对象只能调用它的 const 成员函数，而不能调用普通的非const成员函数。</p>
+<figure>
+<img src="https://pic3.zhimg.com/80/v2-f86a180355890874db6c2d3873bdda5a_720w.jpg" alt="" /><figcaption>img</figcaption>
+</figure>
+<h3 id="const指针">const指针</h3>
+<ul>
+<li>一种指 指向的地址的内容不可以修改 但是它可以转而指向别的地址 (结合最开始的例子可以看出 <strong>编译器是通过 “指针的类型” 来判断是否只读的，因此如果普通指针指向const的变量地址，它的值仍然可以修改</strong>) <code>const int *p</code></li>
+<li>指向的地址可以修改，但是它不能再指向别人 <code>int * const p = &amp;a</code> ( 就看const 后面跟的是啥 啥就不能变)</li>
 </ul>
-<h3 id="const-成员函数"><a href="#const-成员函数" class="headerlink" title="const 成员函数"></a>const 成员函数</h3><p>代表该成员函数 不能修改类中的成员变量，同时也正是这个特性，const 类的对象只能调用 ocnst 修饰的成员函数</p>
-<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/256416683">参考链接</a></p>
+<h3 id="const-成员函数">const 成员函数</h3>
+<p>代表该成员函数 不能修改类中的成员变量，同时也正是这个特性，const 类的对象只能调用 ocnst 修饰的成员函数</p>
+<h2 id="constexpr">constexpr</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/256416683">参考链接</a></p>
 <p>constexpr是C++11中新增的关键字，其语义是“常量表达式”，也就是在编译期可求值的表达式。最基础的常量表达式就是字面值或全局变量/函数的地址或sizeof等关键字返回的结果，而其它常量表达式都是由基础表达式通过各种确定的运算得到的。constexpr值可用于enum、switch、数组长度等场合。</p>
-<h3 id="编译时常量-常量表达式"><a href="#编译时常量-常量表达式" class="headerlink" title="编译时常量/常量表达式"></a>编译时常量/常量表达式</h3><ul>
+<h3 id="编译时常量常量表达式">编译时常量/常量表达式</h3>
+<ul>
 <li>必须是可以在编译阶段被识别的。比如模版的参数／数组的大小</li>
-<li>例如  const int a = 5;  此时 5 就是一个常量表达式   sizeof() 就是个常量表达式 在编译时期就能确定 可以能用来初始化数组大小 case语句的分支等</li>
+<li>例如 const int a = 5; 此时 5 就是一个常量表达式 sizeof() 就是个常量表达式 在编译时期就能确定 可以能用来初始化数组大小 case语句的分支等</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fixed_size_list</span></span></span><br><span class="line"><span class="class">&#123;</span> <span class="comment">/*...*/</span> &#125;;</span><br><span class="line"></span><br><span class="line">fixed_size_list&lt;X&gt; mylist;     <span class="comment">// &lt;-- X必须是字面值类型</span></span><br><span class="line"><span class="keyword">int</span> numbers[X];   <span class="comment">// &lt;-- X必须是字面值类型</span></span><br></pre></td></tr></table></figure>
-<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>constexpr 在修饰函数的时候</p>
+<h3 id="特性">特性</h3>
+<p>constexpr 在修饰函数的时候</p>
 <ul>
-<li>如果函数的入口参数 是使用的字符常量，在编译时期可以确定 那么这个函数就是常量表达式  返回值可以直接用来初始化数组大小</li>
+<li>如果函数的入口参数 是使用的字符常量，在编译时期可以确定 那么这个函数就是常量表达式 返回值可以直接用来初始化数组大小</li>
 <li>如果入口参数的值编译时期无法直接确定 那么他就是个普通函数</li>
 </ul>
 <p>constexpr的好处：</p>
-<ol>
+<ol type="1">
 <li>是一种很强的约束，更好地保证程序的正确语义不被破坏。</li>
 <li>编译器可以在编译期对constexpr的代码进行非常大的优化，<strong>比如将用到的constexpr表达式都直接替换成最终结果等。</strong></li>
 <li>相比宏来说，没有额外的开销，但更安全可靠</li>
@@ -451,10 +463,15 @@
 
       
           <span id="more"></span>
-<h1 id="子字符串查找-——Rabin-Karp算法"><a href="#子字符串查找-——Rabin-Karp算法" class="headerlink" title="子字符串查找 ——Rabin-Karp算法"></a>子字符串查找 ——Rabin-Karp算法</h1><p>求字符串的连续子串，如果传统的散列法复杂度很高。而Rabin-Karp算法的思路是  将字符串每个 字符  a~z 看作  0~25 组成的 26 进制的数。并且在计算 每个位置长度 为 n 的连续子串的散列值时 可以使用  除留余法  方式  将散列的复杂度降低为 O(1)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210711114504.png" alt="image-20210711114457000"></p>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="最长重复子串"><a href="#最长重复子串" class="headerlink" title="最长重复子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-duplicate-substring/">最长重复子串</a></h4><p>这个题也可以用 动态规划做，dp 设置为 字符串1 前 i 个 和  字符串2 前  j  个的子串的最长后缀长度。通过 两层遍历即可完成。</p>
-<p>但是使用  二分查找 + hash 法 复杂度会更低（前提是 hash 使用Rabin-Karp算法散列，保证散列的复杂度为O(1)）  </p>
+<h1 id="子字符串查找-rabin-karp算法">子字符串查找 ——Rabin-Karp算法</h1>
+<p>求字符串的连续子串，如果传统的散列法复杂度很高。而Rabin-Karp算法的思路是 将字符串每个 字符 a~z 看作 0~25 组成的 26 进制的数。并且在计算 每个位置长度 为 n 的连续子串的散列值时 可以使用 除留余法 方式 将散列的复杂度降低为 O(1)</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210711114504.png" alt="" /><figcaption>image-20210711114457000</figcaption>
+</figure>
+<h3 id="例题">例题</h3>
+<h4 id="最长重复子串"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-duplicate-substring/">最长重复子串</a></h4>
+<p>这个题也可以用 动态规划做，dp 设置为 字符串1 前 i 个 和 字符串2 前 j 个的子串的最长后缀长度。通过 两层遍历即可完成。</p>
+<p>但是使用 二分查找 + hash 法 复杂度会更低（前提是 hash 使用Rabin-Karp算法散列，保证散列的复杂度为O(1)）</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/24895aca0459">参考链接</a></p>
 
       
@@ -534,22 +551,29 @@
 
       
           <span id="more"></span>
-<h1 id="二分匹配"><a href="#二分匹配" class="headerlink" title="二分匹配"></a>二分匹配</h1><h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96229700">参考链接</a></p>
+<h1 id="二分匹配">二分匹配</h1>
+<h2 id="匈牙利算法">匈牙利算法</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96229700">参考链接</a></p>
 <p>主要就是 能划分为 二分图，集合0中的元素之间不会有匹配关系，它只会和集合1中的元素有匹配关系，可能一对一一对多。同理集合2中的元素也是</p>
 <p>常用的套路是 按照 奇偶 位置划分二分集合。</p>
-<h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><p>首先 依次从左边集合中选出一个元素  和  右边集合中的元素匹配。如果右边集合中某个元素已经被占用了，那么根据它指向的左边集合中的元素号，递归的去调整它，以给当前元素腾位置。如果能腾出来，那么成功。否则返回false  算法实现的关键在于 一个记录  右边 到左边  的数组序号的映射关系，和   右边序号的访问情况。</p>
-<p>算法时间复杂度，O(ExV)  V为左边集合顶点的数目，E为图中的边数。每次去左边的一个顶点去和右边集合的顶点匹配，最坏情况就是把图中所有的边都遍历一遍才能找到可以匹配的结果。</p>
+<h3 id="算法思路">算法思路</h3>
+<p>首先 依次从左边集合中选出一个元素 和 右边集合中的元素匹配。如果右边集合中某个元素已经被占用了，那么根据它指向的左边集合中的元素号，递归的去调整它，以给当前元素腾位置。如果能腾出来，那么成功。否则返回false 算法实现的关键在于 一个记录 右边 到左边 的数组序号的映射关系，和 右边序号的访问情况。</p>
+<p>算法时间复杂度，O(ExV) V为左边集合顶点的数目，E为图中的边数。每次去左边的一个顶点去和右边集合的顶点匹配，最坏情况就是把图中所有的边都遍历一遍才能找到可以匹配的结果。</p>
 <p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/b9eae162e02f4f928eac37d7699b352e?tpId=37&amp;&amp;tqId=21251&amp;rp=1&amp;ru=/ta/huawei&amp;qru=/ta/huawei/question-ranking">例题</a></p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> M, N;            <span class="comment">//M, N分别表示左、右侧集合的元素数量</span></span><br><span class="line"><span class="keyword">int</span> Map[MAXM][MAXN]; <span class="comment">//邻接矩阵存图</span></span><br><span class="line"><span class="keyword">int</span> p[MAXN];         <span class="comment">//记录当前右侧元素所对应的左侧元素</span></span><br><span class="line"><span class="keyword">bool</span> vis[MAXN];      <span class="comment">//记录右侧元素是否已被访问过</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">        <span class="keyword">if</span> (Map[i][j] &amp;&amp; !vis[j]) <span class="comment">//有边且未访问</span></span><br><span class="line">        &#123;</span><br><span class="line">            vis[j] = <span class="literal">true</span>;                 <span class="comment">//记录状态为访问过</span></span><br><span class="line">            <span class="keyword">if</span> (p[j] == <span class="number">0</span> || <span class="built_in">match</span>(p[j])) <span class="comment">//如果暂无匹配，或者原来匹配的左侧元素可以找到新的匹配</span></span><br><span class="line">            &#123;</span><br><span class="line">                p[j] = i;    <span class="comment">//当前左侧元素成为当前右侧元素的新匹配</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回匹配成功</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//循环结束，仍未找到匹配，返回匹配失败</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hungarian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis)); <span class="comment">//重置vis数组</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">match</span>(i))</span><br><span class="line">            cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="KM算法"><a href="#KM算法" class="headerlink" title="KM算法"></a>KM算法</h2><p>KM 算法是解决带权值的 二分匹配问题</p>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> M, N;            <span class="comment">//M, N分别表示左、右侧集合的元素数量</span></span><br><span class="line"><span class="keyword">int</span> Map[MAXM][MAXN]; <span class="comment">//邻接矩阵存图</span></span><br><span class="line"><span class="keyword">int</span> p[MAXN];         <span class="comment">//记录当前右侧元素所对应的左侧元素</span></span><br><span class="line"><span class="keyword">bool</span> vis[MAXN];      <span class="comment">//记录右侧元素是否已被访问过</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">        <span class="keyword">if</span> (Map[i][j] &amp;&amp; !vis[j]) <span class="comment">//有边且未访问</span></span><br><span class="line">        &#123;</span><br><span class="line">            vis[j] = <span class="literal">true</span>;                 <span class="comment">//记录状态为访问过</span></span><br><span class="line">            <span class="keyword">if</span> (p[j] == <span class="number">0</span> || <span class="built_in">match</span>(p[j])) <span class="comment">//如果暂无匹配，或者原来匹配的左侧元素可以找到新的匹配</span></span><br><span class="line">            &#123;</span><br><span class="line">                p[j] = i;    <span class="comment">//当前左侧元素成为当前右侧元素的新匹配</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回匹配成功</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//循环结束，仍未找到匹配，返回匹配失败</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hungarian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis)); <span class="comment">//重置vis数组</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">match</span>(i))</span><br><span class="line">            cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="km算法">KM算法</h2>
+<p>KM 算法是解决带权值的 二分匹配问题</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sixdaycoder/article/details/47720471">参考链接</a></p>
-<h3 id="算法实现原理"><a href="#算法实现原理" class="headerlink" title="算法实现原理"></a>算法实现原理</h3><p>基本原理也是依靠匈牙利算法，但是每个边都带了权重，因此思想是 取当前的最大子图 然后按照匈牙利算法去寻找完美匹配，如果无法实现完备匹配  就需要扩充最大子图。</p>
+<h3 id="算法实现原理">算法实现原理</h3>
+<p>基本原理也是依靠匈牙利算法，但是每个边都带了权重，因此思想是 取当前的最大子图 然后按照匈牙利算法去寻找完美匹配，如果无法实现完备匹配 就需要扩充最大子图。</p>
 <p>通俗的算法原理：集合A中的1个元素都可以和B中的多个元素匹配，但是由于只能择其一，所以就选和B中匹配得分最大的边 联通，同理所有A中的点都这样筛选边，这样如果 A中的所有元素都和B中的有匹配（即实现完备匹配），那么此时图的匹配权重一定是最大。此时这就可以转化为匈牙利算法去搜索有无完备匹配。</p>
-<p>如果没有实现完备匹配，那一定是有 n 个点 n-1 个边之间出现冲突。所以直观的应该放宽选取可匹配边的权重标准 让新的权重较小的边也加入图中，再尝试是否可以完备匹配，如果此时可以完备匹配 那么起始最终匹配的权重和相对初始的最大子图的完备匹配后的权重和（但是无法实现） 是 略微缩小的。KM算法就是通过一定的策略完成  扩充子图 -&gt; 完备匹配 这个循环的，并保证 子图的权重 一定是  从初始最大 -&gt;  小递减的 中间没有跳跃，所以最后匹配的权重和最大 </p>
+<p>如果没有实现完备匹配，那一定是有 n 个点 n-1 个边之间出现冲突。所以直观的应该放宽选取可匹配边的权重标准 让新的权重较小的边也加入图中，再尝试是否可以完备匹配，如果此时可以完备匹配 那么起始最终匹配的权重和相对初始的最大子图的完备匹配后的权重和（但是无法实现） 是 略微缩小的。KM算法就是通过一定的策略完成 扩充子图 -&gt; 完备匹配 这个循环的，并保证 子图的权重 一定是 从初始最大 -&gt; 小递减的 中间没有跳跃，所以最后匹配的权重和最大</p>
 <ul>
 <li>寻找相等子图的完备匹配</li>
 </ul>
-<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ol>
+<h3 id="实现步骤">实现步骤</h3>
+<ol type="1">
 <li>初始化可行顶标的值 (设定lx,ly的初始值)</li>
 <li>用匈牙利算法寻找相等子图的完备匹配</li>
 <li>若未找到增广路则修改可行顶标的值</li>
@@ -558,7 +582,7 @@
 <p>实现子图扩充最优 要 按照两个原则来实现：</p>
 <ul>
 <li>可行顶标</li>
-<li>可行边，顶点的定标和 等于 边的权重 为一个可行边  可以加入相等子图中</li>
+<li>可行边，顶点的定标和 等于 边的权重 为一个可行边 可以加入相等子图中</li>
 </ul>
 
       
@@ -638,45 +662,51 @@
 
       
           <span id="more"></span>
-<h1 id="HDR-综述"><a href="#HDR-综述" class="headerlink" title="HDR  综述"></a>HDR  综述</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZHANG2012LIANG/article/details/85031065">图像融合</a></p>
-<h2 id="HDR-概念"><a href="#HDR-概念" class="headerlink" title="HDR 概念"></a>HDR 概念</h2><ol>
+<h1 id="hdr-综述">HDR 综述</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZHANG2012LIANG/article/details/85031065">图像融合</a></p>
+<h2 id="hdr-概念">HDR 概念</h2>
+<ol type="1">
 <li>HDR 动态范围：是指图像的最大亮度和最小亮度的比值。对于一个8位的图像，能够存储的动态的范围只有 10^2量级，但是自然场景以及人眼的感知范围远远大于这个。而显示器可以显示的动态范围也只有 10^2 量级，因此直接显示 HDR 图像也会使细节丢失。</li>
 <li>HDR成像：包含两个 过程，一个是成像，相机采集生成位深度为10，12或者16位的高动态图像；另一个过程是 显示，使用特殊的显示器显示高动态范围的图像。</li>
 </ol>
 <p>我理解的低光图像增强和HDR的区别：</p>
 <p>主要就是两种场景：</p>
-<ol>
+<ol type="1">
 <li>一种是纯黑的图提亮；</li>
 <li>一种是光照不均匀的图</li>
 </ol>
 <p>低光照增强实际就是 8位的 图像 -&gt; 提亮后的8位图像，整个过程图像位深度不变，只是通过算法改变了图像的效果，可以认为是伪HDR图像，因为记录的图像的动态范围并没有增加</p>
 <p>HDR技术，则是 8位LDR图像 -&gt; 10/14/16位HDR图像，图像的位深度变大了，图像记录信息的动态范围确确实实增加了。但是显示器能显示的动态范围有限，因此还是要经过 色调映射技术才能在一般的显示器上显示。</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210706200639404.png" alt="image-20210706200639404" style="zoom:50%;" /></p>
-<h2 id="方法分类"><a href="#方法分类" class="headerlink" title="方法分类"></a>方法分类</h2><h3 id="Tone-Map色调映射"><a href="#Tone-Map色调映射" class="headerlink" title="Tone Map色调映射"></a>Tone Map色调映射</h3><p>照相机和摄像机可以捕捉到HDR的影像，渲染过程中可以产生HDR的画面。这些内容如果需要显示到LDR的设备上，就需要一个称为tone mapping的过程，把HDR变成LDR   HDR-&gt;LDR显示  </p>
-<p>Tone Map色调映射算法都可以看作  S  曲线映射  只是不同方法曲线形状不太一样</p>
-<h3 id="单帧HDR"><a href="#单帧HDR" class="headerlink" title="单帧HDR"></a>单帧HDR</h3><p>单帧HDR 是输入为LDR图像，然后提升局部和全部细节输出，感觉输出也是LDR域的伪HDR图像</p>
-<ol>
-<li>条件编码结构：传统的CNN在图像所有位置都采用相同的滤波器权重处理，但是对于图像中 不同区域的处理是不同的，例如图像超分中 通过预先语义分割的一个map作为条件图来使网络对不同纹理的区域有不同的处理。在HDR中也一样，因此常常会通过一个条件子网络来 做位置相关编码核图像相关编码。但是感觉这种和注意力没啥区别  都是点乘 一个  条件图 + 一个偏置</li>
-<li>分频处理的结构：将图像分为不同的频带分别处理  低中高 分别处理融合  例如 DRBN 文中  就是全局三个频带处理，并且再每个阶段会有频带间的信息交流  就是会上采样融合作为下一阶段的输入   同时  全局和局部特征提取结构也是很常见的结构</li>
-<li>生成多帧再融合的思路就是将 单张图像 通过 乘系数 或者 通过相机响应模型等方法 扩展为多张亮度等级的图  再采用多帧融合的思路进行 融合 </li>
+<h2 id="方法分类">方法分类</h2>
+<h3 id="tone-map色调映射">Tone Map色调映射</h3>
+<p>照相机和摄像机可以捕捉到HDR的影像，渲染过程中可以产生HDR的画面。这些内容如果需要显示到LDR的设备上，就需要一个称为tone mapping的过程，把HDR变成LDR HDR-&gt;LDR显示</p>
+<p>Tone Map色调映射算法都可以看作 S 曲线映射 只是不同方法曲线形状不太一样</p>
+<h3 id="单帧hdr">单帧HDR</h3>
+<p>单帧HDR 是输入为LDR图像，然后提升局部和全部细节输出，感觉输出也是LDR域的伪HDR图像</p>
+<ol type="1">
+<li>条件编码结构：传统的CNN在图像所有位置都采用相同的滤波器权重处理，但是对于图像中 不同区域的处理是不同的，例如图像超分中 通过预先语义分割的一个map作为条件图来使网络对不同纹理的区域有不同的处理。在HDR中也一样，因此常常会通过一个条件子网络来 做位置相关编码核图像相关编码。但是感觉这种和注意力没啥区别 都是点乘 一个 条件图 + 一个偏置</li>
+<li>分频处理的结构：将图像分为不同的频带分别处理 低中高 分别处理融合 例如 DRBN 文中 就是全局三个频带处理，并且再每个阶段会有频带间的信息交流 就是会上采样融合作为下一阶段的输入 同时 全局和局部特征提取结构也是很常见的结构</li>
+<li>生成多帧再融合的思路就是将 单张图像 通过 乘系数 或者 通过相机响应模型等方法 扩展为多张亮度等级的图 再采用多帧融合的思路进行 融合</li>
 </ol>
-<h3 id="多帧HDR"><a href="#多帧HDR" class="headerlink" title="多帧HDR"></a>多帧HDR</h3><p>多帧HDR 常常是要考虑 动态场景下的 HDR  如果是对齐的 可以之间采用一个蒙板函数融合生成 HDR 图像  然后 ToneMap压缩动态范围再显示。同时多帧HDR可能有下面两种思路</p>
+<h3 id="多帧hdr">多帧HDR</h3>
+<p>多帧HDR 常常是要考虑 动态场景下的 HDR 如果是对齐的 可以之间采用一个蒙板函数融合生成 HDR 图像 然后 ToneMap压缩动态范围再显示。同时多帧HDR可能有下面两种思路</p>
 <ul>
-<li>使用不同的曝光采集多帧图像 融合  由于不同时间采集的一定会有前景不对齐的问题</li>
-<li>采集多张相同的低曝光的图像  HDR+ 中  避免不可逆的过饱和，同时也可以采用多帧降噪方法抑制阴影区域的噪声，但是也存在不对齐的问题</li>
+<li>使用不同的曝光采集多帧图像 融合 由于不同时间采集的一定会有前景不对齐的问题</li>
+<li>采集多张相同的低曝光的图像 HDR+ 中 避免不可逆的过饱和，同时也可以采用多帧降噪方法抑制阴影区域的噪声，但是也存在不对齐的问题</li>
 </ul>
 <p>网络结构</p>
-<ol>
-<li>传统思路：传统思路就是  预处理 对齐  融合的 方法；早期的方法都是这样做的 </li>
-<li>多分支的网络：认为不需要认为做 对齐  CNN有自动对齐的功能，因此直接采用多分枝特征提取 +  融合  +  解码 的结构</li>
+<ol type="1">
+<li>传统思路：传统思路就是 预处理 对齐 融合的 方法；早期的方法都是这样做的</li>
+<li>多分支的网络：认为不需要认为做 对齐 CNN有自动对齐的功能，因此直接采用多分枝特征提取 + 融合 + 解码 的结构</li>
 <li>在网络中引入 特征对齐网络，相对第二种的朴素思路自然效果更好。具体的可以是 使用可变形卷积构建的多尺度特征对齐模板，也可以是基于自适应卷积滤波器的结构，就是一个分支输出线性变换参数 ，通道数为 cxc 然后对对应位置的特征图的 c x c 领域的特征做线性变换输出。融合的话可以使用注意力机制的特征融合模块</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21983679">参考链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/376246037">https://zhuanlan.zhihu.com/p/376246037</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361596881">https://zhuanlan.zhihu.com/p/361596881</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45250844/article/details/103207184">https://blog.csdn.net/weixin_45250844/article/details/103207184</a></p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw">https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw</a></p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w">https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w</a></p>
+<p>https://zhuanlan.zhihu.com/p/376246037</p>
+<p>https://zhuanlan.zhihu.com/p/361596881</p>
+<p>https://blog.csdn.net/weixin_45250844/article/details/103207184</p>
+<p>https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw</p>
+<p>https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w</p>
 
       
     </div>
@@ -755,25 +785,43 @@
 
       
           <span id="more"></span>
-<h1 id="维纳滤波"><a href="#维纳滤波" class="headerlink" title="维纳滤波"></a>维纳滤波</h1><h2 id="逆滤波"><a href="#逆滤波" class="headerlink" title="逆滤波"></a>逆滤波</h2><p>用于不含噪声的图像去模糊</p>
-<h2 id="维纳滤波-1"><a href="#维纳滤波-1" class="headerlink" title="维纳滤波"></a>维纳滤波</h2><p>用于含有噪声的图像去模糊  以及去噪</p>
+<h1 id="维纳滤波">维纳滤波</h1>
+<h2 id="逆滤波">逆滤波</h2>
+<p>用于不含噪声的图像去模糊</p>
+<h2 id="维纳滤波-1">维纳滤波</h2>
+<p>用于含有噪声的图像去模糊 以及去噪</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">参考链接</a></p>
-<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">维纳滤波详解</a></p>
+<h3 id="基本原理">基本原理</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">维纳滤波详解</a></p>
 <p>在图像拍摄过程中由于各种原因会造成图像退化，图像退化模型如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222253.png" alt="image-20210630222253821"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222253.png" alt="" /><figcaption>image-20210630222253821</figcaption>
+</figure>
 <p>其中，⋆ 为卷积符号，f ( x , y ) 为输入图像，g ( x , y ) 为退化图像，h ( x , y ) 为退化函数，η ( x , y ) 为加性噪声，将上式进行傅里叶变换有（根据傅里叶变换的特性，<strong>空间域中的卷积相当于频率域中的乘积</strong>）：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222401.png" alt="image-20210630222401374"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222401.png" alt="" /><figcaption>image-20210630222401374</figcaption>
+</figure>
 <p><strong>(1) 如果不考虑退化函数</strong>，图像退化模型就简化为图像噪声模型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222436.png" alt="image-20210630222435984"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222436.png" alt="" /><figcaption>image-20210630222435984</figcaption>
+</figure>
 <p>图像增强问题成为单纯的图像去噪问题，可以通过空间域滤波等众多方法解决。</p>
 <p><strong>(2) 如果不考虑加性噪声</strong>，图像退化模型就简化为</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222453.png" alt="image-20210630222453569"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222453.png" alt="" /><figcaption>image-20210630222453569</figcaption>
+</figure>
 <p>这种问题可以通过逆滤波解决，即通过傅里叶变化以及阵列除法即可获得恢复后的图像频谱：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222524.png" alt="image-20210630222524519"></p>
-<p>但是对于退化模型 H 如何获取呢？数字图像处理中有  观察估计法，试验估计法和建模估计。例如建模估中可以通过运动数学模型将退化函数构造为：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222732.png" alt="image-20210630222732217"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222524.png" alt="" /><figcaption>image-20210630222524519</figcaption>
+</figure>
+<p>但是对于退化模型 H 如何获取呢？数字图像处理中有 观察估计法，试验估计法和建模估计。例如建模估中可以通过运动数学模型将退化函数构造为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222732.png" alt="" /><figcaption>image-20210630222732217</figcaption>
+</figure>
 <p><strong>(3) 如果退化函数和加性噪声都考虑</strong>，空域滤波器无法解决图像退化问题，逆滤波效果因为噪声的存在会变得非常差，这个时候就需要用到<strong>维纳滤波</strong>，（维纳滤波的推导写在结论中）维纳滤波公式如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222742.png" alt="image-20210630222742064"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222742.png" alt="" /><figcaption>image-20210630222742064</figcaption>
+</figure>
 
       
     </div>
@@ -852,8 +900,8 @@
 
       
           <span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33552519/article/details/108632146">https://blog.csdn.net/qq_33552519/article/details/108632146</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.codenong.com/cs105736895/">https://www.codenong.com/cs105736895/</a></p>
+<p>https://blog.csdn.net/qq_33552519/article/details/108632146</p>
+<p>https://www.codenong.com/cs105736895/</p>
 
       
     </div>
@@ -932,8 +980,8 @@
 
       
           <span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021721649">https://segmentfault.com/a/1190000021721649</a></p>
-<p><a target="_blank" rel="noopener" href="https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/">https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/</a></p>
+<p>https://segmentfault.com/a/1190000021721649</p>
+<p>https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/</p>
 
       
     </div>
@@ -1012,58 +1060,70 @@
 
       
           <span id="more"></span>
-<h1 id="HDR"><a href="#HDR" class="headerlink" title="HDR+"></a>HDR+</h1><p>Burst photography for high dynamic range and low-light imaging on mobile cameras</p>
+<h1 id="hdr">HDR+</h1>
+<p>Burst photography for high dynamic range and low-light imaging on mobile cameras</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zbwgycm/article/details/82458240">参考链接</a></p>
-<h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><ol>
+<h2 id="主要思想">主要思想</h2>
+<ol type="1">
 <li>不使用多曝光。而是使用一个固定的较低的曝光时间和增益采集多帧图像。将这个曝光设置的足够低以比避免过曝溢出</li>
 <li>直接对bayer格式的数据处理，而不是RGB。一方面采集多帧如果都用RGB格式那每张都要经过ISP，另一方面ISP会对RAW图像做个非线性化，使得去噪变得困难</li>
 <li>使用了基于 FFT 的快速对齐算法</li>
 </ol>
 <p>主要思想是，首先使用多帧低照度的 raw 格式的图像做去噪融合成一张（这是一个常用多帧去噪手段），然后使用一个自适应的曝光算法将该图像扩展到长短曝光后融合，最后将处理后的 RAW 数据 经过ISP流程得到结果。</p>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ol>
+<h2 id="主要内容">主要内容</h2>
+<ol type="1">
 <li>故意曝光不足避免过曝而不可逆</li>
 <li>采集多帧用于抑制暗区域噪声</li>
 <li>使用自动曝光算法 设置长短曝光参数，短曝光参数用于调整相机硬件参数来采集固定曝光的图像，长曝光参数用于对短曝光图像做tone map合成长曝光图</li>
-<li>使用 像素级的 曝光融合方法 融合长短曝光图像 </li>
+<li>使用 像素级的 曝光融合方法 融合长短曝光图像</li>
 <li>色调映射（tone map）压缩动态范围</li>
 </ol>
-<h3 id="自动曝光"><a href="#自动曝光" class="headerlink" title="自动曝光"></a>自动曝光</h3><p>这一步其实是在多帧去噪融合之后使用的，按照原文顺序先介绍了。</p>
+<h3 id="自动曝光">自动曝光</h3>
+<p>这一步其实是在多帧去噪融合之后使用的，按照原文顺序先介绍了。</p>
 <p>现在的 ISP 中都集成了 自动对焦 自动曝光 自动白平衡算法（3A），理论上我们可以直接使用ISP中自带的自动曝光算法根据场景自动设置相机曝光参数，然后再沿用这个参数采集多帧固定曝光的图像用于后续的融合去噪。但是，对于高动态范围的场景，拍摄的图像可能包含无法通过后期 HDR 色调映射恢复的高光或曝光不足的区域。（个人感觉主要是过曝不可逆，所以要避免）</p>
 <p>因此其实最终是对 两张gamma矫正后的图像做融合，其中一个是多帧去噪后的欠曝光图，另一张是对欠曝光后的图使用数字曝光补偿后的图。因此自动曝光算法可以 表述 为两个曝光水平：</p>
 <ul>
-<li><strong>合成长曝光</strong>：由短曝光图合成的长曝光图，在色调映射中用于恢复阴影区域 </li>
+<li><strong>合成长曝光</strong>：由短曝光图合成的长曝光图，在色调映射中用于恢复阴影区域</li>
 <li><strong>短曝光</strong>：用于捕捉场景中亮的区域</li>
 </ul>
 <p><em>动态范围</em>： 图像能捕捉的场景中的光亮度的范围。自然场景中的动态场景通常特别高，人眼能看到的范围也很大。而通常相机能表示的范围只有256中。即便相机能采集到大动态范围的图像，但是一般的显示器能显示的亮度等级也有限，一方面为了弥补相机自生的动态感知范围不足的问题常常采用多曝光融合的方式来合成高动态的图像（场景亮暗细节都能保留），另一方面还要通过tone map色调映射技术将HDR图像压缩为，转换成可以在显示器上显示出更符合人眼视觉的LDR图像。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90093872">动态范围</a></p>
 <p>虽然说要尽量先使用低曝光的图像去采集多帧图像，从而避免饱和。但是曝光太低意味着噪声太强，需要融合更多帧来抑制噪声，这需要付出计算代价。同时如果过分的压缩动态范围（我理解为这是 Tone map 这一步的压缩动态范围，将合成的高动态图使用色调映射手段压缩为显示器可以显示的范围）会出现卡通效应（就是阴影部分被过度提亮了）<strong>文章中设置的压缩比为8（即最亮：最暗大约8比1）</strong></p>
-<h4 id="基于实例的自动曝光"><a href="#基于实例的自动曝光" class="headerlink" title="基于实例的自动曝光"></a>基于实例的自动曝光</h4><p>构建了一个包含5000个场景的数据集，并手动给每张图片标注 短曝光参数  和  长曝光参数，前者用于采集图像的曝光参数，后者用于后面 tone map 的参数。给定一帧raw的输入图像，提取他的特征描述符并在数据库中寻找与他对应的候选样例，然后将所有候选样例手动标注的两个参数分别做一个简单的加权融合。</p>
+<h4 id="基于实例的自动曝光">基于实例的自动曝光</h4>
+<p>构建了一个包含5000个场景的数据集，并手动给每张图片标注 短曝光参数 和 长曝光参数，前者用于采集图像的曝光参数，后者用于后面 tone map 的参数。给定一帧raw的输入图像，提取他的特征描述符并在数据库中寻找与他对应的候选样例，然后将所有候选样例手动标注的两个参数分别做一个简单的加权融合。</p>
 <ul>
 <li>用于计算特征描述符的图像保证是白平衡的</li>
 <li>是在大幅下采样的版本上计算特征描述符，用于量化场景亮度分布</li>
-<li>四组64纬的特征，其中两组在两个不同的尺度空间上提取的，其中两组提取自图像 max(R,G,B) 和  avg(R,G,B)；前者用于代表频率空间的曝光，后两组用于关注颜色削波 <font color=red>（color clipping ？？？？？不懂）</font></li>
+<li>四组64纬的特征，其中两组在两个不同的尺度空间上提取的，其中两组提取自图像 max(R,G,B) 和 avg(R,G,B)；前者用于代表频率空间的曝光，后两组用于关注颜色削波 <font color=red>（color clipping ？？？？？不懂）</font></li>
 <li>带注意力的特征提取手段，通常情况下计算特征时都是给与图像中心更多的权重，当选择中人脸时也可以给与选定区域较大的权重。</li>
 <li>选取候选实例中亮度在当前场景亮度8倍的实例，以防止昼夜颠倒的不真实情况</li>
 </ul>
-<h4 id="曝光参数分解"><a href="#曝光参数分解" class="headerlink" title="曝光参数分解"></a>曝光参数分解</h4><p>通过前面可以计算出 长短曝光参数。那么这一步就是要将从实例中查询计算的短曝光参数  分解为   真实的相机参数（相机曝光时间和曝光增益）然后修改相机参数再去采集图像。这一步使用一个固定的策略来 平衡噪声 和 运动模糊（如果曝光时间长就会有运动模糊）之间的关系</p>
+<h4 id="曝光参数分解">曝光参数分解</h4>
+<p>通过前面可以计算出 长短曝光参数。那么这一步就是要将从实例中查询计算的短曝光参数 分解为 真实的相机参数（相机曝光时间和曝光增益）然后修改相机参数再去采集图像。这一步使用一个固定的策略来 平衡噪声 和 运动模糊（如果曝光时间长就会有运动模糊）之间的关系</p>
 <ul>
 <li>对于亮的场景，曝光增益设置到最低，而曝光时间提高到8ms</li>
 <li>当场景变得暗时，曝光时间固定8ms不变，曝光增益x4</li>
-<li>最后曝光时间和曝光增益一起成比例的提高，曝光时间上限100ms 曝光增益上限96x  为了尽可能提高采集图像的信噪比，尽可能提高曝光增益</li>
+<li>最后曝光时间和曝光增益一起成比例的提高，曝光时间上限100ms 曝光增益上限96x 为了尽可能提高采集图像的信噪比，尽可能提高曝光增益</li>
 </ul>
-<font color=red>（这个过程不是很理解 为何要这么做 以及前面的短曝光参数在这一步做何用？）</font> 
-
-<h4 id="图像数量-burst-size"><a href="#图像数量-burst-size" class="headerlink" title="图像数量(burst size)"></a>图像数量(burst size)</h4><p>在较亮的场景 使用1~2张图即可，因为噪声不多，虽然多一点图也可以抑制运动模糊啥的。在低光照环境下 或者  高动态场景下，通常要将低亮度的区域亮度拉升，会有噪声，因此需要较多帧去噪，提高信噪比。</p>
+<p><font color=red>（这个过程不是很理解 为何要这么做 以及前面的短曝光参数在这一步做何用？）</font></p>
+<h4 id="图像数量burst-size">图像数量(burst size)</h4>
+<p>在较亮的场景 使用1~2张图即可，因为噪声不多，虽然多一点图也可以抑制运动模糊啥的。在低光照环境下 或者 高动态场景下，通常要将低亮度的区域亮度拉升，会有噪声，因此需要较多帧去噪，提高信噪比。</p>
 <p>通常作者 会限制 图像数量才 2~8 张</p>
-<h4 id="图像流采集"><a href="#图像流采集" class="headerlink" title="图像流采集"></a>图像流采集</h4><p>自动曝光算法运行在ISP之前。每四帧图像做一次 自动曝光的参数 计算，计算一次大概10ms，没必要每次都计算因为场景不会急速变化，但是也不能太久计算一次参数，免得场景切换时显示有延迟。</p>
-<p>另一个问题就是，高动态场景中如果包含大量过曝的像素，对估计 低曝光参数 有影响，因此作者通过 忽略  部分过曝像素来计算 匹配参数能较好地匹配样例中相似的低光照场景  <font color=red>（？）</font></p>
-<h3 id="帧对齐"><a href="#帧对齐" class="headerlink" title="帧对齐"></a>帧对齐</h3><p>常用的对齐方法是光流对齐，这种方法可以对齐非刚体形变，但是计算复杂度很高。出于速度、内存和性能（毕竟是移动端）的折衷考虑，作者提出了一个简单的对齐的方法，虽然这种方法无法应对非刚性形变并且误差比较大，但是后续的多帧融合算法对这个误差比较鲁棒，所以即便是使用这个简单快速的对齐方法，整体效果也可以接受。</p>
-<h4 id="选参考帧"><a href="#选参考帧" class="headerlink" title="选参考帧"></a>选参考帧</h4><p>参考帧选择尽可能清晰的帧。根据基于原始输入绿色通道中梯度的简单度量，选择参考帧作为突发子集中最清晰的帧。同时为了最大限度地减少快门延迟，按下快门后连拍并从前 3 帧中选择参考帧。</p>
-<h4 id="处理raw图像"><a href="#处理raw图像" class="headerlink" title="处理raw图像"></a>处理raw图像</h4><p>raw数据格式实际是一整张  RGGB 排列的图像，包含了四个颜色平面。作者直接使用 2X2 的平均池化  得到 下采样的灰度图，对该灰度图像做配准。（我觉得这里不必拘泥于是不是 严格的灰度，因为最后对齐的损失函数使用像素差异来做的，即便不是标准的 RGB-&gt;gray也不太影响对齐性能）</p>
-<h4 id="分层配准"><a href="#分层配准" class="headerlink" title="分层配准"></a>分层配准</h4><p>作者采用了一个由粗到细的配准策略。具体的是构建一个高斯金字塔的结构，先从顶层配（粗）， 将上层的配准结果作为下一层的固定偏移。每层配准的表达式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="image-20210628093708522"></p>
+<h4 id="图像流采集">图像流采集</h4>
+<p>自动曝光算法运行在ISP之前。每四帧图像做一次 自动曝光的参数 计算，计算一次大概10ms，没必要每次都计算因为场景不会急速变化，但是也不能太久计算一次参数，免得场景切换时显示有延迟。</p>
+<p>另一个问题就是，高动态场景中如果包含大量过曝的像素，对估计 低曝光参数 有影响，因此作者通过 忽略 部分过曝像素来计算 匹配参数能较好地匹配样例中相似的低光照场景 <font color=red>（？）</font></p>
+<h3 id="帧对齐">帧对齐</h3>
+<p>常用的对齐方法是光流对齐，这种方法可以对齐非刚体形变，但是计算复杂度很高。出于速度、内存和性能（毕竟是移动端）的折衷考虑，作者提出了一个简单的对齐的方法，虽然这种方法无法应对非刚性形变并且误差比较大，但是后续的多帧融合算法对这个误差比较鲁棒，所以即便是使用这个简单快速的对齐方法，整体效果也可以接受。</p>
+<h4 id="选参考帧">选参考帧</h4>
+<p>参考帧选择尽可能清晰的帧。根据基于原始输入绿色通道中梯度的简单度量，选择参考帧作为突发子集中最清晰的帧。同时为了最大限度地减少快门延迟，按下快门后连拍并从前 3 帧中选择参考帧。</p>
+<h4 id="处理raw图像">处理raw图像</h4>
+<p>raw数据格式实际是一整张 RGGB 排列的图像，包含了四个颜色平面。作者直接使用 2X2 的平均池化 得到 下采样的灰度图，对该灰度图像做配准。（我觉得这里不必拘泥于是不是 严格的灰度，因为最后对齐的损失函数使用像素差异来做的，即便不是标准的 RGB-&gt;gray也不太影响对齐性能）</p>
+<h4 id="分层配准">分层配准</h4>
+<p>作者采用了一个由粗到细的配准策略。具体的是构建一个高斯金字塔的结构，先从顶层配（粗）， 将上层的配准结果作为下一层的固定偏移。每层配准的表达式</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="" /><figcaption>image-20210628093708522</figcaption>
+</figure>
 <p>其中 u0 v0 为上一层配准的偏移结果，p 可能是 L1/L2距离，n 是计算相似度窗口的大小。u v 即为要求的 偏移；因此求u v 即为优化D的最小值。关于窗口的大小 和 采用的损失类型会在后面讨论。另外这里没有采用归一化互相关系数类似NCC中的东西对光照对比度做归一化是因为作者认为采集的几帧图像都是在相同曝光才采集的亮度一致。</p>
-<font color=red> 边界情况怎么处理？</font>
-
+<p><font color=red> 边界情况怎么处理？</font></p>
 <p>根据不同的尺度层，采用了不同的超参数。在粗尺度下，使用L2损失和大搜索半径来做对齐（这里的较大搜索半径如何理解？理解为偏移吧），以提高初始对齐的准确率；在底层，使用L1损失和较小的搜索半径。按照文中的说明：</p>
 <ul>
 <li>最底层，使用+-1的搜索半径，L1损失，图像块为16X16</li>
@@ -1073,47 +1133,66 @@
 </ul>
 <p>个人理解，最底层的L1损失精度最高，但是计算比较耗时。高层的L2损失可以做加速，优化的计算方法中这个搜索半径其实就是一个限幅的作用，并不会实际对每组偏移都计算然后选一个最优，而是最小化二次式的最优估计的方式，因此这里添加的搜索半径其实就是个限度，并不会实际影响计算速度，而这里的限度估计也是怕高层估计误差太大跑偏太远使得当前层无法对上一层的偏差纠正。由于在高层有了粗略偏移估计，所以在最低层使用+-1的搜索半径就行。</p>
 <p>如果不采用尺度金子塔的策略，最底层就要 做一个搜索半径变化范围很大的对齐，例如可能一次就要估计出 +20 的偏移，如果使用L2加速对齐策略，这里一次L2最优估计很容易陷入局部最优，采用L1做精细搜索显然计算量很大。</p>
-<h4 id="快速L2对齐"><a href="#快速L2对齐" class="headerlink" title="快速L2对齐"></a>快速L2对齐</h4><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="image-20210628111641192"></p>
-<p>其实就是前面那个 L2 损失 可以分解为为局部和、局部平方和 以及 卷积计算两部分。前者可以通过积分图加速，后者可以在频域加速。然后假设为 D2为 待估计参数偏移 （u,v）的一个二元二次表达式，如下，我们可以通过计算几个固定偏移 (u v) 下对应的 D2值来估计固定参数A ,b  c</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="image-20210628111927519"></p>
+<h4 id="快速l2对齐">快速L2对齐</h4>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="" /><figcaption>image-20210628111641192</figcaption>
+</figure>
+<p>其实就是前面那个 L2 损失 可以分解为为局部和、局部平方和 以及 卷积计算两部分。前者可以通过积分图加速，后者可以在频域加速。然后假设为 D2为 待估计参数偏移 （u,v）的一个二元二次表达式，如下，我们可以通过计算几个固定偏移 (u v) 下对应的 D2值来估计固定参数A ,b c</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="" /><figcaption>image-20210628111927519</figcaption>
+</figure>
 <p>最后全局最优值 (u , v) 即为:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="image-20210628112051053"></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="" /><figcaption>image-20210628112051053</figcaption>
+</figure>
 <p>所以这是一种近似最优的L2加速方法，不需要搜索每个可能的偏移值，只需要计算几个离散的点做一个二次多项式拟合。</p>
-<h3 id="多帧去噪"><a href="#多帧去噪" class="headerlink" title="多帧去噪"></a>多帧去噪</h3><h4 id="时域去噪"><a href="#时域去噪" class="headerlink" title="时域去噪"></a>时域去噪</h4><p>这也是该文章的核心部分，通过连拍实现对同一场景做多次观察来实现降噪。但是从上面的对齐策略可以看出，前面的对齐只考虑了刚性变化，对于非刚性运动遮挡等问题，上述的对齐方法无法估计。因此这就要求<strong>这一节的多帧融合方法可以对上述的对齐误差鲁棒。</strong></p>
-<p>采用了  成对的时域合并方法。</p>
+<h3 id="多帧去噪">多帧去噪</h3>
+<h4 id="时域去噪">时域去噪</h4>
+<p>这也是该文章的核心部分，通过连拍实现对同一场景做多次观察来实现降噪。但是从上面的对齐策略可以看出，前面的对齐只考虑了刚性变化，对于非刚性运动遮挡等问题，上述的对齐方法无法估计。因此这就要求<strong>这一节的多帧融合方法可以对上述的对齐误差鲁棒。</strong></p>
+<p>采用了 成对的时域合并方法。</p>
 <p>首先对每帧图像 变换到频域 T0 为参考帧的频谱图</p>
-<ol>
+<ol type="1">
 <li>首先一个方法，如下式，简单的将每个帧的频谱图加权平均，但是这样效果最差，<strong>因为正交变换是线性的，这样加权等同于直接在空域中对多帧取平均</strong>，因此如果有旋转不对齐的情况鬼影就很严重。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="image-20210704160856275"></p>
-<ol>
-<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考  <a href="/posts/24335/">图像处理-传统去噪算法汇总.</a>  将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p>
-</li>
-<li><p>最后作者的方法是 对  1 的一个改进。如下式，其实就是  (1 - A) T  + A T0  A是个系数 。相当于在参考帧 和 其他帧 的频谱之间做了个线性插值，而不是直接取平均。这个插值系数由  两帧之间的频谱差异 D 计算。但是不是简单的差异，而是拿噪声的强度做了个参考，如果差异相对噪声频谱的强度很大，表明不对齐，那么就给较小的插值系数；反之给较大的权重。<strong>系数  类似 像素级别的维纳收缩的系数</strong>，<strong>只不过维纳收缩中  使用信号噪声的比 来确定收缩系数，这里使用 频谱功率差异和噪声的比来确定每对儿的插值系数。</strong></p>
-</li>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="" /><figcaption>image-20210704160856275</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考 <a href="/posts/24335/">图像处理-传统去噪算法汇总.</a> 将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p></li>
+<li><p>最后作者的方法是 对 1 的一个改进。如下式，其实就是 (1 - A) T + A T0 A是个系数 。相当于在参考帧 和 其他帧 的频谱之间做了个线性插值，而不是直接取平均。这个插值系数由 两帧之间的频谱差异 D 计算。但是不是简单的差异，而是拿噪声的强度做了个参考，如果差异相对噪声频谱的强度很大，表明不对齐，那么就给较小的插值系数；反之给较大的权重。<strong>系数 类似 像素级别的维纳收缩的系数</strong>，<strong>只不过维纳收缩中 使用信号噪声的比 来确定收缩系数，这里使用 频谱功率差异和噪声的比来确定每对儿的插值系数。</strong></p></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="image-20210704162829608"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="image-20210704162934904"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="image-20210704162947537"></p>
-<p>最后，作者说他们的方法  可以在 图像去噪质量 和  鬼影问题 做个较好的权衡</p>
-<h4 id="空间去噪"><a href="#空间去噪" class="headerlink" title="空间去噪"></a>空间去噪</h4><p>通过上一节对时域中的多帧频谱图像平均达到了 减小噪声方差的目的，如果是N张平均可以理解为噪声缩小了 sigma^2 / N，得到一张滤波后的二维频谱图。按照<strong>维纳滤波收缩的形式（即使用信噪比估计收缩系数）</strong>，再在空域对频谱幅值做收缩。但是这一次根据人眼视觉特性，<strong>人眼对高频区的人造痕迹不是很敏感</strong>，所以根据这个特性 作者对不同频带的噪声强度乘了个系数，给高频区域更高的噪声强度，从而降低对高频区域的滤波程度（即尽可能保留高频区域的纹理）。其中 f(w) 是个分段线性的函数。<strong>通过此举，来尽量提高图像的视觉效果 而  不是 SNR</strong></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="" /><figcaption>image-20210704162829608</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="" /><figcaption>image-20210704162934904</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="" /><figcaption>image-20210704162947537</figcaption>
+</figure>
+<p>最后，作者说他们的方法 可以在 图像去噪质量 和 鬼影问题 做个较好的权衡</p>
+<h4 id="空间去噪">空间去噪</h4>
+<p>通过上一节对时域中的多帧频谱图像平均达到了 减小噪声方差的目的，如果是N张平均可以理解为噪声缩小了 sigma^2 / N，得到一张滤波后的二维频谱图。按照<strong>维纳滤波收缩的形式（即使用信噪比估计收缩系数）</strong>，再在空域对频谱幅值做收缩。但是这一次根据人眼视觉特性，<strong>人眼对高频区的人造痕迹不是很敏感</strong>，所以根据这个特性 作者对不同频带的噪声强度乘了个系数，给高频区域更高的噪声强度，从而降低对高频区域的滤波程度（即尽可能保留高频区域的纹理）。其中 f(w) 是个分段线性的函数。<strong>通过此举，来尽量提高图像的视觉效果 而 不是 SNR</strong></p>
 <p>也正是这种 不同频段设置不同噪声水平的维纳滤波方法，使得最后在高对比度的区域噪声抑制效果不好</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704170800.png" alt="image-20210704170800576" style="zoom:50%;" /></p>
-<h3 id="融合Bayer数据"><a href="#融合Bayer数据" class="headerlink" title="融合Bayer数据"></a>融合Bayer数据</h3><p>对 bayer 图像的每个颜色平面分别对齐融合。</p>
-<p>然后就帧融合是  一个块一个块进行的，这些块之间设置一定的重叠，为了防止出现块边缘的不连续效应，使得融合更加平滑，对块进行窗函数操作。在DFT域使用升余弦函数。</p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<h3 id="融合bayer数据">融合Bayer数据</h3>
+<p>对 bayer 图像的每个颜色平面分别对齐融合。</p>
+<p>然后就帧融合是 一个块一个块进行的，这些块之间设置一定的重叠，为了防止出现块边缘的不连续效应，使得融合更加平滑，对块进行窗函数操作。在DFT域使用升余弦函数。</p>
+<h4 id="问题">问题</h4>
+<ol type="1">
 <li>这种滤波方法不能有效地抑制高对比度区域（如强边缘区域）的噪声。这是由于高对比度区域在空间DFT域的分布是非稀疏的，削弱了空间降噪的有效性。</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704192601.png" alt="image-20210704192601394" style="zoom:50%;" /></p>
-<ol>
-<li>由于算法不会拒绝一个不能完全配准的  块 ，所以有时候会出现轻微的鬼影。</li>
+<ol start="2" type="1">
+<li>由于算法不会拒绝一个不能完全配准的 块 ，所以有时候会出现轻微的鬼影。</li>
 </ol>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210704192645530.png" alt="image-20210704192645530" style="zoom:50%;" /></p>
-<ol>
+<ol start="3" type="1">
 <li>有时会出现振铃效应，作者说该现象基本可以忽略不计；（若频域滤波函数具有陡峭变化，则傅里叶逆变换得到的空域滤波函数会在外围出现震荡）</li>
 </ol>
-<h3 id="合成HDR"><a href="#合成HDR" class="headerlink" title="合成HDR"></a>合成HDR</h3><p>经过配准和融合之后，拍摄的多帧Bayer raw图像合成单张raw图像，且具有更高的bit深度和SNR。实际中，输入10bit的raw数据会合成12bit的数据。得到输出raw图像后，还需要一系列的ISP后处理流程才能得到可视化RGB图像。这些步骤主要包括：</p>
-<ol>
+<h3 id="合成hdr">合成HDR</h3>
+<p>经过配准和融合之后，拍摄的多帧Bayer raw图像合成单张raw图像，且具有更高的bit深度和SNR。实际中，输入10bit的raw数据会合成12bit的数据。得到输出raw图像后，还需要一系列的ISP后处理流程才能得到可视化RGB图像。这些步骤主要包括：</p>
+<ol type="1">
 <li>暗电流扣除</li>
 <li>镜头阴影校正</li>
 <li>白平衡</li>
@@ -1128,9 +1207,11 @@
 <li>特定色调颜色调整</li>
 <li>dithering</li>
 </ol>
-<p>其中，动态范围压缩步骤中，利用获取的短曝光图像以及合成的长曝光图像来  融合。融合方法采用了 Exposure Fusion 文章中的方法融合。但是这里作者只用了亮度这一个评判因素，计算两张图的亮度权重，加权融合（这样节省计算量）合后做gamma校正并将原来的颜色赋值上去。</p>
-<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>在极端动态范围场景，可能存在过曝光区域。在有快速运动的低光场景，为了避免运动模糊使用较短的曝光时间，可能会残留比较剧烈的噪声。在高对比度场景中，由于使用了曝光融合，可能会存在轻微的中频halos。</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2>
+<p>其中，动态范围压缩步骤中，利用获取的短曝光图像以及合成的长曝光图像来 融合。融合方法采用了 Exposure Fusion 文章中的方法融合。但是这里作者只用了亮度这一个评判因素，计算两张图的亮度权重，加权融合（这样节省计算量）合后做gamma校正并将原来的颜色赋值上去。</p>
+<h4 id="问题-1">问题</h4>
+<p>在极端动态范围场景，可能存在过曝光区域。在有快速运动的低光场景，为了避免运动模糊使用较短的曝光时间，可能会残留比较剧烈的噪声。在高对比度场景中，由于使用了曝光融合，可能会存在轻微的中频halos。</p>
+<h2 id="实验结果">实验结果</h2>
+
       
     </div>
 
@@ -1208,15 +1289,22 @@
 
       
           <span id="more"></span>
-<h3 id="有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10-这个小数是无限循环，还是不循环，还是不一定"><a href="#有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10-这个小数是无限循环，还是不循环，还是不一定" class="headerlink" title="有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10 这个小数是无限循环，还是不循环，还是不一定"></a>有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10 这个小数是无限循环，还是不循环，还是不一定</h3><p>由于当前位数只由前两位决定，因此如果 第一次出现了 ab 然后后面又出现了ab 那么必然就循环了。而要对10取模，因此a  b 的范围都0~9 两个连续字取值就10 x 10种情况，所以一定会循环。</p>
-<h3 id="1-n中所有的数里面1出现的次数"><a href="#1-n中所有的数里面1出现的次数" class="headerlink" title="1-  n中所有的数里面1出现的次数"></a>1-  n中所有的数里面1出现的次数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">剑指 Offer 43. 1～n 整数中 1 出现的次数</a></p>
-<h3 id="100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢"><a href="#100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢" class="headerlink" title="100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢"></a>100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢</h3><p>将两个人取的总数看作一轮，每一轮先手最多拿走8个，因此后手总是可以保证这一轮两个人一共拿走9个。所以这样如果有99个石子，99/9=11个回合后，后手正好拿完所有的式子，因此先手拿一个一定可以赢</p>
-<h3 id="斗地主中，地主拿到王炸的概率是多少"><a href="#斗地主中，地主拿到王炸的概率是多少" class="headerlink" title="斗地主中，地主拿到王炸的概率是多少"></a>斗地主中，地主拿到王炸的概率是多少</h3><p>这个就是很简单的排列组合问题。54张牌，可以考虑这种分配模型，将54张牌放一排，前17张农民1的，后17张农名2的，最后20张地主的，然后就是算大小王都在后20张的概率，可以看作把大小王放到  54 个位置中的两个，大小王不同，有序，所以A54/2  同理 A20/2</p>
-<h3 id="如何精确测量（计算）不规则物体的表面积？"><a href="#如何精确测量（计算）不规则物体的表面积？" class="headerlink" title="如何精确测量（计算）不规则物体的表面积？"></a>如何精确测量（计算）不规则物体的表面积？</h3><p>热缩膜覆盖后撕开铺在格子纸上数格子</p>
-<h3 id="海盗分金"><a href="#海盗分金" class="headerlink" title="海盗分金"></a>海盗分金</h3><p>经济学上有个“海盗分金”模型,是说5个海盗抢得100枚金币,他们按抽签的顺序依次提方案：首先由1号提出分配方案,然后5人表决,超过半数同意方案才被通过,否则他将被扔入大海喂鲨鱼,依此类推. 假定“每人海盗都是绝顶聪明且很理智”,那么“第一个海盗提出怎样的分配方案才能够使自己的收益最大化?”</p>
-<p>1，2，3，4，5  从后往前推，如果1-3号都死了，只有4，5号，那么5号一定不会给4号投票让4号也死这样自己就能占有所有硬币。因此4号直到5号的想法就会杜绝这种情况发生，因此它要无条件支持3号，避免只剩4，5两人的情况。3号也直到4号会无条件支持他，因此它只用 100  0  0 即可。2号也知道3号这么想的，所以3号必定不会支持2二号，因此它必须讨好2号让他俩同意它的方法，所以就 98  0  1  1 这样根据2号给出的方案4号5号都能拿到1块，比把2号淘汰后3的方案好，所以这样4和5号就会接受2号的方案。同理1号又知道2号这么想的，所以应该放弃2号，并且给3号4号和5号更多的利益，首先3号如果不投1号，到2号手里就只能得到0个硬币，所以1号只需给3号1个硬币即可让3号支持它，而4和5号如果让1号死了他们最多从中获得1个硬币，因此给他们两个硬币比之前多就可以。由于1号只需3 4 5 中取两个拿到票即可，因此4号和五号挑一个给两个硬币拉拢即可。</p>
-<p>综上  一号的方案  97  0  1  2  0  或  97  0  1  0  2    </p>
-<h3 id="机器人挖矿问题"><a href="#机器人挖矿问题" class="headerlink" title="机器人挖矿问题"></a>机器人挖矿问题</h3><p>一个机器人每天可以挖到8个硬币； 50个硬币可以换得一个机器人； 问：给您5个机器人，50个硬币，10天后，最多拥有多少硬币？</p>
+<h3 id="有一个无限小数小数点后前两位是a和ba和b均不为0从第三位起是前两位之和取模10-这个小数是无限循环还是不循环还是不一定">有一个无限小数，小数点后前两位是a和b，a和b均不为0，从第三位起，是前两位之和取模10 这个小数是无限循环，还是不循环，还是不一定</h3>
+<p>由于当前位数只由前两位决定，因此如果 第一次出现了 ab 然后后面又出现了ab 那么必然就循环了。而要对10取模，因此a b 的范围都0~9 两个连续字取值就10 x 10种情况，所以一定会循环。</p>
+<h3 id="n中所有的数里面1出现的次数">1- n中所有的数里面1出现的次数</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">剑指 Offer 43. 1～n 整数中 1 出现的次数</a></p>
+<h3 id="个石子每次只能取1-8个问第一次取多少个能保证自己必赢">100个石子，每次只能取1-8个。问第一次取多少个能保证自己必赢</h3>
+<p>将两个人取的总数看作一轮，每一轮先手最多拿走8个，因此后手总是可以保证这一轮两个人一共拿走9个。所以这样如果有99个石子，99/9=11个回合后，后手正好拿完所有的式子，因此先手拿一个一定可以赢</p>
+<h3 id="斗地主中地主拿到王炸的概率是多少">斗地主中，地主拿到王炸的概率是多少</h3>
+<p>这个就是很简单的排列组合问题。54张牌，可以考虑这种分配模型，将54张牌放一排，前17张农民1的，后17张农名2的，最后20张地主的，然后就是算大小王都在后20张的概率，可以看作把大小王放到 54 个位置中的两个，大小王不同，有序，所以A54/2 同理 A20/2</p>
+<h3 id="如何精确测量计算不规则物体的表面积">如何精确测量（计算）不规则物体的表面积？</h3>
+<p>热缩膜覆盖后撕开铺在格子纸上数格子</p>
+<h3 id="海盗分金">海盗分金</h3>
+<p>经济学上有个“海盗分金”模型,是说5个海盗抢得100枚金币,他们按抽签的顺序依次提方案：首先由1号提出分配方案,然后5人表决,超过半数同意方案才被通过,否则他将被扔入大海喂鲨鱼,依此类推. 假定“每人海盗都是绝顶聪明且很理智”,那么“第一个海盗提出怎样的分配方案才能够使自己的收益最大化?”</p>
+<p>1，2，3，4，5 从后往前推，如果1-3号都死了，只有4，5号，那么5号一定不会给4号投票让4号也死这样自己就能占有所有硬币。因此4号直到5号的想法就会杜绝这种情况发生，因此它要无条件支持3号，避免只剩4，5两人的情况。3号也直到4号会无条件支持他，因此它只用 100 0 0 即可。2号也知道3号这么想的，所以3号必定不会支持2二号，因此它必须讨好2号让他俩同意它的方法，所以就 98 0 1 1 这样根据2号给出的方案4号5号都能拿到1块，比把2号淘汰后3的方案好，所以这样4和5号就会接受2号的方案。同理1号又知道2号这么想的，所以应该放弃2号，并且给3号4号和5号更多的利益，首先3号如果不投1号，到2号手里就只能得到0个硬币，所以1号只需给3号1个硬币即可让3号支持它，而4和5号如果让1号死了他们最多从中获得1个硬币，因此给他们两个硬币比之前多就可以。由于1号只需3 4 5 中取两个拿到票即可，因此4号和五号挑一个给两个硬币拉拢即可。</p>
+<p>综上 一号的方案 97 0 1 2 0 或 97 0 1 0 2</p>
+<h3 id="机器人挖矿问题">机器人挖矿问题</h3>
+<p>一个机器人每天可以挖到8个硬币； 50个硬币可以换得一个机器人； 问：给您5个机器人，50个硬币，10天后，最多拥有多少硬币？</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/midi666/article/details/105230879">参考链接</a></p>
 
       
