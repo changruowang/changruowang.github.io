@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="面经C++容器和算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经C++容器和算法">
+<meta property="og:url" content="http://xxxxx.com/posts/976/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="面经C++容器和算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg">
+<meta property="og:image" content="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="article:published_time" content="2021-04-24T03:54:22.000Z">
+<meta property="article:modified_time" content="2021-08-30T12:11:06.122Z">
+<meta property="article:author" content="常若望">
+<meta property="article:tag" content="面经">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg">
+
+<link rel="canonical" href="http://xxxxx.com/posts/976/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面经C++容器和算法 | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/976/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面经C++容器和算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-24 11:54:22" itemprop="dateCreated datePublished" datetime="2021-04-24T11:54:22+08:00">2021-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:11:06" itemprop="dateModified" datetime="2021-08-30T20:11:06+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E9%9D%A2%E7%BB%8FC-%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">面经C++汇总</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>面经C++容器和算法</p>
+<span id="more"></span>
+<h2 id="容器和算法">容器和算法</h2>
+<h3 id="map和set有什么区别分别怎么实现">map和set有什么区别，分别怎么实现</h3>
+<p>​ map 和 set 在 c++ 中底层都是红黑树实现。他们的区别在于：</p>
+<ol type="1">
+<li>map的存储形式是key value的形式，在树中对 key关键字进行排序。而set就是以集合种元素本身作为建立红黑树的关键子，set只存储元素。</li>
+<li>对map 迭代时，可以对 value修改，但是不能对key修改，因为红黑树以Key为依据建树，一旦修改红黑树就会自动调整，这时候迭代器的指向顺序就乱了。而同理 set 是直接对 集合中的元素建树，所以set迭代时是不可修改的</li>
+<li>map 支持下标操作，可以通过关键字访问对应的元素，但是在使用下标访问时，如果map中存在该键就将值返回，否则以默认值新建该键值关系，因此在只需要判断该键存在与否的时候 使用 find最好。set 不行。</li>
+</ol>
+<h3 id="stl的allocaotr">STL的allocaotr</h3>
+<p>c++的内存管理使用 new/delete 关键字管理。new/delete的具体执行过程：</p>
+<ul>
+<li>new分为两个阶段 : 1. 调用::operator new内存配置 2. 调用构造函数</li>
+<li>delete:分为两个阶段： 1. 调用对象析构函数 2. 调用::operator delete释放内存</li>
+</ul>
+<p>而 STL 中 为了精密分工，将两个阶段（内存配置和对象构造 / 内存释放和对象析构函数）分开操作</p>
+<ol type="1">
+<li>alloc::allocate() 内存配置</li>
+<li>alloc::deallocate() 内存释放</li>
+</ol>
+<p>同时SGI STL采用了两级内存配置，当分配的内存低于128B 时 使用 内存池技术，通过空闲链表链表管理内存，防止内存碎片化，当分配的内存大于128B时，直接使用malloc realloc free等函数分配一整块内存。</p>
+<h3 id="stl-迭代删除元素">STL 迭代删除元素</h3>
+<p>主要考虑迭代器失效的问题。</p>
+<ul>
+<li>对于序列容器中的vector deque ，删除当前元素，后面的元素都会往前移动一个位置，导致后面的迭代器失效（deque的头尾插除外），而 <code>erase</code> 函数会返回下一个迭代器，因此使用返回值即可。</li>
+<li>对于 list 是由双向环形链表构成，因此也只是当前的迭代器失效，不影响后面的。它的erase方法也会返回下一个有效的iterator。</li>
+<li>对于关联容器，map 和 set 底层都是红黑树，删除当前元素只是当前迭代元素失效，后面的不影响, 备份即可。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要求删除键值为偶数的键值对</span></span><br><span class="line"> map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::iterator it = m.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line"> <span class="comment">//错误实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it);</span><br><span class="line">   &#125;</span><br><span class="line">   it++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//正确实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it++); <span class="comment">//重点！！！  it++的写法才行不能  m.rease(it); it++;</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span>&#123;</span><br><span class="line">     it++;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="stl有什么基本组成">STL有什么基本组成</h3>
+<ol type="1">
+<li>容器：STL内部封装好的数据结构，是一种class template，常用的包括vector、list、deque、set、map等</li>
+<li>算法：是一种函数模板，常用的有sort、search、copy等，STL中算法与数据相分离（不像面向对象中将算法与数据封装在class中）。</li>
+<li>迭代器：类似于泛化的指针，用来访问可迭代序列。</li>
+<li>适配器：提供转换操作，有容器适配器、仿函数适配器、迭代器适配器。</li>
+<li>分配器：负责空间配置与管理，用以支持容器。是一种class template。</li>
+<li>仿函数：行为类似函数，就是使一个类的使用看上去像一个函数。它的具体实现就是通过在类中重载了operator()，使这个类具有了类似函数的行为。</li>
+</ol>
+<p>关系：分配器用于给容器分配空间，算法通过迭代器访问容器中的数据从而完成一定的功能，配接器用于适配套接仿函数或容器，或者说通过一定的方法进行封装。例如 queue 和 stack 基本模型都是 deque 通过配接器实现而来。仿函数可以协助算法完成各种操作。</p>
+<h3 id="stl中map与unordered_map">STL中map与unordered_map</h3>
+<ul>
+<li>底层数据结构不一样，map 是使用 红黑数实现，un..使用hash表</li>
+<li>因此查询效率等都不一样</li>
+<li>map 是有序的 un 是无序的 不能迭代访问</li>
+</ul>
+<h3 id="vector和list的区别应用越详细越好">vector和list的区别，应用，越详细越好</h3>
+<p>1、区别：</p>
+<ol type="1">
+<li>vector底层实现是数组；list是双向 链表。</li>
+<li>vector支持随机访问，list不支持。</li>
+<li>vector是顺序内存，list不是。</li>
+<li>vector在中间节点进行插入删除会导致内存拷贝，list不会。</li>
+<li>vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请。</li>
+<li>vector随机访问性能好，插入删除性能差；list随机访问性能差，插入删除性能好。</li>
+</ol>
+<p>2、应用</p>
+<ul>
+<li>vector拥有一段连续的内存空间，因此支持随机访问，如果需要高效的随即访问，而不在乎插入和删除的效率，使用vector。</li>
+<li>list拥有一段不连续的内存空间，如果需要高效的插入和删除，而不关心随机访问，则应使用list。</li>
+</ul>
+<h3 id="stl中迭代器的作用有指针为何还要迭代器">STL中迭代器的作用，有指针为何还要迭代器</h3>
+<p>Iterator类的访问方式就是把不同集合类的访问逻辑抽象出来，使得不用暴露集合内部的结构而达到循环遍历集合的效果。</p>
+<p>他本质是类模板，表现的像指针，重载了 ++ – 和 -&gt;等操作，封装了原生指针，更像智能指针，可以根据不同的数据结构类型来实现不同的++ –等操作。迭代器返回的是对象的引用而不是对象的值。</p>
+<h3 id="stl迭代器是怎么删除元素">STL迭代器是怎么删除元素</h3>
+<p>考察的是迭代器失效的问题。</p>
+<h3 id="找到数组中每个元素后面比他大的第一个数">找到数组中每个元素后面比他大的第一个数</h3>
+<p>单调栈 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-greater-element-ii/">下一个更大元素 II</a></p>
+<h3 id="stl中resize和reserve区别">STL中resize和reserve区别</h3>
+<p>resize 和 size 参数相关，reserve函数和 capacity参数相关。</p>
+<ul>
+<li>size指容器当前拥有的元素个数，它代表的空间是初始化了的 可以直接访问</li>
+<li>capacity则指容器在必须分配新存储空间之前可以存储的元素总数，只是空间预分配，未初始化，不可访问</li>
+</ul>
+<p>调用 resize(n) 函数后，容器的 size = n； 如果 n 不超过最大容量capacity，则不需要重新分配内存，capacity不变；反之则重新分配内存 capacity = size；</p>
+<p>调用 reserve(n) 函数后，如果 n 不大于 capacity ，capacity不变，否则重新分配 n 的内存使得capcity等于n，同时将之前 size 的内容拷贝过来。</p>
+<h3 id="c-stl-的内存优化">C++ STL 的内存优化</h3>
+<h4 id="二级配置器结构">二级配置器结构</h4>
+<p>STL 内存管理使用二级内存配置器</p>
+<ol type="1">
+<li><p>第一级配置器。当分配的内存数大于128字节时，直接使用 malloc free realloc 等函数执行实际的内存分配，和释放等操作。</p></li>
+<li><p>第二级配置器，当分配的内存少于128字节时，使用内存池管理。又称之次层配置（sub-allocation）。每次配置一大块内存，并维护对应的16个空闲链表（free-list）。下次若有相同大小的内存需求，则直接从free-list中取。如果有小额区块被释放，则由配置器回收到free-list中。</p>
+<ol type="a">
+<li><p>通过size找到合适的空闲链表，如果链表不为空，则直接返回第一个node</p></li>
+<li><p>如果链表为空，则使用 blockAlloc 请求分配 node ，即从图中的 start_free-end_free 中的空闲区域再划分出多个连续的node出来。</p></li>
+</ol>
+<ul>
+<li>如果有足够一个node 的空间，就尽可能的分配多的node （最多20）个，将一个Node返回，其他的添加到空闲链表中</li>
+<li>如果一个多的空闲node都没有，再次向操作系统请求分配内存
+<ul>
+<li>若分配成功 再次使用 b 步骤，分配 block</li>
+<li>若分配失败，循环各个自由链表寻找空间，如果寻找到了，再次进行 b 过程，否则抛出异常</li>
+</ul></li>
+</ul></li>
+<li><p>用户调用deallocate释放内存空间，如果要求释放的内存空间大于128bytes，直接调用free。否则按照其大小找到合适的自由链表，并将其插入</p></li>
+</ol>
+<p>上述步骤有三个关键函数：</p>
+<ol type="1">
+<li><p>空间配置函数<code>allocate</code>：</p>
+<p>检查申请的空间大小，大于128字节就调用一级空间配置器使用malloc分配，否则就调用二级空间配置器，从空闲链表中拿数据块。如果空闲链表为空，则调用 refill 函数重新填充空闲链表。</p></li>
+<li><p>重新填充空闲链表 <code>refill</code></p>
+<p>在使用 allocate 配置空闲空间时，如果对应的空闲链表中没有可用的块（Node）。那么就会调用该函数充填空闲链表。新的空间取自内存池。默认取出 20 个数据块，如果内存池的空间不够，能取多少取多少。从内存池中取空闲块给空闲链表是由函数 <code>chunk_alloc</code>完成</p></li>
+<li><p>从内存池取空闲块<code>chunk_alloc</code></p>
+<p>首先根据<strong>end_free - start_free</strong>来判断内存池中的剩余空间是否足以调出nobjs个大小为size的数据块出去。如果内存连一个数据块的空间都无法供应，需要用 malloc 取堆中申请内存。假如山穷水尽，整个系统的堆空间都不够用了，malloc失败，那么chunk_alloc会从空闲链表中找是否有大的数据块，然后将该数据块的空间分给内存池（这个数据块会从链表中去除）。</p></li>
+<li><p>空间释放函数 <code>deallocate</code></p></li>
+<li><p>首先先要检查释放数据块的大小，如果大于128字节就调用第一级配置器，小于128字节则根据数据块的大小来判断回收后的空间会被插入到哪个空闲链表。</p></li>
+</ol>
+<figure>
+<img src="https://pic2.zhimg.com/v2-d34206291e7b3af0208c63395757f101_r.jpg" alt="" /><figcaption>preview</figcaption>
+</figure>
+<p><img src="https://img-blog.csdn.net/20180128161817846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjYxMTg3OA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom: 50%;" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag"><i class="fa fa-tag"></i> 面经</a>
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/30429/" rel="prev" title="STL容器原理">
+      <i class="fa fa-chevron-left"></i> STL容器原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/48230/" rel="next" title="Linux常用命令">
+      Linux常用命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%92%8C%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">容器和算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map%E5%92%8Cset%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%88%86%E5%88%AB%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">map和set有什么区别，分别怎么实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E7%9A%84allocaotr"><span class="nav-number">1.2.</span> <span class="nav-text">STL的allocaotr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl-%E8%BF%AD%E4%BB%A3%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">1.3.</span> <span class="nav-text">STL 迭代删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E6%9C%89%E4%BB%80%E4%B9%88%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">1.4.</span> <span class="nav-text">STL有什么基本组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E4%B8%ADmap%E4%B8%8Eunordered_map"><span class="nav-number">1.5.</span> <span class="nav-text">STL中map与unordered_map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector%E5%92%8Clist%E7%9A%84%E5%8C%BA%E5%88%AB%E5%BA%94%E7%94%A8%E8%B6%8A%E8%AF%A6%E7%BB%86%E8%B6%8A%E5%A5%BD"><span class="nav-number">1.6.</span> <span class="nav-text">vector和list的区别，应用，越详细越好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E4%B8%AD%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%89%E6%8C%87%E9%92%88%E4%B8%BA%E4%BD%95%E8%BF%98%E8%A6%81%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text">STL中迭代器的作用，有指针为何还要迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">1.8.</span> <span class="nav-text">STL迭代器是怎么删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E6%95%B0%E7%BB%84%E4%B8%AD%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E5%90%8E%E9%9D%A2%E6%AF%94%E4%BB%96%E5%A4%A7%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%95%B0"><span class="nav-number">1.9.</span> <span class="nav-text">找到数组中每个元素后面比他大的第一个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stl%E4%B8%ADresize%E5%92%8Creserve%E5%8C%BA%E5%88%AB"><span class="nav-number">1.10.</span> <span class="nav-text">STL中resize和reserve区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-stl-%E7%9A%84%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96"><span class="nav-number">1.11.</span> <span class="nav-text">C++ STL 的内存优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E9%85%8D%E7%BD%AE%E5%99%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.11.1.</span> <span class="nav-text">二级配置器结构</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
