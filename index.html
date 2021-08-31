@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="可乐">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ruowang&#39;s blogs">
+<meta property="og:url" content="http://xxxxx.com/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="可乐">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="常若望">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://xxxxx.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/37731/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/37731/" class="post-title-link" itemprop="url">test_test</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-31 09:41:17 / 修改时间：10:05:07" itemprop="dateCreated datePublished" datetime="2021-08-31T09:41:17+08:00">2021-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">工具软件使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/63450/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/63450/" class="post-title-link" itemprop="url">办公软件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-14 21:20:37" itemprop="dateCreated datePublished" datetime="2021-08-14T21:20:37+08:00">2021-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-31 09:37:47" itemprop="dateModified" datetime="2021-08-31T09:37:47+08:00">2021-08-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">工具软件使用</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h2 id="word">Word</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38300903">公式快速编号</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/55521/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/55521/" class="post-title-link" itemprop="url">const和constexptr</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-08 10:37:39" itemprop="dateCreated datePublished" datetime="2021-08-08T10:37:39+08:00">2021-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:07:51" itemprop="dateModified" datetime="2021-08-30T20:07:51+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/" itemprop="url" rel="index"><span itemprop="name">语言特性</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="const-和-constexpr">const 和 constexpr</h1>
+<h2 id="const">const</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90720012">参考链接</a></p>
+<h3 id="const-修饰变量">const 修饰变量</h3>
+<p>无论const修饰全局还是函数的局部变量，那么该变量都不能被程序员显式的修改，否则编译器会报错。但是变量本质都是地址，因此可以对他取地址给指针，然后通过指针再去修改该值。这样操作编译器不会报错。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span>* p = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;N);</span><br><span class="line">*p = <span class="number">102</span>;   <span class="comment">// 这样就将N的值修改了</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>全局 const 变量：存储在只读存储区，使用上面的方法可以修改 会导致运行错误</li>
+<li>函数局部的 const 变量：存在栈里，使用上面的方法修改它的值，且不会产生运行错误</li>
+</ul>
+<p>c++ 对 const 会对默认类型的变量（非自定义的结构体成员变量，常规的int float 等会优化）在编译时期会优化，上面的例子中 会将所有地方的 N 像宏定义一样直接替换为 1000；例如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; N &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p;</span><br><span class="line"><span class="comment">// N: 输出1000  *P输出102  </span></span><br></pre></td></tr></table></figure>
+<p><strong>因此 推荐将变量定义为 const 类型 这样编译器会直接替换为值，后面就减少一次内存访问请求</strong> 相对宏定义的优势就是 有类型检查</p>
+<h3 id="const-类对象">const 类对象</h3>
+<p>定义 const 类对象 或者 结构体变量一样，代表他们的成员都不能被修改。并且，const 类对象只能调用它的 const 成员函数，而不能调用普通的非const成员函数。</p>
+<figure>
+<img src="https://pic3.zhimg.com/80/v2-f86a180355890874db6c2d3873bdda5a_720w.jpg" alt="" /><figcaption>img</figcaption>
+</figure>
+<h3 id="const指针">const指针</h3>
+<ul>
+<li>一种指 指向的地址的内容不可以修改 但是它可以转而指向别的地址 (结合最开始的例子可以看出 <strong>编译器是通过 “指针的类型” 来判断是否只读的，因此如果普通指针指向const的变量地址，它的值仍然可以修改</strong>) <code>const int *p</code></li>
+<li>指向的地址可以修改，但是它不能再指向别人 <code>int * const p = &amp;a</code> ( 就看const 后面跟的是啥 啥就不能变)</li>
+</ul>
+<h3 id="const-成员函数">const 成员函数</h3>
+<p>代表该成员函数 不能修改类中的成员变量，同时也正是这个特性，const 类的对象只能调用 ocnst 修饰的成员函数</p>
+<h2 id="constexpr">constexpr</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/256416683">参考链接</a></p>
+<p>constexpr是C++11中新增的关键字，其语义是“常量表达式”，也就是在编译期可求值的表达式。最基础的常量表达式就是字面值或全局变量/函数的地址或sizeof等关键字返回的结果，而其它常量表达式都是由基础表达式通过各种确定的运算得到的。constexpr值可用于enum、switch、数组长度等场合。</p>
+<h3 id="编译时常量常量表达式">编译时常量/常量表达式</h3>
+<ul>
+<li>必须是可以在编译阶段被识别的。比如模版的参数／数组的大小</li>
+<li>例如 const int a = 5; 此时 5 就是一个常量表达式 sizeof() 就是个常量表达式 在编译时期就能确定 可以能用来初始化数组大小 case语句的分支等</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">int</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fixed_size_list</span></span></span><br><span class="line"><span class="class">&#123;</span> <span class="comment">/*...*/</span> &#125;;</span><br><span class="line"></span><br><span class="line">fixed_size_list&lt;X&gt; mylist;     <span class="comment">// &lt;-- X必须是字面值类型</span></span><br><span class="line"><span class="keyword">int</span> numbers[X];   <span class="comment">// &lt;-- X必须是字面值类型</span></span><br></pre></td></tr></table></figure>
+<h3 id="特性">特性</h3>
+<p>constexpr 在修饰函数的时候</p>
+<ul>
+<li>如果函数的入口参数 是使用的字符常量，在编译时期可以确定 那么这个函数就是常量表达式 返回值可以直接用来初始化数组大小</li>
+<li>如果入口参数的值编译时期无法直接确定 那么他就是个普通函数</li>
+</ul>
+<p>constexpr的好处：</p>
+<ol type="1">
+<li>是一种很强的约束，更好地保证程序的正确语义不被破坏。</li>
+<li>编译器可以在编译期对constexpr的代码进行非常大的优化，<strong>比如将用到的constexpr表达式都直接替换成最终结果等。</strong></li>
+<li>相比宏来说，没有额外的开销，但更安全可靠</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/53181/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/53181/" class="post-title-link" itemprop="url">Rabin-Karp算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-11 11:40:30" itemprop="dateCreated datePublished" datetime="2021-07-11T11:40:30+08:00">2021-07-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:23:28" itemprop="dateModified" datetime="2021-08-30T20:23:28+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">经典算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="子字符串查找-rabin-karp算法">子字符串查找 ——Rabin-Karp算法</h1>
+<p>求字符串的连续子串，如果传统的散列法复杂度很高。而Rabin-Karp算法的思路是 将字符串每个 字符 a~z 看作 0~25 组成的 26 进制的数。并且在计算 每个位置长度 为 n 的连续子串的散列值时 可以使用 除留余法 方式 将散列的复杂度降低为 O(1)</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210711114504.png" alt="" /><figcaption>image-20210711114457000</figcaption>
+</figure>
+<h3 id="例题">例题</h3>
+<h4 id="最长重复子串"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-duplicate-substring/">最长重复子串</a></h4>
+<p>这个题也可以用 动态规划做，dp 设置为 字符串1 前 i 个 和 字符串2 前 j 个的子串的最长后缀长度。通过 两层遍历即可完成。</p>
+<p>但是使用 二分查找 + hash 法 复杂度会更低（前提是 hash 使用Rabin-Karp算法散列，保证散列的复杂度为O(1)）</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/24895aca0459">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/53642/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/53642/" class="post-title-link" itemprop="url">二分匹配</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-09 20:05:22" itemprop="dateCreated datePublished" datetime="2021-07-09T20:05:22+08:00">2021-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:23:17" itemprop="dateModified" datetime="2021-08-30T20:23:17+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">经典算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="二分匹配">二分匹配</h1>
+<h2 id="匈牙利算法">匈牙利算法</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96229700">参考链接</a></p>
+<p>主要就是 能划分为 二分图，集合0中的元素之间不会有匹配关系，它只会和集合1中的元素有匹配关系，可能一对一一对多。同理集合2中的元素也是</p>
+<p>常用的套路是 按照 奇偶 位置划分二分集合。</p>
+<h3 id="算法思路">算法思路</h3>
+<p>首先 依次从左边集合中选出一个元素 和 右边集合中的元素匹配。如果右边集合中某个元素已经被占用了，那么根据它指向的左边集合中的元素号，递归的去调整它，以给当前元素腾位置。如果能腾出来，那么成功。否则返回false 算法实现的关键在于 一个记录 右边 到左边 的数组序号的映射关系，和 右边序号的访问情况。</p>
+<p>算法时间复杂度，O(ExV) V为左边集合顶点的数目，E为图中的边数。每次去左边的一个顶点去和右边集合的顶点匹配，最坏情况就是把图中所有的边都遍历一遍才能找到可以匹配的结果。</p>
+<p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/b9eae162e02f4f928eac37d7699b352e?tpId=37&amp;&amp;tqId=21251&amp;rp=1&amp;ru=/ta/huawei&amp;qru=/ta/huawei/question-ranking">例题</a></p>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> M, N;            <span class="comment">//M, N分别表示左、右侧集合的元素数量</span></span><br><span class="line"><span class="keyword">int</span> Map[MAXM][MAXN]; <span class="comment">//邻接矩阵存图</span></span><br><span class="line"><span class="keyword">int</span> p[MAXN];         <span class="comment">//记录当前右侧元素所对应的左侧元素</span></span><br><span class="line"><span class="keyword">bool</span> vis[MAXN];      <span class="comment">//记录右侧元素是否已被访问过</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">        <span class="keyword">if</span> (Map[i][j] &amp;&amp; !vis[j]) <span class="comment">//有边且未访问</span></span><br><span class="line">        &#123;</span><br><span class="line">            vis[j] = <span class="literal">true</span>;                 <span class="comment">//记录状态为访问过</span></span><br><span class="line">            <span class="keyword">if</span> (p[j] == <span class="number">0</span> || <span class="built_in">match</span>(p[j])) <span class="comment">//如果暂无匹配，或者原来匹配的左侧元素可以找到新的匹配</span></span><br><span class="line">            &#123;</span><br><span class="line">                p[j] = i;    <span class="comment">//当前左侧元素成为当前右侧元素的新匹配</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回匹配成功</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//循环结束，仍未找到匹配，返回匹配失败</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hungarian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(vis)); <span class="comment">//重置vis数组</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">match</span>(i))</span><br><span class="line">            cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="km算法">KM算法</h2>
+<p>KM 算法是解决带权值的 二分匹配问题</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sixdaycoder/article/details/47720471">参考链接</a></p>
+<h3 id="算法实现原理">算法实现原理</h3>
+<p>基本原理也是依靠匈牙利算法，但是每个边都带了权重，因此思想是 取当前的最大子图 然后按照匈牙利算法去寻找完美匹配，如果无法实现完备匹配 就需要扩充最大子图。</p>
+<p>通俗的算法原理：集合A中的1个元素都可以和B中的多个元素匹配，但是由于只能择其一，所以就选和B中匹配得分最大的边 联通，同理所有A中的点都这样筛选边，这样如果 A中的所有元素都和B中的有匹配（即实现完备匹配），那么此时图的匹配权重一定是最大。此时这就可以转化为匈牙利算法去搜索有无完备匹配。</p>
+<p>如果没有实现完备匹配，那一定是有 n 个点 n-1 个边之间出现冲突。所以直观的应该放宽选取可匹配边的权重标准 让新的权重较小的边也加入图中，再尝试是否可以完备匹配，如果此时可以完备匹配 那么起始最终匹配的权重和相对初始的最大子图的完备匹配后的权重和（但是无法实现） 是 略微缩小的。KM算法就是通过一定的策略完成 扩充子图 -&gt; 完备匹配 这个循环的，并保证 子图的权重 一定是 从初始最大 -&gt; 小递减的 中间没有跳跃，所以最后匹配的权重和最大</p>
+<ul>
+<li>寻找相等子图的完备匹配</li>
+</ul>
+<h3 id="实现步骤">实现步骤</h3>
+<ol type="1">
+<li>初始化可行顶标的值 (设定lx,ly的初始值)</li>
+<li>用匈牙利算法寻找相等子图的完备匹配</li>
+<li>若未找到增广路则修改可行顶标的值</li>
+<li>重复(2)(3)直到找到相等子图的完备匹配为止</li>
+</ol>
+<p>实现子图扩充最优 要 按照两个原则来实现：</p>
+<ul>
+<li>可行顶标</li>
+<li>可行边，顶点的定标和 等于 边的权重 为一个可行边 可以加入相等子图中</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/623/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/623/" class="post-title-link" itemprop="url">HDR-survey</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-05 20:20:32" itemprop="dateCreated datePublished" datetime="2021-07-05T20:20:32+08:00">2021-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:13:35" itemprop="dateModified" datetime="2021-08-30T20:13:35+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZHANG2012LIANG/article/details/85031065">图像融合</a></p>
+<h1 id="hdr-综述">HDR 综述</h1>
+<h2 id="hdr-概念">HDR 概念</h2>
+<ol type="1">
+<li>HDR 动态范围：是指图像的最大亮度和最小亮度的比值。对于一个8位的图像，能够存储的动态的范围只有 10^2量级，但是自然场景以及人眼的感知范围远远大于这个。而显示器可以显示的动态范围也只有 10^2 量级，因此直接显示 HDR 图像也会使细节丢失。</li>
+<li>HDR成像：包含两个 过程，一个是成像，相机采集生成位深度为10，12或者16位的高动态图像；另一个过程是 显示，使用特殊的显示器显示高动态范围的图像。</li>
+</ol>
+<p>我理解的低光图像增强和HDR的区别：</p>
+<p>主要就是两种场景：</p>
+<ol type="1">
+<li>一种是纯黑的图提亮；</li>
+<li>一种是光照不均匀的图</li>
+</ol>
+<p>低光照增强实际就是 8位的 图像 -&gt; 提亮后的8位图像，整个过程图像位深度不变，只是通过算法改变了图像的效果，可以认为是伪HDR图像，因为记录的图像的动态范围并没有增加</p>
+<p>HDR技术，则是 8位LDR图像 -&gt; 10/14/16位HDR图像，图像的位深度变大了，图像记录信息的动态范围确确实实增加了。但是显示器能显示的动态范围有限，因此还是要经过 色调映射技术才能在一般的显示器上显示。</p>
+<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210706200639404.png" alt="image-20210706200639404" style="zoom:50%;" /></p>
+<h2 id="方法分类">方法分类</h2>
+<h3 id="tone-map色调映射">Tone Map色调映射</h3>
+<p>照相机和摄像机可以捕捉到HDR的影像，渲染过程中可以产生HDR的画面。这些内容如果需要显示到LDR的设备上，就需要一个称为tone mapping的过程，把HDR变成LDR HDR-&gt;LDR显示</p>
+<p>Tone Map色调映射算法都可以看作 S 曲线映射 只是不同方法曲线形状不太一样</p>
+<h3 id="单帧hdr">单帧HDR</h3>
+<p>单帧HDR 是输入为LDR图像，然后提升局部和全部细节输出，感觉输出也是LDR域的伪HDR图像</p>
+<ol type="1">
+<li>条件编码结构：传统的CNN在图像所有位置都采用相同的滤波器权重处理，但是对于图像中 不同区域的处理是不同的，例如图像超分中 通过预先语义分割的一个map作为条件图来使网络对不同纹理的区域有不同的处理。在HDR中也一样，因此常常会通过一个条件子网络来 做位置相关编码核图像相关编码。但是感觉这种和注意力没啥区别 都是点乘 一个 条件图 + 一个偏置</li>
+<li>分频处理的结构：将图像分为不同的频带分别处理 低中高 分别处理融合 例如 DRBN 文中 就是全局三个频带处理，并且再每个阶段会有频带间的信息交流 就是会上采样融合作为下一阶段的输入 同时 全局和局部特征提取结构也是很常见的结构</li>
+<li>生成多帧再融合的思路就是将 单张图像 通过 乘系数 或者 通过相机响应模型等方法 扩展为多张亮度等级的图 再采用多帧融合的思路进行 融合</li>
+</ol>
+<h3 id="多帧hdr">多帧HDR</h3>
+<p>多帧HDR 常常是要考虑 动态场景下的 HDR 如果是对齐的 可以之间采用一个蒙板函数融合生成 HDR 图像 然后 ToneMap压缩动态范围再显示。同时多帧HDR可能有下面两种思路</p>
+<ul>
+<li>使用不同的曝光采集多帧图像 融合 由于不同时间采集的一定会有前景不对齐的问题</li>
+<li>采集多张相同的低曝光的图像 HDR+ 中 避免不可逆的过饱和，同时也可以采用多帧降噪方法抑制阴影区域的噪声，但是也存在不对齐的问题</li>
+</ul>
+<p>网络结构</p>
+<ol type="1">
+<li>传统思路：传统思路就是 预处理 对齐 融合的 方法；早期的方法都是这样做的</li>
+<li>多分支的网络：认为不需要认为做 对齐 CNN有自动对齐的功能，因此直接采用多分枝特征提取 + 融合 + 解码 的结构</li>
+<li>在网络中引入 特征对齐网络，相对第二种的朴素思路自然效果更好。具体的可以是 使用可变形卷积构建的多尺度特征对齐模板，也可以是基于自适应卷积滤波器的结构，就是一个分支输出线性变换参数 ，通道数为 cxc 然后对对应位置的特征图的 c x c 领域的特征做线性变换输出。融合的话可以使用注意力机制的特征融合模块</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21983679">参考链接</a></p>
+<p>https://zhuanlan.zhihu.com/p/376246037</p>
+<p>https://zhuanlan.zhihu.com/p/361596881</p>
+<p>https://blog.csdn.net/weixin_45250844/article/details/103207184</p>
+<p>https://mp.weixin.qq.com/s/WxHn33gIArfRlRdg0jDfdw</p>
+<p>https://mp.weixin.qq.com/s/Tqxj7UfX8z6o3l8OfAqW0w</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/46151/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/46151/" class="post-title-link" itemprop="url">图像处理-逆滤波和维纳滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-30 22:21:45" itemprop="dateCreated datePublished" datetime="2021-06-30T22:21:45+08:00">2021-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:18:23" itemprop="dateModified" datetime="2021-08-30T20:18:23+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">传统图像处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="维纳滤波">维纳滤波</h1>
+<h2 id="逆滤波">逆滤波</h2>
+<p>用于不含噪声的图像去模糊</p>
+<h2 id="维纳滤波-1">维纳滤波</h2>
+<p>用于含有噪声的图像去模糊 以及去噪</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">参考链接</a></p>
+<h3 id="基本原理">基本原理</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580210/article/details/105106563">维纳滤波详解</a></p>
+<p>在图像拍摄过程中由于各种原因会造成图像退化，图像退化模型如下：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222253.png" alt="" /><figcaption>image-20210630222253821</figcaption>
+</figure>
+<p>其中，⋆ 为卷积符号，f ( x , y ) 为输入图像，g ( x , y ) 为退化图像，h ( x , y ) 为退化函数，η ( x , y ) 为加性噪声，将上式进行傅里叶变换有（根据傅里叶变换的特性，<strong>空间域中的卷积相当于频率域中的乘积</strong>）：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222401.png" alt="" /><figcaption>image-20210630222401374</figcaption>
+</figure>
+<p><strong>(1) 如果不考虑退化函数</strong>，图像退化模型就简化为图像噪声模型</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222436.png" alt="" /><figcaption>image-20210630222435984</figcaption>
+</figure>
+<p>图像增强问题成为单纯的图像去噪问题，可以通过空间域滤波等众多方法解决。</p>
+<p><strong>(2) 如果不考虑加性噪声</strong>，图像退化模型就简化为</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222453.png" alt="" /><figcaption>image-20210630222453569</figcaption>
+</figure>
+<p>这种问题可以通过逆滤波解决，即通过傅里叶变化以及阵列除法即可获得恢复后的图像频谱：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222524.png" alt="" /><figcaption>image-20210630222524519</figcaption>
+</figure>
+<p>但是对于退化模型 H 如何获取呢？数字图像处理中有 观察估计法，试验估计法和建模估计。例如建模估中可以通过运动数学模型将退化函数构造为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222732.png" alt="" /><figcaption>image-20210630222732217</figcaption>
+</figure>
+<p><strong>(3) 如果退化函数和加性噪声都考虑</strong>，空域滤波器无法解决图像退化问题，逆滤波效果因为噪声的存在会变得非常差，这个时候就需要用到<strong>维纳滤波</strong>，（维纳滤波的推导写在结论中）维纳滤波公式如下：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630222742.png" alt="" /><figcaption>image-20210630222742064</figcaption>
+</figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/44176/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/44176/" class="post-title-link" itemprop="url">BM3D</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-22 21:21:24" itemprop="dateCreated datePublished" datetime="2021-06-22T21:21:24+08:00">2021-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:15:14" itemprop="dateModified" datetime="2021-08-30T20:15:14+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%8E%BB%E5%99%AA/" itemprop="url" rel="index"><span itemprop="name">图像视频去噪</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<p>https://blog.csdn.net/qq_33552519/article/details/108632146</p>
+<p>https://www.codenong.com/cs105736895/</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/62084/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/62084/" class="post-title-link" itemprop="url">图像视频去噪综述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-22 20:36:56" itemprop="dateCreated datePublished" datetime="2021-06-22T20:36:56+08:00">2021-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:15:10" itemprop="dateModified" datetime="2021-08-30T20:15:10+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%8E%BB%E5%99%AA/" itemprop="url" rel="index"><span itemprop="name">图像视频去噪</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<p>https://segmentfault.com/a/1190000021721649</p>
+<p>https://soaringleefighting.github.io/2019/05/29/%E3%80%90CV%E7%B3%BB%E5%88%97%E3%80%91%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%EF%BC%88%E5%8E%BB%E5%99%AA+%E9%94%90%E5%8C%96%EF%BC%89/</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/51754/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/51754/" class="post-title-link" itemprop="url">HDR+</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-21 20:48:56" itemprop="dateCreated datePublished" datetime="2021-06-21T20:48:56+08:00">2021-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:13:39" itemprop="dateModified" datetime="2021-08-30T20:13:39+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="hdr">HDR+</h1>
+<p>Burst photography for high dynamic range and low-light imaging on mobile cameras</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zbwgycm/article/details/82458240">参考链接</a></p>
+<h2 id="主要思想">主要思想</h2>
+<ol type="1">
+<li>不使用多曝光。而是使用一个固定的较低的曝光时间和增益采集多帧图像。将这个曝光设置的足够低以比避免过曝溢出</li>
+<li>直接对bayer格式的数据处理，而不是RGB。一方面采集多帧如果都用RGB格式那每张都要经过ISP，另一方面ISP会对RAW图像做个非线性化，使得去噪变得困难</li>
+<li>使用了基于 FFT 的快速对齐算法</li>
+</ol>
+<p>主要思想是，首先使用多帧低照度的 raw 格式的图像做去噪融合成一张（这是一个常用多帧去噪手段），然后使用一个自适应的曝光算法将该图像扩展到长短曝光后融合，最后将处理后的 RAW 数据 经过ISP流程得到结果。</p>
+<h2 id="主要内容">主要内容</h2>
+<ol type="1">
+<li>故意曝光不足避免过曝而不可逆</li>
+<li>采集多帧用于抑制暗区域噪声</li>
+<li>使用自动曝光算法 设置长短曝光参数，短曝光参数用于调整相机硬件参数来采集固定曝光的图像，长曝光参数用于对短曝光图像做tone map合成长曝光图</li>
+<li>使用 像素级的 曝光融合方法 融合长短曝光图像</li>
+<li>色调映射（tone map）压缩动态范围</li>
+</ol>
+<h3 id="自动曝光">自动曝光</h3>
+<p>这一步其实是在多帧去噪融合之后使用的，按照原文顺序先介绍了。</p>
+<p>现在的 ISP 中都集成了 自动对焦 自动曝光 自动白平衡算法（3A），理论上我们可以直接使用ISP中自带的自动曝光算法根据场景自动设置相机曝光参数，然后再沿用这个参数采集多帧固定曝光的图像用于后续的融合去噪。但是，对于高动态范围的场景，拍摄的图像可能包含无法通过后期 HDR 色调映射恢复的高光或曝光不足的区域。（个人感觉主要是过曝不可逆，所以要避免）</p>
+<p>因此其实最终是对 两张gamma矫正后的图像做融合，其中一个是多帧去噪后的欠曝光图，另一张是对欠曝光后的图使用数字曝光补偿后的图。因此自动曝光算法可以 表述 为两个曝光水平：</p>
+<ul>
+<li><strong>合成长曝光</strong>：由短曝光图合成的长曝光图，在色调映射中用于恢复阴影区域</li>
+<li><strong>短曝光</strong>：用于捕捉场景中亮的区域</li>
+</ul>
+<p><em>动态范围</em>： 图像能捕捉的场景中的光亮度的范围。自然场景中的动态场景通常特别高，人眼能看到的范围也很大。而通常相机能表示的范围只有256中。即便相机能采集到大动态范围的图像，但是一般的显示器能显示的亮度等级也有限，一方面为了弥补相机自生的动态感知范围不足的问题常常采用多曝光融合的方式来合成高动态的图像（场景亮暗细节都能保留），另一方面还要通过tone map色调映射技术将HDR图像压缩为，转换成可以在显示器上显示出更符合人眼视觉的LDR图像。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90093872">动态范围</a></p>
+<p>虽然说要尽量先使用低曝光的图像去采集多帧图像，从而避免饱和。但是曝光太低意味着噪声太强，需要融合更多帧来抑制噪声，这需要付出计算代价。同时如果过分的压缩动态范围（我理解为这是 Tone map 这一步的压缩动态范围，将合成的高动态图使用色调映射手段压缩为显示器可以显示的范围）会出现卡通效应（就是阴影部分被过度提亮了）<strong>文章中设置的压缩比为8（即最亮：最暗大约8比1）</strong></p>
+<h4 id="基于实例的自动曝光">基于实例的自动曝光</h4>
+<p>构建了一个包含5000个场景的数据集，并手动给每张图片标注 短曝光参数 和 长曝光参数，前者用于采集图像的曝光参数，后者用于后面 tone map 的参数。给定一帧raw的输入图像，提取他的特征描述符并在数据库中寻找与他对应的候选样例，然后将所有候选样例手动标注的两个参数分别做一个简单的加权融合。</p>
+<ul>
+<li>用于计算特征描述符的图像保证是白平衡的</li>
+<li>是在大幅下采样的版本上计算特征描述符，用于量化场景亮度分布</li>
+<li>四组64纬的特征，其中两组在两个不同的尺度空间上提取的，其中两组提取自图像 max(R,G,B) 和 avg(R,G,B)；前者用于代表频率空间的曝光，后两组用于关注颜色削波 <font color=red>（color clipping ？？？？？不懂）</font></li>
+<li>带注意力的特征提取手段，通常情况下计算特征时都是给与图像中心更多的权重，当选择中人脸时也可以给与选定区域较大的权重。</li>
+<li>选取候选实例中亮度在当前场景亮度8倍的实例，以防止昼夜颠倒的不真实情况</li>
+</ul>
+<h4 id="曝光参数分解">曝光参数分解</h4>
+<p>通过前面可以计算出 长短曝光参数。那么这一步就是要将从实例中查询计算的短曝光参数 分解为 真实的相机参数（相机曝光时间和曝光增益）然后修改相机参数再去采集图像。这一步使用一个固定的策略来 平衡噪声 和 运动模糊（如果曝光时间长就会有运动模糊）之间的关系</p>
+<ul>
+<li>对于亮的场景，曝光增益设置到最低，而曝光时间提高到8ms</li>
+<li>当场景变得暗时，曝光时间固定8ms不变，曝光增益x4</li>
+<li>最后曝光时间和曝光增益一起成比例的提高，曝光时间上限100ms 曝光增益上限96x 为了尽可能提高采集图像的信噪比，尽可能提高曝光增益</li>
+</ul>
+<p><font color=red>（这个过程不是很理解 为何要这么做 以及前面的短曝光参数在这一步做何用？）</font></p>
+<h4 id="图像数量burst-size">图像数量(burst size)</h4>
+<p>在较亮的场景 使用1~2张图即可，因为噪声不多，虽然多一点图也可以抑制运动模糊啥的。在低光照环境下 或者 高动态场景下，通常要将低亮度的区域亮度拉升，会有噪声，因此需要较多帧去噪，提高信噪比。</p>
+<p>通常作者 会限制 图像数量才 2~8 张</p>
+<h4 id="图像流采集">图像流采集</h4>
+<p>自动曝光算法运行在ISP之前。每四帧图像做一次 自动曝光的参数 计算，计算一次大概10ms，没必要每次都计算因为场景不会急速变化，但是也不能太久计算一次参数，免得场景切换时显示有延迟。</p>
+<p>另一个问题就是，高动态场景中如果包含大量过曝的像素，对估计 低曝光参数 有影响，因此作者通过 忽略 部分过曝像素来计算 匹配参数能较好地匹配样例中相似的低光照场景 <font color=red>（？）</font></p>
+<h3 id="帧对齐">帧对齐</h3>
+<p>常用的对齐方法是光流对齐，这种方法可以对齐非刚体形变，但是计算复杂度很高。出于速度、内存和性能（毕竟是移动端）的折衷考虑，作者提出了一个简单的对齐的方法，虽然这种方法无法应对非刚性形变并且误差比较大，但是后续的多帧融合算法对这个误差比较鲁棒，所以即便是使用这个简单快速的对齐方法，整体效果也可以接受。</p>
+<h4 id="选参考帧">选参考帧</h4>
+<p>参考帧选择尽可能清晰的帧。根据基于原始输入绿色通道中梯度的简单度量，选择参考帧作为突发子集中最清晰的帧。同时为了最大限度地减少快门延迟，按下快门后连拍并从前 3 帧中选择参考帧。</p>
+<h4 id="处理raw图像">处理raw图像</h4>
+<p>raw数据格式实际是一整张 RGGB 排列的图像，包含了四个颜色平面。作者直接使用 2X2 的平均池化 得到 下采样的灰度图，对该灰度图像做配准。（我觉得这里不必拘泥于是不是 严格的灰度，因为最后对齐的损失函数使用像素差异来做的，即便不是标准的 RGB-&gt;gray也不太影响对齐性能）</p>
+<h4 id="分层配准">分层配准</h4>
+<p>作者采用了一个由粗到细的配准策略。具体的是构建一个高斯金字塔的结构，先从顶层配（粗）， 将上层的配准结果作为下一层的固定偏移。每层配准的表达式</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="" /><figcaption>image-20210628093708522</figcaption>
+</figure>
+<p>其中 u0 v0 为上一层配准的偏移结果，p 可能是 L1/L2距离，n 是计算相似度窗口的大小。u v 即为要求的 偏移；因此求u v 即为优化D的最小值。关于窗口的大小 和 采用的损失类型会在后面讨论。另外这里没有采用归一化互相关系数类似NCC中的东西对光照对比度做归一化是因为作者认为采集的几帧图像都是在相同曝光才采集的亮度一致。</p>
+<p><font color=red> 边界情况怎么处理？</font></p>
+<p>根据不同的尺度层，采用了不同的超参数。在粗尺度下，使用L2损失和大搜索半径来做对齐（这里的较大搜索半径如何理解？理解为偏移吧），以提高初始对齐的准确率；在底层，使用L1损失和较小的搜索半径。按照文中的说明：</p>
+<ul>
+<li>最底层，使用+-1的搜索半径，L1损失，图像块为16X16</li>
+<li>接着，对上层做二倍下采样，+-4搜索半径，L2损失</li>
+<li>接着，对上层做四倍下采样，+-4搜索半径，L2损失</li>
+<li>…</li>
+</ul>
+<p>个人理解，最底层的L1损失精度最高，但是计算比较耗时。高层的L2损失可以做加速，优化的计算方法中这个搜索半径其实就是一个限幅的作用，并不会实际对每组偏移都计算然后选一个最优，而是最小化二次式的最优估计的方式，因此这里添加的搜索半径其实就是个限度，并不会实际影响计算速度，而这里的限度估计也是怕高层估计误差太大跑偏太远使得当前层无法对上一层的偏差纠正。由于在高层有了粗略偏移估计，所以在最低层使用+-1的搜索半径就行。</p>
+<p>如果不采用尺度金子塔的策略，最底层就要 做一个搜索半径变化范围很大的对齐，例如可能一次就要估计出 +20 的偏移，如果使用L2加速对齐策略，这里一次L2最优估计很容易陷入局部最优，采用L1做精细搜索显然计算量很大。</p>
+<h4 id="快速l2对齐">快速L2对齐</h4>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="" /><figcaption>image-20210628111641192</figcaption>
+</figure>
+<p>其实就是前面那个 L2 损失 可以分解为为局部和、局部平方和 以及 卷积计算两部分。前者可以通过积分图加速，后者可以在频域加速。然后假设为 D2为 待估计参数偏移 （u,v）的一个二元二次表达式，如下，我们可以通过计算几个固定偏移 (u v) 下对应的 D2值来估计固定参数A ,b c</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="" /><figcaption>image-20210628111927519</figcaption>
+</figure>
+<p>最后全局最优值 (u , v) 即为:</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="" /><figcaption>image-20210628112051053</figcaption>
+</figure>
+<p>所以这是一种近似最优的L2加速方法，不需要搜索每个可能的偏移值，只需要计算几个离散的点做一个二次多项式拟合。</p>
+<h3 id="多帧去噪">多帧去噪</h3>
+<h4 id="时域去噪">时域去噪</h4>
+<p>这也是该文章的核心部分，通过连拍实现对同一场景做多次观察来实现降噪。但是从上面的对齐策略可以看出，前面的对齐只考虑了刚性变化，对于非刚性运动遮挡等问题，上述的对齐方法无法估计。因此这就要求<strong>这一节的多帧融合方法可以对上述的对齐误差鲁棒。</strong></p>
+<p>采用了 成对的时域合并方法。</p>
+<p>首先对每帧图像 变换到频域 T0 为参考帧的频谱图</p>
+<ol type="1">
+<li>首先一个方法，如下式，简单的将每个帧的频谱图加权平均，但是这样效果最差，<strong>因为正交变换是线性的，这样加权等同于直接在空域中对多帧取平均</strong>，因此如果有旋转不对齐的情况鬼影就很严重。</li>
+</ol>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="" /><figcaption>image-20210704160856275</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考 <a href="/posts/24335/">图像处理-传统去噪算法汇总.</a> 将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p></li>
+<li><p>最后作者的方法是 对 1 的一个改进。如下式，其实就是 (1 - A) T + A T0 A是个系数 。相当于在参考帧 和 其他帧 的频谱之间做了个线性插值，而不是直接取平均。这个插值系数由 两帧之间的频谱差异 D 计算。但是不是简单的差异，而是拿噪声的强度做了个参考，如果差异相对噪声频谱的强度很大，表明不对齐，那么就给较小的插值系数；反之给较大的权重。<strong>系数 类似 像素级别的维纳收缩的系数</strong>，<strong>只不过维纳收缩中 使用信号噪声的比 来确定收缩系数，这里使用 频谱功率差异和噪声的比来确定每对儿的插值系数。</strong></p></li>
+</ol>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="" /><figcaption>image-20210704162829608</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="" /><figcaption>image-20210704162934904</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="" /><figcaption>image-20210704162947537</figcaption>
+</figure>
+<p>最后，作者说他们的方法 可以在 图像去噪质量 和 鬼影问题 做个较好的权衡</p>
+<h4 id="空间去噪">空间去噪</h4>
+<p>通过上一节对时域中的多帧频谱图像平均达到了 减小噪声方差的目的，如果是N张平均可以理解为噪声缩小了 sigma^2 / N，得到一张滤波后的二维频谱图。按照<strong>维纳滤波收缩的形式（即使用信噪比估计收缩系数）</strong>，再在空域对频谱幅值做收缩。但是这一次根据人眼视觉特性，<strong>人眼对高频区的人造痕迹不是很敏感</strong>，所以根据这个特性 作者对不同频带的噪声强度乘了个系数，给高频区域更高的噪声强度，从而降低对高频区域的滤波程度（即尽可能保留高频区域的纹理）。其中 f(w) 是个分段线性的函数。<strong>通过此举，来尽量提高图像的视觉效果 而 不是 SNR</strong></p>
+<p>也正是这种 不同频段设置不同噪声水平的维纳滤波方法，使得最后在高对比度的区域噪声抑制效果不好</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704170800.png" alt="image-20210704170800576" style="zoom:50%;" /></p>
+<h3 id="融合bayer数据">融合Bayer数据</h3>
+<p>对 bayer 图像的每个颜色平面分别对齐融合。</p>
+<p>然后就帧融合是 一个块一个块进行的，这些块之间设置一定的重叠，为了防止出现块边缘的不连续效应，使得融合更加平滑，对块进行窗函数操作。在DFT域使用升余弦函数。</p>
+<h4 id="问题">问题</h4>
+<ol type="1">
+<li>这种滤波方法不能有效地抑制高对比度区域（如强边缘区域）的噪声。这是由于高对比度区域在空间DFT域的分布是非稀疏的，削弱了空间降噪的有效性。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704192601.png" alt="image-20210704192601394" style="zoom:50%;" /></p>
+<ol start="2" type="1">
+<li>由于算法不会拒绝一个不能完全配准的 块 ，所以有时候会出现轻微的鬼影。</li>
+</ol>
+<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210704192645530.png" alt="image-20210704192645530" style="zoom:50%;" /></p>
+<ol start="3" type="1">
+<li>有时会出现振铃效应，作者说该现象基本可以忽略不计；（若频域滤波函数具有陡峭变化，则傅里叶逆变换得到的空域滤波函数会在外围出现震荡）</li>
+</ol>
+<h3 id="合成hdr">合成HDR</h3>
+<p>经过配准和融合之后，拍摄的多帧Bayer raw图像合成单张raw图像，且具有更高的bit深度和SNR。实际中，输入10bit的raw数据会合成12bit的数据。得到输出raw图像后，还需要一系列的ISP后处理流程才能得到可视化RGB图像。这些步骤主要包括：</p>
+<ol type="1">
+<li>暗电流扣除</li>
+<li>镜头阴影校正</li>
+<li>白平衡</li>
+<li>去马赛克</li>
+<li>彩色去噪</li>
+<li>颜色校正</li>
+<li>动态范围压缩</li>
+<li>去雾</li>
+<li>全局色调调整</li>
+<li>色差校正</li>
+<li>锐化</li>
+<li>特定色调颜色调整</li>
+<li>dithering</li>
+</ol>
+<p>其中，动态范围压缩步骤中，利用获取的短曝光图像以及合成的长曝光图像来 融合。融合方法采用了 Exposure Fusion 文章中的方法融合。但是这里作者只用了亮度这一个评判因素，计算两张图的亮度权重，加权融合（这样节省计算量）合后做gamma校正并将原来的颜色赋值上去。</p>
+<h4 id="问题-1">问题</h4>
+<p>在极端动态范围场景，可能存在过曝光区域。在有快速运动的低光场景，为了避免运动模糊使用较短的曝光时间，可能会残留比较剧烈的噪声。在高对比度场景中，由于使用了曝光融合，可能会存在轻微的中频halos。</p>
+<h2 id="实验结果">实验结果</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

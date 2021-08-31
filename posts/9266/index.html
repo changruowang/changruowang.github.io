@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="想解决的问题：低光照图像增强 方法：  提出非监督的生成对抗网络，EnlightenGAN，训练不需要低光度&#x2F;正常光度图像对。 提出使用从输入本身提取的信息来规范化不成对的训练 一些创新：  global-local判断器结构 self-regularized perceptual loss fusion 注意力机制   Introduction DL方法通常用成对图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EnlightenGAN">
+<meta property="og:url" content="http://xxxxx.com/posts/9266/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="想解决的问题：低光照图像增强 方法：  提出非监督的生成对抗网络，EnlightenGAN，训练不需要低光度&#x2F;正常光度图像对。 提出使用从输入本身提取的信息来规范化不成对的训练 一些创新：  global-local判断器结构 self-regularized perceptual loss fusion 注意力机制   Introduction DL方法通常用成对图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/EnlightenGAN.png">
+<meta property="og:image" content="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/L_SFP.png">
+<meta property="article:published_time" content="2021-05-11T02:10:32.000Z">
+<meta property="article:modified_time" content="2021-08-30T12:12:58.548Z">
+<meta property="article:author" content="常若望">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/EnlightenGAN.png">
+
+<link rel="canonical" href="http://xxxxx.com/posts/9266/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>EnlightenGAN | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/9266/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EnlightenGAN
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:32" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:32+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:12:58" itemprop="dateModified" datetime="2021-08-30T20:12:58+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+<p>想解决的问题：低光照图像增强</p>
+<p>方法：</p>
+<ul>
+<li>提出非监督的生成对抗网络，EnlightenGAN，训练不需要低光度/正常光度图像对。</li>
+<li>提出使用从输入本身提取的信息来规范化不成对的训练</li>
+<li>一些创新：
+<ul>
+<li>global-local判断器结构</li>
+<li>self-regularized perceptual loss fusion</li>
+<li>注意力机制</li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>DL方法通常用成对图像作为输入，<strong>缺点</strong>：</p>
+<ol type="1">
+<li>很难在实际中同时采集到同一场景的图像</li>
+<li>合成的图像不够真实，引入了许多人为因素</li>
+<li>对于低光照问题，没有唯一的或者说定义好的GT</li>
+</ol>
+<p>解决的问题：</p>
+<ul>
+<li>对低光照图像进行增强，但不需要成对的训练数据。</li>
+</ul>
+<p>idea：</p>
+<ul>
+<li>使用GAN在low和normal light之间建立unpaired mapping，但不依赖任何成对的图像</li>
+<li>没有使用cycle-consistency作为prior工作
+<ul>
+<li>（不懂这个cycle-consistency是什么）</li>
+<li>ref：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70592331">参考资料</a></li>
+<li>一些point：
+<ul>
+<li>最早是在朱俊彦的cycleGAN提出，用于在没有配对数据的情况下实现2个domain的image-to-image翻译。基本的思想，假设从X翻译到Y得到F(x)，再翻译回去G(F(x))，G(F(x))应该与X一模一样。</li>
+<li></li>
+</ul></li>
+</ul></li>
+<li>一些创新性工作
+<ul>
+<li>1.提出dual-discriminator平衡全局和局部低光照增强x</li>
+<li>2.提出self-regularized perceptual loss来约束输入和增强版本后的特征距离</li>
+<li>3.提出开发的输入的光照信息作为self-regularized attentional map，在每个level的深度特征上regularize无监督学习</li>
+</ul></li>
+</ul>
+<p>EnlightenGAN的创新点：</p>
+<ol type="1">
+<li>第一个将unpaired训练引入低光照增强</li>
+<li>self-regularization，通过保留自特征loss和自规则注意力机制实现</li>
+<li>增强来自不同domain的真实世界的低光照图像更加简单和灵活</li>
+</ol>
+<h2 id="related-works">Related Works</h2>
+<h3 id="paired-datasetsstatus-quo"><strong>Paired Datasets：Status Quo</strong></h3>
+<p>缺点：</p>
+<ul>
+<li>数据量小，简单地增加或减少曝光时间会增加或减少局部的曝光。</li>
+<li>在HDR领域，一些工作首先获取不同光照条件下的图像，然后对其进行排列和融合，但他们不是为单一图像后处理而设计的</li>
+</ul>
+<h3 id="traditional-approaches">Traditional Approaches</h3>
+<p>经典方法：</p>
+<ul>
+<li>adaptive histogram equalization（AHE），自适应直方图平衡
+<ul>
+<li>Stephen M Pizer, E Philip Amburn, John D Austin, Robert Cromartie, Ari Geselowitz, Trey Greer, Bart ter Haar Romeny, John B Zimmerman, and Karel Zuiderveld. Adaptive histogram equalization and its variations. Com- puter vision, graphics, and image processing, 39(3):355– 368, <strong>1987.</strong></li>
+</ul></li>
+<li>Retinex
+<ul>
+<li>Edwin H Land. The retinex theory of color vision. Scientific american, 237(6):108–129, <strong>1977</strong></li>
+</ul></li>
+<li>multi-scale Retinex model
+<ul>
+<li>Daniel J Jobson, Zia-ur Rahman, and Glenn A Woodell. A multiscale retinex for bridging the gap between color images and the human observation of scenes. IEEE Transactions on Image processing, 6(7):965–976, <strong>1997</strong></li>
+</ul></li>
+<li>提出针对不均匀光照用bi-log信息平衡细节与自然感的增强算法
+<ul>
+<li>Shuhang Wang, Jin Zheng, Hai-Miao Hu, and Bo Li. Nat- uralness preserved enhancement algorithm for non-uniform illumination images. IEEE Transactions on Image Process- ing, 22(9):3538–3548, <strong>2013</strong></li>
+</ul></li>
+<li>提出加权变分模型，估计reflectance和illumination
+<ul>
+<li>Xueyang Fu, Delu Zeng, Yue Huang, Xiao-Ping Zhang, and Xinghao Ding. A weighted variational model for simultane- ous reflectance and illumination estimation. In CVPR, pages 2782–2790, <strong>2016</strong></li>
+</ul></li>
+<li>LIME，low-light image enhancement，先找到RGB中的最大值作为最初的光照估计，使用结构先验构建光照图
+<ul>
+<li>Xiaojie Guo, Yu Li, and Haibin Ling. Lime: Low-light im- age enhancement via illumination map estimation. IEEE Transactions on Image Processing, 26(2):982–993, <strong>2017</strong></li>
+</ul></li>
+<li>通过分解连续图像序列来同时处理低光照和去噪
+<ul>
+<li>Xutong Ren, Mading Li, Wen-Huang Cheng, and Jiaying Liu. Joint enhancement and denoising method via sequen-tial decomposition. In Circuits and Systems (ISCAS), 2018 IEEE International Symposium on, pages 1–5. IEEE, <strong>2018</strong></li>
+</ul></li>
+<li>提出更加robust的Retinex模型，与传统的Retinex模型对比，考虑了noise map，通过强噪声提高性能
+<ul>
+<li>Mading Li, Jiaying Liu, Wenhan Yang, Xiaoyan Sun, and Zongming Guo. Structure-revealing low-light image en- hancement via robust retinex model. IEEE Transactions on Image Processing, 27(6):2828–2841, <strong>2018.</strong></li>
+</ul></li>
+</ul>
+<h3 id="deep-learning-approaches">Deep Learning Approaches</h3>
+<p>目前大部分基于DL的方法都依赖于paired image，且图像大部分是从正常图像中人工合成的。</p>
+<ul>
+<li>LL-Net，堆叠的自动编码器，在patch level同时学习去噪和低光照增强。
+<ul>
+<li>Kin Gwn Lore, Adedotun Akintayo, and Soumik Sarkar. Ll- net: A deep autoencoder approach to natural low-light image enhancement. Pattern Recognition, 61:650–662, <strong>2017</strong>.</li>
+</ul></li>
+<li>Retinex-Net，设计了end-to-end框架，结合了Retinex理论
+<ul>
+<li>Chen Wei, Wenjing Wang, Wenhan Yang, and Jiaying Liu. Deep retinex decomposition for low-light enhancement. arXiv preprint arXiv:1808.04560, <strong>2018</strong>.</li>
+</ul></li>
+<li>HDR-Net ，将深度网络与双边网格处理（bilateral gird processing）、局部颜色仿射变换（local affine color transforms）
+<ul>
+<li>Micha¨el Gharbi, Jiawen Chen, Jonathan T Barron, SamuelW Hasinoff, and Fr´edo Durand. Deep bilateral learning for real- time image enhancement. ACM Transactions on Graphics (TOG), 36(4):118, <strong>2017</strong></li>
+</ul></li>
+<li>以及一些针对HDR领域的多帧低光照增强方法
+<ul>
+<li>Nima Khademi Kalantari and Ravi Ramamoorthi. Deep high dynamic range imaging of dynamic scenes. ACM Trans. Graph, 36(4):144, <strong>2017</strong>.</li>
+<li>ShangzheWu, Jiarui Xu, Yu-Wing Tai, and Chi-Keung Tang. Deep high dynamic range imaging with large foreground motions. In Proceedings of the European Conference on Computer Vision (ECCV), pages 117–132, <strong>2018</strong>.</li>
+<li>Jianrui Cai, Shuhang Gu, and Lei Zhang. Learning a deep single image contrast enhancer from multi-exposure images. IEEE Transactions on Image Processing, 27(4):2049–2062, <strong>2018</strong>.</li>
+</ul></li>
+<li>learning to see in the dark，直接在raw数据上，更注重避开放大的artifacts</li>
+</ul>
+<h3 id="adversarial-learning">Adversarial Learning</h3>
+<p>使用GAN的方法同样使用的是paired训练数据。</p>
+<p>一些人提出了无监督的GAN方法，使用对抗学习学习inter-domain。</p>
+<p>提出两个方法，通过使用cycle-consistent loss+uppaired data，对两个不同领域之间进行翻译</p>
+<ul>
+<li>Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A Efros. Unpaired image-to-image translation using cycle- consistent adversarial networks. In ICCV, pages 2223–2232, <strong>2017</strong>.</li>
+<li>Ming-Yu Liu, Thomas Breuel, and Jan Kautz. Unsupervised image-to-image translation networks. In Advances in Neural Information Processing Systems, pages 700–708, <strong>2017</strong>.</li>
+</ul>
+<p>一些最新的工作基于上面的方法论应用在其他low level task（比如，去雾，去噪，SR，手机照片增强等）上：</p>
+<ul>
+<li>Xitong Yang, Zheng Xu, and Jiebo Luo. Towards percep tual image dehazing by physics-based disentanglement and adversarial training. In The Thirty-Second AAAI Conference on Artificial Intelligence (AAAI-18), <strong>2018</strong>.</li>
+<li>Yuan Yuan, Siyuan Liu, Jiawei Zhang, Yongbing Zhang, Chao Dong, and Liang Lin. Unsupervised image super- resolution using cycle-in-cycle generative adversarial net- works. CVPR Workshops, 30:32, <strong>2018</strong>.</li>
+<li>Yu-Sheng Chen, Yu-Ching Wang, Man-Hsin Kao, and Yung- Yu Chuang. Deep photo enhancer: Unpaired learning for image enhancement from photographs with gans. In Pro- ceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 6306–6314, <strong>2018</strong>.</li>
+<li>Xin Jin, Zhibo Chen, Jianxin Lin, Zhikai Chen, and Wei Zhou. Unsupervised single image deraining with self- supervised constraints. arXiv preprint arXiv:1811.08575, <strong>2018</strong>.</li>
+</ul>
+<p>EnlightenGAN采用unpaired训练，但是一个轻量级的one-pathGAN结构（即，没有cycle-consistency）,这样的好处是，训练稳定且简单。</p>
+<h2 id="method">Method</h2>
+<p>网络结构：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/EnlightenGAN.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/EnlightenGAN.png" alt="img" /></a></p>
+<ul>
+<li>采用一个attention-guided U-Net作为生成器</li>
+<li>用对偶的判断器判断全局和局部信息（即，一个global和一个local判断器）</li>
+<li>使用一个自特征保留loss来引导训练，以及保留纹理和结构</li>
+</ul>
+<h4 id="global-local-discriminators">（1）Global-Local Discriminators</h4>
+<p>用对抗loss来最小化真实和输出的正常光线的分布之间的距离。</p>
+<p>image-level的判断器经常在空间变化的光照图像不work，在一些局部区域需要增强的部分和其他区域不太一样（比如，全局大部分是暗的，一个小部分是亮的，这种情况全局生成器可能就不能满足这个需求）。</p>
+<p>解决方法：</p>
+<p>作者设计了一个global-local判断器结构，都是用PatchGAN来判断真假。</p>
+<ul>
+<li><p>local判断器：</p>
+<ul>
+<li>在输出和正常光线图像随机裁剪局部patch，判断器学习判断这些patch的真假。</li>
+</ul></li>
+<li><p>global判断器：</p>
+<ul>
+<li>使用了相对判断器结构
+<ul>
+<li>relativistic discriminator structure：
+<ul>
+<li>Alexia Jolicoeur-Martineau. The relativistic discriminator: a key element missing from standard gan. arXiv preprint arXiv:1807.00734, 2018</li>
+</ul></li>
+</ul></li>
+<li>在标准的相对判断器上将sigmoid函数改为最小二乘法loss</li>
+</ul>
+<p>标准相对判断器公式： <span class="math display">\[ D_{Ra}(x_{r},x_{f})=σ(C(x_{r})-E_{x_{f}∼P_{fake}}[C(x_{f})]) \ D_{Ra}(x_{f},x_{r})=σ(C(x_{f})-E_{x_{f}∼P_{real}}[C(x_{r})]) \]</span> 作者进行修改后的loss：</p>
+<p><strong>Global：</strong> <span class="math display">\[ L_{D}^{Global}=E_{X_{r}∼P_{real}}[(D_{Ra}(x_{r},x_{f})-1)^2]+E_{x_{f}∼P_{fake}}[D_{Ra}(x_f, x_r)^2] \ L_{G}^{Global}=E_{X_{f}∼P_{fake}}[(D_{Ra}(x_{f},x_{r})-1)^2]+E_{x_{r}∼P_{real}}[D_{Ra}(x_r, x_f)^2] \]</span> <strong>Local:</strong> <span class="math display">\[ L_{D}^{Local}=E_{x_{r}∼P_{real-patches}}[(D(x_{r})-1)^2]+E_{x_{f}∼P_{fake-patches}}[(D(x_{f})-0)^2] \ L_{G}^{Local}=E_{x_{r}∼P_{fake-patches}[(D(x_{f})-1)^2]} \]</span></p></li>
+</ul>
+<h4 id="self-feature-preserving-loss">（2）Self Feature Preserving Loss</h4>
+<p>perceptual loss常用来限制提取的特征与GT尽可能接近，perceptual loss是利用预训练的VGG去模拟图像之间的特征空间距离。</p>
+<p><strong>paper</strong>：Justin Johnson, Alexandre Alahi, and Li Fei-Fei. Perceptual losses for real-time style transfer and super-resolution. In European Conference on Computer Vision, pages 694–711. Springer, <strong>2016</strong>.</p>
+<p>作者提出限制输入和输出的VGG-frature距离。</p>
+<p>作者根据经验观察到当调整输入像素的密度范围，VGG的分类结果不是特别灵敏。（也被论文证实了）</p>
+<p>设计了自正则化loss（self-regularzation loss)，以保留图像内容特征。</p>
+<p>L_SFP的定义：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GlassyWu/Note/blob/master/Paper/低光照图像增强/img/L_SFP.png"><img src="https://github.com/GlassyWu/Note/raw/master/Paper/%E4%BD%8E%E5%85%89%E7%85%A7%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/img/L_SFP.png" alt="img" /></a></p>
+<p>对于裁剪的局部块也进行规则，用L_SFP_Local，此外，还在VGG特征图之后增加了instance normalization，目的是稳定训练。</p>
+<h4 id="u-net-generator-guided-with-self-regularized-attention">（3）U-Net Generator Guided with Self-Regularized Attention</h4>
+<ul>
+<li>U-Net作为backbone</li>
+<li>将输入的RGB正则化到[0,1]，用1-I作为self-regularized attention map</li>
+<li>然后resize attention map来适配每个feature map，然后与所有中间feature map、输出进行相乘</li>
+<li>作者强调attention map也是self-regularization的一部分</li>
+</ul>
+<p>attention-guided U-Net generator结构：</p>
+<ul>
+<li>8个conv块 ，每个conv包括LeakyRelU+BN+2个3x3 conv</li>
+<li>在上采样阶段，将标准deconvolutional layer替换为双线上采样层（bilinear upsampling）+一个卷积层，目的是减少checkerboard artifacts
+<ul>
+<li>(不懂bilinear upsampling，checkerboard artifacts)</li>
+</ul></li>
+</ul>
+<h2 id="gan相关论文">GAN相关论文：</h2>
+<p>1、Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A Efros. Unpaired image-to-image translation using cycle- consistent adversarial networks. In ICCV, pages 2223–2232, 2017.</p>
+<p>2、Ming-Yu Liu, Thomas Breuel, and Jan Kautz. Unsupervised image-to-image translation networks. In Advances in Neural Information Processing Systems, pages 700–708, 2017</p>
+<p>3、Alexia Jolicoeur-Martineau. The relativistic discriminator: a key element missing from standard gan. arXiv preprint arXiv:1807.00734, 2018.</p>
+<h2 id="其他">其他</h2>
+<ul>
+<li>HDR(high-dynamic-ranging)
+<ul>
+<li>高动态范围成像，用来实现比普通数字图像技术更大曝光动态范围（即，更大的明暗差别）的一组技术</li>
+<li>目的：正确地表示真实世界中从太阳光直射到最暗的阴影这样大的范围亮度</li>
+</ul></li>
+<li>ablation analysis
+<ul>
+<li>消融实验：分析不同参数或结构对实验结果产生的影响从而得到不同成分的作用</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/46341/" rel="prev" title="DRBN">
+      <i class="fa fa-chevron-left"></i> DRBN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/9641/" rel="next" title="Extreme-Low-light">
+      Extreme-Low-light <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#related-works"><span class="nav-number">2.</span> <span class="nav-text">Related Works</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#paired-datasetsstatus-quo"><span class="nav-number">2.1.</span> <span class="nav-text">Paired Datasets：Status Quo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#traditional-approaches"><span class="nav-number">2.2.</span> <span class="nav-text">Traditional Approaches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deep-learning-approaches"><span class="nav-number">2.3.</span> <span class="nav-text">Deep Learning Approaches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adversarial-learning"><span class="nav-number">2.4.</span> <span class="nav-text">Adversarial Learning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-number">3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global-local-discriminators"><span class="nav-number">3.0.1.</span> <span class="nav-text">（1）Global-Local Discriminators</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-feature-preserving-loss"><span class="nav-number">3.0.2.</span> <span class="nav-text">（2）Self Feature Preserving Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u-net-generator-guided-with-self-regularized-attention"><span class="nav-number">3.0.3.</span> <span class="nav-text">（3）U-Net Generator Guided with Self-Regularized Attention</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gan%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-number">4.</span> <span class="nav-text">GAN相关论文：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
