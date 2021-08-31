@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="双噪声相似度的变分去噪 变分去噪(TV) 假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。 非局部均值滤波 （NLM） 相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了">
+  <meta name="description" content="双噪声相似度的变分去噪变分去噪(TV)假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。 非局部均值滤波 （NLM）相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像处理-双噪声相似性的去噪方法">
 <meta property="og:url" content="http://xxxxx.com/posts/59491/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="双噪声相似度的变分去噪 变分去噪(TV) 假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。 非局部均值滤波 （NLM） 相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了">
+<meta property="og:description" content="双噪声相似度的变分去噪变分去噪(TV)假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。 非局部均值滤波 （NLM）相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210607111125.png">
 <meta property="article:published_time" content="2021-05-08T13:08:31.000Z">
@@ -270,16 +270,11 @@
 
       
         <span id="more"></span>
-<h1 id="双噪声相似度的变分去噪">双噪声相似度的变分去噪</h1>
-<h2 id="变分去噪tv">变分去噪(TV)</h2>
-<p>假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。</p>
-<h2 id="非局部均值滤波-nlm">非局部均值滤波 （NLM）</h2>
-<p>相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息，在去噪的同时能够最大程度的保持图像的细节特征。</p>
-<h2 id="非局部变分去噪nltv">非局部变分去噪（NLTV）</h2>
-<p>借鉴了 非局部 均值滤波中的思想，原始的 变分损失就是度量的当前像素和领域像素的差值，即梯度，作为约束，期望平滑。在非局部变分损失中，将梯度重新定义为其领域一个像素与当前像素之间的差值，权重为以二者像素中心的patch之间的相似度。然后使用 split Bregman算法来求解非局部TV模型</p>
-<h2 id="双噪声相似性的非局部变分去噪">双噪声相似性的非局部变分去噪</h2>
-<p>在NLTV去噪算法中，度量像素之间的相似性是根据初始噪声图像计算的，没有考虑到算法迭代过程中像素之间的相似性，由于在迭代过程中，像素之间的相似性可能会改变，若一直利用初始噪声的相似权重可能会不准确。因此在计算像素之间的相似性时同时利用初始噪声图像的相似性和迭代过程中像素之间的相似性来计算，以增强度量像素相似性的准确性。</p>
-<p>总的来说，就是每次迭代求解过程中 都更新一下权重矩阵，原始的非局部变分损失中的 权重 计算的是原始噪声图像的各个patch之间的相似性，双噪声相似性算法中 在权重中额外添加了一个 当前迭代结果的像素间的相似性作为参考。</p>
+<h1 id="双噪声相似度的变分去噪"><a href="#双噪声相似度的变分去噪" class="headerlink" title="双噪声相似度的变分去噪"></a>双噪声相似度的变分去噪</h1><h2 id="变分去噪-TV"><a href="#变分去噪-TV" class="headerlink" title="变分去噪(TV)"></a>变分去噪(TV)</h2><p>假设图像的成像模型为加性噪声，变分去噪模型包含两项，一项是数据保真项，一项是图像的全变分，即图像的梯度。两项都是无约束凸优化问题。由于噪声区域通常都是梯度异常的区域，因此TV项用在去噪中的作用就是保持图像的光滑性，但是也会对图像的细节丢失。</p>
+<h2 id="非局部均值滤波-（NLM）"><a href="#非局部均值滤波-（NLM）" class="headerlink" title="非局部均值滤波 （NLM）"></a>非局部均值滤波 （NLM）</h2><p>相对对传统邻域滤波方法的一种改进滤波，考虑到了图像的自相似性质，它充分利用了图像中的冗余信息，在去噪的同时能够最大程度的保持图像的细节特征。</p>
+<h2 id="非局部变分去噪（NLTV）"><a href="#非局部变分去噪（NLTV）" class="headerlink" title="非局部变分去噪（NLTV）"></a>非局部变分去噪（NLTV）</h2><p>借鉴了 非局部 均值滤波中的思想，原始的 变分损失就是度量的当前像素和领域像素的差值，即梯度，作为约束，期望平滑。在非局部变分损失中，将梯度重新定义为其领域一个像素与当前像素之间的差值，权重为以二者像素中心的patch之间的相似度。然后使用 split Bregman算法来求解非局部TV模型</p>
+<h2 id="双噪声相似性的非局部变分去噪"><a href="#双噪声相似性的非局部变分去噪" class="headerlink" title="双噪声相似性的非局部变分去噪"></a>双噪声相似性的非局部变分去噪</h2><p>在NLTV去噪算法中，度量像素之间的相似性是根据初始噪声图像计算的，没有考虑到算法迭代过程中像素之间的相似性，由于在迭代过程中，像素之间的相似性可能会改变，若一直利用初始噪声的相似权重可能会不准确。因此在计算像素之间的相似性时同时利用初始噪声图像的相似性和迭代过程中像素之间的相似性来计算，以增强度量像素相似性的准确性。</p>
+<p>总的来说，就是每次迭代求解过程中 都更新一下权重矩阵，原始的非局部变分损失中的 权重 计算的是原始噪声图像的各个patch之间的相似性，双噪声相似性算法中  在权重中额外添加了一个   当前迭代结果的像素间的相似性作为参考。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210607111125.png" alt="image-20210607111125324" style="zoom:67%;" /></p>
 
     </div>
@@ -365,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E5%99%AA%E5%A3%B0%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA"><span class="nav-number">1.</span> <span class="nav-text">双噪声相似度的变分去噪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AAtv"><span class="nav-number">1.1.</span> <span class="nav-text">变分去噪(TV)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%B1%80%E9%83%A8%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2-nlm"><span class="nav-number">1.2.</span> <span class="nav-text">非局部均值滤波 （NLM）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%B1%80%E9%83%A8%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AAnltv"><span class="nav-number">1.3.</span> <span class="nav-text">非局部变分去噪（NLTV）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%99%AA%E5%A3%B0%E7%9B%B8%E4%BC%BC%E6%80%A7%E7%9A%84%E9%9D%9E%E5%B1%80%E9%83%A8%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA"><span class="nav-number">1.4.</span> <span class="nav-text">双噪声相似性的非局部变分去噪</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E5%99%AA%E5%A3%B0%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA"><span class="nav-number">1.</span> <span class="nav-text">双噪声相似度的变分去噪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA-TV"><span class="nav-number">1.1.</span> <span class="nav-text">变分去噪(TV)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%B1%80%E9%83%A8%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2-%EF%BC%88NLM%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">非局部均值滤波 （NLM）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%B1%80%E9%83%A8%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA%EF%BC%88NLTV%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">非局部变分去噪（NLTV）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%99%AA%E5%A3%B0%E7%9B%B8%E4%BC%BC%E6%80%A7%E7%9A%84%E9%9D%9E%E5%B1%80%E9%83%A8%E5%8F%98%E5%88%86%E5%8E%BB%E5%99%AA"><span class="nav-number">1.4.</span> <span class="nav-text">双噪声相似性的非局部变分去噪</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -379,7 +374,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

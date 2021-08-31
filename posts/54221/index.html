@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="HTTPS 参考链接 参考链接 HTTP 有以下安全性问题：  使用明文进行通信，内容可能会被窃听； 不验证通信方的身份，通信方的身份有可能遭遇伪装； 无法证明报文的完整性，报文有可能遭篡改  HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。通过">
+  <meta name="description" content="HTTPS参考链接 参考链接 HTTP 有以下安全性问题：   使用明文进行通信，内容可能会被窃听； 不验证通信方的身份，通信方的身份有可能遭遇伪装； 无法证明报文的完整性，报文有可能遭篡改  HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。通过使用 SSL，HTT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTPS">
 <meta property="og:url" content="http://xxxxx.com/posts/54221/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="HTTPS 参考链接 参考链接 HTTP 有以下安全性问题：  使用明文进行通信，内容可能会被窃听； 不验证通信方的身份，通信方的身份有可能遭遇伪装； 无法证明报文的完整性，报文有可能遭篡改  HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。通过">
+<meta property="og:description" content="HTTPS参考链接 参考链接 HTTP 有以下安全性问题：   使用明文进行通信，内容可能会被窃听； 不验证通信方的身份，通信方的身份有可能遭遇伪装； 无法证明报文的完整性，报文有可能遭篡改  HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。通过使用 SSL，HTT">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210520171309.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021030410034421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NjI2MjU3,size_16,color_FFFFFF,t_70#pic_center">
@@ -273,10 +273,9 @@
 
       
         <span id="more"></span>
-<h1 id="https">HTTPS</h1>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6850418120629485582">参考链接</a></p>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6850418120629485582">参考链接</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cxuanBlog/p/12490862.html">参考链接</a></p>
-<p>HTTP 有以下安全性问题：</p>
+<p>HTTP 有以下安全性问题： </p>
 <ul>
 <li>使用明文进行通信，内容可能会被窃听；</li>
 <li>不验证通信方的身份，通信方的身份有可能遭遇伪装；</li>
@@ -291,89 +290,66 @@
 <li>身份验证：通过认证实现</li>
 </ul>
 <p>流程如下图：</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2021030410034421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NjI2MjU3,size_16,color_FFFFFF,t_70#pic_center" alt="" /><figcaption>img</figcaption>
-</figure>
-<h2 id="加密">加密</h2>
-<h3 id="对称加密">对称加密</h3>
-<p>对称密钥加密（Symmetric-Key Encryption），加密和解密使用同一密钥。</p>
+<p><img src="https://img-blog.csdnimg.cn/2021030410034421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NjI2MjU3,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称密钥加密（Symmetric-Key Encryption），加密和解密使用同一密钥。</p>
 <ul>
 <li>优点：运算速度快；</li>
 <li>缺点：无法安全地将密钥传输给通信方。</li>
 </ul>
 <p>例如 AES加密算法，加密就是 将 明文和密钥 通过一个加密函数映射得到密文。解密就是函数的逆映射。AES为分组密码，分组密码也就是把明文分成一组一组的，每组长度相等，每次加密一组数据，直到加密完整个明文。</p>
-<h3 id="非对称加密">非对称加密</h3>
-<p>非对称密钥加密，又称公开密钥加密（Public-Key Encryption），加密和解密使用不同的密钥。公开密钥所有人都可以获得，通信发送方获得接收方的公开密钥之后，就可以使用公开密钥进行加密，接收方收到通信内容后使用私有密钥解密。</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>非对称密钥加密，又称公开密钥加密（Public-Key Encryption），加密和解密使用不同的密钥。公开密钥所有人都可以获得，通信发送方获得接收方的公开密钥之后，就可以使用公开密钥进行加密，接收方收到通信内容后使用私有密钥解密。</p>
 <p>非对称密钥除了用来加密，还可以用来进行签名。因为私有密钥无法被其他人获取，因此通信发送方使用其私有密钥进行签名，通信接收方使用发送方的公开密钥对签名进行解密，就能判断这个签名是否正确。</p>
 <ul>
 <li>优点：可以更安全地将公开密钥传输给通信发送方；</li>
 <li>缺点：运算速度慢。</li>
 </ul>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210520162855.png" alt="" /><figcaption>image-20201208203759099</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210520162855.png" alt="image-20201208203759099"></p>
 <p>例如 RSA算法，它的安全性基于 <code>整数分解</code>，使用两个超大素数的乘积作为生成密钥的材料</p>
-<h3 id="https-采用的加密方式">HTTPS 采用的加密方式</h3>
-<p>上面提到对称密钥加密方式的传输效率更高，但是无法安全地将密钥 Secret Key 传输给通信方。而非对称密钥加密方式可以保证传输的安全性，因此我们可以利用非对称密钥加密方式将 Secret Key 传输给通信方。HTTPS 采用混合的加密机制，正是利用了上面提到的方案：</p>
+<h3 id="HTTPS-采用的加密方式"><a href="#HTTPS-采用的加密方式" class="headerlink" title="HTTPS 采用的加密方式"></a>HTTPS 采用的加密方式</h3><p>上面提到对称密钥加密方式的传输效率更高，但是无法安全地将密钥 Secret Key 传输给通信方。而非对称密钥加密方式可以保证传输的安全性，因此我们可以利用非对称密钥加密方式将 Secret Key 传输给通信方。HTTPS 采用混合的加密机制，正是利用了上面提到的方案：</p>
 <ul>
 <li>使用非对称密钥加密方式，传输对称密钥加密方式所需要的 Secret Key，从而保证安全性;</li>
 <li>获取到 Secret Key 后，再使用对称密钥加密方式进行通信，从而保证效率。（下图中的 Session Key 就是 Secret Key）</li>
 </ul>
-<h2 id="完整性保护">完整性保护</h2>
-<p>SSL 提供报文摘要功能来进行完整性保护。</p>
+<h2 id="完整性保护"><a href="#完整性保护" class="headerlink" title="完整性保护"></a>完整性保护</h2><p>SSL 提供报文摘要功能来进行完整性保护。</p>
 <ul>
 <li>HTTP 也提供了 MD5 报文摘要功能，但不是安全的。例如报文内容被篡改之后，同时重新计算 MD5 的值，通信接收方是无法意识到发生了篡改。</li>
 <li>HTTPS 的报文摘要功能之所以安全，是因为它结合了加密和认证这两个操作。试想一下，加密之后的报文，遭到篡改之后，也很难重新计算报文摘要，因为无法轻易获取明文。</li>
 </ul>
-<p>MD5 全程 密码哈希算法(cryptographic hash algorithm)，MD5 可用于从任意长度的字符串创建 128 位字符串值，MD5 最常用于<code>验证文件</code>的完整性。除了MD5加密算法外，TLS 里用的是 SHA-2</p>
-<h2 id="认证">认证</h2>
-<p>通过使用 <strong>证书</strong> 来对通信方进行认证。数字证书认证机构（CA，Certificate Authority）是客户端与服务器双方都可信赖的第三方机构。</p>
+<p>MD5 全程 密码哈希算法(cryptographic hash algorithm)，MD5 可用于从任意长度的字符串创建 128 位字符串值，MD5 最常用于<code>验证文件</code>的完整性。除了MD5加密算法外，TLS 里用的是  SHA-2 </p>
+<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><p>通过使用 <strong>证书</strong> 来对通信方进行认证。数字证书认证机构（CA，Certificate Authority）是客户端与服务器双方都可信赖的第三方机构。</p>
 <p>服务器的运营人员向 CA 提出公开密钥的申请，CA 在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公开密钥证书后绑定在一起。进行 HTTPS 通信时，服务器会把证书发送给客户端。客户端取得其中的公开密钥之后，先使用数字签名进行验证，如果验证通过，就可以开始通信了。</p>
-<p>签名的过程可以理解为 CA 机构使用私钥对签名进加密，同时对签名的明文使用 数据摘要算法（散列算法）将签名压缩为一个固定的长度的数据，这个就是上面所说的完整性保护中用的方法。客户端收到证书后，需要使用 公钥CA的公钥对 签名解密然后使用同样的散列函数对 解密后的签名进行压缩 再和 给定的进行对比，如果一致 说明签名在加密后没有被篡改过，是合法的。</p>
-<h2 id="https-的安全性">HTTPS 的安全性</h2>
-<p>不是绝对安全的，可以通过中间人攻击。</p>
-<h3 id="什么是中间人攻击">什么是中间人攻击</h3>
-<p>中间人攻击是指攻击者与通讯的两端分别创建独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。</p>
+<p>签名的过程可以理解为   CA 机构使用私钥对签名进加密，同时对签名的明文使用 数据摘要算法（散列算法）将签名压缩为一个固定的长度的数据，这个就是上面所说的完整性保护中用的方法。客户端收到证书后，需要使用  公钥CA的公钥对  签名解密然后使用同样的散列函数对  解密后的签名进行压缩  再和  给定的进行对比，如果一致 说明签名在加密后没有被篡改过，是合法的。</p>
+<h2 id="HTTPS-的安全性"><a href="#HTTPS-的安全性" class="headerlink" title="HTTPS 的安全性"></a>HTTPS 的安全性</h2><p>不是绝对安全的，可以通过中间人攻击。</p>
+<h3 id="什么是中间人攻击"><a href="#什么是中间人攻击" class="headerlink" title="什么是中间人攻击"></a>什么是中间人攻击</h3><p>中间人攻击是指攻击者与通讯的两端分别创建独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。</p>
 <p>HTTPS 使用了 SSL 加密协议，是一种非常安全的机制，目前并没有方法直接对这个协议进行攻击，一般都是在建立 SSL 连接时，拦截客户端的请求，利用中间人获取到 CA证书、非对称加密的公钥、对称加密的密钥；有了这些条件，就可以对请求和响应进行拦截和篡改。</p>
-<figure>
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3215994d16b543fd81285341833fc808~tplv-k3u1fbpfcp-zoom-1.image" alt="" /><figcaption>image.png</figcaption>
-</figure>
-<h3 id="https-是如何防止中间人攻击的">https 是如何防止中间人攻击的</h3>
-<p>https 无法防止中间人攻击，只有做证书固定ssl-pinning 或者 apk中预置证书做自签名验证可以防中间人攻击。具体的可以看这一篇文章。</p>
-<h2 id="https的缺点">HTTPS的缺点</h2>
-<ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3215994d16b543fd81285341833fc808~tplv-k3u1fbpfcp-zoom-1.image" alt="image.png"></p>
+<h3 id="https-是如何防止中间人攻击的"><a href="#https-是如何防止中间人攻击的" class="headerlink" title="https 是如何防止中间人攻击的"></a>https 是如何防止中间人攻击的</h3><p>https 无法防止中间人攻击，只有做证书固定ssl-pinning 或者 apk中预置证书做自签名验证可以防中间人攻击。具体的可以看这一篇文章。</p>
+<h2 id="HTTPS的缺点"><a href="#HTTPS的缺点" class="headerlink" title="HTTPS的缺点"></a>HTTPS的缺点</h2><ul>
 <li>因为需要进行加密解密等过程，因此速度会更慢；</li>
 <li>需要支付证书授权的高额费用。</li>
 </ul>
-<h2 id="get-和-post-比较">GET 和 POST 比较</h2>
-<h4 id="作用">作用</h4>
-<p>GET 用于获取资源，而 POST 用于传输实体主体。</p>
-<h4 id="参数">参数</h4>
-<p>GET 和 POST 的请求都能使用额外的参数，但是 <strong>GET 的参数是以查询字符串出现在 URL 中</strong>，而 <strong>POST 的参数存储在实体主体中</strong>。不能因为 POST 参数存储在实体主体中就认为它的安全性更高，因为照样可以通过一些抓包工具（Fiddler）查看。</p>
+<h2 id="GET-和-POST-比较"><a href="#GET-和-POST-比较" class="headerlink" title="GET 和 POST 比较"></a>GET 和 POST 比较</h2><h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>GET 用于获取资源，而 POST 用于传输实体主体。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>GET 和 POST 的请求都能使用额外的参数，但是 <strong>GET 的参数是以查询字符串出现在 URL 中</strong>，而 <strong>POST 的参数存储在实体主体中</strong>。不能因为 POST 参数存储在实体主体中就认为它的安全性更高，因为照样可以通过一些抓包工具（Fiddler）查看。</p>
 <p>因为 URL 只支持 ASCII 码，因此 GET 的参数中如果存在中文等字符就需要先进行编码。例如 <code>中文</code> 会转换为 <code>%E4%B8%AD%E6%96%87</code>，而空格会转换为 <code>%20</code>。POST 参数支持标准字符集。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /test/demo_form.asp?name1=value1&amp;name2=value2 HTTP/1.1</span><br></pre></td></tr></table></figure>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST /test/demo_form.asp HTTP/1.1</span><br><span class="line">Host: w3schools.com</span><br><span class="line">name1=value1&amp;name2=value2</span><br></pre></td></tr></table></figure>
-<h4 id="安全">安全</h4>
-<p>安全的 HTTP 方法不会改变服务器状态，也就是说它只是可读的。GET 方法是安全的，而 POST 却不是，因为 POST 的目的是传送实体主体内容，这个内容可能是用户上传的表单数据，上传成功之后，服务器可能把这个数据存储到数据库中，因此状态也就发生了改变。</p>
+<h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><p>安全的 HTTP 方法不会改变服务器状态，也就是说它只是可读的。GET 方法是安全的，而 POST 却不是，因为 POST 的目的是传送实体主体内容，这个内容可能是用户上传的表单数据，上传成功之后，服务器可能把这个数据存储到数据库中，因此状态也就发生了改变。</p>
 <p>安全的方法除了 GET 之外还有：HEAD、OPTIONS。</p>
 <p>不安全的方法除了 POST 之外还有 PUT、DELETE。</p>
-<h4 id="幂等性">幂等性</h4>
-<p>幂等的 HTTP 方法，同样的请求被执行一次与连续执行多次的效果是一样的，服务器的状态也是一样的。换句话说就是，幂等方法不应该具有副作用（统计用途除外）。</p>
+<h4 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h4><p>幂等的 HTTP 方法，同样的请求被执行一次与连续执行多次的效果是一样的，服务器的状态也是一样的。换句话说就是，幂等方法不应该具有副作用（统计用途除外）。</p>
 <p>所有的安全方法也都是幂等的。</p>
 <p>在正确实现的条件下，GET，HEAD，PUT 和 DELETE 等方法都是幂等的，而 POST 方法不是。</p>
 <p>GET /pageX HTTP/1.1 是幂等的，连续调用多次，客户端接收到的结果都是一样的：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /pageX HTTP/1.1</span><br><span class="line">GET /pageX HTTP/1.1</span><br><span class="line">GET /pageX HTTP/1.1</span><br><span class="line">GET /pageX HTTP/1.1</span><br></pre></td></tr></table></figure>
 <p>POST /add_row HTTP/1.1 不是幂等的，如果调用多次，就会增加多行记录：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST /add_row HTTP/1.1   -&gt; Adds a 1nd row</span><br><span class="line">POST /add_row HTTP/1.1   -&gt; Adds a 2nd row</span><br><span class="line">POST /add_row HTTP/1.1   -&gt; Adds a 3rd row</span><br></pre></td></tr></table></figure>
-<h4 id="可缓存">可缓存</h4>
-<p>如果要对响应进行缓存，需要满足以下条件：</p>
+<h4 id="可缓存"><a href="#可缓存" class="headerlink" title="可缓存"></a>可缓存</h4><p>如果要对响应进行缓存，需要满足以下条件：</p>
 <ul>
 <li>请求报文的 HTTP 方法本身是可缓存的，包括 GET 和 HEAD，但是 PUT 和 DELETE 不可缓存，POST 在多数情况下不可缓存的。</li>
 <li>响应报文的状态码是可缓存的，包括：200, 203, 204, 206, 300, 301, 404, 405, 410, 414, and 501。</li>
 <li>响应报文的 Cache-Control 首部字段没有指定不进行缓存</li>
 </ul>
-<h4 id="xmlhttprequest">XMLHttpRequest</h4>
-<p>为了阐述 POST 和 GET 的另一个区别，需要先了解 XMLHttpRequest：</p>
+<h4 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h4><p>为了阐述 POST 和 GET 的另一个区别，需要先了解 XMLHttpRequest：</p>
 <blockquote>
 <p>XMLHttpRequest 是一个 API，它为客户端提供了在客户端和服务器之间传输数据的功能。它提供了一个通过 URL 来获取数据的简单方式，并且不会使整个页面刷新。这使得网页只更新一部分页面而不会打扰到用户。XMLHttpRequest 在 AJAX 中被大量使用。</p>
 </blockquote>
@@ -465,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#https"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-%E9%87%87%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">HTTPS 采用的加密方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%80%A7%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.2.</span> <span class="nav-text">完整性保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81"><span class="nav-number">1.3.</span> <span class="nav-text">认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">HTTPS 的安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">什么是中间人攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-%E6%98%AF%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E7%9A%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">https 是如何防止中间人攻击的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.5.</span> <span class="nav-text">HTTPS的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-%E5%92%8C-post-%E6%AF%94%E8%BE%83"><span class="nav-number">1.6.</span> <span class="nav-text">GET 和 POST 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%82%E7%AD%89%E6%80%A7"><span class="nav-number">1.6.0.4.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E7%BC%93%E5%AD%98"><span class="nav-number">1.6.0.5.</span> <span class="nav-text">可缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xmlhttprequest"><span class="nav-number">1.6.0.6.</span> <span class="nav-text">XMLHttpRequest</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-%E9%87%87%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">HTTPS 采用的加密方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%80%A7%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.2.</span> <span class="nav-text">完整性保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81"><span class="nav-number">1.3.</span> <span class="nav-text">认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS-%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">HTTPS 的安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">什么是中间人攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-%E6%98%AF%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E7%9A%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">https 是如何防止中间人攻击的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.5.</span> <span class="nav-text">HTTPS的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-%E5%92%8C-POST-%E6%AF%94%E8%BE%83"><span class="nav-number">1.6.</span> <span class="nav-text">GET 和 POST 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%82%E7%AD%89%E6%80%A7"><span class="nav-number">1.6.0.4.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E7%BC%93%E5%AD%98"><span class="nav-number">1.6.0.5.</span> <span class="nav-text">可缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest"><span class="nav-number">1.6.0.6.</span> <span class="nav-text">XMLHttpRequest</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -479,7 +455,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

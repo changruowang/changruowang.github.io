@@ -270,15 +270,11 @@
       
         <p>C++虚函数</p>
 <span id="more"></span>
-<h1 id="多态">多态</h1>
-<p>多态 包含 静态多态 和 动态多态，前者是在编译时确定的，通过函数重载实现。后者是通过虚函数实现的，是运行时类指针或引用和它所绑定的对象不同所体现的。</p>
-<p>虚函数 原理： https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage 虚函数 实现原理： https://blog.twofei.com/496/ 虚函数总结： https://blog.csdn.net/qq_39477053/article/details/80322260</p>
-<h2 id="虚拟函数">虚拟函数</h2>
-<p>虚函数的实现是由两个部分组成的，虚函数指针与虚函数表。</p>
-<h3 id="虚函数指针和表">虚函数指针，和表</h3>
-<p>虚函数指针是确实存在的数据类型，在一个被实例化的对象中，它总是被存放在该对象的地址首位。某一个基类（没有继承别人），它其中有好几个虚函数，那么这几个虚函数的地址组成了一个表。当示例化这个类后，称为该类的对象，那么对象只是新增了一个虚函数指针，该虚函数指针指向了虚表的首地址。对于继承该类的派生类的对象，它也有一个虚函数指针，如果它的派生类的虚函数重写了，那么它的虚表和基类的虚表不同。因此虚函数指针的指向地址也不同。</p>
-<h3 id="纯虚函数">纯虚函数</h3>
-<p>纯虚函数 就是 后面加 0 的虚函数，它没有对虚函数进行实现，包含纯虚函数的类称为抽象类，它不能被实例化因为它虚函数没实现，一般用于接口的定义。只有它的派生类并实现了虚函数的 才能实例化。</p>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>多态 包含 静态多态 和  动态多态，前者是在编译时确定的，通过函数重载实现。后者是通过虚函数实现的，是运行时类指针或引用和它所绑定的对象不同所体现的。</p>
+<p>虚函数 原理： <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage">https://www.jianshu.com/p/d07e0ac0ba3c?from=singlemessage</a><br>虚函数 实现原理： <a target="_blank" rel="noopener" href="https://blog.twofei.com/496/">https://blog.twofei.com/496/</a><br>虚函数总结： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39477053/article/details/80322260">https://blog.csdn.net/qq_39477053/article/details/80322260</a></p>
+<h2 id="虚拟函数"><a href="#虚拟函数" class="headerlink" title="虚拟函数"></a>虚拟函数</h2><p>虚函数的实现是由两个部分组成的，虚函数指针与虚函数表。</p>
+<h3 id="虚函数指针，和表"><a href="#虚函数指针，和表" class="headerlink" title="虚函数指针，和表"></a>虚函数指针，和表</h3><p>虚函数指针是确实存在的数据类型，在一个被实例化的对象中，它总是被存放在该对象的地址首位。某一个基类（没有继承别人），它其中有好几个虚函数，那么这几个虚函数的地址组成了一个表。当示例化这个类后，称为该类的对象，那么对象只是新增了一个虚函数指针，该虚函数指针指向了虚表的首地址。对于继承该类的派生类的对象，它也有一个虚函数指针，如果它的派生类的虚函数重写了，那么它的虚表和基类的虚表不同。因此虚函数指针的指向地址也不同。</p>
+<h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数 就是 后面加 0 的虚函数，它没有对虚函数进行实现，包含纯虚函数的类称为抽象类，它不能被实例化因为它虚函数没实现，一般用于接口的定义。只有它的派生类并实现了虚函数的 才能实例化。</p>
 
     </div>
 
@@ -366,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%92%8C%E8%A1%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">虚函数指针，和表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">纯虚函数</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%8C%E5%92%8C%E8%A1%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">虚函数指针，和表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">纯虚函数</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -380,7 +376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

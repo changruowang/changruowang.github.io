@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement 主要贡献  提出了第一个不依赖于成对训练图像的低光照图像增强卷积神经网络 设计了一个 可以近似像素映射的 image-specific 曲线以及通过迭代方式形成的高阶曲线。这种特定于图像的曲线可以在很大的动态范围内有效地执行像素映射。 在没有参考图">
+  <meta name="description" content="Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement 主要贡献 提出了第一个不依赖于成对训练图像的低光照图像增强卷积神经网络 设计了一个 可以近似像素映射的 image-specific 曲线以及通过迭代方式形成的高阶曲线。这种特定于图像的曲线可以在很大的动态范围内有效地执行像素映射。 在没有参考图像的情况下，通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zero-DCE">
 <meta property="og:url" content="http://xxxxx.com/posts/9431/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement 主要贡献  提出了第一个不依赖于成对训练图像的低光照图像增强卷积神经网络 设计了一个 可以近似像素映射的 image-specific 曲线以及通过迭代方式形成的高阶曲线。这种特定于图像的曲线可以在很大的动态范围内有效地执行像素映射。 在没有参考图">
+<meta property="og:description" content="Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement 主要贡献 提出了第一个不依赖于成对训练图像的低光照图像增强卷积神经网络 设计了一个 可以近似像素映射的 image-specific 曲线以及通过迭代方式形成的高阶曲线。这种特定于图像的曲线可以在很大的动态范围内有效地执行像素映射。 在没有参考图像的情况下，通">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png">
@@ -275,93 +275,63 @@
       
         <span id="more"></span>
 <p>Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement</p>
-<h2 id="主要贡献">主要贡献</h2>
-<ol type="1">
+<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ol>
 <li>提出了第一个不依赖于成对训练图像的低光照图像增强卷积神经网络</li>
 <li>设计了一个 可以近似像素映射的 image-specific 曲线以及通过迭代方式形成的高阶曲线。这种特定于图像的曲线可以在很大的动态范围内有效地执行像素映射。</li>
 <li>在没有参考图像的情况下，通过设计 特定的 任务相关的损失函数来训练深度网络 这种方法存在巨大的潜力。</li>
-<li>640 x 480输入图像 500 FPS</li>
+<li>640 x 480输入图像 500 FPS </li>
 </ol>
-<h2 id="主要方法">主要方法</h2>
-<h3 id="光照增强曲线-le-curve">光照增强曲线 LE-curve</h3>
-<p>​ 作者说受 P图软件的 曲线调整的启发，有了这个思想。希望设计一个 可以自动增强图像的曲线，其中自适应曲线参数仅依赖于输入图像。这种曲线的设计要有如下性质：</p>
+<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><h3 id="光照增强曲线-LE-curve"><a href="#光照增强曲线-LE-curve" class="headerlink" title="光照增强曲线 LE-curve"></a>光照增强曲线 LE-curve</h3><p>​    作者说受 P图软件的 曲线调整的启发，有了这个思想。希望设计一个 可以自动增强图像的曲线，其中自适应曲线参数仅依赖于输入图像。这种曲线的设计要有如下性质：</p>
 <ul>
 <li>增强后图像的每个像素值都应在归一化范围[0,1]内，以避免溢出截断导致的信息丢失;</li>
 <li>曲线应该是单调递增的，以保持相邻像素的差异(对比度); 就是本来输入低光照图像较亮的区域输出对应也应该更亮，而不是反而变暗。</li>
 <li>这种曲线可微，可以反向传播。</li>
 </ul>
-<p>从上述需要的三个条件可以看出，作者设计的这种曲线感觉和 图像直方图调整的那个曲线不是一回事。这个曲线就是一个对输入图像的像素经过一个非线性映射然后输出吧，类似gamma的增强方法？所以这个曲线得满足单调可谓等的性质，与gamma不同的是，这个曲线参数由CNN输出，其不同像素位置的曲线参数不同，而gamma是全局用一条曲（但是文中这么设计我觉得仅仅是曲线是单调递增得并不能保证相邻像素输出得对比度差异，因为相邻像素使用得曲线参数不一样，虽然两条曲线都是递增得，但是分别对应映射输出后得值不一定依旧保证输入之前的相对大小关系，可能这种情况通过后面的损失函数，网络训练完之后便不会出现了吧），换句话说就是不同像素位置的 映射方式不同。具体设计的曲线 如下式子：</p>
-<p><span class="math display">\[L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))\]</span></p>
-<p>​ 上式中 <span class="math inline">\(I(\mathbf{x})\)</span> 为输入图像的x位置的像素值，<span class="math inline">\(\alpha\)</span>为曲线调整的参数，由CNN输出决定，不同的<span class="math inline">\(\alpha\)</span>对应不同形状的曲线参数，具体可见下图。例如当<span class="math inline">\(\alpha\)</span>=-1时，就是一个二次曲线，输入输出的映射关系为二次关系。同理。 ​ 同时将上式迭代，可以构成更高阶的曲线。</p>
-<p><span class="math display">\[L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))\]</span></p>
-<p>​ 最后，每个像素位置的<span class="math inline">\(\alpha\)</span>参数都不同，也就是不同位置的 曲线映射方式不一样，所以CNN输出的<span class="math inline">\(\alpha\)</span>其实是和输入图像大小一样的。而由于有n次迭代，每次迭代分别对 RGB 三通道使用独立的<span class="math inline">\(\alpha\)</span> 所以最终CNN输出的feature map的尺寸应该是n x 3 x W x H大小的。如下图：</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="" /><figcaption>1589469658310</figcaption>
-</figure>
+<p>从上述需要的三个条件可以看出，作者设计的这种曲线感觉和 图像直方图调整的那个曲线不是一回事。这个曲线就是一个对输入图像的像素经过一个非线性映射然后输出吧，类似gamma的增强方法？所以这个曲线得满足单调可谓等的性质，与gamma不同的是，这个曲线参数由CNN输出，其不同像素位置的曲线参数不同，而gamma是全局用一条曲（但是文中这么设计我觉得仅仅是曲线是单调递增得并不能保证相邻像素输出得对比度差异，因为相邻像素使用得曲线参数不一样，虽然两条曲线都是递增得，但是分别对应映射输出后得值不一定依旧保证输入之前的相对大小关系，可能这种情况通过后面的损失函数，网络训练完之后便不会出现了吧），换句话说就是不同像素位置的 映射方式不同。具体设计的曲线   如下式子：</p>
+<script type="math/tex; mode=display">L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))</script><p>​    上式中 $I(\mathbf{x})$ 为输入图像的x位置的像素值，$\alpha$为曲线调整的参数，由CNN输出决定，不同的$\alpha$对应不同形状的曲线参数，具体可见下图。例如当$\alpha$=-1时，就是一个二次曲线，输入输出的映射关系为二次关系。同理。<br>​    同时将上式迭代，可以构成更高阶的曲线。</p>
+<script type="math/tex; mode=display">L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))</script><p>​    最后，每个像素位置的$\alpha$参数都不同，也就是不同位置的 曲线映射方式不一样，所以CNN输出的$\alpha$其实是和输入图像大小一样的。而由于有n次迭代，每次迭代分别对 RGB 三通道使用独立的$\alpha$ 所以最终CNN输出的feature map的尺寸应该是n x 3 x W x H大小的。如下图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="1589469658310"></p>
 <p>上图 b 可以看出:</p>
 <ul>
-<li>对于迭代一次的曲线，当<span class="math inline">\(\alpha = -1\)</span> 为二次曲线，即输入x &gt; 输出y; 这种情况对于过曝的像素可以压缩它的像素值。</li>
-<li>... 当<span class="math inline">\(\alpha = 0\)</span> 为恒等映射，输入输出不变</li>
-<li>... 当<span class="math inline">\(\alpha = 1\)</span>时，曲线为凸函数，即 输入x &lt; 输出y; 这种情况可以增大像素值，对应光照增强。</li>
+<li>对于迭代一次的曲线，当$\alpha = -1$ 为二次曲线，即输入x &gt; 输出y; 这种情况对于过曝的像素可以压缩它的像素值。</li>
+<li>… 当$\alpha = 0$ 为恒等映射，输入输出不变</li>
+<li>… 当$\alpha = 1$时，曲线为凸函数，即 输入x &lt; 输出y; 这种情况可以增大像素值，对应光照增强。</li>
 </ul>
 <p>因此这种曲线调整的方式 不仅有可以增强低曝光区域像素的能力，还可以压缩过曝区域的像素。</p>
-<h3 id="dec-net">DEC-Net</h3>
-<p>​ 就是常规的CNN，主要是轻量。他的输出特征为A，通道数为迭代次数x3(RGB)，尺寸和输入图像一样。</p>
-<h3 id="损失函数-non-reference-loss-functions">损失函数 Non-Reference Loss Functions</h3>
-<p>​ 我觉得这就是最关键的地方吧，感觉前面说的曲线的方式 和 传统的CNN学习端到端的像素映射没什么区别，不能决定它不用参考图像来训练。</p>
-<ul class="task-list">
-<li><input type="checkbox" disabled="" />
-可能 增加 a 的曲线方式可以增强 CNN的非线性性？可以试试去掉后面的曲线调整部分，直接CNN输出增强后的图像，然后用这个损失函数来做看效果。</li>
+<h3 id="DEC-Net"><a href="#DEC-Net" class="headerlink" title="DEC-Net"></a>DEC-Net</h3><p>​    就是常规的CNN，主要是轻量。他的输出特征为A，通道数为迭代次数x3(RGB)，尺寸和输入图像一样。</p>
+<h3 id="损失函数-Non-Reference-Loss-Functions"><a href="#损失函数-Non-Reference-Loss-Functions" class="headerlink" title="损失函数 Non-Reference Loss Functions"></a>损失函数 Non-Reference Loss Functions</h3><p>​    我觉得这就是最关键的地方吧，感觉前面说的曲线的方式 和 传统的CNN学习端到端的像素映射没什么区别，不能决定它不用参考图像来训练。</p>
+<ul>
+<li>[ ] 可能 增加 a 的曲线方式可以增强 CNN的非线性性？可以试试去掉后面的曲线调整部分，直接CNN输出增强后的图像，然后用这个损失函数来做看效果。</li>
 </ul>
-<h4 id="空间一致性损失-spatial-consistency-loss">空间一致性损失 Spatial Consistency Loss</h4>
-<p><span class="math display">\[L_{s p a}=\frac{1}{K} \sum_{i=1}^{K} \sum_{j \in \Omega(i)}\left(\left|\left(Y_{i}-Y_{j}\right)\right|-\left|\left(I_{i}-I_{j}\right)\right|\right)^{2}\]</span></p>
-<p>​ 作者描述的这个损失的目的是，保留输入图像和输出图像对应位置像素和相邻像素之间的差异。其中K表示局部区域像素数，<span class="math inline">\(\Omega(i)\)</span>是像素位置<span class="math inline">\(i\)</span>的上下左右四个领域位置。<span class="math inline">\(Y,I\)</span> 分别表示增强后的图像和输入图像。感觉这个式子和局部梯度相似性很像。</p>
-<h4 id="曝光控制-exposure-control-loss">曝光控制 Exposure Control Loss</h4>
-<p>​ 为了抑制过曝和欠曝的出现，用这个损失函数来控制图像整体曝光水平。这项就是衡量局部区域（16x16）的像素值的平均水平与 常数E例如0.6之间的差距。作者说这个E取[0.4, 0.7]差别不大。</p>
-<p><span class="math display">\[L_{e x p}=\frac{1}{M} \sum_{k=1}^{M}\left|Y_{k}-E\right|\]</span></p>
-<h4 id="颜色恒常损失color-constancy-loss">颜色恒常损失Color Constancy Loss</h4>
-<p>​ 基于 <strong>Gray-World color constancy hypothesis</strong> 这个规则，对于一幅有着大量色彩变化的图像，R，G，B， 三个分量的平均值趋于同一灰度值。 从物理意义上讲，灰色世界法假设自然界景物对于光线的平均反射的均值在总体上是个定值，这个定值近似地为“灰色”。也就是一个正常的彩色图像，R,G,B三通道的平均值应该都相等。避免</p>
-<p><span class="math display">\[L_{c o l}=\sum_{\forall(p, q) \in \varepsilon}\left(J^{p}-J^{q}\right)^{2}, \varepsilon=\{(R, G),(R, B),(G, B)\}\]</span></p>
-<p>上式含义显而易见。设计了色彩恒常性损失，以纠正在增强的过程中可能出现的颜色偏差。</p>
-<h4 id="光照平滑-illumination-smoothness-loss">光照平滑 Illumination Smoothness Loss</h4>
-<p>这个损失就 类似 Retinex中的局部光照一致性原理。即局部区域的 a 参数应该是一样的。</p>
-<h2 id="实验">实验</h2>
-<p>​ 使用SICE数据集中的 2422张训练，其余的测试。 每张图resize到512x512进行训练。</p>
-<h3 id="各项损失函数的作用">各项损失函数的作用</h3>
-<p>​ 作者分别去掉四项损失中的一项，进行训练得到的结果如下：</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="" /><figcaption>1589508112377</figcaption>
-</figure>
+<h4 id="空间一致性损失-Spatial-Consistency-Loss"><a href="#空间一致性损失-Spatial-Consistency-Loss" class="headerlink" title="空间一致性损失 Spatial Consistency Loss"></a>空间一致性损失 Spatial Consistency Loss</h4><script type="math/tex; mode=display">L_{s p a}=\frac{1}{K} \sum_{i=1}^{K} \sum_{j \in \Omega(i)}\left(\left|\left(Y_{i}-Y_{j}\right)\right|-\left|\left(I_{i}-I_{j}\right)\right|\right)^{2}</script><p>​    作者描述的这个损失的目的是，保留输入图像和输出图像对应位置像素和相邻像素之间的差异。其中K表示局部区域像素数，$\Omega(i)$是像素位置$i$的上下左右四个领域位置。$Y,I$ 分别表示增强后的图像和输入图像。感觉这个式子和局部梯度相似性很像。</p>
+<h4 id="曝光控制-Exposure-Control-Loss"><a href="#曝光控制-Exposure-Control-Loss" class="headerlink" title="曝光控制 Exposure Control Loss"></a>曝光控制 Exposure Control Loss</h4><p>​    为了抑制过曝和欠曝的出现，用这个损失函数来控制图像整体曝光水平。这项就是衡量局部区域（16x16）的像素值的平均水平与 常数E例如0.6之间的差距。作者说这个E取[0.4, 0.7]差别不大。</p>
+<script type="math/tex; mode=display">L_{e x p}=\frac{1}{M} \sum_{k=1}^{M}\left|Y_{k}-E\right|</script><h4 id="颜色恒常损失Color-Constancy-Loss"><a href="#颜色恒常损失Color-Constancy-Loss" class="headerlink" title="颜色恒常损失Color Constancy Loss"></a>颜色恒常损失Color Constancy Loss</h4><p>​    基于 <strong>Gray-World color constancy hypothesis</strong> 这个规则，对于一幅有着大量色彩变化的图像，R，G，B， 三个分量的平均值趋于同一灰度值。 从物理意义上讲，灰色世界法假设自然界景物对于光线的平均反射的均值在总体上是个定值，这个定值近似地为“灰色”。也就是一个正常的彩色图像，R,G,B三通道的平均值应该都相等。避免</p>
+<script type="math/tex; mode=display">L_{c o l}=\sum_{\forall(p, q) \in \varepsilon}\left(J^{p}-J^{q}\right)^{2}, \varepsilon=\{(R, G),(R, B),(G, B)\}</script><p>上式含义显而易见。设计了色彩恒常性损失，以纠正在增强的过程中可能出现的颜色偏差。</p>
+<h4 id="光照平滑-Illumination-Smoothness-Loss"><a href="#光照平滑-Illumination-Smoothness-Loss" class="headerlink" title="光照平滑 Illumination Smoothness Loss"></a>光照平滑 Illumination Smoothness Loss</h4><p>这个损失就 类似 Retinex中的局部光照一致性原理。即局部区域的 a 参数应该是一样的。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>​    使用SICE数据集中的 2422张训练，其余的测试。 每张图resize到512x512进行训练。</p>
+<h3 id="各项损失函数的作用"><a href="#各项损失函数的作用" class="headerlink" title="各项损失函数的作用"></a>各项损失函数的作用</h3><p>​    作者分别去掉四项损失中的一项，进行训练得到的结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="1589508112377"></p>
 <ul>
 <li>去掉 spa损失，对比度细节下降，如空中的白云。</li>
 <li>去掉 esp损失，图像暗区域的曝光度降低，没能成功增强暗区域</li>
 <li>去掉 col 颜色恒常损失，可以看出图片整体颜色出现偏色</li>
 <li>没有 tv 光照平滑损失，图像出现严重伪影</li>
 </ul>
-<h3 id="各项参数的影响">各项参数的影响</h3>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="" /><figcaption>1589508544279</figcaption>
-</figure>
-<p>​ 网络深度-通道数-迭代次数。可以看出对比def三个图，可以看出 迭代一次的曲线增强能力太弱，因此需要更多次的迭代来合成高阶曲线，这样曲线具有更强的调整能力。</p>
-<h3 id="训练数据的影响">训练数据的影响</h3>
-<p>​ 作者 做了三类训练数据</p>
-<ol type="1">
+<h3 id="各项参数的影响"><a href="#各项参数的影响" class="headerlink" title="各项参数的影响"></a>各项参数的影响</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="1589508544279"></p>
+<p>​    网络深度-通道数-迭代次数。可以看出对比def三个图，可以看出 迭代一次的曲线增强能力太弱，因此需要更多次的迭代来合成高阶曲线，这样曲线具有更强的调整能力。</p>
+<h3 id="训练数据的影响"><a href="#训练数据的影响" class="headerlink" title="训练数据的影响"></a>训练数据的影响</h3><p>​    作者 做了三类训练数据 </p>
+<ol>
 <li>原本DEC训练数据中的一部分900张 只有欠曝光的图像。DEC_low</li>
 <li>DARK FACE数据集中收集的 9000张 低光照数据集，也是只有低光照数据集。DEC_large_L</li>
 <li>使用数据增广的方法，包含了 过曝光和欠曝光图像，从1,2部分获得的数据集 4800张 DEC_large_LH</li>
 </ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="" /><figcaption>1589509475989</figcaption>
-</figure>
-<p>​ 由图c,d可以看出，如果训练数据中不含有过曝光数据，最终网络会对原本光照正常的区域造成过曝光，但是如果低光照数据多，对暗区域增强的能力要强。因此</p>
-<ol type="1">
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="1589509475989"></p>
+<p>​    由图c,d可以看出，如果训练数据中不含有过曝光数据，最终网络会对原本光照正常的区域造成过曝光，但是如果低光照数据多，对暗区域增强的能力要强。因此</p>
+<ol>
 <li>训练数据集中必须有 过曝光图像，防止过曝</li>
 <li>低光照训练图像多的话，网络的增强能力要强。</li>
 </ol>
-<h3 id="最终对比结果">最终对比结果</h3>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="" /><figcaption>1589509826164</figcaption>
-</figure>
+<h3 id="最终对比结果"><a href="#最终对比结果" class="headerlink" title="最终对比结果"></a>最终对比结果</h3><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="1589509826164"></p>
 
     </div>
 
@@ -446,7 +416,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">主要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E5%A2%9E%E5%BC%BA%E6%9B%B2%E7%BA%BF-le-curve"><span class="nav-number">2.1.</span> <span class="nav-text">光照增强曲线 LE-curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dec-net"><span class="nav-number">2.2.</span> <span class="nav-text">DEC-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-non-reference-loss-functions"><span class="nav-number">2.3.</span> <span class="nav-text">损失函数 Non-Reference Loss Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7%E6%8D%9F%E5%A4%B1-spatial-consistency-loss"><span class="nav-number">2.3.1.</span> <span class="nav-text">空间一致性损失 Spatial Consistency Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%9D%E5%85%89%E6%8E%A7%E5%88%B6-exposure-control-loss"><span class="nav-number">2.3.2.</span> <span class="nav-text">曝光控制 Exposure Control Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%8D%9F%E5%A4%B1color-constancy-loss"><span class="nav-number">2.3.3.</span> <span class="nav-text">颜色恒常损失Color Constancy Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E5%B9%B3%E6%BB%91-illumination-smoothness-loss"><span class="nav-number">2.3.4.</span> <span class="nav-text">光照平滑 Illumination Smoothness Loss</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E9%A1%B9%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">各项损失函数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E9%A1%B9%E5%8F%82%E6%95%B0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.2.</span> <span class="nav-text">各项参数的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.3.</span> <span class="nav-text">训练数据的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E5%AF%B9%E6%AF%94%E7%BB%93%E6%9E%9C"><span class="nav-number">3.4.</span> <span class="nav-text">最终对比结果</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">主要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E5%A2%9E%E5%BC%BA%E6%9B%B2%E7%BA%BF-LE-curve"><span class="nav-number">2.1.</span> <span class="nav-text">光照增强曲线 LE-curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEC-Net"><span class="nav-number">2.2.</span> <span class="nav-text">DEC-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-Non-Reference-Loss-Functions"><span class="nav-number">2.3.</span> <span class="nav-text">损失函数 Non-Reference Loss Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7%E6%8D%9F%E5%A4%B1-Spatial-Consistency-Loss"><span class="nav-number">2.3.1.</span> <span class="nav-text">空间一致性损失 Spatial Consistency Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%9D%E5%85%89%E6%8E%A7%E5%88%B6-Exposure-Control-Loss"><span class="nav-number">2.3.2.</span> <span class="nav-text">曝光控制 Exposure Control Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%8D%9F%E5%A4%B1Color-Constancy-Loss"><span class="nav-number">2.3.3.</span> <span class="nav-text">颜色恒常损失Color Constancy Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%89%E7%85%A7%E5%B9%B3%E6%BB%91-Illumination-Smoothness-Loss"><span class="nav-number">2.3.4.</span> <span class="nav-text">光照平滑 Illumination Smoothness Loss</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E9%A1%B9%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">各项损失函数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E9%A1%B9%E5%8F%82%E6%95%B0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.2.</span> <span class="nav-text">各项参数的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.3.</span> <span class="nav-text">训练数据的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E5%AF%B9%E6%AF%94%E7%BB%93%E6%9E%9C"><span class="nav-number">3.4.</span> <span class="nav-text">最终对比结果</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -460,7 +430,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

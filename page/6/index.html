@@ -200,164 +200,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/30994/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/30994/" class="post-title-link" itemprop="url">计算机操作系统-概述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:11:19" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:19+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:24:11" itemprop="dateModified" datetime="2021-08-30T20:24:11+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<h1 id="计算机操作系统---概述">计算机操作系统 - 概述</h1>
-<h2 id="基本特征">基本特征</h2>
-<h3 id="并发">1. 并发</h3>
-<ul>
-<li>并发是指宏观上在一段时间内能同时运行多个程序，而并行则指同一时刻能运行多个指令。</li>
-<li>并行需要硬件支持，如多流水线、多核处理器或者分布式计算系统。</li>
-<li>操作系统通过引入进程和线程，使得程序能够并发运行</li>
-</ul>
-<h3 id="共享">2.共享</h3>
-<p>共享是指系统中的资源可以被多个并发进程共同使用。有两种共享方式：互斥共享和同时共享。互斥共享 称为临界资源，例如打印机等，在同一时刻只允许一个进程访问，需要用同步机制来实现互斥访问</p>
-<h3 id="虚拟">3.虚拟</h3>
-<p>虚拟技术把一个物理实体转换为多个逻辑实体。主要有两种虚拟技术：<strong>时（时间）分复用技术和空（空间）分复用技术</strong>。</p>
-<ul>
-<li>时分复用：多个进程能在同一个处理器上<strong>并发执行</strong>使用了时分复用技术，让每个进程轮流占用处理器，每次只执行一小个时间片并快速切换。</li>
-<li>空分复用：虚拟内存使用了空分复用技术，它将物理内存抽象为地址空间，每个进程都有各自的地址空间。地址空间的页被映射到物理内存，地址空间的页并不需要全部在物理内存中，当使用到一个没有在物理内存的页时，执行页面置换算法，将该页置换到内存中 。 <strong>它使得应用程序认为它拥有连续可用的内存（一个连续完整的地址空间）</strong>，而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上使用这种技术的系统使得大型程序的编写变得更容易，对真正的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/物理内存">物理内存</a>（例如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/隨機存取記憶體">RAM</a>）的使用也更有效率</li>
-</ul>
-<h3 id="异步">4.异步</h3>
-<p>异步指进程不是一次性执行完毕，而是走走停停，以不可知的速度向前推进</p>
-<h2 id="基本功能">基本功能</h2>
-<h3 id="进程管理">进程管理</h3>
-<p>进程控制、进程同步、进程通信、死锁处理、处理机调度等</p>
-<h3 id="内存管理">内存管理</h3>
-<p>内存分配、地址映射、内存保护与共享、虚拟内存等。</p>
-<h3 id="文件管理">文件管理</h3>
-<p>文件存储空间的管理、目录管理、文件读写管理和保护等</p>
-<h3 id="设备管理">设备管理</h3>
-<p>完成用户的 I/O 请求，方便用户使用各种设备，并提高设备的利用率。主要包括缓冲管理、设备分配、设备处理、虛拟设备等</p>
-<h2 id="系统调用">系统调用</h2>
-<p>Linux内核中设置了一组用于实现各种系统功能的子程序，称为系统调用。用户可以通过系统调用命令在自己的应用程序中调用它们。从某种角度来看，系统调用和普通的函数调用非常相似。区别仅仅在于，系统调用由操作系统核心提供，运行于核心态（内核态）; 而普通的函数调用由函数库或用户自己提供，运行于用户态。</p>
-<p><a href="/posts/22984/">系统调用</a></p>
-<p>Linux 的系统调用主要有以下这些：</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Task</th>
-<th>Commands</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">进程控制</td>
-<td>fork(); exit(); wait();</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">进程通信</td>
-<td>pipe(); shmget(); mmap();</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">文件操作</td>
-<td>open(); read(); write();</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">设备操作</td>
-<td>ioctl(); read(); write();</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">信息维护</td>
-<td>getpid(); alarm(); sleep();</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">安全</td>
-<td>chmod(); umask(); chown()</td>
-</tr>
-</tbody>
-</table>
-<h2 id="宏内核和微内核">宏内核和微内核</h2>
-<h3 id="宏内核">宏内核</h3>
-<p>简单来说，就是把很多东西都集成进内核，例如linux内核，除了最基本的进程、线程管理、内存管理外，文件系统，驱动，网络协议等等都在内核里面。由于各模块共享信息，<strong>因此有很高的性能。缺点是稳定性差</strong>，开发过程中的bug经常会导致整个系统挂掉。做驱动开发的应该经常有按电源键强行关机的经历。</p>
-<h3 id="微内核">微内核</h3>
-<p>内核中只有最基本的调度、内存管理。驱动、文件系统等都是用户态的守护进程去实现的。优点是超级稳定，驱动等的错误只会导致相应进程死掉，不会导致整个系统都崩溃，在微内核结构下，操作系统被划分成小的、定义良好的模块，只有微内核这一个模块运行在内核态，其余模块运行在用户态。因为需要频繁地在用户态和核心态之间进行切换，所以会有一定的性能损失。</p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/ed489OiP7okQBLV.png" alt="" /><figcaption>image-20201209214721265</figcaption>
-</figure>
-<h2 id="中断分类">中断分类</h2>
-<h3 id="外中断">外中断</h3>
-<p><strong>由 CPU 执行指令以外的事件引起</strong>，如 I/O 完成中断，表示设备输入/输出处理已经完成，处理器能够发送下一个输入/输出请求。此外还有时钟中断、控制台中断等。</p>
-<h3 id="异常">异常</h3>
-<p>由 CPU 执行指令的内部事件引起，如非法操作码、地址越界、算术溢出等</p>
-<h3 id="陷入">陷入</h3>
-<p>在用户程序中使用系统调用</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/34672/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,50 +259,38 @@
 
       
           <span id="more"></span>
-<h1 id="内存管理">内存管理</h1>
-<h2 id="虚拟内存">虚拟内存</h2>
-<p>虚拟内存的目的是为了让物理内存扩充成更大的逻辑内存，从而让程序获得更多的可用内存。</p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><p>虚拟内存的目的是为了让物理内存扩充成更大的逻辑内存，从而让程序获得更多的可用内存。</p>
 <p>为了更好的管理内存，操作系统将内存抽象成地址空间。每个程序拥有自己的地址空间，这个地址空间被分割成多个块，每一块称为一页。这些页被映射到物理内存，但不需要映射到连续的物理内存，也不需要所有页都必须在物理内存中。当程序引用到不在物理内存中的页时，由硬件执行必要的映射，将缺失的部分装入物理内存并重新执行失败的指令。</p>
 <p>从上面的描述中可以看出，虚拟内存允许程序不用将地址空间中的每一页都映射到物理内存，<strong>也就是说一个程序不需要全部调入内存就可以运行</strong>，这使得有限的内存运行大程序成为可能。例如有一台计算机可以产生 16 位地址，那么一个程序的地址空间范围是 0~64K。该计算机只有 32KB 的物理内存，虚拟内存技术允许该计算机运行一个 64K 大小的程序。</p>
-<h2 id="分页系统地址映射">分页系统地址映射</h2>
-<p>内存管理单元（MMU）管理着地址空间和物理内存的转换。 内存管理单元里的 页表 存储着 页（程序地址空间）和页框（物理内存空间）的映射表。</p>
-<p>一个虚拟地址分成两个部分，一部分存储页面号，一部分存储偏移量。 其中页面号通过 页表 转成真实 页的地址，另外，页表还有一个功能就是 标记 地址是否在内存中。具体实例如下：</p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/rtI45BhWZqkAnP6.png" alt="" /><figcaption>image-20201214203458354</figcaption>
-</figure>
-<p>例如虚拟地址 0010 000000000100 前 4 位是存储页面号 2 后 12 位存储页面内偏移量 但是 这个页面号不是真实地址的页面号。需要通过页表映射。取页面号2即页表的第二个位置存储的 表项内容为（110 1）：页表项最后一位表示是否存在于内存中，1 表示存在。则这个页对应的页框的地址为 （110 000000000100）。如果不在内存中 就将<strong>外存</strong>调入内存。</p>
+<h2 id="分页系统地址映射"><a href="#分页系统地址映射" class="headerlink" title="分页系统地址映射"></a>分页系统地址映射</h2><p>内存管理单元（MMU）管理着地址空间和物理内存的转换。 内存管理单元里的 页表 存储着   页（程序地址空间）和页框（物理内存空间）的映射表。</p>
+<p>一个虚拟地址分成两个部分，一部分存储页面号，一部分存储偏移量。 其中页面号通过 页表 转成真实  页的地址，另外，页表还有一个功能就是 标记 地址是否在内存中。具体实例如下：</p>
+<p><img src="https://i.loli.net/2021/04/05/rtI45BhWZqkAnP6.png" alt="image-20201214203458354"></p>
+<p>例如虚拟地址  0010 000000000100   前 4 位是存储页面号 2  后 12 位存储页面内偏移量  但是 这个页面号不是真实地址的页面号。需要通过页表映射。取页面号2即页表的第二个位置存储的 表项内容为（110 1）：页表项最后一位表示是否存在于内存中，1 表示存在。则这个页对应的页框的地址为 （110 000000000100）。如果不在内存中 就将<strong>外存</strong>调入内存。</p>
 <blockquote>
 <p>每个进程的虚拟空间地址都一样，那如果两个进程完全使用了相同的虚拟地址，页表项怎么区分呢？一个进程在执行前，操作系统要为它设置好页表寄存器，让它指向进程自己专属的页表，相当于虚拟地址 + 页表地址</p>
 </blockquote>
-<h2 id="页面置换算法">页面置换算法</h2>
-<p>在程序运行过程中，如果要访问的页面不在内存中，就发生缺页中断从而将该页调入内存中。此时如果内存已无空闲空间，系统必须从内存中调出一个页面到磁盘对换区中来腾出空间。</p>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><p>在程序运行过程中，如果要访问的页面不在内存中，就发生缺页中断从而将该页调入内存中。此时如果内存已无空闲空间，系统必须从内存中调出一个页面到磁盘对换区中来腾出空间。 </p>
 <p>页面置换算法和缓存淘汰策略类似，可以将内存看成磁盘的缓存。在缓存系统中，缓存的大小有限，当有新的缓存到达时，需要淘汰一部分已经存在的缓存，这样才有空间存放新的缓存数据。</p>
 <p>页面置换算法的主要目标是使页面置换频率最低（也可以说缺页率最低）</p>
-<h3 id="fifo先进先出">FIFO先进先出</h3>
-<p>FIFO, First In First Out 选择换出的页面是最先进入的页面。该算法会将那些经常被访问的页面换出，导致缺页率升高。</p>
-<h3 id="lru-最近最久未使用">LRU 最近最久未使用</h3>
-<p>LRU, Least Recently Used <strong>虽然无法知道将来要使用的页面情况，但是可以知道过去使用页面的情况</strong>。LRU 将最近最久未使用的页面换出。为了实现 LRU，需要在内存中维护一个所有页面的链表。当一个页面被访问时，将这个页面移到链表表头。这样就能保证链表表尾的页面是最近最久未访问的。</p>
+<h3 id="FIFO先进先出"><a href="#FIFO先进先出" class="headerlink" title="FIFO先进先出"></a>FIFO先进先出</h3><p>FIFO, First In First Out  选择换出的页面是最先进入的页面。该算法会将那些经常被访问的页面换出，导致缺页率升高。</p>
+<h3 id="LRU-最近最久未使用"><a href="#LRU-最近最久未使用" class="headerlink" title="LRU 最近最久未使用"></a>LRU 最近最久未使用</h3><p>LRU, Least Recently Used  <strong>虽然无法知道将来要使用的页面情况，但是可以知道过去使用页面的情况</strong>。LRU 将最近最久未使用的页面换出。为了实现 LRU，需要在内存中维护一个所有页面的链表。当一个页面被访问时，将这个页面移到链表表头。这样就能保证链表表尾的页面是最近最久未访问的。</p>
 <p>缺点：</p>
-<ol type="1">
+<ol>
 <li>因为每次访问都需要更新链表，<strong>因此这种方式实现的 LRU 代价很高</strong>。</li>
 <li>缓存颠簸，当出现类似的 (3，2，1） 满了，然后又来连续的数据 (0,1,2,3,0,1,2,3….) 每次替换的页面都是下一次即将出现的序号，循环往复每次都要替换</li>
 <li>缓存污染，当出现偶然出现的数据时，它被替换到队头，需要整个队列的长度它才会被替换出去，缓存中冷数据会存放太久</li>
 </ol>
-<h3 id="lru-k">LRU-K</h3>
-<p>最久未使用K次淘汰算法 为了缓解LRU缓存污染的缺点，只有当引用次数超过K次才会被提到对头。可以使用一个队列，一个双向链表实现。对于访问次数不超过 K 次的内存页，可以将它存放在历史访问 队列里，超过K次的元素可以放在缓存队列里。</p>
-<ol type="1">
+<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p>最久未使用K次淘汰算法  为了缓解LRU缓存污染的缺点，只有当引用次数超过K次才会被提到对头。可以使用一个队列，一个双向链表实现。对于访问次数不超过 K 次的内存页，可以将它存放在历史访问 队列里，超过K次的元素可以放在缓存队列里。</p>
+<ol>
 <li>当历史队列中的元素满，并且还有新增访问元素的时候，将历史缓存队列的元素 按照 FIFO 的顺序置换页面（历史缓存页里的元素被访问的次数都不超过K次）</li>
 <li>当历史缓存页里的某个页 访问大于等于K次时，将它从历史队列里删除，并且添加到缓存队列里。</li>
 <li>当访问的元素大于K次，那么它应该在缓存队列里，缓存队列使用的双向链表实现，因此将该元素添加到队头</li>
 <li>当缓存队列里的元素需要删除的时候，删除链表尾的元素， 即<code>第k次访问距离现在最久</code>的那个页面。</li>
 </ol>
-<h3 id="q">2Q</h3>
-<p>2Q 就 类似于 LRU-2，采用一个FIFO队列 一个LRU队列，当FIFO容量为2，访问负载为 ABCABCABC时用不到 LRU队列</p>
-<h3 id="lfu最不经常访问淘汰算法">LFU（最不经常访问淘汰算法）</h3>
-<p>如果数据过去被访问多次，那么将来被访问的频率也更高。每个数据块一个引用计数，所有数据块按照引用计数排序，具有相同引用计数的数据块则按照时间排序。每次淘汰队尾数据块。</p>
+<h3 id="2Q"><a href="#2Q" class="headerlink" title="2Q"></a>2Q</h3><p>2Q 就 类似于 LRU-2，采用一个FIFO队列 一个LRU队列，当FIFO容量为2，访问负载为 ABCABCABC时用不到 LRU队列</p>
+<h3 id="LFU（最不经常访问淘汰算法）"><a href="#LFU（最不经常访问淘汰算法）" class="headerlink" title="LFU（最不经常访问淘汰算法）"></a>LFU（最不经常访问淘汰算法）</h3><p>如果数据过去被访问多次，那么将来被访问的频率也更高。每个数据块一个引用计数，所有数据块按照引用计数排序，具有相同引用计数的数据块则按照时间排序。每次淘汰队尾数据块。</p>
 <p>缓存颠簸</p>
-<h3 id="最近未使用">最近未使用</h3>
-<p>NRU, Not Recently Used 每个页面都有两个状态位：R 与 M，当页面被访问时设置页面的 R=1，当页面被修改时设置 M=1。其中 R 位会定时被清零。可以将页面分成以下四类：</p>
+<h3 id="最近未使用"><a href="#最近未使用" class="headerlink" title="最近未使用"></a>最近未使用</h3><p>NRU, Not Recently Used  每个页面都有两个状态位：R 与 M，当页面被访问时设置页面的 R=1，当页面被修改时设置 M=1。其中 R 位会定时被清零。可以将页面分成以下四类：</p>
 <ul>
 <li>R=0，M=0</li>
 <li>R=0，M=1</li>
@@ -468,46 +298,34 @@
 <li>R=1，M=1</li>
 </ul>
 <p>当发生缺页中断时，NRU 算法随机地从类编号最小的非空类中挑选一个页面将它换出。NRU 优先换出已经被修改的脏页面（R=0，M=1），而不是被频繁使用的干净页面（R=1，M=0）。</p>
-<h3 id="第二次机会算法">第二次机会算法</h3>
-<p>和FIFO 一样，但是设置了第二次机会。设置一个队列保存 被置置入的 页面序号，先被置入内存的页面在队列最前面。当内存满了 需要置换页面时，fifo方法是 把队列头的 页置换出去，但是可能这个页是频繁访问的页面。第二次机会算法 是 每次访问页面是，将该页面的R位设置为 1 需要置换时，如果队列头的R位是1 就将它放放到队列最后并R位清0，再找下一个，直到队列头的页的R位为0时，将其替换掉。当每个页面都被访问过时就退化为FIFO</p>
+<h3 id="第二次机会算法"><a href="#第二次机会算法" class="headerlink" title="第二次机会算法"></a>第二次机会算法</h3><p>和FIFO 一样，但是设置了第二次机会。设置一个队列保存 被置置入的 页面序号，先被置入内存的页面在队列最前面。当内存满了 需要置换页面时，fifo方法是 把队列头的 页置换出去，但是可能这个页是频繁访问的页面。第二次机会算法  是 每次访问页面是，将该页面的R位设置为 1  需要置换时，如果队列头的R位是1 就将它放放到队列最后并R位清0，再找下一个，直到队列头的页的R位为0时，将其替换掉。当每个页面都被访问过时就退化为FIFO</p>
 <p>这种方法的缺点时 如果缓存中所有的页面都已经被标记 就退化为 FIFO</p>
-<h3 id="时钟">时钟</h3>
-<p>第二次机会算法中的队列 即 （链表）需要在链表中移动页面，降低了效率。时钟算法<strong>使用环形链表将页面连接起来</strong>，再使用一个指针指向最老的页面。 从C移动到D就相当于 把C放到了队列尾！！！！</p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/uiTFI7CpPsqkUZl.png" alt="" /><figcaption>image-20201214205828039</figcaption>
-</figure>
-<h2 id="分段">分段</h2>
-<p>虚拟内存采用的是分页技术，也就是将地址空间划分成固定大小的页，每一页再与内存进行映射。（代码段 …）</p>
+<h3 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h3><p>第二次机会算法中的队列  即 （链表）需要在链表中移动页面，降低了效率。时钟算法<strong>使用环形链表将页面连接起来</strong>，再使用一个指针指向最老的页面。  从C移动到D就相当于 把C放到了队列尾！！！！</p>
+<p><img src="https://i.loli.net/2021/04/05/uiTFI7CpPsqkUZl.png" alt="image-20201214205828039"></p>
+<h2 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h2><p>虚拟内存采用的是分页技术，也就是将地址空间划分成固定大小的页，每一页再与内存进行映射。（代码段   …）</p>
 <p>下图为一个编译器在编译过程中建立的多个表，有 4 个表是动态增长的，如果使用分页系统的一维地址空间，动态增长的特点会导致覆盖问题的出现。</p>
 <p>分段的做法是把每个表分成段，一个段构成一个独立的地址空间。每个段的长度可以不同，并且可以动态增长。</p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/UzkJHWdnFwPqKhV.png" alt="" /><figcaption>image-20201214212530805</figcaption>
-</figure>
-<h2 id="段页式">段页式</h2>
-<p>程序的地址空间划分成多个拥有独立地址空间的段 每个段上的地址空间划分成大小相同的页。这样既拥有分段系统的共享和保护，又拥有分页系统的虚拟内存功能</p>
-<h2 id="分页与分段的比较">分页与分段的比较</h2>
-<ul>
+<p><img src="https://i.loli.net/2021/04/05/UzkJHWdnFwPqKhV.png" alt="image-20201214212530805"></p>
+<h2 id="段页式"><a href="#段页式" class="headerlink" title="段页式"></a>段页式</h2><p>程序的地址空间划分成多个拥有独立地址空间的段  每个段上的地址空间划分成大小相同的页。这样既拥有分段系统的共享和保护，又拥有分页系统的虚拟内存功能</p>
+<h2 id="分页与分段的比较"><a href="#分页与分段的比较" class="headerlink" title="分页与分段的比较"></a>分页与分段的比较</h2><ul>
 <li>对程序员的透明性：分页透明，但是分段需要程序员显式划分每个段。</li>
 <li>地址空间的维度：<strong>分页是一维地址空间，分段是二维的。</strong></li>
 <li>大小是否可以改变：页的大小不可变，段的大小可以动态改变。</li>
 <li>出现的原因：分页主要用于实现虚拟内存，从而获得更大的地址空间；<strong>分段主要是为了使程序和数据可以被划分为逻辑上独立的地址空间并且有助于共享和保护</strong>。</li>
 </ul>
-<h2 id="多级页表">多级页表</h2>
-<p>一般来说，任何进程切换都会暗示着更换活动页表集。Linux内核为每一个进程维护一个task_struct结构体（即进程描述符PCB），task_struct-&gt;mm_struct结构体成员用来保存<strong>该进程的页表</strong>。在进程切换的过程中，<strong>内核把新的页表的地址写入CR3控制寄存器</strong>。</p>
+<h2 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h2><p>一般来说，任何进程切换都会暗示着更换活动页表集。Linux内核为每一个进程维护一个task_struct结构体（即进程描述符PCB），task_struct-&gt;mm_struct结构体成员用来保存<strong>该进程的页表</strong>。在进程切换的过程中，<strong>内核把新的页表的地址写入CR3控制寄存器</strong>。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210419204602.png" alt="image-20210419204602171" style="zoom: 150%;" /></p>
-<p>可以看出 多级页表的结构 是这样的 一级页表中的每一个项 指向下一级页表的地址。如果一级页表由 1K 个项，那么附属的就有 1K 个二级页表。</p>
+<p>可以看出 多级页表的结构 是这样的  一级页表中的每一个项  指向下一级页表的地址。如果一级页表由 1K 个项，那么附属的就有 1K 个二级页表。</p>
 <p>假设4G 的寻址空间，每个页大小 4K。</p>
 <ul>
 <li>如果只用一级页表来寻址，那么需要的一级页表的项目数为 4 G / 4 K = 1 M的容量，假设表的每个项就是4字节的数组，那么存储这个1级表需要 1M X 4B = 4M</li>
-<li>如果使用二级表，并且将一级表的数量设置为 1K， 那么对应的二级表的个数也为 1K 由于寻址4G空间，那么每个二级表的大小 1M / 1K = 1K ，也就是 需要1K 个 每个大小为 1K 的二级表，那么存放所有的二级表需要 1K x 1K x 4B =4M空间，加上一级表的空间 0.004M，总共需要 4.004 M 的空间存储一级和二级表。</li>
+<li>如果使用二级表，并且将一级表的数量设置为 1K， 那么对应的二级表的个数也为 1K  由于寻址4G空间，那么每个二级表的大小 1M / 1K = 1K ，也就是 需要1K 个 每个大小为 1K 的二级表，那么存放所有的二级表需要 1K x 1K x 4B =4M空间，加上一级表的空间 0.004M，总共需要 4.004 M 的空间存储一级和二级表。</li>
 </ul>
 <p>多级页表的内存空间占用反而变大了</p>
-<h3 id="为什么用多级表">为什么用多级表</h3>
-<p>通过上面的计算，发现二级表占用空间反而多了。但是其实在大部分进程中，短时间内并不会真正用上 4G 的寻址空间，但是一级表由于是连续的，要加载就得全部加载进内存，尽管中间很多映射项都没用。如果使用二级表，那么一级表中只有百分之20的二级表需要存储，而没用上的二级表并不需要加载到内存，<strong>可以在使用的时候再调入</strong>。假设只用了4G寻址空间中的百分之20，二级表 需要存储的空间为 1K x 1K x 0.2 x 4B = 0.8 M 再加上一级表 1K x 4B = 0.004M 一共 使用 0.804M。即实现了分散存储 大大减少了存储页表的开支。</p>
+<h3 id="为什么用多级表"><a href="#为什么用多级表" class="headerlink" title="为什么用多级表"></a>为什么用多级表</h3><p>通过上面的计算，发现二级表占用空间反而多了。但是其实在大部分进程中，短时间内并不会真正用上 4G 的寻址空间，但是一级表由于是连续的，要加载就得全部加载进内存，尽管中间很多映射项都没用。如果使用二级表，那么一级表中只有百分之20的二级表需要存储，而没用上的二级表并不需要加载到内存，<strong>可以在使用的时候再调入</strong>。假设只用了4G寻址空间中的百分之20，二级表 需要存储的空间为 1K  x 1K x 0.2 x 4B = 0.8 M 再加上一级表  1K x 4B = 0.004M  一共 使用 0.804M。即实现了分散存储 大大减少了存储页表的开支。 </p>
 <p>只有一级页表才需要总是在主存中；虚拟存储器系统可以在需要时创建，页面掉入或调出二级页表，这就减少了主存的压力；只有最经常使用的二级页表才需要缓存在主存中，这种离散的存储方式是非常便利的</p>
-<h2 id="page-cache">page cache</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68071761">参考连接</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yang_yulei/article/details/46371975">基数树</a> 主要用于构建大范围 但是有较多公共前缀的 稀疏映射关系 例如稀疏的地址集合</p>
+<h2 id="page-cache"><a href="#page-cache" class="headerlink" title="page cache"></a>page cache</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68071761">参考连接</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yang_yulei/article/details/46371975">基数树</a>    主要用于构建大范围 但是有较多公共前缀的 稀疏映射关系  例如稀疏的地址集合   </p>
 
       
     </div>
@@ -586,12 +404,8 @@
 
       
           <span id="more"></span>
-<h1 id="malloc-和-free的实现原理解析">malloc 和 free的实现原理解析</h1>
-<p>https://jacktang816.github.io/post/mallocandfree/</p>
-<h2 id="进程地址空间">进程地址空间</h2>
-<figure>
-<img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="" /><figcaption>img</figcaption>
-</figure>
+<h1 id="malloc-和-free的实现原理解析"><a href="#malloc-和-free的实现原理解析" class="headerlink" title="malloc 和 free的实现原理解析"></a>malloc 和 free的实现原理解析</h1><p><a target="_blank" rel="noopener" href="https://jacktang816.github.io/post/mallocandfree/">https://jacktang816.github.io/post/mallocandfree/</a></p>
+<h2 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h2><p><img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="img"></p>
 <p>如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。</p>
 <ul>
 <li>代码段： 主要存放进程的可执行二进制代码，字符串字面值和只读变量（不能修改的）</li>
@@ -602,50 +416,44 @@
 </ul>
 <p>bss段、数据段和代码段是可执行程序<strong>编译时的分段</strong>，<strong>运行时还需要栈和堆</strong>。将应用程序加载到内存空间执行时，操作系统负责代码段、数据段和bss段的加载，并在内存中为这些段分配空间。栈也由操作系统分配和管理，<strong>堆则是由程序员自己管理</strong>。</p>
 <blockquote>
-<p>为什么要区分 .bss段 和 数据段？ .data段存放的是已经初始化的且非0的全局或局部变量，因此这个初始化的值会保存在可执行文件中，而.bss段中是未初始化的，因此编译的时候只是记录了该段需要的空间大小，在执行额时候才会给.bss段中的数据分配内存。这样可以减少生成的可执行文件的大小。而对于字面值常量，显示是和代码一样的不可修改的常量值，所以放在代码段。</p>
+<p>为什么要区分 .bss段 和 数据段？<br>.data段存放的是已经初始化的且非0的全局或局部变量，因此这个初始化的值会保存在可执行文件中，而.bss段中是未初始化的，因此编译的时候只是记录了该段需要的空间大小，在执行额时候才会给.bss段中的数据分配内存。这样可以减少生成的可执行文件的大小。而对于字面值常量，显示是和代码一样的不可修改的常量值，所以放在代码段。</p>
 </blockquote>
 <p><strong>内存映射段(mmap)</strong> 内核将硬盘文件的内容直接映射到内存，任何应用程序都可通过 Linux 的 mmap() 系统调用请求这种映射。</p>
 <ul>
-<li><p>内存映射是一种方便高效的文件 I/O 方式， 因而被用于装载动态共享库。</p></li>
-<li><p>用户也可创建匿名内存映射，<strong>该映射没有对应的文件，可用于存放程序数据</strong>。</p></li>
-<li><p>mmap 映射区向下扩展，堆向上扩展，两者相对扩展，直到耗尽虚拟地址空间中的剩余区域.</p></li>
+<li><p>内存映射是一种方便高效的文件 I/O 方式， 因而被用于装载动态共享库。</p>
+</li>
+<li><p>用户也可创建匿名内存映射，<strong>该映射没有对应的文件，可用于存放程序数据</strong>。</p>
+</li>
+<li><p>mmap 映射区向下扩展，堆向上扩展，两者相对扩展，直到耗尽虚拟地址空间中的剩余区域.</p>
+</li>
 </ul>
-<h2 id="进程">进程</h2>
-<p>在Linux中进程由进程控制块(PCB)描述，用一个<code>task_struct</code> 数据结构表示，这个数据结构记录了所有进程信息，包括进程状态、进程调度信息、标示符、进程通信相关信息、进程连接信息、时间和定时器、文件系统信息、虚拟内存信息等.。</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>在Linux中进程由进程控制块(PCB)描述，用一个<code>task_struct</code> 数据结构表示，这个数据结构记录了所有进程信息，包括进程状态、进程调度信息、标示符、进程通信相关信息、进程连接信息、时间和定时器、文件系统信息、虚拟内存信息等.。</p>
 <p>和 <code>malloc</code>密切相关的就是虚拟内存信息，定义为 <code>struct mm_struct *mm</code> 具体描述进程的地址空间。<strong><code>mm_struct</code>结构是对整个用户空间（进程空间）的描述</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///include/linux/sched.h </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> * <span class="title">mmap</span>;</span>  <span class="comment">/* 指向虚拟区间（VMA）链表 */</span></span><br><span class="line">  <span class="keyword">rb_root_t</span> mm_rb;               <span class="comment">/*指向red_black树*/</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> * <span class="title">mmap_cache</span>;</span>     <span class="comment">/* 指向最近找到的虚拟区间*/</span></span><br><span class="line">  <span class="keyword">pgd_t</span> * pgd;                  <span class="comment">/*指向进程的页目录*/</span></span><br><span class="line">  <span class="keyword">atomic_t</span> mm_users;                   <span class="comment">/* 用户空间中的有多少用户*/</span>                                     </span><br><span class="line">  <span class="keyword">atomic_t</span> mm_count;                   <span class="comment">/* 对&quot;struct mm_struct&quot;有多少引用*/</span>                                     </span><br><span class="line">  <span class="keyword">int</span> map_count;                       <span class="comment">/* 虚拟区间的个数*/</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">rw_semaphore</span> <span class="title">mmap_sem</span>;</span></span><br><span class="line">  <span class="keyword">spinlock_t</span> page_table_lock;         <span class="comment">/* 保护任务页表和 mm-&gt;rss */</span>       </span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">mmlist</span>;</span>            <span class="comment">/*所有活动（active）mm的链表 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> start_code, end_code, start_data, end_data; <span class="comment">/* 代码段、数据段 起始地址和结束地址 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> start_brk, brk, start_stack; <span class="comment">/* 栈区 的起始地址，堆区 起始地址和结束地址 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> arg_start, arg_end, env_start, env_end; <span class="comment">/*命令行参数 和 环境变量的 起始地址和结束地址*/</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> rss, total_vm, locked_vm;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> def_flags;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> cpu_vm_mask;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> swap_address;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">unsigned</span> dumpable:<span class="number">1</span>;</span><br><span class="line">  <span class="comment">/* Architecture-specific MM context */</span></span><br><span class="line">  <span class="keyword">mm_context_t</span> context;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>start_brk 和 brk 分别是堆的起始和终止地址。堆的大小由start_brk 和brk决定。
-<ul>
+<li>start_brk 和 brk 分别是堆的起始和终止地址。堆的大小由start_brk 和brk决定。<ul>
 <li>可以使用系统调用 sbrk() 或 brk() 增加 brk的值，达到增大堆空间的效果，但是系统调用代价太大，涉及到用户态和内核态的相互转换。所以，<strong>实际中系统分配较大的堆空间，进程通过malloc() 库函数在堆上进行空间动态分配，堆如果不够用 malloc 可以进行系统调用，增大brk的值。</strong></li>
-</ul></li>
+</ul>
+</li>
 <li>start_stack是进程栈的起始地址，栈的大小是在编译时期确定的，在运行时不能改变。</li>
 </ul>
 <blockquote>
 <p>malloc 只知道 start_brk 和brk之间连续可用的内存空间它可用任意分配，如果不够用了就向系统申请增大brk。后面一部分主要就malloc如何分配内存进行说明。</p>
-</blockquote>
-<blockquote>
 <p>个人理解：每个进程都有一个4G的虚拟进程空间，但是其中很大一部分起始都没有映射到物理内存，比如堆区，不可能每个进程都同时把这么大的堆空间都分配物理内存。而是在动态申请后，真正使用了 才会分配。每个进程malloc管理的也是自己区域虚拟空间中的堆区，不同进程之间的malloc不存在交叉。</p>
 </blockquote>
-<h3 id="相关的系统调用">相关的系统调用</h3>
-<h4 id="brk-和-sbrk">brk() 和 sbrk()</h4>
-<p>由之前的进程地址空间结构分析可以知道，要增加一个进程实际的可用堆大小，就需要将 brk 指针向高地址移动。Linux通过<strong>brk和sbrk系统调用</strong>操作break指针。两个系统调用的原型如下：</p>
+<h3 id="相关的系统调用"><a href="#相关的系统调用" class="headerlink" title="相关的系统调用"></a>相关的系统调用</h3><h4 id="brk-和-sbrk"><a href="#brk-和-sbrk" class="headerlink" title="brk() 和 sbrk()"></a>brk() 和 sbrk()</h4><p>由之前的进程地址空间结构分析可以知道，要增加一个进程实际的可用堆大小，就需要将 brk 指针向高地址移动。Linux通过<strong>brk和sbrk系统调用</strong>操作break指针。两个系统调用的原型如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">brk</span><span class="params">(<span class="keyword">void</span> *addr)</span></span>;             <span class="comment">//将brk指针直接设置为某个地址</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">sbrk</span><span class="params">(<span class="keyword">intptr_t</span> increment)</span></span>;  <span class="comment">//将brk指针从当前位置移动increment所指定的增量 ，失败返回-1</span></span><br></pre></td></tr></table></figure>
 <p><strong>进程所面对的虚拟内存地址空间，只有按页映射到物理内存地址，才能真正使用</strong>。受物理存储容量限制，整个堆虚拟内存空间不可能全部映射到实际的物理内存。因此每个进程有一个<strong>rlimit</strong>表示当前进程可用的资源上限。这个限制可以通过<strong>getrlimit系统调用</strong>得到。</p>
-<figure>
-<img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="" /><figcaption>img</figcaption>
-</figure>
-<h4 id="mmap">mmap</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, off\<span class="keyword">_t</span> offset)</span></span>;  <span class="comment">// 向映射区申请一块内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length)</span></span>;   <span class="comment">// 用于释放内存</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="img"></p>
+<h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, off\<span class="keyword">_t</span> offset)</span></span>;  <span class="comment">// 向映射区申请一块内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length)</span></span>;   <span class="comment">// 用于释放内存</span></span><br></pre></td></tr></table></figure>
 <p>mmap函数第一种用法是映射磁盘文件到内存中；而malloc使用的mmap函数的第二种用法，即匿名映射，匿名映射不映射磁盘文件，而是向映射区申请一块内存。</p>
 <ul>
 <li>分配内存 &lt; DEFAULT_MMAP_THRESHOLD （默认128K），走__brk，从内存池获取，失败的话走brk系统调用</li>
 <li>分配内存 &gt; DEFAULT_MMAP_THRESHOLD，走__mmap，直接调用mmap系统调用</li>
 </ul>
 <p><strong>上述的只是分配了虚拟内存，还没有映射到物理内存，当访问申请的内存时，才会因为缺页异常，内核分配物理内存。</strong></p>
-<h2 id="malloc实现方案">malloc实现方案</h2>
-<p>直接使用系统调用分配内存存在的问题：</p>
-<ol type="1">
+<h2 id="malloc实现方案"><a href="#malloc实现方案" class="headerlink" title="malloc实现方案"></a>malloc实现方案</h2><p>直接使用系统调用分配内存存在的问题：</p>
+<ol>
 <li>由于brk/sbrk/mmap属于系统调用，如果每次申请内存，都调用这三个函数中的一个，那么每次都要产生系统调用开销（即cpu从用户态切换到内核态的上下文切换，这里要保存用户态数据，等会还要切换回用户态），这是非常影响性能的；</li>
 <li>其次，这样申请的内存容易产生碎片，因为堆是从低地址到高地址，如果低地址的内存没有被释放，高地址的内存就不能被回收。</li>
 </ol>
@@ -662,22 +470,21 @@
 <p>malloc除了有unsorted bin，small bin，large bin三个bin之外，还有一个<strong>fast bin</strong>。一般的情况是，程序在运行时会经常需要申请和释放一些较小的内存空间。当分配器合并了相邻的几个小的 chunk 之后，也许马上就会有另一个小块内存的请求，这样分配器又需要从大的空闲内存中切分出一块，这样无疑是比较低效的，故而，malloc 中在分配过程中引入了 fast bins，不大于 max_fast(默认值为 64B)的 chunk 被释放后，首先会被放到 fast bins中，fast bins 中的 chunk 并不改变它的使用标志 P。这样也就无法将它们合并，当需要给用户分配的 chunk 小于或等于 max_fast 时，malloc 首先会在 fast bins 中查找相应的空闲块，然后才会去查找 bins 中的空闲 chunk。在某个特定的时候，malloc 会遍历 fast bins 中的 chunk，将相邻的空闲 chunk 进行合并，并将合并后的 chunk 加入 unsorted bin 中，然后再将 unsorted bin 里的 chunk 加入 bins 中。</p>
 <p>unsorted bin 的队列使用 bins 数组的第一个，如果被用户释放的 chunk 大于 max_fast，或者 fast bins 中的空闲 chunk 合并后，这些 chunk 首先会被放到 unsorted bin 队列中，在进行 malloc 操作的时候，如果在 fast bins 中没有找到合适的 chunk，则malloc 会先在 unsorted bin 中查找合适的空闲 chunk，然后才查找 bins。如果 unsorted bin 不能满足分配要求。 malloc便会将 unsorted bin 中的 chunk 加入 bins 中。然后再从 bins 中继续进行查找和分配过程。从这个过程可以看出来，<strong>unsorted bin 可以看做是 bins 的一个缓冲区，增加它只是为了加快分配的速度。</strong></p>
 <p>综上：</p>
-<h3 id="malloc-内存分配流程">malloc 内存分配流程</h3>
-<ol type="1">
-<li>如果分配内存&lt;512字节，则通过内存大小定位到smallbins对应的index上(floor(size/8))
-<ul>
+<h3 id="malloc-内存分配流程"><a href="#malloc-内存分配流程" class="headerlink" title="malloc 内存分配流程"></a>malloc 内存分配流程</h3><ol>
+<li>如果分配内存&lt;512字节，则通过内存大小定位到smallbins对应的index上(floor(size/8))<ul>
 <li>如果smallbins[index]为空，进入步骤3</li>
 <li>如果smallbins[index]非空，直接返回第一个chunk</li>
-</ul></li>
-<li>如果分配内存&gt;512字节，则定位到largebins对应的index上
-<ul>
+</ul>
+</li>
+<li>如果分配内存&gt;512字节，则定位到largebins对应的index上<ul>
 <li>如果largebins[index]为空，进入步骤3</li>
 <li>如果largebins[index]非空，扫描链表，找到第一个大小最合适的chunk，如size=12.5K，则使用chunk B，剩下的0.5k放入unsorted_list中</li>
-</ul></li>
+</ul>
+</li>
 <li>遍历unsorted_list，查找合适size的chunk，如果找到则返回；否则，将这些chunk都归类放到smallbins和largebins里面</li>
 <li>index++从更大的链表中查找，直到找到合适大小的chunk为止，找到后将chunk拆分，并将剩余的加入到unsorted_list中</li>
 <li>如果还没有找到，那么使用top chunk</li>
-<li>或者，内存&lt;128k，使用brk；内存&gt;128k，使用mmap获取新内存</li>
+<li>或者，内存<128k，使用brk；内存>128k，使用mmap获取新内存</li>
 </ol>
 
       
@@ -835,17 +642,14 @@
 
       
           <span id="more"></span>
-<h1 id="linux">Linux</h1>
-<p>在面试中，Linux 知识点相对于网络和操作系统等知识点而言不是那么重要，只需要重点掌握一些原理和命令即可</p>
+<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>在面试中，Linux 知识点相对于网络和操作系统等知识点而言不是那么重要，只需要重点掌握一些原理和命令即可</p>
 <ul>
 <li><strong>能简单使用 cat，grep，cut 等命令进行一些操作；</strong></li>
 <li><strong>文件系统相关的原理，inode 和 block 等概念，数据恢复；</strong></li>
 <li><strong>硬链接与软链接；</strong></li>
-<li><strong>进程管理相关，僵尸进程与孤儿进程，SIGCHLD</strong></li>
+<li><strong>进程管理相关，僵尸进程与孤儿进程，SIGCHLD</strong> </li>
 </ul>
-<h2 id="文件系统">文件系统</h2>
-<h3 id="组成">组成</h3>
-<p>最主要的几个组成部分如下：</p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>最主要的几个组成部分如下：</p>
 <ul>
 <li>inode：一个文件占用一个 inode，记录文件的属性，同时记录此文件的内容所在的 block 编号；</li>
 <li>block：记录文件的内容，文件太大时，会占用多个 block。</li>
@@ -855,19 +659,13 @@
 <li>superblock：记录文件系统的整体信息，包括 inode 和 block 的总量、使用量、剩余量，以及文件系统的格式与相关信息等；</li>
 <li>block bitmap：记录 block 是否被使用的位图。</li>
 </ul>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213817.png" alt="" /><figcaption>image-20210417213817484</figcaption>
-</figure>
-<h3 id="文件读取">文件读取</h3>
-<p>对于 Ext2 文件系统，当要读取一个文件的内容时，先在 inode 中查找文件内容所在的所有 block，然后把所有 block 的内容读出来。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213859.png" alt="image-20210417213859503" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213911.png" alt="image-20210417213911816" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213859.png" alt="image-20210417213859503" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213911.png" alt="image-20210417213911816" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213817.png" alt="image-20210417213817484"></p>
+<h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><p>对于 Ext2 文件系统，当要读取一个文件的内容时，先在 inode 中查找文件内容所在的所有 block，然后把所有 block 的内容读出来。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213859.png" alt="image-20210417213859503" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213911.png" alt="image-20210417213911816"><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213859.png" alt="image-20210417213859503" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210417213911.png" alt="image-20210417213911816"></p>
 <p>而对于 FAT 文件系统，它没有 inode，每个 block 中存储着下一个 block 的编号</p>
-<h3 id="磁盘碎片">磁盘碎片</h3>
-<p>指一个文件内容所在的 block 过于分散，导致磁盘磁头移动距离过大，从而降低磁盘读写性能</p>
-<h3 id="block">block</h3>
-<p>在 Ext2 文件系统中所支持的 block 大小有 1K，2K 及 4K 三种，不同的大小限制了单个文件和文件系统的最大大小。一个 block 只能被一个文件所使用，未使用的部分直接浪费了。因此如果需要存储大量的小文件，那么最好选用比较小的 block。</p>
-<h3 id="inode">inode</h3>
-<p>inode 具体包含以下信息：</p>
+<h3 id="磁盘碎片"><a href="#磁盘碎片" class="headerlink" title="磁盘碎片"></a>磁盘碎片</h3><p>指一个文件内容所在的 block 过于分散，导致磁盘磁头移动距离过大，从而降低磁盘读写性能</p>
+<h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><p>在 Ext2 文件系统中所支持的 block 大小有 1K，2K 及 4K 三种，不同的大小限制了单个文件和文件系统的最大大小。一个 block 只能被一个文件所使用，未使用的部分直接浪费了。因此如果需要存储大量的小文件，那么最好选用比较小的 block。</p>
+<h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>inode 具体包含以下信息：</p>
 <ul>
 <li>权限 (read/write/excute)；</li>
 <li>拥有者与群组 (owner/group)；</li>
@@ -875,7 +673,7 @@
 <li>建立或状态改变的时间 (ctime)；</li>
 <li>最近读取时间 (atime)；</li>
 <li>最近修改时间 (mtime)；</li>
-<li>定义文件特性的旗标 (flag)，如 SetUID...；</li>
+<li>定义文件特性的旗标 (flag)，如 SetUID…；</li>
 <li>该文件真正内容的指向 (pointer)。</li>
 </ul>
 <p>inode 具有以下特点：</p>
@@ -885,13 +683,9 @@
 </ul>
 <p>inode 中记录了文件内容所在的 block 编号，但是每个 block 非常小，一个大文件随便都需要几十万的 block。而一个 inode 大小有限，无法直接引用这么多 block 编号。因此引入了间接、双间接、三间接引用。间接引用让 inode 记录的引用 block 块记录引用信息。</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210417214209808.png" alt="image-20210417214209808" style="zoom:67%;" /></p>
-<h3 id="目录">目录</h3>
-<p>建立一个目录时，会分配一个 inode 与至少一个 block。<strong>block 记录的内容是目录下所有文件的 inode 编号以及文件名</strong>。可以看到文件的 <strong>inode 本身不记录文件名，文件名记录在目录中，因此新增文件、删除文件、更改文件名这些操作与目录的写权限有关</strong>。</p>
-<h3 id="挂载">挂载</h3>
-<p>挂载利用目录作为文件系统的进入点，也就是说，进入目录之后就可以读取文件系统的数据。</p>
-<h2 id="文件">文件</h2>
-<h3 id="文件属性">文件属性</h3>
-<p>用户分为三种：文件拥有者、群组以及其它人，对不同的用户有不同的文件权限。使用 ls 查看一个文件时，会显示一个文件的信息，例如 <code>drwxr-xr-x 3 root root 17 May 6 00:14 .config</code>，对这个信息的解释如下：</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>建立一个目录时，会分配一个 inode 与至少一个 block。<strong>block 记录的内容是目录下所有文件的 inode 编号以及文件名</strong>。可以看到文件的 <strong>inode 本身不记录文件名，文件名记录在目录中，因此新增文件、删除文件、更改文件名这些操作与目录的写权限有关</strong>。</p>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>挂载利用目录作为文件系统的进入点，也就是说，进入目录之后就可以读取文件系统的数据。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h3 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h3><p>用户分为三种：文件拥有者、群组以及其它人，对不同的用户有不同的文件权限。使用 ls 查看一个文件时，会显示一个文件的信息，例如 <code>drwxr-xr-x 3 root root 17 May 6 00:14 .config</code>，对这个信息的解释如下：</p>
 <ul>
 <li>drwxr-xr-x：文件类型以及权限，第 1 位为文件类型字段，后 9 位为文件权限字段</li>
 <li>3：链接数</li>
@@ -908,40 +702,28 @@
 <li>l：链接文件</li>
 </ul>
 <p>9 位的文件权限字段中，每 3 个为一组，共 3 组，每一组分别代表对<strong>文件拥有者、所属群组以及其它人的文件权限</strong>。一组权限中的 3 位分别为 r、w、x 权限，表示可读、可写、可执行。</p>
-<h3 id="链接">链接</h3>
-<ul>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><ul>
 <li>实体链接 ： 即硬链接，在目录下创建一个条目，记录着文件名和inode编号，这个inode编号就是源文件的inode，删除源文件 这个硬链接还是存在，只是把当前文件从它在的目录下的记录抹去了，但是还有别的地方链接了它，那么这个文件的inode就不会真正删除</li>
-<li>软链接：类似于windows下的快捷方式，只是记录了文件的绝对路径，如果源文件删除了 软链接就失效了。</li>
+<li>软链接：类似于windows下的快捷方式，只是记录了文件的绝对路径，如果源文件删除了  软链接就失效了。</li>
 </ul>
-<h2 id="常用命令">常用命令</h2>
-<h3 id="chmod-修改权限">chmod 修改权限</h3>
-<p>可以将一组权限用数字来表示，此时一组权限的 3 个位当做二进制数字的位，从左到右每个位的权值为 4、2、1，即每个权限对应的数字权值为 r : 4、w : 2、x : 1。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="chmod-修改权限"><a href="#chmod-修改权限" class="headerlink" title="chmod 修改权限"></a>chmod 修改权限</h3><p>可以将一组权限用数字来表示，此时一组权限的 3 个位当做二进制数字的位，从左到右每个位的权值为 4、2、1，即每个权限对应的数字权值为 r : 4、w : 2、x : 1。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## chmod [-R] xyz dirname/filename</span><br></pre></td></tr></table></figure>
-<p>示例：将 .bashrc 文件的权限修改为 -rwxr-xr--</p>
+<p>示例：将 .bashrc 文件的权限修改为 -rwxr-xr—</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">## chmod [ugoa]  [+-=] [rwx] dirname/filename</span><br><span class="line">- u：拥有者</span><br><span class="line">- g：所属群组</span><br><span class="line">- o：其他人</span><br><span class="line">- a：所有人</span><br><span class="line">- +：添加权限</span><br><span class="line">- -：移除权限</span><br><span class="line">- =：设定权限</span><br></pre></td></tr></table></figure>
 <p>示例：为 .bashrc 文件的所有用户添加写权限。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+w .bashrc</span><br></pre></td></tr></table></figure>
-<h3 id="ln-创建链接">ln 创建链接</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## ln [-sf] source_filename dist_filename</span><br><span class="line">-s ：默认是实体链接，加 -s 为符号链接</span><br><span class="line">-f ：如果目标文件存在时，先删除目标文件</span><br></pre></td></tr></table></figure>
-<h3 id="ls-查看目录信息">ls 查看目录信息</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## ls [-aAdfFhilnrRSt] file|dir</span><br><span class="line">-a ：列出全部的文件</span><br><span class="line">-d ：仅列出目录本身</span><br><span class="line">-l ：以长数据串行列出，包含文件的属性与权限等等数据</span><br></pre></td></tr></table></figure>
-<h3 id="touch-建立新文件">touch 建立新文件</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">更新文件时间或者建立新文件。</span><br><span class="line">## touch [-acdmt] filename</span><br><span class="line">-a ： 更新 atime</span><br><span class="line">-c ： 更新 ctime，若该文件不存在则不建立新文件</span><br><span class="line">-m ： 更新 mtime</span><br><span class="line">-d ： 后面可以接更新日期而不使用当前日期，也可以使用 --date&#x3D;&quot;日期或时间&quot;</span><br><span class="line">-t ： 后面可以接更新时间而不使用当前时间，格式为[YYYYMMDDhhmm]</span><br></pre></td></tr></table></figure>
-<h3 id="cp-复制">cp 复制</h3>
-<p>复制文件。如果源文件有两个以上，则目的文件一定要是目录才行</p>
+<h3 id="ln-创建链接"><a href="#ln-创建链接" class="headerlink" title="ln 创建链接"></a>ln 创建链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## ln [-sf] source_filename dist_filename</span><br><span class="line">-s ：默认是实体链接，加 -s 为符号链接</span><br><span class="line">-f ：如果目标文件存在时，先删除目标文件</span><br></pre></td></tr></table></figure>
+<h3 id="ls-查看目录信息"><a href="#ls-查看目录信息" class="headerlink" title="ls 查看目录信息"></a>ls 查看目录信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## ls [-aAdfFhilnrRSt] file|dir</span><br><span class="line">-a ：列出全部的文件</span><br><span class="line">-d ：仅列出目录本身</span><br><span class="line">-l ：以长数据串行列出，包含文件的属性与权限等等数据</span><br></pre></td></tr></table></figure>
+<h3 id="touch-建立新文件"><a href="#touch-建立新文件" class="headerlink" title="touch 建立新文件"></a>touch 建立新文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">更新文件时间或者建立新文件。</span><br><span class="line">## touch [-acdmt] filename</span><br><span class="line">-a ： 更新 atime</span><br><span class="line">-c ： 更新 ctime，若该文件不存在则不建立新文件</span><br><span class="line">-m ： 更新 mtime</span><br><span class="line">-d ： 后面可以接更新日期而不使用当前日期，也可以使用 --date&#x3D;&quot;日期或时间&quot;</span><br><span class="line">-t ： 后面可以接更新时间而不使用当前时间，格式为[YYYYMMDDhhmm]</span><br></pre></td></tr></table></figure>
+<h3 id="cp-复制"><a href="#cp-复制" class="headerlink" title="cp 复制"></a>cp 复制</h3><p>复制文件。如果源文件有两个以上，则目的文件一定要是目录才行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp [-adfilprsu] source destination</span><br><span class="line">-a ：相当于 -dr --preserve&#x3D;all</span><br><span class="line">-d ：若来源文件为链接文件，则复制链接文件属性而非文件本身</span><br><span class="line">-i ：若目标文件已经存在时，在覆盖前会先询问</span><br><span class="line">-p ：连同文件的属性一起复制过去</span><br><span class="line">-r ：递归复制</span><br><span class="line">-u ：destination 比 source 旧才更新 destination，或 destination 不存在的情况下才复制</span><br><span class="line">--preserve&#x3D;all ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了</span><br></pre></td></tr></table></figure>
-<h3 id="mv-移动">mv 移动</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## mv [-fiu] source destination</span><br><span class="line">## mv [options] source1 source2 source3 .... directory</span><br><span class="line">-f ： force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖</span><br></pre></td></tr></table></figure>
-<h3 id="cat-取得文件内容">cat 取得文件内容</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## cat [-AbEnTv] filename</span><br><span class="line">-n ：打印出行号，连同空白行也会有行号，-b 不会</span><br><span class="line"></span><br><span class="line">## cat test &gt; test1   ### test 内容会覆盖test1的所有内容</span><br><span class="line">## cat test &gt;&gt; test1  ### test内容添加在 test1 内容的后面</span><br></pre></td></tr></table></figure>
-<h3 id="locate-文件搜索">locate 文件搜索</h3>
-<p>文件搜索。可以用关键字或者正则表达式进行搜索。locate 使用 /var/lib/mlocate/ 这个数据库来进行搜索，它存储在内存中，并且<strong>每天更新一次，所以无法用 locate 搜索新建的文件</strong>。可以使用 <strong>updatedb</strong> 来立即更新数据库。较快</p>
+<h3 id="mv-移动"><a href="#mv-移动" class="headerlink" title="mv 移动"></a>mv 移动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## mv [-fiu] source destination</span><br><span class="line">## mv [options] source1 source2 source3 .... directory</span><br><span class="line">-f ： force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖</span><br></pre></td></tr></table></figure>
+<h3 id="cat-取得文件内容"><a href="#cat-取得文件内容" class="headerlink" title="cat 取得文件内容"></a>cat 取得文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## cat [-AbEnTv] filename</span><br><span class="line">-n ：打印出行号，连同空白行也会有行号，-b 不会</span><br><span class="line"></span><br><span class="line">## cat test &gt; test1   ### test 内容会覆盖test1的所有内容</span><br><span class="line">## cat test &gt;&gt; test1  ### test内容添加在 test1 内容的后面</span><br></pre></td></tr></table></figure>
+<h3 id="locate-文件搜索"><a href="#locate-文件搜索" class="headerlink" title="locate 文件搜索"></a>locate 文件搜索</h3><p>文件搜索。可以用关键字或者正则表达式进行搜索。locate 使用 /var/lib/mlocate/ 这个数据库来进行搜索，它存储在内存中，并且<strong>每天更新一次，所以无法用 locate 搜索新建的文件</strong>。可以使用 <strong>updatedb</strong> 来立即更新数据库。较快</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## locate [-ir] keyword</span><br><span class="line">-r：正则表达式</span><br><span class="line">##  locate -r &#x2F;ls$     ### 查找以&#x2F;ls结尾的文件  </span><br></pre></td></tr></table></figure>
-<h3 id="find-文件搜索">find 文件搜索</h3>
-<p>文件搜索。可以使用文件的属性和权限进行搜索</p>
+<h3 id="find-文件搜索"><a href="#find-文件搜索" class="headerlink" title="find 文件搜索"></a>find 文件搜索</h3><p>文件搜索。可以使用文件的属性和权限进行搜索</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">## find [basedir] [option]</span><br><span class="line">example: find . -name &quot;shadow*&quot;</span><br><span class="line"></span><br><span class="line">与时间有关的选项</span><br><span class="line"></span><br><span class="line">与文件拥有者和所属群组有关的选项</span><br><span class="line"></span><br><span class="line">与文件权限和名称有关的权限</span><br></pre></td></tr></table></figure>
-<h3 id="tar-打包指令">tar 打包指令</h3>
-<p>压缩指令只能对一个文件进行压缩，而打包能够将多个文件打包成一个大文件。tar 不仅可以用于打包，也可以使用 gzip、bzip2、xz 将打包文件进行压缩。</p>
+<h3 id="tar-打包指令"><a href="#tar-打包指令" class="headerlink" title="tar  打包指令"></a>tar  打包指令</h3><p>压缩指令只能对一个文件进行压缩，而打包能够将多个文件打包成一个大文件。tar 不仅可以用于打包，也可以使用 gzip、bzip2、xz 将打包文件进行压缩。</p>
 
       
     </div>
@@ -1020,8 +802,7 @@
 
       
           <span id="more"></span>
-<h1 id="fork-和-vfork">fork 和 vfork</h1>
-<p>https://blog.csdn.net/gatieme/article/details/51417488</p>
+<h1 id="fork-和-vfork"><a href="#fork-和-vfork" class="headerlink" title="fork 和 vfork"></a>fork 和 vfork</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gatieme/article/details/51417488">https://blog.csdn.net/gatieme/article/details/51417488</a></p>
 
       
     </div>
@@ -1377,6 +1158,91 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/56789/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/56789/" class="post-title-link" itemprop="url">相关的编程题汇总-回朔</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:11:09" itemprop="dateCreated datePublished" datetime="2021-05-11T10:11:09+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:21:51" itemprop="dateModified" datetime="2021-08-30T20:21:51+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">算法思想</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记录了回朔类的题目，常见的 八皇后问题，排列组合等</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/56789/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1450,7 +1316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
