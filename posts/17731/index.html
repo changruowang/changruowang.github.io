@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="设备管理 磁盘结构  盘面（Platter）：一个磁盘有多个盘面； 磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道； 扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小； 磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘">
+  <meta name="description" content="设备管理磁盘结构 盘面（Platter）：一个磁盘有多个盘面； 磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道； 扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小； 磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘面的磁场（写）；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机操作系统-设备管理">
 <meta property="og:url" content="http://xxxxx.com/posts/17731/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="设备管理 磁盘结构  盘面（Platter）：一个磁盘有多个盘面； 磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道； 扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小； 磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘">
+<meta property="og:description" content="设备管理磁盘结构 盘面（Platter）：一个磁盘有多个盘面； 磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道； 扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小； 磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘面的磁场（写）；">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/04/05/UgN2XMLorY4yB3f.jpg">
 <meta property="og:image" content="https://i.loli.net/2021/04/05/TlDjAExVoS2wamz.png">
@@ -272,9 +272,7 @@
 
       
         <span id="more"></span>
-<h1 id="设备管理">设备管理</h1>
-<h2 id="磁盘结构">磁盘结构</h2>
-<ul>
+<h1 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h1><h2 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h2><ul>
 <li>盘面（Platter）：一个磁盘有多个盘面；</li>
 <li>磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道；</li>
 <li>扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小；</li>
@@ -282,29 +280,19 @@
 <li>制动手臂（Actuator arm）：用于在磁道之间移动磁头；</li>
 <li>主轴（Spindle）：使整个盘面转动。</li>
 </ul>
-<figure>
-<img src="https://i.loli.net/2021/04/05/UgN2XMLorY4yB3f.jpg" alt="" /><figcaption>img</figcaption>
-</figure>
-<h2 id="磁盘调度算法">磁盘调度算法</h2>
-<p>读写一个磁盘块的时间的影响因素有：</p>
+<p><img src="https://i.loli.net/2021/04/05/UgN2XMLorY4yB3f.jpg" alt="img"></p>
+<h2 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h2><p>读写一个磁盘块的时间的影响因素有：</p>
 <ul>
 <li>旋转时间（主轴转动盘面，使得磁头移动到适当的扇区上）</li>
 <li>寻道时间（制动手臂移动，使得磁头移动到适当的磁道上）</li>
 <li>实际的数据传输时间</li>
 </ul>
 <p>其中，寻道时间最长，因此磁盘调度的主要目标是使磁盘的平均寻道时间最短</p>
-<h3 id="先来先服务">先来先服务</h3>
-<p>FCFS, First Come First Served 按照磁盘请求的顺序进行调度。优点是公平和简单。缺点也很明显，因为未对寻道做任何优化，使平均寻道时间可能较长。</p>
-<h3 id="最短寻道时间优先">最短寻道时间优先</h3>
-<p>SSTF, Shortest Seek Time First 优先调度与当前磁头所在磁道距离最近的磁道。虽然平均寻道时间比较低，但是不够公平。如果新到达的磁道请求总是比一个在等待的磁道请求近，那么在等待的磁道请求会一直等待下去，也就是出现<strong>饥饿现象</strong>。具体来说，<strong>两端的磁道请求更容易出现饥饿现象。</strong></p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/TlDjAExVoS2wamz.png" alt="" /><figcaption>image-20201214213147756</figcaption>
-</figure>
-<h3 id="电梯算法">电梯算法</h3>
-<p>电梯总是保持一个方向运行，直到该方向没有请求为止，然后改变运行方向。电梯算法（扫描算法）和电梯的运行过程类似，总是按一个方向来进行磁盘调度，直到该方向上没有未完成的磁盘请求，然后改变方向。因为考虑了移动方向，因此所有的磁盘请求都会被满足，解决了 SSTF 的饥饿问题。</p>
-<figure>
-<img src="https://i.loli.net/2021/04/05/P9Ta1sqvX3yKOrQ.png" alt="" /><figcaption>image-20201214213157846</figcaption>
-</figure>
+<h3 id="先来先服务"><a href="#先来先服务" class="headerlink" title="先来先服务"></a>先来先服务</h3><p>FCFS, First Come First Served  按照磁盘请求的顺序进行调度。优点是公平和简单。缺点也很明显，因为未对寻道做任何优化，使平均寻道时间可能较长。</p>
+<h3 id="最短寻道时间优先"><a href="#最短寻道时间优先" class="headerlink" title="最短寻道时间优先"></a>最短寻道时间优先</h3><p>SSTF, Shortest Seek Time First   优先调度与当前磁头所在磁道距离最近的磁道。虽然平均寻道时间比较低，但是不够公平。如果新到达的磁道请求总是比一个在等待的磁道请求近，那么在等待的磁道请求会一直等待下去，也就是出现<strong>饥饿现象</strong>。具体来说，<strong>两端的磁道请求更容易出现饥饿现象。</strong></p>
+<p><img src="https://i.loli.net/2021/04/05/TlDjAExVoS2wamz.png" alt="image-20201214213147756"></p>
+<h3 id="电梯算法"><a href="#电梯算法" class="headerlink" title="电梯算法"></a>电梯算法</h3><p>电梯总是保持一个方向运行，直到该方向没有请求为止，然后改变运行方向。电梯算法（扫描算法）和电梯的运行过程类似，总是按一个方向来进行磁盘调度，直到该方向上没有未完成的磁盘请求，然后改变方向。因为考虑了移动方向，因此所有的磁盘请求都会被满足，解决了 SSTF 的饥饿问题。</p>
+<p><img src="https://i.loli.net/2021/04/05/P9Ta1sqvX3yKOrQ.png" alt="image-20201214213157846"></p>
 
     </div>
 

@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="形态学滤波 腐蚀 操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值 效果：使暗的更暗  膨胀 操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值 效果：使亮的更亮  开运算 先腐蚀后膨胀，消除小物体和小连接点 闭运算 先膨胀后腐蚀，连接缝隙，">
+  <meta name="description" content="形态学滤波腐蚀操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值效果：使暗的更暗  膨胀操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值效果：使亮的更亮  开运算先腐蚀后膨胀，消除小物体和小连接点 闭运算先膨胀后腐蚀，连接缝隙，填充小黑洞 形态学梯度基本梯度：膨胀">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像处理-形态学滤波">
 <meta property="og:url" content="http://xxxxx.com/posts/59990/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="形态学滤波 腐蚀 操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值 效果：使暗的更暗  膨胀 操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值 效果：使亮的更亮  开运算 先腐蚀后膨胀，消除小物体和小连接点 闭运算 先膨胀后腐蚀，连接缝隙，">
+<meta property="og:description" content="形态学滤波腐蚀操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值效果：使暗的更暗  膨胀操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值效果：使亮的更亮  开运算先腐蚀后膨胀，消除小物体和小连接点 闭运算先膨胀后腐蚀，连接缝隙，填充小黑洞 形态学梯度基本梯度：膨胀">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609200614322.png">
 <meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609200712018.png">
@@ -273,28 +273,20 @@
 
       
         <span id="more"></span>
-<h1 id="形态学滤波">形态学滤波</h1>
-<h2 id="腐蚀">腐蚀</h2>
-<p>操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值 效果：使暗的更暗</p>
+<h1 id="形态学滤波"><a href="#形态学滤波" class="headerlink" title="形态学滤波"></a>形态学滤波</h1><h2 id="腐蚀"><a href="#腐蚀" class="headerlink" title="腐蚀"></a>腐蚀</h2><p>操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最小值，将其作为图像在锚点位置的像素值<br>效果：使暗的更暗</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609200614322.png" alt="image-20210609200614322" style="zoom:50%;" /></p>
-<h2 id="膨胀">膨胀</h2>
-<p>操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值 效果：使亮的更亮</p>
+<h2 id="膨胀"><a href="#膨胀" class="headerlink" title="膨胀"></a>膨胀</h2><p>操作过程：构建一个核，并指定核的锚点，用该核与图像卷积，计算核覆盖区域的像素点最大值，将其作为图像在锚点位置的像素值<br>效果：使亮的更亮</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609200712018.png" alt="image-20210609200712018" style="zoom:50%;" /></p>
-<h2 id="开运算">开运算</h2>
-<p>先腐蚀后膨胀，消除小物体和小连接点</p>
-<h2 id="闭运算">闭运算</h2>
-<p>先膨胀后腐蚀，连接缝隙，填充小黑洞</p>
-<h2 id="形态学梯度">形态学梯度</h2>
-<p>基本梯度：膨胀的图 - 腐蚀的图</p>
-<p>内部梯度：原图 - 腐蚀的图</p>
+<h2 id="开运算"><a href="#开运算" class="headerlink" title="开运算"></a>开运算</h2><p>先腐蚀后膨胀，消除小物体和小连接点</p>
+<h2 id="闭运算"><a href="#闭运算" class="headerlink" title="闭运算"></a>闭运算</h2><p>先膨胀后腐蚀，连接缝隙，填充小黑洞</p>
+<h2 id="形态学梯度"><a href="#形态学梯度" class="headerlink" title="形态学梯度"></a>形态学梯度</h2><p>基本梯度：膨胀的图 -  腐蚀的图</p>
+<p>内部梯度：原图 - 腐蚀的图   </p>
 <p>外部梯度：膨胀的图 - 原图</p>
 <p>效果：<strong>保留物体边缘轮廓</strong></p>
-<h2 id="顶帽">顶帽</h2>
-<p>原图 - 开运算 （这个内部梯度的区别，内部梯度只是腐蚀，因此物体的轮廓会小一圈，而开运算是去掉了小的点，原本物体的大小不会变化因为他是腐蚀+膨胀）</p>
+<h2 id="顶帽"><a href="#顶帽" class="headerlink" title="顶帽"></a>顶帽</h2><p>原图 - 开运算 （这个内部梯度的区别，内部梯度只是腐蚀，因此物体的轮廓会小一圈，而开运算是去掉了小的点，原本物体的大小不会变化因为他是腐蚀+膨胀）</p>
 <p>获取：获取图像小区域，例如比较小的背景，会被开运算去掉，再用原图一减提取的便是背景</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609201359570.png" alt="image-20210609201359570" style="zoom:50%;" /></p>
-<h2 id="黑帽">黑帽</h2>
-<p>闭运算 - 原图 闭运算突出了原本暗的区域，或者连接的空区域，那么黑帽 就是 凸显了暗区域</p>
+<h2 id="黑帽"><a href="#黑帽" class="headerlink" title="黑帽"></a>黑帽</h2><p>闭运算 - 原图 闭运算突出了原本暗的区域，或者连接的空区域，那么黑帽 就是  凸显了暗区域</p>
 <p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210609201609775.png" alt="image-20210609201609775" style="zoom:50%;" /></p>
 
     </div>

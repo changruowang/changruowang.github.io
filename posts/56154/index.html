@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="malloc 和 free的实现原理解析 https:&#x2F;&#x2F;jacktang816.github.io&#x2F;post&#x2F;mallocandfree&#x2F; 进程地址空间  img  如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。  代码段： 主要存放进程的可执行二进制代码，">
+  <meta name="description" content="malloc 和 free的实现原理解析https:&#x2F;&#x2F;jacktang816.github.io&#x2F;post&#x2F;mallocandfree&#x2F; 进程地址空间 如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。  代码段： 主要存放进程的可执行二进制代码，字符串字面值和只读变量（不能修改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="malloc实现原理">
 <meta property="og:url" content="http://xxxxx.com/posts/56154/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="malloc 和 free的实现原理解析 https:&#x2F;&#x2F;jacktang816.github.io&#x2F;post&#x2F;mallocandfree&#x2F; 进程地址空间  img  如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。  代码段： 主要存放进程的可执行二进制代码，">
+<meta property="og:description" content="malloc 和 free的实现原理解析https:&#x2F;&#x2F;jacktang816.github.io&#x2F;post&#x2F;mallocandfree&#x2F; 进程地址空间 如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。  代码段： 主要存放进程的可执行二进制代码，字符串字面值和只读变量（不能修改">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jacktang816.github.io/img/linux/linuxAddrSpace.png">
 <meta property="og:image" content="https://jacktang816.github.io/img/linux/heapSpace.png">
@@ -273,12 +273,8 @@
 
       
         <span id="more"></span>
-<h1 id="malloc-和-free的实现原理解析">malloc 和 free的实现原理解析</h1>
-<p>https://jacktang816.github.io/post/mallocandfree/</p>
-<h2 id="进程地址空间">进程地址空间</h2>
-<figure>
-<img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="" /><figcaption>img</figcaption>
-</figure>
+<h1 id="malloc-和-free的实现原理解析"><a href="#malloc-和-free的实现原理解析" class="headerlink" title="malloc 和 free的实现原理解析"></a>malloc 和 free的实现原理解析</h1><p><a target="_blank" rel="noopener" href="https://jacktang816.github.io/post/mallocandfree/">https://jacktang816.github.io/post/mallocandfree/</a></p>
+<h2 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h2><p><img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="img"></p>
 <p>如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。</p>
 <ul>
 <li>代码段： 主要存放进程的可执行二进制代码，字符串字面值和只读变量（不能修改的）</li>
@@ -289,50 +285,44 @@
 </ul>
 <p>bss段、数据段和代码段是可执行程序<strong>编译时的分段</strong>，<strong>运行时还需要栈和堆</strong>。将应用程序加载到内存空间执行时，操作系统负责代码段、数据段和bss段的加载，并在内存中为这些段分配空间。栈也由操作系统分配和管理，<strong>堆则是由程序员自己管理</strong>。</p>
 <blockquote>
-<p>为什么要区分 .bss段 和 数据段？ .data段存放的是已经初始化的且非0的全局或局部变量，因此这个初始化的值会保存在可执行文件中，而.bss段中是未初始化的，因此编译的时候只是记录了该段需要的空间大小，在执行额时候才会给.bss段中的数据分配内存。这样可以减少生成的可执行文件的大小。而对于字面值常量，显示是和代码一样的不可修改的常量值，所以放在代码段。</p>
+<p>为什么要区分 .bss段 和 数据段？<br>.data段存放的是已经初始化的且非0的全局或局部变量，因此这个初始化的值会保存在可执行文件中，而.bss段中是未初始化的，因此编译的时候只是记录了该段需要的空间大小，在执行额时候才会给.bss段中的数据分配内存。这样可以减少生成的可执行文件的大小。而对于字面值常量，显示是和代码一样的不可修改的常量值，所以放在代码段。</p>
 </blockquote>
 <p><strong>内存映射段(mmap)</strong> 内核将硬盘文件的内容直接映射到内存，任何应用程序都可通过 Linux 的 mmap() 系统调用请求这种映射。</p>
 <ul>
-<li><p>内存映射是一种方便高效的文件 I/O 方式， 因而被用于装载动态共享库。</p></li>
-<li><p>用户也可创建匿名内存映射，<strong>该映射没有对应的文件，可用于存放程序数据</strong>。</p></li>
-<li><p>mmap 映射区向下扩展，堆向上扩展，两者相对扩展，直到耗尽虚拟地址空间中的剩余区域.</p></li>
+<li><p>内存映射是一种方便高效的文件 I/O 方式， 因而被用于装载动态共享库。</p>
+</li>
+<li><p>用户也可创建匿名内存映射，<strong>该映射没有对应的文件，可用于存放程序数据</strong>。</p>
+</li>
+<li><p>mmap 映射区向下扩展，堆向上扩展，两者相对扩展，直到耗尽虚拟地址空间中的剩余区域.</p>
+</li>
 </ul>
-<h2 id="进程">进程</h2>
-<p>在Linux中进程由进程控制块(PCB)描述，用一个<code>task_struct</code> 数据结构表示，这个数据结构记录了所有进程信息，包括进程状态、进程调度信息、标示符、进程通信相关信息、进程连接信息、时间和定时器、文件系统信息、虚拟内存信息等.。</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>在Linux中进程由进程控制块(PCB)描述，用一个<code>task_struct</code> 数据结构表示，这个数据结构记录了所有进程信息，包括进程状态、进程调度信息、标示符、进程通信相关信息、进程连接信息、时间和定时器、文件系统信息、虚拟内存信息等.。</p>
 <p>和 <code>malloc</code>密切相关的就是虚拟内存信息，定义为 <code>struct mm_struct *mm</code> 具体描述进程的地址空间。<strong><code>mm_struct</code>结构是对整个用户空间（进程空间）的描述</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///include/linux/sched.h </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> * <span class="title">mmap</span>;</span>  <span class="comment">/* 指向虚拟区间（VMA）链表 */</span></span><br><span class="line">  <span class="keyword">rb_root_t</span> mm_rb;               <span class="comment">/*指向red_black树*/</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> * <span class="title">mmap_cache</span>;</span>     <span class="comment">/* 指向最近找到的虚拟区间*/</span></span><br><span class="line">  <span class="keyword">pgd_t</span> * pgd;                  <span class="comment">/*指向进程的页目录*/</span></span><br><span class="line">  <span class="keyword">atomic_t</span> mm_users;                   <span class="comment">/* 用户空间中的有多少用户*/</span>                                     </span><br><span class="line">  <span class="keyword">atomic_t</span> mm_count;                   <span class="comment">/* 对&quot;struct mm_struct&quot;有多少引用*/</span>                                     </span><br><span class="line">  <span class="keyword">int</span> map_count;                       <span class="comment">/* 虚拟区间的个数*/</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">rw_semaphore</span> <span class="title">mmap_sem</span>;</span></span><br><span class="line">  <span class="keyword">spinlock_t</span> page_table_lock;         <span class="comment">/* 保护任务页表和 mm-&gt;rss */</span>       </span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">mmlist</span>;</span>            <span class="comment">/*所有活动（active）mm的链表 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> start_code, end_code, start_data, end_data; <span class="comment">/* 代码段、数据段 起始地址和结束地址 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> start_brk, brk, start_stack; <span class="comment">/* 栈区 的起始地址，堆区 起始地址和结束地址 */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> arg_start, arg_end, env_start, env_end; <span class="comment">/*命令行参数 和 环境变量的 起始地址和结束地址*/</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> rss, total_vm, locked_vm;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> def_flags;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> cpu_vm_mask;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> swap_address;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">unsigned</span> dumpable:<span class="number">1</span>;</span><br><span class="line">  <span class="comment">/* Architecture-specific MM context */</span></span><br><span class="line">  <span class="keyword">mm_context_t</span> context;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>start_brk 和 brk 分别是堆的起始和终止地址。堆的大小由start_brk 和brk决定。
-<ul>
+<li>start_brk 和 brk 分别是堆的起始和终止地址。堆的大小由start_brk 和brk决定。<ul>
 <li>可以使用系统调用 sbrk() 或 brk() 增加 brk的值，达到增大堆空间的效果，但是系统调用代价太大，涉及到用户态和内核态的相互转换。所以，<strong>实际中系统分配较大的堆空间，进程通过malloc() 库函数在堆上进行空间动态分配，堆如果不够用 malloc 可以进行系统调用，增大brk的值。</strong></li>
-</ul></li>
+</ul>
+</li>
 <li>start_stack是进程栈的起始地址，栈的大小是在编译时期确定的，在运行时不能改变。</li>
 </ul>
 <blockquote>
 <p>malloc 只知道 start_brk 和brk之间连续可用的内存空间它可用任意分配，如果不够用了就向系统申请增大brk。后面一部分主要就malloc如何分配内存进行说明。</p>
-</blockquote>
-<blockquote>
 <p>个人理解：每个进程都有一个4G的虚拟进程空间，但是其中很大一部分起始都没有映射到物理内存，比如堆区，不可能每个进程都同时把这么大的堆空间都分配物理内存。而是在动态申请后，真正使用了 才会分配。每个进程malloc管理的也是自己区域虚拟空间中的堆区，不同进程之间的malloc不存在交叉。</p>
 </blockquote>
-<h3 id="相关的系统调用">相关的系统调用</h3>
-<h4 id="brk-和-sbrk">brk() 和 sbrk()</h4>
-<p>由之前的进程地址空间结构分析可以知道，要增加一个进程实际的可用堆大小，就需要将 brk 指针向高地址移动。Linux通过<strong>brk和sbrk系统调用</strong>操作break指针。两个系统调用的原型如下：</p>
+<h3 id="相关的系统调用"><a href="#相关的系统调用" class="headerlink" title="相关的系统调用"></a>相关的系统调用</h3><h4 id="brk-和-sbrk"><a href="#brk-和-sbrk" class="headerlink" title="brk() 和 sbrk()"></a>brk() 和 sbrk()</h4><p>由之前的进程地址空间结构分析可以知道，要增加一个进程实际的可用堆大小，就需要将 brk 指针向高地址移动。Linux通过<strong>brk和sbrk系统调用</strong>操作break指针。两个系统调用的原型如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">brk</span><span class="params">(<span class="keyword">void</span> *addr)</span></span>;             <span class="comment">//将brk指针直接设置为某个地址</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">sbrk</span><span class="params">(<span class="keyword">intptr_t</span> increment)</span></span>;  <span class="comment">//将brk指针从当前位置移动increment所指定的增量 ，失败返回-1</span></span><br></pre></td></tr></table></figure>
 <p><strong>进程所面对的虚拟内存地址空间，只有按页映射到物理内存地址，才能真正使用</strong>。受物理存储容量限制，整个堆虚拟内存空间不可能全部映射到实际的物理内存。因此每个进程有一个<strong>rlimit</strong>表示当前进程可用的资源上限。这个限制可以通过<strong>getrlimit系统调用</strong>得到。</p>
-<figure>
-<img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="" /><figcaption>img</figcaption>
-</figure>
-<h4 id="mmap">mmap</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, off\<span class="keyword">_t</span> offset)</span></span>;  <span class="comment">// 向映射区申请一块内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length)</span></span>;   <span class="comment">// 用于释放内存</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="img"></p>
+<h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, off\<span class="keyword">_t</span> offset)</span></span>;  <span class="comment">// 向映射区申请一块内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length)</span></span>;   <span class="comment">// 用于释放内存</span></span><br></pre></td></tr></table></figure>
 <p>mmap函数第一种用法是映射磁盘文件到内存中；而malloc使用的mmap函数的第二种用法，即匿名映射，匿名映射不映射磁盘文件，而是向映射区申请一块内存。</p>
 <ul>
 <li>分配内存 &lt; DEFAULT_MMAP_THRESHOLD （默认128K），走__brk，从内存池获取，失败的话走brk系统调用</li>
 <li>分配内存 &gt; DEFAULT_MMAP_THRESHOLD，走__mmap，直接调用mmap系统调用</li>
 </ul>
 <p><strong>上述的只是分配了虚拟内存，还没有映射到物理内存，当访问申请的内存时，才会因为缺页异常，内核分配物理内存。</strong></p>
-<h2 id="malloc实现方案">malloc实现方案</h2>
-<p>直接使用系统调用分配内存存在的问题：</p>
-<ol type="1">
+<h2 id="malloc实现方案"><a href="#malloc实现方案" class="headerlink" title="malloc实现方案"></a>malloc实现方案</h2><p>直接使用系统调用分配内存存在的问题：</p>
+<ol>
 <li>由于brk/sbrk/mmap属于系统调用，如果每次申请内存，都调用这三个函数中的一个，那么每次都要产生系统调用开销（即cpu从用户态切换到内核态的上下文切换，这里要保存用户态数据，等会还要切换回用户态），这是非常影响性能的；</li>
 <li>其次，这样申请的内存容易产生碎片，因为堆是从低地址到高地址，如果低地址的内存没有被释放，高地址的内存就不能被回收。</li>
 </ol>
@@ -349,22 +339,21 @@
 <p>malloc除了有unsorted bin，small bin，large bin三个bin之外，还有一个<strong>fast bin</strong>。一般的情况是，程序在运行时会经常需要申请和释放一些较小的内存空间。当分配器合并了相邻的几个小的 chunk 之后，也许马上就会有另一个小块内存的请求，这样分配器又需要从大的空闲内存中切分出一块，这样无疑是比较低效的，故而，malloc 中在分配过程中引入了 fast bins，不大于 max_fast(默认值为 64B)的 chunk 被释放后，首先会被放到 fast bins中，fast bins 中的 chunk 并不改变它的使用标志 P。这样也就无法将它们合并，当需要给用户分配的 chunk 小于或等于 max_fast 时，malloc 首先会在 fast bins 中查找相应的空闲块，然后才会去查找 bins 中的空闲 chunk。在某个特定的时候，malloc 会遍历 fast bins 中的 chunk，将相邻的空闲 chunk 进行合并，并将合并后的 chunk 加入 unsorted bin 中，然后再将 unsorted bin 里的 chunk 加入 bins 中。</p>
 <p>unsorted bin 的队列使用 bins 数组的第一个，如果被用户释放的 chunk 大于 max_fast，或者 fast bins 中的空闲 chunk 合并后，这些 chunk 首先会被放到 unsorted bin 队列中，在进行 malloc 操作的时候，如果在 fast bins 中没有找到合适的 chunk，则malloc 会先在 unsorted bin 中查找合适的空闲 chunk，然后才查找 bins。如果 unsorted bin 不能满足分配要求。 malloc便会将 unsorted bin 中的 chunk 加入 bins 中。然后再从 bins 中继续进行查找和分配过程。从这个过程可以看出来，<strong>unsorted bin 可以看做是 bins 的一个缓冲区，增加它只是为了加快分配的速度。</strong></p>
 <p>综上：</p>
-<h3 id="malloc-内存分配流程">malloc 内存分配流程</h3>
-<ol type="1">
-<li>如果分配内存&lt;512字节，则通过内存大小定位到smallbins对应的index上(floor(size/8))
-<ul>
+<h3 id="malloc-内存分配流程"><a href="#malloc-内存分配流程" class="headerlink" title="malloc 内存分配流程"></a>malloc 内存分配流程</h3><ol>
+<li>如果分配内存&lt;512字节，则通过内存大小定位到smallbins对应的index上(floor(size/8))<ul>
 <li>如果smallbins[index]为空，进入步骤3</li>
 <li>如果smallbins[index]非空，直接返回第一个chunk</li>
-</ul></li>
-<li>如果分配内存&gt;512字节，则定位到largebins对应的index上
-<ul>
+</ul>
+</li>
+<li>如果分配内存&gt;512字节，则定位到largebins对应的index上<ul>
 <li>如果largebins[index]为空，进入步骤3</li>
 <li>如果largebins[index]非空，扫描链表，找到第一个大小最合适的chunk，如size=12.5K，则使用chunk B，剩下的0.5k放入unsorted_list中</li>
-</ul></li>
+</ul>
+</li>
 <li>遍历unsorted_list，查找合适size的chunk，如果找到则返回；否则，将这些chunk都归类放到smallbins和largebins里面</li>
 <li>index++从更大的链表中查找，直到找到合适大小的chunk为止，找到后将chunk拆分，并将剩余的加入到unsorted_list中</li>
 <li>如果还没有找到，那么使用top chunk</li>
-<li>或者，内存&lt;128k，使用brk；内存&gt;128k，使用mmap获取新内存</li>
+<li>或者，内存<128k，使用brk；内存>128k，使用mmap获取新内存</li>
 </ol>
 
     </div>

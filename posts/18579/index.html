@@ -273,23 +273,15 @@
       
         <p>记录了解题中需要用数学思想的题目，这类题目规律最多样。</p>
 <span id="more"></span>
-<h2 id="数学">数学</h2>
-<h4 id="用-rand7-实现-rand10"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-rand10-using-rand7/">用 Rand7() 实现 Rand10()</a></h4>
-<p>这个题有意思。第一次做很容易想到 rand 用两次然后相加得到1-14范围…这种操作就不是均匀分布了，类似扔筛子。这道题的解法是，将 执行两次 rand7 得到x y 坐标。然后映射。类似 如果 x 坐标和 y坐标是均匀分布，那么x,y构成的格点都是均匀分布的，这样就能得到7*7=49个格点，我们只要ran10 因此可以只用前40个 （对10取余即可）如果不是前40个点，则再投一次坐标（<strong>拒绝采样</strong>）。当然可以优化，剩下多的8个点其实可以看做 rand8 然后 和 rand7 再组成一个坐标网格….以此重复，使得丢弃的数少，运行效率就高。</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203006.png" alt="" /><figcaption>image-20210315221237407</figcaption>
-</figure>
-<p><a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/算法/剑指%20Offer%20题解/39.%20数组中出现次数超过一半的数字.html">39. 数组中出现次数超过一半的数字</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/算法/剑指%20Offer%20题解/66.%20构建乘积数组.html">66. 构建乘积数组</a></p>
-<h4 id="打乱数组"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shuffle-an-array/">打乱数组</a></h4>
-<p>这个题 主要的思路是 如何用 一定的操作规则 模拟 打乱的情景。数组的排列有n!种 那么如何保证等概率的输出一种排序呢？就相当于把数组所有元素放进盒子里，然后无放回抽取出，按抽出的先后顺序即为….</p>
-<h4 id="阶乘后的零"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">阶乘后的零</a></h4>
-<p>这个题 要找规律。首先 阶乘后的0的个数，阶乘后的0能怎么来呢？ 例如 1x2x3x4x5x6… 这时候组合一下 1x3x4x6x(2x5) 很明显 10=2x5 所以 就是找结成中有多少个 2x5 的组合 即可。而 2 是每两次至少出现一次 5 大一些 显然出现的次数少 所以就是找有多少个5 像 但是 25 可以算 5x5 75=15x5=3x5x5 可以算有两个5 所以简单的 5 等间隔取肯定是不够的</p>
-<p>1 2 3 4 5x1 6 7 8 9 5x2 11 12 13 14 5x3 …. n n/5 之后相当于 获得了 (5x1 5x2 5x3…. 5x5 5x6… 5xn/5) / 5 = 1 2 3 4 … n/5 所以说 n/5之后 又变成了 求 n/5前面有多少个5的问题了。</p>
-<h4 id="字符串相乘"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/">字符串相乘</a></h4>
-<p>使用 字符串 模拟 竖式乘法 呗；类似的还有 字符串加法的题目….</p>
-<h4 id="灯泡开关"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/bulb-switcher/">灯泡开关</a></h4>
-<p>这个题 以看 测试的 n 10^9 的级别，就肯定是数学找规律的问题。通过归纳总结也能找到规律吧。但是理性分析的话 也是很容易得出结论的。对于第 n 个灯泡的状态，能改变它的只有它的只有 它的 因数轮，例如 36 能被 1 2 3 4 6 | 6 9 12 18 36 注意除了中间的 6 只有一个，其他的都是成对出现了，这就说明 如果 n 恰好能被完全开平方，那么状态切换一定是奇数次，然后第 n 个状态就是亮的，否则如果不能被完全开平方，例如 24 = 1 2 3 8 12 24 因数一定是偶数个，最后第24个状态就是灭的状态，同时24轮及其以后都碰不到它了。所以….</p>
+<h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><h4 id="用-Rand7-实现-Rand10"><a href="#用-Rand7-实现-Rand10" class="headerlink" title="用 Rand7() 实现 Rand10()"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-rand10-using-rand7/">用 Rand7() 实现 Rand10()</a></h4><p>这个题有意思。第一次做很容易想到 rand 用两次然后相加得到1-14范围…这种操作就不是均匀分布了，类似扔筛子。这道题的解法是，将 执行两次 rand7 得到x y 坐标。然后映射。类似 如果 x 坐标和 y坐标是均匀分布，那么x,y构成的格点都是均匀分布的，这样就能得到7<em>7=49个格点，我们只要ran10 因此可以只用前40个 （对10取余即可）如果不是前40个点，则再投一次坐标（<em>*拒绝采样</em></em>）。当然可以优化，剩下多的8个点其实可以看做 rand8  然后 和 rand7 再组成一个坐标网格….以此重复，使得丢弃的数少，运行效率就高。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203006.png" alt="image-20210315221237407"></p>
+<p><a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/算法/剑指 Offer 题解/39. 数组中出现次数超过一半的数字.html">39. 数组中出现次数超过一半的数字</a> </p>
+<p><a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/算法/剑指 Offer 题解/66. 构建乘积数组.html">66. 构建乘积数组</a></p>
+<h4 id="打乱数组"><a href="#打乱数组" class="headerlink" title="打乱数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shuffle-an-array/">打乱数组</a></h4><p>这个题 主要的思路是 如何用 一定的操作规则 模拟 打乱的情景。数组的排列有n!种 那么如何保证等概率的输出一种排序呢？就相当于把数组所有元素放进盒子里，然后无放回抽取出，按抽出的先后顺序即为….</p>
+<h4 id="阶乘后的零"><a href="#阶乘后的零" class="headerlink" title="阶乘后的零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">阶乘后的零</a></h4><p>这个题 要找规律。首先 阶乘后的0的个数，阶乘后的0能怎么来呢？ 例如 1x2x3x4x5x6… 这时候组合一下  1x3x4x6x(2x5) 很明显 10=2x5 所以 就是找结成中有多少个 2x5 的组合 即可。而 2 是每两次至少出现一次 5 大一些 显然出现的次数少  所以就是找有多少个5  像 但是  25 可以算 5x5  75=15x5=3x5x5 可以算有两个5  所以简单的 5 等间隔取肯定是不够的 </p>
+<p>1 2 3 4 5x1 6 7 8 9 5x2 11 12 13 14 5x3 ….  n     n/5 之后相当于 获得了  (5x1  5x2  5x3…. 5x5 5x6… 5xn/5) / 5  =<br>1 2 3 4 … n/5  所以说 n/5之后 又变成了 求 n/5前面有多少个5的问题了。</p>
+<h4 id="字符串相乘"><a href="#字符串相乘" class="headerlink" title="字符串相乘"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/">字符串相乘</a></h4><p>使用 字符串 模拟 竖式乘法 呗；类似的还有 字符串加法的题目…. </p>
+<h4 id="灯泡开关"><a href="#灯泡开关" class="headerlink" title="灯泡开关"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/bulb-switcher/">灯泡开关</a></h4><p>这个题 以看 测试的 n 10^9 的级别，就肯定是数学找规律的问题。通过归纳总结也能找到规律吧。但是理性分析的话 也是很容易得出结论的。对于第  n  个灯泡的状态，能改变它的只有它的只有 它的 因数轮，例如 36 能被 1 2 3 4 6 | 6 9 12  18 36 注意除了中间的 6 只有一个，其他的都是成对出现了，这就说明 如果 n 恰好能被完全开平方，那么状态切换一定是奇数次，然后第 n 个状态就是亮的，否则如果不能被完全开平方，例如 24 = 1  2  3  8  12  24  因数一定是偶数个，最后第24个状态就是灭的状态，同时24轮及其以后都碰不到它了。所以…. </p>
 
     </div>
 
@@ -378,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">数学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8-rand7-%E5%AE%9E%E7%8E%B0-rand10"><span class="nav-number">1.0.1.</span> <span class="nav-text">用 Rand7() 实现 Rand10()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E4%B9%B1%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.2.</span> <span class="nav-text">打乱数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E4%B9%98%E5%90%8E%E7%9A%84%E9%9B%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">阶乘后的零</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98"><span class="nav-number">1.0.4.</span> <span class="nav-text">字符串相乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%81%AF%E6%B3%A1%E5%BC%80%E5%85%B3"><span class="nav-number">1.0.5.</span> <span class="nav-text">灯泡开关</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">数学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8-Rand7-%E5%AE%9E%E7%8E%B0-Rand10"><span class="nav-number">1.0.1.</span> <span class="nav-text">用 Rand7() 实现 Rand10()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E4%B9%B1%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.2.</span> <span class="nav-text">打乱数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E4%B9%98%E5%90%8E%E7%9A%84%E9%9B%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">阶乘后的零</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98"><span class="nav-number">1.0.4.</span> <span class="nav-text">字符串相乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%81%AF%E6%B3%A1%E5%BC%80%E5%85%B3"><span class="nav-number">1.0.5.</span> <span class="nav-text">灯泡开关</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
