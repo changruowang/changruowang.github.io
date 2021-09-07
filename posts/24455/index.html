@@ -279,37 +279,57 @@
       
         <p>详细记录了 KMP 算法的原理，KPM算法是一种字符串匹配算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。</p>
 <span id="more"></span>
-<h1 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h1><p>KMP算法是一种<strong>字符串匹配</strong>算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。如下图所示，字符串匹配就是从主串中搜索是否存在模式串。字符串匹配是一个非常频繁的任务。例如，今有一份名单，你急切地想知道自己在不在名单上；又如，假设你拿到了一份文献，你希望快速地找到某个关键字（keyword）所在的章节……凡此种种，不胜枚举。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328211045.png" alt="image-20210328211045841"></p>
-<h2 id="暴力-Brute-Force"><a href="#暴力-Brute-Force" class="headerlink" title="暴力 Brute-Force"></a>暴力 Brute-Force</h2><p>首先想到的就是 暴力搜索，从最开始对齐比较 如果不相同，将模式串往后移动一位再去和主串对应位置的子串比较….直到找到。但是显然这样比较的复杂度为O(n*(m-n+1))  n 为主串的长度，m为子串的长度。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328212909.png" alt="image-20210328212909725"></p>
-<p>暴力的方法很慢，那么有没有优化的方法了。暴力方法中每次 没匹配上 都是往后移动一格，然后接着比较，这样比较的趟数很多，完全没有用到上一次比较失败的教训。<strong>尽可能利用残余的信息，是KMP算法的思想所在</strong>。上面的例子中在匹配 algor 全对上了，但是最后一个a没有匹配上，按照暴力的逻辑 可能就往后滑动一个 再接着配。但是我们可以明显看出  algor 这几个字母如果错位，就不可能再配上，所以完全可以从 i 去比较，可以直接跳过主串中algor这几个字母。再例如下面的例子：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328213445.png" alt="image-20210328213445574"></p>
-<p>还是在 最后一个 d 处对不上，但是已经比较了 abcab 这一段，这一段模式串和主串是对的上的，根据这个已知信息 按照直觉逻辑，这次可以跳到ab试试，因为可以保证 模式串中已经比较过的 ab 和 主串中的部分对的上，而且 比较过的这一段中 存在首ab 和 尾ab相同。一句话总结  <strong>我们在已经比较并确定对齐的模式串的主串abcab后，我们移动的准则是 从abcab中 找到 模式串的首ab 和主串的尾ab对齐的位置，再往后就是主串之前没比过的位置就接着比</strong> 。这是KMP算法的核心了。</p>
-<h2 id="KMP原理"><a href="#KMP原理" class="headerlink" title="KMP原理"></a>KMP原理</h2><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328215038.png" alt="image-20210328215038322"></p>
+<h1 id="kmp-算法">KMP 算法</h1>
+<p>KMP算法是一种<strong>字符串匹配</strong>算法，可以在 O(n+m) 的时间复杂度内实现两个字符串的匹配。如下图所示，字符串匹配就是从主串中搜索是否存在模式串。字符串匹配是一个非常频繁的任务。例如，今有一份名单，你急切地想知道自己在不在名单上；又如，假设你拿到了一份文献，你希望快速地找到某个关键字（keyword）所在的章节……凡此种种，不胜枚举。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328211045.png" alt="" /><figcaption>image-20210328211045841</figcaption>
+</figure>
+<h2 id="暴力-brute-force">暴力 Brute-Force</h2>
+<p>首先想到的就是 暴力搜索，从最开始对齐比较 如果不相同，将模式串往后移动一位再去和主串对应位置的子串比较….直到找到。但是显然这样比较的复杂度为O(n*(m-n+1)) n 为主串的长度，m为子串的长度。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328212909.png" alt="" /><figcaption>image-20210328212909725</figcaption>
+</figure>
+<p>暴力的方法很慢，那么有没有优化的方法了。暴力方法中每次 没匹配上 都是往后移动一格，然后接着比较，这样比较的趟数很多，完全没有用到上一次比较失败的教训。<strong>尽可能利用残余的信息，是KMP算法的思想所在</strong>。上面的例子中在匹配 algor 全对上了，但是最后一个a没有匹配上，按照暴力的逻辑 可能就往后滑动一个 再接着配。但是我们可以明显看出 algor 这几个字母如果错位，就不可能再配上，所以完全可以从 i 去比较，可以直接跳过主串中algor这几个字母。再例如下面的例子：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328213445.png" alt="" /><figcaption>image-20210328213445574</figcaption>
+</figure>
+<p>还是在 最后一个 d 处对不上，但是已经比较了 abcab 这一段，这一段模式串和主串是对的上的，根据这个已知信息 按照直觉逻辑，这次可以跳到ab试试，因为可以保证 模式串中已经比较过的 ab 和 主串中的部分对的上，而且 比较过的这一段中 存在首ab 和 尾ab相同。一句话总结 <strong>我们在已经比较并确定对齐的模式串的主串abcab后，我们移动的准则是 从abcab中 找到 模式串的首ab 和主串的尾ab对齐的位置，再往后就是主串之前没比过的位置就接着比</strong> 。这是KMP算法的核心了。</p>
+<h2 id="kmp原理">KMP原理</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328215038.png" alt="" /><figcaption>image-20210328215038322</figcaption>
+</figure>
 <p>如上图所示，绿色部分是成功匹配，失配于红色部分。深绿色手绘线条标出了相等的前缀和后缀，<strong>其长度为next[右端]</strong>. 由于手绘线条部分的字符是一样的，所以直接把前面那条移到后面那条的位置。因此说，<strong>next数组为我们如何移动标尺提供了依据</strong>。</p>
-<h2 id="PMT表"><a href="#PMT表" class="headerlink" title="PMT表"></a>PMT表</h2><p>上述 ab … ab 这样首位相同的结构，叫做前缀和后缀。（也叫 next 数组 即 PMT表）</p>
-<p> 如果字符串A和B，存在A=BS，其中S是任意的非空字符串，那就称B为A的前缀。例如，”Harry”的前缀包括{”H”, ”Ha”, ”Har”, ”Harr”}，我们把所有前缀组成的集合，称为字符串的前缀集合。同样可以定义后缀A=SB， 其中S是任意的非空字符串，那就称B为A的后缀，例如，”Potter”的后缀包括{”otter”, ”tter”, ”ter”, ”er”, ”r”}，然后把所有后缀组成的集合，称为字符串的后缀集合。要注意的是，字符串本身并不是自己的后缀。</p>
+<h2 id="pmt表">PMT表</h2>
+<p>上述 ab … ab 这样首位相同的结构，叫做前缀和后缀。（也叫 next 数组 即 PMT表）</p>
+<p>如果字符串A和B，存在A=BS，其中S是任意的非空字符串，那就称B为A的前缀。例如，”Harry”的前缀包括{”H”, ”Ha”, ”Har”, ”Harr”}，我们把所有前缀组成的集合，称为字符串的前缀集合。同样可以定义后缀A=SB， 其中S是任意的非空字符串，那就称B为A的后缀，例如，”Potter”的后缀包括{”otter”, ”tter”, ”ter”, ”er”, ”r”}，然后把所有后缀组成的集合，称为字符串的后缀集合。要注意的是，字符串本身并不是自己的后缀。</p>
 <p>如果一个字符串长度为N 那么PMT表的长度就为N 定义为：<strong>PMT中的值是字符串的前缀集合与后缀集合的交集中最长元素的长度</strong>。例如 对于字符串”ababa”，它的前缀集合为{”a”, ”ab”, ”aba”, ”abab”}，它的后缀集合为{”baba”, ”aba”, ”ba”, ”a”}， 两个集合的交集为{”a”, ”aba”}，其中最长的元素为”aba”，长度为3。</p>
-<h2 id="构建next数组"><a href="#构建next数组" class="headerlink" title="构建next数组"></a>构建next数组</h2><p>next数组是 针对模式串的。next数组的定义：</p>
+<h2 id="构建next数组">构建next数组</h2>
+<p>next数组是 针对模式串的。next数组的定义：</p>
 <ul>
 <li>定义 “k-前缀” 为一个字符串的前 k 个字符； “k-后缀” 为一个字符串的后 k 个字符。k 必须小于字符串长度。</li>
 <li>next[x] 定义为： P[0]~P[x] 这一段字符串，使得<strong>k-前缀恰等于k-后缀</strong>的最大的k.</li>
 </ul>
-<p>用动态规划的思路思考，如果已知 next[0] next[1]  next[2] … next[x]  要求 next[x+1]呢？首先，已经知道了 next[x-1]（以下记为now）。</p>
-<ol>
+<p>用动态规划的思路思考，如果已知 next[0] next[1] next[2] … next[x] 要求 next[x+1]呢？首先，已经知道了 next[x-1]（以下记为now）。</p>
+<ol type="1">
 <li>如果 P[x] 与 P[now] 一样 (图中的是不相等的情况) 最长相等前后缀的长度就可以扩展一位，很明显 next[x] = now + 1。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328220456.png" alt="image-20210328220458845"></p>
-<ol>
-<li>P[x] 与 P[now] 不一样 。如上图  不能直接+1，因此，我们应该<strong>缩短这个now</strong>。 但是还是可以知道字串A == 字串B（这是由next[x]确定已知的），后面要新增一个 c 所以这个 c 肯定要用上，那么我们希望从 字串 B 的尾巴（后缀集合）中找一段  假设为 C ， 和字串A 的前缀中找一段 假设为 E 满足   C + ‘c’ == E，把 E 拆开为 E1 + 字符n ，又字串A == 字串B，这不就等于在子串 A 中 找相等的最大前缀C和后缀E （回到了next的定义 即为next[now - 1] ），然后再判断‘c’ 是否等于字符n。综上：<ul>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328220456.png" alt="" /><figcaption>image-20210328220458845</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>P[x] 与 P[now] 不一样 。如上图 不能直接+1，因此，我们应该<strong>缩短这个now</strong>。 但是还是可以知道字串A == 字串B（这是由next[x]确定已知的），后面要新增一个 c 所以这个 c 肯定要用上，那么我们希望从 字串 B 的尾巴（后缀集合）中找一段 假设为 C ， 和字串A 的前缀中找一段 假设为 E 满足 C + ‘c’ == E，把 E 拆开为 E1 + 字符n ，又字串A == 字串B，这不就等于在子串 A 中 找相等的最大前缀C和后缀E （回到了next的定义 即为next[now - 1] ），然后再判断‘c’ 是否等于字符n。综上：
+<ul>
 <li>now = next[ now - 1]</li>
 <li>再判断 p[x] == p[now] 是否成立，成立就是 next[now - 1] + 1 否则循环</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://pic1.zhimg.com/v2-010a582b0c92a92044c43a2a2ea88928_r.jpg?source=1940ef5c" alt="preview"></p>
-<p><img src="https://pic2.zhimg.com/80/v2-a6bd81af7cf9bbda32b2cfb0e4858276_1440w.jpg?source=1940ef5c" alt="img"></p>
+<h2 id="代码">代码</h2>
+<figure>
+<img src="https://pic1.zhimg.com/v2-010a582b0c92a92044c43a2a2ea88928_r.jpg?source=1940ef5c" alt="" /><figcaption>preview</figcaption>
+</figure>
+<figure>
+<img src="https://pic2.zhimg.com/80/v2-a6bd81af7cf9bbda32b2cfb0e4858276_1440w.jpg?source=1940ef5c" alt="" /><figcaption>img</figcaption>
+</figure>
 
     </div>
 
@@ -398,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP-%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">KMP 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B-Brute-Force"><span class="nav-number">1.1.</span> <span class="nav-text">暴力 Brute-Force</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">KMP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMT%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">PMT表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BAnext%E6%95%B0%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text">构建next数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmp-%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">KMP 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B-brute-force"><span class="nav-number">1.1.</span> <span class="nav-text">暴力 Brute-Force</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmp%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">KMP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pmt%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">PMT表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BAnext%E6%95%B0%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text">构建next数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -412,7 +432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

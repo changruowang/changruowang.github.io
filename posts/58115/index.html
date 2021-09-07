@@ -275,33 +275,54 @@
       
         <p>记录了解题中双指针方法典型的题目，例如二分法中的首位指针，图的环判定中的快慢指针，滑窗方法等</p>
 <span id="more"></span>
-<h1 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>二分查找问题中，有的问题可以很明显套用二分查找的思路，例如有序数组等。但是有的问题比较隐晦，例如<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">在 D 天内送达包裹的能力</a> 最好的思路就是先按照暴力的方法找思路，如果了暴力可以做，再考虑是否可以二分优化，这种题的有序性就隐藏在了题的情景中，直接很难想到二分的思路。</p>
-<h4 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">旋转数组的最小数字</a></h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">在 D 天内送达包裹的能力</a></p>
+<h1 id="双指针">双指针</h1>
+<h2 id="二分查找">二分查找</h2>
+<p>二分查找问题中，有的问题可以很明显套用二分查找的思路，例如有序数组等。但是有的问题比较隐晦，例如<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">在 D 天内送达包裹的能力</a> 最好的思路就是先按照暴力的方法找思路，如果了暴力可以做，再考虑是否可以二分优化，这种题的有序性就隐藏在了题的情景中，直接很难想到二分的思路。</p>
+<h4 id="旋转数组的最小数字"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">旋转数组的最小数字</a></h4>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">在 D 天内送达包裹的能力</a></p>
 <p>这个题有点意思。看题目很难朝二分查找上想。但<strong>凡是能用二分查找的就能用暴力</strong>。所以这个题如果先用暴力想到就可以简单的换成二分法。可以想到的是 船的运载量越大，越可能完成运载任务，题目要求可以完成运载任务的最小运载量。如果已经给定一个运载量，那么可以很容易地判断在这个运载量下能否完成运输。贪心地思想，每趟尽可能的多运，如果最后一天还运不玩 那说明这个运载量少了，需要增加运载量。于是暴力搜索运载量的方法就产生了。那么如何转换成二分呢。<strong>起始运载量越大越可能完成这个隐藏条件就是二分查找有序的条件</strong>。最后就是确定二分查找的边界。很明显当运载量为总重时是 右边界，运载量还得大于单个货物的重量。</p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/o-1VJO2TQZjC5ROmV7CReA">切木头</a></p>
 <p>这个题目和上面的题极为类似</p>
-<h4 id="分割数组的最大值"><a href="#分割数组的最大值" class="headerlink" title="分割数组的最大值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-array-largest-sum/">分割数组的最大值</a></h4><p>同上</p>
-<h4 id="乘法表中第k小的数"><a href="#乘法表中第k小的数" class="headerlink" title="乘法表中第k小的数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-number-in-multiplication-table/">乘法表中第k小的数</a></h4><p>这个题套路和上面的题一样。但是这个难想一点，题目要求是求 K 大的元素，直观的想法是从1 … k  统计 乘法表中1的元素数量，2的元素数量，3的元素数量，然后就想着找规律了，然后没找出来。实际换个思路，可以很容易计算出 表中 小于等于 x 的个数，为什么呢？只需遍历所有的行，对于第 i 行 [1i， 2xi, 3xi，4xi…nxi]，是个递增的，所以很容易知道该行小于 x 的元素个数 Min[x//i , n]。然后遍历所有行累加即可。知道了这个就可以 从 1 …  nxm 遍历，判断表中 小于等于 x 的元素个数。x越大，表中小于他的元素就越多，由此可知 可以二分 。一共要搜索 log(mn)次，每次遍历表 m 行 时间复杂度为 O(mlogmn)</p>
+<h4 id="分割数组的最大值"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-array-largest-sum/">分割数组的最大值</a></h4>
+<p>同上</p>
+<h4 id="乘法表中第k小的数"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-number-in-multiplication-table/">乘法表中第k小的数</a></h4>
+<p>这个题套路和上面的题一样。但是这个难想一点，题目要求是求 K 大的元素，直观的想法是从1 … k 统计 乘法表中1的元素数量，2的元素数量，3的元素数量，然后就想着找规律了，然后没找出来。实际换个思路，可以很容易计算出 表中 小于等于 x 的个数，为什么呢？只需遍历所有的行，对于第 i 行 [1i， 2xi, 3xi，4xi…nxi]，是个递增的，所以很容易知道该行小于 x 的元素个数 Min[x//i , n]。然后遍历所有行累加即可。知道了这个就可以 从 1 … nxm 遍历，判断表中 小于等于 x 的元素个数。x越大，表中小于他的元素就越多，由此可知 可以二分 。一共要搜索 log(mn)次，每次遍历表 m 行 时间复杂度为 O(mlogmn)</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-limit-of-balls-in-a-bag/">袋子里最少数目的球</a></p>
 <p>和上面那个题一样的思路。但是在判断查找结果能否满足要求时 不能遍历。</p>
-<h4 id="元素和小于等于阈值的正方形的最大边长"><a href="#元素和小于等于阈值的正方形的最大边长" class="headerlink" title="元素和小于等于阈值的正方形的最大边长"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/">元素和小于等于阈值的正方形的最大边长</a></h4><p>和上面的思路也是一样 只不过要用到前缀和  加速计算任意矩形面积元素和</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">寻找两个正序数组的中位数</a>    </p>
-<p>直接能想到  根据归并中的思路，挨个合并。但是这样时间复杂度为 O(m + n)  题目要求复杂度为 O(log(m + n )) 这很明显要用二分搜索。有序的问题一般都能通过二分搜索解决。</p>
-<h4 id="有序数组中的单一元素"><a href="#有序数组中的单一元素" class="headerlink" title="有序数组中的单一元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-element-in-a-sorted-array/">有序数组中的单一元素</a></h4><pre><code>     这个题要求时间复杂度为 O(logn) 则必须使用二分查找。这个题很有意思，给定数组中按照升序排列，找出单一的元素。这个题使用二分的关键在于 两个相同的元素相邻，根据 二分之后索引的奇数偶数来确定向前还是向后搜索。
-</code></pre><p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203040.png" alt="image-20200930204059711"></p>
-<h4 id="寻找旋转排序数组中的最小值"><a href="#寻找旋转排序数组中的最小值" class="headerlink" title="寻找旋转排序数组中的最小值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">寻找旋转排序数组中的最小值</a></h4><p>​        二分法。这个题关键是找对比较对象，否则 特殊情况 不好处理。关键是 计算中值后都与右边的数比较   如果  mid &gt; right  说明需要调整左区间++  如果 mid &lt;  right 说明 mid 在右边，但是此时可能mid就是 最小值，所以 r = c; 而不减一。  </p>
-<h4 id="在排序数组中查找元素的第一个和最后一个位置"><a href="#在排序数组中查找元素的第一个和最后一个位置" class="headerlink" title="在排序数组中查找元素的第一个和最后一个位置"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">在排序数组中查找元素的第一个和最后一个位置</a></h4><h4 id="寻找峰值"><a href="#寻找峰值" class="headerlink" title="寻找峰值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-peak-element/">寻找峰值</a></h4><p>第一个难点在于如何将该问题转化为 二分查找的方法去做，另一个难点在 怎么用代码实现二分查找，写的不对的话 边界情况很麻烦，但是框架写对了，就不需要处理边界情况</p>
-<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/">最长重复子数组</a></p>
+<h4 id="元素和小于等于阈值的正方形的最大边长"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/">元素和小于等于阈值的正方形的最大边长</a></h4>
+<p>和上面的思路也是一样 只不过要用到前缀和 加速计算任意矩形面积元素和</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">寻找两个正序数组的中位数</a></p>
+<p>直接能想到 根据归并中的思路，挨个合并。但是这样时间复杂度为 O(m + n) 题目要求复杂度为 O(log(m + n )) 这很明显要用二分搜索。有序的问题一般都能通过二分搜索解决。</p>
+<h4 id="有序数组中的单一元素"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-element-in-a-sorted-array/">有序数组中的单一元素</a></h4>
+<pre><code>    这个题要求时间复杂度为 O(logn) 则必须使用二分查找。这个题很有意思，给定数组中按照升序排列，找出单一的元素。这个题使用二分的关键在于 两个相同的元素相邻，根据 二分之后索引的奇数偶数来确定向前还是向后搜索。</code></pre>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328203040.png" alt="" /><figcaption>image-20200930204059711</figcaption>
+</figure>
+<h4 id="寻找旋转排序数组中的最小值"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">寻找旋转排序数组中的最小值</a></h4>
+<p>​ 二分法。这个题关键是找对比较对象，否则 特殊情况 不好处理。关键是 计算中值后都与右边的数比较 如果 mid &gt; right 说明需要调整左区间++ 如果 mid &lt; right 说明 mid 在右边，但是此时可能mid就是 最小值，所以 r = c; 而不减一。</p>
+<h4 id="在排序数组中查找元素的第一个和最后一个位置"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">在排序数组中查找元素的第一个和最后一个位置</a></h4>
+<h4 id="寻找峰值"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-peak-element/">寻找峰值</a></h4>
+<p>第一个难点在于如何将该问题转化为 二分查找的方法去做，另一个难点在 怎么用代码实现二分查找，写的不对的话 边界情况很麻烦，但是框架写对了，就不需要处理边界情况</p>
+<h2 id="滑动窗口">滑动窗口</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/">最长重复子数组</a></p>
 <p><img src="https://pic.leetcode-cn.com/9ed48b9b51214a8bafffcad17356d438b4c969b4999623247278d23f1e43977f-%E9%94%99%E5%BC%80%E6%AF%94%E8%BE%83.gif" alt="错开比较.gif" style="zoom:50%;" /></p>
 <p>这个题 用 动态规划做复杂度 O(M x N)。滑动窗口解法复杂度 O((M + N) x min(M, N))</p>
-<h4 id="最小覆盖子串"><a href="#最小覆盖子串" class="headerlink" title="最小覆盖子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-window-substring/">最小覆盖子串</a></h4><p>这是个 很典型的 用滑动窗口的方法。右指针增加用于 扩大 窗口，当窗口中覆盖了需要的所有字符后，左指针不断收缩窗口。</p>
-<h4 id="找到字符串中所有字母异位词"><a href="#找到字符串中所有字母异位词" class="headerlink" title="找到字符串中所有字母异位词"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">找到字符串中所有字母异位词</a></h4><p>这道题典型的使用双指针的方法来实现滑动窗口。初始两个指针都在起点，然后右指针滑动向右，和左指针构成一个滑窗。</p>
-<h2 id="首尾指针"><a href="#首尾指针" class="headerlink" title="首尾指针"></a>首尾指针</h2><p>和二分查找相同的是，这种题目也是根据有序的条件收缩 首位指针，去掉无用的搜索。因此对于简单的题目，可能题中有明显的有序的条件。但是有的比较隐晦。</p>
-<h4 id="盛最多水的容器"><a href="#盛最多水的容器" class="headerlink" title="盛最多水的容器"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">盛最多水的容器</a></h4><p>这是典型的双指针的题目。和二分法类似，但是二分查找有明显的排序条件在其中，总之都是根据一定的条件收缩指针。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="递增的三元子序列"><a href="#递增的三元子序列" class="headerlink" title="递增的三元子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h4><h4 id="有效三角形的个数"><a href="#有效三角形的个数" class="headerlink" title="有效三角形的个数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-triangle-number/">有效三角形的个数</a></h4><p>同样的  暴力 N^3 超时。因此可以通过手动排序的方法降低复杂度。排序一下子就想到了  但是没想到优化，排序后自然而然就要想到双指针优化，使得复杂度降低为 N^2  ，固定一个最大的边，然后使用双指针去搜索另外两个小的边</p>
-<h4 id="最小区间"><a href="#最小区间" class="headerlink" title="最小区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/smallest-range-covering-elements-from-k-lists/">最小区间</a></h4><p>这个题可以看作一个典型的多指针解决的问题。有多个递增的序列 首先就应该想到双指针 二分之类的思路。我当时就是想到了二分法，以一个数组为基准遍历里面的每个元素，然后去其他数组中搜索离它最近的元素，这样每个数组都能找到一个最近的，将这几个最近的合并成完整的区间即可。但是这样是错的，因为最近的元素可能会有左右两个 例如 4  9  中搜索5，离他最近的是4，但是就一定是选4嘛？不一定，因为还要看其他区间，也有可能选9，所以要考虑左右相邻的合并问题，没有想到很好的解决方法</p>
+<h4 id="最小覆盖子串"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-window-substring/">最小覆盖子串</a></h4>
+<p>这是个 很典型的 用滑动窗口的方法。右指针增加用于 扩大 窗口，当窗口中覆盖了需要的所有字符后，左指针不断收缩窗口。</p>
+<h4 id="找到字符串中所有字母异位词"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">找到字符串中所有字母异位词</a></h4>
+<p>这道题典型的使用双指针的方法来实现滑动窗口。初始两个指针都在起点，然后右指针滑动向右，和左指针构成一个滑窗。</p>
+<h2 id="首尾指针">首尾指针</h2>
+<p>和二分查找相同的是，这种题目也是根据有序的条件收缩 首位指针，去掉无用的搜索。因此对于简单的题目，可能题中有明显的有序的条件。但是有的比较隐晦。</p>
+<h4 id="盛最多水的容器"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">盛最多水的容器</a></h4>
+<p>这是典型的双指针的题目。和二分法类似，但是二分查找有明显的排序条件在其中，总之都是根据一定的条件收缩指针。</p>
+<h2 id="其他">其他</h2>
+<h4 id="递增的三元子序列"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h4>
+<h4 id="有效三角形的个数"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-triangle-number/">有效三角形的个数</a></h4>
+<p>同样的 暴力 N^3 超时。因此可以通过手动排序的方法降低复杂度。排序一下子就想到了 但是没想到优化，排序后自然而然就要想到双指针优化，使得复杂度降低为 N^2 ，固定一个最大的边，然后使用双指针去搜索另外两个小的边</p>
+<h4 id="最小区间"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/smallest-range-covering-elements-from-k-lists/">最小区间</a></h4>
+<p>这个题可以看作一个典型的多指针解决的问题。有多个递增的序列 首先就应该想到双指针 二分之类的思路。我当时就是想到了二分法，以一个数组为基准遍历里面的每个元素，然后去其他数组中搜索离它最近的元素，这样每个数组都能找到一个最近的，将这几个最近的合并成完整的区间即可。但是这样是错的，因为最近的元素可能会有左右两个 例如 4 9 中搜索5，离他最近的是4，但是就一定是选4嘛？不一定，因为还要看其他区间，也有可能选9，所以要考虑左右相邻的合并问题，没有想到很好的解决方法</p>
 <p>标准答案是 使用多指针。由于需要在每个数组中都找一个对应的，那么就都取数组的第一个，一共K个元素使用小顶堆维护，并找到最大值，最小值到最大值即为一个区间。然后就是指针的移动条件，每次移动小顶堆中最小的那个指针。即一个区间头指针一个尾指针，数组递增，移动头指针肯定越移动区间长度越大，所以只能移动尾指针。如此动态更新。</p>
-<p>另一个解法应该想到的。换个思路，将数组中的元素看作 a b c…. 的编号，然后将所有数组依序合并成一个新的递增序列  然后使用滑窗  保证窗中至少覆盖一个 a b c 即可。就转换为最小覆盖子串的问题了。</p>
+<p>另一个解法应该想到的。换个思路，将数组中的元素看作 a b c…. 的编号，然后将所有数组依序合并成一个新的递增序列 然后使用滑窗 保证窗中至少覆盖一个 a b c 即可。就转换为最小覆盖子串的问题了。</p>
 
     </div>
 
@@ -405,7 +426,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

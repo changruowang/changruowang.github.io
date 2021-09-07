@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="进程与线程的概念基本概念： 进程是对运行时程序的封装，是系统进行资源调度和分配的的基本单位，实现了操作系统的并发； 线程是进程的子任务，是CPU调度和分派的基本单位，用于保证程序的实时性，实现进程内部的并发；线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。每个线程完成不同的任务，但是共享同一地址空间（也就是同样的 动态内存，映射">
+  <meta name="description" content="进程与线程的概念 基本概念： 进程是对运行时程序的封装，是系统进行资源调度和分配的的基本单位，实现了操作系统的并发； 线程是进程的子任务，是CPU调度和分派的基本单位，用于保证程序的实时性，实现进程内部的并发；线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。每个线程完成不同的任务，但是共享同一地址空间（也就是同样的 动态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面经1">
 <meta property="og:url" content="http://xxxxx.com/posts/12158/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="进程与线程的概念基本概念： 进程是对运行时程序的封装，是系统进行资源调度和分配的的基本单位，实现了操作系统的并发； 线程是进程的子任务，是CPU调度和分派的基本单位，用于保证程序的实时性，实现进程内部的并发；线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。每个线程完成不同的任务，但是共享同一地址空间（也就是同样的 动态内存，映射">
+<meta property="og:description" content="进程与线程的概念 基本概念： 进程是对运行时程序的封装，是系统进行资源调度和分配的的基本单位，实现了操作系统的并发； 线程是进程的子任务，是CPU调度和分派的基本单位，用于保证程序的实时性，实现进程内部的并发；线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。每个线程完成不同的任务，但是共享同一地址空间（也就是同样的 动态">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-11T02:11:24.000Z">
 <meta property="article:modified_time" content="2021-08-30T12:25:08.889Z">
@@ -268,7 +268,8 @@
 
       
         <span id="more"></span>
-<h2 id="进程与线程的概念"><a href="#进程与线程的概念" class="headerlink" title="进程与线程的概念"></a>进程与线程的概念</h2><p>基本概念：</p>
+<h2 id="进程与线程的概念">进程与线程的概念</h2>
+<p>基本概念：</p>
 <p>进程是对运行时程序的封装，是系统进行资源调度和分配的的基本单位，实现了操作系统的并发；</p>
 <p>线程是进程的子任务，是CPU调度和分派的基本单位，<strong>用于保证程序的实时性</strong>，实现<strong>进程内部的并发</strong>；线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。每个线程完成不同的任务，但是共享同一地址空间（也就是同样的 动态内存，映射文件，目标代码等等），打开的文件队列和其他内核资源。</p>
 <p>区别：</p>
@@ -281,7 +282,8 @@
 <blockquote>
 <p>从Linux实现上，它其实并没有专门区分进程和线程的概念。它使用了相同函数去创建进程/线程，通过设置是否共享资源的入口参数来创建进程/线程。</p>
 </blockquote>
-<h2 id="多进程和多线程的使用场景"><a href="#多进程和多线程的使用场景" class="headerlink" title="多进程和多线程的使用场景"></a>多进程和多线程的使用场景</h2><p>多进程应用场景</p>
+<h2 id="多进程和多线程的使用场景">多进程和多线程的使用场景</h2>
+<p>多进程应用场景</p>
 <ul>
 <li>例如 谷歌浏览器的每个页面就是一个单独的进程</li>
 <li>电脑中每个软件就是一个独立的进程，这个软件崩了不会影响其他的软件</li>
@@ -293,7 +295,8 @@
 <li>对于需要频繁的数据共享的场景，使用线程可以降低通信的开销</li>
 <li>对于需要快速响应的场景，例如GUI界面，如果算法耗时很多，就会导致界面假死无法响应用户的请求</li>
 </ul>
-<h2 id="内核线程和用户线程"><a href="#内核线程和用户线程" class="headerlink" title="内核线程和用户线程"></a>内核线程和用户线程</h2><p>这里讲的用户线程是编译层面通过编程语言实现的用户线程，即协程。内核线程就是常规的线程（还有一种内核线程的称呼是指只运行在内核态的线程，是操作系统创建的用于完成操作系统事务的线程，也叫守护线程，它和普通的线程一样被同等调度）但是这里讨论的实际是协程和线程的区别。</p>
+<h2 id="内核线程和用户线程">内核线程和用户线程</h2>
+<p>这里讲的用户线程是编译层面通过编程语言实现的用户线程，即协程。内核线程就是常规的线程（还有一种内核线程的称呼是指只运行在内核态的线程，是操作系统创建的用于完成操作系统事务的线程，也叫守护线程，它和普通的线程一样被同等调度）但是这里讨论的实际是协程和线程的区别。</p>
 <p>协程是用户在编译器层面使用编程语言模拟出的线程，不通过系统调用，不用陷入内核，这时候创建新线程比较快，这就是用户线程。多个协程运行在一个线程上，OS感知不到协程的存在，它只是对承载这些协程的线程进行调度，因此如果协程中有IO阻塞操作导致线程被阻塞，那么所有的协程都无法再被调度。这种情况需要程序员自己避免，可以使用异步IO代替阻塞IO，手动调度协程。</p>
 <p>而常规的线程是 由操作系统维护的，它的创建和调度都要从用户态陷入内核态，所以线程的切换代价高于协程。但是由于操作系统调度，所以不会因为一个线程的IO阻塞而饿死其他线程。</p>
 <p>协程的优点：</p>
@@ -301,71 +304,69 @@
 <li>协程极高的执行效率。因为子程序切换不是线程切换，而是由程序自身控制，因此，没有线程切换的开销，和多线程比，线程数量越多，协程的性能优势就越明显</li>
 <li>第二大优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多</li>
 </ul>
-<h2 id="为什么进程切换比线程慢"><a href="#为什么进程切换比线程慢" class="headerlink" title="为什么进程切换比线程慢"></a>为什么进程切换比线程慢</h2><p>首先无论进程还是线程切换都需要保存寄存器值，例如SP 栈寄存器，PC程序计数器指向下一条要执行的指令，EAX累加寄存器，用于加法乘法的确信寄存器等。但是 每个进程都有自己的虚拟地址空间， 进程内的所有线程共享进程的虚拟地址空间，进程切换涉及虚拟地址空间的切换而线程不会。把虚拟地址空间转换为物理地址是通过页表实现的，为了加速页表的查找速度，通常要使用缓存来存储常用的地址映射，即TLB。每个进程有自己的页表，当进程切换后，缓存就失效了，导致命中率低，那么虚拟地址转换为物理地址就会变慢，表现出来的就是程序运行会变慢，而线程切换则不会导致TLB失效，因为线程线程无需切换地址空间，因此我们通常说线程切换要比较进程切换快，原因就在这里。（<strong>为了加速虚拟地址的转换速度，会将常用的地址映射存放在缓存中，进程切换，页表也改变会导致缓存命中率低，同时就需要重新从内存中将新的页表加载进缓存，所以进程切换比线程切换慢的原因就在这儿</strong>）</p>
-<h2 id="进程间通信的方式"><a href="#进程间通信的方式" class="headerlink" title="进程间通信的方式"></a>进程间通信的方式</h2><p><strong>进程间通信</strong>主要包括管道、消息队列、信号量、信号、共享内存、以及套接字socket。</p>
-<ol>
-<li><p>管道：分为无名管道  和  有名管道，他们都只支持半双工的通信，通信时接收双方必须同时存在，由于传输的是字节流，需要程序自行定义通信协议。管道是存在于<strong>内存中</strong>，只是形式和文件类似，当消息被读取出便不再存在。</p>
+<h2 id="为什么进程切换比线程慢">为什么进程切换比线程慢</h2>
+<p>首先无论进程还是线程切换都需要保存寄存器值，例如SP 栈寄存器，PC程序计数器指向下一条要执行的指令，EAX累加寄存器，用于加法乘法的确信寄存器等。但是 每个进程都有自己的虚拟地址空间， 进程内的所有线程共享进程的虚拟地址空间，进程切换涉及虚拟地址空间的切换而线程不会。把虚拟地址空间转换为物理地址是通过页表实现的，为了加速页表的查找速度，通常要使用缓存来存储常用的地址映射，即TLB。每个进程有自己的页表，当进程切换后，缓存就失效了，导致命中率低，那么虚拟地址转换为物理地址就会变慢，表现出来的就是程序运行会变慢，而线程切换则不会导致TLB失效，因为线程线程无需切换地址空间，因此我们通常说线程切换要比较进程切换快，原因就在这里。（<strong>为了加速虚拟地址的转换速度，会将常用的地址映射存放在缓存中，进程切换，页表也改变会导致缓存命中率低，同时就需要重新从内存中将新的页表加载进缓存，所以进程切换比线程切换慢的原因就在这儿</strong>）</p>
+<h2 id="进程间通信的方式">进程间通信的方式</h2>
+<p><strong>进程间通信</strong>主要包括管道、消息队列、信号量、信号、共享内存、以及套接字socket。</p>
+<ol type="1">
+<li><p>管道：分为无名管道 和 有名管道，他们都只支持半双工的通信，通信时接收双方必须同时存在，由于传输的是字节流，需要程序自行定义通信协议。管道是存在于<strong>内存中</strong>，只是形式和文件类似，当消息被读取出便不再存在。</p>
 <ul>
-<li><p>无名管道：只能用于有亲缘关系的进程之间通信。</p>
-</li>
-<li><p>有名管道：有路径名称与之关联，以一种特殊的文件形式存在于内存中。所以可以用于没有关系的进程之间通信。</p>
-</li>
-</ul>
-</li>
+<li><p>无名管道：只能用于有亲缘关系的进程之间通信。</p></li>
+<li><p>有名管道：有路径名称与之关联，以一种特殊的文件形式存在于内存中。所以可以用于没有关系的进程之间通信。</p></li>
+</ul></li>
 <li><p>消息队列：消息队列，是消息的链接表，存放在<strong>内核中</strong>。一个消息队列由一个标识符（即队列ID）来标记。 (消息队列克服了信号传递信息少，管道只能承载无格式字节流以及缓冲区大小受限等特点)具有写权限得进程可以按照一定得规则向消息队列中添加新信息；对消息队列有读权限得进程则可以从消息队列中读取信息；</p>
 <ul>
 <li>消息队列是面向记录的，其中的消息具有特定的格式以及特定的优先级。</li>
 <li>消息队列独立于发送与接收进程。进程终止时，消息队列及其内容并不会被删除</li>
 <li>消息队列可以实现消息的随机查询,消息不一定要以先进先出的次序读取,也可以按消息的类型读取</li>
-</ul>
-</li>
+</ul></li>
 <li><p>信号量：是一个计数器，用来控制进程间的同步或互斥访问。</p>
 <ul>
 <li>如果要传递信息，则需要结合共享内存，来实现同步或者互斥访问</li>
 <li>信号量基于 操作系统 的 P V操作，程序对信号的操作都是原子操作</li>
-<li>P V，不仅只能对信号量的减加  还 可以加减任意正整数  当信号量为0时，进程休眠</li>
+<li>P V，不仅只能对信号量的减加 还 可以加减任意正整数 当信号量为0时，进程休眠</li>
 <li>支持信号量组</li>
-</ul>
-</li>
-<li><p>信号： 用于通知接收进程某个事件已经发生</p>
-</li>
-<li>共享内存：它使得多个进程可以访问同一块内存空间，不同进程可以及时看到对方进程中对共享内存中数据得更新。这种方式需要依靠某种同步操作，如互斥锁和信号量等<ul>
-<li>是速度最快的一种 IPC  因为 进程是直接对内存进行存取</li>
+</ul></li>
+<li><p>信号： 用于通知接收进程某个事件已经发生</p></li>
+<li><p>共享内存：它使得多个进程可以访问同一块内存空间，不同进程可以及时看到对方进程中对共享内存中数据得更新。这种方式需要依靠某种同步操作，如互斥锁和信号量等</p>
+<ul>
+<li>是速度最快的一种 IPC 因为 进程是直接对内存进行存取</li>
 <li>因为多个进程可以同时操作，所以需要进行同步。信号量+共享内存通常结合在一起使用，信号量用来同步对共享内存的访问</li>
-</ul>
-</li>
-<li>套接字<code>SOCKET</code>：它用于不同主机之间的进程通信</li>
+</ul></li>
+<li><p>套接字<code>SOCKET</code>：它用于不同主机之间的进程通信</p></li>
 </ol>
 <p><strong>线程间通信</strong>的方式：</p>
-<ol>
-<li>临界区：通过多线程的串行化来访问公共资源或一段代码，速度快，适合控制数据访问。如果有多个线程试图同时访问临界区，那么 在有一个线程进入后其他所有试图访问此临界区的线程将被挂起，并一直持续到进入临界区的线程离开。<pre><code> * `EnterCriticalSection()` 进入临界区
-</code></pre><ul>
+<ol type="1">
+<li>临界区：通过多线程的串行化来访问公共资源或一段代码，速度快，适合控制数据访问。如果有多个线程试图同时访问临界区，那么 在有一个线程进入后其他所有试图访问此临界区的线程将被挂起，并一直持续到进入临界区的线程离开。 * <code>EnterCriticalSection()</code> 进入临界区
+<ul>
 <li><code>LeaveCriticalSection()</code>离开临界区</li>
-</ul>
-</li>
+</ul></li>
 <li>互斥量Synchronized/Lock：采用互斥对象机制，只有拥有互斥对象的线程才有访问公共资源的权限。因为互斥对象只有一个，所以可以保证公共资源不会被多个线程同时访问。</li>
 <li>信号量 <code>Semphare</code>：为控制具有有限数量的用户资源而设计的，<strong>它允许多个线程在同一时刻去访问同一个资源</strong>，但一般需要限制同一时刻访问此资源的最大线程数目。</li>
 <li>事件(信号)，Wait/Notify：通过通知操作的方式来保持多线程同步，还可以方便的实现多线程优先级的比较操作</li>
 </ol>
 <p>对比：临界区是非内核对象，它运行在用户态，因此只能用于同一个进程中的线程之间的互斥访问，但是临界区的效率是最高的。而后面都是内核对象可以用于不同进程的线程之间的同步互斥。</p>
-<h2 id="Linux虚拟地址空间"><a href="#Linux虚拟地址空间" class="headerlink" title="Linux虚拟地址空间"></a>Linux虚拟地址空间</h2><p>程序拥有自己的地址空间，这个地址空间被分割成多个块，每一块称为一页。这些页被映射到物理内存，但不需要映射到连续的物理内存，也不需要所有页都必须在物理内存中。当程序引用到不在物理内存中的页时，由硬件执行必要的映射，将缺失的部分装入物理内存并重新执行失败的指令。还有进程运行过程中，要动态分配内存，比如 <code>malloc</code>时，也只是分配了虚拟内存，即为这块虚拟内存对应的页表项做相应设置，当进程真正访问到此数据时，才引发缺页异常。</p>
+<h2 id="linux虚拟地址空间">Linux虚拟地址空间</h2>
+<p>程序拥有自己的地址空间，这个地址空间被分割成多个块，每一块称为一页。这些页被映射到物理内存，但不需要映射到连续的物理内存，也不需要所有页都必须在物理内存中。当程序引用到不在物理内存中的页时，由硬件执行必要的映射，将缺失的部分装入物理内存并重新执行失败的指令。还有进程运行过程中，要动态分配内存，比如 <code>malloc</code>时，也只是分配了虚拟内存，即为这块虚拟内存对应的页表项做相应设置，当进程真正访问到此数据时，才引发缺页异常。</p>
 <p>好处：</p>
-<ol>
+<ol type="1">
 <li>可以控制物理内存的访问权限，对特定的地址设置保护，防止在用户模式下执行错误的指令而意外改写内核数据</li>
 <li>每个进程的地址空间独立，通过页表映射到物理地址，可以防止不同进程之间相互干扰，一个进程无无法访问其他进程的地址空间</li>
 <li>通过页面的换入换出可以在小内存中运行大程序。另一方面由于逻辑地址不是全部都映射到具体的物理地址的，只有在读写时引发缺页异常才会进行映射，因此可以在内存上同时保留多个进程，提高系统的并发度</li>
 <li>可以将连续的逻辑地址映射到不连续的物理地址上，提高内存利用率</li>
 </ol>
 <p>虚拟内存的代价：</p>
-<ol>
+<ol type="1">
 <li>虚存的管理需要建立很多数据结构，这些数据结构要占用额外的内存</li>
 <li>虚拟地址到物理地址的转换，增加了指令的执行时间</li>
 <li>页面的换入换出需要磁盘I/O，这是很耗时的</li>
 <li>如果一页中只有一部分数据，会浪费内存</li>
 </ol>
-<h2 id="请你回答一下为什么要有page-cache，操作系统怎么设计的page-cache"><a href="#请你回答一下为什么要有page-cache，操作系统怎么设计的page-cache" class="headerlink" title="请你回答一下为什么要有page cache，操作系统怎么设计的page cache"></a>请你回答一下为什么要有page cache，操作系统怎么设计的page cache</h2><p>加快从磁盘读取文件的速率。page cache 中有一部分磁盘文件的缓存，因为从磁盘中读取文件比较慢，所以读取文件先去page cache 中去查找，如果命中，则不需要去磁盘中读取，大大加快读取速度。</p>
-<p>当系统需要读取某个文件的对应位置的数据时，首先根据打开的文件的 inode 找到 address_space 结构，address_space是建立内存和文件关联的桥梁，其中保存有该文件的 基数树，通过文件的偏移  在基数树中查找页缓存，如果缓存命中直接读取，否则分配一块缓存页并将磁盘中的对应数据拷贝到内存缓存页中。（最后害有一个双向链表来实现LRU？）</p>
-<h2 id="操作系统程序的内部结构"><a href="#操作系统程序的内部结构" class="headerlink" title="操作系统程序的内部结构"></a>操作系统程序的内部结构</h2><p>32位系统 一个程序的可寻址空间位 4G ， 其中0-3G是用户态空间，3-4G是内核空间。从低地址到高地址，依次为代码段，数据段，bss段，堆区，mmap映射区，栈区。</p>
+<h2 id="请你回答一下为什么要有page-cache操作系统怎么设计的page-cache">请你回答一下为什么要有page cache，操作系统怎么设计的page cache</h2>
+<p>加快从磁盘读取文件的速率。page cache 中有一部分磁盘文件的缓存，因为从磁盘中读取文件比较慢，所以读取文件先去page cache 中去查找，如果命中，则不需要去磁盘中读取，大大加快读取速度。</p>
+<p>当系统需要读取某个文件的对应位置的数据时，首先根据打开的文件的 inode 找到 address_space 结构，address_space是建立内存和文件关联的桥梁，其中保存有该文件的 基数树，通过文件的偏移 在基数树中查找页缓存，如果缓存命中直接读取，否则分配一块缓存页并将磁盘中的对应数据拷贝到内存缓存页中。（最后害有一个双向链表来实现LRU？）</p>
+<h2 id="操作系统程序的内部结构">操作系统程序的内部结构</h2>
+<p>32位系统 一个程序的可寻址空间位 4G ， 其中0-3G是用户态空间，3-4G是内核空间。从低地址到高地址，依次为代码段，数据段，bss段，堆区，mmap映射区，栈区。</p>
 <ul>
 <li>代码段：存放的是机器代码 和 字符常量，只读，在可执行文件生成的时候以已经写入。</li>
 <li>数据段：存放的是初始化了的且初始值不为0的全局变量和局部静态变量。在可执行文件生成的时候已经写入。</li>
@@ -373,22 +374,24 @@
 <li>堆区：前三个大小都是固定的。后两个是在程序运行时新增的区域。堆区为程序员动态分配的空间，在运行中可以动态改变，由低地址向高地址生长。堆的效率比栈要低的多。</li>
 <li>栈区：用于存放函数调用时函数的返回值，返回地址等信息，该部分内存由操作系统管理，栈区是从高地址位向低地址位增长的，是一块连续的内存区域，并且每个栈的最大地址有限制，超出了会异常。</li>
 </ul>
-<h2 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h2><p>malloc mmap 函数分配空间只是分配的虚拟内存，只有当程序访问虚拟空间，并发现虚拟内存和物理内存没有建立映射关系时，就会出发缺页中断。<strong>在请求分页系统中，可以通过查询页表中的状态位来确定所要访问的页面是否存在于内存中</strong>。此时操作系统会根据页表中的外存地址在外存中找到所缺的一页，将其调入内存。</p>
+<h2 id="缺页中断">缺页中断</h2>
+<p>malloc mmap 函数分配空间只是分配的虚拟内存，只有当程序访问虚拟空间，并发现虚拟内存和物理内存没有建立映射关系时，就会出发缺页中断。<strong>在请求分页系统中，可以通过查询页表中的状态位来确定所要访问的页面是否存在于内存中</strong>。此时操作系统会根据页表中的外存地址在外存中找到所缺的一页，将其调入内存。</p>
 <p>缺页本身是一种中断，与一般的中断一样，需要经过4个处理步骤：</p>
-<ol>
+<ol type="1">
 <li>保护CPU现场</li>
 <li>分析中断原因</li>
 <li>处理缺页中断</li>
 <li>恢复CPU现场，继续执行</li>
 </ol>
 <p>但是缺页中断所要访问的页面不在内存时，由硬件所产生的一种特殊的中断，因此与一般中断存在的区别是：</p>
-<ol>
+<ol type="1">
 <li>在指令执行期间产生和处理缺页中断信号</li>
 <li>一条指令在执行期间，可能产生多次缺页中断</li>
 <li><strong>缺页中断返回是，执行产生中断的一条指令，而一般的中断返回是，执行下一条指令</strong>。</li>
 </ol>
-<h2 id="请你回答一下fork和vfork的区别"><a href="#请你回答一下fork和vfork的区别" class="headerlink" title="请你回答一下fork和vfork的区别"></a>请你回答一下fork和vfork的区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">vfork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-<ol>
+<h2 id="请你回答一下fork和vfork的区别">请你回答一下fork和vfork的区别</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">vfork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol type="1">
 <li><strong>fork的发展</strong>：但是在早期 Unix系统中，调用fork，fork创造的子进程是父进程的完整副本，复制了父亲进程的资源，包括内存的内容和task_struct内容。逐页的复制方式是十分耗时的。现代的Unix系统采用了写时复制的方法，而不是对父进程空间进程整体复制。</li>
 <li><strong>为何会有vfork：</strong> 由于早期 fork 全盘复制的弊端，常规用途中 往往直接在子进程中使用 exec 加载其他映像文件，并不需要全部复制父进程的东西。因此 出现了<code>vfork</code> 。</li>
 <li><strong>vfork 作用</strong>： vfork( ) 避免了地址空间的按页复制。在这个过程中，父进程和子进程共享相同的地址空间和页表项。实际上vfork( )只完成了一件事：复制内部的内核数据结构。因此，子进程也就不能修改地址空间中的任何内存。而且子进程将先于父进程运行，只有在 子进程调用 exec 或者 _exit 时，才会唤醒父进程。</li>
@@ -396,32 +399,40 @@
 <li><strong>写时复制的具体实现</strong>：在使用虚拟内存的情况下，写时复制（Copy-On-Write）是以页为基础进行的。所以，只要进程不修改它全部的地址空间，那么就不必复制整个地址空间。如果有进程试图修改一个页，就会产生一个缺页中断。内核处理缺页中断的方式就是对该页进行一次透明复制。这时会清除页面的COW属性，表示着它不再被共享。</li>
 </ol>
 <p>fork 与 vfork 区别：</p>
-<ol>
+<ol type="1">
 <li>fork( )的子进程拷贝父进程的数据段和代码段；vfork( )的子进程与父进程共享数据段 直至子进程使用execve启动新的应用程序为止</li>
 <li>fork( )的父子进程的执行次序不确定；vfork( )保证子进程先运行，在调用exec或exit之前与父进程数据是共享的，<strong>在它调用exec或exit之后父进程才能被调度运行</strong>，如果在调用这两个函数之前子进程依赖于父进程的进一步动作，<strong>则会导致死锁。</strong></li>
 </ol>
-<h2 id="请问如何修改文件最大句柄数"><a href="#请问如何修改文件最大句柄数" class="headerlink" title="请问如何修改文件最大句柄数"></a>请问如何修改文件最大句柄数</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ulimit</span> -n 2048   <span class="comment"># 将最大文件句柄数修改为2048 但是新开一个 shell 会失效</span></span><br><span class="line"><span class="built_in">ulimit</span> -a        <span class="comment"># 查询 Linux 的相关参数，其中open files为最大文件数</span></span><br><span class="line">vi /etc/security/limits.conf  <span class="comment">## 要永久修改 最大文件数 在 conf 文件中添加  修改以后保存，注销当前用户，重新登录，修改后的参数就生效了</span></span><br><span class="line">*　　soft　　nofile　　65536</span><br><span class="line">*　　hard　　nofile　　65536</span><br></pre></td></tr></table></figure>
-<h2 id="并发-concurrency-和并行-parallelism"><a href="#并发-concurrency-和并行-parallelism" class="headerlink" title="并发(concurrency)和并行(parallelism)"></a>并发(concurrency)和并行(parallelism)</h2><p>并发：宏观上两个程序好像在同时运行，但是某一时刻只有一个程序在运行，两个程序交替执行一个小时间片，并发能提高程序的效率。</p>
+<h2 id="请问如何修改文件最大句柄数">请问如何修改文件最大句柄数</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ulimit</span> -n 2048   <span class="comment"># 将最大文件句柄数修改为2048 但是新开一个 shell 会失效</span></span><br><span class="line"><span class="built_in">ulimit</span> -a        <span class="comment"># 查询 Linux 的相关参数，其中open files为最大文件数</span></span><br><span class="line">vi /etc/security/limits.conf  <span class="comment">## 要永久修改 最大文件数 在 conf 文件中添加  修改以后保存，注销当前用户，重新登录，修改后的参数就生效了</span></span><br><span class="line">*　　soft　　nofile　　65536</span><br><span class="line">*　　hard　　nofile　　65536</span><br></pre></td></tr></table></figure>
+<h2 id="并发concurrency和并行parallelism">并发(concurrency)和并行(parallelism)</h2>
+<p>并发：宏观上两个程序好像在同时运行，但是某一时刻只有一个程序在运行，两个程序交替执行一个小时间片，并发能提高程序的效率。</p>
 <p>并行：并行需要硬件支持，例如多核或者多机。两个程序可以在不同核中同时运行，也就是运行了两个指令，互不影响。</p>
-<h2 id="MySQL的端口号是多少，如何修改这个端口号"><a href="#MySQL的端口号是多少，如何修改这个端口号" class="headerlink" title="MySQL的端口号是多少，如何修改这个端口号"></a>MySQL的端口号是多少，如何修改这个端口号</h2><p>mysql 的默认端口是 3306，修改端口号 在  /etc/my.cnf 文件 中修改即可</p>
+<h2 id="mysql的端口号是多少如何修改这个端口号">MySQL的端口号是多少，如何修改这个端口号</h2>
+<p>mysql 的默认端口是 3306，修改端口号 在 /etc/my.cnf 文件 中修改即可</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 登录 mysql 使用命令</span></span><br><span class="line">show global variables like <span class="string">&#x27;port&#x27;</span>   <span class="comment">## 查看端口号  </span></span><br><span class="line">vim my.cnf   <span class="comment">### 修改端口号</span></span><br></pre></td></tr></table></figure>
-<h2 id="说一说操作系统中的页表寻址"><a href="#说一说操作系统中的页表寻址" class="headerlink" title="说一说操作系统中的页表寻址"></a>说一说操作系统中的页表寻址</h2><p>页式内存管理，内存分成固定长度的一个个页片。操作系统为每一个进程维护了一个从虚拟地址到物理地址的映射关系的数据结构，叫页表，页表的内容就是该进程的虚拟地址到物理地址的一个映射。页表中的每一项都记录了这个页的基地址。通过页表，由逻辑地址的高位部分先找到逻辑地址对应的页基地址，再由页基地址偏移一定长度就得到最后的物理地址，偏移的长度由逻辑地址的低位部分决定。一般情况下，这个过程都可以由硬件完成，所以效率还是比较高的。页式内存管理的优点就是比较灵活，内存管理以较小的页为单位，方便内存换入换出和扩充地址空间。</p>
+<h2 id="说一说操作系统中的页表寻址">说一说操作系统中的页表寻址</h2>
+<p>页式内存管理，内存分成固定长度的一个个页片。操作系统为每一个进程维护了一个从虚拟地址到物理地址的映射关系的数据结构，叫页表，页表的内容就是该进程的虚拟地址到物理地址的一个映射。页表中的每一项都记录了这个页的基地址。通过页表，由逻辑地址的高位部分先找到逻辑地址对应的页基地址，再由页基地址偏移一定长度就得到最后的物理地址，偏移的长度由逻辑地址的低位部分决定。一般情况下，这个过程都可以由硬件完成，所以效率还是比较高的。页式内存管理的优点就是比较灵活，内存管理以较小的页为单位，方便内存换入换出和扩充地址空间。</p>
 <p>早期的Linux系统使用 一级 页表，由于页表是连续的，即使一个进程可能只会使用到少部分的寻址空间，但是也需要将整个页表存储在连续的内存中，这是比较浪费内存的。因此 逐渐出现 多级页表的 结构，通过分散存储的思想，内存中往往只用存储一个一级页表和少量使用到的二级页表，其他不用的二级页表可以存储在外存中，使用时再调入。这样大大减小了存储页表需要的内存空间。寻址方式类似，首先通过CR3寄存器获得一级页表的地址，根据逻辑地址的高位，映射得到对应的二级页表的地址，然后再在二级页表中，根据逻辑地址的中间位映射，得到该逻辑地址对应的完整页的基地址，再加上逻辑地址的低位偏移得到真实的物理地址。</p>
-<h2 id="说一说有了进程，为什么还要有线程"><a href="#说一说有了进程，为什么还要有线程" class="headerlink" title="说一说有了进程，为什么还要有线程"></a>说一说有了进程，为什么还要有线程</h2><p>进程可以使多个程序能并发执行，以提高资源的利用率和系统的吞吐量；但是其具有一些缺点。</p>
-<ol>
+<h2 id="说一说有了进程为什么还要有线程">说一说有了进程，为什么还要有线程</h2>
+<p>进程可以使多个程序能并发执行，以提高资源的利用率和系统的吞吐量；但是其具有一些缺点。</p>
+<ol type="1">
 <li>进程中一旦有阻塞任务，整个进程都会被挂起，即使进程中有些工作不依赖于等待资源，但是仍然不会被执行。</li>
-<li>进程的建立需要耗费更多资源。线程是一种非常”节俭”的多任务操作方式。在linux系统下，启动一个新的进程必须分配给它独立的地址空间，建立众多的数据表来维护它的代码段、堆栈段和数据段，这是一种”昂贵”的多任务工作方式。</li>
+<li>进程的建立需要耗费更多资源。线程是一种非常"节俭"的多任务操作方式。在linux系统下，启动一个新的进程必须分配给它独立的地址空间，建立众多的数据表来维护它的代码段、堆栈段和数据段，这是一种"昂贵"的多任务工作方式。</li>
 <li>进程间的通信复杂，因为不同进程的数据空间是独立的，要通信需要借助IPC，而线程之间共享资源，比较方便</li>
 <li>进程切换开销大，运行于一个进程中的多个线程，它们之间使用相同的地址空间，而且线程间彼此切换所需时间也远远小于进程间切换所需要的时间。</li>
 </ol>
 <p>另外：</p>
-<ol>
+<ol type="1">
 <li>使多CPU系统更加有效。操作系统会保证当线程数不大于CPU数目时，不同的线程运行于不同的CPU上</li>
 <li>改善程序结构。一个既长又复杂的进程可以考虑分为多个线程，成为几个独立或半独立的运行部分，这样的程序才会利于理解和修改。</li>
 </ol>
-<h2 id="单核机器上写多线程程序，是否需要考虑加锁，为什么？"><a href="#单核机器上写多线程程序，是否需要考虑加锁，为什么？" class="headerlink" title="单核机器上写多线程程序，是否需要考虑加锁，为什么？"></a>单核机器上写多线程程序，是否需要考虑加锁，为什么？</h2><p>需要，如果有一个线程正在对共享数据修改，还没修改完 突然被系统挂起，调入另一个线程，此时该线程再对共享数据读，读出的就是脏数据。</p>
-<h2 id="线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的"><a href="#线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的" class="headerlink" title="线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的"></a>线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的</h2><p>保存 <strong>当前线程id和状态，寄存器状态，堆栈信息</strong>等。其中寄存器信息主要有 SP指针 存放的是堆栈地址，PC指针程序计数器指向下一条将要执行的指令，EAX累加寄存器，是加法乘法的缺省寄存器，<strong>用来存储cpu计算产生的中间结果</strong>，如果没有累加器这样的寄存器，那么每次计算加法乘法移位等后产生的中间结果都要写会内存，也许马上又要读回来，速度慢。</p>
-<h2 id="线程间同步的方式"><a href="#线程间同步的方式" class="headerlink" title="线程间同步的方式"></a>线程间同步的方式</h2><p>（如果问线程通信的方式 就 加上 临界区，通过多线程的串行化来访问公共资源或一段代码，速度快，适合控制数据访问）</p>
+<h2 id="单核机器上写多线程程序是否需要考虑加锁为什么">单核机器上写多线程程序，是否需要考虑加锁，为什么？</h2>
+<p>需要，如果有一个线程正在对共享数据修改，还没修改完 突然被系统挂起，调入另一个线程，此时该线程再对共享数据读，读出的就是脏数据。</p>
+<h2 id="线程需要保存哪些上下文sppceax这些寄存器是干嘛用的">线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的</h2>
+<p>保存 <strong>当前线程id和状态，寄存器状态，堆栈信息</strong>等。其中寄存器信息主要有 SP指针 存放的是堆栈地址，PC指针程序计数器指向下一条将要执行的指令，EAX累加寄存器，是加法乘法的缺省寄存器，<strong>用来存储cpu计算产生的中间结果</strong>，如果没有累加器这样的寄存器，那么每次计算加法乘法移位等后产生的中间结果都要写会内存，也许马上又要读回来，速度慢。</p>
+<h2 id="线程间同步的方式">线程间同步的方式</h2>
+<p>（如果问线程通信的方式 就 加上 临界区，通过多线程的串行化来访问公共资源或一段代码，速度快，适合控制数据访问）</p>
 <ul>
 <li>用户模式：原子操作，临界区</li>
 <li>内核模式：事件，信号量，互斥量</li>
@@ -432,12 +443,15 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pthread_mutex_init</span>();     <span class="comment">// 初始化互斥锁</span></span><br><span class="line"><span class="built_in">pthread_mutex_lock</span>();     <span class="comment">// 以原子的方式给一个互斥锁加锁</span></span><br><span class="line"><span class="built_in">pthread_mutex_unlock</span>();   <span class="comment">// 以原子的方式给互斥锁解锁</span></span><br><span class="line"><span class="built_in">pthread_mutex_destroy</span>();  <span class="comment">// 销毁互斥锁</span></span><br></pre></td></tr></table></figure>
 <p><strong>条件变量</strong>。和互斥锁不同，条件变量是当达到某个条件时，同时唤醒在等待该变量的线程，从而实现线程同步。但是为了防止出现唤醒信号丢失的情况，通常要和互斥锁配合使用，在测试条件变量的时候先加锁，防止在测试且还未睡眠时，另一个线程发出条件信号，而被当前线程错过的问题。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pthread_cond_init</span>();    <span class="comment">// 初始化条件变量</span></span><br><span class="line"><span class="built_in">pthread_cond_wait</span>();    <span class="comment">// 等待目标条件变量，如果没有信号就休眠。在调用该函数测试条件时需要先使用互斥锁加锁确保原子性。在该函数中进入wait状态前会先解锁再休眠。因此该函数入口参数还有个互斥锁变量。在被条件唤醒后，函数内部会再加上互斥锁。</span></span><br><span class="line"><span class="built_in">pthread_cond_signal</span>();  <span class="comment">// 唤醒一个等待目标条件变量的线程。哪个线程被唤醒取决于调度策略和优先级。</span></span><br><span class="line"><span class="built_in">pthread_cond_destroy</span>(); <span class="comment">// 销毁条件变量</span></span><br></pre></td></tr></table></figure>
-<h2 id="游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么"><a href="#游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么" class="headerlink" title="游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么"></a>游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么</h2><p>游戏服务器应该为每个用户开辟一个进程。因为同一进程间的线程会相互影响，一个线程死掉会影响其他线程，从而导致进程崩溃。因此为了保证不同用户之间不会相互影响，应该为每个用户开辟一个进程</p>
-<h2 id="缺页置换算法"><a href="#缺页置换算法" class="headerlink" title="缺页置换算法"></a>缺页置换算法</h2><p>进程运行过程中，如果发生缺页中断，而此时内存中有没有空闲的物理块是，为了能够把所缺的页面装入内存，系统必须从内存中选择一页调出到<strong>磁盘的对换区</strong>。但此时应该把哪个页面换出，则需要根据一定的<strong>页面置换算法</strong>（Page Replacement Algorithm)来确定</p>
+<h2 id="游戏服务器应该为每个用户开辟一个线程还是一个进程为什么">游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么</h2>
+<p>游戏服务器应该为每个用户开辟一个进程。因为同一进程间的线程会相互影响，一个线程死掉会影响其他线程，从而导致进程崩溃。因此为了保证不同用户之间不会相互影响，应该为每个用户开辟一个进程</p>
+<h2 id="缺页置换算法">缺页置换算法</h2>
+<p>进程运行过程中，如果发生缺页中断，而此时内存中有没有空闲的物理块是，为了能够把所缺的页面装入内存，系统必须从内存中选择一页调出到<strong>磁盘的对换区</strong>。但此时应该把哪个页面换出，则需要根据一定的<strong>页面置换算法</strong>（Page Replacement Algorithm)来确定</p>
 <p>先进先出(FIFO)算法：置换最先调入内存的页面，即置换在内存中驻留时间最久的页面。按照进入内存的先后次序排列成队列，从队尾进入，从队首删除。</p>
 <p>最近最少使用（LRU）算法: 置换最近一段时间以来最长时间未访问过的页面。根据程序局部性原理，刚被访问的页面，可能马上又要被访问；而较长时间内没有被访问的页面，可能最近不会被访问。</p>
 <p>当前最常采用的就是LRU算法。</p>
-<h2 id="死锁发生的条件以及如何解决死锁"><a href="#死锁发生的条件以及如何解决死锁" class="headerlink" title="死锁发生的条件以及如何解决死锁"></a>死锁发生的条件以及如何解决死锁</h2><ol>
+<h2 id="死锁发生的条件以及如何解决死锁">死锁发生的条件以及如何解决死锁</h2>
+<ol type="1">
 <li><strong>互斥条件</strong>：进程对所分配到的资源不允许其他进程访问，若其他进程访问该资源，只能等待，直至占有该资源的进程使用完成后释放该资源；</li>
 <li><strong>请求和保持条件</strong>：进程获得一定的资源后，又对其他资源发出请求，但是该资源可能被其他进程占有，此时请求阻塞，但该进程不会释放自己已经占有的资源</li>
 <li><strong>不可剥夺条件</strong>：进程已获得的资源，在未完成使用之前，不可被剥夺，只能在使用后自己释放</li>
@@ -445,67 +459,74 @@
 </ol>
 <p>解决死锁的方法即破坏上述四个条件之一，主要方法如下（死锁预防）：</p>
 <ul>
-<li>静态分配资源，一次性把要用的资源都申请到  破坏请求保持条件</li>
+<li>静态分配资源，一次性把要用的资源都申请到 破坏请求保持条件</li>
 <li>可剥夺资源：即当进程新的资源未得到满足时，释放已占有的资源，等到进程可以同时获取两个资源后再启动，从而破坏不可剥夺的条件</li>
-<li>资源有序分配法：系统给每类资源赋予一个序号，每个进程按编号递增的请求资源，释放则相反，从而破坏环路等待的条件。例如 1，2，3资源，如果进程A 按照 1 2 3  顺序申请，而 B 按照 3 2 1 顺序申请，那必然环路，如果都按照 1 2 3 顺序申请就没事</li>
+<li>资源有序分配法：系统给每类资源赋予一个序号，每个进程按编号递增的请求资源，释放则相反，从而破坏环路等待的条件。例如 1，2，3资源，如果进程A 按照 1 2 3 顺序申请，而 B 按照 3 2 1 顺序申请，那必然环路，如果都按照 1 2 3 顺序申请就没事</li>
 </ul>
-<h3 id="运行时死锁状态判别"><a href="#运行时死锁状态判别" class="headerlink" title="运行时死锁状态判别"></a>运行时死锁状态判别</h3><p>银行家算法  </p>
-<ol>
+<h3 id="运行时死锁状态判别">运行时死锁状态判别</h3>
+<p>银行家算法</p>
+<ol type="1">
 <li>需要预先知道系统当前剩余的资源数量，以及各个进程已经占有的资源数量和请求的资源数量。</li>
 <li>遍历每个进程判断 他当前球请求的资源数量是否小于系统剩余资源数量，如果是标记当前进程；然后将系统剩余资源数量加上当前进程占有的资源数量，这代表该进程释放资源后系统总的剩余资源数量。</li>
 <li>再按照之前的步骤去遍历标记剩下的进程。最终未被标记的进程都是死锁进程。</li>
 </ol>
-<p>如果有一个状态是不安全的  就应该拒绝进入这个状态</p>
-<p>通过宏定义 重写加锁去锁算法  主要就是在上锁之前打印请求的资源号和请求的进程  从而得到一个持有的图 然后拓扑排序判断是否有环</p>
-<h2 id="请问虚拟内存和物理内存怎么对应"><a href="#请问虚拟内存和物理内存怎么对应" class="headerlink" title="请问虚拟内存和物理内存怎么对应"></a>请问虚拟内存和物理内存怎么对应</h2><h2 id="操作系统中的结构体对齐，字节对齐"><a href="#操作系统中的结构体对齐，字节对齐" class="headerlink" title="操作系统中的结构体对齐，字节对齐"></a>操作系统中的结构体对齐，字节对齐</h2><p>需要字节对齐的原因：</p>
-<ol>
+<p>如果有一个状态是不安全的 就应该拒绝进入这个状态</p>
+<p>通过宏定义 重写加锁去锁算法 主要就是在上锁之前打印请求的资源号和请求的进程 从而得到一个持有的图 然后拓扑排序判断是否有环</p>
+<h2 id="请问虚拟内存和物理内存怎么对应">请问虚拟内存和物理内存怎么对应</h2>
+<h2 id="操作系统中的结构体对齐字节对齐">操作系统中的结构体对齐，字节对齐</h2>
+<p>需要字节对齐的原因：</p>
+<ol type="1">
 <li>平台原因：不是所有硬件平台都能随机访问任意地址的数据，可能只能从特定地址开始一次读取指定大小的数据，否则会抛出硬件异常。因此通过指定对齐方 式可以使代码方便兼容多种平台。</li>
 <li>性能原因：数据结构应该经可能在自然边界上对齐。原因在于，为了访问非对其的内存，可能需要做两次内存访问，而对齐的内存访问只需要一次。例如如果内存只能从偶地址开始读，那么直接访问奇地址开始的两字节变量需要先访问两次偶地址的地址，然后组合得到实际的数据值。</li>
 </ol>
 <p>字节对齐的规则：</p>
-<ol>
+<ol type="1">
 <li>结构体字节对齐规则：结构中，第一个变量的起始地址为0，其他变量的起始地址要是 变量本身大小 和 unpack指定的对齐数中 较小的整数倍。如果不是，就补齐。</li>
-<li>结构体本身对齐规则：结构本身所占的 大小，要是 成员中最大变量的字节数 和  unpack指定对齐参数中取较小的 数的整数倍。</li>
+<li>结构体本身对齐规则：结构本身所占的 大小，要是 成员中最大变量的字节数 和 unpack指定对齐参数中取较小的 数的整数倍。</li>
 <li>结构体中如果还有结构体：那么内部的结构体要对齐在它本身 元素中最大变量 的 地址上。</li>
 </ol>
 <p>如何自定义对齐方式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#program pack(2)   <span class="comment">// n=1,2,4,8,16来改变这一系数，其中的n就是指定的“对齐系数”。</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AA</span> &#123;</span></span><br><span class="line"><span class="keyword">int</span> a;       <span class="comment">//长度4 &gt; 2 按2对齐；偏移量为0；存放位置区间[0,3]</span></span><br><span class="line"><span class="keyword">char</span> b;      <span class="comment">//长度1 &lt; 2 按1对齐；偏移量为4；存放位置区间[4]</span></span><br><span class="line"><span class="keyword">short</span> c;     <span class="comment">//长度2 = 2 按2对齐；偏移量要提升到2的倍数6；存放位置区间[6,7]</span></span><br><span class="line"><span class="keyword">char</span> d;      <span class="comment">//长度1 &lt; 2 按1对齐；偏移量为7；存放位置区间[8]；最后 结构体要是2的倍数 共10个字节</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack()     <span class="comment">//结束对齐</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="进程间通信的方式-1"><a href="#进程间通信的方式-1" class="headerlink" title="进程间通信的方式"></a>进程间通信的方式</h2><p>进程通信的方式有  管道，消息队列，套接字，共享内存，信号量</p>
+<h2 id="进程间通信的方式-1">进程间通信的方式</h2>
+<p>进程通信的方式有 管道，消息队列，套接字，共享内存，信号量</p>
 <ul>
-<li>管道：管道有 无名管道和有名管道。<ol>
+<li>管道：管道有 无名管道和有名管道。
+<ol type="1">
 <li>他们都只支持半双工通信，且收发数据双方得同时存在管道的两端；</li>
 <li>管道实际是将信息存储在内存中，消息取出后就不再存在于管道中了；</li>
 <li>管道传输的是数据流，收发双发需要自定义数据格式；</li>
 <li>其中无名管道只能用于有亲缘关系的进程，而有名管道没有这个限制</li>
-</ol>
-</li>
+</ol></li>
 <li>消息队列：消息队列存在于内核中，一个消息队列由一个标识符（即队列ID）来标记，数据读取后仍然存在；且消息具有类型和优先级，因此读取方可以按照数据类型读取消息，而不必按照顺序读出；消息队列独立于发送与接收进程，进程终止时，消息队列及其内容并不会被删除。</li>
 <li>共享内存：它使得多个进程可以访问同一块物理内存，但是需要用户使用信号量等辅助完成同步操作。这是最快的IPC，因为进程可以直接从物理内存读取。</li>
 <li>套接字：用于不同主机中的进程通信。</li>
 </ul>
-<h2 id="虚拟内存置换的方式"><a href="#虚拟内存置换的方式" class="headerlink" title="虚拟内存置换的方式"></a>虚拟内存置换的方式</h2><p>比较常见的置换方法：FIFO   第二次机会算法    LRU   LRU-K    LFU   NRU   </p>
-<ol>
+<h2 id="虚拟内存置换的方式">虚拟内存置换的方式</h2>
+<p>比较常见的置换方法：FIFO 第二次机会算法 LRU LRU-K LFU NRU</p>
+<ol type="1">
 <li>FIFO： 用一个队列实现，先进先出。完全没有考虑页面使用的冷热信息。</li>
-<li>第二次机会算法：弥补了FIFO的缺点，当再次访问队列中已经存在的页时，将它标记为1，当需要置换页面是，从队头开始，如果其标记为1，那么将它置0并放在队尾，依次循环直到找到标记为0的页面换出。实现的时候可以使用一个环形数组实现，每次只需要移动指针即可完成对头到队尾的转变。<ul>
+<li>第二次机会算法：弥补了FIFO的缺点，当再次访问队列中已经存在的页时，将它标记为1，当需要置换页面是，从队头开始，如果其标记为1，那么将它置0并放在队尾，依次循环直到找到标记为0的页面换出。实现的时候可以使用一个环形数组实现，每次只需要移动指针即可完成对头到队尾的转变。
+<ul>
 <li>当队列中所有的页面都标记为1时，退化成FIFO</li>
-</ul>
-</li>
-<li>LRU：使用一个链表维护，当访问某个页面时，将该页面放在队头，当需要换出时，将队尾的页面换出。<ul>
+</ul></li>
+<li>LRU：使用一个链表维护，当访问某个页面时，将该页面放在队头，当需要换出时，将队尾的页面换出。
+<ul>
 <li>由于需要链表，速度慢；</li>
 <li>缓存污染：出现偶然数据时，会让内存存放大量冷数据；</li>
-<li>缓存颠簸：当出现交替的数据时，命中率很低，每次都要置换。例如  0 1 2 3 0 1 2 3 … 这种数据 缓存大小只有3  </li>
-</ul>
+<li>缓存颠簸：当出现交替的数据时，命中率很低，每次都要置换。例如 0 1 2 3 0 1 2 3 … 这种数据 缓存大小只有3<br />
 </li>
-<li>LRU-K：为了解决LRU中缓存污染的问题。维护 一个 FIFO  加  一个 LRU，基本原理是只有当某个页面访问次数超过K次之后才使用LRU的规则置换，否则对于访问频率较少的页面直接使用FIFO的策略淘汰。具体思路是，当新加入一个页面时，先将它放入FIFO中，当访问某个页面时需要记录FIFO中每个页面的被访问次数，如果大于K，就将它从FIFO中删除并放入LRU的链表中，如果LRU缓存满了就按照LRU的规则删除链表尾部的元素。当需要删除页面时，将FIFO中先进入的页面删除。 <ul>
+</ul></li>
+<li>LRU-K：为了解决LRU中缓存污染的问题。维护 一个 FIFO 加 一个 LRU，基本原理是只有当某个页面访问次数超过K次之后才使用LRU的规则置换，否则对于访问频率较少的页面直接使用FIFO的策略淘汰。具体思路是，当新加入一个页面时，先将它放入FIFO中，当访问某个页面时需要记录FIFO中每个页面的被访问次数，如果大于K，就将它从FIFO中删除并放入LRU的链表中，如果LRU缓存满了就按照LRU的规则删除链表尾部的元素。当需要删除页面时，将FIFO中先进入的页面删除。
+<ul>
 <li>为了解决 LRU 的缓存污染问题</li>
-</ul>
-</li>
-<li>2Q算法就是  LRU-2<ul>
-<li>当访问的数据为 ABABABA时退化为 FIFO  用不到LRU</li>
-</ul>
-</li>
+</ul></li>
+<li>2Q算法就是 LRU-2
+<ul>
+<li>当访问的数据为 ABABABA时退化为 FIFO 用不到LRU</li>
+</ul></li>
 </ol>
-<h2 id="epoll原理"><a href="#epoll原理" class="headerlink" title="epoll原理"></a>epoll原理</h2>
+<h2 id="epoll原理">epoll原理</h2>
+
     </div>
 
     
@@ -589,7 +610,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">进程与线程的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">多进程和多线程的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%94%A8%E6%88%B7%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">内核线程和用户线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E6%AF%94%E7%BA%BF%E7%A8%8B%E6%85%A2"><span class="nav-number">4.</span> <span class="nav-text">为什么进程切换比线程慢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">进程间通信的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">6.</span> <span class="nav-text">Linux虚拟地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89page-cache%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84page-cache"><span class="nav-number">7.</span> <span class="nav-text">请你回答一下为什么要有page cache，操作系统怎么设计的page cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">8.</span> <span class="nav-text">操作系统程序的内部结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD"><span class="nav-number">9.</span> <span class="nav-text">缺页中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%8Bfork%E5%92%8Cvfork%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.</span> <span class="nav-text">请你回答一下fork和vfork的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E9%97%AE%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9C%80%E5%A4%A7%E5%8F%A5%E6%9F%84%E6%95%B0"><span class="nav-number">11.</span> <span class="nav-text">请问如何修改文件最大句柄数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91-concurrency-%E5%92%8C%E5%B9%B6%E8%A1%8C-parallelism"><span class="nav-number">12.</span> <span class="nav-text">并发(concurrency)和并行(parallelism)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E8%BF%99%E4%B8%AA%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">13.</span> <span class="nav-text">MySQL的端口号是多少，如何修改这个端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%A1%B5%E8%A1%A8%E5%AF%BB%E5%9D%80"><span class="nav-number">14.</span> <span class="nav-text">说一说操作系统中的页表寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%9C%89%E4%BA%86%E8%BF%9B%E7%A8%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%9C%89%E7%BA%BF%E7%A8%8B"><span class="nav-number">15.</span> <span class="nav-text">说一说有了进程，为什么还要有线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%A0%B8%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%86%99%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%EF%BC%8C%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%8A%A0%E9%94%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">单核机器上写多线程程序，是否需要考虑加锁，为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%9C%80%E8%A6%81%E4%BF%9D%E5%AD%98%E5%93%AA%E4%BA%9B%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CSP%E3%80%81PC%E3%80%81EAX%E8%BF%99%E4%BA%9B%E5%AF%84%E5%AD%98%E5%99%A8%E6%98%AF%E5%B9%B2%E5%98%9B%E7%94%A8%E7%9A%84"><span class="nav-number">17.</span> <span class="nav-text">线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">18.</span> <span class="nav-text">线程间同步的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%94%E8%AF%A5%E4%B8%BA%E6%AF%8F%E4%B8%AA%E7%94%A8%E6%88%B7%E5%BC%80%E8%BE%9F%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">19.</span> <span class="nav-text">游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">20.</span> <span class="nav-text">缺页置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E5%8F%91%E7%94%9F%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81"><span class="nav-number">21.</span> <span class="nav-text">死锁发生的条件以及如何解决死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E5%88%A4%E5%88%AB"><span class="nav-number">21.1.</span> <span class="nav-text">运行时死锁状态判别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E9%97%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E6%80%8E%E4%B9%88%E5%AF%B9%E5%BA%94"><span class="nav-number">22.</span> <span class="nav-text">请问虚拟内存和物理内存怎么对应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E5%AF%B9%E9%BD%90%EF%BC%8C%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">23.</span> <span class="nav-text">操作系统中的结构体对齐，字节对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F-1"><span class="nav-number">24.</span> <span class="nav-text">进程间通信的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%BD%AE%E6%8D%A2%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">25.</span> <span class="nav-text">虚拟内存置换的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll%E5%8E%9F%E7%90%86"><span class="nav-number">26.</span> <span class="nav-text">epoll原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">进程与线程的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">多进程和多线程的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%94%A8%E6%88%B7%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">内核线程和用户线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E6%AF%94%E7%BA%BF%E7%A8%8B%E6%85%A2"><span class="nav-number">4.</span> <span class="nav-text">为什么进程切换比线程慢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">进程间通信的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">6.</span> <span class="nav-text">Linux虚拟地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89page-cache%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84page-cache"><span class="nav-number">7.</span> <span class="nav-text">请你回答一下为什么要有page cache，操作系统怎么设计的page cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">8.</span> <span class="nav-text">操作系统程序的内部结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD"><span class="nav-number">9.</span> <span class="nav-text">缺页中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%8Bfork%E5%92%8Cvfork%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.</span> <span class="nav-text">请你回答一下fork和vfork的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E9%97%AE%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9C%80%E5%A4%A7%E5%8F%A5%E6%9F%84%E6%95%B0"><span class="nav-number">11.</span> <span class="nav-text">请问如何修改文件最大句柄数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91concurrency%E5%92%8C%E5%B9%B6%E8%A1%8Cparallelism"><span class="nav-number">12.</span> <span class="nav-text">并发(concurrency)和并行(parallelism)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7%E6%98%AF%E5%A4%9A%E5%B0%91%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E8%BF%99%E4%B8%AA%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">13.</span> <span class="nav-text">MySQL的端口号是多少，如何修改这个端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%A1%B5%E8%A1%A8%E5%AF%BB%E5%9D%80"><span class="nav-number">14.</span> <span class="nav-text">说一说操作系统中的页表寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E8%AF%B4%E6%9C%89%E4%BA%86%E8%BF%9B%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%9C%89%E7%BA%BF%E7%A8%8B"><span class="nav-number">15.</span> <span class="nav-text">说一说有了进程，为什么还要有线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%A0%B8%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%86%99%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%8A%A0%E9%94%81%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">16.</span> <span class="nav-text">单核机器上写多线程程序，是否需要考虑加锁，为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%9C%80%E8%A6%81%E4%BF%9D%E5%AD%98%E5%93%AA%E4%BA%9B%E4%B8%8A%E4%B8%8B%E6%96%87sppceax%E8%BF%99%E4%BA%9B%E5%AF%84%E5%AD%98%E5%99%A8%E6%98%AF%E5%B9%B2%E5%98%9B%E7%94%A8%E7%9A%84"><span class="nav-number">17.</span> <span class="nav-text">线程需要保存哪些上下文，SP、PC、EAX这些寄存器是干嘛用的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">18.</span> <span class="nav-text">线程间同步的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%94%E8%AF%A5%E4%B8%BA%E6%AF%8F%E4%B8%AA%E7%94%A8%E6%88%B7%E5%BC%80%E8%BE%9F%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">19.</span> <span class="nav-text">游戏服务器应该为每个用户开辟一个线程还是一个进程，为什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">20.</span> <span class="nav-text">缺页置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E5%8F%91%E7%94%9F%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81"><span class="nav-number">21.</span> <span class="nav-text">死锁发生的条件以及如何解决死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%AD%BB%E9%94%81%E7%8A%B6%E6%80%81%E5%88%A4%E5%88%AB"><span class="nav-number">21.1.</span> <span class="nav-text">运行时死锁状态判别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E9%97%AE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E6%80%8E%E4%B9%88%E5%AF%B9%E5%BA%94"><span class="nav-number">22.</span> <span class="nav-text">请问虚拟内存和物理内存怎么对应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E5%AF%B9%E9%BD%90%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">23.</span> <span class="nav-text">操作系统中的结构体对齐，字节对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F-1"><span class="nav-number">24.</span> <span class="nav-text">进程间通信的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%BD%AE%E6%8D%A2%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">25.</span> <span class="nav-text">虚拟内存置换的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll%E5%8E%9F%E7%90%86"><span class="nav-number">26.</span> <span class="nav-text">epoll原理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -603,7 +624,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

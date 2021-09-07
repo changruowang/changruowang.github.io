@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="C11 提供了两个新的关键字 auto  和 decltype 来实现变量的自动类型推断">
+  <meta name="description" content="C11 提供了两个新的关键字 auto 和 decltype 来实现变量的自动类型推断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++11特性：auto和decltype关键字简化声明">
 <meta property="og:url" content="http://xxxxx.com/posts/53003/index.html">
 <meta property="og:site_name" content="Ruowang&#39;s blogs">
-<meta property="og:description" content="C11 提供了两个新的关键字 auto  和 decltype 来实现变量的自动类型推断">
+<meta property="og:description" content="C11 提供了两个新的关键字 auto 和 decltype 来实现变量的自动类型推断">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-29T14:19:02.000Z">
 <meta property="article:modified_time" content="2021-08-31T02:27:24.806Z">
@@ -270,13 +270,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>C11 提供了两个新的关键字 auto  和 decltype 来实现变量的自动类型推断</p>
+        <p>C11 提供了两个新的关键字 auto 和 decltype 来实现变量的自动类型推断</p>
 <span id="more"></span>
-<p>类型推断有两种，一种是<strong>编译时类型推断</strong>，我们在编程的时候常常要把表达式赋给一个确定类型的变量，这就需要在声明变量的时候清楚的知道表达式的类型。然而要做到这一点并非容易，有时根本不知道，或者有的类型名字很长，书写不方便。为了解决这个问题，C11新标准引入了 <code>auto</code>和  <code>decltype</code>两个关键字，用他们可以让编译器在编译的时候自动分析变量的类型。这两个都是编译时编译器自动推断变量类型；另一种 <code>typeid</code>运算符可以在运行时查询变量的类型，由<code>RTTI</code>机制为每个类型产生一个<code>type_info</code>类型的数据。</p>
-<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>auto可以在声明变量时根据变量初始值的类型自动为此变量选择匹配的类型。</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> f = <span class="number">3.14</span>;  <span class="comment">//double</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">s</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span></span>;  <span class="comment">//const char*</span></span><br><span class="line"><span class="keyword">auto</span> z = <span class="keyword">new</span> <span class="built_in"><span class="keyword">auto</span></span>(<span class="number">9</span>);  <span class="comment">//int *</span></span><br><span class="line"><span class="keyword">auto</span> x1 = <span class="number">5</span>, x2 = <span class="number">5.0</span>, x3 = <span class="string">&#x27;r&#x27;</span>;   <span class="comment">//错误，必须是初始化为同一类型</span></span><br><span class="line">std::vector&lt;<span class="keyword">int</span>&gt; vect; </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it = vect.<span class="built_in">begin</span>(); it != vect.<span class="built_in">end</span>(); ++it)</span><br><span class="line">&#123;  <span class="comment">//it的类型是std::vector&lt;int&gt;::iterator</span></span><br><span class="line">    std::cin &gt;&gt; *it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>当希望从表达式的类型推断出要定义的变量类型的类型，<strong>但是不想用该表达式的值初始化变量</strong>，这就是和 auto 的区别，使用auto 即便可以使用表达式初始化一个变量，但是其初始值一定是表达式执行后的返回结果。但是使用这个关键字定义，就不需要显式的执行表达式（函数），也就不需要用表达式的返回值初始化了。</p>
-<h3 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h3><p><strong>使用函数/表达式推断</strong> </p>
+<p>类型推断有两种，一种是<strong>编译时类型推断</strong>，我们在编程的时候常常要把表达式赋给一个确定类型的变量，这就需要在声明变量的时候清楚的知道表达式的类型。然而要做到这一点并非容易，有时根本不知道，或者有的类型名字很长，书写不方便。为了解决这个问题，C11新标准引入了 <code>auto</code>和 <code>decltype</code>两个关键字，用他们可以让编译器在编译的时候自动分析变量的类型。这两个都是编译时编译器自动推断变量类型；另一种 <code>typeid</code>运算符可以在运行时查询变量的类型，由<code>RTTI</code>机制为每个类型产生一个<code>type_info</code>类型的数据。</p>
+<h2 id="auto">auto</h2>
+<h3 id="作用">作用</h3>
+<p>auto可以在声明变量时根据变量初始值的类型自动为此变量选择匹配的类型。</p>
+<h3 id="用法">用法</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> f = <span class="number">3.14</span>;  <span class="comment">//double</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">s</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span></span>;  <span class="comment">//const char*</span></span><br><span class="line"><span class="keyword">auto</span> z = <span class="keyword">new</span> <span class="built_in"><span class="keyword">auto</span></span>(<span class="number">9</span>);  <span class="comment">//int *</span></span><br><span class="line"><span class="keyword">auto</span> x1 = <span class="number">5</span>, x2 = <span class="number">5.0</span>, x3 = <span class="string">&#x27;r&#x27;</span>;   <span class="comment">//错误，必须是初始化为同一类型</span></span><br><span class="line">std::vector&lt;<span class="keyword">int</span>&gt; vect; </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it = vect.<span class="built_in">begin</span>(); it != vect.<span class="built_in">end</span>(); ++it)</span><br><span class="line">&#123;  <span class="comment">//it的类型是std::vector&lt;int&gt;::iterator</span></span><br><span class="line">    std::cin &gt;&gt; *it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="decltype">decltype</h2>
+<h3 id="作用-1">作用</h3>
+<p>当希望从表达式的类型推断出要定义的变量类型的类型，<strong>但是不想用该表达式的值初始化变量</strong>，这就是和 auto 的区别，使用auto 即便可以使用表达式初始化一个变量，但是其初始值一定是表达式执行后的返回结果。但是使用这个关键字定义，就不需要显式的执行表达式（函数），也就不需要用表达式的返回值初始化了。</p>
+<h3 id="用法-1">用法</h3>
+<p><strong>使用函数/表达式推断</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i*i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">decltype</span>(<span class="built_in">f</span>(<span class="number">1</span>)) x;  <span class="comment">// x的类型就是函数f的返回值，这个例子中需要确定给定具体的输入参数，可能是存在函数重载的机制，所以编译器需要确定到底调用的哪个函数  但是编译器并不实际调用 函数 f </span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">42</span>, *p = &amp;i, &amp;r = i;</span><br><span class="line">    <span class="keyword">decltype</span>(r + <span class="number">0</span>) b; <span class="comment">// 正确，加法的结果是int 因此b是一个未初始化的 int 变量</span></span><br><span class="line">    <span class="keyword">decltype</span>(*p) c;    <span class="comment">// 错误，c是int&amp;  必须初始化</span></span><br><span class="line">    <span class="keyword">decltype</span>((i)) d;   <span class="comment">// 错误，d是int&amp;  必须初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其他注意点：</p>
 <ul>
@@ -389,7 +395,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

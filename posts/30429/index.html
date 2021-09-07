@@ -273,79 +273,90 @@
       
         <p>总结了STL容器的原理</p>
 <span id="more"></span>
-<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>C++ 提供的容器有 vector , map ,  unordered_map , set , list , dequeue等</p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="set-和-map"><a href="#set-和-map" class="headerlink" title="set 和 map"></a>set 和 map</h3><ol>
+<h1 id="容器">容器</h1>
+<p>C++ 提供的容器有 vector , map , unordered_map , set , list , dequeue等</p>
+<h2 id="应用场景">应用场景</h2>
+<h3 id="set-和-map">set 和 map</h3>
+<ol type="1">
 <li>共同点：都是C++的关联容器,只是通过它提供的接口对里面的元素进行访问，底层都是采用<strong>红黑树</strong>实现。</li>
-<li><p>不同点： </p>
+<li>不同点：
 <ul>
 <li>set：用来判断某一个元素是不是在一个组里面，使用的比较少；</li>
 <li>map：映射，相当于字典，把一个值映射成另一个值，可以创建字典</li>
-</ul>
-</li>
-<li><p>优点：查找某一个数的时间为<strong>O(log n)</strong>；遍历时采用 iterator，效果不错</p>
-</li>
+</ul></li>
+<li>优点：查找某一个数的时间为<strong>O(log n)</strong>；遍历时采用 iterator，效果不错</li>
 <li>缺点：每次插入值的时候，都需要调整红黑树，效率有一定影响</li>
 </ol>
-<h3 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h3><p>Hash表实现，虽然功能上 和 map 有点像，但是由于原理上本质的区别，它是不能遍历迭代的，即无序。速度快 查找时间复杂度 <strong>O(1)</strong></p>
-<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p>是<strong>动态数组</strong>，在堆中分配内存，元素连续存放，有保留内存，如果减少大小后，内存也不会释放；如果新值大于当前大小时才会重新分配内存。</p>
-<ol>
+<h3 id="unordered_map">unordered_map</h3>
+<p>Hash表实现，虽然功能上 和 map 有点像，但是由于原理上本质的区别，它是不能遍历迭代的，即无序。速度快 查找时间复杂度 <strong>O(1)</strong></p>
+<h3 id="vector">vector</h3>
+<p>是<strong>动态数组</strong>，在堆中分配内存，元素连续存放，有保留内存，如果减少大小后，内存也不会释放；如果新值大于当前大小时才会重新分配内存。</p>
+<ol type="1">
 <li>优点：拥有一段连续的内存空间，并且起始地址不变，因此能够非常好的支持随机存取，即[]操作符；<strong>O(1)</strong></li>
 <li>缺点：对头部和中间进行添加删除元素操作需要移动内存，如果元素是结构或类，那么移动的同时还会进行构造和析构操作，所以性能不高</li>
 </ol>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><strong>双向链表</strong>，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来进行数据的访问。</p>
-<ol>
+<h3 id="list">list</h3>
+<p><strong>双向链表</strong>，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来进行数据的访问。</p>
+<ol type="1">
 <li>缺点：这个特点使得它的随机存取变得非常没有效率，因此它没有提供[]操作符的重载。访问元素的时间复杂度 <strong>O(N)</strong>。</li>
 <li>优点：它可以很有效率的支持任意地方的删除和插入操作。所以常用来做<strong>随机插入和删除</strong>操作容器。</li>
 </ol>
-<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p>deque是一种优化了的对序列两端元素进行添加和删除操作的基本序列容器。通常由<strong>一些独立的区块组成，第一区块朝某方向扩展，最后一个区块朝另一方向扩展</strong>。它允许较为快速地随机访问但它不像vector一样把所有对象保存在一个连续的内存块，而是多个连续的内存块。并且在一个映射结构中保存对这些块以及顺序的跟踪。（因此在任意位置插入元素，不需要移动后面所有的元素，只用修改一页的内容）</p>
+<h3 id="deque">deque</h3>
+<p>deque是一种优化了的对序列两端元素进行添加和删除操作的基本序列容器。通常由<strong>一些独立的区块组成，第一区块朝某方向扩展，最后一个区块朝另一方向扩展</strong>。它允许较为快速地随机访问但它不像vector一样把所有对象保存在一个连续的内存块，而是多个连续的内存块。并且在一个映射结构中保存对这些块以及顺序的跟踪。（因此在任意位置插入元素，不需要移动后面所有的元素，只用修改一页的内容）</p>
 <ul>
-<li>优点：随机插入删除元素的速度 介于 vector  和 list 之间，因为不需要复制所有元素</li>
-<li>缺点：随机读取元素的速度 也是 介于 list  和  vector之间，因为deque需要处理内部跳转，读取速度没vector快，不支持resize 和 reserve 操作即不能自己显式的控制内存的大小。</li>
+<li>优点：随机插入删除元素的速度 介于 vector 和 list 之间，因为不需要复制所有元素</li>
+<li>缺点：随机读取元素的速度 也是 介于 list 和 vector之间，因为deque需要处理内部跳转，读取速度没vector快，不支持resize 和 reserve 操作即不能自己显式的控制内存的大小。</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210404172935.png" alt="image-20210404172337830" style="zoom:50%;" /></p>
-<h2 id="迭代失效问题"><a href="#迭代失效问题" class="headerlink" title="迭代失效问题"></a>迭代失效问题</h2><div class="table-container">
+<h2 id="迭代失效问题">迭代失效问题</h2>
 <table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 34%" />
+<col style="width: 31%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th></th>
-<th style="text-align:center"><strong>vector</strong></th>
+<th style="text-align: center;"><strong>vector</strong></th>
 <th><strong>deque</strong></th>
 <th><strong>list</strong></th>
 <th><strong>set、map</strong></th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><strong>内部数据结构</strong></td>
-<td style="text-align:center"><strong>数组(一段连续内存空间)</strong></td>
+<td style="text-align: center;"><strong>数组(一段连续内存空间)</strong></td>
 <td><strong>数组(多段连续内存空间)</strong></td>
 <td><strong>双向环状链表</strong></td>
 <td><strong>红黑树</strong></td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>插入操作</strong></td>
-<td style="text-align:center">插入后元素总数不大于capacity，插入位置之后的迭代器会失效；大于capacity,所有迭代器都会失效</td>
+<td style="text-align: center;">插入后元素总数不大于capacity，插入位置之后的迭代器会失效；大于capacity,所有迭代器都会失效</td>
 <td>两端插入, 不会引起迭代器失效；中间插入, 所有迭代器失效</td>
 <td>不会出现迭代器失效</td>
 <td>不会出现迭代器失效</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>删除操作</strong></td>
-<td style="text-align:center">删除位置之后的迭代器都会失效,但是erase会返回下一个有效的迭代器</td>
+<td style="text-align: center;">删除位置之后的迭代器都会失效,但是erase会返回下一个有效的迭代器</td>
 <td>两端删除, 被删除元素的迭代器失效中间删除, 所有迭代器失效</td>
 <td>被删除节点的迭代器失效</td>
 <td>被删除节点的迭代器失效</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>解决方法</strong></td>
-<td style="text-align:center">iter =cont.erase(iter)</td>
+<td style="text-align: center;">iter =cont.erase(iter)</td>
 <td></td>
 <td>m.erase(iter++)</td>
 <td>m.erase(iter++)</td>
 </tr>
 </tbody>
 </table>
-</div>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要求删除键值为偶数的键值对</span></span><br><span class="line"> map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::iterator it = m.<span class="built_in">begin</span>();</span><br><span class="line"></span><br><span class="line"> <span class="comment">//错误实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it);</span><br><span class="line">   &#125;</span><br><span class="line">   it++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//正确实现：</span></span><br><span class="line"> <span class="keyword">while</span> (it != m.<span class="built_in">end</span>())&#123;</span><br><span class="line">   <span class="keyword">if</span>(it-&gt;second % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">     m.<span class="built_in">erase</span>(it++); <span class="comment">//重点！！！  it++的写法才行不能  m.rease(it); it++;</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span>&#123;</span><br><span class="line">     it++;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -435,7 +446,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#set-%E5%92%8C-map"><span class="nav-number">1.1.1.</span> <span class="nav-text">set 和 map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unordered-map"><span class="nav-number">1.1.2.</span> <span class="nav-text">unordered_map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector"><span class="nav-number">1.1.3.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.1.4.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">1.1.5.</span> <span class="nav-text">deque</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">迭代失效问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#set-%E5%92%8C-map"><span class="nav-number">1.1.1.</span> <span class="nav-text">set 和 map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unordered_map"><span class="nav-number">1.1.2.</span> <span class="nav-text">unordered_map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector"><span class="nav-number">1.1.3.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.1.4.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">1.1.5.</span> <span class="nav-text">deque</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">迭代失效问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -449,7 +460,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

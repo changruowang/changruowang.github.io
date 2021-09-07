@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xxxxx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="python爬虫入门 闲来无事稍微了解了下爬虫的基本流程，学习地址1 学习地址2 HTTP &#x2F; HTTPs协议 计算机基础 总的来说 当访问一个网站时，浏览器会发送很多请求，然后服务器依次根据请求内容返回，返回的内容里包含了需要的信息。谷歌浏览器 F12 开发者模式 可以观察到浏览器发出的所有请求。 基本流程  image-20210907115247892  主要有三个地方需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫入门">
+<meta property="og:url" content="http://xxxxx.com/posts/42326/index.html">
+<meta property="og:site_name" content="Ruowang&#39;s blogs">
+<meta property="og:description" content="python爬虫入门 闲来无事稍微了解了下爬虫的基本流程，学习地址1 学习地址2 HTTP &#x2F; HTTPs协议 计算机基础 总的来说 当访问一个网站时，浏览器会发送很多请求，然后服务器依次根据请求内容返回，返回的内容里包含了需要的信息。谷歌浏览器 F12 开发者模式 可以观察到浏览器发出的所有请求。 基本流程  image-20210907115247892  主要有三个地方需要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115248.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115846.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907120059.png">
+<meta property="og:image" content="c:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210907113448404.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151253.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151421.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151625.png">
+<meta property="article:published_time" content="2021-09-07T03:25:21.066Z">
+<meta property="article:modified_time" content="2021-09-07T08:25:42.660Z">
+<meta property="article:author" content="常若望">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115248.png">
+
+<link rel="canonical" href="http://xxxxx.com/posts/42326/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python爬虫入门 | Ruowang's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ruowang's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">去更远的地方，见更亮的光</p>
+      <a>
+        <img class="custom-logo-image" src="/images/icon.png" alt="Ruowang's blogs">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/42326/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python爬虫入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-07 11:25:21 / 修改时间：16:25:42" itemprop="dateCreated datePublished" datetime="2021-09-07T11:25:21+08:00">2021-09-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">个人项目</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="python爬虫入门">python爬虫入门</h1>
+<p>闲来无事稍微了解了下爬虫的基本流程，<a target="_blank" rel="noopener" href="https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero">学习地址1</a> <a target="_blank" rel="noopener" href="https://github.com/wistbean/learn_python3_spider">学习地址2</a></p>
+<h2 id="http-https协议">HTTP / HTTPs协议</h2>
+<p><a href="/posts/23632/">计算机基础</a></p>
+<p>总的来说 当访问一个网站时，浏览器会发送很多请求，然后服务器依次根据请求内容返回，返回的内容里包含了需要的信息。谷歌浏览器 F12 开发者模式 可以观察到浏览器发出的所有请求。</p>
+<h2 id="基本流程">基本流程</h2>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115248.png" alt="" /><figcaption>image-20210907115247892</figcaption>
+</figure>
+<p>主要有三个地方需要观察</p>
+<ol type="1">
+<li>Networks：选中该项，然后查看浏览器发出的所有的请求</li>
+<li>仔细查看所有请求，并看他对应2位置的 response 响应
+<ul>
+<li>例如如果是要 爬取 视频/音频，如果该条请求响应的文件应该很大，且 response 显示的乱码的信息，该条请求极有可能请求的就是视频/音频的 指令</li>
+<li>例如如果想要的 爬取的东西是 文字，那么在response 区域显示就应该是 文字可显示的 东西<br />
+</li>
+<li>综上所述 需要耐心的分析 response 和 header 信息去确定哪条请求是我们想要的</li>
+</ul></li>
+</ol>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115846.png" alt="" /><figcaption>image-20210907115846290</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>确定好目标请求后 就需要分析这条请求的 信息，然后使用 python 中的库 去模拟浏览器的行为 发送同样的请求即可。一个快捷的验证方法是，找到目标请求后 按照下述操作导出 cmd 然后粘贴到 <a target="_blank" rel="noopener" href="https://curl.trillworks.com/">这个链接</a> 中可直接生成这条请求的 python 代码，直接测试。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907120059.png" alt="image-20210907120059079" style="zoom: 67%;" /></p>
+<ol start="4" type="1">
+<li>分析查找条件下 请求 的变化规律。例如 查找第一页评论 和 第二页评论，发出的请求参数有什么变化，下载不同歌名的音频，发出的请求参数有什么变化。发现规律后就是使用 python 代码来实现这个变换规律，从而实现自动化爬取信息</li>
+<li>成功拿到请求后就需要对 服务器响应的数据做分析，后续会有数据处理的方法</li>
+<li>有的时候 可能不是 简单的 一次 请求 + 分析 就可以得到结果的。就需要下图中 从响应 结果中提取 url 再请求的流程
+<ul>
+<li>例如 （下载 b 站的视频，根据固定的 ip + 视频id 会有个固定的 url，但是下载m4a的视频缓冲文件 并不是这个url地址，而是需要先向这个url地址发送 一个请求，返回响应的数据中可能就包含了 下载视频的 url） 所以图中的流程中 有个提取 url 的步骤</li>
+</ul></li>
+</ol>
+<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210907113448404.png" alt="image-20210907113448404" style="zoom:67%;" /></p>
+<h2 id="request使用">request使用</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 GET 请求参数</span></span><br><span class="line">params = &#123;</span><br><span class="line">  <span class="string">&quot;kw&quot;</span>:<span class="string">&quot;hello&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 发送自定义请求头  GET</span></span><br><span class="line">response = requests.get(url,headers=headers,params=params)</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.post(url,headers=headers,data=data) <span class="comment"># post 还多了个data数据</span></span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br><span class="line">response.text 			<span class="comment">#返回响应内容，响应内容为 str 类型</span></span><br><span class="line">respones.content 		<span class="comment">#返回响应内容,响应内容为 bytes 类型</span></span><br><span class="line">response.status_code 	 <span class="comment">#返回响应状态码</span></span><br><span class="line">response.request.headers <span class="comment">#返回请求头</span></span><br><span class="line">response.headers         <span class="comment">#返回响应头</span></span><br><span class="line">response.cookies 		<span class="comment">#返回响应的 RequestsCookieJar 对象</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用代理服务器">使用代理服务器</h3>
+<p>让服务器认为不是同一个客户端在请求，防止被封 ip；防止真实地址被泄露，防止被追究</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 代理服务器</span></span><br><span class="line">proxies = &#123;</span><br><span class="line">  <span class="string">&quot;http&quot;</span>:<span class="string">&quot;http://IP地址:端口号&quot;</span>,</span><br><span class="line">  <span class="string">&quot;https&quot;</span>:<span class="string">&quot;https://IP地址:端口号&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,proxies=proxies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+<h3 id="js逆向分析">js逆向分析</h3>
+<p>服务端为了防止爬虫，有的会使用 js 混淆参数。本来是明文参数放在 请求里一起发送，但是这样很容易就被爬虫爬了，因此他们就将一些参数在浏览器端 通过 js 进行加密，然后将加密后的东西作为请求参数发送。这样一定程度上可以避免爬虫。但是很明显，由于 浏览器的 端的东西都是透明的，我们只需要逆向分析出 它 js 加密的地方就可以了。<a target="_blank" rel="noopener" href="https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero/blob/master/03-%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91.md">百度翻译中的逆向流程</a></p>
+<p>基本的思路是：</p>
+<ul>
+<li><p>找到 请求中加密的参数，例如下图中 的 params 和 encSecKey就是加密后的参数<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151253.png" alt="image-20210907151253114" /></p></li>
+<li><p>然后在浏览器中全局搜索 encSecKey 这个关键字，找到这个数据生成的地方<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151421.png" alt="image-20210907151421828" /></p></li>
+<li><p>然后在 js 文件中 加断点，并刷新浏览器 让它重新发送请求，断点调试观察变量，如下图就可以看到加密前的数据是啥（歌词的页数和偏移）<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151625.png" alt="image-20210907151625428" /></p></li>
+<li><p>通过 断点调试/栈 去逐步逆向找到参数变化的规律 和 加密的函数 。然后在python中用代码实现相同的加密过程。这个调试需要有耐性。网易云的加密函数 是用的别人开源的 python版本的AES加密库，百度翻译的加密就是通过 js 函数实现的，可以直接把这个js函数拷贝出来，然后使用 python的 js2py 去执行 js 文件。</p></li>
+</ul>
+<p><strong>JS 逆向流程</strong></p>
+<ol type="1">
+<li>通过关键词切入到代码中，切入到发送请求的代码行，通过请求的url中提取关键字</li>
+<li>在发送请求的代码添加断点，并且触发发送请求，确认寻找的代码是否正确</li>
+<li>往上逆向，寻找目标参数以及生成逻辑</li>
+<li>利用js2py模拟执行生成逻辑获取想要的内容</li>
+</ol>
+<p><strong>chrome 调试技巧</strong></p>
+<ol type="1">
+<li>search 打开查询面板</li>
+<li>查询面板可以通过关键字查找所有出现关键字地方的代码</li>
+<li>点击跟踪代码并且可以把代码格式化</li>
+<li>对格式化的代码进行设置断点</li>
+<li>鼠标光标移动到上面可以查看当前运行代码变量值，函数原始代码地方等等</li>
+</ol>
+<h2 id="数据处理">数据处理</h2>
+<p>大概的数据类型 有 <code>json  html</code> 等格式，其实都有对应的库可以处理</p>
+<ul>
+<li><code>json</code>格式的响应：可以直接转换为 字典</li>
+<li><code>html</code>格式的数据（即响应的是个网页）：<code>beautifulsoup</code>库，<code>正则表达式</code></li>
+<li><code>xml</code>格式的数据：</li>
+</ul>
+<h2 id="实例代码">实例代码</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/changruowang/python_spider">代码地址</a></p>
+<ul>
+<li>爬取b站的视频</li>
+<li>爬取网易云的歌词和评论</li>
+<li>百度翻译</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/63450/" rel="prev" title="办公软件">
+      <i class="fa fa-chevron-left"></i> 办公软件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/42437/" rel="next" title="git的使用">
+      git的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+      src="//music.163.com/outchain/player?type=0&id=885457449&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">python爬虫入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#http-https%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP &#x2F; HTTPs协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">request使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用代理服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">js逆向分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">实例代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常若望</p>
+  <div class="site-description" itemprop="description">可乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changruowang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changruowang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/changruowang@qq.com" title="E-Mail → changruowang@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常若望</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

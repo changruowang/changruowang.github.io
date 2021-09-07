@@ -292,36 +292,59 @@
       
         <p>数据结构之树，例如二叉树，平衡二叉树，堆，等</p>
 <span id="more"></span>
-<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="树的类别"><a href="#树的类别" class="headerlink" title="树的类别"></a>树的类别</h2><p><img src="https://pic3.zhimg.com/v2-e7a99fda571a4294e9b2196d58f8e65c_r.jpg?source=1940ef5c" alt="preview"></p>
-<h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><p>给定一棵树 判断是否为平衡二叉树，即任意节点的左右子树的高度差不超过1，即为平衡二叉树。</p>
+<h1 id="树">树</h1>
+<h2 id="树的类别">树的类别</h2>
+<figure>
+<img src="https://pic3.zhimg.com/v2-e7a99fda571a4294e9b2196d58f8e65c_r.jpg?source=1940ef5c" alt="" /><figcaption>preview</figcaption>
+</figure>
+<h2 id="平衡二叉树">平衡二叉树</h2>
+<p>给定一棵树 判断是否为平衡二叉树，即任意节点的左右子树的高度差不超过1，即为平衡二叉树。</p>
 <p>这道题的关键是，任意子节点的左右子树高度差不超过1。如果只是判断根节点的左右子树的高度，那么写一个前序遍历的递归即可，如下代码:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">height</span>(root-&gt;left), <span class="built_in">height</span>(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输入根节点，通过前序遍历的方式往下遍历，遍历计算左节点高度-&gt;回退父节点-&gt;遍历计算右子节点高度-&gt;二者高度取最大+1。但是这么一次遍历 最终计算的只是 根节点的左右子节点的高度。因此还需一个递归，来遍历判断所有节点是否为平衡节点。加入以下递归调用的方式。先判断当前节点的左右子树的高度差是否满足 再判断左右子树的子树高度差是否满足…..</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="built_in">height</span>(root-&gt;left) - <span class="built_in">height</span>(root-&gt;right)) &lt;= <span class="number">1</span> &amp;&amp; <span class="built_in">isBalanced</span>(root-&gt;left) &amp;&amp; <span class="built_in">isBalanced</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><p>（采用二分法思维把数据按规则组装成一个树形结构的数据）</p>
-<p>是一种特殊的二叉树  （参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/John_xyz/article/details/79622219），它改善了二叉树节点查找的效率。二叉查找树有以下性质。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低,均为O(log">https://blog.csdn.net/John_xyz/article/details/79622219），它改善了二叉树节点查找的效率。二叉查找树有以下性质。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低,均为O(log</a> n)。对于任意一个节点 n：</p>
+<h2 id="二叉搜索树">二叉搜索树</h2>
+<p>（采用二分法思维把数据按规则组装成一个树形结构的数据）</p>
+<p>是一种特殊的二叉树 （参考：https://blog.csdn.net/John_xyz/article/details/79622219），它改善了二叉树节点查找的效率。二叉查找树有以下性质。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低,均为O(log n)。对于任意一个节点 n：</p>
 <ul>
 <li>其左子树（left subtree）下的每个后代节点（descendant node）的值都小于节点 n 的值；</li>
 <li>其右子树（right subtree）下的每个后代节点的值都大于节点 n 的值；</li>
 <li>没有键值相等的节点</li>
 </ul>
-<h3 id="二叉搜索树有关操作"><a href="#二叉搜索树有关操作" class="headerlink" title="二叉搜索树有关操作"></a>二叉搜索树有关操作</h3><p>​    <strong>插入</strong>：若b是空树，则将s所指结点作为根节点插入，否则；若s.val等于b的根节点的数据域之值，则返回，否则；若s.val小于b的根节点的数据域之值，则把s所指节点插入到左子树中；否则把s所指节点插入到右子树中<strong>新插入节点总是叶子节点</strong></p>
-<p>​    <strong>删除</strong>：分三种情况，如下图，1. 如果待删除的节点是叶子节点，那么可以立即被删除；2. 如果有一个子节点，要将下一个子节点上移到当前节点，即替换之；3.如果有两个子节点，则将其右子树的最小数据代替此节点的数据，并将其右子树的最小数据删除。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095944.png" alt="1599307406058"></p>
-<p>查找：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n)<br>插入：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n)<br>删除：最佳情况Olog(n)Olog(n), 最坏情况O(n)</p>
-<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>平衡二叉排序树，首先是二叉搜索树，其次是平衡树。因此有二者的共同特点。所有子树都是平衡二叉树，且左右子树的高度差不值不超过1。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lanhaicode/p/11321243.html">https://www.cnblogs.com/lanhaicode/p/11321243.html</a></p>
-<h3 id="平衡因子"><a href="#平衡因子" class="headerlink" title="平衡因子"></a>平衡因子</h3><p>某结点的左子树与右子树的高度或深度 差即为该结点的平衡因子（BF,Balance Factor），平衡二叉树（AVL树）上所有结点的平衡因子只可能是 -1，0 或 1。AVL树的数据结构中 存放的是 节点的高度 height。</p>
-<h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><p>和二叉搜索树类似</p>
-<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><p>​        二叉搜索树每次插入节点都插在树的叶节点。在插入后，树可能失衡。处理流程为：<br>​        按照搜索树的方式插入新节点 -&gt;  搜索最低失衡点 -&gt; 判断失衡点的类型  -&gt; 调整二叉树平衡</p>
-<p><em>失衡的类型</em> ： <strong>RR  LL RL  LR</strong> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095948.png" alt="image-20201102213545758"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095950.png" alt="image-20201102213920250"></p>
-<p>​        LL 和 RR 型相对简单。只需要旋转一次即可。</p>
-<p><img src="https://img2018.cnblogs.com/blog/1590962/201908/1590962-20190812202510882-2058601498.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095954.png" alt="image-20201102214304915"></p>
-<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><p>​        比插入还复杂，但是本质还是那四种旋转方式。只不过删除可能会多两种 RE LE 类不平衡的情况。</p>
-<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树是特殊的二叉查找树，首先它满足二叉查找树的所有要求，其次为了缓解二叉查找树不平衡的坏情况带来 数据查找效率降低的问题，引入了红黑树的一些独有的限制。具体的有如下特性：</p>
-<ol>
+<h3 id="二叉搜索树有关操作">二叉搜索树有关操作</h3>
+<p>​ <strong>插入</strong>：若b是空树，则将s所指结点作为根节点插入，否则；若s.val等于b的根节点的数据域之值，则返回，否则；若s.val小于b的根节点的数据域之值，则把s所指节点插入到左子树中；否则把s所指节点插入到右子树中<strong>新插入节点总是叶子节点</strong></p>
+<p>​ <strong>删除</strong>：分三种情况，如下图，1. 如果待删除的节点是叶子节点，那么可以立即被删除；2. 如果有一个子节点，要将下一个子节点上移到当前节点，即替换之；3.如果有两个子节点，则将其右子树的最小数据代替此节点的数据，并将其右子树的最小数据删除。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095944.png" alt="" /><figcaption>1599307406058</figcaption>
+</figure>
+<p>查找：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n) 插入：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n) 删除：最佳情况Olog(n)Olog(n), 最坏情况O(n)</p>
+<h2 id="avl树">AVL树</h2>
+<p>平衡二叉排序树，首先是二叉搜索树，其次是平衡树。因此有二者的共同特点。所有子树都是平衡二叉树，且左右子树的高度差不值不超过1。https://www.cnblogs.com/lanhaicode/p/11321243.html</p>
+<h3 id="平衡因子">平衡因子</h3>
+<p>某结点的左子树与右子树的高度或深度 差即为该结点的平衡因子（BF,Balance Factor），平衡二叉树（AVL树）上所有结点的平衡因子只可能是 -1，0 或 1。AVL树的数据结构中 存放的是 节点的高度 height。</p>
+<h3 id="查找节点">查找节点</h3>
+<p>和二叉搜索树类似</p>
+<h3 id="插入节点">插入节点</h3>
+<p>​ 二叉搜索树每次插入节点都插在树的叶节点。在插入后，树可能失衡。处理流程为： ​ 按照搜索树的方式插入新节点 -&gt; 搜索最低失衡点 -&gt; 判断失衡点的类型 -&gt; 调整二叉树平衡</p>
+<p><em>失衡的类型</em> ： <strong>RR LL RL LR</strong></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095948.png" alt="" /><figcaption>image-20201102213545758</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095950.png" alt="" /><figcaption>image-20201102213920250</figcaption>
+</figure>
+<p>​ LL 和 RR 型相对简单。只需要旋转一次即可。</p>
+<figure>
+<img src="https://img2018.cnblogs.com/blog/1590962/201908/1590962-20190812202510882-2058601498.gif" alt="" /><figcaption>img</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095954.png" alt="" /><figcaption>image-20201102214304915</figcaption>
+</figure>
+<h3 id="删除节点">删除节点</h3>
+<p>​ 比插入还复杂，但是本质还是那四种旋转方式。只不过删除可能会多两种 RE LE 类不平衡的情况。</p>
+<h2 id="红黑树">红黑树</h2>
+<p>红黑树是特殊的二叉查找树，首先它满足二叉查找树的所有要求，其次为了缓解二叉查找树不平衡的坏情况带来 数据查找效率降低的问题，引入了红黑树的一些独有的限制。具体的有如下特性：</p>
+<ol type="1">
 <li>每个节点要么是红色要么是黑色（用一个数据表示）</li>
 <li>根节点是黑色</li>
 <li>每个叶子节点都是黑色，并且为空节点。（这里的叶节点是黑色的意思是 常规的叶子节点下面都有两个空的null，算作黑色节点，对于只有一个孩子的节点，他的另一边也是一个null空的黑色节点）</li>
@@ -329,129 +352,164 @@
 <li>从根节点到最后的null(黑色)的叶子节点，每条路径上的黑色节点数应该一样。</li>
 </ol>
 <p>在上述4，5的约束下，红黑树的 最长路径（红黑相间路径 2N）不会超过 最短路径（全是黑色节点的路径N）的两倍</p>
-<h3 id="插入节点-1"><a href="#插入节点-1" class="headerlink" title="插入节点"></a>插入节点</h3><h3 id="删除节点-1"><a href="#删除节点-1" class="headerlink" title="删除节点"></a>删除节点</h3><p>参考 ：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22800206?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=1266313842667769856&amp;utm_campaign=shareopn">https://zhuanlan.zhihu.com/p/22800206?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=1266313842667769856&amp;utm_campaign=shareopn</a></p>
-<p>​        首先，红黑树删除节点和普通二叉搜索树一样，首先找到待删除的节点X，如果 X 有两个子节点，那么在他的右子树或左子树寻找替代节点S，然后将替代节点S的值和待删除节X点的值交换（颜色不变）问题就转变为删除节点S （且此时的S节点最多只有一个孩子，因为由二叉搜索树的性质，替代节点一定是右子树的最小值）。因此最终问题都归结为删除 至多有一个孩子节点的节点。 下面详细分析：</p>
-<ol>
+<h3 id="插入节点-1">插入节点</h3>
+<h3 id="删除节点-1">删除节点</h3>
+<p>参考 ：https://zhuanlan.zhihu.com/p/22800206?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=1266313842667769856&amp;utm_campaign=shareopn</p>
+<p>​ 首先，红黑树删除节点和普通二叉搜索树一样，首先找到待删除的节点X，如果 X 有两个子节点，那么在他的右子树或左子树寻找替代节点S，然后将替代节点S的值和待删除节X点的值交换（颜色不变）问题就转变为删除节点S （且此时的S节点最多只有一个孩子，因为由二叉搜索树的性质，替代节点一定是右子树的最小值）。因此最终问题都归结为删除 至多有一个孩子节点的节点。 下面详细分析：</p>
+<ol type="1">
 <li>如果删除的是红色叶子节点，直接删除即可，删除一个红色叶节点不违反任何特性。</li>
 <li>如果删除的是黑色叶子节点，明显删除了之后经过该叶子节点的路径上黑色节点数量少一 需要处理。</li>
 <li>如果删除的节点有一个叶子节点，两个一黑一红，可以直接转换成 1 解决。</li>
 <li>如果删除的节点和其叶子节点都是黑色，将叶子节点和待删除节点值替换，那么问题转换为 （删除一个黑色叶子节点的情况 2）</li>
 </ol>
 <p>综上，所有情况都转换为 情况1，2两种，而情况1很容易，下面讨论问题2的解决方法 （删除一个黑色叶子节点）</p>
-<p>​    这是，待删除的叶子节点是黑色，那么他一定有兄第节点 （如果 S 没有兄弟节点，到兄弟 null 的路径上黑色节点数比到 S 的null叶节点上的黑色节点树少1 。不满足红黑树性质5的约束）下面就是对它的兄弟节点的颜色讨论：</p>
-<ol>
-<li><p>待删除的节点是一个左叶子节点  即图中的 80 为待删除节点</p>
-<ol>
+<p>​ 这是，待删除的叶子节点是黑色，那么他一定有兄第节点 （如果 S 没有兄弟节点，到兄弟 null 的路径上黑色节点数比到 S 的null叶节点上的黑色节点树少1 。不满足红黑树性质5的约束）下面就是对它的兄弟节点的颜色讨论：</p>
+<ol type="1">
+<li><p>待删除的节点是一个左叶子节点 即图中的 80 为待删除节点</p>
+<ol type="1">
 <li><p>兄弟节点是黑色，此时兄弟节点可能会有1/2/0个红色节节点 （此时兄弟的子节点不可能是黑色，需满足红黑树约束）</p>
-<p> a.  兄弟有一个红色右节点</p>
-<p> b. 兄弟有一个红色左节点  简单旋转兄弟节点和兄弟节点的子节点位置即转为 情况 a</p>
-<p> c. 兄弟有两个红色节点</p>
-<p> d. 兄弟没有子节点</p>
-</li>
-<li><p>兄弟节点是红色，此时兄弟一定会有两个黑色子节点，如果是一个也不满足条件5约束 </p>
-</li>
-</ol>
-</li>
+<ol type="a">
+<li><p>兄弟有一个红色右节点</p></li>
+<li><p>兄弟有一个红色左节点 简单旋转兄弟节点和兄弟节点的子节点位置即转为 情况 a</p></li>
+<li><p>兄弟有两个红色节点</p></li>
+<li><p>兄弟没有子节点</p></li>
+</ol></li>
+<li><p>兄弟节点是红色，此时兄弟一定会有两个黑色子节点，如果是一个也不满足条件5约束</p></li>
+</ol></li>
 <li><p>待删除的节点是一个黑色右叶子节点 即中的 110</p>
-<p> … 同上分类</p>
-</li>
+<p>… 同上分类</p></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100001.png" alt="image-20201104210955575"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100003.png" alt="image-20201104212934752"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100006.png" alt=""></p>
-<h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><p>二叉树虽然搜索效率也很高，但是二叉树应用的是场景是对存储在内存的数据查找，对于存储在硬盘的数据，数据量大，且硬盘读写速度慢，而将整个硬盘存储区的内容一次读入内存也装不下，因此需要用B树/B+树，主要用于数据库的查找索引等。因为B树每个节点可以存储多个子节点（键值），所以B树需要对硬盘的读写次数较低（尽管比较次数较二叉树多）。B树的阶数一般为磁盘每页的容量大小 （从磁盘中读取数据时，都是按照磁盘块来读取的，并不是一条一条的读）</p>
-<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><ol>
-<li><p>排序方式：所有节点关键字是按递增次序排列，并遵循左小右大原则；</p>
-</li>
-<li><p>子节点数：非叶节点的子节点数&gt;1，且&lt;=M ，空树除外（注：M阶代表一个树节点最多有多少个查找路径，M=M路,当M=2则是2叉树,M=3则是3叉；</p>
-</li>
-<li><p>关键字数：非根节点的关键字数量大于等于 ceil(M/2)-1 个 （向上取整） 且小于等于M-1个；</p>
-</li>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100001.png" alt="" /><figcaption>image-20201104210955575</figcaption>
+</figure>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100003.png" alt="" /><figcaption>image-20201104212934752</figcaption>
+</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100006.png" /></p>
+<h2 id="b-树">B-树</h2>
+<p>二叉树虽然搜索效率也很高，但是二叉树应用的是场景是对存储在内存的数据查找，对于存储在硬盘的数据，数据量大，且硬盘读写速度慢，而将整个硬盘存储区的内容一次读入内存也装不下，因此需要用B树/B+树，主要用于数据库的查找索引等。因为B树每个节点可以存储多个子节点（键值），所以B树需要对硬盘的读写次数较低（尽管比较次数较二叉树多）。B树的阶数一般为磁盘每页的容量大小 （从磁盘中读取数据时，都是按照磁盘块来读取的，并不是一条一条的读）</p>
+<h3 id="规则">规则</h3>
+<ol type="1">
+<li><p>排序方式：所有节点关键字是按递增次序排列，并遵循左小右大原则；</p></li>
+<li><p>子节点数：非叶节点的子节点数&gt;1，且&lt;=M ，空树除外（注：M阶代表一个树节点最多有多少个查找路径，M=M路,当M=2则是2叉树,M=3则是3叉；</p></li>
+<li><p>关键字数：非根节点的关键字数量大于等于 ceil(M/2)-1 个 （向上取整） 且小于等于M-1个；</p></li>
 <li><p>所有叶子节点均在同一层、叶子节点除了包含了关键字和关键字记录的指针外也有指向其子节点的指针只不过其指针地址都为null对应下图最后一层节点的空格子;</p>
-<p> <img src="https://pic2.zhimg.com/v2-2c2264cc1c6c603dfeca4f84a2575901_r.jpg" alt="preview"></p>
-<p> 如图中，每个内部节点如果有 n 各关键字，那么他们就有n+1个间隔，子树的所有键值一定在对应的间隔大小范围内。</p>
-</li>
+<figure>
+<img src="https://pic2.zhimg.com/v2-2c2264cc1c6c603dfeca4f84a2575901_r.jpg" alt="" /><figcaption>preview</figcaption>
+</figure>
+<p>如图中，每个内部节点如果有 n 各关键字，那么他们就有n+1个间隔，子树的所有键值一定在对应的间隔大小范围内。</p></li>
 </ol>
-<h3 id="插入节点-2"><a href="#插入节点-2" class="headerlink" title="插入节点"></a>插入节点</h3><p>​        插入的规则就是，先往下搜索到最底层，插入，如果当前位置的关键字数量超过了它允许的最大数量，就取中间那个键为新的根，左右分裂为两个新的子树，再将新的根归并入他原本的父节点中，此时父节点也超了，同理再分裂向上增加节点，若直到根节点还是超，那么此时树的高度就增加了1。</p>
-<p><img src="https://pic1.zhimg.com/v2-3057eaab2b1764dd51c2a8658791cc98_r.jpg" alt="preview"></p>
-<h3 id="删除节点-2"><a href="#删除节点-2" class="headerlink" title="删除节点"></a>删除节点</h3><ol>
+<h3 id="插入节点-2">插入节点</h3>
+<p>​ 插入的规则就是，先往下搜索到最底层，插入，如果当前位置的关键字数量超过了它允许的最大数量，就取中间那个键为新的根，左右分裂为两个新的子树，再将新的根归并入他原本的父节点中，此时父节点也超了，同理再分裂向上增加节点，若直到根节点还是超，那么此时树的高度就增加了1。</p>
+<figure>
+<img src="https://pic1.zhimg.com/v2-3057eaab2b1764dd51c2a8658791cc98_r.jpg" alt="" /><figcaption>preview</figcaption>
+</figure>
+<h3 id="删除节点-2">删除节点</h3>
+<ol type="1">
 <li>如果删除的是叶子节点，且删除后数量依然满足要求，就直接删</li>
-<li>如果删除的不是叶子节点，且删了之后数量不够<ul>
+<li>如果删除的不是叶子节点，且删了之后数量不够
+<ul>
 <li>如果它的左边 或者 右边 兄弟节点树比最低标准多，那么就根兄弟节点接节点。具体的，如果是跟右边的兄弟节点借，先把右边兄弟节点最左边的键移动的父节点，再把父节点中对应的节点移动到该子节点。</li>
 <li>如果它的左右兄弟节点都不够借，就和左/右兄弟节点合并。具体的 将该节点和上连的父节点比他大的键以及右边兄弟节点一起 合并为一个子节点。（和左边兄弟节点合并也类似）然后此时父节点由于给出一个关键子，可能数量少于要求了，就对父节点做同样的调整。至到满足要求的节点 或者 根节点（此时树高度就减一了）</li>
-</ul>
-</li>
+</ul></li>
 <li>如果删除的不是叶子节点，类似二叉查找树里的操作，寻找右边子树最小的叶子节点或左边子树的最大叶子节点与他替换，就转化为删除叶子节点的问题。</li>
 </ol>
-<p><img src="https://i.loli.net/2021/03/28/kBc3dPOD1ZV4RwY.png" alt="image-20201111220009652"></p>
-<h2 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h2><p>同样B+树也是通常用于数据库和操作系统的文件系统中。B+树的特点是能够保持数据稳定有序， 其插入与修改拥有较稳定的对数时间复杂度。</p>
-<h3 id="与B树的区别"><a href="#与B树的区别" class="headerlink" title="与B树的区别"></a>与B树的区别</h3><ul>
-<li><p>有 n 棵子树的节点中含有n个关键字(即每个关键字对应一棵子树)；B树中有最多n个分支子树，则有n-1个关键字。</p>
-</li>
-<li><p>所有叶子节点中包含了全部关键字的信息， 及指向含这些关键字记录的指针，且叶子节点本身依关键字的大小自小而大顺序链接；B+树中叶节点保存的是 索引值和对应的value。</p>
-</li>
-<li><p>所有的非终端节点可以看成是索引部分，<strong>节点中仅含有其子树（根节点）中的最大（或最小)关键字</strong>  B树的子节点是介于父节点对应关键字的区间之中</p>
-</li>
-<li><p>除根节点外，其他所有节点中所含关键字的个数必须 &gt;= ceil (m/2 )  B树是至少 ceil (m/2 )-1个关键字 ，ceil (m/2 )个子节点；</p>
-<p>  <img src="https://ivanzz1001.github.io/records/assets/img/data_structure/ds_bplus_tree1.jpg" alt="img"></p>
-</li>
+<figure>
+<img src="https://i.loli.net/2021/03/28/kBc3dPOD1ZV4RwY.png" alt="" /><figcaption>image-20201111220009652</figcaption>
+</figure>
+<h2 id="b树">B+树</h2>
+<p>同样B+树也是通常用于数据库和操作系统的文件系统中。B+树的特点是能够保持数据稳定有序， 其插入与修改拥有较稳定的对数时间复杂度。</p>
+<h3 id="与b树的区别">与B树的区别</h3>
+<ul>
+<li><p>有 n 棵子树的节点中含有n个关键字(即每个关键字对应一棵子树)；B树中有最多n个分支子树，则有n-1个关键字。</p></li>
+<li><p>所有叶子节点中包含了全部关键字的信息， 及指向含这些关键字记录的指针，且叶子节点本身依关键字的大小自小而大顺序链接；B+树中叶节点保存的是 索引值和对应的value。</p></li>
+<li><p>所有的非终端节点可以看成是索引部分，<strong>节点中仅含有其子树（根节点）中的最大（或最小)关键字</strong> B树的子节点是介于父节点对应关键字的区间之中</p></li>
+<li><p>除根节点外，其他所有节点中所含关键字的个数必须 &gt;= ceil (m/2 ) B树是至少 ceil (m/2 )-1个关键字 ，ceil (m/2 )个子节点；</p>
+<figure>
+<img src="https://ivanzz1001.github.io/records/assets/img/data_structure/ds_bplus_tree1.jpg" alt="" /><figcaption>img</figcaption>
+</figure></li>
 </ul>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<h3 id="特点">特点</h3>
+<ol type="1">
 <li>B+<strong>树的层级更少</strong>：相较于B树B+每个<strong>非叶子</strong>节点存储的关键字数更多，树的层级更少所以查询数据更快；</li>
 <li>B+<strong>树查询速度更稳定</strong>：B+所有关键字数据地址都存在<strong>叶子</strong>节点上，所以每次查找的次数都相同所以查询速度要比B树更稳定;</li>
 <li>B+<strong>树天然具备排序功能：</strong>B+树所有的<strong>叶子</strong>节点数据构成了一个有序链表，在查询大小区间的数据时候更方便，数据紧密性很高，缓存的命中率也会比B树高。</li>
 <li>B+<strong>树全节点遍历更快：</strong>B+树遍历整棵树只需要遍历所有的<strong>叶子</strong>节点即可，，而不需要像B树一样需要对每一层进行遍历，这有利于数据库做全表扫描。</li>
 </ol>
 <p><strong>B树</strong>相对于<strong>B+树</strong>的优点是，如果经常访问的数据离根节点很近，而<strong>B树</strong>的<strong>非叶子</strong>节点本身存有关键字其数据的地址，所以这种数据检索的时候会要比<strong>B+树</strong>快。</p>
-<h2 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h2><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>堆(heap)又被为优先队列(priority queue)。队列中允许的操作是先进先出（FIFO），在队尾插入元素，在队头取出元素 而堆也是一样，在堆底插入元素，在堆顶取出元素，但是堆中元素的排列不是按照到来的先后顺序，<strong>而是按照一定的优先顺序排列的。这个优先顺序可以是元素的大小或者其他规则</strong>。Linux中的任务调度器就是堆实现的。<br>堆的一个经典的实现是完全二叉树(complete binary tree)。这样实现的堆成为二叉堆(binary heap)。<br>完全二叉树是增加了限定条件的二叉树。假设一个二叉树的深度为n。为了满足完全二叉树的要求，该二叉树的前n-1层必须填满，第n层也必须按照从左到右的顺序被填满，比如下图:            </p>
-<p><img src="https://i.loli.net/2021/03/28/9w6YBOVIz18edCD.png" alt="img"></p>
+<h2 id="线段树">线段树</h2>
+<h2 id="堆">堆</h2>
+<p>堆(heap)又被为优先队列(priority queue)。队列中允许的操作是先进先出（FIFO），在队尾插入元素，在队头取出元素 而堆也是一样，在堆底插入元素，在堆顶取出元素，但是堆中元素的排列不是按照到来的先后顺序，<strong>而是按照一定的优先顺序排列的。这个优先顺序可以是元素的大小或者其他规则</strong>。Linux中的任务调度器就是堆实现的。 堆的一个经典的实现是完全二叉树(complete binary tree)。这样实现的堆成为二叉堆(binary heap)。 完全二叉树是增加了限定条件的二叉树。假设一个二叉树的深度为n。为了满足完全二叉树的要求，该二叉树的前n-1层必须填满，第n层也必须按照从左到右的顺序被填满，比如下图:</p>
+<figure>
+<img src="https://i.loli.net/2021/03/28/9w6YBOVIz18edCD.png" alt="" /><figcaption>img</figcaption>
+</figure>
 <p>堆常用的用途：</p>
 <ul>
 <li>构建优先队列</li>
 <li>支持堆排序</li>
 <li>快速找出一个集合中的最小值（或者最大值）</li>
 </ul>
-<h3 id="堆属性"><a href="#堆属性" class="headerlink" title="堆属性"></a>堆属性</h3><p>在<strong>最大堆</strong>中，父节点的值比每一个子节点的值都要大。在<strong>最小堆</strong>中，父节点的值比每一个子节点的值都要小。这就是所谓的“堆属性”，并且这个属性对堆中的每一个节点都成立。 由此 最大堆的堆顶 是最大的，而最下的是某个叶节点，至于那个并不一定；最小堆 堆顶是最小的元素。</p>
-<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p>用数组来实现树相关的数据结构。它在时间和空间上都是很高效的。这点远优于二叉树，这 也是完全二叉树的特点。对于某个节点 i,其父节点和左右子节点 在数组中的位置：</p>
+<h3 id="堆属性">堆属性</h3>
+<p>在<strong>最大堆</strong>中，父节点的值比每一个子节点的值都要大。在<strong>最小堆</strong>中，父节点的值比每一个子节点的值都要小。这就是所谓的“堆属性”，并且这个属性对堆中的每一个节点都成立。 由此 最大堆的堆顶 是最大的，而最下的是某个叶节点，至于那个并不一定；最小堆 堆顶是最小的元素。</p>
+<h3 id="存储结构">存储结构</h3>
+<p>用数组来实现树相关的数据结构。它在时间和空间上都是很高效的。这点远优于二叉树，这 也是完全二叉树的特点。对于某个节点 i,其父节点和左右子节点 在数组中的位置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parent(i) &#x3D; floor((i - 1)&#x2F;2)</span><br><span class="line">left(i)   &#x3D; 2i + 1</span><br><span class="line">right(i)  &#x3D; 2i + 2</span><br></pre></td></tr></table></figure>
-<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>插入就是先放在数组最后末尾，然后向前索引它的父节点，如果不满足堆的定义，就和父节点交换。</p>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>通常是 pop 堆顶的元素。删除它，就将数组最后一个叶子节点拿过去 替换原本的节点，然后将它下沉 堆化。</p>
-<h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2><p>哈夫曼（Huffman）编码算法是基于二叉树构建编码压缩结构的，它是数据压缩中经典的一种算法。算法<strong>根据文本字符出现的频率，重新对字符进行编码。因为为了缩短编码的长度，我们自然希望频率越高的词，编码越短，这样最终才能最大化压缩存储文本数据的空间</strong>。例如常规的 每个字符都是占一个/多个相同的数量的字节树，要存储 n 个字符就需要 kn 个字节的空间，这是等长编码。但是哈夫曼树是一种不等长编码，根据序列中不同字符出现频率不同，分别重新进行不等长编码，出现次数多的字符希望它单个字符占用的空间少，出现次数少的可以多一点。只不过哈夫曼树实现不等长编码使用的是 二叉树完成的。<br>另一个，不等长编码虽然是无损压缩节省存储空间，但是得保证  不出现歧义性，例如 00  0 分别表示两个字符ab，那么单看00可以有多种解释方法，而哈夫曼编码是一种<strong>前缀编码</strong>，不存在歧义。<br>​        前缀编码： 任意一个字符的编码都不是另一个字符的编码的前缀。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/penghuwan/p/8308324.html">https://www.cnblogs.com/penghuwan/p/8308324.html</a></p>
-<h3 id="构建哈夫曼树"><a href="#构建哈夫曼树" class="headerlink" title="构建哈夫曼树"></a>构建哈夫曼树</h3><ul>
+<h3 id="插入">插入</h3>
+<p>插入就是先放在数组最后末尾，然后向前索引它的父节点，如果不满足堆的定义，就和父节点交换。</p>
+<h3 id="删除">删除</h3>
+<p>通常是 pop 堆顶的元素。删除它，就将数组最后一个叶子节点拿过去 替换原本的节点，然后将它下沉 堆化。</p>
+<h2 id="哈夫曼树">哈夫曼树</h2>
+<p>哈夫曼（Huffman）编码算法是基于二叉树构建编码压缩结构的，它是数据压缩中经典的一种算法。算法<strong>根据文本字符出现的频率，重新对字符进行编码。因为为了缩短编码的长度，我们自然希望频率越高的词，编码越短，这样最终才能最大化压缩存储文本数据的空间</strong>。例如常规的 每个字符都是占一个/多个相同的数量的字节树，要存储 n 个字符就需要 kn 个字节的空间，这是等长编码。但是哈夫曼树是一种不等长编码，根据序列中不同字符出现频率不同，分别重新进行不等长编码，出现次数多的字符希望它单个字符占用的空间少，出现次数少的可以多一点。只不过哈夫曼树实现不等长编码使用的是 二叉树完成的。 另一个，不等长编码虽然是无损压缩节省存储空间，但是得保证 不出现歧义性，例如 00 0 分别表示两个字符ab，那么单看00可以有多种解释方法，而哈夫曼编码是一种<strong>前缀编码</strong>，不存在歧义。 ​ 前缀编码： 任意一个字符的编码都不是另一个字符的编码的前缀。</p>
+<p>https://www.cnblogs.com/penghuwan/p/8308324.html</p>
+<h3 id="构建哈夫曼树">构建哈夫曼树</h3>
+<ul>
 <li>将字符序列中，不同字符出现的频率按照 低到高排序，每个字符是一个节点。构建一个小顶堆（优先队列），保证每次取出的树的根节点的频率都是队列里最少的。</li>
 <li>从优先队列中取出两个 节点（出现频率最少的两个），将他们合并构成一个二叉树，新的根节点的频率为 两个 节点的和，再将这个新的根节点入队</li>
 <li>再从队列中取出两个节点（可能是之前已经合并过的树的根节点），再左右合并成一个新的树，将新的根节点入队</li>
 <li>循环上述步骤直到只剩一棵树，完成哈夫曼树的构建。（此时所有字符都是树的叶子）</li>
 <li>根据哈夫曼树对字符编码。叶节点中存储的字符 重新编码为 ，从根节点到叶节点的边构成的编码如下图</li>
 </ul>
-<p><img src="https://i.loli.net/2021/03/28/a5zYbvtFNHldpAs.png" alt="image-20201109222200118"></p>
-<h2 id="前缀（字典）树"><a href="#前缀（字典）树" class="headerlink" title="前缀（字典）树"></a>前缀（字典）树</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">bool</span> isEnd; <span class="comment">//该结点是否是一个串的结束</span></span><br><span class="line">    TrieNode* next[<span class="number">26</span>]; <span class="comment">//字母映射表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://i.loli.net/2021/03/28/a5zYbvtFNHldpAs.png" alt="" /><figcaption>image-20201109222200118</figcaption>
+</figure>
+<h2 id="前缀字典树">前缀（字典）树</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">bool</span> isEnd; <span class="comment">//该结点是否是一个串的结束</span></span><br><span class="line">    TrieNode* next[<span class="number">26</span>]; <span class="comment">//字母映射表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210419110553.png" alt="image-20210419110553476" style="zoom:67%;" /></p>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210419110622.png" alt="image-20210419110622319" style="zoom:67%;" /></p>
-<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><p>对于求数组区间和的问题，常常会预先计算一个前缀和，然后再求任意区间的的元素和时，时间复杂度就为O(1)。但是如果原始数组会动态改变，那么前缀和数组也需要做相应的修改。例如 array[1] 改变了， 那么 sum(1-n) 中的前缀值每个都要改变，复杂度又变成了 O(n）</p>
-<p>对于这种需要动态更新数组的问题，使用树状数组可以  即将前缀数组维护成一个  树状的结构，用于均衡更新  和   查询的时间复杂度。</p>
+<h2 id="树状数组">树状数组</h2>
+<p>对于求数组区间和的问题，常常会预先计算一个前缀和，然后再求任意区间的的元素和时，时间复杂度就为O(1)。但是如果原始数组会动态改变，那么前缀和数组也需要做相应的修改。例如 array[1] 改变了， 那么 sum(1-n) 中的前缀值每个都要改变，复杂度又变成了 O(n）</p>
+<p>对于这种需要动态更新数组的问题，使用树状数组可以 即将前缀数组维护成一个 树状的结构，用于均衡更新 和 查询的时间复杂度。</p>
 <ul>
-<li>查询 / 更新时间复杂度 O(logN)  </li>
+<li>查询 / 更新时间复杂度 O(logN)<br />
+</li>
 <li>构建的时候复杂度为O(NlogN)</li>
 </ul>
-<p>树状数组的思想是，原始的前缀数组 C  的第 i 个元素 C[ i ] = a[1] + a[2] +… a[ i ]，  当更新一个元素时，该元素之后的前缀和都要改变，牵一发而动全身 。如果将前缀数组中的每个元素负责的范围缩小呢？例如 C[ i ]  只负责它前面的一段小范围内的元素的和， 整个区间的和被划分为多块小区间的和 即可，这样 当只有 C[ i ]  掌管的小段区间中的元素值改变时，才会更新C[i] 的值，避免的牵一发而动全身的问题。</p>
-<p>基于以上思路来看树状数组结构图  C为前缀数组  A为原始数组，二者长度相同</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210702230002.png" alt="image-20210702230002397"></p>
-<h3 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h3><p>观察上表的规律  可以发现 C[i]  计算 的是 A[j ~ i]  共 x 个元素的和，那么这个数量x 和 序号 i  有啥关系呢？</p>
-<p>2^0       2^1      2^0     2^2     2^0      2^1    2^0      2^3   个</p>
-<p> 0001    0010   0011   0100   0101   0110   0111   1000</p>
-<p>可以看出 序号的二进制的 最末尾  0  的个数 k  =&gt; 2^k  = x  可以用下式高效计算</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703101419.png" alt="image-20210703101419090"></p>
-<p>负数的补码为 原码的取反加1 所以实际为：    11010100  &amp;  (00101011 + 1)  = 00000100</p>
-<p>因此通过上述关系可以很很容易知道  C[i]  计算的是多少个元素的和。当我们要求 [0 ~ i ]  个元素的和时，只需递归得向前计算</p>
+<p>树状数组的思想是，原始的前缀数组 C 的第 i 个元素 C[ i ] = a[1] + a[2] +… a[ i ]， 当更新一个元素时，该元素之后的前缀和都要改变，牵一发而动全身 。如果将前缀数组中的每个元素负责的范围缩小呢？例如 C[ i ] 只负责它前面的一段小范围内的元素的和， 整个区间的和被划分为多块小区间的和 即可，这样 当只有 C[ i ] 掌管的小段区间中的元素值改变时，才会更新C[i] 的值，避免的牵一发而动全身的问题。</p>
+<p>基于以上思路来看树状数组结构图 C为前缀数组 A为原始数组，二者长度相同</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210702230002.png" alt="" /><figcaption>image-20210702230002397</figcaption>
+</figure>
+<h3 id="lowbit">lowbit</h3>
+<p>观察上表的规律 可以发现 C[i] 计算 的是 A[j ~ i] 共 x 个元素的和，那么这个数量x 和 序号 i 有啥关系呢？</p>
+<p>2^0 2^1 2^0 2^2 2^0 2^1 2^0 2^3 个</p>
+<p>0001 0010 0011 0100 0101 0110 0111 1000</p>
+<p>可以看出 序号的二进制的 最末尾 0 的个数 k =&gt; 2^k = x 可以用下式高效计算</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703101419.png" alt="" /><figcaption>image-20210703101419090</figcaption>
+</figure>
+<p>负数的补码为 原码的取反加1 所以实际为： 11010100 &amp; (00101011 + 1) = 00000100</p>
+<p>因此通过上述关系可以很很容易知道 C[i] 计算的是多少个元素的和。当我们要求 [0 ~ i ] 个元素的和时，只需递归得向前计算</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; C;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">		sum += C[i];</span><br><span class="line">         i -= <span class="built_in">lowbit</span>(i);   <span class="comment">// 向前回退 因为 C[i] 包含了 A[i] 以及 前lowbit(i)个元素的和了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="单点更新"><a href="#单点更新" class="headerlink" title="单点更新"></a>单点更新</h3><p>通过分段管理的思路可以大大减少元素更新的时间复杂度，例如上图中 元素 A[3]  改变时，只需将 C[3]  C[4]  C[8] 增加一个对应的deta值即可。那么如果根据 元素的下标 i 找到它对应的父节点的 序号呢？</p>
-<p>先看 C[3]C[3] ，lowbit(3)=1lowbit(3)=1， 3+lowbit(3)=43+lowbit(3)=4 就是 C[3]C[3] 的父亲结点 C[4]C[4] 的索引值<br>再看 C[4]C[4] ，lowbit(4)=4lowbit(4)=4， 4+lowbit(4)=84+lowbit(4)=8 就是 C[4]C[4] 的父亲结点 C[8]C[8] 的索引值<br>从已知子结点的索引 ii ，则结点 ii 的父结点的索引 parentparent 的计算公式为：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703102548.png" alt="image-20210703102548264"></p>
+<h3 id="单点更新">单点更新</h3>
+<p>通过分段管理的思路可以大大减少元素更新的时间复杂度，例如上图中 元素 A[3] 改变时，只需将 C[3] C[4] C[8] 增加一个对应的deta值即可。那么如果根据 元素的下标 i 找到它对应的父节点的 序号呢？</p>
+<p>先看 C[3]C[3] ，lowbit(3)=1lowbit(3)=1， 3+lowbit(3)=43+lowbit(3)=4 就是 C[3]C[3] 的父亲结点 C[4]C[4] 的索引值 再看 C[4]C[4] ，lowbit(4)=4lowbit(4)=4， 4+lowbit(4)=84+lowbit(4)=8 就是 C[4]C[4] 的父亲结点 C[8]C[8] 的索引值 从已知子结点的索引 ii ，则结点 ii 的父结点的索引 parentparent 的计算公式为：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703102548.png" alt="" /><figcaption>image-20210703102548264</figcaption>
+</figure>
 <p>所以就可以很容易写出单点更新的代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> delta)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= len)&#123;      <span class="comment">// 这里 len(C) = len(A) + 1; i 其实是A中的 i-1 </span></span><br><span class="line">        C[i] += delta;</span><br><span class="line">        i += <span class="built_in">lowbit</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h3><p>有了上述基础 区间查询 就运用前缀和的方法喽</p>
+<h3 id="区间查询">区间查询</h3>
+<p>有了上述基础 区间查询 就运用前缀和的方法喽</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">query</span>(y) - <span class="built_in">query</span>(x<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -541,7 +599,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E7%B1%BB%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">树的类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.3.</span> <span class="nav-text">二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9C%89%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.</span> <span class="nav-text">二叉搜索树有关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL%E6%A0%91"><span class="nav-number">1.4.</span> <span class="nav-text">AVL树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E5%9B%A0%E5%AD%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">平衡因子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">查找节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.3.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.4.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">1.5.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">1.6.1.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9-2"><span class="nav-number">1.6.2.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9-2"><span class="nav-number">1.6.3.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91-1"><span class="nav-number">1.7.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8EB%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.1.</span> <span class="nav-text">与B树的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.7.2.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">1.8.</span> <span class="nav-text">线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">1.9.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%B1%9E%E6%80%A7"><span class="nav-number">1.9.1.</span> <span class="nav-text">堆属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.9.2.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-number">1.9.3.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.9.4.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">1.10.</span> <span class="nav-text">哈夫曼树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">1.10.1.</span> <span class="nav-text">构建哈夫曼树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%EF%BC%88%E5%AD%97%E5%85%B8%EF%BC%89%E6%A0%91"><span class="nav-number">1.11.</span> <span class="nav-text">前缀（字典）树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84"><span class="nav-number">1.12.</span> <span class="nav-text">树状数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lowbit"><span class="nav-number">1.12.1.</span> <span class="nav-text">lowbit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0"><span class="nav-number">1.12.2.</span> <span class="nav-text">单点更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.12.3.</span> <span class="nav-text">区间查询</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E7%B1%BB%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">树的类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.3.</span> <span class="nav-text">二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9C%89%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.</span> <span class="nav-text">二叉搜索树有关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avl%E6%A0%91"><span class="nav-number">1.4.</span> <span class="nav-text">AVL树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E5%9B%A0%E5%AD%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">平衡因子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">查找节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.3.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.4.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">1.5.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b-%E6%A0%91"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">1.6.1.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9-2"><span class="nav-number">1.6.2.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9-2"><span class="nav-number">1.6.3.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b%E6%A0%91"><span class="nav-number">1.7.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8Eb%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.1.</span> <span class="nav-text">与B树的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.7.2.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">1.8.</span> <span class="nav-text">线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">1.9.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%B1%9E%E6%80%A7"><span class="nav-number">1.9.1.</span> <span class="nav-text">堆属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.9.2.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-number">1.9.3.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.9.4.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">1.10.</span> <span class="nav-text">哈夫曼树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">1.10.1.</span> <span class="nav-text">构建哈夫曼树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%AD%97%E5%85%B8%E6%A0%91"><span class="nav-number">1.11.</span> <span class="nav-text">前缀（字典）树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84"><span class="nav-number">1.12.</span> <span class="nav-text">树状数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lowbit"><span class="nav-number">1.12.1.</span> <span class="nav-text">lowbit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0"><span class="nav-number">1.12.2.</span> <span class="nav-text">单点更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.12.3.</span> <span class="nav-text">区间查询</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -555,7 +613,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">144</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
