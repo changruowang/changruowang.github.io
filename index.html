@@ -225,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-07 15:34:08 / 修改时间：16:24:01" itemprop="dateCreated datePublished" datetime="2021-09-07T15:34:08+08:00">2021-09-07</time>
+              <time title="创建时间：2021-09-07 15:34:08 / 修改时间：16:29:43" itemprop="dateCreated datePublished" datetime="2021-09-07T15:34:08+08:00">2021-09-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,7 +270,7 @@
 </blockquote></li>
 </ol>
 <h2 id="新建一个resp">新建一个resp</h2>
-<p>2021/9 月提交很一个爬虫工程很多报错，最后使用下面的流程成功新增了一个 resp 并提交</p>
+<p>2021/9 月提交一个爬虫工程很多报错，最后使用下面的流程成功新增了一个 resp 并提交</p>
 <ul>
 <li>在远程 github 网站上 新建一个 resp</li>
 <li>将这个 resp clone 到本地</li>
@@ -321,7 +321,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-07 11:25:21 / 修改时间：16:25:42" itemprop="dateCreated datePublished" datetime="2021-09-07T11:25:21+08:00">2021-09-07</time>
+              <time title="创建时间：2021-09-07 11:25:21 / 修改时间：16:31:51" itemprop="dateCreated datePublished" datetime="2021-09-07T11:25:21+08:00">2021-09-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -350,84 +350,14 @@
       
           <h1 id="python爬虫入门">python爬虫入门</h1>
 <p>闲来无事稍微了解了下爬虫的基本流程，<a target="_blank" rel="noopener" href="https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero">学习地址1</a> <a target="_blank" rel="noopener" href="https://github.com/wistbean/learn_python3_spider">学习地址2</a></p>
-<h2 id="http-https协议">HTTP / HTTPs协议</h2>
-<p><a href="/posts/23632/">计算机基础</a></p>
-<p>总的来说 当访问一个网站时，浏览器会发送很多请求，然后服务器依次根据请求内容返回，返回的内容里包含了需要的信息。谷歌浏览器 F12 开发者模式 可以观察到浏览器发出的所有请求。</p>
-<h2 id="基本流程">基本流程</h2>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115248.png" alt="" /><figcaption>image-20210907115247892</figcaption>
-</figure>
-<p>主要有三个地方需要观察</p>
-<ol type="1">
-<li>Networks：选中该项，然后查看浏览器发出的所有的请求</li>
-<li>仔细查看所有请求，并看他对应2位置的 response 响应
-<ul>
-<li>例如如果是要 爬取 视频/音频，如果该条请求响应的文件应该很大，且 response 显示的乱码的信息，该条请求极有可能请求的就是视频/音频的 指令</li>
-<li>例如如果想要的 爬取的东西是 文字，那么在response 区域显示就应该是 文字可显示的 东西<br />
-</li>
-<li>综上所述 需要耐心的分析 response 和 header 信息去确定哪条请求是我们想要的</li>
-</ul></li>
-</ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907115846.png" alt="" /><figcaption>image-20210907115846290</figcaption>
-</figure>
-<ol start="3" type="1">
-<li>确定好目标请求后 就需要分析这条请求的 信息，然后使用 python 中的库 去模拟浏览器的行为 发送同样的请求即可。一个快捷的验证方法是，找到目标请求后 按照下述操作导出 cmd 然后粘贴到 <a target="_blank" rel="noopener" href="https://curl.trillworks.com/">这个链接</a> 中可直接生成这条请求的 python 代码，直接测试。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907120059.png" alt="image-20210907120059079" style="zoom: 67%;" /></p>
-<ol start="4" type="1">
-<li>分析查找条件下 请求 的变化规律。例如 查找第一页评论 和 第二页评论，发出的请求参数有什么变化，下载不同歌名的音频，发出的请求参数有什么变化。发现规律后就是使用 python 代码来实现这个变换规律，从而实现自动化爬取信息</li>
-<li>成功拿到请求后就需要对 服务器响应的数据做分析，后续会有数据处理的方法</li>
-<li>有的时候 可能不是 简单的 一次 请求 + 分析 就可以得到结果的。就需要下图中 从响应 结果中提取 url 再请求的流程
-<ul>
-<li>例如 （下载 b 站的视频，根据固定的 ip + 视频id 会有个固定的 url，但是下载m4a的视频缓冲文件 并不是这个url地址，而是需要先向这个url地址发送 一个请求，返回响应的数据中可能就包含了 下载视频的 url） 所以图中的流程中 有个提取 url 的步骤</li>
-</ul></li>
-</ol>
-<p><img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210907113448404.png" alt="image-20210907113448404" style="zoom:67%;" /></p>
-<h2 id="request使用">request使用</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 GET 请求参数</span></span><br><span class="line">params = &#123;</span><br><span class="line">  <span class="string">&quot;kw&quot;</span>:<span class="string">&quot;hello&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 发送自定义请求头  GET</span></span><br><span class="line">response = requests.get(url,headers=headers,params=params)</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.post(url,headers=headers,data=data) <span class="comment"># post 还多了个data数据</span></span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br><span class="line">response.text 			<span class="comment">#返回响应内容，响应内容为 str 类型</span></span><br><span class="line">respones.content 		<span class="comment">#返回响应内容,响应内容为 bytes 类型</span></span><br><span class="line">response.status_code 	 <span class="comment">#返回响应状态码</span></span><br><span class="line">response.request.headers <span class="comment">#返回请求头</span></span><br><span class="line">response.headers         <span class="comment">#返回响应头</span></span><br><span class="line">response.cookies 		<span class="comment">#返回响应的 RequestsCookieJar 对象</span></span><br></pre></td></tr></table></figure>
-<h3 id="使用代理服务器">使用代理服务器</h3>
-<p>让服务器认为不是同一个客户端在请求，防止被封 ip；防止真实地址被泄露，防止被追究</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 代理服务器</span></span><br><span class="line">proxies = &#123;</span><br><span class="line">  <span class="string">&quot;http&quot;</span>:<span class="string">&quot;http://IP地址:端口号&quot;</span>,</span><br><span class="line">  <span class="string">&quot;https&quot;</span>:<span class="string">&quot;https://IP地址:端口号&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,proxies=proxies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-<h3 id="js逆向分析">js逆向分析</h3>
-<p>服务端为了防止爬虫，有的会使用 js 混淆参数。本来是明文参数放在 请求里一起发送，但是这样很容易就被爬虫爬了，因此他们就将一些参数在浏览器端 通过 js 进行加密，然后将加密后的东西作为请求参数发送。这样一定程度上可以避免爬虫。但是很明显，由于 浏览器的 端的东西都是透明的，我们只需要逆向分析出 它 js 加密的地方就可以了。<a target="_blank" rel="noopener" href="https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero/blob/master/03-%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91.md">百度翻译中的逆向流程</a></p>
-<p>基本的思路是：</p>
-<ul>
-<li><p>找到 请求中加密的参数，例如下图中 的 params 和 encSecKey就是加密后的参数<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151253.png" alt="image-20210907151253114" /></p></li>
-<li><p>然后在浏览器中全局搜索 encSecKey 这个关键字，找到这个数据生成的地方<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151421.png" alt="image-20210907151421828" /></p></li>
-<li><p>然后在 js 文件中 加断点，并刷新浏览器 让它重新发送请求，断点调试观察变量，如下图就可以看到加密前的数据是啥（歌词的页数和偏移）<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210907151625.png" alt="image-20210907151625428" /></p></li>
-<li><p>通过 断点调试/栈 去逐步逆向找到参数变化的规律 和 加密的函数 。然后在python中用代码实现相同的加密过程。这个调试需要有耐性。网易云的加密函数 是用的别人开源的 python版本的AES加密库，百度翻译的加密就是通过 js 函数实现的，可以直接把这个js函数拷贝出来，然后使用 python的 js2py 去执行 js 文件。</p></li>
-</ul>
-<p><strong>JS 逆向流程</strong></p>
-<ol type="1">
-<li>通过关键词切入到代码中，切入到发送请求的代码行，通过请求的url中提取关键字</li>
-<li>在发送请求的代码添加断点，并且触发发送请求，确认寻找的代码是否正确</li>
-<li>往上逆向，寻找目标参数以及生成逻辑</li>
-<li>利用js2py模拟执行生成逻辑获取想要的内容</li>
-</ol>
-<p><strong>chrome 调试技巧</strong></p>
-<ol type="1">
-<li>search 打开查询面板</li>
-<li>查询面板可以通过关键字查找所有出现关键字地方的代码</li>
-<li>点击跟踪代码并且可以把代码格式化</li>
-<li>对格式化的代码进行设置断点</li>
-<li>鼠标光标移动到上面可以查看当前运行代码变量值，函数原始代码地方等等</li>
-</ol>
-<h2 id="数据处理">数据处理</h2>
-<p>大概的数据类型 有 <code>json  html</code> 等格式，其实都有对应的库可以处理</p>
-<ul>
-<li><code>json</code>格式的响应：可以直接转换为 字典</li>
-<li><code>html</code>格式的数据（即响应的是个网页）：<code>beautifulsoup</code>库，<code>正则表达式</code></li>
-<li><code>xml</code>格式的数据：</li>
-</ul>
-<h2 id="实例代码">实例代码</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/changruowang/python_spider">代码地址</a></p>
-<ul>
-<li>爬取b站的视频</li>
-<li>爬取网易云的歌词和评论</li>
-<li>百度翻译</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/42326/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
