@@ -296,16 +296,16 @@
 <p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复</p>
 <h3 id="每种类型一个资源的死锁检测">每种类型一个资源的死锁检测</h3>
 <figure>
-<img src="https://i.loli.net/2021/04/05/I9NwHWanvUqPs7V.png" alt="" /><figcaption>image-20201214195516515</figcaption>
+<img src="https://i.loli.net/2021/04/05/I9NwHWanvUqPs7V.png" alt="image-20201214195516515" /><figcaption aria-hidden="true">image-20201214195516515</figcaption>
 </figure>
 <p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。<strong>有环时 即发生死锁</strong> 因此 每种类型一个资源的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
 <h3 id="每种类型多个资源的死锁检测">每种类型多个资源的死锁检测</h3>
 <figure>
-<img src="https://i.loli.net/2021/04/05/gnWPJ9mkNRSMTFu.png" alt="" /><figcaption>image-20201214195622770</figcaption>
+<img src="https://i.loli.net/2021/04/05/gnWPJ9mkNRSMTFu.png" alt="image-20201214195622770" /><figcaption aria-hidden="true">image-20201214195622770</figcaption>
 </figure>
 <p>这时候后 就不能用上述的环路检测法检测了，一个类型多个资源的情况如下，左图发生了死锁，而右图未死锁。这种情况的死锁检测算法如下：</p>
 <figure>
-<img src="https://i.loli.net/2021/04/05/GvwpKYR1V4gUxoF.png" alt="" /><figcaption>image-20201214195823456</figcaption>
+<img src="https://i.loli.net/2021/04/05/GvwpKYR1V4gUxoF.png" alt="image-20201214195823456" /><figcaption aria-hidden="true">image-20201214195823456</figcaption>
 </figure>
 <p>上图中，有三个进程四个资源，每个数据代表的含义如下：</p>
 <ul>
@@ -449,7 +449,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

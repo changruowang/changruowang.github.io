@@ -297,7 +297,7 @@
 <p><span class="math display">\[L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))\]</span></p>
 <p>​ 最后，每个像素位置的<span class="math inline">\(\alpha\)</span>参数都不同，也就是不同位置的 曲线映射方式不一样，所以CNN输出的<span class="math inline">\(\alpha\)</span>其实是和输入图像大小一样的。而由于有n次迭代，每次迭代分别对 RGB 三通道使用独立的<span class="math inline">\(\alpha\)</span> 所以最终CNN输出的feature map的尺寸应该是n x 3 x W x H大小的。如下图：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="" /><figcaption>1589469658310</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="1589469658310" /><figcaption aria-hidden="true">1589469658310</figcaption>
 </figure>
 <p>上图 b 可以看出:</p>
 <ul>
@@ -331,7 +331,7 @@
 <h3 id="各项损失函数的作用">各项损失函数的作用</h3>
 <p>​ 作者分别去掉四项损失中的一项，进行训练得到的结果如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="" /><figcaption>1589508112377</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="1589508112377" /><figcaption aria-hidden="true">1589508112377</figcaption>
 </figure>
 <ul>
 <li>去掉 spa损失，对比度细节下降，如空中的白云。</li>
@@ -341,7 +341,7 @@
 </ul>
 <h3 id="各项参数的影响">各项参数的影响</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="" /><figcaption>1589508544279</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="1589508544279" /><figcaption aria-hidden="true">1589508544279</figcaption>
 </figure>
 <p>​ 网络深度-通道数-迭代次数。可以看出对比def三个图，可以看出 迭代一次的曲线增强能力太弱，因此需要更多次的迭代来合成高阶曲线，这样曲线具有更强的调整能力。</p>
 <h3 id="训练数据的影响">训练数据的影响</h3>
@@ -352,7 +352,7 @@
 <li>使用数据增广的方法，包含了 过曝光和欠曝光图像，从1,2部分获得的数据集 4800张 DEC_large_LH</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="" /><figcaption>1589509475989</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="1589509475989" /><figcaption aria-hidden="true">1589509475989</figcaption>
 </figure>
 <p>​ 由图c,d可以看出，如果训练数据中不含有过曝光数据，最终网络会对原本光照正常的区域造成过曝光，但是如果低光照数据多，对暗区域增强的能力要强。因此</p>
 <ol type="1">
@@ -361,7 +361,7 @@
 </ol>
 <h3 id="最终对比结果">最终对比结果</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="" /><figcaption>1589509826164</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="1589509826164" /><figcaption aria-hidden="true">1589509826164</figcaption>
 </figure>
 
     </div>
@@ -464,7 +464,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

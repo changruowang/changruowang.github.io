@@ -292,7 +292,7 @@
 <h3 id="bgu-主要思想">BGU 主要思想</h3>
 <p>文章提出了一种加速图像处理的方法。由于很多复杂的滤镜处理速度比较慢，一个很常用的解决思路是对原图 downsample 之后做处理，然后用 upsample 得到处理结果。而在 BGU 这个例子里，利用 bilateral grid 来做 downsample - upsample 的工作，使得效果更为出色。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212354.png" alt="" /><figcaption>1595208512974</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212354.png" alt="1595208512974" /><figcaption aria-hidden="true">1595208512974</figcaption>
 </figure>
 <ul>
 <li>任何滤镜效果，在双边网格的局部小区域内（<strong>空域xy小范围内，以及像素域小范围内</strong>）都可以看做是一个线性变换。</li>
@@ -309,11 +309,11 @@
 </ol>
 <h3 id="网络的主要结构">网络的主要结构：</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212421.png" alt="" /><figcaption>1595165752929</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212421.png" alt="1595165752929" /><figcaption aria-hidden="true">1595165752929</figcaption>
 </figure>
 <p>​ <strong>Low-level特征</strong> 首先将输入图像下采样至固定的256x256。然后一组共用的特征提取层，一共四层，每层为步长为2的3x3卷积和激活层。如果这个层数太少缺乏表达力，如下图对比，层数太多后面得到的仿射变换系数太稀疏（决定了双边网格的z轴的bin的数量)。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212416.png" alt="" /><figcaption>1595165304189</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212416.png" alt="1595165304189" /><figcaption aria-hidden="true">1595165304189</figcaption>
 </figure>
 <p>​ <strong>局部特征提</strong>取有两层卷积，这两个卷积都不改变feature map的尺寸，如果没有局部特征提取层，最后的预测的变换系数会失去空间信息。</p>
 <p>​ <strong>全局特征提取</strong> 的支路包含了两个步长为2的卷积层和3个全连接层，最后输出一个包含全局信息的64维的特征向量。网络的输入图在提取特征时已经Resize成256x256了，所以可以直接用全连接。局特征具有的全局信息可以作为局部特征提取的先验，如果没有全局特征去描述图像信息的高维表示，网络可能会做出错误的局部特征表示，从而出现如上图的artifact。</p>
@@ -327,7 +327,7 @@
 \tau(.)=\max (1-|\cdot|, 0)
 \]</span>表示线性插值，<span class="math inline">\(s_{x}\)</span> <span class="math inline">\(s_{y}\)</span>表示网格的宽度和原图分辨率的长宽比。x 和 y 的位置由这两个长宽比决定其在网格中的对应位置，而我们知道网格z轴的 bin数量是8，应该是将z的8维度插值为 256bins 然后将bin合并成1 那么这里输出图像是 <span class="math inline">\(\bar{A}_{c}\)</span> 的 z 轴在网格对应的深度由guide map决定 即<span class="math inline">\(\bar{A}_{c}[i,j,g[x,y]]\)</span>，这个guide map是网络可训练的，那么最后每个<span class="math inline">\(\bar{A}_{c}\)</span> 像素的颜色深度也就由参与guide map决定，例如guide map上相邻灰度差异很大的像素，那么他们在原始网格也中映射的也是z轴上相距很远的两个bin，而BGU中说网格间是局部平滑，也即i索引的这两个变换矩阵差异会很大。但是这里是基于CNN的 并像BGU中那样直接对网格间的参数做平滑约束，这里就靠数据自己学习吧，最终学出来的也应该会有这个效果。 我感觉 它直接拿原图的灰度版本作为guide map 来指导插值也可以，但是这样相当于固定死了，原图差异多大的灰度，映射到网格中就是固定位置的bins虽然说也合理，但是 使用几层CNN来生成guide 就可学习更灵活了。这中以全分辨率的guide指导上采样 比直接使用 可学习的转置卷积上采样的对比。<strong>与基于转置卷积不同，这种方法在guide map的指导下可以很好的保留图像的边缘。</strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212434.png" alt="" /><figcaption>1595211122459</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212434.png" alt="1595211122459" /><figcaption aria-hidden="true">1595211122459</figcaption>
 </figure>
 <h3 id="获得最终的输出">获得最终的输出</h3>
 <p>​ 这一部分和上一部分中的guide map的计算是在全分辨率下进行的。这一步就是将上一步得到的全分辨率的变换矩阵（w x h x 12）用来对原图做变换。公式如下：</p>
@@ -344,7 +344,7 @@
 <p>这篇文章将 HDR中使用到的双边滤波的思想 和 Retinex 结合，来做图像增强。首先和HDR一样，将原始降采样，在低分辨率下进行 变换参数的估计。前半部分和HDR 完全一样，包括 CNN的设计 (全局和局部特征提取，guide map的设计)。只是输出的变换参数 维度为 wxhx(9 + 9x2 + 3x4) 这里 9 + 9x2 为噪声估计用到的变换参数，9是W 9x2是偏移量，相当于可变性卷积的意思；3x4是用于光照图估计的变化参数，和HDR中的方式一样。通过两个变换分别估计出了噪声图和光照图，使用式 <span class="math inline">\(\widetilde{\boldsymbol{R}}=(\boldsymbol{I}-\boldsymbol{N}) \oslash \boldsymbol{E}\)</span> 估计最终增强之后的图像。</p>
 <h3 id="网络的主要结构-1">网络的主要结构</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212440.png" alt="" /><figcaption>1595218108228</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212440.png" alt="1595218108228" /><figcaption aria-hidden="true">1595218108228</figcaption>
 </figure>
 <h3 id="噪声图的估计">噪声图的估计</h3>
 <p>根据 变换参数对输入图像变换得到噪声估计图像，变换参数为 9 + 9 x 2 感觉相当于1X1可变性卷积。对于某个像素位置 输入为三通道 输出也为三通道，相当于需要 3x3个1x1卷积核，而 9x2 为x y两个方向上的偏移，即可变性卷积的原理。</p>
@@ -461,7 +461,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

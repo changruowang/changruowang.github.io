@@ -279,14 +279,14 @@
 <li>将成对的低-正常光照图分解为 HSV 格式，将低光照图的V替换为高光照的V通道，替换整体和正常光照图相似，但是会有一定的色差和畸变，光照越低的原图，噪声退化越严重</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205428.png" alt="" /><figcaption>1577263236106</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205428.png" alt="1577263236106" /><figcaption aria-hidden="true">1577263236106</figcaption>
 </figure>
 <ol start="2" type="1">
 <li><p>相机成像模型 Retinex 中为I * R 根据相机成像模型，这个应该是非线性的</p></li>
 <li><p>局部光照一致性 距离高斯分布的局部 变分 离边缘位置越远，得到边缘的梯度损失权重越大 正处于边缘位置的最小</p></li>
 <li><p>LIME 对于 黑色区域和暗区域也不能很好的区分 因此对黑色区域也存在过曝 LIME中 可以看出r矫正之后 光照值整体变大，相应的过曝区域变少。KinD中对 光照估计依然很低 但是反射率图 却没那么过曝 呈现黑色 主要是Kind训练时加入了纯黑的图片 低光照图是黑色 对应的强光照图也是黑色</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205434.png" alt="" /><figcaption>1577371572408</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205434.png" alt="1577371572408" /><figcaption aria-hidden="true">1577371572408</figcaption>
 </figure></li>
 </ol>
 <ul>
@@ -296,7 +296,7 @@
 <li>其实 KindD的图像分解效果 总是 &lt;= LIME 尤其是在对于纯黑色区域</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425180117.png" alt="" /><figcaption>15720100311301</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425180117.png" alt="15720100311301" /><figcaption aria-hidden="true">15720100311301</figcaption>
 </figure>
 <h3 id="lime-传统光照分解">LIME 传统光照分解</h3>
 <p>优点 ：</p>
@@ -342,17 +342,17 @@
 <h2 id="只估计光照图">只估计光照图</h2>
 <p><strong>网络输出没加sigmoid 导致一开始损失很大 百千级别</strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205513.png" alt="" /><figcaption>1578965212749</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205513.png" alt="1578965212749" /><figcaption aria-hidden="true">1578965212749</figcaption>
 </figure>
 <p>使用kinD的梯度损失，外加初始亮度损失会使结果优化不出来（此时Loss&lt;1），同时最后一行一列补0/不补0没区别</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205502.png" alt="" /><figcaption>1578966176923</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205502.png" alt="1578966176923" /><figcaption aria-hidden="true">1578966176923</figcaption>
 </figure>
 <p>使用rtv损失，并且不加亮度约束损失，中间整体损失在0.5附近时，效果较真实，但是当损失进一步收敛，epoch20时此时极端化，可见此时亮度损失已经偏离正常值。而且亮度图中明显可见小斑点，我觉得可能是rtv权重不是连续的导致的，四角会出现光晕</p>
 <p><strong>加上sigmoid函数收敛的很慢 主要是 在卷积输出为很大的时候 经过sigmoid的输出趋近1 此时的梯度实际很小</strong></p>
 <p>实际加sigmoid的输出效果和不加的差不多</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210827170255.png" alt="" /><figcaption>1578969926566</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210827170255.png" alt="1578969926566" /><figcaption aria-hidden="true">1578969926566</figcaption>
 </figure>
 <p>加上sigmoid之后 loss rs 的比重需要减小 否则会使得高低光照图都接近很暗 不能增强</p>
 <h2 id="细节调整">细节调整</h2>
@@ -484,7 +484,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

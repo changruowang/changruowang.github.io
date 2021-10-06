@@ -295,7 +295,7 @@
 <h1 id="树">树</h1>
 <h2 id="树的类别">树的类别</h2>
 <figure>
-<img src="https://pic3.zhimg.com/v2-e7a99fda571a4294e9b2196d58f8e65c_r.jpg?source=1940ef5c" alt="" /><figcaption>preview</figcaption>
+<img src="https://pic3.zhimg.com/v2-e7a99fda571a4294e9b2196d58f8e65c_r.jpg?source=1940ef5c" alt="preview" /><figcaption aria-hidden="true">preview</figcaption>
 </figure>
 <h2 id="平衡二叉树">平衡二叉树</h2>
 <p>给定一棵树 判断是否为平衡二叉树，即任意节点的左右子树的高度差不超过1，即为平衡二叉树。</p>
@@ -315,7 +315,7 @@
 <p>​ <strong>插入</strong>：若b是空树，则将s所指结点作为根节点插入，否则；若s.val等于b的根节点的数据域之值，则返回，否则；若s.val小于b的根节点的数据域之值，则把s所指节点插入到左子树中；否则把s所指节点插入到右子树中<strong>新插入节点总是叶子节点</strong></p>
 <p>​ <strong>删除</strong>：分三种情况，如下图，1. 如果待删除的节点是叶子节点，那么可以立即被删除；2. 如果有一个子节点，要将下一个子节点上移到当前节点，即替换之；3.如果有两个子节点，则将其右子树的最小数据代替此节点的数据，并将其右子树的最小数据删除。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095944.png" alt="" /><figcaption>1599307406058</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095944.png" alt="1599307406058" /><figcaption aria-hidden="true">1599307406058</figcaption>
 </figure>
 <p>查找：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n) 插入：最佳情况Olog(n)Olog(n), 最坏情况O(n)O(n) 删除：最佳情况Olog(n)Olog(n), 最坏情况O(n)</p>
 <h2 id="avl树">AVL树</h2>
@@ -328,17 +328,17 @@
 <p>​ 二叉搜索树每次插入节点都插在树的叶节点。在插入后，树可能失衡。处理流程为： ​ 按照搜索树的方式插入新节点 -&gt; 搜索最低失衡点 -&gt; 判断失衡点的类型 -&gt; 调整二叉树平衡</p>
 <p><em>失衡的类型</em> ： <strong>RR LL RL LR</strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095948.png" alt="" /><figcaption>image-20201102213545758</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095948.png" alt="image-20201102213545758" /><figcaption aria-hidden="true">image-20201102213545758</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095950.png" alt="" /><figcaption>image-20201102213920250</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095950.png" alt="image-20201102213920250" /><figcaption aria-hidden="true">image-20201102213920250</figcaption>
 </figure>
 <p>​ LL 和 RR 型相对简单。只需要旋转一次即可。</p>
 <figure>
-<img src="https://img2018.cnblogs.com/blog/1590962/201908/1590962-20190812202510882-2058601498.gif" alt="" /><figcaption>img</figcaption>
+<img src="https://img2018.cnblogs.com/blog/1590962/201908/1590962-20190812202510882-2058601498.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095954.png" alt="" /><figcaption>image-20201102214304915</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406095954.png" alt="image-20201102214304915" /><figcaption aria-hidden="true">image-20201102214304915</figcaption>
 </figure>
 <h3 id="删除节点">删除节点</h3>
 <p>​ 比插入还复杂，但是本质还是那四种旋转方式。只不过删除可能会多两种 RE LE 类不平衡的情况。</p>
@@ -380,10 +380,10 @@
 <p>… 同上分类</p></li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100001.png" alt="" /><figcaption>image-20201104210955575</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100001.png" alt="image-20201104210955575" /><figcaption aria-hidden="true">image-20201104210955575</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100003.png" alt="" /><figcaption>image-20201104212934752</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100003.png" alt="image-20201104212934752" /><figcaption aria-hidden="true">image-20201104212934752</figcaption>
 </figure>
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406100006.png" /></p>
 <h2 id="b-树">B-树</h2>
@@ -395,14 +395,14 @@
 <li><p>关键字数：非根节点的关键字数量大于等于 ceil(M/2)-1 个 （向上取整） 且小于等于M-1个；</p></li>
 <li><p>所有叶子节点均在同一层、叶子节点除了包含了关键字和关键字记录的指针外也有指向其子节点的指针只不过其指针地址都为null对应下图最后一层节点的空格子;</p>
 <figure>
-<img src="https://pic2.zhimg.com/v2-2c2264cc1c6c603dfeca4f84a2575901_r.jpg" alt="" /><figcaption>preview</figcaption>
+<img src="https://pic2.zhimg.com/v2-2c2264cc1c6c603dfeca4f84a2575901_r.jpg" alt="preview" /><figcaption aria-hidden="true">preview</figcaption>
 </figure>
 <p>如图中，每个内部节点如果有 n 各关键字，那么他们就有n+1个间隔，子树的所有键值一定在对应的间隔大小范围内。</p></li>
 </ol>
 <h3 id="插入节点-2">插入节点</h3>
 <p>​ 插入的规则就是，先往下搜索到最底层，插入，如果当前位置的关键字数量超过了它允许的最大数量，就取中间那个键为新的根，左右分裂为两个新的子树，再将新的根归并入他原本的父节点中，此时父节点也超了，同理再分裂向上增加节点，若直到根节点还是超，那么此时树的高度就增加了1。</p>
 <figure>
-<img src="https://pic1.zhimg.com/v2-3057eaab2b1764dd51c2a8658791cc98_r.jpg" alt="" /><figcaption>preview</figcaption>
+<img src="https://pic1.zhimg.com/v2-3057eaab2b1764dd51c2a8658791cc98_r.jpg" alt="preview" /><figcaption aria-hidden="true">preview</figcaption>
 </figure>
 <h3 id="删除节点-2">删除节点</h3>
 <ol type="1">
@@ -415,7 +415,7 @@
 <li>如果删除的不是叶子节点，类似二叉查找树里的操作，寻找右边子树最小的叶子节点或左边子树的最大叶子节点与他替换，就转化为删除叶子节点的问题。</li>
 </ol>
 <figure>
-<img src="https://i.loli.net/2021/03/28/kBc3dPOD1ZV4RwY.png" alt="" /><figcaption>image-20201111220009652</figcaption>
+<img src="https://i.loli.net/2021/03/28/kBc3dPOD1ZV4RwY.png" alt="image-20201111220009652" /><figcaption aria-hidden="true">image-20201111220009652</figcaption>
 </figure>
 <h2 id="b树">B+树</h2>
 <p>同样B+树也是通常用于数据库和操作系统的文件系统中。B+树的特点是能够保持数据稳定有序， 其插入与修改拥有较稳定的对数时间复杂度。</p>
@@ -426,7 +426,7 @@
 <li><p>所有的非终端节点可以看成是索引部分，<strong>节点中仅含有其子树（根节点）中的最大（或最小)关键字</strong> B树的子节点是介于父节点对应关键字的区间之中</p></li>
 <li><p>除根节点外，其他所有节点中所含关键字的个数必须 &gt;= ceil (m/2 ) B树是至少 ceil (m/2 )-1个关键字 ，ceil (m/2 )个子节点；</p>
 <figure>
-<img src="https://ivanzz1001.github.io/records/assets/img/data_structure/ds_bplus_tree1.jpg" alt="" /><figcaption>img</figcaption>
+<img src="https://ivanzz1001.github.io/records/assets/img/data_structure/ds_bplus_tree1.jpg" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure></li>
 </ul>
 <h3 id="特点">特点</h3>
@@ -441,7 +441,7 @@
 <h2 id="堆">堆</h2>
 <p>堆(heap)又被为优先队列(priority queue)。队列中允许的操作是先进先出（FIFO），在队尾插入元素，在队头取出元素 而堆也是一样，在堆底插入元素，在堆顶取出元素，但是堆中元素的排列不是按照到来的先后顺序，<strong>而是按照一定的优先顺序排列的。这个优先顺序可以是元素的大小或者其他规则</strong>。Linux中的任务调度器就是堆实现的。 堆的一个经典的实现是完全二叉树(complete binary tree)。这样实现的堆成为二叉堆(binary heap)。 完全二叉树是增加了限定条件的二叉树。假设一个二叉树的深度为n。为了满足完全二叉树的要求，该二叉树的前n-1层必须填满，第n层也必须按照从左到右的顺序被填满，比如下图:</p>
 <figure>
-<img src="https://i.loli.net/2021/03/28/9w6YBOVIz18edCD.png" alt="" /><figcaption>img</figcaption>
+<img src="https://i.loli.net/2021/03/28/9w6YBOVIz18edCD.png" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure>
 <p>堆常用的用途：</p>
 <ul>
@@ -470,7 +470,7 @@
 <li>根据哈夫曼树对字符编码。叶节点中存储的字符 重新编码为 ，从根节点到叶节点的边构成的编码如下图</li>
 </ul>
 <figure>
-<img src="https://i.loli.net/2021/03/28/a5zYbvtFNHldpAs.png" alt="" /><figcaption>image-20201109222200118</figcaption>
+<img src="https://i.loli.net/2021/03/28/a5zYbvtFNHldpAs.png" alt="image-20201109222200118" /><figcaption aria-hidden="true">image-20201109222200118</figcaption>
 </figure>
 <h2 id="前缀字典树">前缀（字典）树</h2>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrieNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">bool</span> isEnd; <span class="comment">//该结点是否是一个串的结束</span></span><br><span class="line">    TrieNode* next[<span class="number">26</span>]; <span class="comment">//字母映射表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -487,7 +487,7 @@
 <p>树状数组的思想是，原始的前缀数组 C 的第 i 个元素 C[ i ] = a[1] + a[2] +… a[ i ]， 当更新一个元素时，该元素之后的前缀和都要改变，牵一发而动全身 。如果将前缀数组中的每个元素负责的范围缩小呢？例如 C[ i ] 只负责它前面的一段小范围内的元素的和， 整个区间的和被划分为多块小区间的和 即可，这样 当只有 C[ i ] 掌管的小段区间中的元素值改变时，才会更新C[i] 的值，避免的牵一发而动全身的问题。</p>
 <p>基于以上思路来看树状数组结构图 C为前缀数组 A为原始数组，二者长度相同</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210702230002.png" alt="" /><figcaption>image-20210702230002397</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210702230002.png" alt="image-20210702230002397" /><figcaption aria-hidden="true">image-20210702230002397</figcaption>
 </figure>
 <h3 id="lowbit">lowbit</h3>
 <p>观察上表的规律 可以发现 C[i] 计算 的是 A[j ~ i] 共 x 个元素的和，那么这个数量x 和 序号 i 有啥关系呢？</p>
@@ -495,7 +495,7 @@
 <p>0001 0010 0011 0100 0101 0110 0111 1000</p>
 <p>可以看出 序号的二进制的 最末尾 0 的个数 k =&gt; 2^k = x 可以用下式高效计算</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703101419.png" alt="" /><figcaption>image-20210703101419090</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703101419.png" alt="image-20210703101419090" /><figcaption aria-hidden="true">image-20210703101419090</figcaption>
 </figure>
 <p>负数的补码为 原码的取反加1 所以实际为： 11010100 &amp; (00101011 + 1) = 00000100</p>
 <p>因此通过上述关系可以很很容易知道 C[i] 计算的是多少个元素的和。当我们要求 [0 ~ i ] 个元素的和时，只需递归得向前计算</p>
@@ -504,7 +504,7 @@
 <p>通过分段管理的思路可以大大减少元素更新的时间复杂度，例如上图中 元素 A[3] 改变时，只需将 C[3] C[4] C[8] 增加一个对应的deta值即可。那么如果根据 元素的下标 i 找到它对应的父节点的 序号呢？</p>
 <p>先看 C[3]C[3] ，lowbit(3)=1lowbit(3)=1， 3+lowbit(3)=43+lowbit(3)=4 就是 C[3]C[3] 的父亲结点 C[4]C[4] 的索引值 再看 C[4]C[4] ，lowbit(4)=4lowbit(4)=4， 4+lowbit(4)=84+lowbit(4)=8 就是 C[4]C[4] 的父亲结点 C[8]C[8] 的索引值 从已知子结点的索引 ii ，则结点 ii 的父结点的索引 parentparent 的计算公式为：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703102548.png" alt="" /><figcaption>image-20210703102548264</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210703102548.png" alt="image-20210703102548264" /><figcaption aria-hidden="true">image-20210703102548264</figcaption>
 </figure>
 <p>所以就可以很容易写出单点更新的代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> delta)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= len)&#123;      <span class="comment">// 这里 len(C) = len(A) + 1; i 其实是A中的 i-1 </span></span><br><span class="line">        C[i] += delta;</span><br><span class="line">        i += <span class="built_in">lowbit</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -613,7 +613,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

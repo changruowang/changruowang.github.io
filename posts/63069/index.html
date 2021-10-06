@@ -305,13 +305,13 @@
 </ul>
 <h4 id="域名结构">域名结构</h4>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092125.png" alt="" /><figcaption>image-20201202204435339</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092125.png" alt="image-20201202204435339" /><figcaption aria-hidden="true">image-20201202204435339</figcaption>
 </figure>
 <p><code>www.baidu.com/</code> 为例，<code>www</code> 是三级域名，<code>baidu</code> 是二级域名，<code>com</code> 是顶级域名 各级域名之间通过 <code>.</code> 相连。每个<strong>互联网上的主机域名</strong>都对应一个 IP 地址，并且这个<strong>域名在互联网中是唯一的</strong></p>
 <h4 id="域名服务器">域名服务器</h4>
 <p>世界各地很多主机，不可能把所有的 域名-&gt;ip地址的映射方式都记录在本地主机。所以需要DNS服务根据域名去获取IP地址。根据域名服务器所起到的作用，可以把域名服务器分为四种不同的类型。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092131.png" alt="" /><figcaption>img</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092131.png" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure>
 <ul>
 <li>根域名服务器： 是最高层次的域名服务器，也是最重要的域名服务器，全球共设有 13 个根域名服务器。所有的根域名服务器都知道所有的顶级域名服务器的域名和 IP 地址。当其他的域名服务器无法解析域名时，会首先求助于根域名服务器。假如所有的根域名服务器都挂了，那么整个互联网的 DNS 系统就无法工作了，因为采取的分布式结构，所以只要有一台能够正常工作，互联网的 DNS 系统就不会受到影响。</li>
@@ -325,7 +325,7 @@
 <li>递归查询：主机向本地域名服务器的查询一般都采用递归查询</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092137.png" alt="" /><figcaption>image-20201202205206528</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092137.png" alt="image-20201202205206528" /><figcaption aria-hidden="true">image-20201202205206528</figcaption>
 </figure>
 <h4 id="dns缓存记录">DNS缓存记录</h4>
 <p>为了提高 DNS 的查询效率，减轻根域名服务器的负荷和 DNS 数据报的查询数量，在域名服务器中广泛地使用了高速缓存。高速缓存用来存放最近查询过的域名以及从何处获得域名映射信息的记录。不仅在本地域名服务器中有高速缓存，在主机中也有。很多主机在启动的时候从本地域名服务器下载名字和地址的全部数据库，维护存放自己使用的域名的高速缓存，只有在缓存中找不到名字时才使用域名服务器。</p>
@@ -340,7 +340,7 @@
 <li>被动模式：客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092142.png" alt="" /><figcaption>image-20201207212239959</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092142.png" alt="image-20201207212239959" /><figcaption aria-hidden="true">image-20201207212239959</figcaption>
 </figure>
 <p>主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。</p>
 <h3 id="动态主机配置协议">动态主机配置协议</h3>
@@ -355,14 +355,14 @@
 <li>DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092150.png" alt="" /><figcaption>image-20201207212830445</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092150.png" alt="image-20201207212830445" /><figcaption aria-hidden="true">image-20201207212830445</figcaption>
 </figure>
 <h3 id="远程登录协议">远程登录协议</h3>
 <p>TELNET 用于登录到远程主机上，并且远程主机上的输出也会返回。TELNET 可以适应许多计算机和操作系统的差异，例如不同操作系统系统的换行符定义。</p>
 <h3 id="电子邮件协议">电子邮件协议</h3>
 <p>一个电子邮件系统由三部分组成：用户代理、邮件服务器以及邮件协议。邮件协议包含发送协议和读取协议，发送协议常用 SMTP，读取协议常用 POP3 和 IMAP。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092155.png" alt="" /><figcaption>image-20201207212959016</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406092155.png" alt="image-20201207212959016" /><figcaption aria-hidden="true">image-20201207212959016</figcaption>
 </figure>
 <ol type="1">
 <li><p>SMTP SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。</p></li>
@@ -580,7 +580,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

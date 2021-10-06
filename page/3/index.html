@@ -200,6 +200,405 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/42532/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/42532/" class="post-title-link" itemprop="url">图像处理-3A算法和ISP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-08 19:33:46" itemprop="dateCreated datePublished" datetime="2021-06-08T19:33:46+08:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:19:05" itemprop="dateModified" datetime="2021-08-30T20:19:05+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">传统图像处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="a算法">3A算法</h1>
+<p>3A技术即自动对焦（AF）、自动曝光（AE）和自动白平衡（AWB），3A数字成像技术利用了AF、AE、AWB算法实现图像对比度最大、改善目标拍摄物过曝光或曝光不足情况，使画面在不同光线照射下的色差得到补偿，从而呈现较高画质的图像信息。</p>
+<h2 id="自动对焦af">自动对焦AF</h2>
+<p>计算当前图像的对比度，然后调整焦距，最终使得图像的对比度最大。这里对合适的焦距可以采用 爬山法 搜索。因为一开始你并不知道当前焦距下成像是最清晰的，那么爬山法的原理和梯度下降有点类似。搜索当前点领域空间的点，选其中反馈最大的位置作为下一步迭代的点。即不断往上“怕山”，直到遇到局部最优值，即领域的值都比它差。</p>
+<p>那么自动对焦算法中有两个关键步骤</p>
+<ul>
+<li>图像清晰度评价指标：图像熵，灰度方差，拉普拉斯梯度和，变分损失等</li>
+<li>搜索算法： 上述的爬山法的 优点是 避免了全局搜索，效率高。 但是会陷入局部最优，一个替代的方法是 模拟退火法。他的思路是当找到局部最优值后，以一定的概率接受往周围稍差的值前进，即以一定概率接受走下坡路，但是这个概率是越来越低的，直至收敛。因此这样就可能跳出局部最优值，而搜索到更好的结果。</li>
+</ul>
+<h2 id="自动曝光ae">自动曝光AE</h2>
+<p>一般的自动曝光算法通过获取图像的亮度调节相应的曝光参数，得到合适的曝光量。曝光参数包括光圈大小, 快门速度和摄像头传感器的亮度增益。</p>
+<p>获取图像亮度,可采用的方法有：</p>
+<ol type="1">
+<li>平均亮度</li>
+<li>分区域加权平均，可以将关注区域集中在屏幕某个具体位置 或者具体对象</li>
+<li>直方图信息等</li>
+<li>设置不同的亮度文献，对背光、正光和强光进行区分</li>
+</ol>
+<p>调整参数的主要方法：</p>
+<ol type="1">
+<li>查表法：系统内部可能预先存储了一张曝光参数的调整步长与图像亮度之间的关系查找表，根据当前的亮度去获取调整值，使得图像亮度接近期望值。</li>
+<li>迭代法：</li>
+<li>数值计算法</li>
+</ol>
+<h2 id="自动白平衡awb">自动白平衡AWB</h2>
+<p>白平衡，这是和光源的色温息息相关的概念。例如 早期的灯泡，都是光色的暖光源，在暖光源下成像的整体颜色就偏黄，白炽灯是冷色光源，成像效果就偏蓝。为了使得成像效果不受光源色温影响，尽可能还原出场景的本身颜色，就有了自动白平衡算法。</p>
+<p>常用的白平衡算法有以下两种：</p>
+<ol type="1">
+<li>选白点算法：所谓白点就是图像中原本应该是白色的点。白点算法就是首先找到图像中 可能的 “白色的点”，然后将白色点矫正会去RGB={255，255，255}，以此为标准，就能知道变换矩阵将其他颜色的像素点都还原回去。这里的 可能的白点 是选的图像中 RGB 值和最大的点，这个最大的也是一个阈值。</li>
+<li>灰度世界假设：类似上面的白点算法。灰度世界原理是，对于一个丰富的场景的图，它全图 R G B 三通道的均值应该接近，基于此就可以算出各个通道的变换倍数。</li>
+<li>色温估计：这个算法原理是，预先在不同的光源下，记录一个合适的校准值保存。在测试的时候，先根据图像估算色温，然后去查表找到当前色温的校准值。至于如何估计色温，可以将图像分块，然后针对每个块做一个白点的计算，得到色温估算。</li>
+</ol>
+<h1 id="isp">ISP</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z_HUALIN/article/details/78017314">安卓相机处理流程</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/115321553">参考链接</a></p>
+<p>ISP 图像信号处理器，用于处理图像传感器的原始数据。它首先是一个处理器，然后由运行在其上的软件来控制整个ISP流程。软件结构按照层级可以划分为如下三层，分别为 顶层的 ISP控制逻辑， 3A算法库，传感器控制库 和 基础ISP算法。如下图所示。</p>
+<p>​ <img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608223056.png" alt="image-20210608223056771" style="zoom:50%;" /></p>
+<ul>
+<li>SENSOR 3A：我理解为控制相机硬件的库，例如控制相机的快门，光圈大小等，因此它服务于 3A库，3A算法需要根据当前图像的统计信息反馈来调整这些硬件参数。</li>
+<li>SENSOR ISP：其他的一些算法库，例如 黑电平矫正，黑点矫正等算法</li>
+<li>3A LIB：就是上面介绍的3A算法</li>
+<li>ISP CTRL：整个 ISP 的控制逻辑，从传感器读取数据，然后通过回调函数调用底层的ISP算法，完成整个ISP的流程，然后输出图像，同时还负责处理外部用户通过IIC / SPI 等输入的控制指令。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215513.png" alt="image-20210608215513588" style="zoom: 67%;" /></p>
+<p>常规的步骤可以 以 3A 算法作为依据划分为算个阶段。因为其实 白平衡 亮度 和 焦距 他们存在依赖关系。因此需要有序调整。从上图可以大致看出，先自动调整白平衡，然后自动调整曝光，最后自动对焦</p>
+<h3 id="黑电平矫正">黑电平矫正</h3>
+<p>由于传感器存在漏电流，当全黑时成的像由于漏电流的存在而不是全黑的，减去偏移值即可</p>
+<h3 id="镜头阴影矫正">镜头阴影矫正</h3>
+<p>或者叫非均匀矫正，镜头中央进光比较均匀，四周少，表现就是纯色场景 四周有暗角。这也是相机的固有缺陷，可以实现矫正</p>
+<h3 id="坏点矫正">坏点矫正</h3>
+<p>相机传感器难免有一些成像单元损坏，会导致最后的图像有一些坏点。找坏点，做中值滤波即可</p>
+<h3 id="颜色插值">颜色插值</h3>
+<p>相机的成像元件是按照 拜尔排列，和屏幕的显示彩色图像一样，他是红绿蓝三个颜色滤镜分别采集RGB信号，因此输出的图像也就是 RawRGB格式，那么就需要对R G B 三通道都进行颜色插值，</p>
+<p>​ <img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210608215036384.png" alt="image-20210608215036384" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210608215107.png" alt="image-20210608215107199" style="zoom: 33%;" /></p>
+<h3 id="去噪">去噪</h3>
+<p>对图像传统的去噪方法 ….</p>
+<h3 id="颜色矫正">颜色矫正</h3>
+<ul>
+<li>RGB： 是一种均匀性较差的颜色空间，人眼对于三个颜色分量的敏感程度是不一样的，<strong>如果颜色的相似性直接用欧氏距离来度量，其结果与人眼视觉会有较大的偏差</strong>。在RGB颜色系统中，<strong>三个颜色分量之间是高度相关的，即只要亮度改变，三个分量都会相应的改变</strong>，如果一个颜色的某一个分量发生了一定程度的改变，那么这颜色很可能也要发生改变。</li>
+<li>HSI：用色调（Hue）、饱和度（Saturation或Chroma）和亮度（Intensity或Brightness）来描述颜色。 I 分量与颜色信息无关，H和S分量与人感受彩色的方式相似，彩色图像中的每一个均匀性彩色区域都对应一个相一致的色度和饱和度，色度和饱和度能够被用来进行独立于亮度的彩色区域分割。</li>
+<li>YUV：Y就是常说的灰度</li>
+</ul>
+<h3 id="gamma矫正">gamma矫正</h3>
+<p>人眼对亮度的敏感度不是线性变化的，在低照度下 人眼对亮度变化敏感，在高亮度下人眼对亮度变化没那么敏感，因此使用gamma矫正对输入图像的灰度做一个非线性操作，拉伸低亮度的值，压缩高亮度的像素值</p>
+<h3 id="色彩空间转换">色彩空间转换</h3>
+<p>了解一下常用的色彩空间和运用</p>
+<h3 id="彩色去噪">彩色去噪</h3>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/46437/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/46437/" class="post-title-link" itemprop="url">DeepExposure</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-07 09:43:08" itemprop="dateCreated datePublished" datetime="2021-06-07T09:43:08+08:00">2021-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-31 11:12:44" itemprop="dateModified" datetime="2021-08-31T11:12:44+08:00">2021-08-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/59399/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/59399/" class="post-title-link" itemprop="url">图像处理-图像分割</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-06 22:32:13" itemprop="dateCreated datePublished" datetime="2021-06-06T22:32:13+08:00">2021-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:18:45" itemprop="dateModified" datetime="2021-08-30T20:18:45+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">传统图像处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="图像分割">图像分割</h1>
+<p>简单了解一下传统图像分割中常用的两个算法</p>
+<h2 id="ostu">OSTU</h2>
+<p>大津法自适应图像二值化方法。自适应的计算二值化的分割阈值。他的原理是：将图像发为前景和背景区域，大于阈值的为前景，小于阈值的背景。设置某个阈值，计算前景区域的像素均值w1 背景区域的像素均值 w2 以及全图的像素均值 w ，期望 w 和 w1 w2 的方差最大，即类间方差最大化的分割阈值即为所求。</p>
+<h2 id="标记分水岭">标记分水岭</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/1886/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1886/" class="post-title-link" itemprop="url">图像处理-相机响应函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-06 21:51:10" itemprop="dateCreated datePublished" datetime="2021-06-06T21:51:10+08:00">2021-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:18:51" itemprop="dateModified" datetime="2021-08-30T20:18:51+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E4%BC%A0%E7%BB%9F%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">传统图像处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="相机响应模型">相机响应模型</h1>
+<p>这是在阅读下面这个文献是遇到的概念</p>
+<blockquote>
+<p>A New Low-Light Image Enhancement Algorithm using Camera Response Model ∗</p>
+</blockquote>
+<h2 id="相机响应曲线">相机响应曲线</h2>
+<p>首先，物体在反射光进入相机后，相机成像具有一个响应曲线，理论上响应曲线应该是对不同波段不同强度的光能线性还原。但是实际为一个S曲线，例如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606215823.png" alt="image-20210606215822976" style="zoom:50%;" /></p>
+<p>横坐标为 实际的进入相机的亮度，而纵坐标代表感光元件量化后的像素值强度，例如纵坐标为50就代表成像后的像素值为0.5x255…同时上图中 ISO 的调节可以将相机响应曲线平移，但是并不能改变相机响应曲线的形状。在x轴上平移就使得相机对不同的输入光强更敏感。ISO（感光度）</p>
+<p>因此相机响应函数就是指的上面这个曲线</p>
+<p><strong>ISO 控制传感器自身对亮度的感知范围</strong>，而 <strong>快门+光圈 = 曝光</strong>，快门控制进光时间，光圈代表进光的窗口大小</p>
+<h2 id="方法">方法</h2>
+<p>LIME以及其他使用Retinex分解的方法中，都认为 I = V X R 这个 V 是图像的亮度（或者叫曝光，曝光本质就是进入摄像机的总的光量），但其实更准确的说，这个 V 应该是物体反射后的光的强度。但是经过成像后，是有个相机响应模型的后处理，因此 这篇文章中认为 I = f(V) x R =&gt; R = I / f(V) =&gt; 其中V使用和LIME中类似的估计。而 f 函数是相机的响应曲线，对于固定的相机，这个响应曲线应该是固定的，因此在 一个数据集上 去 标定相机响应曲线的参数即可。</p>
+<p>那么增强的步骤就是：估计 亮度 V 带入抑制的相机响应模型对图像提亮</p>
+<p>（具体公式还得详细推导）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/63908/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -277,7 +676,7 @@
 <li><p>融合就是，将每张图的金子塔的同一层 拉普拉斯结果融合，加权系数为 他们对应的 高斯金子塔的值。整个过程就看作每张图相同层的拉普拉斯加权平均吧，权重是高斯金子塔的值。最顶层的就直接是 高斯图的平均。</p></li>
 <li><p>按照5最后获得的结果就是，除了最顶层是 高斯图，其他层都是拉普拉斯，将高斯 上采样+模糊+拉普拉斯 即可恢复</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425163023.png" alt="" /><figcaption>image-20201223210726030</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425163023.png" alt="image-20201223210726030" /><figcaption aria-hidden="true">image-20201223210726030</figcaption>
 </figure></li>
 </ol>
 <h2 id="其他融合方法">其他融合方法</h2>
@@ -385,14 +784,14 @@
 <p>加性噪声有一个很重要的性质：</p>
 <p><strong>每个像素点的噪声 在 空域 和 时域都是独立无关的</strong>，即当前像素的噪声值，和它领域的像素的噪声值 是无关的变量。在时域是指，同一个像素位置，不同时间拍的照，噪声强度也是相互独立的。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630214759.png" alt="" /><figcaption>image-20210630214759894</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630214759.png" alt="image-20210630214759894" /><figcaption aria-hidden="true">image-20210630214759894</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215237.png" alt="" /><figcaption>image-20210630215237457</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215237.png" alt="image-20210630215237457" /><figcaption aria-hidden="true">image-20210630215237457</figcaption>
 </figure>
 <p>其中 u 为干净的图像，n 为高斯白噪声。常用的均值滤波的方法，是多个像素点取平均，每个像素的噪声是独立无关的，加入这几个像素的 u(x) 都一样，即是相似像素。那么 多个像素值取平均 后 分布变为：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215244.png" alt="" /><figcaption>image-20210630215244594</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215244.png" alt="image-20210630215244594" /><figcaption aria-hidden="true">image-20210630215244594</figcaption>
 </figure>
 <p>如果 u(xi) 是常数，那么加权平均后的 u(x) 不变；对于第二项，噪声的方差明显成比例的缩小。 例如 一个噪声分布 nx(0, 1) ny(0,1) 对他俩加权平均 0.5 x nx 之后 分布变为 nx(0, 0.5^2) ny(0, 0.5^2) 两个乘系数后的分布再求和 n(0, 0.5^2 + 0.5^2) = n(0, 0.5) 所以均值后方差缩小了很多，就得到更干净的图像。</p>
 <p>上述理论也是 目前各种 空域去噪方法 例如 均值滤波，高斯滤波， 非局部均值去噪 的理论基础。</p>
@@ -425,7 +824,7 @@
 <h4 id="阈值滤波">阈值滤波</h4>
 <p>首先，常规的干净图像，它的频谱图在直流分量应该有较大的幅值。而高斯白噪声的正交变换后的频谱图依然是 同分布的高斯白噪声，例如下图：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701200050.png" alt="" /><figcaption>image-20210701200050585</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701200050.png" alt="image-20210701200050585" /><figcaption aria-hidden="true">image-20210701200050585</figcaption>
 </figure>
 <p>叠加有高斯白噪声的图像的频谱图相当于 在 相对原图 在每个频带 又叠加了一个高斯白噪声。但是这个高斯白噪声的幅值分布范围是是在 3 sigma 以内，当噪声sigma较小时，可以采用一个阈值法将频谱图 <strong>较低 幅值</strong> 的地方直接设置为0，认为这些是噪声对应的频带，但是这样无法去除隐藏在 直流分量中的噪声，所以不彻底。并且当噪声sigma较大时，也会使得 噪声和 部分图像的其他分量混合导致误杀，使图像模糊。</p>
 <h4 id="协同滤波">协同滤波</h4>
@@ -440,18 +839,18 @@
 <li>协同滤波中相似块的堆叠 其实和 非局部均值滤波思想类似，只不过<strong>一个是在时域对相似块的利用，一个在频域利用</strong>，后者计算复杂度低很多，但是对细节保留效果不好，因为<strong>该算法本身并没有把噪声的方差缩小</strong>，而无论我们怎样把低频分量的能量集中，总会有一些细节部分的的能量会被淹没在噪声当中，无法恢复。</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701213303.png" alt="" /><figcaption>image-20210701213302939</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701213303.png" alt="image-20210701213302939" /><figcaption aria-hidden="true">image-20210701213302939</figcaption>
 </figure>
 <h4 id="维也纳滤波">维也纳滤波</h4>
-<p><a href="/posts/46151/">图像处理-逆滤波和维纳滤波</a></p>
+<p><a href="./图像处理-逆滤波和维纳滤波.md">图像处理-逆滤波和维纳滤波</a></p>
 <p><strong>维纳滤波</strong>是在频域中处理图像的一种算法，是一种非常经典的图像增强算法，<strong>不仅可以进行图像降噪，还可以消除由于运动等原因带来的图像模糊</strong>。运动模糊可以在空域建模为卷积退化，将退化图像变换到频域，可以将 卷积 分解为点乘，然后寻求一个和干净图像的频谱均方差最小的解。将卷积信号设置为 1 即 不存在运动模糊时，就变为单纯的去噪方法，为下式：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701214422.png" alt="" /><figcaption>image-20210701214422250</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701214422.png" alt="image-20210701214422250" /><figcaption aria-hidden="true">image-20210701214422250</figcaption>
 </figure>
 <p>对于输入图像的功率普，干净图像的功率谱接近可以近似，噪声的功率谱使用固定方差去生成噪声图然后计算功率谱（所以这就得知道噪声的方差否则去噪效果不好）</p>
 <p>从上式直观的看，其实<strong>和前面的阈值滤波有点相似，本质上也是对噪声频谱的幅值进行抑制</strong>，只不过这个通过优化推导出的是最优解。当某个频带 原始信号能量 远大于 噪声信号能量，那么幅值系数接近于1不抑制。当原始信号能量 远小于 噪声信号能量，系数接近于0，抑制噪声。<strong>维纳收缩</strong></p>
 <h3 id="同态滤波">同态滤波</h3>
-<p><a href="/posts/65493/">图像处理-同态滤波</a></p>
+<p><a href="./图像处理-同态滤波.md">图像处理-同态滤波</a></p>
 <p>其实这是一种 频域图像增强方法。低光照图 = 反射分量 x 纹理值 ，反射分量比较平滑对应低频分量，而纹理对应高频。首先取对数 将乘变为加 然后 变换到频域使用 高通滤波 最后 恢复。即可剔除反射分量，提亮。</p>
 <h2 id="空域去噪">空域去噪</h2>
 <h3 id="高斯滤波">高斯滤波</h3>
@@ -463,12 +862,12 @@
 <h3 id="非局部均值滤波">非局部均值滤波</h3>
 <p>NL 考虑了和周围区域的相似度</p>
 <h3 id="tv变分去噪">TV变分去噪</h3>
-<p>有一系列的TV损失的变种，例如变分去噪法，非局部变分去噪，双噪声相似的非局部变分去噪 <a href="/posts/59491/">图像处理-双噪声相似性的去噪方法.</a></p>
+<p>有一系列的TV损失的变种，例如变分去噪法，非局部变分去噪，双噪声相似的非局部变分去噪 <a href="./图像处理-双噪声相似性的去噪方法.md">图像处理-双噪声相似性的去噪方法.</a></p>
 <p>## 混合域去噪</p>
 <h3 id="bm3d">BM3D</h3>
 <p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33552519/article/details/108632146">BM3D去噪方法讲解</a></strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701223354.png" alt="" /><figcaption>image-20210701223354016</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701223354.png" alt="image-20210701223354016" /><figcaption aria-hidden="true">image-20210701223354016</figcaption>
 </figure>
 <p>BM3D 方法其实是 协同滤波 和 维纳滤波的结合。分为两个步骤：</p>
 <p>步骤一：</p>
@@ -570,23 +969,23 @@
 <h2 id="图像中的同态滤波">图像中的同态滤波</h2>
 <p>在图像处理中，常常遇到动态范围很大但是暗区的细节又不清楚的现象，我们希望增强暗区细节的同时不损失亮区细节，一般来说，我们可以将图像f(x,y)建模成 <strong>照射强度（illumination）</strong> i(x,y) 和 <strong>反射强度（reflection）</strong> r(x,y)的乘积，所以有：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="" /><figcaption>image-20210606115221662</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="image-20210606115221662" /><figcaption aria-hidden="true">image-20210606115221662</figcaption>
 </figure>
 <p>一般来说，自然图片的光照一般是均匀渐变的，所以i应该是低频分量，而不同物体对光的反射是具有突变的，所以r是高频分量。现在我们对两边取对数，并做Fourier变换，得到线性组合的频率域。</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="" /><figcaption>image-20210606115234960</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="image-20210606115234960" /><figcaption aria-hidden="true">image-20210606115234960</figcaption>
 </figure>
 <p>我们希望对低频能量进行压制（抑制掉 光照分量），这样就降低了动态范围，而要对高频进行提高，这样就增强了图像的对比度，示意图如下：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="" /><figcaption>image-20210606115250493</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="image-20210606115250493" /><figcaption aria-hidden="true">image-20210606115250493</figcaption>
 </figure>
 <p>所以采用的滤波器为：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="" /><figcaption>image-20210606115300446</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="image-20210606115300446" /><figcaption aria-hidden="true">image-20210606115300446</figcaption>
 </figure>
 <p>操作完成后在按照之前介绍的步骤，反变换，求幂，即可得到处理后的图像，整个过程的流程图如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="" /><figcaption>image-20210606115350488</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="image-20210606115350488" /><figcaption aria-hidden="true">image-20210606115350488</figcaption>
 </figure>
 
       
@@ -671,7 +1070,7 @@
 <h2 id="低光照存在的挑战">低光照存在的挑战</h2>
 <p>背光，光照不均匀，弱光照，极低光照，彩色光，噪声等</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210605213901.png" alt="" /><figcaption>image-20210605213359244</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210605213901.png" alt="image-20210605213359244" /><figcaption aria-hidden="true">image-20210605213359244</figcaption>
 </figure>
 <h2 id="传统方法">传统方法</h2>
 <ul>
@@ -947,346 +1346,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/10008/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/10008/" class="post-title-link" itemprop="url">责任模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-22 20:55:32" itemprop="dateCreated datePublished" datetime="2021-05-22T20:55:32+08:00">2021-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:08:52" itemprop="dateModified" datetime="2021-08-30T20:08:52+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>行为模型模式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/10008/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/22548/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/22548/" class="post-title-link" itemprop="url">原型模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-22 17:45:01" itemprop="dateCreated datePublished" datetime="2021-05-22T17:45:01+08:00">2021-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:08:59" itemprop="dateModified" datetime="2021-08-30T20:08:59+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用原型实例指定要创建对象的类型，通过复制这个原型来创建新对象</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/22548/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/25129/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/25129/" class="post-title-link" itemprop="url">生成器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-22 15:17:27" itemprop="dateCreated datePublished" datetime="2021-05-22T15:17:27+08:00">2021-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:08:49" itemprop="dateModified" datetime="2021-08-30T20:08:49+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>生成器模式</strong>是一种创建型设计模式， 使你能够分步骤创建复杂对象。 该模式允许你使用相同的创建代码生成不同类型和形式的对象。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/25129/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/48237/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/48237/" class="post-title-link" itemprop="url">设计模式-创建型-抽象工厂</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-22 11:48:50" itemprop="dateCreated datePublished" datetime="2021-05-22T11:48:50+08:00">2021-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:08:10" itemprop="dateModified" datetime="2021-08-30T20:08:10+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>提供一个接口，用于创建 <strong>相关的对象家族</strong> 。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/48237/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1360,7 +1419,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

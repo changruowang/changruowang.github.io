@@ -282,23 +282,23 @@
 <h2 id="图像中的同态滤波">图像中的同态滤波</h2>
 <p>在图像处理中，常常遇到动态范围很大但是暗区的细节又不清楚的现象，我们希望增强暗区细节的同时不损失亮区细节，一般来说，我们可以将图像f(x,y)建模成 <strong>照射强度（illumination）</strong> i(x,y) 和 <strong>反射强度（reflection）</strong> r(x,y)的乘积，所以有：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="" /><figcaption>image-20210606115221662</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115221662.png" alt="image-20210606115221662" /><figcaption aria-hidden="true">image-20210606115221662</figcaption>
 </figure>
 <p>一般来说，自然图片的光照一般是均匀渐变的，所以i应该是低频分量，而不同物体对光的反射是具有突变的，所以r是高频分量。现在我们对两边取对数，并做Fourier变换，得到线性组合的频率域。</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="" /><figcaption>image-20210606115234960</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115234960.png" alt="image-20210606115234960" /><figcaption aria-hidden="true">image-20210606115234960</figcaption>
 </figure>
 <p>我们希望对低频能量进行压制（抑制掉 光照分量），这样就降低了动态范围，而要对高频进行提高，这样就增强了图像的对比度，示意图如下：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="" /><figcaption>image-20210606115250493</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115250493.png" alt="image-20210606115250493" /><figcaption aria-hidden="true">image-20210606115250493</figcaption>
 </figure>
 <p>所以采用的滤波器为：</p>
 <figure>
-<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="" /><figcaption>image-20210606115300446</figcaption>
+<img src="C:/Users/10729/AppData/Roaming/Typora/typora-user-images/image-20210606115300446.png" alt="image-20210606115300446" /><figcaption aria-hidden="true">image-20210606115300446</figcaption>
 </figure>
 <p>操作完成后在按照之前介绍的步骤，反变换，求幂，即可得到处理后的图像，整个过程的流程图如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="" /><figcaption>image-20210606115350488</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210606115350.png" alt="image-20210606115350488" /><figcaption aria-hidden="true">image-20210606115350488</figcaption>
 </figure>
 
     </div>
@@ -398,7 +398,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -301,7 +301,7 @@
 <h4 id="透明传输">透明传输</h4>
 <p>透明表示一个实际存在的事物看起来好像不存在一样 。帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。<strong>这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在</strong>。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091812.png" alt="" /><figcaption>image-20201202210820341</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091812.png" alt="image-20201202210820341" /><figcaption aria-hidden="true">image-20201202210820341</figcaption>
 </figure>
 <h4 id="差错检测">差错检测</h4>
 <p>差错是不可避免的。而且不同的传输介质的差错程度也是不同的。链路层的任务就是分析差错产生的原因，检查差错，然后纠正差错。 目前数据链路层广泛使用了循环冗余检验（CRC）来检查比特差错。使用滑窗协议来解决出现差错（有两种），大概是发一帧，受到之后CRC校验没问题应带ACK 再发下一帧，否则重发这一帧….</p>
@@ -319,7 +319,7 @@
 <li><p>波分复用：光的频分复用。在同一根光纤中同时传输两个或众多不同波长光信号的技术，称为波分复用</p></li>
 <li><p>码分复用：为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片<span class="math inline">\(\vec{S}\)</span> 和 $ $ 有 <span class="math inline">\(\frac{1}{m} \vec{S} \cdot \vec{T}=0\)</span> 为了讨论方便，取 m=8，设码片 <span class="math inline">\(\vec{S}\)</span> 为 0 0011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091820.png" alt="" /><figcaption>image-20201202222641379</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091820.png" alt="image-20201202222641379" /><figcaption aria-hidden="true">image-20201202222641379</figcaption>
 </figure>
 <p>利用上面的式子我们知道，当接收端使用码片 <span class="math inline">\(\vec{S}\)</span> 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。<strong>码分复用需要发送的数据量为原先的 m 倍。</strong> 例如 A 的 码片是 1 1 -1 -1</p>
 <p>B 的码片是 -1 1 -1 1 那么 A B 的内积为 0 ；如果要发送A的0bit 就发送 A码片否则发送A的反码。从这里看出，如果要两个码片正交，那么码片的位数一定得是偶数位，并且对应位乘积后，正负1对半开，这样就正交了，这个和数学上的正交坐标系思想一样但是实现方式不太一样，主要是数学上一下子就容易想到 （0, 1, 0） (1,0,0)这种正交，但是这种没法用两种状态来表示，至少需要 0 1 -1</p></li>
@@ -342,14 +342,14 @@
 <li>信息部分的长度不超过 1500</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091829.png" alt="" /><figcaption>image-20201202225254343</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091829.png" alt="image-20201202225254343" /><figcaption aria-hidden="true">image-20201202225254343</figcaption>
 </figure>
 <h3 id="mac地址">MAC地址</h3>
 <p>MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标识网络适配器（网卡）。一台主机拥有多少个网络适配器就有多少个 MAC 地址。例如笔记本电脑普遍存在无线网络适配器和有线网络适配器，因此就有两个 MAC 地址。</p>
 <h3 id="局域网">局域网</h3>
 <p>局域网是一种典型的广播信道，主要特点是网络为一个单位所拥有，且地理范围和站点数目均有限。主要有以太网、令牌环网、FDDI 和 ATM 等局域网技术，目前以太网占领着有线局域网市场。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091836.png" alt="" /><figcaption>image-20201202225413801</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091836.png" alt="image-20201202225413801" /><figcaption aria-hidden="true">image-20201202225413801</figcaption>
 </figure>
 <h4 id="以太网">以太网</h4>
 <p>是一种局域网</p>
@@ -360,18 +360,18 @@
 <li><strong>FCS</strong> ：帧检验序列，使用的是 CRC 检验方法；</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091856.png" alt="" /><figcaption>image-20201202225529512</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091856.png" alt="image-20201202225529512" /><figcaption aria-hidden="true">image-20201202225529512</figcaption>
 </figure>
 <h3 id="交换机">交换机</h3>
 <p>交换机具有自学习能力，学习的是交换表的内容，交换表中存储着 MAC 地址到接口的映射。正是由于这种自学习能力，因此交换机是一种即插即用设备，不需要网络管理员手动配置交换表内容。</p>
 <p>下图中，交换机有 4 个接口，主机 A 向主机 B 发送数据帧时，交换机把主机 A 到接口 1 的映射写入交换表中。为了发送数据帧到 B，先查交换表，此时没有主机 B 的表项，那么主机 A 就发送广播帧，主机 C 和主机 D 会丢弃该帧，主机 B 回应该帧向主机 A 发送数据包时，交换机查找交换表得到主机 A 映射的接口为 1，就发送数据帧到接口 1，同时交换机添加主机 B 到接口 2 的映射。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091906.png" alt="" /><figcaption>image-20201202225650091</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091906.png" alt="image-20201202225650091" /><figcaption aria-hidden="true">image-20201202225650091</figcaption>
 </figure>
 <h3 id="虚拟局域网">虚拟局域网</h3>
 <p>虚拟局域网可以建立与物理位置无关的逻辑组，只有在同一个虚拟局域网中的成员才会收到链路层广播信息。例如下图中 (A1, A2, A3, A4) 属于一个虚拟局域网，A1 发送的广播会被 A2、A3、A4 收到，而其它站点收不到。例如下图中 (A1, A2, A3, A4) 属于一个虚拟局域网，A1 发送的广播会被 A2、A3、A4 收到，而其它站点收不到。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091916.png" alt="" /><figcaption>image-20201202225733826</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091916.png" alt="image-20201202225733826" /><figcaption aria-hidden="true">image-20201202225733826</figcaption>
 </figure>
 
     </div>
@@ -471,7 +471,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

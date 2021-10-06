@@ -282,12 +282,12 @@
 <li>在图像的平坦区域，像素值变化很小，对应的像素范围域权重接近于1，此时空间域权重起主要作用，相当于进行高斯模糊</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205234.png" alt="" /><figcaption>1594710898655</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205234.png" alt="1594710898655" /><figcaption aria-hidden="true">1594710898655</figcaption>
 </figure>
 <h3 id="快速双边滤波">快速双边滤波</h3>
 <p>​ 直接计算的话，上述运算量很大 因为每个位置的 值域的 权重都得重新计算。；滤波窗口越大计算量也越大。快速算法的思想是在原本的二维图像上增加一个新的值域维度。然后使用3维卷积滤波，加速计算。下面以一个一维信号来举例。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205143.png" alt="" /><figcaption>1594711300931</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205143.png" alt="1594711300931" /><figcaption aria-hidden="true">1594711300931</figcaption>
 </figure>
 <ul>
 <li>第一步创建双边网格。将整个网格初始化为0 。对于上右图所示的一维信号而言，如果不考虑downsample unsample sliceing的过程。将一维信号变为二维的方法就是 若原信号x位置的 值 为20，则对于 左边的wi 双边网格的 (x,y) 坐标 填充为20； 右边的w双边网格的 (x, y) 坐标位置填充 1 (为填充的位置初始为0) 这样将原始x信号依次填充 网格</li>
@@ -296,7 +296,7 @@
 </ul>
 <p>​ 对于二维图像，增加一个值域坐标轴 就是三维的了 过程类似。同时为了降低计算量。原文作者的双边网格其实是在较原图较小的分辨率上做的。对于在一个bin里面的很多像素取平均.... 在低分辨率下得到的双边网格最后插值的方法上采样即可。具体算法流程如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205234.png" alt="" /><figcaption>1594713161307</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205234.png" alt="1594713161307" /><figcaption aria-hidden="true">1594713161307</figcaption>
 </figure>
 
     </div>
@@ -396,7 +396,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

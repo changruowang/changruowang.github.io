@@ -281,13 +281,13 @@
 <p><strong>进程是资源分配的基本单位</strong> <strong>进程控制块</strong> (Process Control Block, PCB) 描述进程的基本信息和运行状态，所谓的创建进程和撤销进程，都是指对 PCB 的操作。</p>
 <p>下图显示了 4 个程序创建了 4 个进程，这 4 个进程可以并发地执行。</p>
 <figure>
-<img src="https://i.loli.net/2021/04/05/AeMS9o8yiCLPusB.png" alt="" /><figcaption>image-20201209215006274</figcaption>
+<img src="https://i.loli.net/2021/04/05/AeMS9o8yiCLPusB.png" alt="image-20201209215006274" /><figcaption aria-hidden="true">image-20201209215006274</figcaption>
 </figure>
 <h3 id="线程">线程</h3>
 <p><strong>线程是独立调度的基本单位</strong>。<strong>一个进程中可以有多个线程，它们共享进程资源。</strong></p>
 <p>QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 HTTP 请求线程、事件响应线程、渲染线程等等，线程的并发执行使得在浏览器中点击一个新链接从而发起 HTTP 请求时，浏览器还可以响应用户的其它事件</p>
 <figure>
-<img src="https://i.loli.net/2021/04/05/7E4Gey5J2B6WoDO.png" alt="" /><figcaption>image-20201209215107055</figcaption>
+<img src="https://i.loli.net/2021/04/05/7E4Gey5J2B6WoDO.png" alt="image-20201209215107055" /><figcaption aria-hidden="true">image-20201209215107055</figcaption>
 </figure>
 <p>（内核线程）</p>
 <h3 id="协程">协程</h3>
@@ -302,7 +302,7 @@
 </ol>
 <h2 id="进程状态的切换">进程状态的切换</h2>
 <figure>
-<img src="https://i.loli.net/2021/04/05/H7qwl3ELoWCYVMb.png" alt="" /><figcaption>image-20201209221158792</figcaption>
+<img src="https://i.loli.net/2021/04/05/H7qwl3ELoWCYVMb.png" alt="image-20201209221158792" /><figcaption aria-hidden="true">image-20201209221158792</figcaption>
 </figure>
 <ul>
 <li>就绪状态（ready）：等待被调度</li>
@@ -344,7 +344,7 @@
 <p>这种调度算法看成是时间片轮转调度算法和优先级调度算法的结合。</p>
 <p>一个进程需要执行 100 个时间片，如果采用时间片轮转调度算法，那么需要交换 100 次。多级队列是为这种需要连续执行多个时间片的进程考虑，它设置了多个队列，每个队列时间片大小都不同，例如 1,2,4,8,..。<strong>进程在第一个队列没执行完，就会被移到下一个队列</strong>。每个队列优先权也不同，最上面的优先权最高。<strong>因此只有上一个队列没有进程在排队，才能调度当前队列上的进程。</strong></p>
 <figure>
-<img src="https://i.loli.net/2021/04/05/TKNOGUfedsZpRcg.png" alt="" /><figcaption>image-20201209225512870</figcaption>
+<img src="https://i.loli.net/2021/04/05/TKNOGUfedsZpRcg.png" alt="image-20201209225512870" /><figcaption aria-hidden="true">image-20201209225512870</figcaption>
 </figure>
 <h3 id="实时系统">实时系统</h3>
 <p>实时系统要求一个请求在一个确定时间内得到响应。分为硬实时和软实时，前者必须满足绝对的截止时间，后者可以容忍一定的超时。</p>
@@ -387,7 +387,7 @@
 </blockquote>
 <p>按题目的流程，伪代码表示如下（用一个互斥变量来保护一个筷子，拿筷子即为把该变量置0 这样就实现了题目要求的 一只筷子只能一个人拿，然后按流程组织得到下面初步结果）：</p>
 <figure>
-<img src="https://i.loli.net/2021/04/05/YOthIRWPr2Cse57.png" alt="" /><figcaption>image-20201210213841188</figcaption>
+<img src="https://i.loli.net/2021/04/05/YOthIRWPr2Cse57.png" alt="image-20201210213841188" /><figcaption aria-hidden="true">image-20201210213841188</figcaption>
 </figure>
 <p>这样存在的问题是 如果这些人 都同时拿起坐边的筷子，然后等右手的筷子，那么就会导致锁死。可以从以下几个思路改进</p>
 <ol type="1">
@@ -536,7 +536,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

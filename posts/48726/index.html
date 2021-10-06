@@ -291,7 +291,7 @@
 <pre><code>        2. 该节点没有子节点。这时就要回溯了，一直找到它父节点，知道它是父节点的左子树为止。 具体要参照中序遍历的输出规律。好理解</code></pre>
 <h4 id="矩形填充"><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/72a5a919508a4251859fb2cfb987a0e6?tpId=13&amp;tqId=11163&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking&amp;from=cyc_github">矩形填充</a></h4>
 <figure>
-<img src="https://i.loli.net/2021/03/28/aMROkmxHqfGSeX9.png" alt="" /><figcaption>image-20200912171353588</figcaption>
+<img src="https://i.loli.net/2021/03/28/aMROkmxHqfGSeX9.png" alt="image-20200912171353588" /><figcaption aria-hidden="true">image-20200912171353588</figcaption>
 </figure>
 <p>f(n) = f(n-1) + f(n-2) 斐波拉西</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/">青蛙跳台阶</a></p>
@@ -306,7 +306,7 @@
 <h4 id="正则表达式匹配"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/solution/shi-pin-tu-jie-dong-tai-gui-hua-zheng-ze-biao-da-s/">正则表达式匹配</a></h4>
 <p>​ 动态规划。f[i] [j] 表示字符串 s (目标字符串) 的 前 i 个 字符 和 p (正则字符串) 的前 j 个字符 匹配的状态。那么对于 f[i] [j] 当 p[j] 不是 “*” 时就很简单 只用看 i-1 j-1 的状态 和 s[i] 与 s[j] 是否匹配（相等或者为‘.’）即可。复杂的是 当 p[j] 为※号时的情况。如果 ※号的用法可以分为两类： 1. 他前面一个字符出现0次，就是消掉他，那么 f[i] [j] 的状态由 f[i] [j-2]决定。 2. ✳将他前面的字符重复1-n次的情况。此时 若 s[i] 和 p[j-1] 匹配,例如都等于a，那么就由 f[i-1] [j] 状态决定，此时相当于 s[i-1] 后面再加一个 a 此时 ✳再复制一次即可 所以状态取决于 f[i-1] [j]</p>
 <figure>
-<img src="https://i.loli.net/2021/03/28/VFQRBkwazWuAI7s.png" alt="" /><figcaption>image-20200914202819724</figcaption>
+<img src="https://i.loli.net/2021/03/28/VFQRBkwazWuAI7s.png" alt="image-20200914202819724" /><figcaption aria-hidden="true">image-20200914202819724</figcaption>
 </figure>
 <h4 id="删除链表倒数第k个节点"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/submissions/">删除链表倒数第K个节点</a></h4>
 <p>​ 核心的 使用快慢指针 先将快指针 从头往后移动K个，再二者一起 往后移动 ，知道快指针为NULL 责慢指针停下的地方就是 了。为了排除 边界情况 可以在链表头加一个 哑铃节点，然后 每次让慢指针停在 待删除节点的前一个节点。这样就不用备份慢指针的父节点啦。</p>
@@ -343,7 +343,7 @@
 
         2. **使用优先队列的方式**。构建一个大顶堆和一个小顶堆。大顶堆保存中位数左边较小的 数据，小顶堆保存中位数右边较大的数据。每次插入新数据，先将其加入大顶堆，再将大顶堆的最大数据弹出 加入小顶堆；然后判断一下两个堆的大小，保证大顶堆的数据量&gt;小顶堆的。求中值的时候，奇数个数据就是 大顶堆数据 最大的那个 4，3  偶数二者平均。 加入新数据 时间复杂度 O(logn)  </code></pre>
 <figure>
-<img src="https://i.loli.net/2021/03/28/HNhUWojJM6A1tsx.png" alt="" /><figcaption>image-20200917215844317</figcaption>
+<img src="https://i.loli.net/2021/03/28/HNhUWojJM6A1tsx.png" alt="image-20200917215844317" /><figcaption aria-hidden="true">image-20200917215844317</figcaption>
 </figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> &#123;</span></span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>&gt; lo;                              <span class="comment">// 大顶堆</span></span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; hi;   <span class="comment">// 小顶堆</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Adds a number into the data structure.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        lo.<span class="built_in">push</span>(num);                                    <span class="comment">// 加到大顶堆</span></span><br><span class="line"></span><br><span class="line">        hi.<span class="built_in">push</span>(lo.<span class="built_in">top</span>());                               <span class="comment">// 平衡</span></span><br><span class="line">        lo.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lo.<span class="built_in">size</span>() &lt; hi.<span class="built_in">size</span>()) &#123;                     <span class="comment">// 维护两个堆元素个数</span></span><br><span class="line">            lo.<span class="built_in">push</span>(hi.<span class="built_in">top</span>());</span><br><span class="line">            hi.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns the median of current data stream</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lo.<span class="built_in">size</span>() &gt; hi.<span class="built_in">size</span>() ? (<span class="keyword">double</span>) lo.<span class="built_in">top</span>() : (lo.<span class="built_in">top</span>() + hi.<span class="built_in">top</span>()) * <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h4 id="数字-1-的个数"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-digit-one/">数字 1 的个数</a></h4>
@@ -366,7 +366,7 @@
 <h4 id="数组中数字出现的次数"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/">数组中数字出现的次数</a></h4>
 <p>​ 这个题用 异或 做 异或的性质</p>
 <figure>
-<img src="https://i.loli.net/2021/03/28/mQfvBUKTstk4xGa.png" alt="" /><figcaption>image-20200923110415455</figcaption>
+<img src="https://i.loli.net/2021/03/28/mQfvBUKTstk4xGa.png" alt="image-20200923110415455" /><figcaption aria-hidden="true">image-20200923110415455</figcaption>
 </figure>
 <p>​ 如果对于一个数组 只有一个数字出现了 一次,其他数字都出现了两次，找出这个单独的数字。根据异或的性质，全员异或 最终的结果便是这个单独的数字。而此题是有两个不同的单独的数字，要找出这两个。最直观的想法是，将这两个不同的数字分别放在两组，然后每组中除了 这个单独的数字就是其他成对的数字，这就退化成了 第一个问题。即要求分组的数字 有以下性质：</p>
 <ol type="1">
@@ -394,7 +394,7 @@
 <p>位运算 两个数相加 可以分为两部分 ： 无进位和 + 进位 满足以下规律：</p></li>
 </ul>
 <figure>
-<img src="https://i.loli.net/2021/03/28/yPMmYSpuXVrzJ6x.png" alt="" /><figcaption>image-20200924203153740</figcaption>
+<img src="https://i.loli.net/2021/03/28/yPMmYSpuXVrzJ6x.png" alt="image-20200924203153740" /><figcaption aria-hidden="true">image-20200924203153740</figcaption>
 </figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;   <span class="comment">//当进位 为  0 时 就停止递归 计算结束</span></span><br><span class="line">        <span class="keyword">return</span> b ? <span class="built_in">add</span>(a^b, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(a&amp;b)&lt;&lt;<span class="number">1</span>) : a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -498,7 +498,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

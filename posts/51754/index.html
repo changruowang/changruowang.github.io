@@ -341,7 +341,7 @@
 <h4 id="分层配准">分层配准</h4>
 <p>作者采用了一个由粗到细的配准策略。具体的是构建一个高斯金字塔的结构，先从顶层配（粗）， 将上层的配准结果作为下一层的固定偏移。每层配准的表达式</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="" /><figcaption>image-20210628093708522</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628093708.png" alt="image-20210628093708522" /><figcaption aria-hidden="true">image-20210628093708522</figcaption>
 </figure>
 <p>其中 u0 v0 为上一层配准的偏移结果，p 可能是 L1/L2距离，n 是计算相似度窗口的大小。u v 即为要求的 偏移；因此求u v 即为优化D的最小值。关于窗口的大小 和 采用的损失类型会在后面讨论。另外这里没有采用归一化互相关系数类似NCC中的东西对光照对比度做归一化是因为作者认为采集的几帧图像都是在相同曝光才采集的亮度一致。</p>
 <p><font color=red> 边界情况怎么处理？</font></p>
@@ -356,15 +356,15 @@
 <p>如果不采用尺度金子塔的策略，最底层就要 做一个搜索半径变化范围很大的对齐，例如可能一次就要估计出 +20 的偏移，如果使用L2加速对齐策略，这里一次L2最优估计很容易陷入局部最优，采用L1做精细搜索显然计算量很大。</p>
 <h4 id="快速l2对齐">快速L2对齐</h4>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="" /><figcaption>image-20210628111641192</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111641.png" alt="image-20210628111641192" /><figcaption aria-hidden="true">image-20210628111641192</figcaption>
 </figure>
 <p>其实就是前面那个 L2 损失 可以分解为为局部和、局部平方和 以及 卷积计算两部分。前者可以通过积分图加速，后者可以在频域加速。然后假设为 D2为 待估计参数偏移 （u,v）的一个二元二次表达式，如下，我们可以通过计算几个固定偏移 (u v) 下对应的 D2值来估计固定参数A ,b c</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="" /><figcaption>image-20210628111927519</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628111927.png" alt="image-20210628111927519" /><figcaption aria-hidden="true">image-20210628111927519</figcaption>
 </figure>
 <p>最后全局最优值 (u , v) 即为:</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="" /><figcaption>image-20210628112051053</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210628112051.png" alt="image-20210628112051053" /><figcaption aria-hidden="true">image-20210628112051053</figcaption>
 </figure>
 <p>所以这是一种近似最优的L2加速方法，不需要搜索每个可能的偏移值，只需要计算几个离散的点做一个二次多项式拟合。</p>
 <h3 id="多帧去噪">多帧去噪</h3>
@@ -376,20 +376,20 @@
 <li>首先一个方法，如下式，简单的将每个帧的频谱图加权平均，但是这样效果最差，<strong>因为正交变换是线性的，这样加权等同于直接在空域中对多帧取平均</strong>，因此如果有旋转不对齐的情况鬼影就很严重。</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="" /><figcaption>image-20210704160856275</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704160856.png" alt="image-20210704160856275" /><figcaption aria-hidden="true">image-20210704160856275</figcaption>
 </figure>
 <ol start="2" type="1">
-<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考 <a href="/posts/24335/">图像处理-传统去噪算法汇总.</a> 将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p></li>
+<li><p>接着还有 3D 卷积的方法，类似于BM3D中的做法 参考 <a href="../传统图像处理/图像处理-传统去噪算法汇总.md">图像处理-传统去噪算法汇总.</a> 将时域的图像组成3D块然后先对两维变换再在时域第三维做变换，利用白噪声正交变换分布不变的思路通过新增维度的正交变换将能量进一步聚集，拉开噪声幅值和信号幅值的差距，然后采用硬阈值或者软阈值滤波滤掉噪声。但是这种方法也要依赖相似块是否对其，否则在第三维中会引入新的频带信号和噪声混合被一同滤除，相当于还是做了模糊。</p></li>
 <li><p>最后作者的方法是 对 1 的一个改进。如下式，其实就是 (1 - A) T + A T0 A是个系数 。相当于在参考帧 和 其他帧 的频谱之间做了个线性插值，而不是直接取平均。这个插值系数由 两帧之间的频谱差异 D 计算。但是不是简单的差异，而是拿噪声的强度做了个参考，如果差异相对噪声频谱的强度很大，表明不对齐，那么就给较小的插值系数；反之给较大的权重。<strong>系数 类似 像素级别的维纳收缩的系数</strong>，<strong>只不过维纳收缩中 使用信号噪声的比 来确定收缩系数，这里使用 频谱功率差异和噪声的比来确定每对儿的插值系数。</strong></p></li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="" /><figcaption>image-20210704162829608</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162829.png" alt="image-20210704162829608" /><figcaption aria-hidden="true">image-20210704162829608</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="" /><figcaption>image-20210704162934904</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162934.png" alt="image-20210704162934904" /><figcaption aria-hidden="true">image-20210704162934904</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="" /><figcaption>image-20210704162947537</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210704162947.png" alt="image-20210704162947537" /><figcaption aria-hidden="true">image-20210704162947537</figcaption>
 </figure>
 <p>最后，作者说他们的方法 可以在 图像去噪质量 和 鬼影问题 做个较好的权衡</p>
 <h4 id="空间去噪">空间去噪</h4>
@@ -533,7 +533,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

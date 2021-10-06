@@ -285,7 +285,7 @@
 </ul>
 <h3 id="udptcp-首部格式">UDP/TCP 首部格式</h3>
 <figure>
-<img src="https://i.loli.net/2021/04/05/oqmREA9cFxWiZt3.png" alt="" /><figcaption>image-20201207200213483</figcaption>
+<img src="https://i.loli.net/2021/04/05/oqmREA9cFxWiZt3.png" alt="image-20201207200213483" /><figcaption aria-hidden="true">image-20201207200213483</figcaption>
 </figure>
 <p>UDP首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
 <p>TCP 首部：</p>
@@ -300,7 +300,7 @@
 </ul>
 <h3 id="tcp-的三次握手">TCP 的三次握手</h3>
 <figure>
-<img src="https://i.loli.net/2021/04/05/9isQeZEN8VRupmv.png" alt="" /><figcaption>image-20201207200623727</figcaption>
+<img src="https://i.loli.net/2021/04/05/9isQeZEN8VRupmv.png" alt="image-20201207200623727" /><figcaption aria-hidden="true">image-20201207200623727</figcaption>
 </figure>
 <p>假设 A 为客户端，B 为服务器端。</p>
 <ul>
@@ -314,7 +314,7 @@
 <p>第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。 客户端发送的连接请求如果在网络中滞留，那么就会隔很长一段时间才能收到服务器端发回的连接确认。客户端等待一个超时重传时间之后，就会重新请求连接。但是这个滞留的连接请求最后还是会到达服务器，如果不进行三次握手，那么服务器就会打开两个连接。如果有第三次握手，客户端会忽略服务器之后发送的对滞留连接请求的连接确认，不进行第三次握手，因此就不会再次打开连接。</p>
 <h3 id="tcp-四次挥手">TCP 四次挥手</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091652.png" alt="" /><figcaption>image-20201207201452127</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091652.png" alt="image-20201207201452127" /><figcaption aria-hidden="true">image-20201207201452127</figcaption>
 </figure>
 <ul>
 <li>A 发送连接释放报文，FIN=1。</li>
@@ -332,14 +332,14 @@
 <h3 id="tcp-可靠传输">TCP 可靠传输</h3>
 <p>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。其中 RTTd 为偏差的加权平均值。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091711.png" alt="" /><figcaption>image-20201207202638734</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091711.png" alt="image-20201207202638734" /><figcaption aria-hidden="true">image-20201207202638734</figcaption>
 </figure>
 <h3 id="tcp-的滑动窗口">TCP 的滑动窗口</h3>
 <p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，滑动窗口协议是<strong>传输层进行流控</strong>的一种措施，<strong>接收方通过通告发送方自己的窗口大小</strong>，从而控制发送方的发送速度，从而达到防止发送方发送速度过快而导致自己被淹没的目的。</p>
 <p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。</p>
 <p>对ACK的再认识，ack通常被理解为收到数据后给出的一个确认ACK，ACK包含两个非常重要的信息： <strong>一是期望接收到的下一字节的序号n，该n代表接收方已经接收到了前n-1字节数据，此时如果接收方收到第n+1字节数据而不是第n字节数据，接收方是不会发送序号为n+2的ACK的。</strong>举个例子，假如接收端收到1-1024字节，它会发送一个确认号为1025的ACK,但是接下来收到的是2049-3072，它是不会发送确认号为3072的ACK,而依旧发送1025的ACK。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091720.png" alt="" /><figcaption>image-20201207203211039</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091720.png" alt="image-20201207203211039" /><figcaption aria-hidden="true">image-20201207203211039</figcaption>
 </figure>
 <h3 id="tcp-流量控制">TCP 流量控制</h3>
 <p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
@@ -352,7 +352,7 @@
 <li><p>接收方有足够大的接收缓存，因此不会发生流量控制；</p></li>
 <li><p>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091731.png" alt="" /><figcaption>image-20201207211202040</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091731.png" alt="image-20201207211202040" /><figcaption aria-hidden="true">image-20201207211202040</figcaption>
 </figure></li>
 </ul>
 <ol type="1">
@@ -367,7 +367,7 @@
 </ul></li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091741.png" alt="" /><figcaption>image-20201207210545841</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210406091741.png" alt="image-20201207210545841" /><figcaption aria-hidden="true">image-20201207210545841</figcaption>
 </figure>
 
     </div>
@@ -467,7 +467,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

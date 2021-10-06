@@ -277,7 +277,7 @@
 <p>https://jacktang816.github.io/post/mallocandfree/</p>
 <h2 id="进程地址空间">进程地址空间</h2>
 <figure>
-<img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="" /><figcaption>img</figcaption>
+<img src="https://jacktang816.github.io/img/linux/linuxAddrSpace.png" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure>
 <p>如上图所示在一个32位系统中，可寻址的空间大小是4G，linux系统下0-3G是用户模式，3-4G是内核模式。而在用户模式下又分为代码段、数据段、.bss段、堆、栈。</p>
 <ul>
@@ -320,7 +320,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">brk</span><span class="params">(<span class="keyword">void</span> *addr)</span></span>;             <span class="comment">//将brk指针直接设置为某个地址</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">sbrk</span><span class="params">(<span class="keyword">intptr_t</span> increment)</span></span>;  <span class="comment">//将brk指针从当前位置移动increment所指定的增量 ，失败返回-1</span></span><br></pre></td></tr></table></figure>
 <p><strong>进程所面对的虚拟内存地址空间，只有按页映射到物理内存地址，才能真正使用</strong>。受物理存储容量限制，整个堆虚拟内存空间不可能全部映射到实际的物理内存。因此每个进程有一个<strong>rlimit</strong>表示当前进程可用的资源上限。这个限制可以通过<strong>getrlimit系统调用</strong>得到。</p>
 <figure>
-<img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="" /><figcaption>img</figcaption>
+<img src="https://jacktang816.github.io/img/linux/heapSpace.png" alt="img" /><figcaption aria-hidden="true">img</figcaption>
 </figure>
 <h4 id="mmap">mmap</h4>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, off\<span class="keyword">_t</span> offset)</span></span>;  <span class="comment">// 向映射区申请一块内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length)</span></span>;   <span class="comment">// 用于释放内存</span></span><br></pre></td></tr></table></figure>
@@ -464,7 +464,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

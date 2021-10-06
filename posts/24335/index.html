@@ -304,14 +304,14 @@
 <p>加性噪声有一个很重要的性质：</p>
 <p><strong>每个像素点的噪声 在 空域 和 时域都是独立无关的</strong>，即当前像素的噪声值，和它领域的像素的噪声值 是无关的变量。在时域是指，同一个像素位置，不同时间拍的照，噪声强度也是相互独立的。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630214759.png" alt="" /><figcaption>image-20210630214759894</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630214759.png" alt="image-20210630214759894" /><figcaption aria-hidden="true">image-20210630214759894</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215237.png" alt="" /><figcaption>image-20210630215237457</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215237.png" alt="image-20210630215237457" /><figcaption aria-hidden="true">image-20210630215237457</figcaption>
 </figure>
 <p>其中 u 为干净的图像，n 为高斯白噪声。常用的均值滤波的方法，是多个像素点取平均，每个像素的噪声是独立无关的，加入这几个像素的 u(x) 都一样，即是相似像素。那么 多个像素值取平均 后 分布变为：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215244.png" alt="" /><figcaption>image-20210630215244594</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210630215244.png" alt="image-20210630215244594" /><figcaption aria-hidden="true">image-20210630215244594</figcaption>
 </figure>
 <p>如果 u(xi) 是常数，那么加权平均后的 u(x) 不变；对于第二项，噪声的方差明显成比例的缩小。 例如 一个噪声分布 nx(0, 1) ny(0,1) 对他俩加权平均 0.5 x nx 之后 分布变为 nx(0, 0.5^2) ny(0, 0.5^2) 两个乘系数后的分布再求和 n(0, 0.5^2 + 0.5^2) = n(0, 0.5) 所以均值后方差缩小了很多，就得到更干净的图像。</p>
 <p>上述理论也是 目前各种 空域去噪方法 例如 均值滤波，高斯滤波， 非局部均值去噪 的理论基础。</p>
@@ -344,7 +344,7 @@
 <h4 id="阈值滤波">阈值滤波</h4>
 <p>首先，常规的干净图像，它的频谱图在直流分量应该有较大的幅值。而高斯白噪声的正交变换后的频谱图依然是 同分布的高斯白噪声，例如下图：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701200050.png" alt="" /><figcaption>image-20210701200050585</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701200050.png" alt="image-20210701200050585" /><figcaption aria-hidden="true">image-20210701200050585</figcaption>
 </figure>
 <p>叠加有高斯白噪声的图像的频谱图相当于 在 相对原图 在每个频带 又叠加了一个高斯白噪声。但是这个高斯白噪声的幅值分布范围是是在 3 sigma 以内，当噪声sigma较小时，可以采用一个阈值法将频谱图 <strong>较低 幅值</strong> 的地方直接设置为0，认为这些是噪声对应的频带，但是这样无法去除隐藏在 直流分量中的噪声，所以不彻底。并且当噪声sigma较大时，也会使得 噪声和 部分图像的其他分量混合导致误杀，使图像模糊。</p>
 <h4 id="协同滤波">协同滤波</h4>
@@ -359,18 +359,18 @@
 <li>协同滤波中相似块的堆叠 其实和 非局部均值滤波思想类似，只不过<strong>一个是在时域对相似块的利用，一个在频域利用</strong>，后者计算复杂度低很多，但是对细节保留效果不好，因为<strong>该算法本身并没有把噪声的方差缩小</strong>，而无论我们怎样把低频分量的能量集中，总会有一些细节部分的的能量会被淹没在噪声当中，无法恢复。</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701213303.png" alt="" /><figcaption>image-20210701213302939</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701213303.png" alt="image-20210701213302939" /><figcaption aria-hidden="true">image-20210701213302939</figcaption>
 </figure>
 <h4 id="维也纳滤波">维也纳滤波</h4>
-<p><a href="/posts/46151/">图像处理-逆滤波和维纳滤波</a></p>
+<p><a href="./图像处理-逆滤波和维纳滤波.md">图像处理-逆滤波和维纳滤波</a></p>
 <p><strong>维纳滤波</strong>是在频域中处理图像的一种算法，是一种非常经典的图像增强算法，<strong>不仅可以进行图像降噪，还可以消除由于运动等原因带来的图像模糊</strong>。运动模糊可以在空域建模为卷积退化，将退化图像变换到频域，可以将 卷积 分解为点乘，然后寻求一个和干净图像的频谱均方差最小的解。将卷积信号设置为 1 即 不存在运动模糊时，就变为单纯的去噪方法，为下式：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701214422.png" alt="" /><figcaption>image-20210701214422250</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701214422.png" alt="image-20210701214422250" /><figcaption aria-hidden="true">image-20210701214422250</figcaption>
 </figure>
 <p>对于输入图像的功率普，干净图像的功率谱接近可以近似，噪声的功率谱使用固定方差去生成噪声图然后计算功率谱（所以这就得知道噪声的方差否则去噪效果不好）</p>
 <p>从上式直观的看，其实<strong>和前面的阈值滤波有点相似，本质上也是对噪声频谱的幅值进行抑制</strong>，只不过这个通过优化推导出的是最优解。当某个频带 原始信号能量 远大于 噪声信号能量，那么幅值系数接近于1不抑制。当原始信号能量 远小于 噪声信号能量，系数接近于0，抑制噪声。<strong>维纳收缩</strong></p>
 <h3 id="同态滤波">同态滤波</h3>
-<p><a href="/posts/65493/">图像处理-同态滤波</a></p>
+<p><a href="./图像处理-同态滤波.md">图像处理-同态滤波</a></p>
 <p>其实这是一种 频域图像增强方法。低光照图 = 反射分量 x 纹理值 ，反射分量比较平滑对应低频分量，而纹理对应高频。首先取对数 将乘变为加 然后 变换到频域使用 高通滤波 最后 恢复。即可剔除反射分量，提亮。</p>
 <h2 id="空域去噪">空域去噪</h2>
 <h3 id="高斯滤波">高斯滤波</h3>
@@ -382,12 +382,12 @@
 <h3 id="非局部均值滤波">非局部均值滤波</h3>
 <p>NL 考虑了和周围区域的相似度</p>
 <h3 id="tv变分去噪">TV变分去噪</h3>
-<p>有一系列的TV损失的变种，例如变分去噪法，非局部变分去噪，双噪声相似的非局部变分去噪 <a href="/posts/59491/">图像处理-双噪声相似性的去噪方法.</a></p>
+<p>有一系列的TV损失的变种，例如变分去噪法，非局部变分去噪，双噪声相似的非局部变分去噪 <a href="./图像处理-双噪声相似性的去噪方法.md">图像处理-双噪声相似性的去噪方法.</a></p>
 <p>## 混合域去噪</p>
 <h3 id="bm3d">BM3D</h3>
 <p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33552519/article/details/108632146">BM3D去噪方法讲解</a></strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701223354.png" alt="" /><figcaption>image-20210701223354016</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210701223354.png" alt="image-20210701223354016" /><figcaption aria-hidden="true">image-20210701223354016</figcaption>
 </figure>
 <p>BM3D 方法其实是 协同滤波 和 维纳滤波的结合。分为两个步骤：</p>
 <p>步骤一：</p>
@@ -501,7 +501,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

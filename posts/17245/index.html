@@ -282,12 +282,12 @@
 <p>GAN 目前从三个研究角度进行，即大规模训练、网络结构设计和正则化技术。尽管近年来取得了很大的进展，但如何综合具有全局语义连贯、长程结构和细节准确性的图像仍然具有挑战性。对抗器的好坏会直接影响生成器的效果。在目前最先进的GAN模型中，作为分类网络的鉴别器只学习一种表示，因此它通常要么关注全局结构，要么关注局部细节。合成样本的分布随着训练过程中生成器的不断变化而变化，容易忘记之前的任务 (在判别器训练的背景下，学习语义、结构和纹理可以被认为是不同的任务) .....</p>
 <h3 id="结构">结构</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203430.png" alt="" /><figcaption>image-20210225152057705</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203430.png" alt="image-20210225152057705" /><figcaption aria-hidden="true">image-20210225152057705</figcaption>
 </figure>
 <p>结构很简单 ，使用UNET 判别器可以同时输出去全局和局部判别。对于全局判别的标签就是和输入图像一样的 0/1的值。除此之外，还是用了MixCut正则技术</p>
 <h3 id="cutmix">CutMix</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411220658.png" alt="" /><figcaption>20210331203434</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411220658.png" alt="20210331203434" /><figcaption aria-hidden="true">20210331203434</figcaption>
 </figure>
 <p>mixcut用在对判别器的训练。通常判别器输入要么是正样本要么是负样本。而MixCut就是复制粘贴的方式结合在一起输入网络（M就是二值掩膜）。对应的标签按照 正负样本 面积比例给的。除此之外还有 Mixup,Cutout</p>
 <ul>
@@ -307,11 +307,11 @@
 <h3 id="损失函数">损失函数</h3>
 <p>从上述结构不难看出 生成器的损失函数 包含两项 一个是编码器的全局判别损失和解码器的像素级判别损失。而训练对抗器的损失由于加入了CutMix操作，作者又提出了一个一致性损失，更充分的利用了像素判别的优势。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203438.png" alt="" /><figcaption>image-20210225153426059</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203438.png" alt="image-20210225153426059" /><figcaption aria-hidden="true">image-20210225153426059</figcaption>
 </figure>
 <p>这个式子的意思是 将 真实图片 x 和 生成器生成的假的图片 fake 首先使用Mask将二者混合后 输入 判别器，解码出的像素级判别的结果 1 和 将x 和 fake 分别输入判别器得到各自的得分后再使用Mask混合得到结果2 ，这两个结果应该一致。因此最终判别器的损失：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203442.png" alt="" /><figcaption>image-20210225153858202</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203442.png" alt="image-20210225153858202" /><figcaption aria-hidden="true">image-20210225153858202</figcaption>
 </figure>
 <p>但是对于全局判别器的Mix 标签 这里的设置和 以往的不同 以往Mix后的全局标签设置是按照正负样本面积比例计算的一个介于0-1之间的值。而作者这里 <strong>Mix标签设置为固定的0。</strong>用于约束编码器的输出。</p>
 <blockquote>
@@ -417,7 +417,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

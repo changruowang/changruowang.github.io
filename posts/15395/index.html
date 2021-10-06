@@ -283,7 +283,7 @@
 </ul>
 <h2 id="网络结构">网络结构</h2>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png" alt="" /><figcaption>1572790251537</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120111.png" alt="1572790251537" /><figcaption aria-hidden="true">1572790251537</figcaption>
 </figure>
 <p>​ 可以看出，整个模型由序列的两部分组成，图像分解，和 去噪以及亮度多尺度调整</p>
 <h3 id="数据驱动的图像分解-decom-net">数据驱动的图像分解 Decom-Net</h3>
@@ -312,14 +312,14 @@
 <p>For LIME, the total variation constraint is weighted by an initial illumination map, which is the maximum intensity of each pixel in R, G and B channels. Our structure-aware smoothness loss instead is weighted by reflectance. The static initial estimation used in LIME may not depict the image structure as well as reflectance does, since reflectance is assumed as the physical property of an image.</p>
 </blockquote>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png" alt="" /><figcaption>1572858053126</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120115.png" alt="1572858053126" /><figcaption aria-hidden="true">1572858053126</figcaption>
 </figure>
 <h3 id="多尺度光照调节-adjustment">多尺度光照调节 adjustment</h3>
 <p>​ 这个adujust网络的结构类似于<strong>U-net</strong> 的编码解码结构。降采样块包含步长为2的卷积层，上采样块使用resize-convolution层，即先将特征图插值的方法上采样然后使用步长为1的卷积和激活。这一部分的损失即为调整过后的光照图和去噪过后的反射率图重建产生的图像和正常光照图像之间的l1损失。 ​ 可以看到，在这一部分还对反射率图进行了去噪处理，使用的时DMB3</p>
 <h2 id="数据集">数据集</h2>
 <p>​ 作者提出了一套数据集，包含两部分：成对的合成数据和真实的低光照图。由于真实场景的图像采集正常光照和低光照时会产生错位，作者采用了三步法来矫正。 ​ 合成图像，作者分析了已有的真实低光照图像和真实的正常图像光照的YCbCr中Y的分量，统计Y分量的直方图，根据他们的规律来合成低光照图像。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png" alt="" /><figcaption>1572858105879</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120119.png" alt="1572858105879" /><figcaption aria-hidden="true">1572858105879</figcaption>
 </figure>
 <h2 id="结果">结果</h2>
 <p>​ 本论文作者并没有贴出指标的定量分析，只是贴了几幅图。图像分解的方法是否有效有待考虑.... ​ 定性分析：</p>
@@ -330,7 +330,7 @@
 <li><p>得益于加权TV损失，相对于基于DeHz去雾方法 结果中没有黑边</p></li>
 <li><p>又对比了同样含有去噪方法的JED 网络，LIME(网络后去噪) 结果，发现Retinex的边缘细节得到较好的保留。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png" alt="" /><figcaption>1572859097749</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120123.png" alt="1572859097749" /><figcaption aria-hidden="true">1572859097749</figcaption>
 </figure></li>
 </ol>
 <p>感觉这种方法处理的结果</p>
@@ -435,7 +435,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

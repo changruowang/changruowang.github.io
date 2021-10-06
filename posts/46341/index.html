@@ -302,7 +302,7 @@
 <p>上式可以看出 ，首先这阶段的网络输入是 上一阶段生成的几乎无噪声的，细节很好的图像，输出获得具有更好光照更好对比图的图像。网络学习的是变换参数。</p>
 <h3 id="网络结构">网络结构</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212517.png" alt="" /><figcaption>1598796721130</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212517.png" alt="1598796721130" /><figcaption aria-hidden="true">1598796721130</figcaption>
 </figure>
 <p><strong>Recursive Band Learning</strong></p>
 <p>这一阶段使用一系列 U-NET类似的网络结构(BLN)来完成迭代。图中的分辨率分别为 1/4， 1/2，1 。首先输入图像y经过一个BLN_F 生成 。f 为每个网络生成的中间特征，有不同分辨率的 和上一轮生成的 f 求和 生成当前层的 x 输出，其次也会直接输入下一层 和下一层的 f 求和。这样以来 每次递归的其实是 学习的 上一轮 生成的 f 的残差。所以说由粗到精细特征。</p>
@@ -353,11 +353,11 @@ L_{\text {Quality }} &amp;=-\log D\left(\hat{x}_{3}^{F}\right)
 <h3 id="训练细节">训练细节</h3>
 <p>首先使用 LOL 上成对的数据 先训练第一阶段的网络，然后固定第一阶段 的权重 再训练第二阶段。具体训练方法如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120152.png" alt="" /><figcaption>1598841253259</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120152.png" alt="1598841253259" /><figcaption aria-hidden="true">1598841253259</figcaption>
 </figure>
 <h3 id="实验结果">实验结果</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120157.png" alt="" /><figcaption>1598841560362</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120157.png" alt="1598841560362" /><figcaption aria-hidden="true">1598841560362</figcaption>
 </figure>
 <ol start="3" type="1">
 <li></li>
@@ -463,7 +463,7 @@ L_{\text {Quality }} &amp;=-\log D\left(\hat{x}_{3}^{F}\right)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

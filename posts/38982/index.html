@@ -280,7 +280,7 @@
 <h4 id="旋转图像"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-image/">旋转图像</a></h4>
 <p>要做到不占用额外空间</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210426192915.gif" alt="" /><figcaption>rotate.gif</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210426192915.gif" alt="rotate.gif" /><figcaption aria-hidden="true">rotate.gif</figcaption>
 </figure>
 <p>方法一：需要用 暂存一个值 然后 循环交换。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; ++j) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = matrix[i][j];</span><br><span class="line">                matrix[i][j] = matrix[n - j - <span class="number">1</span>][i];</span><br><span class="line">                matrix[n - j - <span class="number">1</span>][i] = matrix[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>];</span><br><span class="line">                matrix[n - i - <span class="number">1</span>][n - j - <span class="number">1</span>] = matrix[j][n - i - <span class="number">1</span>];</span><br><span class="line">                matrix[j][n - i - <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -316,7 +316,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210426110441.png" alt="image-20210426110441307" style="zoom:67%;" /></p>
 <p>同样，对于循环移位类的问题，可以这样理解，移动后的位置 i = (k + i) % len；但是移动的时候，可能还没遍历完所有的元素，就回到了起点。也可能从起点0开始，往后寻找，到下一轮回到了1位置，这时候再循环，可以到2位置….最终肯定能够再回到起点位置。也可能是从起点开始，到下一轮刚好又回到起点。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210426113941.png" alt="" /><figcaption>image-20210426113941474</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210426113941.png" alt="image-20210426113941474" /><figcaption aria-hidden="true">image-20210426113941474</figcaption>
 </figure>
 <h2 id="链表">链表</h2>
 <h4 id="相交链表"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">相交链表</a></h4>
@@ -476,7 +476,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

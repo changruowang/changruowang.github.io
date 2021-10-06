@@ -280,11 +280,11 @@
 <h2 id="主要思想">主要思想</h2>
 <p>​ 作者发现 <strong>低光照图像的噪声在不同频率的层会表现出不同的对比度，在低频层中比在高频层中更容易检测到噪声。</strong>基于此思想，提出了一个基于频率分解-增强的两阶段低光照图像增强模型。也是从粗糙到精细coarse to fine的思路。同时 还提出一个新的包含真实噪声的数据集。如下图：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120217.png" alt="" /><figcaption>1598948440726</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120217.png" alt="1598948440726" /><figcaption aria-hidden="true">1598948440726</figcaption>
 </figure>
 <h2 id="主要内容">主要内容</h2>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120223.png" alt="" /><figcaption>1598949161921</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120223.png" alt="1598949161921" /><figcaption aria-hidden="true">1598949161921</figcaption>
 </figure>
 <h3 id="整体结构">整体结构</h3>
 <p>​ 首先，与直接增强整个图像相比，增强 含有噪声的低光图像的低频层更容易。这是因为低频层的噪声更容易检测和抑制。通过分析图像低频层的全局属性，可以正确地估计图像的光照/颜色；并且图像的边缘或者角点只占图像的很低维度(?)因此，给定基础的低频信息，可以推断出相应的高频信息。</p>
@@ -296,7 +296,7 @@
 <h3 id="ace模块">ACE模块</h3>
 <p>​ 又总的结构图可以看出 在第一第二阶段输入的时候都经过了一个ACE模块，这个模块就是起到筛选 低频/高频 成分的功能。后面接的对应网络完成 低频/高频 图像 中的噪声去除和细节恢复。ACE结构如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120229.png" alt="" /><figcaption>1598951252434</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120229.png" alt="1598951252434" /><figcaption aria-hidden="true">1598951252434</figcaption>
 </figure>
 <p>ACE 对输入图像做了两个并列的 不同 空洞率的卷积 ，然后做了 <strong>差</strong> 生成了Ca <span class="math inline">\(C_{a}=\operatorname{sigmoid}\left(f_{d 1}\left(x_{i n}\right)-f_{d 2}\left(x_{i n}\right)\right)\)</span> Ca 表明 像素间的相对差异，差异大的就是高频区域 反之低频。将Ca作为一个全图的权重 和 输入特征x_in点乘，来过滤高低频信息（1-Ca） 再后面的部分就是 nonlocal 模块了，作者这里进行了降采样 提高计算速度。这里在第一个图中的两个ACE是共享权重的。</p>
 <h3 id="cdt模块">CDT模块</h3>
@@ -310,7 +310,7 @@
 <p>​ 第一阶段中的 <span class="math inline">\(\alpha\)</span> 初始设置为 1 。训练图像随机裁剪到 512X384。分辨率为1024x768的输入图像处理耗时0.33s 在1080显卡上。</p>
 <h3 id="对比实验">对比实验</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120236.png" alt="" /><figcaption>1598952274964</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210424120236.png" alt="1598952274964" /><figcaption aria-hidden="true">1598952274964</figcaption>
 </figure>
 <p>一个是 对 网络中的各个模块 ACE DCT等做了对比实验，另一个是 在自己训练用的RGB数据集上和其他发给发做了对比，再就是对 加入去噪流程的其他方法做了对比。</p>
 
@@ -414,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

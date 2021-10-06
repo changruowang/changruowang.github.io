@@ -307,7 +307,7 @@
 <p>I为输入低光照图，R为本身的反射率图，L为原本的低光照图。如果将图像分解，会将噪声分解到<span class="math inline">\(\tilde{\mathbf{R}}\)</span> 此时包含(R + E)因此最后调整光照强度再还原时，E与L一起被放大，因此需要用L来指导去噪。那么为什么不直接从输入微光图像I中去除E呢？一方面光照不平衡的问题存在，另一方面内部的细节和噪声不均匀地混合在一起，再就是由于L 的存在是个变量，没有合适的方法去掉，就是同一个场景光照不同噪声强度也不同，难以在参杂一个光照变量的情况下很好的去除噪声，而反射率图就更纯粹，比较适合用来去噪。</p>
 <h2 id="kind-network">Kind Network</h2>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212250.png" alt="" /><figcaption>1572948093087</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212250.png" alt="1572948093087" /><figcaption aria-hidden="true">1572948093087</figcaption>
 </figure>
 <h3 id="分解网络">分解网络</h3>
 <p>​ 训练时网络有输入成对的图像 Il Ih</p>
@@ -350,11 +350,11 @@
 <h2 id="实验结果">实验结果</h2>
 <p>​ 主要在LOL数据集上对比和各种算法。包含500对正常/低光照图像。分解网络batchsize=10, path-size=48X48。分辨率重建网络和光照跳着网络batch size为4，384X384大小。SGD优化</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212307.png" alt="" /><figcaption>1572948721689</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212307.png" alt="1572948721689" /><figcaption aria-hidden="true">1572948721689</figcaption>
 </figure>
 <h2 id="后续版本-kindd">后续版本 KindD ++</h2>
 <figure>
-<img src="https://github.com/zhangyhuaee/KinD_plus/blob/master/figures/restoration_net2.jpg?raw=true" alt="" /><figcaption>restoration_net2.jpg</figcaption>
+<img src="https://github.com/zhangyhuaee/KinD_plus/blob/master/figures/restoration_net2.jpg?raw=true" alt="restoration_net2.jpg" /><figcaption aria-hidden="true">restoration_net2.jpg</figcaption>
 </figure>
 <p>主要是改进了 重建网络 光照图深入重建网络的各个层 ，且重建网络中使用多尺度的卷积contact</p>
 <p>本文的创新点在于：</p>
@@ -381,12 +381,12 @@
 <h3 id="关于分解网络损失权重的讨论">关于分解网络损失权重的讨论</h3>
 <h4 id="按照原始的损失权重的定义-结果">按照原始的损失权重的定义 结果</h4>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212321.png" alt="" /><figcaption>1573788470551</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212321.png" alt="1573788470551" /><figcaption aria-hidden="true">1573788470551</figcaption>
 </figure>
 <p>可以看出 网络映射成了恒等映射， 分离出来的光照分量恒为1 这种情况，重建损失很低，但是R的相似度也很低，但是由于其权重只有0.01 所以被削弱了。感觉不符合分解的目的。</p>
 <h4 id="rec-rs-is-mc-110.080.1">rec, rs, is, mc = 1,1,0.08,0.1</h4>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212328.png" alt="" /><figcaption>1573789025322</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212328.png" alt="1573789025322" /><figcaption aria-hidden="true">1573789025322</figcaption>
 </figure>
 <p>​ 可以看出增R反射率损失的权重</p>
 <hr />
@@ -741,7 +741,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

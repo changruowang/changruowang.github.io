@@ -200,6 +200,427 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/60259/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/60259/" class="post-title-link" itemprop="url">相似性度量</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:51" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:51+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:18:08" itemprop="dateModified" datetime="2021-08-30T20:18:08+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E8%99%B9%E8%BD%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">虹软实习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="相似性度量方法">相似性度量方法</h1>
+<h3 id="samise">Samise</h3>
+<p>Learning to Compare Image Patches via Convolutional Neural Networks</p>
+<p>这篇文章讲了使用 孪生神经网路做patch的相似性度量。但是他的输出是全连接 只有1个输出，损失了空间位置的相关性。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203220.png" alt="image-20210204085426652" /><figcaption aria-hidden="true">image-20210204085426652</figcaption>
+</figure>
+<h3 id="图像质量评价">图像质量评价</h3>
+<p>Deep Neural Networks for No-Reference and Full-Reference Image Quality Assessment</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203217.png" alt="image-20210204092039515" /><figcaption aria-hidden="true">image-20210204092039515</figcaption>
+</figure>
+<p>这个文章是用来做图像质量评价的。输入两个VGG结构类似的孪生神经网络 对两个patch计算得到两个全连接特征，特征融合是将两个特征向量以及他们的插值concat 然后输入后面两个共享权重的全连接（patch weight estimate ...）。上面一个全连接输出一的是 该patch的权重，下面一个全连接输出的是 该Patch 的打分。最终的输出是所有随机采样的patch的加权平均。</p>
+<h3 id="图象配置">图象配置</h3>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/13251/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/13251/" class="post-title-link" itemprop="url">虹软实习-实验记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:50" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:50+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-31 11:15:33" itemprop="dateModified" datetime="2021-08-31T11:15:33+08:00">2021-08-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E8%99%B9%E8%BD%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">虹软实习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          总结了研究生期间的项目经历
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/13251/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/50530/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/50530/" class="post-title-link" itemprop="url">动态场景复原</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:49" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:49+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:17:31" itemprop="dateModified" datetime="2021-08-30T20:17:31+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E8%99%B9%E8%BD%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">虹软实习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="动态场景视频增强复原">动态场景、视频增强复原</h1>
+<h3 id="动态场景hdr">动态场景HDR</h3>
+<p>早期的算法有将所有图象像素强度大概对齐到一定水平，然后使用光流算法完成图象空间对齐，最后再融合输出, 也有使用CNN实现光流的但是本质都是在图象层面完成了空间对齐。这篇文章作者将HDR看作图象到图象的转换，认为CNN有容忍偏差的能力，不需要显式的对齐图片，因此全用一个网络完成。</p>
+<blockquote>
+<p>Deep HDR Reconstruction of Dynamic Scenes 这篇文章就是使用CNN在图象层面完成对齐，再使用CNN对对齐后的图象融合</p>
+</blockquote>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411220742.png" alt="20210331203224" /><figcaption aria-hidden="true">20210331203224</figcaption>
+</figure>
+<p><strong>HDR-GAN: HDR Image Reconstruction from Multi-Exposed LDR Images with Large Motions</strong></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203231.png" alt="image-20210203172029335" /><figcaption aria-hidden="true">image-20210203172029335</figcaption>
+</figure>
+<p>感觉这个文章和上面一篇区别不大，就是引入了GAN 他还是需要参考图的（图中的L1损失）。只不过生成器结构更复杂了。使用了多尺度的结果，左边浅蓝色是下采样的过程。文章还提到 最中间那个 + 连接 是有特征对齐的作用（浅紫色块处的+连接）。</p>
+<p>###　视频重建</p>
+<p><strong>EDVR: Video Restoration with Enhanced Deformable Convolutional Networks</strong></p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203234.png" alt="image-20210203152356503" /><figcaption aria-hidden="true">image-20210203152356503</figcaption>
+</figure>
+<p>主体结构如上图。主要流程为 -&gt;输入特征提取 --&gt; 特征对齐模块 -&gt; 特征融合模块 -&gt; 重建输出。核心是特征对齐模块和融合模块。</p>
+<p>特征对齐模块的设计使用了可变性卷积 和 特征金子塔的结构。如下图。特征融合模块的一个重要的设计是 作者考虑到不同帧间即便对齐了，但是由于信息量的差异，应该有不同的权重，因此加入了注意力。</p>
+<p>应该是端到端损失 据说不好训练</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203254.png" alt="image-20210203152951344" /><figcaption aria-hidden="true">image-20210203152951344</figcaption>
+</figure>
+<h3 id="动态场景去噪">动态场景去噪</h3>
+<p><strong>Supervised Raw Video Denoising with a Benchmark Dataset on Dynamic Scenes</strong></p>
+<p>这篇文章和上面那篇很相似。特征对准的方式几乎一样。只不过多了一个非局部模块。整个流程对去噪任务做了特定的设计。</p>
+<h3 id="视频去模糊">视频去模糊</h3>
+<p>Spatio-Temporal Filter Adaptive Network for Video Deblurring</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203244.png" alt="image-20210203154242212" /><figcaption aria-hidden="true">image-20210203154242212</figcaption>
+</figure>
+<p>这篇文章视频去模糊的结构分为了三个模块 特征提取模块、STFAN模块、重建模块。可以看出，这篇文章的空间对齐和去模糊操作也都是在中间的特征空间完成的。但是这个STFAN模块采用了不同与可变性卷积的特征对齐方式。不过和上面的类似，他们都是采用了隐式的空间对齐方法，即网络中集成了可以完成空间对齐的结构，但是 本质上的约束都是来自最后的端到端的监督损失。</p>
+<p>作者提出了一个 FAC layer 用于完成特征对齐和去模糊的操作。具体的流程：特征提取网络对当前帧提取特征得到Et STFAN模块则使用卷积对三元组输出处理得到 两个滤波器，一个是对齐滤波器一个是去模糊滤波器（图中的Falign deblur）。将估计的对齐滤波器（包含了复杂的运动参数）和上次迭代的 Ht-1（应该就是代表上一帧的去模糊后的特征图） 通过 FAC层得到一个对齐后的特征，同理去模糊滤波器也这么用。最后将两个特征concat（concat特征包含了这一帧去模糊的结果和上一帧去模糊后的特征图经过对齐后的结果）。 使用另一个解码器得到输出，同时concat的结果会传递到下一帧的计算。</p>
+<p>FAC 层</p>
+<p>很直观 这个为啥可以对其特征？</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203249.png" alt="image-20210203160054986" /><figcaption aria-hidden="true">image-20210203160054986</figcaption>
+</figure>
+<p>损失函数</p>
+<p>也是很简单 一个MSE 一个感知损失</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/17245/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常若望">
+      <meta itemprop="description" content="可乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruowang's blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/17245/" class="post-title-link" itemprop="url">UNET-GAN</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 10:10:48" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:48+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-30 20:18:11" itemprop="dateModified" datetime="2021-08-30T20:18:11+08:00">2021-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">其他笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/%E8%99%B9%E8%BD%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">虹软实习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="unet-gan">UNET-GAN</h1>
+<p>A U-Net Based Discriminator for Generative Adversarial Networks</p>
+<h2 id="主要思想">主要思想</h2>
+<p>文章的工作主要是针对 GAN 的判别器的改进。使用一个U-NET作为判别器，判别器的编码部分输出对图象的全局分类结果，判别器的解码部分输出对图象像素级的判别。因此这个判别器既能判别全局也能判别局部信息。同时作者结合了 最新的正则化技术 MixCup 提出了个一致性正则化损失 。</p>
+<h2 id="主要内容">主要内容</h2>
+<h3 id="研究背景">研究背景</h3>
+<p>GAN 目前从三个研究角度进行，即大规模训练、网络结构设计和正则化技术。尽管近年来取得了很大的进展，但如何综合具有全局语义连贯、长程结构和细节准确性的图像仍然具有挑战性。对抗器的好坏会直接影响生成器的效果。在目前最先进的GAN模型中，作为分类网络的鉴别器只学习一种表示，因此它通常要么关注全局结构，要么关注局部细节。合成样本的分布随着训练过程中生成器的不断变化而变化，容易忘记之前的任务 (在判别器训练的背景下，学习语义、结构和纹理可以被认为是不同的任务) .....</p>
+<h3 id="结构">结构</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203430.png" alt="image-20210225152057705" /><figcaption aria-hidden="true">image-20210225152057705</figcaption>
+</figure>
+<p>结构很简单 ，使用UNET 判别器可以同时输出去全局和局部判别。对于全局判别的标签就是和输入图像一样的 0/1的值。除此之外，还是用了MixCut正则技术</p>
+<h3 id="cutmix">CutMix</h3>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210411220658.png" alt="20210331203434" /><figcaption aria-hidden="true">20210331203434</figcaption>
+</figure>
+<p>mixcut用在对判别器的训练。通常判别器输入要么是正样本要么是负样本。而MixCut就是复制粘贴的方式结合在一起输入网络（M就是二值掩膜）。对应的标签按照 正负样本 面积比例给的。除此之外还有 Mixup,Cutout</p>
+<ul>
+<li>Mixup:将随机的两张样本按比例混合，分类的结果按比例分配；</li>
+<li>Cutout:随机的将样本中的部分区域cut掉，并且填充0像素值，分类的结果不变；</li>
+<li>CutMix:就是将一部分区域cut掉但不填充0像素而是随机填充训练集中的其他数据的区域像素值，分类结果按一定的比例分配</li>
+</ul>
+<p>CutMix优点：</p>
+<ol type="1">
+<li>在训练过程中不会出现非信息像素，从而能够提高训练效率；</li>
+<li>保留了regional dropout的优势，能够关注目标的non-discriminative parts；</li>
+<li>通<strong>过要求模型从局部视图识别对象，对cut区域中添加其他样本的信息</strong>，<strong>能够进一步增强模型的定位能力</strong>；</li>
+<li>不会有图像混合后不自然的情形，能够提升模型分类的表现；</li>
+<li>训练和推理代价保持不变</li>
+</ol>
+<p>https://blog.csdn.net/weixin_38715903/article/details/103999227</p>
+<h3 id="损失函数">损失函数</h3>
+<p>从上述结构不难看出 生成器的损失函数 包含两项 一个是编码器的全局判别损失和解码器的像素级判别损失。而训练对抗器的损失由于加入了CutMix操作，作者又提出了一个一致性损失，更充分的利用了像素判别的优势。</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203438.png" alt="image-20210225153426059" /><figcaption aria-hidden="true">image-20210225153426059</figcaption>
+</figure>
+<p>这个式子的意思是 将 真实图片 x 和 生成器生成的假的图片 fake 首先使用Mask将二者混合后 输入 判别器，解码出的像素级判别的结果 1 和 将x 和 fake 分别输入判别器得到各自的得分后再使用Mask混合得到结果2 ，这两个结果应该一致。因此最终判别器的损失：</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210331203442.png" alt="image-20210225153858202" /><figcaption aria-hidden="true">image-20210225153858202</figcaption>
+</figure>
+<p>但是对于全局判别器的Mix 标签 这里的设置和 以往的不同 以往Mix后的全局标签设置是按照正负样本面积比例计算的一个介于0-1之间的值。而作者这里 <strong>Mix标签设置为固定的0。</strong>用于约束编码器的输出。</p>
+<blockquote>
+<p>In contrast to [47], the class label c ∈ {0, 1} for the new CutMix image x˜ is set to be fake, i.e. c = 0. Globally the mixed synthetic image should be recognized as fake by the encoder Denc U ,otherwise the generator can learn to introduce the CutMix augmentation into generated samples, causing undesirable artifacts.</p>
+</blockquote>
+<h2 id="实验">实验</h2>
+<p>MixCut图象的生成概率 p 在前n个epoch是从0到0.5逐步提高的。以给生成器足够的时间学习生成较真实的图片。避免判别器过早的训练稳定。一开始生成器生成的太假 判别mix难度太小。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/25307/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -263,14 +684,14 @@
 <li>将成对的低-正常光照图分解为 HSV 格式，将低光照图的V替换为高光照的V通道，替换整体和正常光照图相似，但是会有一定的色差和畸变，光照越低的原图，噪声退化越严重</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205428.png" alt="" /><figcaption>1577263236106</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205428.png" alt="1577263236106" /><figcaption aria-hidden="true">1577263236106</figcaption>
 </figure>
 <ol start="2" type="1">
 <li><p>相机成像模型 Retinex 中为I * R 根据相机成像模型，这个应该是非线性的</p></li>
 <li><p>局部光照一致性 距离高斯分布的局部 变分 离边缘位置越远，得到边缘的梯度损失权重越大 正处于边缘位置的最小</p></li>
 <li><p>LIME 对于 黑色区域和暗区域也不能很好的区分 因此对黑色区域也存在过曝 LIME中 可以看出r矫正之后 光照值整体变大，相应的过曝区域变少。KinD中对 光照估计依然很低 但是反射率图 却没那么过曝 呈现黑色 主要是Kind训练时加入了纯黑的图片 低光照图是黑色 对应的强光照图也是黑色</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205434.png" alt="" /><figcaption>1577371572408</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205434.png" alt="1577371572408" /><figcaption aria-hidden="true">1577371572408</figcaption>
 </figure></li>
 </ol>
 <ul>
@@ -280,7 +701,7 @@
 <li>其实 KindD的图像分解效果 总是 &lt;= LIME 尤其是在对于纯黑色区域</li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425180117.png" alt="" /><figcaption>15720100311301</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210425180117.png" alt="15720100311301" /><figcaption aria-hidden="true">15720100311301</figcaption>
 </figure>
 <h3 id="lime-传统光照分解">LIME 传统光照分解</h3>
 <p>优点 ：</p>
@@ -326,17 +747,17 @@
 <h2 id="只估计光照图">只估计光照图</h2>
 <p><strong>网络输出没加sigmoid 导致一开始损失很大 百千级别</strong></p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205513.png" alt="" /><figcaption>1578965212749</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205513.png" alt="1578965212749" /><figcaption aria-hidden="true">1578965212749</figcaption>
 </figure>
 <p>使用kinD的梯度损失，外加初始亮度损失会使结果优化不出来（此时Loss&lt;1），同时最后一行一列补0/不补0没区别</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205502.png" alt="" /><figcaption>1578966176923</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210328205502.png" alt="1578966176923" /><figcaption aria-hidden="true">1578966176923</figcaption>
 </figure>
 <p>使用rtv损失，并且不加亮度约束损失，中间整体损失在0.5附近时，效果较真实，但是当损失进一步收敛，epoch20时此时极端化，可见此时亮度损失已经偏离正常值。而且亮度图中明显可见小斑点，我觉得可能是rtv权重不是连续的导致的，四角会出现光晕</p>
 <p><strong>加上sigmoid函数收敛的很慢 主要是 在卷积输出为很大的时候 经过sigmoid的输出趋近1 此时的梯度实际很小</strong></p>
 <p>实际加sigmoid的输出效果和不加的差不多</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210827170255.png" alt="" /><figcaption>1578969926566</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210827170255.png" alt="1578969926566" /><figcaption aria-hidden="true">1578969926566</figcaption>
 </figure>
 <p>加上sigmoid之后 loss rs 的比重需要减小 否则会使得高低光照图都接近很暗 不能增强</p>
 <h2 id="细节调整">细节调整</h2>
@@ -470,7 +891,7 @@
 <p><span class="math display">\[L E(I(\mathbf{x}) ; \alpha)=I(\mathbf{x})+\alpha I(\mathbf{x})(1-I(\mathbf{x}))\]</span></p>
 <p>​ 最后，每个像素位置的<span class="math inline">\(\alpha\)</span>参数都不同，也就是不同位置的 曲线映射方式不一样，所以CNN输出的<span class="math inline">\(\alpha\)</span>其实是和输入图像大小一样的。而由于有n次迭代，每次迭代分别对 RGB 三通道使用独立的<span class="math inline">\(\alpha\)</span> 所以最终CNN输出的feature map的尺寸应该是n x 3 x W x H大小的。如下图：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="" /><figcaption>1589469658310</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211854.png" alt="1589469658310" /><figcaption aria-hidden="true">1589469658310</figcaption>
 </figure>
 <p>上图 b 可以看出:</p>
 <ul>
@@ -504,7 +925,7 @@
 <h3 id="各项损失函数的作用">各项损失函数的作用</h3>
 <p>​ 作者分别去掉四项损失中的一项，进行训练得到的结果如下：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="" /><figcaption>1589508112377</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211903.png" alt="1589508112377" /><figcaption aria-hidden="true">1589508112377</figcaption>
 </figure>
 <ul>
 <li>去掉 spa损失，对比度细节下降，如空中的白云。</li>
@@ -514,7 +935,7 @@
 </ul>
 <h3 id="各项参数的影响">各项参数的影响</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="" /><figcaption>1589508544279</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211909.png" alt="1589508544279" /><figcaption aria-hidden="true">1589508544279</figcaption>
 </figure>
 <p>​ 网络深度-通道数-迭代次数。可以看出对比def三个图，可以看出 迭代一次的曲线增强能力太弱，因此需要更多次的迭代来合成高阶曲线，这样曲线具有更强的调整能力。</p>
 <h3 id="训练数据的影响">训练数据的影响</h3>
@@ -525,7 +946,7 @@
 <li>使用数据增广的方法，包含了 过曝光和欠曝光图像，从1,2部分获得的数据集 4800张 DEC_large_LH</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="" /><figcaption>1589509475989</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211925.png" alt="1589509475989" /><figcaption aria-hidden="true">1589509475989</figcaption>
 </figure>
 <p>​ 由图c,d可以看出，如果训练数据中不含有过曝光数据，最终网络会对原本光照正常的区域造成过曝光，但是如果低光照数据多，对暗区域增强的能力要强。因此</p>
 <ol type="1">
@@ -534,7 +955,7 @@
 </ol>
 <h3 id="最终对比结果">最终对比结果</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="" /><figcaption>1589509826164</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211917.png" alt="1589509826164" /><figcaption aria-hidden="true">1589509826164</figcaption>
 </figure>
 
       
@@ -628,7 +1049,7 @@
 <h2 id="主要内容">主要内容</h2>
 <h3 id="结构">结构</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211942.png" alt="" /><figcaption>image-20201230103849874</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211942.png" alt="image-20201230103849874" /><figcaption aria-hidden="true">image-20201230103849874</figcaption>
 </figure>
 <p>​ 主要结构 不必 多说 很清晰。主要要注意以下几个点：</p>
 <ul>
@@ -641,10 +1062,10 @@
 </ul></li>
 </ul>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211948.png" alt="" /><figcaption>image-20201230104605270</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211948.png" alt="image-20201230104605270" /><figcaption aria-hidden="true">image-20201230104605270</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211954.png" alt="" /><figcaption>image-20201230104650389</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211954.png" alt="image-20201230104650389" /><figcaption aria-hidden="true">image-20201230104650389</figcaption>
 </figure>
 <p>上式是论文贴的 低通滤波器。</p>
 <h3 id="损失">损失</h3>
@@ -656,7 +1077,7 @@
 <li>重建损失：就是输入输出的L1距离 不知道为啥要这个损失 感觉 还不如VGG</li>
 </ol>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211958.png" alt="" /><figcaption>image-20201230105254104</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508211958.png" alt="image-20201230105254104" /><figcaption aria-hidden="true">image-20201230105254104</figcaption>
 </figure>
 <h2 id="实验结果">实验结果</h2>
 <p>论文 从以下几个方面做实验：</p>
@@ -753,37 +1174,37 @@
 </ol>
 <h2 id="主要内容">主要内容</h2>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="" /><figcaption>image-20201231103107211</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212012.png" alt="image-20201231103107211" /><figcaption aria-hidden="true">image-20201231103107211</figcaption>
 </figure>
 <h3 id="损失函数">损失函数</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="" /><figcaption>image-20201231103305198</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212017.png" alt="image-20201231103305198" /><figcaption aria-hidden="true">image-20201231103305198</figcaption>
 </figure>
 <p>均衡后的图像的 分解产生的 R 要和 低光照图直接分解产生的R 一致</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="" /><figcaption>image-20201231103339686</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212022.png" alt="image-20201231103339686" /><figcaption aria-hidden="true">image-20201231103339686</figcaption>
 </figure>
 <p>光照平滑和一致损失，第一项表明 光照分段平滑，以反射率图的梯度加权。第二项以高低光照图自身梯度加权，是为了让在两张图中都是边缘的地方损失小，非共同边缘的地方损失大，即两张光照图的边缘一致。这和RetinexNet中的损失一致</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="" /><figcaption>image-20201231103645591</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212027.png" alt="image-20201231103645591" /><figcaption aria-hidden="true">image-20201231103645591</figcaption>
 </figure>
 <p>第一项，意思为增强后的图像的 梯度要比原图像放大beta倍，当然 计算原输入图像 S 的梯度的时，滤掉了梯度较小的地方。第二项是，输入图像的 HSV中的H通道和 分解R的 H通道要一致，防止颜色乱变。</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="" /><figcaption>image-20201231103920053</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212032.png" alt="image-20201231103920053" /><figcaption aria-hidden="true">image-20201231103920053</figcaption>
 </figure>
 <p>最后一项是噪声 一致的 ，输入图像乘 噪声估计图N ，约束噪声的大小。（不知道为啥）</p>
 <h3 id="光照调整">光照调整</h3>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="" /><figcaption>image-20201231104256103</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212037.png" alt="image-20201231104256103" /><figcaption aria-hidden="true">image-20201231104256103</figcaption>
 </figure>
 <p>​ 这个阶段是整篇文章比较有意思的地方。它分析了直接用GAMMA矫正来调整光照图带来的问题，然后针对它进行了改进，提出了一个新的光照调整函数。</p>
 <p>​ 具体的，图像R的对比度由于暗区域的过度增亮而被破坏。最终增强图像的照明水平仍然不足，因为明亮区域几乎没有变化。一句话总结就是，gamma矫正过分的提高了暗区域的光照，导致R*L 乘回去之后，R衰减的太少，使得整体效果显得过增强。对于亮区域gamma 矫正又几乎不调整，导致亮区域的低光光照被拉低。按它的思路应该是 暗区域亮度拉升变缓，以抑制R的过曝，亮区域亮度要再提高免得亮区域亮度乘上系数后又被压缩回去了。（是这样嘛？？？）</p>
 <p>​ 按照上述逻辑 作者提出的曲线波形是NIMS的形状，表达式为：</p>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="" /><figcaption>image-20201231105830496</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212042.png" alt="image-20201231105830496" /><figcaption aria-hidden="true">image-20201231105830496</figcaption>
 </figure>
 <figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="" /><figcaption>image-20201231105852294</figcaption>
+<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212047.png" alt="image-20201231105852294" /><figcaption aria-hidden="true">image-20201231105852294</figcaption>
 </figure>
 <p>首先对光照图的像素亮度进行聚类，（两类）。分为亮像素和暗像素，去亮像素区的最小亮度值作为T，计算yita。参数 yita 的意义在于，在NISM下将亮像素的最小照明值映射到0.8</p>
 
@@ -905,7 +1326,7 @@
 </ol>
 <h3 id="网络结构">网络结构</h3>
 <figure>
-<img src="../figs/1590054658337.png" alt="" /><figcaption>1590054658337</figcaption>
+<img src="../figs/1590054658337.png" alt="1590054658337" /><figcaption aria-hidden="true">1590054658337</figcaption>
 </figure>
 <p>​ 关于结构，卷积层和sigmod层的叠加也可以产生可以接受的结果。然而，如果添加一些concat层，增强结果将变得更加清晰。作者还采用了上采样和下采样的结构，这样的结构可以起到抑制噪声的作用，但是有些场合中会带来模糊的效果。</p>
 <h2 id="实验">实验</h2>
@@ -1016,537 +1437,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/6701/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/6701/" class="post-title-link" itemprop="url">MSR</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:10:40" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:40+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:22:46" itemprop="dateModified" datetime="2021-08-31T11:22:46+08:00">2021-08-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<h1 id="msr-net">MSR-NET</h1>
-<h2 id="retinex-系列算法">Retinex 系列算法</h2>
-<h3 id="retinex原理">Retinex原理</h3>
-<p>​ I(x) = R(x) · L(x) ​ 对上式子取对数，得到 ​ Log[R(x,y)] = Log[I(x,y)] - Log[L(x,y)] = ​ Log[R(x,y)] = Log[I(x,y)] - Log[I(x,y)*F(x,y)] ( *表示卷积)<br />
-把这个技术运用到图像处理上，就是针对我们现在已经获得的一副图像数据I(x,y），计算出对应的R(x,y)，则R(x,y)认为是增强后的图像，现在的关键是如何得到L(X,Y)。Retinex理论的提出者指出这个L(x,y）可以通过对图像数据I(x,y）进行F(x,y)高斯模糊而得到，从实际运用的角度来说，也可以用均值模糊来代替高斯模糊。</p>
-<ol type="1">
-<li>输入： 原始图像数据I(x,y),尺度（也就是所谓的模糊的半径）</li>
-<li>处理：
-<ul>
-<li>计算原始图像按指定尺度进行模糊后的图像 L(x,y);</li>
-<li>按照上式的计算方法计算出 Log[R(x,y)]的值</li>
-<li>将 Log[R(x,y)]量化为0到255范围的像素值，作为最终的输出</li>
-</ul></li>
-</ol>
-<p>上述在讲Log[] 量化时，会产生色彩失真。这也是这算法的通病。上述实现的算法通常叫SSR (Single Scale Retinex,单尺度视网膜增强）</p>
-<h4 id="msr-multi-scale-retinex">MSR (Multi-Scale Retinex)</h4>
-<p>​ 最为经典的就是3尺度的，大、中、小，既能实现图像动态范围的压缩，又能保持色感的一致性较好。同单尺度相比，该算法有在计算Log[R(x,y)]的值时步骤有所不同。</p>
-<ul>
-<li>需要对原始图像进行每个尺度的高斯模糊，得到模糊后的图像Li(x,y),其中小标i表示尺度数</li>
-<li>对每个尺度下进行累加计算 Log[R(x,y)] = Log[R(x,y)] + Weight(i)* ( Log[Ii(x,y)]-Log[Li(x,y)]); 其中Weight(i)表示每个尺度对应的权重，要求各尺度权重之和必须为1，经典的取值为等权重</li>
-</ul>
-<h4 id="带色彩恢复的多尺度视网膜增强算法msrcrmulti-scale-retinex-with-color-restoration">带色彩恢复的多尺度视网膜增强算法(MSRCR,Multi-Scale Retinex with Color Restoration)</h4>
-<p>​ 其改进在于对Log量化过程的改进：</p>
-<ol type="1">
-<li><p>分别计算出 Log[R(x,y)]中R/G/B各通道数据的均值Mean和均方差Var（注意是均方差）</p></li>
-<li><p>利用类似下述公式计算各通道的Min和Max值 Min = Mean - Dynamic * Var; Max = Mean + Dynamic * Var;</p></li>
-<li><p>对Log[R(x,y)]的每一个值Value，进行线性映射：</p>
-<p>​ R(x,y) = ( Value - Min ) / (Max - Min) * (255-0)</p>
-<p>同时要注意增加一个溢出判断,即：</p>
-<p>​ if (R(x,y) &gt; 255) R(x,y) =255; else if (R(x,y) &lt; 0) R(x,y)=0</p></li>
-</ol>
-<h4 id="more...">more...</h4>
-<p>参考链接： https://www.cnblogs.com/Imageshop/archive/2013/04/17/3026881.html https://cloud.tencent.com/developer/article/1011768</p>
-<h2 id="msr-net-1">MSR-net</h2>
-<p>### 主要贡献：</p>
-<ol type="1">
-<li>作者认为 传统的MSR多尺度视网膜增强算法的过程可以用神经网络去模拟，并且神经网络的参数可以根据数据自学习。相对传统的采用固定的高斯模糊核要灵活 <strong>多尺度Retinex实际上相当于一个具有残差结构的前馈卷积神经网络</strong></li>
-<li>提出MSR-net 基于Retinex模型和神经网络的方法端到端得学习亮暗图之间得映射</li>
-</ol>
-<h3 id="相关知识">相关知识</h3>
-<p>常用得图像增强的方法有</p>
-<ol type="1">
-<li>直方图均衡化HE<br />
-</li>
-<li>Gamma Correction 通过压缩亮区像素的范围，扩大暗区域的亮度范围</li>
-<li>上述的方法都只关注了单个像素而没有关注其周围的像素信息。文献[5] contextual and variational contrast enhancement ...</li>
-</ol>
-<h3 id="结构图">结构图</h3>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212112.png" alt="" /><figcaption>1572616376706</figcaption>
-</figure>
-<h4 id="多尺度对数变换f1">多尺度对数变换f1</h4>
-<p><span class="math display">\[
-M_{j}=\log _{v_{j}+1}\left(1+v_{j} \cdot X\right), j=1,2, \ldots, n
-\]</span></p>
-<p>​ 输入的一幅3通道的图像，经过对数变换为 n*3 通道的tensor。 log函数具有压缩高灰度值的数据，拉伸低灰度值的数据。X代表输入图像，vj代表对应的尺度n代表尺度数。 ​ 接着，使用一个卷积+Relu 。上述的操作主要是通过多次对数变换的加权和来得到更好的图像，加速了网络的收敛。</p>
-<h4 id="difference-of-convolution-f2">Difference-of-convolution f2</h4>
-<p>​ 这里的卷积代表着对不同尺度的图像进行平滑处理。将不同卷积层的输出contact 一起最后来个1X1卷积，相当于MSR中对不同尺度的SSR输出的加权平均。1X1之后引入了一个 <strong>“-”</strong> 操作，与SSR中的 Log[I(x,y)] - Log[L(x,y)] 减 的目的相同，根据模拟产生的L(x,y) 还原出Log[R(x,y)] 深度为K</p>
-<h4 id="颜色重建函数-f3">颜色重建函数 f3</h4>
-<p>​ 由于上一步 减 的到的是 Log(R(x,y)) 因此最后一个1X1卷积就是用来色彩还原的。 ​ 上述三步的输出结果可视化如下：</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212122.png" alt="" /><figcaption>1572618295529</figcaption>
-</figure>
-<h4 id="损失函数">损失函数</h4>
-<p><span class="math display">\[
-L=\frac{1}{N} \sum_{i=1}^{N}\left\|f\left(X_{i}\right)-Y_{i}\right\|_{F}^{2}+\lambda \sum_{i=-1}^{K+2}\left\|W_{i}\right\|_{F}^{2}
-\]</span></p>
-<h3 id="实验">实验</h3>
-<h4 id="数据集">数据集</h4>
-<p>​ 依然是同时使用合成图像验证，使用公开的真实的数据集。同时还对比了各种超参数对结果的影响。<strong>作者建立了一个新的真实数据集 包含HQ LQ图片</strong> 同时还使用了已有的正式低光照数据集 <strong>MEF NPE VV</strong></p>
-<h4 id="训练参数">训练参数</h4>
-<p>​ 中间的神经网络的深度为K ， adam 权重衰减为10-6 batch_size为64 初始学习率为10-4 学习率除10每100K到200K iteration。作者实验发现带有第一个对数多尺度变换的要比单尺度变换的效果好 4个变换尺度，分别为1，10，100，300</p>
-<h4 id="结果">结果</h4>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212118.png" alt="" /><figcaption>1572779177674</figcaption>
-</figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/12562/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/12562/" class="post-title-link" itemprop="url">MBLLEN</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:10:39" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:39+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:21:59" itemprop="dateModified" datetime="2021-08-31T11:21:59+08:00">2021-08-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<h1 id="mbllen">MBLLEN</h1>
-<h2 id="主要思想">主要思想</h2>
-<p>​ 由于图像内容的复杂性，作者认为简单的网络难以实现高质量的图像增强。因此设计了MBLLEN 的多分枝结构。将图像增强任务分解成和不同特征相关的子问题，不同特征层分别增强，最后通过多分枝结果融合得到搞质量的输出。</p>
-<h2 id="网络结构">网络结构</h2>
-<h3 id="结构">结构</h3>
-<p>​ 由三部分组成，FEM, EM, FM;特征提取模块，增强模块，融合模块。</p>
-<ol type="1">
-<li>FEM：将三通道微光图像输入FEM模块，FEM模块实际是由10个步长1，3X3卷积Relu层组成的网络。每一层卷积后的feature map一方面作为EM模块的输入，一方面接着传给下一层卷积接着提特征</li>
-<li>EM：增强模块，数量等于上一层输出的feature map的个数。每个EM模块都是conv deconv结构，输出的尺寸和原微光图像尺寸相同。所有EM模块输出的featuremap contact 作为FM的输出</li>
-<li>FM：多分支融合，将上一层contact的结果用1X1卷积聚合。得到最终的输出</li>
-<li>应用在视频....</li>
-</ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212135.png" alt="" /><figcaption>1572958613424</figcaption>
-</figure>
-<h3 id="损失函数">损失函数</h3>
-<p>​ 传统的MSE或者MAE损失在增强的任务中不能很好的表现，作者使用了更复杂的损失函数，包含结构损失，Context(语义)损失， 区域损失</p>
-<ol type="1">
-<li>结构损失（structure loss ）：这个损失是为了提高输出图像的视觉 效果。通常低光照图像暗区因为硬件捕获的问题带有模糊和伪影，他们视觉效果不好但是不能被MAE损失表现出来。作者提出的结构损失中包含两部分：简化的SSIM MS-SSIM。</li>
-</ol>
-<p><span class="math display">\[
-L_{S S M}=-\frac{1}{N} \sum_{p \in i m g} \frac{2 \mu_{x} \mu_{y}+C_{1}}{\mu_{x}^{2}+\mu_{y}^{2}+C_{1}} \cdot \frac{2 \sigma_{x y}+C_{2}}{\sigma_{x}^{2}+\sigma_{y}^{2}+C_{2}}
-\]</span></p>
-<p><span class="math display">\[
-L_{S t r}=L_{S S I M}+L_{M S-S S I M}
-\]</span></p>
-<ol start="2" type="1">
-<li>context loss： 作者认为MSE和SSIM智能表示低层信息，认为使用更高级的语义信息是有必要的。采用了SRGAN中相似的做法来设计损失。具体是使用VGG-19 net提取两张图片的特征图。然后比较特征图的差别，如下式，i,j表示VGG-19中第j层特征第i个block的输出特征图。</li>
-</ol>
-<p><span class="math display">\[
-L_{V G G / i, j}=\frac{1}{W_{i, j} H_{i, j} C_{i, j}} \sum_{x=1}^{W_{i, j}} \sum_{z=1}^{C_{i, j}}\left\|\phi_{i, j}(E)_{x, y, z}-\phi_{i, j}(G)_{x, y, z}\right\|
-\]</span></p>
-<ol start="3" type="1">
-<li><strong>region loss</strong> 区域损失：上面两个损失函数都是基于全图的。然而在图像增强任务中，需要对低光照区域提供更多的注意力。因此作者提出这个损失函数来平衡低光照区域和其他区域的损失。作者筛选暗区域的策略是 发现选取一副图中前40%暗的像素作为暗区域最能代表实际的暗区域。<strong>这里可以寻找更恰当的选取暗区域的方法</strong> 式子中，EL GL中的L代表输入图像的暗区域，H代表亮区域 E,G代表输出图像和groundtruth WL=4 WH=1 <span class="math display">\[
-L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^{m_{L}}\left(\left\|E_{L}(i, j)-G_{L}(i, j)\right\|\right)+w_{H} \cdot \frac{1}{m_{H} n_{H}} \sum_{i=1}^{n_{H}} \sum_{j=1}^{m_{H}}\left(\left\|E_{H}(i, j)-G_{H}(i, j)\right\|\right)
-\]</span></li>
-</ol>
-<h3 id="实现细节">实现细节</h3>
-<p>​ 选取PASCAL VOC上的一部分图像使用损及gamma矫正转化为合成的低光照图像，同时加入了泊松噪声。56张验证，144张测试。minibatch 24 256X256X3的图像。VGG损失作者选取的是j=4 i=3处的feature map 。ADAM优化器，学习率0.002 b1=0.9 b2=0.99 e=10-8 学习率每个epoch learnrate * 0.95。</p>
-<h2 id="结果">结果</h2>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212143.png" alt="" /><figcaption>1572960634271</figcaption>
-</figure>
-<h2 id="结论">结论</h2>
-<ul>
-<li>感觉这篇文章 出发点 很独特，不同于以往的基于retinex模型的方法，提取光照图等等。通过多层特征提取，然后分别增强，最后多分枝融合。思想很独特。</li>
-<li>区域损失 值得借鉴和改进 VGG损失？？？</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/34239/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/34239/" class="post-title-link" itemprop="url">LightenNet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:10:38" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:38+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-31 11:21:53" itemprop="dateModified" datetime="2021-08-31T11:21:53+08:00">2021-08-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<h1 id="lightennet">LightenNet</h1>
-<h2 id="图像增强研究现状">图像增强研究现状</h2>
-<ol type="1">
-<li><p>基于直方图的方法：Adaptive histogram equalization and its variations</p></li>
-<li><p>基于物理模型的方法：通常产生非自然和不现实的结果，因为一些先验或假设并不总是适用于不同的照明条件 [19, 28]</p></li>
-<li><p>基于去雾模型的方法：去雾类方法在一定程度上可以提高微光图像的视觉质量，但这些方法缺乏有说服力的物理解释，容易产生不真实的结果。[4, 9, 28]</p>
-<blockquote>
-<p>Such a method first inverts an input low-light image, and then employs an image dehazing algorithm on the inverted image, finally achieves the enhanced image by inverting the dehazed image.</p>
-</blockquote></li>
-<li><p>基于稀疏表示的微光图像增强框架：增强的结果在很大程度上依赖于所学习的字典的准确性 [5]</p>
-<blockquote>
-<p>Fotiadou et al. used two dictionaries (i.e., night dictionary and day dictionary) to transform the Sparse Representation of low-light image patches to the corresponding enhanced image patches.</p>
-</blockquote></li>
-<li><p>基于融合的方法： 通过两个设计的权重来 融合亮度增强和对比度增强结果。此外采用多尺度融合的方法来减少放大的伪影。然而，与其他基于融合的图像增强方法一样，这种方法由于忽略了弱光照图像退化的物理特性，容易产生过增强、过饱和和不真实的结果 。 [7]</p></li>
-<li><p>LLNet：提出了一种基于深度学习的图像自适应增强和去噪方法，直接采用了现有的深度神经网络结构（堆叠稀疏去噪自动编码器）建立低光图像与增强、去噪图像之间的关系。实验结果表明，基于深度学习的方法适用于微光图像增强。[20]</p></li>
-<li><p>LIME: 简单的微光图像增强方法。[11]</p>
-<blockquote>
-<p>This method first estimated the illumination of each pixel in the low-light image, then refined the initial illumination map by a structure prior, finally the enhanced image was achieved based on Retinex model using the estimated illumination map. Besides, in order to reduce the amplified noise, an existing image denoising algorithm was used as post-processing in the LIME method</p>
-</blockquote></li>
-</ol>
-<h2 id="lightennet-1">LightenNet</h2>
-<h3 id="retinex-model">Retinex model :</h3>
-<p>​ Retinex model 源自人类视觉系统研究的颜色恒常性模型（在不同光照条件下，人眼可以产生近乎一致的色彩感知）。意思是 色觉不由射入到人眼的可见光的强度决定，而是由物体的反射率所确定，人眼能够以某种方式过滤掉光照的影响而直接获得物体表面的反射率从而确定颜色 。Retinex 理论方法的发展，促进了其在图像增强中的应用。Retinex 主要用来解决数字图像中的光照不均和色偏等问题，也被广泛用于雾霾图像、水下图像等图像处理任务中以获得高对比度的图像，同时在医学、遥感、公安、交通等各个领域都有成功的应用。该模型可用表示： ​ I(x) = R(x) · L(x) ​ I(x)是观测到的图像, x代表像素位置，R表示该位置表面的光波长反射率， L代表该位置的光照度 反射率是物体本身固有的性质，与光照条件无关。如果能够从衣服图像中获得3个色彩通道对应的反射率R，那么从某种程度上说解读了人类视觉的恒常特性。</p>
-<h3 id="贡献">贡献</h3>
-<ul>
-<li>提出了一个用于低光照图像增强的简单的CNN网络。与以往的使用CNN的直接估计输出方法不同，LightenNet学习低光照图像和其响应光照强度图之间的映射。</li>
-<li>基于Retinex模型，提出了一种合成低光照图像的方法。</li>
-<li>提出的方法在合成低光照图和实际低光照图上都取得了最好的效果</li>
-</ul>
-<h3 id="lightennet-2">LightenNet</h3>
-<p>​ 通过上述，论文作者的目的通过观测图像预测其的L(x)来实现R(x) 即输入一个弱光照图像，网络通过学习到的映射输出其光照映射图，这个光照映射图接着用于获得增强的图片。</p>
-<blockquote>
-<p>In this letter, our goal is to achieve the reflectance R(x) from the observed image I(x) by predicting its illumination map L(x)</p>
-</blockquote>
-<p>​ 论文作者说，LightenNet包含四个卷积层，每层都有不同的作用。比如前两层主要作用于高亮度的区域，第三层作用于低亮度的区域，最后一层用于重建。</p>
-<ol type="1">
-<li>Patch extraction and representation</li>
-<li>Feature enhancement ：将噪声和特征分开映射</li>
-<li>Non-linear mapping:</li>
-<li>Reconstruction</li>
-</ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212154.png" alt="" /><figcaption>1572008006804</figcaption>
-</figure>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212219.png" alt="" /><figcaption>1572008198140</figcaption>
-</figure>
-<p>损失函数为MSE损失 illu是图像的光照图像？？怎么获得？</p>
-<p>​ 在通过CNN获得光照映射图之后，还要进行以下3步，才能获得最终的增强图片。</p>
-<ol type="1">
-<li><p>Gamma矫正（Gamma correction ） L(x)` = L(x)^γ (r=1.7)</p>
-<blockquote>
-<p>Following previous method [11], we adjust the estimated illumination map by Gamma correction in order to thoroughly unveil dark regions in the results, which can be expressed as</p>
-</blockquote></li>
-<li><p>作者在优化CNN模型的时候认为局部的nXn输入图像具有相同的光照强度，因此gamma矫正之后需要通过指导滤波来细化光照图。在导图滤波中，将输入图像的红色通道作为导图，滤波窗口大小为16×16.</p></li>
-<li><p>基于Retinex 模型，将低光照输入图/光照强度预测图 得到最终的增强后的输出 拥有了精确的光照强度映射图，就能产生自然的接近真实的增强输出，暗的区域得到增强，亮的区域保持不变。</p></li>
-</ol>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212215.png" alt="" /><figcaption>1572010031130</figcaption>
-</figure>
-<h3 id="具体的实现">具体的实现</h3>
-<h4 id="训练参数">训练参数</h4>
-<ul>
-<li>使用高斯分布初始化权重，偏置设0</li>
-<li>初始学习率0.05 每100000个迭代减少0.5</li>
-<li>momentum =0.9 batch_size=128</li>
-</ul>
-<h4 id="样本的合成">样本的合成</h4>
-<p>​ 首先，基于图像局部亮度大小恒定的假设制造数据。作者从互联网上收集了600张带有各种内容的清晰的照明图像（光照充足且没有噪声和模糊的图），用于样本对的合成（弱光照图像以及其光照映射）。基于Retinex ，给定实际的清晰图像R(X)，和一个随机光照值L， 一个弱光照图I(x) = R(x)*L 通过这种方式，获得训练图片集patch patch的overlapping pixels = 10 16X16的训练图片 2000..张 （假设输入的16X16图像具有相同的光照映射）</p>
-<h3 id="实验结果">实验结果</h3>
-<ul>
-<li>最后的1X1的Constarint重建对这个模型很重要</li>
-<li>最后尝试增加卷积层数没有作用 作者认为的原因是 1.梯度扩散效应 2.简单的原始架构重复导致网络架构不合理 作者将来会考虑使用更复杂的CNN网络来做</li>
-<li><strong>Failure cases </strong> 训练的时候使用的都是没有噪声的图像，因此对于带有噪声的微光图像 效果不好</li>
-</ul>
-<h3 id="研究方向">研究方向</h3>
-<ol type="1">
-<li>使用复杂的网络</li>
-<li>考虑带噪声的低光照图</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xxxxx.com/posts/32466/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="常若望">
-      <meta itemprop="description" content="可乐">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruowang's blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/32466/" class="post-title-link" itemprop="url">LEUGAN</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 10:10:37" itemprop="dateCreated datePublished" datetime="2021-05-11T10:10:37+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 20:13:48" itemprop="dateModified" datetime="2021-08-30T20:13:48+08:00">2021-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像预处理</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A2%9E%E5%BC%BA/" itemprop="url" rel="index"><span itemprop="name">图像视频增强</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<h1 id="leuganlow-light-image-enhancement-by-unsupervised-generative-attentional-networks">LEUGAN:Low-Light Image Enhancement by Unsupervised Generative Attentional Networks</h1>
-<h2 id="亮点">亮点</h2>
-<ol type="1">
-<li>生成器和判别器都是两分支结构，边缘辅助模块用于辅助边缘增强，一个注意力模块用于恢复颜色</li>
-<li>设计了一个新的损失函数</li>
-</ol>
-<h2 id="结构">结构</h2>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212229.png" alt="" /><figcaption>image-20201230154540024</figcaption>
-</figure>
-<p>提出的 structure loss 和 SSIM 很像，应该是作用于输入图像和输出图像之间的。</p>
-<figure>
-<img src="https://cdn.jsdelivr.net/gh/changruowang/cloudimg/img/20210508212236.png" alt="" /><figcaption>image-20201230154646501</figcaption>
-</figure>
-<p><strong>这个损失没看懂</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1620,7 +1510,7 @@ L_{R e g i o n}=w_{L} \cdot \frac{1}{m_{L} n_{L}} \sum_{i=1}^{n_{L}} \sum_{j=1}^
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
